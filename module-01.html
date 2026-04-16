@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 01 — Mindset & Vision</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100%}
+
+body{
+background:#050505;
+color:#f5f0e8;
+font-family:‘Montserrat’,Arial,sans-serif;
+overflow-x:hidden;
+}
+
+/* HEADER */
+.header{
+position:sticky;top:0;z-index:50;
+background:rgba(5,5,5,.95);
+backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(201,168,76,.1);
+padding:12px 18px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.header-back{
+display:flex;align-items:center;gap:8px;
+text-decoration:none;color:rgba(245,240,232,.4);
+font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+transition:color .2s;
+}
+.header-back:active{color:#C9A84C}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:13px;letter-spacing:3px;color:#C9A84C;
+}
+.header-num{
+font-size:10px;font-weight:600;letter-spacing:2px;
+color:rgba(245,240,232,.25);text-transform:uppercase;
+}
+
+/* PROGRESS TOP */
+.module-progress{
+height:3px;
+background:rgba(255,255,255,.05);
+position:sticky;top:49px;z-index:49;
+}
+.module-progress-fill{
+height:100%;width:0%;
+background:linear-gradient(90deg,#C0001A,#C9A84C);
+transition:width .4s ease;
+}
+
+/* HERO */
+.hero{
+padding:36px 20px 28px;
+text-align:center;
+position:relative;
+border-bottom:1px solid rgba(255,255,255,.04);
+}
+.hero::before{
+content:’’;position:absolute;inset:0;
+background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.15) 0%,transparent 70%);
+pointer-events:none;
+}
+.hero-tag{
+display:inline-flex;align-items:center;gap:6px;
+font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+color:#C9A84C;border:1px solid rgba(201,168,76,.2);
+border-radius:20px;padding:5px 14px;margin-bottom:16px;
+background:rgba(201,168,76,.05);
+}
+.hero-num{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:11px;letter-spacing:3px;color:rgba(192,0,26,.7);
+display:block;margin-bottom:6px;
+}
+.hero-title{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:clamp(32px,8vw,52px);
+letter-spacing:3px;color:#f5f0e8;
+line-height:1;margin-bottom:12px;
+}
+.hero-title span{color:#C0001A}
+.hero-sub{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:16px;font-style:italic;
+color:rgba(245,240,232,.5);
+letter-spacing:1px;
+}
+
+/* SECTION WRAPPER */
+.section{
+padding:28px 20px;
+border-bottom:1px solid rgba(255,255,255,.04);
+opacity:0;transform:translateY(20px);
+transition:opacity .6s ease,transform .6s ease;
+}
+.section.visible{opacity:1;transform:translateY(0)}
+
+/* STORY BLOCK */
+.story-block{
+background:rgba(255,255,255,.02);
+border-left:2px solid #C0001A;
+border-radius:0 4px 4px 0;
+padding:18px 16px;
+margin-bottom:16px;
+}
+.story-block p{
+font-size:14px;font-weight:300;line-height:1.8;
+color:rgba(245,240,232,.8);
+}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+
+/* IMPACT QUOTE */
+.impact-quote{
+text-align:center;
+padding:24px 16px;
+margin:20px 0;
+position:relative;
+}
+.impact-quote::before,.impact-quote::after{
+content:’’;position:absolute;left:50%;transform:translateX(-50%);
+width:40px;height:1px;background:rgba(201,168,76,.3);
+}
+.impact-quote::before{top:0}
+.impact-quote::after{bottom:0}
+.impact-quote-text{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(18px,4.5vw,24px);
+font-weight:600;font-style:italic;
+color:#f5f0e8;line-height:1.4;
+margin-bottom:10px;
+}
+.impact-quote-author{
+font-size:9px;font-weight:600;letter-spacing:3px;
+text-transform:uppercase;color:rgba(201,168,76,.5);
+}
+
+/* REVEAL CARD */
+.reveal-card{
+background:rgba(192,0,26,.06);
+border:1px solid rgba(192,0,26,.15);
+border-radius:4px;padding:20px 16px;
+margin-bottom:12px;cursor:pointer;
+transition:border-color .2s,background .2s;
+position:relative;overflow:hidden;
+}
+.reveal-card.open{
+background:rgba(192,0,26,.1);
+border-color:rgba(192,0,26,.35);
+}
+.reveal-card-header{
+display:flex;align-items:center;justify-content:space-between;
+}
+.reveal-card-title{
+font-size:13px;font-weight:600;color:#f5f0e8;
+letter-spacing:.3px;padding-right:12px;
+}
+.reveal-icon{
+width:24px;height:24px;flex-shrink:0;
+border:1px solid rgba(201,168,76,.3);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+transition:transform .3s,background .2s;
+}
+.reveal-card.open .reveal-icon{
+transform:rotate(45deg);
+background:rgba(201,168,76,.15);
+}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{
+max-height:0;overflow:hidden;
+transition:max-height .4s cubic-bezier(.16,1,.3,1);
+}
+.reveal-card.open .reveal-content{max-height:400px}
+.reveal-content p{
+font-size:13px;font-weight:300;line-height:1.75;
+color:rgba(245,240,232,.7);
+padding-top:14px;
+}
+
+/* SECTION TITLE */
+.s-title{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:clamp(20px,5vw,28px);
+letter-spacing:3px;color:#f5f0e8;
+margin-bottom:6px;
+}
+.s-title span{color:#C0001A}
+.s-sub{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:13px;font-style:italic;
+color:rgba(245,240,232,.4);
+margin-bottom:20px;letter-spacing:.5px;
+}
+
+/* QUIZ */
+.quiz-wrap{
+background:rgba(255,255,255,.02);
+border:1px solid rgba(201,168,76,.1);
+border-radius:6px;padding:20px 16px;
+}
+.quiz-question{
+font-size:14px;font-weight:600;
+color:#f5f0e8;line-height:1.5;
+margin-bottom:16px;
+}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.08);
+border-radius:3px;padding:12px 14px;
+cursor:pointer;display:flex;align-items:center;gap:12px;
+transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;
+font-family:‘Montserrat’,Arial,sans-serif;
+}
+.quiz-option:active{border-color:rgba(201,168,76,.3)}
+.quiz-option.correct{
+border-color:rgba(100,200,100,.4);
+background:rgba(100,200,100,.06);
+}
+.quiz-option.wrong{
+border-color:rgba(192,0,26,.4);
+background:rgba(192,0,26,.06);
+}
+.quiz-option.disabled{cursor:default}
+.option-letter{
+width:24px;height:24px;flex-shrink:0;
+border:1px solid rgba(201,168,76,.2);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:10px;font-weight:600;color:#C9A84C;
+}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{
+margin-top:14px;padding:12px 14px;
+border-radius:3px;font-size:12px;font-weight:500;
+line-height:1.5;display:none;
+}
+.quiz-feedback.correct{
+background:rgba(100,200,100,.08);
+border:1px solid rgba(100,200,100,.2);
+color:#80d080;display:block;
+}
+.quiz-feedback.wrong{
+background:rgba(192,0,26,.08);
+border:1px solid rgba(192,0,26,.2);
+color:#ff7070;display:block;
+}
+
+/* POINT SENSIBLE */
+.sensible-block{
+background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));
+border:1px solid rgba(192,0,26,.2);
+border-radius:6px;padding:22px 18px;
+text-align:center;margin:8px 0;
+}
+.sensible-icon{font-size:28px;margin-bottom:12px;display:block}
+.sensible-title{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:22px;letter-spacing:3px;color:#f5f0e8;
+margin-bottom:10px;
+}
+.sensible-text{
+font-size:13px;font-weight:300;line-height:1.8;
+color:rgba(245,240,232,.75);
+}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{
+display:flex;align-items:flex-start;gap:12px;
+background:rgba(255,255,255,.02);
+border:1px solid rgba(255,255,255,.06);
+border-radius:3px;padding:12px 14px;
+cursor:pointer;transition:all .2s;
+}
+.check-item.checked{
+border-color:rgba(201,168,76,.25);
+background:rgba(201,168,76,.04);
+}
+.check-box{
+width:20px;height:20px;flex-shrink:0;
+border:1px solid rgba(201,168,76,.25);
+border-radius:3px;margin-top:1px;
+display:flex;align-items:center;justify-content:center;
+transition:all .2s;
+}
+.check-item.checked .check-box{
+background:#C9A84C;border-color:#C9A84C;
+}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.4);text-decoration:line-through}
+
+/* COMPLETE BUTTON */
+.complete-section{
+padding:28px 20px 48px;
+text-align:center;
+}
+.btn-complete{
+width:100%;
+background:linear-gradient(135deg,#C0001A,#8a0013);
+border:none;border-radius:3px;
+padding:18px;
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:18px;letter-spacing:4px;
+color:#f5f0e8;cursor:pointer;
+box-shadow:0 4px 24px rgba(192,0,26,.4);
+-webkit-appearance:none;
+transition:transform .15s,box-shadow .2s;
+position:relative;overflow:hidden;
+margin-bottom:12px;
+}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{
+background:linear-gradient(135deg,#2a6e2a,#1a4a1a);
+box-shadow:0 4px 20px rgba(100,200,100,.2);
+}
+.nav-modules{
+display:flex;gap:10px;
+}
+.btn-nav{
+flex:1;background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+border-radius:3px;padding:13px;
+font-family:‘Montserrat’,Arial,sans-serif;
+font-size:10px;font-weight:600;letter-spacing:2px;
+text-transform:uppercase;color:rgba(245,240,232,.4);
+cursor:pointer;-webkit-appearance:none;
+transition:all .2s;text-decoration:none;
+display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-nav:active{border-color:rgba(201,168,76,.3);color:#C9A84C}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+  <a class="header-back" href="dashboard.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour
+  </a>
+  <div class="module-badge">MODULE 01</div>
+  <div class="header-num">1 / 28</div>
+</div>
+
+<!-- PROGRESS BAR -->
+
+<div class="module-progress">
+  <div class="module-progress-fill" id="readProgress"></div>
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+  <div class="hero-tag">🧠 Mindset</div>
+  <span class="hero-num">MODULE 01</span>
+  <div class="hero-title">MINDSET<br><span>&</span> VISION</div>
+  <div class="hero-sub">La fondation de tout ce que tu vas construire</div>
+</div>
+
+<!-- SECTION 1 — POINT SENSIBLE -->
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🪞</span>
+    <div class="sensible-title">UNE QUESTION HONNÊTE</div>
+    <p class="sensible-text">
+      Tu as <strong>scrollé des centaines de vidéos</strong> sur comment gagner de l'argent en ligne.<br><br>
+      Tu as peut-être même acheté des formations.<br><br>
+      Mais aujourd'hui... <strong>tu n'as pas encore les résultats</strong> que tu veux.<br><br>
+      Pourquoi ?
+    </p>
+  </div>
+</div>
+
+<!-- SECTION 2 — STORY -->
+
+<div class="section" id="s2">
+  <div class="s-title">LE VRAI <span>PROBLÈME</span></div>
+  <div class="s-sub">Ce que personne ne te dit</div>
+
+  <div class="story-block">
+    <p>Ce n'est <strong>pas un problème d'information</strong>. Tu sais déjà que les réseaux sociaux peuvent rapporter de l'argent. Tu sais que d'autres le font.</p>
+  </div>
+
+  <div class="story-block">
+    <p>Le vrai problème c'est ton <strong>mindset</strong>. C'est la façon dont tu <em>te perçois toi-même</em> face à l'argent, face au succès, face au regard des autres.</p>
+  </div>
+
+  <div class="story-block">
+    <p>Tant que tu penses encore comme quelqu'un qui <strong>essaie</strong> de réussir plutôt que comme quelqu'un qui <em>est en train</em> de réussir — rien ne changera vraiment.</p>
+  </div>
+
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Tu ne peux pas avoir une vie premium avec un mindset discount."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<!-- SECTION 3 — QUIZ 1 -->
+
+<div class="section" id="s3">
+  <div class="s-title">TEST <span>TOI-MÊME</span></div>
+  <div class="s-sub">Sois honnête — personne ne te regarde</div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-question">Quand tu penses à vendre quelque chose en ligne, quelle est ta <em>première</em> réaction instinctive ?</div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','A')">
+        <div class="option-letter">A</div>
+        <div class="option-text">"Je ne suis pas légitime pour vendre quoi que ce soit"</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')">
+        <div class="option-letter">B</div>
+        <div class="option-text">"Et si les gens me jugent ou se moquent de moi ?"</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')">
+        <div class="option-letter">C</div>
+        <div class="option-text">"Ça va sûrement pas marcher pour moi"</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','D')">
+        <div class="option-letter">D</div>
+        <div class="option-text">"Comment je peux créer le maximum de valeur pour mes clients ?"</div>
+      </button>
+    </div>
+    <div class="quiz-feedback correct" id="q1-correct">✅ <strong>C'est ça le bon mindset.</strong> Mais sois honnête — si tu as hésité entre A, B ou C, c'est normal. C'est précisément ce qu'on va transformer dans ce module.</div>
+    <div class="quiz-feedback wrong" id="q1-wrong">🔍 <strong>Honnêteté respectée.</strong> Ces pensées sont normales et humaines. Mais elles te coûtent de l'argent chaque jour. La bonne nouvelle ? Elles se reprogramment. C'est exactement ce qu'on fait ici.</div>
+  </div>
+</div>
+
+<!-- SECTION 4 — LES 3 BLOCAGES -->
+
+<div class="section" id="s4">
+  <div class="s-title">LES 3 <span>BLOCAGES</span></div>
+  <div class="s-sub">Identifie lequel te freine le plus</div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-card-header">
+      <div class="reveal-card-title">🔒 Blocage 1 — La Légitimité</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>"Qui suis-je pour vendre ça ?" — Cette pensée t'a paralysé au moins une fois. La vérité : <strong>personne n'attend d'être parfait pour démarrer.</strong> Les experts d'aujourd'hui étaient des débutants qui ont osé agir malgré le doute. Ta valeur n'est pas dans ce que tu sais déjà — elle est dans ce que tu apportes aux gens qui sont un pas derrière toi.</p>
+    </div>
+  </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-card-header">
+      <div class="reveal-card-title">😨 Blocage 2 — La Peur du Regard</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>"Et si mes proches voient ça et se moquent ?" — Les gens qui réussissent en ligne ont tous traversé ce moment. Mais voilà ce qu'ils ont compris : <strong>ceux qui rient maintenant seront silencieux quand tu montres tes résultats.</strong> Et les 1% qui restent dans ton camp dès le début ? Ce sont eux qui comptent vraiment.</p>
+    </div>
+  </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-card-header">
+      <div class="reveal-card-title">🔄 Blocage 3 — Le Syndrome du "Pas encore prêt"</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>"Je vais commencer quand j'aurai fini cette formation / ce cours / ce livre." — L'action crée la clarté. Pas l'inverse. <strong>Tu n'apprendras jamais à nager en lisant un livre sur la natation.</strong> Le meilleur moment pour commencer était hier. Le deuxième meilleur moment c'est maintenant — exactement maintenant.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5 — QUIZ 2 -->
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>VISION</span></div>
+  <div class="s-sub">Ta vision définit ta trajectoire</div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-question">Dans <em>5 ans</em>, si tu avais parfaitement réussi — à quoi ressemble ta vie concrètement ?</div>
+    <div class="quiz-options" id="q2">
+      <button class="quiz-option" onclick="answer(this,'q2','wrong','A')">
+        <div class="option-letter">A</div>
+        <div class="option-text">J'ai un bon emploi stable avec un salaire correct</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q2','correct','B')">
+        <div class="option-letter">B</div>
+        <div class="option-text">Je génère des revenus passifs, je travaille de partout, je suis libre</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q2','wrong','C')">
+        <div class="option-letter">C</div>
+        <div class="option-text">Honnêtement je ne sais pas encore ce que je veux</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q2','wrong','D')">
+        <div class="option-letter">D</div>
+        <div class="option-text">J'espère juste que ça marchera d'une façon ou d'une autre</div>
+      </button>
+    </div>
+    <div class="quiz-feedback correct" id="q2-correct">🎯 <strong>Tu as une vision claire.</strong> C'est ta boussole. Maintenant il faut construire le chemin vers ça — et c'est exactement ce que la DMA t'enseigne.</div>
+    <div class="quiz-feedback wrong" id="q2-wrong">💡 <strong>Honnêteté importante.</strong> Sans vision précise, tu avances en aveugle. La prochaine étape : définir exactement ta vie idéale dans les moindres détails. On va faire ça ensemble dans les exercices ci-dessous.</div>
+  </div>
+</div>
+
+<!-- SECTION 6 — LES RÈGLES DU JEU -->
+
+<div class="section" id="s6">
+  <div class="s-title">LES NOUVELLES <span>RÈGLES</span></div>
+  <div class="s-sub">Ceux qui réussissent pensent différemment</div>
+
+  <div class="story-block">
+    <p><strong>Règle 1 :</strong> Tu n'attends plus la permission de personne pour réussir. <em>Ni de ta famille, ni de tes amis, ni de la société.</em></p>
+  </div>
+  <div class="story-block">
+    <p><strong>Règle 2 :</strong> Tu es responsable à 100% de tes résultats. Pas la conjoncture. Pas les autres. <em>Toi.</em></p>
+  </div>
+  <div class="story-block">
+    <p><strong>Règle 3 :</strong> L'inconfort est le prix de la croissance. <em>Chaque fois que tu as peur d'agir, c'est là que la vraie transformation commence.</em></p>
+  </div>
+  <div class="story-block">
+    <p><strong>Règle 4 :</strong> Tu joues le jeu long. <em>Pas de richesse overnight. Mais une construction solide, mois après mois, qui te libère pour de vrai.</em></p>
+  </div>
+
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Le mindset n'est pas une pensée positive. C'est une décision de qui tu choisis d'être."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<!-- SECTION 7 — EXERCICES -->
+
+<div class="section" id="s7">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque action quand tu l'as faite</div>
+
+  <div class="checklist" id="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Écris ta vision en 5 ans</strong> — sur papier, en détails. Revenus, lieu de vie, journée type, libertés. Sois précis.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,1)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Identifie ton blocage principal</strong> — légitimité, regard des autres, ou "pas encore prêt" ? Note-le et décide de le dépasser aujourd'hui.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,2)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Pose une action concrète</strong> — même petite. Crée un compte, poste quelque chose, envoie un DM. L'action brise le blocage.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,3)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Lis tes nouvelles règles</strong> chaque matin pendant 7 jours. La répétition reprogramme le cerveau.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,4)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Passe au Module 02</strong> — le positionnement premium. Ce que tu apprends ici n'a de valeur que si tu passes à la suite.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLETE -->
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">
+    ✓ MARQUER COMME TERMINÉ
+  </button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="dashboard.html">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Dashboard
+    </a>
+    <a class="btn-nav" href="module-02.html">
+      Module 02
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Auth check
+  const user = JSON.parse(sessionStorage.getItem('dma_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, (window.scrollY / total) * 100);
+    document.getElementById('readProgress').style.width = pct + '%';
+  });
+
+  // Intersection Observer pour animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  // Quiz
+  function answer(btn, qid, type, letter) {
+    const opts = document.querySelectorAll('#' + qid + ' .quiz-option');
+    opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
+    if (type === 'correct') {
+      btn.classList.add('correct');
+      document.getElementById(qid + '-correct').style.display = 'block';
+    } else {
+      btn.classList.add('wrong');
+      document.getElementById(qid + '-wrong').style.display = 'block';
+      // Highlight correct answer
+      opts.forEach(o => {
+        if (o.querySelector('.option-letter').textContent === (qid === 'q1' ? 'D' : 'B')) {
+          o.classList.add('correct');
+        }
+      });
+    }
+  }
+
+  // Reveal cards
+  function toggleReveal(card) {
+    card.classList.toggle('open');
+  }
+
+  // Checklist
+  function toggleCheck(item, idx) {
+    item.classList.toggle('checked');
+    localStorage.setItem('m01_check_' + idx, item.classList.contains('checked') ? '1' : '0');
+  }
+
+  // Restore checklist
+  document.querySelectorAll('.check-item').forEach((item, i) => {
+    if (localStorage.getItem('m01_check_' + i) === '1') item.classList.add('checked');
+  });
+
+  // Complete module
+  const isComplete = localStorage.getItem('module_01_done') === '1';
+  if (isComplete) {
+    const btn = document.getElementById('completeBtn');
+    btn.textContent = '✓ MODULE TERMINÉ';
+    btn.classList.add('done');
+  }
+
+  function completeModule() {
+    localStorage.setItem('module_01_done', '1');
+    const btn = document.getElementById('completeBtn');
+    btn.textContent = '✓ MODULE TERMINÉ !';
+    btn.classList.add('done');
+    setTimeout(() => { window.location.href = 'module-02.html'; }, 1000);
+  }
+</script>
+
+</body>
+</html>
