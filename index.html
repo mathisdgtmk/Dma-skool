@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DMA — Accès Membre</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0001A;
+    --red-dark: #7a0010;
+    --gold: #C9A84C;
+    --gold-light: #e8c96a;
+    --black: #050505;
+    --black-2: #0f0f0f;
+    --black-3: #1a1a1a;
+    --white: #f5f0e8;
+    --white-dim: rgba(245,240,232,0.6);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–black);
+color: var(–white);
+font-family: ‘Montserrat’, sans-serif;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+position: relative;
+}
+
+/* BACKGROUND LAYERS */
+.bg-grain {
+position: fixed; inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events: none; z-index: 0; opacity: 0.4;
+}
+
+.bg-radial {
+position: fixed; inset: 0;
+background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(192,0,26,0.12) 0%, transparent 70%),
+radial-gradient(ellipse 50% 40% at 100% 100%, rgba(201,168,76,0.06) 0%, transparent 60%),
+radial-gradient(ellipse 60% 50% at 0% 80%, rgba(192,0,26,0.05) 0%, transparent 60%);
+pointer-events: none; z-index: 0;
+}
+
+.bg-lines {
+position: fixed; inset: 0;
+background-image: repeating-linear-gradient(
+0deg,
+transparent,
+transparent 60px,
+rgba(201,168,76,0.025) 60px,
+rgba(201,168,76,0.025) 61px
+);
+pointer-events: none; z-index: 0;
+}
+
+/* CORNER ORNAMENTS */
+.corner {
+position: fixed;
+width: 80px; height: 80px;
+opacity: 0.35;
+z-index: 1;
+}
+.corner svg { width: 100%; height: 100%; }
+.corner–tl { top: 20px; left: 20px; }
+.corner–tr { top: 20px; right: 20px; transform: scaleX(-1); }
+.corner–bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
+.corner–br { bottom: 20px; right: 20px; transform: scale(-1); }
+
+/* MAIN CARD */
+.card {
+position: relative; z-index: 10;
+width: 100%; max-width: 440px;
+padding: 0 24px;
+animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(30px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+/* LOGO AREA */
+.logo-wrap {
+text-align: center;
+margin-bottom: 40px;
+animation: fadeUp 0.9s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.logo-emblem {
+display: inline-block;
+position: relative;
+margin-bottom: 16px;
+}
+
+.logo-emblem::before,
+.logo-emblem::after {
+content: ‘’;
+position: absolute;
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+border-radius: 50%;
+}
+.logo-emblem::before {
+width: 72px; height: 72px;
+border: 1px solid rgba(201,168,76,0.2);
+animation: pulse 3s ease-in-out infinite;
+}
+.logo-emblem::after {
+width: 90px; height: 90px;
+border: 1px solid rgba(201,168,76,0.08);
+animation: pulse 3s ease-in-out infinite 0.5s;
+}
+
+@keyframes pulse {
+0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+50% { transform: translate(-50%,-50%) scale(1.06); opacity: 0.6; }
+}
+
+.logo-icon {
+width: 52px; height: 52px;
+background: linear-gradient(135deg, var(–red) 0%, var(–red-dark) 100%);
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+position: relative;
+box-shadow: 0 0 30px rgba(192,0,26,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.logo-icon span {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 20px;
+color: var(–gold);
+letter-spacing: 1px;
+line-height: 1;
+}
+
+.logo-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 42px;
+letter-spacing: 6px;
+color: var(–white);
+line-height: 1;
+display: block;
+}
+
+.logo-subtitle {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 13px;
+font-weight: 300;
+letter-spacing: 4px;
+color: var(–gold);
+text-transform: uppercase;
+display: block;
+margin-top: 4px;
+}
+
+/* DIVIDER */
+.divider {
+display: flex; align-items: center; gap: 12px;
+margin-bottom: 32px;
+animation: fadeUp 0.9s 0.15s cubic-bezier(0.16,1,0.3,1) both;
+}
+.divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent); }
+.divider-diamond {
+width: 6px; height: 6px;
+background: var(–gold);
+transform: rotate(45deg);
+opacity: 0.6;
+}
+
+/* FORM */
+.form-wrap {
+animation: fadeUp 0.9s 0.2s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.form-label {
+display: block;
+font-size: 9px;
+font-weight: 600;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 8px;
+opacity: 0.8;
+}
+
+.form-group {
+margin-bottom: 20px;
+position: relative;
+}
+
+.form-input {
+width: 100%;
+background: rgba(255,255,255,0.03);
+border: 1px solid rgba(201,168,76,0.15);
+border-radius: 2px;
+padding: 14px 16px;
+color: var(–white);
+font-family: ‘Montserrat’, sans-serif;
+font-size: 14px;
+font-weight: 300;
+letter-spacing: 1px;
+outline: none;
+transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+-webkit-appearance: none;
+}
+
+.form-input::placeholder { color: rgba(245,240,232,0.2); letter-spacing: 1px; }
+
+.form-input:focus {
+border-color: rgba(201,168,76,0.5);
+background: rgba(255,255,255,0.05);
+box-shadow: 0 0 0 3px rgba(201,168,76,0.06), 0 0 20px rgba(192,0,26,0.1);
+}
+
+.form-input.error {
+border-color: rgba(192,0,26,0.6);
+box-shadow: 0 0 0 3px rgba(192,0,26,0.08);
+}
+
+/* TOGGLE PASSWORD */
+.input-wrapper { position: relative; }
+.toggle-pw {
+position: absolute; right: 14px; top: 50%;
+transform: translateY(-50%);
+background: none; border: none;
+color: rgba(245,240,232,0.25);
+cursor: pointer; padding: 4px;
+transition: color 0.2s;
+font-size: 15px;
+}
+.toggle-pw:hover { color: var(–gold); }
+
+/* BUTTON */
+.btn-login {
+width: 100%;
+background: linear-gradient(135deg, var(–red) 0%, #a00015 100%);
+border: none;
+border-radius: 2px;
+padding: 16px;
+color: var(–white);
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 18px;
+letter-spacing: 4px;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+transition: transform 0.2s, box-shadow 0.3s;
+box-shadow: 0 4px 24px rgba(192,0,26,0.3);
+margin-top: 8px;
+}
+
+.btn-login::before {
+content: ‘’;
+position: absolute; inset: 0;
+background: linear-gradient(135deg, rgba(201,168,76,0.15) 0%, transparent 60%);
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.btn-login:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(192,0,26,0.45); }
+.btn-login:hover::before { opacity: 1; }
+.btn-login:active { transform: translateY(0); }
+
+.btn-login .btn-shine {
+position: absolute; top: 0; left: -100%;
+width: 60%; height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+transform: skewX(-15deg);
+transition: left 0.5s;
+}
+.btn-login:hover .btn-shine { left: 150%; }
+
+/* ERROR MESSAGE */
+.error-msg {
+display: none;
+background: rgba(192,0,26,0.08);
+border: 1px solid rgba(192,0,26,0.25);
+border-radius: 2px;
+padding: 12px 16px;
+margin-bottom: 16px;
+font-size: 12px;
+font-weight: 500;
+letter-spacing: 0.5px;
+color: #ff6b6b;
+text-align: center;
+}
+.error-msg.visible { display: block; animation: shake 0.4s ease; }
+
+@keyframes shake {
+0%,100% { transform: translateX(0); }
+20%,60% { transform: translateX(-6px); }
+40%,80% { transform: translateX(6px); }
+}
+
+/* LOADING STATE */
+.btn-login.loading { pointer-events: none; opacity: 0.7; }
+.btn-login.loading .btn-text { opacity: 0; }
+.btn-loader {
+position: absolute; top: 50%; left: 50%;
+transform: translate(-50%,-50%);
+width: 20px; height: 20px;
+border: 2px solid rgba(255,255,255,0.2);
+border-top-color: white;
+border-radius: 50%;
+display: none;
+animation: spin 0.7s linear infinite;
+}
+.btn-login.loading .btn-loader { display: block; }
+
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+/* FOOTER */
+.card-footer {
+margin-top: 32px;
+text-align: center;
+animation: fadeUp 0.9s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.footer-line {
+display: flex; align-items: center; gap: 10px;
+margin-bottom: 16px;
+}
+.footer-line .divider-line { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
+
+.footer-text {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 12px;
+font-style: italic;
+color: rgba(245,240,232,0.25);
+letter-spacing: 1px;
+}
+
+.contact-link {
+font-size: 10px;
+font-weight: 500;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: rgba(201,168,76,0.4);
+text-decoration: none;
+transition: color 0.2s;
+}
+.contact-link:hover { color: var(–gold); }
+
+/* ATTEMPT COUNTER */
+.attempt-info {
+font-size: 10px;
+color: rgba(245,240,232,0.2);
+text-align: center;
+margin-top: 12px;
+letter-spacing: 1px;
+display: none;
+}
+.attempt-info.visible { display: block; }
+
+/* SUCCESS OVERLAY */
+.success-overlay {
+position: fixed; inset: 0;
+background: var(–black);
+z-index: 100;
+display: flex; align-items: center; justify-content: center;
+opacity: 0; pointer-events: none;
+transition: opacity 0.6s;
+}
+.success-overlay.visible { opacity: 1; pointer-events: all; }
+.success-content { text-align: center; }
+.success-icon {
+width: 64px; height: 64px;
+border: 2px solid var(–gold);
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+margin: 0 auto 24px;
+animation: scaleIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.success-icon svg { width: 28px; height: 28px; stroke: var(–gold); fill: none; stroke-width: 2.5; }
+@keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+.success-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 32px; letter-spacing: 5px;
+color: var(–white); margin-bottom: 8px;
+}
+.success-sub {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 14px; color: var(–gold);
+font-style: italic; letter-spacing: 2px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Background -->
+
+<div class="bg-grain"></div>
+<div class="bg-radial"></div>
+<div class="bg-lines"></div>
+
+<!-- Corner ornaments -->
+
+<div class="corner corner--tl">
+  <svg viewBox="0 0 80 80" fill="none">
+    <path d="M2 78 L2 2 L78 2" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+    <path d="M2 50 L2 2 L50 2" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="2" cy="2" r="3" fill="#C9A84C" opacity="0.5"/>
+  </svg>
+</div>
+<div class="corner corner--tr">
+  <svg viewBox="0 0 80 80" fill="none">
+    <path d="M2 78 L2 2 L78 2" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+    <path d="M2 50 L2 2 L50 2" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="2" cy="2" r="3" fill="#C9A84C" opacity="0.5"/>
+  </svg>
+</div>
+<div class="corner corner--bl">
+  <svg viewBox="0 0 80 80" fill="none">
+    <path d="M2 78 L2 2 L78 2" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+    <path d="M2 50 L2 2 L50 2" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="2" cy="2" r="3" fill="#C9A84C" opacity="0.5"/>
+  </svg>
+</div>
+<div class="corner corner--br">
+  <svg viewBox="0 0 80 80" fill="none">
+    <path d="M2 78 L2 2 L78 2" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+    <path d="M2 50 L2 2 L50 2" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="2" cy="2" r="3" fill="#C9A84C" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- Card -->
+
+<div class="card">
+
+  <!-- Logo -->
+
+  <div class="logo-wrap">
+    <div class="logo-emblem">
+      <div class="logo-icon"><span>DMA</span></div>
+    </div>
+    <span class="logo-title">DIGITAL MASTERY</span>
+    <span class="logo-subtitle">Academy — Espace Membre</span>
+  </div>
+
+  <!-- Divider -->
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Form -->
+
+  <div class="form-wrap">
+    <div class="error-msg" id="errorMsg">Identifiants incorrects. Vérifie tes accès.</div>
+
+```
+<div class="form-group">
+  <label class="form-label" for="username">Identifiant</label>
+  <input class="form-input" type="text" id="username" placeholder="Ton identifiant membre" autocomplete="username" autocapitalize="none">
+</div>
+
+<div class="form-group">
+  <label class="form-label" for="password">Mot de passe</label>
+  <div class="input-wrapper">
+    <input class="form-input" type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+    <button class="toggle-pw" onclick="togglePw()" type="button" id="toggleBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<button class="btn-login" id="loginBtn" onclick="handleLogin()">
+  <div class="btn-shine"></div>
+  <span class="btn-text">Accéder à la formation</span>
+  <div class="btn-loader"></div>
+</button>
+
+<div class="attempt-info" id="attemptInfo"></div>
+```
+
+  </div>
+
+  <!-- Footer -->
+
+  <div class="card-footer">
+    <div class="footer-line">
+      <div class="divider-line"></div>
+      <div class="divider-diamond" style="opacity:0.2"></div>
+      <div class="divider-line"></div>
+    </div>
+    <p class="footer-text">Accès strictement personnel et non transférable</p>
+    <br>
+    <a href="mailto:mathisreservation@gmail.com" class="contact-link">Contacter le support</a>
+  </div>
+
+</div>
+
+<!-- Success overlay -->
+
+<div class="success-overlay" id="successOverlay">
+  <div class="success-content">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="success-title">Accès accordé</div>
+    <div class="success-sub">Bienvenue dans la DMA</div>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // BASE DE DONNÉES MEMBRES
+  // Format: { identifiant: { password: '...', name: '...', tier: 'starter|jcvd|duking', redirect: 'dashboard.html' } }
+  // ============================================================
+  const MEMBRES = {
+    // --- EXEMPLES À REMPLACER PAR TES VRAIS CLIENTS ---
+    "client001": { password: "DMA2025!", name: "Jean D.", tier: "starter", redirect: "dashboard.html" },
+    "client002": { password: "Elite#007", name: "Sarah M.", tier: "jcvd", redirect: "dashboard.html" },
+    "client003": { password: "King$2025", name: "Thomas R.", tier: "duking", redirect: "dashboard.html" },
+    // Compte admin/démo
+    "mathis": { password: "AdminDMA!", name: "Mathis", tier: "duking", redirect: "dashboard.html" },
+  };
+
+  // ============================================================
+
+  let attempts = 0;
+  const MAX_ATTEMPTS = 5;
+  let locked = false;
+
+  function handleLogin() {
+    if (locked) return;
+
+    const username = document.getElementById('username').value.trim().toLowerCase();
+    const password = document.getElementById('password').value;
+    const btn = document.getElementById('loginBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // Clear errors
+    errorMsg.classList.remove('visible');
+    document.getElementById('username').classList.remove('error');
+    document.getElementById('password').classList.remove('error');
+
+    if (!username || !password) {
+      errorMsg.textContent = "Remplis tous les champs.";
+      errorMsg.classList.add('visible');
+      return;
+    }
+
+    // Loading
+    btn.classList.add('loading');
+
+    setTimeout(() => {
+      btn.classList.remove('loading');
+
+      const membre = MEMBRES[username];
+
+      if (membre && membre.password === password) {
+        // SUCCESS
+        sessionStorage.setItem('dma_user', JSON.stringify({
+          id: username,
+          name: membre.name,
+          tier: membre.tier,
+          loginTime: Date.now()
+        }));
+
+        document.getElementById('successOverlay').classList.add('visible');
+
+        setTimeout(() => {
+          window.location.href = membre.redirect;
+        }, 1800);
+
+      } else {
+        // FAIL
+        attempts++;
+        document.getElementById('username').classList.add('error');
+        document.getElementById('password').classList.add('error');
+
+        const remaining = MAX_ATTEMPTS - attempts;
+
+        if (attempts >= MAX_ATTEMPTS) {
+          locked = true;
+          errorMsg.textContent = "Trop de tentatives. Compte bloqué 10 minutes.";
+          errorMsg.classList.add('visible');
+          document.getElementById('attemptInfo').classList.remove('visible');
+          setTimeout(() => {
+            locked = false;
+            attempts = 0;
+            errorMsg.classList.remove('visible');
+          }, 600000);
+        } else {
+          errorMsg.textContent = "Identifiants incorrects. Vérifie tes accès.";
+          errorMsg.classList.add('visible');
+          if (attempts >= 2) {
+            const info = document.getElementById('attemptInfo');
+            info.textContent = `${remaining} tentative${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}`;
+            info.classList.add('visible');
+          }
+        }
+
+        // Shake password field
+        const pw = document.getElementById('password');
+        pw.value = '';
+        pw.focus();
+      }
+    }, 900);
+  }
+
+  function togglePw() {
+    const pw = document.getElementById('password');
+    const btn = document.getElementById('toggleBtn');
+    if (pw.type === 'password') {
+      pw.type = 'text';
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+    } else {
+      pw.type = 'password';
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    }
+  }
+
+  // Enter key support
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleLogin();
+  });
+</script>
+
+</body>
+</html>
