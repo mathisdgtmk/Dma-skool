@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA — Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%}
+
+body{
+background:#050505;
+color:#f5f0e8;
+font-family:‘Montserrat’,Arial,sans-serif;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* BG */
+body::before{
+content:’’;position:fixed;inset:0;
+background:
+radial-gradient(ellipse 80% 40% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 60%),
+radial-gradient(ellipse 40% 30% at 0% 50%,rgba(201,168,76,.04) 0%,transparent 60%);
+pointer-events:none;z-index:0;
+}
+
+/* HEADER */
+.header{
+position:sticky;top:0;z-index:50;
+background:rgba(5,5,5,.92);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(201,168,76,.1);
+padding:14px 20px;
+display:flex;align-items:center;justify-content:space-between;
+}
+
+.header-logo{
+display:flex;align-items:center;gap:10px;
+}
+
+.header-emblem{
+width:34px;height:34px;
+background:linear-gradient(135deg,#C0001A,#7a0010);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 0 14px rgba(192,0,26,.4);
+flex-shrink:0;
+}
+.header-emblem span{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:11px;color:#C9A84C;letter-spacing:.5px;
+}
+
+.header-title{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:18px;letter-spacing:3px;color:#f5f0e8;
+}
+
+.header-right{display:flex;align-items:center;gap:12px}
+
+.welcome-name{
+font-size:11px;font-weight:500;letter-spacing:1px;
+color:rgba(201,168,76,.7);
+display:none;
+}
+@media(min-width:400px){.welcome-name{display:block}}
+
+.btn-logout{
+background:none;border:1px solid rgba(201,168,76,.2);
+border-radius:2px;padding:6px 12px;
+color:rgba(245,240,232,.4);
+font-family:‘Montserrat’,Arial,sans-serif;
+font-size:9px;font-weight:600;letter-spacing:2px;
+text-transform:uppercase;cursor:pointer;
+transition:all .2s;-webkit-appearance:none;
+}
+.btn-logout:active{border-color:rgba(201,168,76,.5);color:#C9A84C}
+
+/* MAIN */
+.main{position:relative;z-index:1;padding:28px 16px 48px;}
+@media(min-width:480px){.main{padding:32px 24px 60px;}}
+
+/* HERO */
+.hero{
+text-align:center;
+margin-bottom:36px;
+animation:fadeUp .6s cubic-bezier(.16,1,.3,1) both;
+}
+
+.hero-tag{
+display:inline-block;
+font-size:9px;font-weight:600;letter-spacing:3px;
+text-transform:uppercase;color:#C9A84C;
+border:1px solid rgba(201,168,76,.2);
+border-radius:20px;padding:5px 14px;
+margin-bottom:14px;
+background:rgba(201,168,76,.05);
+}
+
+.hero-title{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:clamp(28px,7vw,48px);
+letter-spacing:clamp(2px,1vw,5px);
+color:#f5f0e8;line-height:1;
+margin-bottom:10px;
+}
+
+.hero-title span{color:#C0001A}
+
+.hero-sub{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(13px,3vw,16px);
+font-style:italic;
+color:rgba(245,240,232,.45);
+letter-spacing:1px;
+margin-bottom:20px;
+}
+
+/* PROGRESS BAR */
+.progress-wrap{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(201,168,76,.1);
+border-radius:3px;
+padding:14px 16px;
+margin-bottom:32px;
+animation:fadeUp .6s .1s cubic-bezier(.16,1,.3,1) both;
+}
+
+.progress-top{
+display:flex;justify-content:space-between;align-items:center;
+margin-bottom:10px;
+}
+
+.progress-label{
+font-size:9px;font-weight:600;letter-spacing:2.5px;
+text-transform:uppercase;color:rgba(201,168,76,.6);
+}
+
+.progress-count{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:16px;letter-spacing:2px;color:#C9A84C;
+}
+
+.progress-bar{
+height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;
+}
+
+.progress-fill{
+height:100%;width:0%;
+background:linear-gradient(90deg,#C0001A,#C9A84C);
+border-radius:2px;
+transition:width 1s cubic-bezier(.16,1,.3,1);
+}
+
+/* SECTION TITLE */
+.section-title{
+display:flex;align-items:center;gap:12px;
+margin-bottom:16px;
+}
+
+.section-title-text{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:13px;letter-spacing:3px;
+color:rgba(245,240,232,.4);
+text-transform:uppercase;
+white-space:nowrap;
+}
+
+.section-title-line{
+flex:1;height:1px;
+background:linear-gradient(90deg,rgba(201,168,76,.15),transparent);
+}
+
+/* MODULE GRID */
+.modules-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:24px;
+}
+@media(min-width:480px){.modules-grid{gap:12px}}
+
+/* MODULE CARD */
+.module-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(201,168,76,.08);
+border-radius:4px;
+padding:14px 12px;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+transition:border-color .25s,background .25s,transform .15s;
+animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both;
+text-decoration:none;
+display:block;
+}
+
+.module-card::before{
+content:’’;
+position:absolute;inset:0;
+background:linear-gradient(135deg,rgba(192,0,26,.06) 0%,transparent 60%);
+opacity:0;transition:opacity .3s;
+}
+
+.module-card:active{
+border-color:rgba(201,168,76,.3);
+background:rgba(255,255,255,.05);
+transform:scale(.98);
+}
+.module-card:active::before{opacity:1}
+
+.module-card.completed{
+border-color:rgba(201,168,76,.2);
+background:rgba(201,168,76,.04);
+}
+
+.module-card.locked{
+opacity:.45;cursor:default;
+}
+
+.module-num{
+font-family:‘Bebas Neue’,Impact,sans-serif;
+font-size:11px;letter-spacing:2px;
+color:rgba(201,168,76,.4);
+margin-bottom:6px;
+display:block;
+}
+
+.module-title{
+font-size:11px;font-weight:600;
+letter-spacing:.3px;
+color:#f5f0e8;
+line-height:1.3;
+margin-bottom:8px;
+}
+
+.module-card.locked .module-title{color:rgba(245,240,232,.4)}
+
+.module-tag{
+display:inline-block;
+font-size:8px;font-weight:600;letter-spacing:1.5px;
+text-transform:uppercase;
+padding:3px 8px;border-radius:2px;
+}
+
+.tag-mindset{background:rgba(192,0,26,.15);color:#ff6b6b}
+.tag-business{background:rgba(201,168,76,.12);color:#C9A84C}
+.tag-content{background:rgba(100,180,255,.1);color:#7ab8ff}
+.tag-tech{background:rgba(150,255,150,.08);color:#80d080}
+.tag-premium{background:rgba(192,0,26,.2);color:#ff4444;border:1px solid rgba(192,0,26,.3)}
+
+.module-check{
+position:absolute;top:10px;right:10px;
+width:18px;height:18px;
+border:1px solid rgba(201,168,76,.2);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+transition:all .2s;
+}
+
+.module-card.completed .module-check{
+background:#C9A84C;
+border-color:#C9A84C;
+}
+
+.module-check svg{width:9px;height:9px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.module-card.completed .module-check svg{display:block}
+
+.module-lock{
+position:absolute;top:10px;right:10px;
+font-size:12px;opacity:.3;
+}
+
+/* BONUS SECTION */
+.bonus-card{
+background:linear-gradient(135deg,rgba(192,0,26,.08) 0%,rgba(201,168,76,.05) 100%);
+border:1px solid rgba(192,0,26,.2);
+border-radius:4px;
+padding:16px;
+display:flex;align-items:center;gap:14px;
+cursor:pointer;
+transition:border-color .2s,transform .15s;
+text-decoration:none;
+margin-bottom:10px;
+animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both;
+}
+.bonus-card:active{border-color:rgba(192,0,26,.5);transform:scale(.98)}
+
+.bonus-icon{
+width:40px;height:40px;flex-shrink:0;
+background:linear-gradient(135deg,#C0001A,#7a0010);
+border-radius:3px;
+display:flex;align-items:center;justify-content:center;
+font-size:18px;
+}
+
+.bonus-info{}
+.bonus-label{
+font-size:8px;font-weight:600;letter-spacing:2.5px;
+text-transform:uppercase;color:#C9A84C;
+margin-bottom:4px;display:block;
+}
+.bonus-title{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.2}
+
+/* BOTTOM NAV */
+.bottom-nav{
+position:fixed;bottom:0;left:0;right:0;
+background:rgba(5,5,5,.95);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border-top:1px solid rgba(201,168,76,.08);
+display:flex;z-index:50;
+padding-bottom:env(safe-area-inset-bottom);
+}
+
+.nav-item{
+flex:1;display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+padding:10px 4px;
+cursor:pointer;
+border:none;background:none;
+color:rgba(245,240,232,.25);
+transition:color .2s;
+-webkit-appearance:none;
+font-family:‘Montserrat’,Arial,sans-serif;
+}
+
+.nav-item.active{color:#C9A84C}
+.nav-item svg{width:20px;height:20px;margin-bottom:4px}
+.nav-item span{font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(16px)}
+to{opacity:1;transform:translateY(0)}
+}
+</style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+  <div class="header-logo">
+    <div class="header-emblem"><span>DMA</span></div>
+    <div class="header-title">DIGITAL MASTERY</div>
+  </div>
+  <div class="header-right">
+    <span class="welcome-name" id="welcomeName"></span>
+    <button class="btn-logout" onclick="logout()">Déco</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+
+<div class="main" style="padding-bottom:80px">
+
+  <!-- HERO -->
+
+  <div class="hero">
+    <div class="hero-tag">✦ Espace Formation</div>
+    <div class="hero-title">TES <span>28</span> MODULES</div>
+    <div class="hero-sub">Maîtrise le digital. Construis ton empire.</div>
+  </div>
+
+  <!-- PROGRESS -->
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Progression globale</span>
+      <span class="progress-count" id="progressCount">0 / 28</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- MODULES MINDSET -->
+
+  <div class="section-title">
+    <span class="section-title-text">Fondations</span>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="modules-grid">
+    <a class="module-card" href="module-01.html" style="animation-delay:.05s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 01</span>
+      <div class="module-title">Mindset & Vision</div>
+      <span class="module-tag tag-mindset">Mindset</span>
+    </a>
+    <a class="module-card" href="module-02.html" style="animation-delay:.08s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 02</span>
+      <div class="module-title">Positionnement Premium</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-03.html" style="animation-delay:.1s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 03</span>
+      <div class="module-title">Page de Vente</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-04.html" style="animation-delay:.12s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 04</span>
+      <div class="module-title">Configuration Paiement</div>
+      <span class="module-tag tag-tech">Tech</span>
+    </a>
+  </div>
+
+  <!-- MODULES CONTENU -->
+
+  <div class="section-title" style="margin-top:8px">
+    <span class="section-title-text">Contenu & Marketing</span>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="modules-grid">
+    <a class="module-card" href="module-05.html" style="animation-delay:.14s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 05</span>
+      <div class="module-title">Produits Digitaux</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-06.html" style="animation-delay:.16s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 06</span>
+      <div class="module-title">Content Marketing</div>
+      <span class="module-tag tag-content">Contenu</span>
+    </a>
+    <a class="module-card" href="module-07.html" style="animation-delay:.18s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 07</span>
+      <div class="module-title">Vidéo Faceless</div>
+      <span class="module-tag tag-content">Contenu</span>
+    </a>
+    <a class="module-card" href="module-08.html" style="animation-delay:.2s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 08</span>
+      <div class="module-title">Instagram Mastery</div>
+      <span class="module-tag tag-content">Contenu</span>
+    </a>
+    <a class="module-card" href="module-09.html" style="animation-delay:.22s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 09</span>
+      <div class="module-title">TikTok Hooks</div>
+      <span class="module-tag tag-content">Contenu</span>
+    </a>
+    <a class="module-card" href="module-10.html" style="animation-delay:.24s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 10</span>
+      <div class="module-title">Snapchat Strategy</div>
+      <span class="module-tag tag-content">Contenu</span>
+    </a>
+  </div>
+
+  <!-- MODULES VENTE -->
+
+  <div class="section-title" style="margin-top:8px">
+    <span class="section-title-text">Vente & Closing</span>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="modules-grid">
+    <a class="module-card" href="module-11.html" style="animation-delay:.26s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 11</span>
+      <div class="module-title">Closing & Scripts</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-12.html" style="animation-delay:.28s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 12</span>
+      <div class="module-title">Live Selling TikTok</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-13.html" style="animation-delay:.3s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 13</span>
+      <div class="module-title">VSL & Video Sales</div>
+      <span class="module-tag tag-content">Contenu</span>
+    </a>
+    <a class="module-card" href="module-14.html" style="animation-delay:.32s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 14</span>
+      <div class="module-title">Email Marketing</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-15.html" style="animation-delay:.34s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 15</span>
+      <div class="module-title">Funnels & Tunnels</div>
+      <span class="module-tag tag-tech">Tech</span>
+    </a>
+    <a class="module-card" href="module-16.html" style="animation-delay:.36s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 16</span>
+      <div class="module-title">AI Selling</div>
+      <span class="module-tag tag-tech">Tech</span>
+    </a>
+  </div>
+
+  <!-- MODULES AVANCÉS -->
+
+  <div class="section-title" style="margin-top:8px">
+    <span class="section-title-text">Revenus & Systèmes</span>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="modules-grid">
+    <a class="module-card" href="module-17.html" style="animation-delay:.38s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 17</span>
+      <div class="module-title">MRR & Récurrence</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-18.html" style="animation-delay:.4s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 18</span>
+      <div class="module-title">SMMA Agency</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-19.html" style="animation-delay:.42s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 19</span>
+      <div class="module-title">Shopify & E-commerce</div>
+      <span class="module-tag tag-tech">Tech</span>
+    </a>
+    <a class="module-card" href="module-20.html" style="animation-delay:.44s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 20</span>
+      <div class="module-title">Système.io & Stan</div>
+      <span class="module-tag tag-tech">Tech</span>
+    </a>
+    <a class="module-card" href="module-21.html" style="animation-delay:.46s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 21</span>
+      <div class="module-title">Déclaration Légale</div>
+      <span class="module-tag tag-tech">Tech</span>
+    </a>
+    <a class="module-card" href="module-22.html" style="animation-delay:.48s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 22</span>
+      <div class="module-title">Automation DM</div>
+      <span class="module-tag tag-tech">Tech</span>
+    </a>
+  </div>
+
+  <!-- MODULES PREMIUM -->
+
+  <div class="section-title" style="margin-top:8px">
+    <span class="section-title-text">Premium & Expert</span>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="modules-grid">
+    <a class="module-card" href="module-23.html" style="animation-delay:.5s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 23</span>
+      <div class="module-title">Droits de Revente MRR</div>
+      <span class="module-tag tag-premium">Premium</span>
+    </a>
+    <a class="module-card" href="module-24.html" style="animation-delay:.52s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 24</span>
+      <div class="module-title">Personal Branding</div>
+      <span class="module-tag tag-mindset">Mindset</span>
+    </a>
+    <a class="module-card" href="module-25.html" style="animation-delay:.54s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 25</span>
+      <div class="module-title">Prospection B2B</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-26.html" style="animation-delay:.56s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 26</span>
+      <div class="module-title">Gestion Client</div>
+      <span class="module-tag tag-business">Business</span>
+    </a>
+    <a class="module-card" href="module-27.html" style="animation-delay:.58s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 27</span>
+      <div class="module-title">Scaling & Délégation</div>
+      <span class="module-tag tag-premium">Premium</span>
+    </a>
+    <a class="module-card" href="module-28.html" style="animation-delay:.6s">
+      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <span class="module-num">MODULE 28</span>
+      <div class="module-title">Stratégie 2026</div>
+      <span class="module-tag tag-premium">Premium</span>
+    </a>
+  </div>
+
+  <!-- BONUS -->
+
+  <div class="section-title" style="margin-top:16px">
+    <span class="section-title-text">Bonus Exclusifs</span>
+    <div class="section-title-line"></div>
+  </div>
+
+  <a class="bonus-card" href="bonus-tracker.html" style="animation-delay:.62s">
+    <div class="bonus-icon">📊</div>
+    <div class="bonus-info">
+      <span class="bonus-label">Outil Inclus</span>
+      <div class="bonus-title">Tracker CRM Prospects</div>
+    </div>
+  </a>
+
+  <a class="bonus-card" href="bonus-scripts.html" style="animation-delay:.64s">
+    <div class="bonus-icon">🎯</div>
+    <div class="bonus-info">
+      <span class="bonus-label">Bonus Vente</span>
+      <div class="bonus-title">Scripts & Objections PDF</div>
+    </div>
+  </a>
+
+  <a class="bonus-card" href="bonus-legal.html" style="animation-delay:.66s">
+    <div class="bonus-icon">📋</div>
+    <div class="bonus-info">
+      <span class="bonus-label">Bonus Legal</span>
+      <div class="bonus-title">CGV & Contrats Prêts</div>
+    </div>
+  </a>
+
+</div>
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+  <button class="nav-item active" onclick="scrollTop()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+    </svg>
+    <span>Modules</span>
+  </button>
+  <button class="nav-item" onclick="window.location.href='bonus-tracker.html'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M3 3h18v18H3z"/><path d="M8 12h8M8 8h8M8 16h5"/>
+    </svg>
+    <span>CRM</span>
+  </button>
+  <button class="nav-item" onclick="window.location.href='profil.html'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+    </svg>
+    <span>Profil</span>
+  </button>
+</div>
+
+<script>
+  // Vérifie session
+  const user = JSON.parse(sessionStorage.getItem('dma_user') || 'null');
+  if (!user) { window.location.href = 'index.html'; }
+  else {
+    document.getElementById('welcomeName').textContent = user.name || '';
+  }
+
+  // Progress depuis localStorage
+  const TOTAL = 28;
+  function updateProgress() {
+    let done = 0;
+    for (let i = 1; i <= TOTAL; i++) {
+      if (localStorage.getItem('module_' + i + '_done') === '1') {
+        done++;
+        const card = document.querySelector('[href="module-' + String(i).padStart(2,'0') + '.html"]');
+        if (card) card.classList.add('completed');
+      }
+    }
+    document.getElementById('progressCount').textContent = done + ' / ' + TOTAL;
+    setTimeout(() => {
+      document.getElementById('progressFill').style.width = (done / TOTAL * 100) + '%';
+    }, 300);
+  }
+  updateProgress();
+
+  function logout() {
+    sessionStorage.removeItem('dma_user');
+    window.location.href = 'index.html';
+  }
+
+  function scrollTop() {
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+</script>
+
+</body>
+</html>
