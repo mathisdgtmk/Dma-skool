@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 03 — Configuration Paiement</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{width:100%;min-height:100%}
+  body{background:#050505;color:#f5f0e8;font-family:'Montserrat',Arial,sans-serif;overflow-x:hidden;}
+
+.header{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C;}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25);}
+
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49;}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease;}
+
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);}
+.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05);}
+.hero-num{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px;}
+.hero-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px;}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px;}
+
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.section.visible{opacity:1;transform:translateY(0)}
+
+.s-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px;}
+.s-title span{color:#C0001A}
+.s-sub{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px;}
+
+.story-block{background:rgba(255,255,255,.02);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px;}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.8);}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative;}
+.impact-quote::before,.impact-quote::after{content:’’;position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3);}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px;}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5);}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:20px;}
+.tab-btn{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px 8px;font-family:‘Montserrat’,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;transition:all .2s;-webkit-appearance:none;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.tab-btn span{font-size:20px;}
+.tab-btn.active{border-color:rgba(192,0,26,.4);color:#C0001A;background:rgba(192,0,26,.06);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* PLATFORM TABS (secondary) */
+.platform-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;}
+.platform-tabs::-webkit-scrollbar{display:none}
+.ptab-btn{flex-shrink:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:8px 12px;font-family:‘Montserrat’,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.35);cursor:pointer;transition:all .2s;-webkit-appearance:none;}
+.ptab-btn.active{border-color:rgba(201,168,76,.35);color:#C9A84C;background:rgba(201,168,76,.05);}
+.ptab-content{display:none;}
+.ptab-content.active{display:block;}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px;}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:‘Bebas Neue’,Impact,sans-serif;font-size:13px;color:#f5f0e8;}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px;}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65;}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8);}
+
+/* WARNING / INFO */
+.warning-block{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start;}
+.warning-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.warning-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6;}
+.warning-text strong{color:#ff7070;font-weight:600}
+
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start;}
+.info-icon{font-size:18px;flex-shrink:0;}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6;}
+.info-text strong{color:#C9A84C;font-weight:600}
+
+/* COMPARE TABLE */
+.compare-table{width:100%;border-collapse:collapse;margin-bottom:16px;}
+.compare-table th{background:rgba(255,255,255,.04);padding:10px 12px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.5);text-align:left;border-bottom:1px solid rgba(255,255,255,.06);}
+.compare-table td{padding:10px 12px;font-size:11px;font-weight:300;color:rgba(245,240,232,.7);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;line-height:1.5;}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td:first-child{font-weight:500;color:#f5f0e8;}
+.badge-green{background:rgba(100,200,100,.1);color:#80d080;border-radius:2px;padding:2px 7px;font-size:9px;font-weight:600;letter-spacing:1px;}
+.badge-red{background:rgba(192,0,26,.1);color:#ff7070;border-radius:2px;padding:2px 7px;font-size:9px;font-weight:600;letter-spacing:1px;}
+.badge-yellow{background:rgba(201,168,76,.1);color:#C9A84C;border-radius:2px;padding:2px 7px;font-size:9px;font-weight:600;letter-spacing:1px;}
+
+/* QUIZ */
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px;}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px;}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:‘Montserrat’,Arial,sans-serif;}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06);}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06);}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C;}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none;}
+.show-correct{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important;}
+.show-wrong{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important;}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s;}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04);}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C;}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+
+/* COMPLETE */
+.complete-section{padding:28px 20px 48px;text-align:center;}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:‘Bebas Neue’,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px;}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a);}
+.nav-modules{display:flex;gap:10px;}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:‘Montserrat’,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;transition:all .2s;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour
+  </a>
+  <div class="module-badge">MODULE 03</div>
+  <div class="header-num">3 / 28</div>
+</div>
+
+<div class="module-progress">
+  <div class="module-progress-fill" id="readProgress"></div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">💳 Paiement</div>
+  <span class="hero-num">MODULE 03</span>
+  <div class="hero-title">CONFIG<br><span>PAIEMENT</span></div>
+  <div class="hero-sub">Stripe & PayPal sur toutes tes plateformes</div>
+</div>
+
+<!-- SECTION 1 — INTRO -->
+
+<div class="section" id="s1">
+  <div class="story-block">
+    <p>Tu peux avoir la meilleure page de vente du monde. Si <strong>le paiement ne fonctionne pas</strong>, tu ne gagnes pas un centime.</p>
+  </div>
+  <div class="story-block">
+    <p>La configuration du paiement c'est <em>l'étape que 80% des débutants bâclent</em>. Résultat : des clients qui veulent acheter mais ne peuvent pas. Des ventes perdues.</p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Chaque friction dans le processus de paiement te coûte des ventes. Rends l'achat aussi simple que possible."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<!-- SECTION 2 — STRIPE VS PAYPAL -->
+
+<div class="section" id="s2">
+  <div class="s-title">STRIPE <span>VS</span> PAYPAL</div>
+  <div class="s-sub">Lequel choisir selon ta situation</div>
+
+  <table class="compare-table">
+    <tr>
+      <th>Critère</th>
+      <th>Stripe</th>
+      <th>PayPal</th>
+    </tr>
+    <tr>
+      <td>Frais</td>
+      <td>1.5% + 0.25€</td>
+      <td>3.4% + 0.35€</td>
+    </tr>
+    <tr>
+      <td>Création compte</td>
+      <td><span class="badge-yellow">Complexe</span></td>
+      <td><span class="badge-green">Simple</span></td>
+    </tr>
+    <tr>
+      <td>Apparence</td>
+      <td><span class="badge-green">Très pro</span></td>
+      <td><span class="badge-yellow">Reconnu</span></td>
+    </tr>
+    <tr>
+      <td>Paiement 4x</td>
+      <td><span class="badge-green">Oui</span></td>
+      <td><span class="badge-green">Oui</span></td>
+    </tr>
+    <tr>
+      <td>Virement</td>
+      <td>2-7 jours</td>
+      <td>Instantané</td>
+    </tr>
+    <tr>
+      <td>Mineur accepté</td>
+      <td><span class="badge-red">Non</span></td>
+      <td><span class="badge-yellow">Avec tuteur</span></td>
+    </tr>
+    <tr>
+      <td>Recommandé</td>
+      <td>✅ Principal</td>
+      <td>✅ Backup</td>
+    </tr>
+  </table>
+
+  <div class="info-block">
+    <div class="info-icon">💡</div>
+    <div class="info-text"><strong>Conseil DMA :</strong> Active les deux. Stripe comme solution principale (plus pro, moins de frais), PayPal comme alternative pour les clients qui préfèrent. Tu maximises tes conversions.</div>
+  </div>
+</div>
+
+<!-- SECTION 3 — QUIZ -->
+
+<div class="section" id="s3">
+  <div class="s-title">QUIZ <span>PAIEMENT</span></div>
+  <div class="s-sub">Teste tes connaissances</div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu vends à 97€. Avec Stripe (1.5% + 0.25€), combien tu touches <em>réellement</em> par vente ?</div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong')">
+        <div class="option-letter">A</div>
+        <div class="option-text">97€ — Stripe ne prend rien</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong')">
+        <div class="option-letter">B</div>
+        <div class="option-text">94€ environ</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct')">
+        <div class="option-letter">C</div>
+        <div class="option-text">95.30€ environ (97€ - 1.46€ - 0.25€)</div>
+      </button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong')">
+        <div class="option-letter">D</div>
+        <div class="option-text">90€ environ</div>
+      </button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">✅ <strong>Exact !</strong> 97€ × 1.5% = 1.46€ + 0.25€ = 1.71€ de frais. Tu touches 95.29€. Sur 100 ventes c'est 171€ de frais — c'est pour ça qu'on préfère Stripe à PayPal qui prendrait 3.65€ par vente.</div>
+    <div class="quiz-feedback" id="q1-wrong">🔍 <strong>Pas tout à fait.</strong> Stripe prend 1.5% + 0.25€ fixe. Sur 97€ : 1.46€ + 0.25€ = 1.71€ de frais. Tu touches 95.29€. Comprendre les frais te permet de fixer tes prix intelligemment.</div>
+  </div>
+</div>
+
+<!-- SECTION 4 — CONFIG STRIPE -->
+
+<div class="section" id="s4">
+  <div class="s-title">CONFIG <span>STRIPE</span></div>
+  <div class="s-sub">Étape par étape selon ta plateforme</div>
+
+  <div class="warning-block">
+    <div class="warning-icon">⚠️</div>
+    <div class="warning-text"><strong>Important :</strong> Stripe requiert d'avoir 18 ans et un RIB/IBAN valide. Si tu es mineur, tu as besoin d'un compte au nom d'un parent ou tuteur légal.</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('stripe','beacons')">
+      <span>🔗</span>Beacons
+    </button>
+    <button class="tab-btn" onclick="showTab('stripe','stan')">
+      <span>⭐</span>Stan
+    </button>
+    <button class="tab-btn" onclick="showTab('stripe','systeme')">
+      <span>⚙️</span>Système
+    </button>
+    <button class="tab-btn" onclick="showTab('stripe','shopify')">
+      <span>🛍️</span>Shopify
+    </button>
+  </div>
+
+  <div class="tab-content active" id="stripe-beacons">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Va dans Beacons → Settings</div><div class="step-text">Dans ton dashboard Beacons → appuie sur <strong>Settings (⚙️)</strong> → puis <strong>"Payouts & Payments"</strong>.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte Stripe</div><div class="step-text">Clique sur <strong>"Connect Stripe"</strong> → tu seras redirigé vers Stripe pour créer ou connecter ton compte.</div><div class="step-tip">💡 Si tu n'as pas de compte Stripe, crée-le directement depuis cette page</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Vérifie ton identité sur Stripe</div><div class="step-text">Stripe demande : nom, adresse, date de naissance, <strong>IBAN/RIB</strong> et parfois une pièce d'identité. Remplis tout correctement — c'est obligatoire pour recevoir des virements.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Teste avec un vrai achat</div><div class="step-text">Crée un produit à <strong>1€</strong> → achète-le toi-même → vérifie que l'argent apparaît dans ton dashboard Stripe sous 24h.</div><div class="step-tip">💡 Supprime le produit test après vérification</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="stripe-stan">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">StanStore → Settings → Payments</div><div class="step-text">Dans ton dashboard StanStore → <strong>Settings</strong> → <strong>"Payment Settings"</strong> → clique sur <strong>"Connect with Stripe"</strong>.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Crée ou connecte ton compte Stripe</div><div class="step-text">Si tu n'as pas de compte : crée-en un en suivant les étapes Stripe. Prénom, nom, pays (France), email, <strong>numéro de téléphone</strong>.</div><div class="step-tip">💡 Utilise ton vrai numéro — Stripe envoie un SMS de vérification</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Renseigne ton IBAN</div><div class="step-text">Dans Stripe → <strong>Paramètres → Informations bancaires</strong> → entre ton IBAN français. C'est là que l'argent sera viré automatiquement.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Retourne sur StanStore et vérifie</div><div class="step-text">Retourne dans Payment Settings → tu dois voir <strong>"Stripe Connected ✅"</strong>. Fais un achat test à 1€ pour confirmer.</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="stripe-systeme">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Paramètres → Paiement</div><div class="step-text">Dans Système.io → <strong>Paramètres (⚙️)</strong> → <strong>"Passerelles de paiement"</strong> → clique sur <strong>"Stripe"</strong>.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte ton compte Stripe</div><div class="step-text">Clique sur <strong>"Connecter avec Stripe"</strong> → connecte-toi ou crée un compte → autorise Système.io à accéder à ton Stripe.</div><div class="step-tip">💡 Système.io est 100% en français — plus simple à naviguer</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Active le paiement en plusieurs fois</div><div class="step-text">Dans les paramètres Stripe sur Système.io → active <strong>"Paiement en plusieurs fois"</strong> → configure 3x ou 4x selon tes offres.</div><div class="step-tip">💡 Le paiement en 4x augmente les conversions de 20 à 30%</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Teste ton tunnel de vente</div><div class="step-text">Va sur ton tunnel → clique sur ton bouton d'achat → vérifie que la page de paiement Stripe s'affiche correctement avec ton prix et ton produit.</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="stripe-shopify">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Settings → Payments</div><div class="step-text">Dans ton admin Shopify → <strong>Settings</strong> → <strong>"Payments"</strong> → tu verras "Shopify Payments" en haut.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Active Shopify Payments (= Stripe)</div><div class="step-text">Clique sur <strong>"Complete account setup"</strong> → entre les informations de ton entreprise, ton IBAN, et ta pièce d'identité si demandée.</div><div class="step-tip">💡 Shopify Payments est propulsé par Stripe — même sécurité, interface intégrée</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Active les méthodes de paiement</div><div class="step-text">Coche <strong>Visa, Mastercard, Apple Pay, Google Pay</strong>. Plus de méthodes = plus de clients qui peuvent acheter.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Désactive les frais tiers</div><div class="step-text">Si tu utilises Shopify Payments, les frais de transaction de 2% sont <strong>supprimés</strong>. Vérifie que c'est bien le cas dans tes paramètres.</div><div class="step-tip">💡 Économie de 2€ sur chaque vente à 100€</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5 — CONFIG PAYPAL -->
+
+<div class="section" id="s5">
+  <div class="s-title">CONFIG <span>PAYPAL</span></div>
+  <div class="s-sub">Le backup indispensable</div>
+
+  <div class="info-block">
+    <div class="info-icon">💡</div>
+    <div class="info-text"><strong>Pourquoi PayPal en plus ?</strong> Certains clients refusent de mettre leur carte bancaire en ligne. Avec PayPal, ils paient depuis leur solde ou leur compte bancaire. Tu ne rates aucune vente.</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('paypal','beacons')">
+      <span>🔗</span>Beacons
+    </button>
+    <button class="tab-btn" onclick="showTab('paypal','stan')">
+      <span>⭐</span>Stan
+    </button>
+    <button class="tab-btn" onclick="showTab('paypal','systeme')">
+      <span>⚙️</span>Système
+    </button>
+    <button class="tab-btn" onclick="showTab('paypal','shopify')">
+      <span>🛍️</span>Shopify
+    </button>
+  </div>
+
+  <div class="tab-content active" id="paypal-beacons">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Beacons → Settings → Payouts</div><div class="step-text">Dans Settings → <strong>"Payouts & Payments"</strong> → tu verras l'option PayPal à côté de Stripe.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte ton compte PayPal Business</div><div class="step-text">Clique sur <strong>"Connect PayPal"</strong> → connecte-toi avec ton email PayPal. Si tu n'as qu'un compte personnel, convertis-le en <strong>compte Business</strong> gratuitement.</div><div class="step-tip">💡 PayPal Business = mêmes fonctions + look pro + stats de vente</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Vérifie ton email PayPal</div><div class="step-text">PayPal envoie un email de confirmation. <strong>Vérifie ton email</strong> et clique sur le lien de confirmation pour activer les paiements.</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="paypal-stan">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">StanStore ne supporte pas PayPal directement</div><div class="step-text">StanStore fonctionne uniquement avec Stripe. Pour accepter PayPal, tu dois <strong>créer un lien de paiement PayPal</strong> séparé et le mettre dans ta bio ou en message privé.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Crée un lien de paiement PayPal</div><div class="step-text">Sur paypal.com → <strong>Envoyer et Demander → Créer un lien de paiement</strong> → entre le montant et la description → copie le lien.</div><div class="step-tip">💡 Format : "Pour payer par PayPal → [ton lien]"</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="paypal-systeme">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Paramètres → Passerelles → PayPal</div><div class="step-text">Dans Système.io → <strong>Paramètres → Passerelles de paiement → PayPal</strong> → clique sur <strong>"Connecter PayPal"</strong>.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte ton compte PayPal Business</div><div class="step-text">Entre ton email PayPal Business → autorise Système.io → ton PayPal apparaît comme option de paiement sur tous tes tunnels.</div><div class="step-tip">💡 Tes clients voient les deux options : carte (Stripe) et PayPal</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Teste les deux options</div><div class="step-text">Passe par ton tunnel → vérifie que les boutons <strong>"Payer par carte"</strong> et <strong>"PayPal"</strong> apparaissent tous les deux sur la page de paiement.</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="paypal-shopify">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Settings → Payments → PayPal</div><div class="step-text">Dans Shopify → Settings → Payments → descends jusqu'à <strong>"PayPal"</strong> → clique sur <strong>"Activate PayPal"</strong>.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte ton compte PayPal Business</div><div class="step-text">Connecte-toi avec ton email PayPal Business → autorise Shopify → PayPal apparaît automatiquement sur ton checkout.</div><div class="step-tip">💡 Les clients voient PayPal en option sur la page de paiement</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Active PayPal Express</div><div class="step-text">Coche <strong>"PayPal Express Checkout"</strong> — ça permet aux clients de payer en 2 clics depuis leur app PayPal. Réduit l'abandon de panier.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 — PAIEMENT 4X -->
+
+<div class="section" id="s6">
+  <div class="s-title">PAIEMENT <span>4X</span></div>
+  <div class="s-sub">La stratégie qui double tes conversions</div>
+
+  <div class="story-block">
+    <p>Un client hésite à payer <strong>197€ en une fois</strong>. Le même client dit oui immédiatement à <em>4 × 52€</em>. C'est la même somme — mais le cerveau perçoit le risque différemment.</p>
+  </div>
+
+  <div class="info-block">
+    <div class="info-icon">🎯</div>
+    <div class="info-text"><strong>Méthode DMA :</strong> Propose toujours le paiement en une fois ET en 4x. Le prix 4x doit être légèrement plus cher (exemple : 197€ en 1x ou 4 × 55€ = 220€) pour compenser le risque d'impayé et les frais.</div>
+  </div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Sur Système.io</div><div class="step-text">Produit → <strong>Plans de paiement → Ajouter un plan</strong> → configure 4 paiements mensuels → entre le montant par échéance.</div><div class="step-tip">💡 Système.io gère les prélèvements automatiquement via Stripe</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Sur Shopify</div><div class="step-text">Installe l'app <strong>"Shop Pay Installments"</strong> → active dans Settings → Payments. Shopify gère tout automatiquement.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Sur Beacons/Stan — méthode manuelle</div><div class="step-text">Crée <strong>deux produits distincts</strong> : "Paiement intégral 197€" et "Paiement 4× 55€". Pour le 4x, tu crées manuellement les 3 factures restantes via Stripe.</div><div class="step-tip">💡 Méthode plus manuelle mais 100% fonctionnelle</div></div></div>
+  </div>
+</div>
+
+<!-- SECTION 7 — PROBLÈMES FRÉQUENTS -->
+
+<div class="section" id="s7">
+  <div class="s-title">PROBLÈMES <span>FRÉQUENTS</span></div>
+  <div class="s-sub">Les erreurs que tout le monde fait — et comment les éviter</div>
+
+  <div class="warning-block">
+    <div class="warning-icon">🚫</div>
+    <div class="warning-text"><strong>Stripe refusé ?</strong> Vérifie que ton adresse correspond exactement à ta pièce d'identité. Une simple différence (rue vs avenue) peut bloquer la vérification.</div>
+  </div>
+  <div class="warning-block">
+    <div class="warning-icon">🚫</div>
+    <div class="warning-text"><strong>Paiements bloqués ?</strong> Stripe peut bloquer les premiers virements pendant 7 jours le temps de vérifier ton activité. C'est normal — ça se débloque automatiquement.</div>
+  </div>
+  <div class="warning-block">
+    <div class="warning-icon">🚫</div>
+    <div class="warning-text"><strong>Compte Stripe suspendu ?</strong> Ça arrive si tu reçois trop de remboursements ou de litiges. <strong>Ne promets que ce que tu peux livrer</strong> et réponds aux litiges rapidement.</div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">✅</div>
+    <div class="info-text"><strong>Conseil pro :</strong> Garde toujours une capture d'écran de chaque vente et du contenu livré. En cas de litige PayPal ou Stripe, tu as la preuve que tu as rempli ta part.</div>
+  </div>
+</div>
+
+<!-- SECTION 8 — CHECKLIST -->
+
+<div class="section" id="s8">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque étape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Crée ton compte Stripe</strong> sur stripe.com et complète toute la vérification d'identité.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,1)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Connecte Stripe</strong> sur ta plateforme principale (Beacons, Stan, Système.io ou Shopify).</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,2)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Crée/convertis ton compte PayPal</strong> en compte Business et connecte-le à ta plateforme.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,3)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Fais un achat test à 1€</strong> pour vérifier que Stripe et PayPal fonctionnent correctement de A à Z.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,4)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Configure le paiement en 4x</strong> sur au moins une de tes offres principales.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this,5)">
+      <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <div class="check-text"><strong>Ton premier virement est reçu</strong> — vérifie que l'argent arrive bien sur ton compte bancaire.</div>
+    </div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">
+    ✓ MARQUER COMME TERMINÉ
+  </button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-02.html">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Module 02
+    </a>
+    <a class="btn-nav" href="module-04.html">
+      Module 04
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  const user = JSON.parse(sessionStorage.getItem('dma_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('readProgress').style.width = Math.min(100,(window.scrollY/total)*100) + '%';
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.1});
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  function showTab(group, name) {
+    const section = event.currentTarget.closest('.section');
+    section.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    section.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(group+'-'+name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function answer(btn, qid, type) {
+    const opts = document.querySelectorAll('#'+qid+' .quiz-option');
+    opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
+    btn.classList.add(type === 'correct' ? 'correct' : 'wrong');
+    const fb = document.getElementById(qid + (type==='correct'?'-correct':'-wrong'));
+    if(fb) fb.classList.add(type==='correct'?'show-correct':'show-wrong');
+    if(type === 'wrong') {
+      opts.forEach(o => { if(o.querySelector('.option-letter').textContent === 'C') o.classList.add('correct'); });
+    }
+  }
+
+  function toggleCheck(item, idx) {
+    item.classList.toggle('checked');
+    localStorage.setItem('m03_check_'+idx, item.classList.contains('checked')?'1':'0');
+  }
+  document.querySelectorAll('.check-item').forEach((item,i) => {
+    if(localStorage.getItem('m03_check_'+i)==='1') item.classList.add('checked');
+  });
+
+  if(localStorage.getItem('module_03_done')==='1') {
+    const btn = document.getElementById('completeBtn');
+    btn.textContent = '✓ MODULE TERMINÉ';
+    btn.classList.add('done');
+  }
+
+  function completeModule() {
+    localStorage.setItem('module_03_done','1');
+    const btn = document.getElementById('completeBtn');
+    btn.textContent = '✓ MODULE TERMINÉ !';
+    btn.classList.add('done');
+    setTimeout(() => { window.location.href = 'module-04.html'; }, 1000);
+  }
+</script>
+
+</body>
+</html>
