@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 06 - Video Faceless</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.skool-banner{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(192,0,26,.08));border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:20px 16px;margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.skool-icon{font-size:32px;flex-shrink:0}
+.skool-title{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:2px;color:#C9A84C;margin-bottom:4px}
+.skool-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.5}
+.skool-text strong{color:#f5f0e8;font-weight:600}
+.niche-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.niche-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px 12px;position:relative;overflow:hidden}
+.niche-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
+.niche-card.luxe::before{background:linear-gradient(90deg,#C9A84C,#e8c96a)}
+.niche-card.finance::before{background:linear-gradient(90deg,#80d080,#50a050)}
+.niche-card.lifestyle::before{background:linear-gradient(90deg,#C0001A,#ff4444)}
+.niche-card.fitness::before{background:linear-gradient(90deg,#7ab8ff,#4488cc)}
+.niche-card.motivation::before{background:linear-gradient(90deg,#C9A84C,#C0001A)}
+.niche-card.tech::before{background:linear-gradient(90deg,#80d0ff,#4488ff)}
+.niche-icon{font-size:22px;margin-bottom:8px;display:block}
+.niche-name{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:4px}
+.niche-desc{font-size:10px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.4}
+.niche-potential{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;color:#C9A84C;letter-spacing:1px;margin-top:6px}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:600px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour
+  </a>
+  <div class="module-badge">MODULE 06</div>
+  <div class="header-num">6 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🎬 Faceless</div>
+  <span class="hero-num">MODULE 06</span>
+  <div class="hero-title">VIDEO<br><span>FACELESS</span></div>
+  <div class="hero-sub">Cree du contenu viral sans jamais montrer ton visage</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="skool-banner">
+    <div class="skool-icon">🎬</div>
+    <div>
+      <div class="skool-title">VIDEOS DISPONIBLES SUR SKOOL</div>
+      <div class="skool-text">Les <strong>videos exemples faceless</strong> (voiture luxe, esthetic femme, esthetic homme) sont disponibles directement dans ton espace <strong>DMA sur Skool</strong>. Connecte-toi pour les regarder et les utiliser comme reference.</div>
+    </div>
+  </div>
+  <div class="story-block">
+    <p>Tu n as pas besoin de montrer ton visage pour faire des millions de vues. Des centaines de comptes generent <strong>des milliers d euros par mois</strong> sans jamais apparaitre a l ecran.</p>
+  </div>
+  <div class="story-block">
+    <p>Voitures de luxe, lifestyle, motivation, finance — ces niches cartonnent en faceless. <em>Ton visage n a aucune valeur ajoutee</em> si ton contenu est bon.</p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Les meilleurs comptes faceless gagnent plus que la plupart des influenceurs qui se montrent."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES <span>NICHES</span></div>
+  <div class="s-sub">Les 6 niches faceless les plus rentables en 2025</div>
+  <div class="niche-grid">
+    <div class="niche-card luxe"><span class="niche-icon">&#127950;</span><div class="niche-name">Luxe et Rich Lifestyle</div><div class="niche-desc">Voitures, montres, villas, jets. Aspiration maximale.</div><div class="niche-potential">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+    <div class="niche-card finance"><span class="niche-icon">&#128176;</span><div class="niche-name">Finance et Business</div><div class="niche-desc">Crypto, investissement, revenus passifs, entrepreneuriat.</div><div class="niche-potential">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+    <div class="niche-card lifestyle"><span class="niche-icon">&#10024;</span><div class="niche-name">Aesthetic Lifestyle</div><div class="niche-desc">Mode, beaute, interieurs, voyages. Tres engageant.</div><div class="niche-potential">&#9733;&#9733;&#9733;&#9733;&#9734;</div></div>
+    <div class="niche-card fitness"><span class="niche-icon">&#128170;</span><div class="niche-name">Fitness et Sante</div><div class="niche-desc">Transformations, nutrition, sport. Audience massive.</div><div class="niche-potential">&#9733;&#9733;&#9733;&#9733;&#9734;</div></div>
+    <div class="niche-card motivation"><span class="niche-icon">&#128293;</span><div class="niche-name">Motivation Mindset</div><div class="niche-desc">Citations, discours, success stories. Viral naturellement.</div><div class="niche-potential">&#9733;&#9733;&#9733;&#9733;&#9734;</div></div>
+    <div class="niche-card tech"><span class="niche-icon">&#129302;</span><div class="niche-name">IA et Tech</div><div class="niche-desc">Outils IA, automatisation, futur du travail. En explosion.</div><div class="niche-potential">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">QUIZ <span>NICHE</span></div>
+  <div class="s-sub">Trouve ta niche faceless ideale</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Quel type de contenu tu consommes le plus <em>naturellement</em> sur TikTok ?</div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="nicheAdvice(this,0)"><div class="option-letter">A</div><div class="option-text">Voitures, montres, maisons de luxe, jets prives</div></button>
+      <button class="quiz-option" onclick="nicheAdvice(this,1)"><div class="option-letter">B</div><div class="option-text">Business, investissement, revenus passifs, crypto</div></button>
+      <button class="quiz-option" onclick="nicheAdvice(this,2)"><div class="option-letter">C</div><div class="option-text">Mode, aesthetic, voyages, interieurs design</div></button>
+      <button class="quiz-option" onclick="nicheAdvice(this,3)"><div class="option-letter">D</div><div class="option-text">Motivation, mindset, discours inspirants, citations</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-advice"></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">COMMENT <span>CREER</span></div>
+  <div class="s-sub">Le processus exact de A a Z sans montrer ton visage</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Trouve tes clips libres de droits</div><div class="step-text">Sources gratuites : <strong>Pexels, Pixabay, Coverr, Mixkit</strong>. Tape ta niche dans la barre de recherche et telecharge en HD gratuitement. Pour le luxe : "luxury car", "mansion", "private jet".</div><div class="step-tip">pexels.com — tout est gratuit et libre de droits</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Choisis la bonne musique</div><div class="step-text">La musique fait 50% de l impact. <strong>Utilise les sons viraux TikTok du moment</strong> — va dans Decouvrir, Sons populaires, et copie le style des comptes qui cartonnent dans ta niche.</div><div class="step-tip">Sounds viraux TikTok cette semaine = plus de portee garantie</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Monte avec CapCut — 100% gratuit</div><div class="step-text">Structure gagnante : <strong>Hook visuel fort (0-2s) → developpement (3-20s) → CTA final</strong>. Duree ideale : 15 a 30 secondes. Active "Auto-caption" pour les sous-titres automatiques en une seconde.</div><div class="step-tip">CapCut gratuit = suffisant pour 100% des videos faceless</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Ajoute ton texte hook</div><div class="step-text">Texte en overlay = ton accroche visuelle. Exemples qui marchent : <strong>"Ce que les riches font que tu ne fais pas"</strong> ou <strong>"Dans 5 ans tu regretteras de ne pas avoir commence"</strong>. Le texte cree la tension et oblige a regarder jusqu a la fin.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Poste et analyse tes stats</div><div class="step-text">Poste a <strong>12h-14h ou 18h-21h</strong>. Stats a surveiller apres 48h : taux de completion superieur a 60% = bonne video, inferieur a 30% = hook a retravailler. <strong>Le taux de completion est la stat numero 1.</strong></div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">LES <span>SECRETS</span></div>
+  <div class="s-sub">Ce que font les comptes faceless qui explosent</div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Le pattern interrupt</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Les 2 premieres secondes doivent <strong>rompre le pattern mental</strong> du scrolleur. Coupe brusque, son fort, image inattendue, texte choquant. Le cerveau s arrete automatiquement face a l inattendu.<br><br><strong>Exemple :</strong> Ferrari qui demarre fort + "Tu travailles 40h semaine pour payer la voiture du patron."</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La boucle ouverte</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Cree une question dans la tete du spectateur des le debut et ne reponds qu a la fin. <strong>"La verite que ton patron ne veut pas que tu saches..."</strong><br><br>Le cerveau est oblige de regarder jusqu a la fin pour fermer la boucle. C est le secret du taux de completion eleve.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Volume avant qualite</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Les comptes qui explosent ont tous poste <strong>50 a 100 videos</strong> avant leur premiere virale. La regularite entraine l algorithme. Chaque video t apprend ce qui marche.<br><br><strong>Objectif :</strong> 1 video par jour pendant 30 jours minimum. Apres ca tu sais exactement ce qui marche dans ta niche.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Monetiser un compte faceless</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>3 facons de monetiser sans montrer ton visage :</strong><br><br>1. <strong>Lien en bio</strong> vers ta page de vente — produit digital, formation, MRR<br>2. <strong>Affiliation</strong> — tu recommandes un produit tiers et tu touches une commission<br>3. <strong>Revente du compte</strong> — un compte niche avec 50k abonnes se revend entre 500 et 5000 euros<br><br>Le faceless est parfait pour vendre la DMA — tu vends sans jamais apparaitre.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Les outils — tout est gratuit</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Montage :</strong> CapCut — gratuit<br><strong>Videos libres :</strong> Pexels, Pixabay, Coverr, Mixkit — gratuit HD<br><strong>Musique :</strong> Sons viraux TikTok — gratuit<br><strong>Scripts :</strong> ChatGPT pour generer des hooks en masse<br><strong>Planification :</strong> Later ou Buffer pour programmer les posts<br><br><strong>Budget total pour demarrer : 0 euros.</strong></p></div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Va sur Skool DMA</strong> et regarde les 3 videos exemples faceless pour t inspirer.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis ta niche faceless</strong> parmi les 6 categories selon ce qui te passionne naturellement.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton compte dedie</strong> sur TikTok ou Instagram avec un nom de marque — pas ton vrai nom.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Telecharge CapCut</strong> et cree ta premiere video avec des clips gratuits de Pexels.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Poste ta premiere video</strong> aujourd hui — imparfaite mais publiee vaut mieux que parfaite jamais postee.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Engage-toi sur 30 jours</strong> — 1 video par jour minimum. L algorithme te recompense a partir du 30eme jour.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-05.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 05</a>
+    <a class="btn-nav" href="module-07.html">Module 07<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+
+var msgs=[
+  "Niche Luxe et Rich Lifestyle. Tu as le gout naturel pour ce contenu — c est parfait. Clips de voitures sur Pexels, sons viraux, texte hook fort. Cette niche convertit tres bien pour vendre des produits premium comme la DMA.",
+  "Niche Finance et Business. Excellente niche — forte intention d achat. Ton audience cherche activement des solutions pour gagner de l argent. Ideal pour vendre la DMA directement via le lien en bio.",
+  "Niche Aesthetic Lifestyle. Tres visuelle et engageante. Parfaite pour construire une audience rapidement. Monetise avec des produits digitaux lifestyle, des presets ou des guides.",
+  "Niche Motivation et Mindset. Contenu viral naturellement. Citations, discours, success stories — tres simple a creer sans materiel. Parfait pour vendre des formations mindset ou la DMA."
+];
+
+function nicheAdvice(btn,idx){
+  var opts=document.querySelectorAll("#q1 .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add("correct");
+  var fb=document.getElementById("q1-advice");
+  fb.textContent=msgs[idx];
+  fb.className="quiz-feedback show-c";
+}
+
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m06_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m06_check_"+i)==="1")item.classList.add("checked");
+});
+
+if(localStorage.getItem("module_06_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";
+  btn.classList.add("done");
+}
+
+function completeModule(){
+  localStorage.setItem("module_06_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";
+  btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-07.html";},1000);
+}
+</script>
+
+</body>
+</html>
