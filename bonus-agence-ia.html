@@ -4,23 +4,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Bonus — Agence IA No-Code</title>
+<title>Bonus Exclusif - Agence IA No-Code</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{background:#050505}
 body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
-.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.gate{position:fixed;inset:0;background:#050505;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px}
+.gate-card{width:100%;max-width:380px;text-align:center}
+.gate-emblem{width:70px;height:70px;background:linear-gradient(135deg,#C9A84C,#a07820);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(201,168,76,.4)}
+.gate-emblem svg{width:32px;height:32px;stroke:#050505;fill:none;stroke-width:2.5}
+.gate-title{font-family:Bebas Neue,Impact,sans-serif;font-size:28px;letter-spacing:4px;color:#f5f0e8;margin-bottom:6px}
+.gate-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:14px;font-style:italic;color:rgba(245,240,232,.45);margin-bottom:28px;letter-spacing:1px}
+.gate-label{display:block;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin-bottom:8px;text-align:left;opacity:.8}
+.gate-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:14px 16px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;font-size:15px;font-weight:400;letter-spacing:3px;text-align:center;outline:none;-webkit-appearance:none;margin-bottom:16px;transition:border-color .3s}
+.gate-input:focus{border-color:rgba(201,168,76,.5)}
+.gate-input.error{border-color:rgba(192,0,26,.5)}
+.gate-btn{width:100%;background:linear-gradient(135deg,#C9A84C,#a07820);border:none;border-radius:3px;padding:16px;font-family:Bebas Neue,Impact,sans-serif;font-size:17px;letter-spacing:4px;color:#050505;cursor:pointer;-webkit-appearance:none;box-shadow:0 4px 24px rgba(201,168,76,.3);margin-bottom:14px}
+.gate-btn:active{transform:scale(.98)}
+.gate-error{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.25);border-radius:3px;padding:10px 14px;font-size:12px;color:#ff7070;text-align:center;margin-bottom:12px;display:none}
+.gate-error.show{display:block}
+.gate-hint{font-size:10px;font-weight:300;color:rgba(245,240,232,.2);line-height:1.5}
+.gate-hint strong{color:rgba(201,168,76,.4)}
+.gate-success{position:fixed;inset:0;background:#050505;z-index:201;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .5s}
+.gate-success.show{opacity:1;pointer-events:all}
+.success-content{text-align:center}
+.success-icon{width:70px;height:70px;border:2px solid #C9A84C;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.success-icon svg{width:30px;height:30px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.success-title{font-family:Bebas Neue,Impact,sans-serif;font-size:32px;letter-spacing:5px;color:#f5f0e8;margin-bottom:8px}
+.success-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:14px;color:#C9A84C;font-style:italic;letter-spacing:2px}
+.main-content{display:none}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.15);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
 .header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
 .header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
-.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:2px;color:#C9A84C;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:4px 10px}
 .module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
 .module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#C0001A);transition:width .4s ease}
 .hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.12) 0%,transparent 70%);pointer-events:none}
-.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.08)}
-.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.exclusive-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(192,0,26,.08));border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:6px 16px;margin-bottom:16px}
+.exclusive-badge span{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C}
 .hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
 .hero-title span{color:#C9A84C}
 .hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
@@ -33,81 +57,63 @@ body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,san
 .story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
 .story-block strong{color:#f5f0e8;font-weight:600}
 .story-block em{color:#C9A84C;font-style:italic}
-.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
-.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
-.impact-quote::before{top:0}.impact-quote::after{bottom:0}
-.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
-.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
-.sensible-block{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(192,0,26,.04));border:1px solid rgba(201,168,76,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
-.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
-.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
-.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
-.sensible-text strong{color:#C9A84C;font-weight:600}
-.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.tool-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px 12px;position:relative;overflow:hidden}
-.tool-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
-.tool-card.make::before{background:linear-gradient(90deg,#C9A84C,#e8c96a)}
-.tool-card.zapier::before{background:linear-gradient(90deg,#ff6b35,#ff9a00)}
-.tool-card.manychat::before{background:linear-gradient(90deg,#7ab8ff,#4488cc)}
-.tool-card.voiceflow::before{background:linear-gradient(90deg,#a855f7,#7c3aed)}
-.tool-card.n8n::before{background:linear-gradient(90deg,#80d080,#50a050)}
-.tool-card.gpt::before{background:linear-gradient(90deg,#80d0ff,#4488ff)}
-.tool-card.airtable::before{background:linear-gradient(90deg,#C0001A,#ff4444)}
-.tool-card.notion::before{background:linear-gradient(90deg,#f5f0e8,#C9A84C)}
-.tool-icon{font-size:24px;margin-bottom:8px;display:block}
-.tool-name{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:3px}
-.tool-desc{font-size:10px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.4}
-.tool-tag{display:inline-block;margin-top:6px;font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:2px}
-.tag-free{background:rgba(100,200,100,.1);color:#80d080}
-.tag-paid{background:rgba(192,0,26,.1);color:#ff7070}
-.tag-freemium{background:rgba(201,168,76,.1);color:#C9A84C}
-.package-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
-.package-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:16px;position:relative;overflow:hidden}
-.package-card.starter::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#80d080}
-.package-card.pro::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#C9A84C}
-.package-card.premium::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#C0001A}
-.package-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.package-name{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:2px;color:#f5f0e8}
-.package-price{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:2px;color:#C9A84C}
-.package-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.6}
-.package-includes{margin-top:8px}
-.package-item{font-size:10px;font-weight:400;color:rgba(245,240,232,.5);padding:3px 0;padding-left:12px;position:relative}
-.package-item::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:#C9A84C}
-.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
-.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
-.reveal-header{display:flex;align-items:center;justify-content:space-between}
-.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
-.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
-.reveal-card.open .reveal-icon{transform:rotate(45deg)}
-.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
-.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
-.reveal-card.open .reveal-content{max-height:600px}
-.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
-.reveal-content strong{color:#C9A84C;font-weight:600}
-.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
-.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
-.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C9A84C,#a07820);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#050505}
-.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
-.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
-.step-text strong{color:#C9A84C;font-weight:600}
-.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.tool-tabs{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+.tool-tabs::-webkit-scrollbar{display:none}
+.tool-tab{flex-shrink:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 14px;font-family:Montserrat,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.35);cursor:pointer;-webkit-appearance:none;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s}
+.tool-tab span{font-size:18px}
+.tool-tab.active{border-color:rgba(201,168,76,.4);color:#C9A84C;background:rgba(201,168,76,.06)}
+.tool-panel{display:none}
+.tool-panel.active{display:block}
+.tool-header{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.15);border-radius:6px;padding:16px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.tool-logo{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.tool-name-big{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8}
+.tool-tagline{font-size:11px;font-weight:300;color:rgba(245,240,232,.5);line-height:1.4}
+.tool-price{margin-top:4px;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px;display:inline-block}
+.price-free{background:rgba(100,200,100,.1);color:#80d080}
+.price-freemium{background:rgba(201,168,76,.1);color:#C9A84C}
+.price-paid{background:rgba(192,0,26,.1);color:#ff7070}
+.screen-mock{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:16px;margin-bottom:14px;position:relative}
+.screen-dots{position:absolute;top:8px;left:12px;display:flex;gap:5px}
+.screen-dot{width:10px;height:10px;border-radius:50%}
+.screen-dot.r{background:#ff5f57}
+.screen-dot.y{background:#febc2e}
+.screen-dot.g{background:#28c840}
+.screen-url{position:absolute;top:6px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.06);border-radius:4px;padding:3px 14px;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.5px}
+.screen-body{margin-top:32px}
+.mock-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.mock-node{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:6px 10px;font-size:9px;color:rgba(255,255,255,.6);white-space:nowrap}
+.mock-node.trigger{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.08);color:#80d080}
+.mock-node.action{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.08);color:#C9A84C}
+.mock-node.ai{border-color:rgba(100,100,255,.4);background:rgba(100,100,255,.08);color:#8888ff}
+.mock-arrow{color:rgba(255,255,255,.2);font-size:12px}
+.mock-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px;margin-bottom:8px}
+.mock-title{font-size:11px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:4px}
+.mock-text{font-size:10px;color:rgba(255,255,255,.35);line-height:1.4}
+.mock-btn{background:rgba(201,168,76,.9);border:none;border-radius:4px;padding:7px 14px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;color:#050505;cursor:default;display:inline-block;margin-bottom:8px}
+.mock-input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:7px 10px;font-size:10px;color:rgba(255,255,255,.5);width:100%;margin-bottom:8px;display:block}
+.mock-label{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px;display:block}
+.mock-highlight{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:8px 10px;margin-top:8px;font-size:10px;color:rgba(201,168,76,.8)}
+.click-step{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;margin-bottom:8px}
+.click-num{width:26px;height:26px;flex-shrink:0;background:linear-gradient(135deg,#C9A84C,#a07820);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#050505}
+.click-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:4px}
+.click-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.6}
+.click-text strong{color:#C9A84C;font-weight:600}
+.click-arrow{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:2px 8px;font-size:10px;color:#C9A84C;margin:2px;font-family:monospace}
 .info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
 .info-icon{font-size:18px;flex-shrink:0}
 .info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
 .info-text strong{color:#C9A84C;font-weight:600}
-.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
-.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
-.quiz-question em{color:#C9A84C;font-style:normal}
-.quiz-options{display:flex;flex-direction:column;gap:8px}
-.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
-.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
-.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
-.quiz-option.disabled{cursor:default}
-.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
-.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
-.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
-.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
-.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.package-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.package-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:16px;position:relative;overflow:hidden}
+.package-card.s::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#80d080}
+.package-card.p::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#C9A84C}
+.package-card.pp::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#C0001A}
+.pkg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pkg-name{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:2px;color:#f5f0e8}
+.pkg-price{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:2px;color:#C9A84C}
+.pkg-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.6;margin-bottom:8px}
+.pkg-item{font-size:10px;font-weight:400;color:rgba(245,240,232,.5);padding:3px 0 3px 12px;position:relative}
+.pkg-item::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:#C9A84C}
 .checklist{display:flex;flex-direction:column;gap:10px}
 .check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
 .check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
@@ -121,292 +127,384 @@ body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,san
 .btn-complete{width:100%;background:linear-gradient(135deg,#C9A84C,#a07820);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#050505;cursor:pointer;box-shadow:0 4px 24px rgba(201,168,76,.3);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
 .btn-complete:active{transform:scale(.98)}
 .btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a);color:#f5f0e8}
-.nav-modules{display:flex;gap:10px}
 .btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
 .btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 </style>
-
-<style>
-html,body,div,main,section,header,footer{background-color:#050505!important}
-body::after{content:"";position:fixed;inset:0;background:#050505;z-index:-999;pointer-events:none}
-</style>
-
 </head>
 <body>
 
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-emblem"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+    <div class="gate-title">ACCES EXCLUSIF</div>
+    <div class="gate-sub">Reserve aux membres premium DMA</div>
+    <label class="gate-label">Code secret</label>
+    <input class="gate-input" type="password" id="bonusCode" placeholder="Entre ton code" maxlength="20" autocomplete="off">
+    <div class="gate-error" id="gateError">Code incorrect. Contacte @mathisdgtmk</div>
+    <button class="gate-btn" onclick="checkCode()">Acceder au bonus</button>
+    <div class="gate-hint">Code envoye par DM apres ton achat.<br><strong>Contacte @mathisdgtmk</strong> si besoin.</div>
+  </div>
+</div>
+
+<div class="gate-success" id="gateSuccess">
+  <div class="success-content">
+    <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="success-title">ACCES ACCORDE</div>
+    <div class="success-sub">Bienvenue dans le bonus exclusif</div>
+  </div>
+</div>
+
+<div class="main-content" id="mainContent">
 <div class="header">
-  <a class="header-back" href="dashboard.html">
-    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Retour
-  </a>
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
   <div class="module-badge">BONUS EXCLUSIF</div>
 </div>
 <div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
 
 <div class="hero">
-  <div class="hero-tag">BONUS EXCLUSIF DMA</div>
-  <span class="hero-num">AGENCE IA</span>
+  <div class="exclusive-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Bonus Exclusif DMA</span></div>
   <div class="hero-title">AGENCE IA<br><span>NO-CODE</span></div>
-  <div class="hero-sub">Lance ton agence IA sans coder une seule ligne</div>
+  <div class="hero-sub">Guide prestige etape par etape - 6 outils complets</div>
+</div>
+
+<div class="section" id="s0">
+  <div class="story-block"><p>Ce bonus te donne le guide le plus complet sur le no-code IA. <strong>Chaque outil est decortique etape par etape</strong> avec simulation visuelle de chaque ecran. Tu sors de ce bonus capable de livrer un premier client en moins d une semaine.</p></div>
+  <div class="info-block"><div class="info-icon">🎯</div><div class="info-text"><strong>Comment utiliser :</strong> Selectionne l outil dans les onglets. Suis les etapes dans l ordre. Ouvre l application en parallele et repete chaque action en temps reel.</div></div>
 </div>
 
 <div class="section" id="s1">
-  <div class="sensible-block">
-    <span class="sensible-icon">🤖</span>
-    <div class="sensible-title">LE BUSINESS DU FUTUR — MAINTENANT</div>
-    <p class="sensible-text">
-      En 2025, chaque entreprise a besoin de l IA. <strong>Peu savent comment l utiliser.</strong><br><br>
-      Toi tu vas leur vendre exactement ca — des systemes automatises, des chatbots, des workflows IA.<br><br>
-      Sans coder. Sans diplome. Juste avec les bons outils.
-    </p>
-  </div>
-  <div class="impact-quote">
-    <div class="impact-quote-text">"L IA ne va pas prendre ton emploi. Quelqu un qui utilise l IA va prendre ton emploi."</div>
-    <div class="impact-quote-author">Principe DMA</div>
-  </div>
-</div>
+  <div class="s-title">LES <span>6 OUTILS</span></div>
+  <div class="s-sub">Guide complet etape par etape pour chaque outil</div>
 
+  <div class="tool-tabs">
+    <button class="tool-tab active" onclick="showTool('make',this)"><span>⚙️</span>Make</button>
+    <button class="tool-tab" onclick="showTool('manychat',this)"><span>💬</span>Manychat</button>
+    <button class="tool-tab" onclick="showTool('voiceflow',this)"><span>🎙️</span>Voiceflow</button>
+    <button class="tool-tab" onclick="showTool('n8n',this)"><span>🔄</span>n8n</button>
+    <button class="tool-tab" onclick="showTool('airtable',this)"><span>📊</span>Airtable</button>
+    <button class="tool-tab" onclick="showTool('gpt',this)"><span>🤖</span>GPT API</button>
+  </div>
+  <!-- MAKE -->
+  <div class="tool-panel active" id="panel-make">
+    <div class="tool-header">
+      <div class="tool-logo" style="background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.05))">⚙️</div>
+      <div><div class="tool-name-big">MAKE</div><div class="tool-tagline">Automatise des workflows complexes visuellement. Connecte toutes tes apps sans coder.</div><span class="tool-price price-freemium">Freemium - 1000 operations/mois gratuites</span></div>
+    </div>
+    <div class="click-step"><div class="click-num">1</div><div><div class="click-title">Cree ton compte sur make.com</div><div class="click-text">Va sur <strong>make.com</strong> → clique <span class="click-arrow">Get started free</span> → entre ton email → confirme par email → tu arrives sur le dashboard principal.</div></div></div>
+    <div class="click-step"><div class="click-num">2</div><div><div class="click-title">Cree ton premier scenario</div><div class="click-text">Clique <span class="click-arrow">+ Create a new scenario</span> → canvas vide avec un cercle <strong>+</strong> au centre → clique dessus pour ajouter ton premier module declencheur.</div></div></div>
+    <div class="screen-mock">
+      <div class="screen-dots"><div class="screen-dot r"></div><div class="screen-dot y"></div><div class="screen-dot g"></div></div>
+      <div class="screen-url">make.com/scenarios/new</div>
+      <div class="screen-body">
+        <div class="mock-flow" style="justify-content:center">
+          <div class="mock-node trigger">Declencheur<br><small>Ex: Formulaire soumis</small></div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node action">Action<br><small>Ex: Envoie email</small></div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node ai">IA GPT<br><small>Ex: Genere reponse</small></div>
+        </div>
+        <div class="mock-highlight">Structure : Declencheur → Actions → IA (optionnel)</div>
+      </div>
+    </div>
+    <div class="click-step"><div class="click-num">3</div><div><div class="click-title">Choisis ton declencheur</div><div class="click-text">Dans la barre de recherche tape <strong>"Webhooks"</strong> → <span class="click-arrow">Webhooks</span> → <span class="click-arrow">Custom webhook</span> → <span class="click-arrow">Add</span> → Make genere une URL unique. Copie cette URL — c est la porte d entree de tes donnees.</div></div></div>
+    <div class="click-step"><div class="click-num">4</div><div><div class="click-title">Ajoute une action</div><div class="click-text">Clique <strong>+</strong> apres le declencheur → recherche l app cible (Gmail, Notion, Airtable, Instagram...) → connecte ton compte → configure les champs. Exemple : formulaire rempli → <strong>email automatique personnalise</strong>.</div></div></div>
+    <div class="click-step"><div class="click-num">5</div><div><div class="click-title">Teste et active</div><div class="click-text">Clique <span class="click-arrow">Run once</span> pour tester → si tout est vert → <span class="click-arrow">Scheduling</span> → active <span class="click-arrow">ON</span>. Ton automatisation tourne maintenant 24h/24.</div></div></div>
+    <div class="info-block"><div class="info-icon">💡</div><div class="info-text"><strong>A vendre :</strong> Formulaire contact → Make → email bienvenue personnalise + ajout CRM Airtable + notification Slack. <strong>Valeur client : 800 a 1500 euros.</strong></div></div>
+  </div>
+
+  <!-- MANYCHAT -->
+
+  <div class="tool-panel" id="panel-manychat">
+    <div class="tool-header">
+      <div class="tool-logo" style="background:linear-gradient(135deg,rgba(122,184,255,.2),rgba(68,136,204,.05))">💬</div>
+      <div><div class="tool-name-big">MANYCHAT</div><div class="tool-tagline">Chatbots Instagram et Facebook. Automatise tes DMs, stories et sequences de messages.</div><span class="tool-price price-freemium">Gratuit jusqu a 1000 contacts</span></div>
+    </div>
+    <div class="click-step"><div class="click-num">1</div><div><div class="click-title">Connecte ton Instagram</div><div class="click-text">Va sur <strong>manychat.com</strong> → <span class="click-arrow">Sign up free</span> → connecte avec Facebook → autorise l acces a ta page Facebook et ton Instagram Pro → selectionne ton compte. <strong>Instagram doit etre Professionnel ou Createur.</strong></div></div></div>
+    <div class="click-step"><div class="click-num">2</div><div><div class="click-title">Cree ton premier Flow</div><div class="click-text">Dashboard → <span class="click-arrow">Automation</span> → <span class="click-arrow">+ New Flow</span> → nomme ton flow → <span class="click-arrow">Create</span>. Tu arrives sur l editeur visuel de ton chatbot.</div></div></div>
+    <div class="screen-mock">
+      <div class="screen-dots"><div class="screen-dot r"></div><div class="screen-dot y"></div><div class="screen-dot g"></div></div>
+      <div class="screen-url">manychat.com - Flow Builder</div>
+      <div class="screen-body">
+        <div class="mock-flow" style="flex-direction:column;gap:8px">
+          <div class="mock-node trigger" style="width:fit-content">Trigger : DM "INFO"</div>
+          <div class="mock-arrow" style="margin-left:20px">↓ immediat</div>
+          <div class="mock-card"><div class="mock-title">Message 1</div><div class="mock-text">"Hey ! Voici les infos sur ma formation : [description + lien]"</div></div>
+          <div class="mock-arrow" style="margin-left:20px">↓ Delai 24h</div>
+          <div class="mock-card"><div class="mock-title">Message 2 - Follow-up</div><div class="mock-text">"Tu as eu le temps de regarder ? Des questions ?"</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="click-step"><div class="click-num">3</div><div><div class="click-title">Configure le declencheur Instagram</div><div class="click-text">Clique <span class="click-arrow">+ Add Trigger</span> → <span class="click-arrow">Instagram</span> → choisis : <strong>DM Keyword</strong> (quelqu un envoie un mot cle) ou <strong>Story Reply</strong> (quelqu un repond a ta story). Configure le mot cle ex: "INFO", "FORMATION", "PRIX".</div></div></div>
+    <div class="click-step"><div class="click-num">4</div><div><div class="click-title">Construis ta sequence</div><div class="click-text">Clique <span class="click-arrow">+ Add Message</span> → Message 1 immediat : info principale + lien → Message 2 apres 24h : relance → Message 3 apres 48h : offre ou urgence. Chaque message peut contenir du texte, des images ou des boutons.</div></div></div>
+    <div class="click-step"><div class="click-num">5</div><div><div class="click-title">Publie et teste</div><div class="click-text">Clique <span class="click-arrow">Publish</span> → envoie le mot cle depuis un autre compte Instagram → verifie que les messages arrivent bien et dans le bon ordre.</div></div></div>
+    <div class="info-block"><div class="info-icon">💡</div><div class="info-text"><strong>A vendre :</strong> Story Instagram → DM auto + sequence qualification → lien paiement. Le client repond a 100% des DMs sans lever le doigt. <strong>Valeur client : 500 a 1200 euros.</strong></div></div>
+  </div>
+
+  <!-- VOICEFLOW -->
+
+  <div class="tool-panel" id="panel-voiceflow">
+    <div class="tool-header">
+      <div class="tool-logo" style="background:linear-gradient(135deg,rgba(168,85,247,.2),rgba(124,58,237,.05))">🎙️</div>
+      <div><div class="tool-name-big">VOICEFLOW</div><div class="tool-tagline">Chatbots IA avances pour sites web. Drag and drop, base de connaissances, integration facile.</div><span class="tool-price price-freemium">Gratuit - 2 agents IA inclus</span></div>
+    </div>
+    <div class="click-step"><div class="click-num">1</div><div><div class="click-title">Cree ton projet</div><div class="click-text">Va sur <strong>voiceflow.com</strong> → <span class="click-arrow">Get started</span> → inscris-toi → <span class="click-arrow">+ New Project</span> → choisis <span class="click-arrow">Chat Assistant</span> → donne un nom a ton agent IA.</div></div></div>
+    <div class="screen-mock">
+      <div class="screen-dots"><div class="screen-dot r"></div><div class="screen-dot y"></div><div class="screen-dot g"></div></div>
+      <div class="screen-url">creator.voiceflow.com</div>
+      <div class="screen-body">
+        <div class="mock-flow" style="justify-content:center">
+          <div class="mock-node trigger">Start</div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node action">Message accueil</div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node ai">IA GPT</div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node action">Reponse client</div>
+        </div>
+        <div class="mock-highlight">Drag and drop les blocs pour construire le chatbot</div>
+      </div>
+    </div>
+    <div class="click-step"><div class="click-num">2</div><div><div class="click-title">Construis le flow de conversation</div><div class="click-text">Glisse un bloc <span class="click-arrow">Speak</span> pour le message d accueil → connecte a un bloc <span class="click-arrow">AI Response</span> pour les reponses intelligentes → termine avec un bloc <span class="click-arrow">End</span>.</div></div></div>
+    <div class="click-step"><div class="click-num">3</div><div><div class="click-title">Configure le System Prompt IA</div><div class="click-text">Double-clique sur le bloc <strong>AI Response</strong> → dans <span class="click-arrow">System Prompt</span> ecris les instructions : <em>"Tu es l assistant de [Client]. Tu reponds aux questions sur [sujet]. Tu es professionnel et concis. Si tu ne sais pas, dis de contacter [email]."</em></div></div></div>
+    <div class="click-step"><div class="click-num">4</div><div><div class="click-title">Ajoute la base de connaissances</div><div class="click-text">Menu gauche → <span class="click-arrow">Knowledge Base</span> → <span class="click-arrow">+ Add Source</span> → colle l URL du site client ou uploade un PDF. L IA apprend automatiquement le contenu et repond avec precision.</div></div></div>
+    <div class="click-step"><div class="click-num">5</div><div><div class="click-title">Integre sur le site client</div><div class="click-text"><span class="click-arrow">Publish</span> → <span class="click-arrow">Integrations</span> → copie le code JavaScript → colle dans le HTML du site avant la fermeture de la balise body. Le chatbot apparait instantanement en bas a droite.</div></div></div>
+    <div class="info-block"><div class="info-icon">💡</div><div class="info-text"><strong>A vendre :</strong> Chatbot IA sur site e-commerce qui repond aux FAQ, qualifie les visiteurs et propose les bons produits. Reduit le support de 70%. <strong>Valeur client : 1200 a 2500 euros.</strong></div></div>
+  </div>
+
+  <!-- N8N -->
+
+  <div class="tool-panel" id="panel-n8n">
+    <div class="tool-header">
+      <div class="tool-logo" style="background:linear-gradient(135deg,rgba(128,208,128,.2),rgba(80,160,80,.05))">🔄</div>
+      <div><div class="tool-name-big">N8N</div><div class="tool-tagline">L alternative Make open-source. Plus puissant, 100% gratuit, workflows avances avec conditions et IA.</div><span class="tool-price price-free">100% gratuit en self-hosted</span></div>
+    </div>
+    <div class="click-step"><div class="click-num">1</div><div><div class="click-title">Lance n8n sur n8n.cloud</div><div class="click-text">Va sur <strong>n8n.io</strong> → <span class="click-arrow">Get started free</span> → cree un compte → tu as acces a n8n Cloud avec 2500 executions gratuites par mois. Pas besoin de serveur.</div></div></div>
+    <div class="click-step"><div class="click-num">2</div><div><div class="click-title">Cree ton premier workflow</div><div class="click-text">Dashboard → <span class="click-arrow">+ New workflow</span> → clique sur le canvas → <span class="click-arrow">Add first step</span> → recherche ton declencheur : Webhook, Gmail, Typeform, Airtable, etc.</div></div></div>
+    <div class="screen-mock">
+      <div class="screen-dots"><div class="screen-dot r"></div><div class="screen-dot y"></div><div class="screen-dot g"></div></div>
+      <div class="screen-url">n8n.cloud - Workflow Editor</div>
+      <div class="screen-body">
+        <div class="mock-flow" style="justify-content:center;flex-wrap:wrap">
+          <div class="mock-node trigger">Webhook</div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node ai">OpenAI<br><small>Analyse IA</small></div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node action">IF<br><small>Condition</small></div>
+          <div class="mock-arrow">→</div>
+          <div class="mock-node action">Gmail<br><small>Email auto</small></div>
+        </div>
+        <div class="mock-highlight">n8n permet des workflows avec conditions, boucles et IA integree</div>
+      </div>
+    </div>
+    <div class="click-step"><div class="click-num">3</div><div><div class="click-title">Integre OpenAI pour l IA</div><div class="click-text">Clique <span class="click-arrow">+</span> → recherche <span class="click-arrow">OpenAI</span> → <span class="click-arrow">Connect</span> → colle ta cle API OpenAI depuis platform.openai.com → action <strong>Message a Model</strong> → ecris ton prompt.</div></div></div>
+    <div class="click-step"><div class="click-num">4</div><div><div class="click-title">Ajoute des conditions avec IF</div><div class="click-text">Le node <strong>IF</strong> cree des chemins differents. Exemple : si le client a depense plus de 100 euros → email VIP. Sinon → email standard. C est ce qui rend n8n plus puissant que Make.</div></div></div>
+    <div class="click-step"><div class="click-num">5</div><div><div class="click-title">Active et monitore</div><div class="click-text">Clique <span class="click-arrow">Save</span> puis toggle <span class="click-arrow">Active</span> en haut. Dashboard → <span class="click-arrow">Executions</span> pour voir tous les runs en temps reel et detecter les erreurs.</div></div></div>
+    <div class="info-block"><div class="info-icon">💡</div><div class="info-text"><strong>A vendre :</strong> Lead entre → IA analyse → si qualifie : Calendly + CRM → sinon : sequence email nurturing. <strong>Valeur client : 2000 a 4000 euros.</strong></div></div>
+  </div>
+
+  <!-- AIRTABLE -->
+
+  <div class="tool-panel" id="panel-airtable">
+    <div class="tool-header">
+      <div class="tool-logo" style="background:linear-gradient(135deg,rgba(192,0,26,.2),rgba(192,0,26,.05))">📊</div>
+      <div><div class="tool-name-big">AIRTABLE</div><div class="tool-tagline">Base de donnees visuelle. CRM, gestion leads, reporting automatise. La colonne vertebrale de ton agence.</div><span class="tool-price price-freemium">Gratuit jusqu a 1200 lignes par base</span></div>
+    </div>
+    <div class="click-step"><div class="click-num">1</div><div><div class="click-title">Cree ta base</div><div class="click-text">Va sur <strong>airtable.com</strong> → <span class="click-arrow">Sign up</span> → <span class="click-arrow">+ Add a base</span> → commence avec le template <span class="click-arrow">CRM</span> ou une base vide selon ton besoin.</div></div></div>
+    <div class="screen-mock">
+      <div class="screen-dots"><div class="screen-dot r"></div><div class="screen-dot y"></div><div class="screen-dot g"></div></div>
+      <div class="screen-url">airtable.com - CRM Clients</div>
+      <div class="screen-body">
+        <table style="width:100%;border-collapse:collapse;font-size:10px">
+          <tr style="background:rgba(255,255,255,.06)">
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.08);color:#C9A84C;font-weight:600">Nom</td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.08);color:#C9A84C;font-weight:600">Email</td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.08);color:#C9A84C;font-weight:600">Statut</td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.08);color:#C9A84C;font-weight:600">Budget</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.7)">Thomas R.</td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.4)">thomas@...</td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05)"><span style="background:rgba(201,168,76,.15);border-radius:3px;padding:2px 6px;font-size:9px;color:#C9A84C">Prospect</span></td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05);color:#80d080">497€</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.7)">Sara M.</td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.4)">sara@...</td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05)"><span style="background:rgba(100,200,100,.15);border-radius:3px;padding:2px 6px;font-size:9px;color:#80d080">Client</span></td>
+            <td style="padding:6px 8px;border:1px solid rgba(255,255,255,.05);color:#80d080">1497€</td>
+          </tr>
+        </table>
+        <div class="mock-highlight" style="margin-top:10px">Vue Grid = tableau. Ajoute des vues Kanban, Calendrier, Galerie</div>
+      </div>
+    </div>
+    <div class="click-step"><div class="click-num">2</div><div><div class="click-title">Configure tes champs</div><div class="click-text">Clique <span class="click-arrow">+</span> a droite de la derniere colonne → choisis : <strong>Single line text</strong> (texte), <strong>Number</strong> (chiffres), <strong>Single select</strong> (statut avec couleurs), <strong>Date</strong>, <strong>Attachments</strong> (fichiers).</div></div></div>
+    <div class="click-step"><div class="click-num">3</div><div><div class="click-title">Vue Kanban pour le pipeline</div><div class="click-text"><span class="click-arrow">+ Add view</span> → <span class="click-arrow">Kanban</span> → selectionne le champ <strong>Statut</strong>. Tu vois tes clients organises par etape : Prospect → Contact → Proposition → Client → Fidélise.</div></div></div>
+    <div class="click-step"><div class="click-num">4</div><div><div class="click-title">Connecte a Make ou n8n</div><div class="click-text">Dans Make ou n8n, ajoute le module <strong>Airtable</strong> → connecte avec ta cle API (Settings Airtable → API) → selectionne ta base et table → action <strong>Create Record</strong> pour ajouter automatiquement les nouveaux leads.</div></div></div>
+    <div class="info-block"><div class="info-icon">💡</div><div class="info-text"><strong>A vendre :</strong> CRM auto — lead via formulaire → Make l ajoute dans Airtable → pipeline mis a jour → client voit son tableau en temps reel. <strong>Valeur client : 600 a 1500 euros + 200 euros/mois maintenance.</strong></div></div>
+  </div>
+
+  <!-- GPT API -->
+
+  <div class="tool-panel" id="panel-gpt">
+    <div class="tool-header">
+      <div class="tool-logo" style="background:linear-gradient(135deg,rgba(128,208,255,.2),rgba(68,136,255,.05))">🤖</div>
+      <div><div class="tool-name-big">CHATGPT API</div><div class="tool-tagline">Integre l IA dans tes automatisations. Redaction, analyse, classification, reponses intelligentes.</div><span class="tool-price price-paid">Environ 0.002 euros par 1000 tokens</span></div>
+    </div>
+    <div class="click-step"><div class="click-num">1</div><div><div class="click-title">Obtiens ta cle API</div><div class="click-text">Va sur <strong>platform.openai.com</strong> → inscris-toi → menu gauche <span class="click-arrow">API Keys</span> → <span class="click-arrow">+ Create new secret key</span> → copie la cle (commence par sk-...). <strong>Ne la partage jamais — traite-la comme un mot de passe.</strong></div></div></div>
+    <div class="click-step"><div class="click-num">2</div><div><div class="click-title">Ajoute du credit</div><div class="click-text">Billing → <span class="click-arrow">Add payment method</span> → ajoute ta carte → <span class="click-arrow">Add credit</span> → commence avec 5 euros. Le modele <strong>gpt-4o-mini</strong> = le plus economique et tres performant pour les automatisations.</div></div></div>
+    <div class="screen-mock">
+      <div class="screen-dots"><div class="screen-dot r"></div><div class="screen-dot y"></div><div class="screen-dot g"></div></div>
+      <div class="screen-url">Make.com - Module OpenAI configure</div>
+      <div class="screen-body">
+        <div class="mock-card">
+          <div class="mock-title">Configuration OpenAI dans Make</div>
+          <span class="mock-label">Model</span>
+          <div class="mock-input">gpt-4o-mini</div>
+          <span class="mock-label">System Prompt (comportement de l IA)</span>
+          <div class="mock-input" style="min-height:40px">Tu es l assistant de [Entreprise]. Tu reponds en francais, de facon professionnelle et concise. Si tu ne sais pas, renvoie vers [email].</div>
+          <span class="mock-label">User Message (question entrante)</span>
+          <div class="mock-input">{{1.message}}</div>
+          <div class="mock-highlight">System Prompt = personnalite de l IA. User Message = la question du client.</div>
+        </div>
+      </div>
+    </div>
+    <div class="click-step"><div class="click-num">3</div><div><div class="click-title">Integre dans Make ou n8n</div><div class="click-text">Dans Make : ajoute module <span class="click-arrow">OpenAI → Create a completion</span> → colle ta cle API → modele <strong>gpt-4o-mini</strong> → configure le System Prompt et le User Message avec les donnees du declencheur.</div></div></div>
+    <div class="click-step"><div class="click-num">4</div><div><div class="click-title">Ecris un System Prompt efficace</div><div class="click-text">Exemple pour un restaurant :<br><br><em>"Tu es l assistant du Restaurant X a Paris. Tu reponds aux questions sur les horaires (12h-22h), les reservations (appel 01 23 45 67) et le menu. Tu es chaleureux. Si tu ne sais pas : contactez-nous directement."</em></div></div></div>
+    <div class="click-step"><div class="click-num">5</div><div><div class="click-title">Envoie la reponse au bon endroit</div><div class="click-text">Apres OpenAI, ajoute l action de sortie : <strong>Gmail</strong> (email), <strong>Twilio</strong> (SMS), <strong>Slack</strong> (notification), ou retour <strong>Instagram DM</strong> via Manychat. L IA repond automatiquement sur tous les canaux.</div></div></div>
+    <div class="info-block"><div class="info-icon">💡</div><div class="info-text"><strong>A vendre :</strong> Email client recu → IA categorise → commande : confirmation auto → reclamation : ticket support → question : reponse auto. Cout : moins de 0.01 euro par email. <strong>Valeur client : 1500 a 3000 euros.</strong></div></div>
+  </div>
+
+</div>
 <div class="section" id="s2">
-  <div class="s-title">C EST QUOI UNE <span>AGENCE IA</span></div>
-  <div class="s-sub">Le modele business le plus rentable de 2025</div>
-  <div class="story-block">
-    <p>Une agence IA c est simple : tu aides des entreprises a <strong>automatiser leurs taches repetitives</strong> grace a l intelligence artificielle. Reponses automatiques aux clients, qualification de leads, creation de contenu, reporting — tout ca sans qu ils aient a lever le petit doigt.</p>
-  </div>
-  <div class="story-block">
-    <p>Tu n as pas besoin de savoir coder. Les outils no-code actuels permettent de construire des <em>systemes puissants en quelques heures</em>. Ce que tu vends c est ton expertise en configuration — pas du developpement.</p>
-  </div>
-  <div class="info-block">
-    <div class="info-icon">💰</div>
-    <div class="info-text"><strong>Revenus potentiels :</strong> Un chatbot simple se facture entre 500 et 2000 euros. Une automatisation complete entre 1500 et 5000 euros. Un retainer mensuel de maintenance entre 300 et 800 euros par mois par client.</div>
+  <div class="s-title">TES <span>PACKAGES</span></div>
+  <div class="s-sub">Comment combiner les outils et vendre des systemes complets</div>
+  <div class="package-cards">
+    <div class="package-card s">
+      <div class="pkg-header"><div class="pkg-name">STARTER</div><div class="pkg-price">497€</div></div>
+      <div class="pkg-desc">1 outil, 1 automatisation simple. Livrable en 2-3 jours.</div>
+      <div class="pkg-item">Chatbot Manychat DM auto sur Instagram</div>
+      <div class="pkg-item">3 sequences de messages automatises</div>
+      <div class="pkg-item">Integration compte Instagram existant</div>
+      <div class="pkg-item">Formation 30 min pour utiliser</div>
+    </div>
+    <div class="package-card p">
+      <div class="pkg-header"><div class="pkg-name">PRO</div><div class="pkg-price">1497€</div></div>
+      <div class="pkg-desc">3 outils combines. Le plus vendu. Livrable en 5-7 jours.</div>
+      <div class="pkg-item">Manychat : chatbot Instagram complet</div>
+      <div class="pkg-item">Make : automatisation leads vers CRM</div>
+      <div class="pkg-item">Airtable : CRM et suivi en temps reel</div>
+      <div class="pkg-item">GPT API : reponses IA personnalisees</div>
+      <div class="pkg-item">1 mois support inclus</div>
+    </div>
+    <div class="package-card pp">
+      <div class="pkg-header"><div class="pkg-name">PREMIUM</div><div class="pkg-price">3497€</div></div>
+      <div class="pkg-desc">Systeme complet 6 outils. Livrable en 2-3 semaines.</div>
+      <div class="pkg-item">n8n : workflows avances avec conditions</div>
+      <div class="pkg-item">Voiceflow : chatbot IA sur site web</div>
+      <div class="pkg-item">Manychat : chatbot multi-canal</div>
+      <div class="pkg-item">Airtable : CRM et reporting avance</div>
+      <div class="pkg-item">GPT API : IA sur tous les canaux</div>
+      <div class="pkg-item">Retainer 500 euros/mois inclus 3 mois</div>
+    </div>
   </div>
 </div>
 
 <div class="section" id="s3">
-  <div class="s-title">LES <span>OUTILS</span> NO-CODE</div>
-  <div class="s-sub">La boite a outils complete — tout est accessible gratuitement pour commencer</div>
-  <div class="tools-grid">
-    <div class="tool-card make">
-      <span class="tool-icon">⚙️</span>
-      <div class="tool-name">Make (ex-Integromat)</div>
-      <div class="tool-desc">Connecte toutes tes apps et automatise des workflows complexes visuellement.</div>
-      <span class="tool-tag tag-freemium">Freemium</span>
-    </div>
-    <div class="tool-card zapier">
-      <span class="tool-icon">⚡</span>
-      <div class="tool-name">Zapier</div>
-      <div class="tool-desc">L outil d automatisation le plus simple. Parfait pour debuter sans friction.</div>
-      <span class="tool-tag tag-freemium">Freemium</span>
-    </div>
-    <div class="tool-card manychat">
-      <span class="tool-icon">💬</span>
-      <div class="tool-name">Manychat</div>
-      <div class="tool-desc">Chatbots Instagram et Facebook. Automation DM, reponses auto, sequences.</div>
-      <span class="tool-tag tag-freemium">Freemium</span>
-    </div>
-    <div class="tool-card voiceflow">
-      <span class="tool-icon">🎙️</span>
-      <div class="tool-name">Voiceflow</div>
-      <div class="tool-desc">Cree des chatbots IA avances pour sites web et apps. Interface drag and drop.</div>
-      <span class="tool-tag tag-freemium">Freemium</span>
-    </div>
-    <div class="tool-card n8n">
-      <span class="tool-icon">🔄</span>
-      <div class="tool-name">n8n</div>
-      <div class="tool-desc">Alternative Make open-source. Plus puissant, self-hosted, 100% gratuit.</div>
-      <span class="tool-tag tag-free">Gratuit</span>
-    </div>
-    <div class="tool-card gpt">
-      <span class="tool-icon">🤖</span>
-      <div class="tool-name">ChatGPT API</div>
-      <div class="tool-desc">Integre l IA dans tes automatisations. Redaction, analyse, reponses intelligentes.</div>
-      <span class="tool-tag tag-paid">Payant</span>
-    </div>
-    <div class="tool-card airtable">
-      <span class="tool-icon">📊</span>
-      <div class="tool-name">Airtable</div>
-      <div class="tool-desc">Base de donnees visuelle. CRM, gestion leads, reporting automatise pour tes clients.</div>
-      <span class="tool-tag tag-freemium">Freemium</span>
-    </div>
-    <div class="tool-card notion">
-      <span class="tool-icon">📝</span>
-      <div class="tool-name">Notion AI</div>
-      <div class="tool-desc">Wiki intelligent, documentation client, reporting automatise avec IA integree.</div>
-      <span class="tool-tag tag-freemium">Freemium</span>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="s4">
-  <div class="s-title">QUIZ <span>POSITIONNEMENT</span></div>
-  <div class="s-sub">Quel type d agence IA est fait pour toi</div>
-  <div class="quiz-wrap">
-    <div class="quiz-question">Quel secteur te parle le plus <em>naturellement</em> ?</div>
-    <div class="quiz-options" id="q1">
-      <button class="quiz-option" onclick="agenceAdvice(this,0)"><div class="option-letter">A</div><div class="option-text">E-commerce et boutiques en ligne</div></button>
-      <button class="quiz-option" onclick="agenceAdvice(this,1)"><div class="option-letter">B</div><div class="option-text">Coaches, formateurs, createurs de contenu</div></button>
-      <button class="quiz-option" onclick="agenceAdvice(this,2)"><div class="option-letter">C</div><div class="option-text">Restaurants, commerces locaux, salons</div></button>
-      <button class="quiz-option" onclick="agenceAdvice(this,3)"><div class="option-letter">D</div><div class="option-text">Agences immobilieres, assurances, services B2B</div></button>
-    </div>
-    <div class="quiz-feedback" id="q1-advice"></div>
-  </div>
-</div>
-
-<div class="section" id="s5">
-  <div class="s-title">TES <span>PACKAGES</span></div>
-  <div class="s-sub">Comment structurer et vendre tes services</div>
-  <div class="package-cards">
-    <div class="package-card starter">
-      <div class="package-header">
-        <div class="package-name">STARTER</div>
-        <div class="package-price">497€</div>
-      </div>
-      <div class="package-desc">Parfait pour les premiers clients. Simple a livrer en 2 a 3 jours.</div>
-      <div class="package-includes">
-        <div class="package-item">Chatbot reponses automatiques Instagram ou Facebook</div>
-        <div class="package-item">Integration avec leur compte existant</div>
-        <div class="package-item">3 sequences de messages automatises</div>
-        <div class="package-item">Formation de 30 min pour les utiliser</div>
-      </div>
-    </div>
-    <div class="package-card pro">
-      <div class="package-header">
-        <div class="package-name">PRO</div>
-        <div class="package-price">1497€</div>
-      </div>
-      <div class="package-desc">Le plus vendu. Bon rapport valeur prix pour le client et toi.</div>
-      <div class="package-includes">
-        <div class="package-item">Chatbot IA intelligent avec GPT integre</div>
-        <div class="package-item">Automatisation des leads vers CRM</div>
-        <div class="package-item">Sequences email automatiques</div>
-        <div class="package-item">Tableau de bord reporting Airtable</div>
-        <div class="package-item">1 mois de support inclus</div>
-      </div>
-    </div>
-    <div class="package-card premium">
-      <div class="package-header">
-        <div class="package-name">PREMIUM</div>
-        <div class="package-price">3497€</div>
-      </div>
-      <div class="package-desc">Pour les grosses entreprises. Systeme complet sur mesure.</div>
-      <div class="package-includes">
-        <div class="package-item">Systeme d automatisation complet Make ou n8n</div>
-        <div class="package-item">Chatbot multi-plateforme IA avance</div>
-        <div class="package-item">Integration CRM existant</div>
-        <div class="package-item">Automatisation contenu reseaux sociaux</div>
-        <div class="package-item">Retainer mensuel 500 euros inclus 3 mois</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="s6">
-  <div class="s-title">COMMENT <span>LANCER</span></div>
-  <div class="s-sub">De zero a ton premier client en 30 jours</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Maitrise 1 ou 2 outils maximum</div><div class="step-text">Ne cherche pas a tout apprendre. <strong>Commence par Make ou Manychat</strong> — fais le tour complet de l outil en une semaine sur YouTube. Tu n as besoin que d un seul outil pour ton premier client.</div><div class="step-tip">Tutoriels gratuits Make sur YouTube en francais</div></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Cree un projet demonstration</div><div class="step-text">Construis un chatbot ou une automatisation <strong>pour toi-meme ou un ami</strong> avant de le vendre. Ca devient ta demonstration — tu montres le resultat concret. Un client convaincu par une demo vaut 10 clients convaincus par des mots.</div><div class="step-tip">Projet demo = ton portfolio = ta credibilite</div></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Prospecte dans ta niche choisie</div><div class="step-text">DM direct aux restaurants, coaches, e-commerces de ta ville ou en ligne. Message simple : <strong>"J automatise les reponses clients et la gestion des leads pour les [niche]. Tu veux voir un exemple en live ?"</strong> Taux de reponse eleve car c est tres concret.</div></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Livre avec un Google Doc de suivi</div><div class="step-text">Chaque livraison doit inclure un <strong>document de suivi clair</strong> — ce qui a ete fait, comment ca marche, comment le contacter. Les clients qui comprennent ce qu ils ont achete gardent le service et recommandent.</div></div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Propose un retainer mensuel</div><div class="step-text">Apres chaque projet, propose <strong>300 a 500 euros par mois</strong> pour la maintenance, les mises a jour et les ameliorations. 5 clients en retainer = 1500 a 2500 euros de revenus fixes chaque mois.</div><div class="step-tip">Le retainer = revenus recurrents = liberte financiere</div></div></div>
-  </div>
-</div>
-
-<div class="section" id="s7">
-  <div class="s-title">LES <span>SECRETS</span></div>
-  <div class="s-sub">Ce que les agences IA qui reussissent font differemment</div>
-
-  <div class="reveal-card" onclick="this.classList.toggle('open')">
-    <div class="reveal-header"><div class="reveal-title">Specialise-toi dans une seule niche</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
-    <div class="reveal-content"><p>Une agence IA qui sert tout le monde = personne ne la choisit. Une agence IA <strong>specialisee restaurants</strong> ou <strong>specialisee coaches</strong> = elle devient la reference de sa niche.<br><br>La specialisation te permet de facturer plus cher, de prospecter plus efficacement et de livrer plus vite car tu connais les besoins par coeur.</p></div>
-  </div>
-
-  <div class="reveal-card" onclick="this.classList.toggle('open')">
-    <div class="reveal-header"><div class="reveal-title">Vends le resultat pas l outil</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
-    <div class="reveal-content"><p>Ton client ne veut pas savoir que tu utilises Make ou Manychat. Il veut savoir que <strong>ses clients seront repondus en moins de 2 minutes a toute heure</strong> et qu il va economiser 10 heures par semaine.<br><br>Toujours pitcher en termes de resultats concrets — temps gagne, argent genere, stress elimine.</p></div>
-  </div>
-
-  <div class="reveal-card" onclick="this.classList.toggle('open')">
-    <div class="reveal-header"><div class="reveal-title">Le premier client a prix reduit</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
-    <div class="reveal-content"><p>Ton premier client est ton <strong>cas etude</strong>. Accepte de le faire a 50% de reduction en echange d un temoignage video et d un droit de reference. Ce cas etude vaut 10 fois son prix — il te permettra de vendre les suivants au prix plein sans difficulte.</p></div>
-  </div>
-
-  <div class="reveal-card" onclick="this.classList.toggle('open')">
-    <div class="reveal-header"><div class="reveal-title">Automatise ta propre prospection</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
-    <div class="reveal-content"><p>Utilise tes propres outils pour trouver des clients. <strong>Manychat pour automatiser tes DMs, Make pour qualifier les leads entrants, Airtable pour tracker ta prospection.</strong><br><br>Quand un prospect voit que tu utilises toi-meme ce que tu vends — ta credibilite explose instantanement.</p></div>
-  </div>
-</div>
-
-<div class="section" id="s8">
   <div class="s-title">TES <span>ACTIONS</span></div>
   <div class="s-sub">Coche chaque etape accomplie</div>
   <div class="checklist">
-    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis ta niche</strong> parmi les 4 options du quiz et engage-toi dessus pendant 90 jours minimum.</div></div>
-    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree un compte Make gratuit</strong> et suis 3 tutoriels YouTube pour comprendre le fonctionnement de base.</div></div>
-    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Construis une demo</strong> — un chatbot ou une automatisation simple pour toi-meme ou un proche.</div></div>
-    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Envoie 10 DMs</strong> a des entreprises de ta niche avec ton message de prospection cette semaine.</div></div>
-    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Signe ton premier client</strong> a prix reduit en echange d un temoignage et d un droit de reference.</div></div>
-    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Propose un retainer mensuel</strong> a chaque client livre pour securiser des revenus fixes recurrents.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton compte Make</strong> et suis le guide etape par etape pour creer ton premier scenario test.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Connecte Manychat</strong> a ton Instagram et configure un premier DM automatique avec le mot cle "INFO".</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree une base Airtable</strong> CRM avec les champs : Nom, Email, Statut, Budget, Date de contact.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Obtiens ta cle API OpenAI</strong> et ajoute 5 euros de credit pour tester l integration IA.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ta demo</strong> — un systeme complet pour toi-meme ou un proche comme portfolio a montrer aux clients.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Envoie 10 DMs cette semaine</strong> a des entreprises de ta niche avec ton offre et ta demo.</div></div>
   </div>
 </div>
 
 <div class="complete-section">
   <button class="btn-complete" id="completeBtn" onclick="completeModule()">BONUS TERMINE</button>
-  <div class="nav-modules">
+  <div style="display:flex;gap:10px">
     <a class="btn-nav" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Dashboard</a>
   </div>
 </div>
 
+</div>
+
 <script>
-var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
-if(!user)window.location.href="index.html";
+var CODES_BONUS = ["DMA-ELITE-2025","PREMIUM-001","PREMIUM-002","PREMIUM-003","PREMIUM-004","PREMIUM-005","BONUS-VIP-001","BONUS-VIP-002","MATHIS-ADMIN"];
 
-window.addEventListener("scroll",function(){
-  var t=document.body.scrollHeight-window.innerHeight;
-  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
-});
+var user = JSON.parse(sessionStorage.getItem("dma_user") || "null");
+if (!user) window.location.href = "index.html";
 
-var obs=new IntersectionObserver(function(e){
-  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
-},{threshold:0.1});
-document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+if (sessionStorage.getItem("bonus_ia_access") === "1") showContent();
 
-var msgs=[
-  "E-commerce et boutiques. Automatise les reponses SAV, les relances panier abandonne et les confirmations de commande. Chaque boutique perd entre 20 et 40 pourcent de ses ventes par manque de suivi. Tu resous ca.",
-  "Coaches et formateurs. Automatise la qualification des leads entrants, les DMs Instagram, les relances email et la gestion des inscrits. Ce secteur est pret a payer cher car le temps des coaches vaut tres cher.",
-  "Restaurants et commerces locaux. Chatbot reservations, reponses aux FAQ, gestion des avis Google, campagnes SMS automatisees. Niche tres accessible car les patrons sont debordés et cherchent des solutions simples.",
-  "Immobilier et B2B. Qualification des prospects entrants, suivi automatise des leads, relances, reporting. Tickets eleves et clients qui restent longtemps. La niche la plus rentable en termes de retainer mensuel."
-];
-
-function agenceAdvice(btn,idx){
-  var opts=document.querySelectorAll("#q1 .quiz-option");
-  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
-  btn.classList.add("correct");
-  var fb=document.getElementById("q1-advice");
-  fb.textContent=msgs[idx];
-  fb.className="quiz-feedback show-c";
+function checkCode() {
+  var code = document.getElementById("bonusCode").value.trim().toUpperCase();
+  var input = document.getElementById("bonusCode");
+  var err = document.getElementById("gateError");
+  if (!code) return;
+  input.classList.remove("error");
+  err.classList.remove("show");
+  var ok = CODES_BONUS.map(function(c){return c.toUpperCase();}).indexOf(code) !== -1;
+  if (ok) {
+    sessionStorage.setItem("bonus_ia_access","1");
+    document.getElementById("gateSuccess").classList.add("show");
+    setTimeout(function(){
+      document.getElementById("gateSuccess").classList.remove("show");
+      document.getElementById("gate").style.display = "none";
+      showContent();
+    }, 1800);
+  } else {
+    input.classList.add("error");
+    err.classList.add("show");
+    input.value = "";
+  }
 }
 
-function toggleCheck(item,idx){
+function showContent() {
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("mainContent").style.display = "block";
+  window.addEventListener("scroll", function(){
+    var t = document.body.scrollHeight - window.innerHeight;
+    if (t > 0) document.getElementById("readProgress").style.width = Math.min(100,(window.scrollY/t)*100)+"%";
+  });
+  var obs = new IntersectionObserver(function(e){
+    e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+  },{threshold:0.1});
+  document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+}
+
+function showTool(name, btn) {
+  document.querySelectorAll(".tool-panel").forEach(function(p){p.classList.remove("active");});
+  document.querySelectorAll(".tool-tab").forEach(function(b){b.classList.remove("active");});
+  document.getElementById("panel-"+name).classList.add("active");
+  btn.classList.add("active");
+}
+
+function toggleCheck(item, idx) {
   item.classList.toggle("checked");
-  localStorage.setItem("bonus_ia_check_"+idx,item.classList.contains("checked")?"1":"0");
+  localStorage.setItem("bonus_ia_check_"+idx, item.classList.contains("checked")?"1":"0");
 }
 document.querySelectorAll(".check-item").forEach(function(item,i){
-  if(localStorage.getItem("bonus_ia_check_"+i)==="1")item.classList.add("checked");
+  if(localStorage.getItem("bonus_ia_check_"+i)==="1") item.classList.add("checked");
 });
 
-if(localStorage.getItem("bonus_ia_done")==="1"){
-  var btn=document.getElementById("completeBtn");
-  btn.textContent="BONUS TERMINE";
-  btn.classList.add("done");
+if (localStorage.getItem("bonus_ia_done") === "1") {
+  var btn = document.getElementById("completeBtn");
+  if (btn) { btn.textContent = "BONUS TERMINE"; btn.classList.add("done"); }
 }
 
-function completeModule(){
+function completeModule() {
   localStorage.setItem("bonus_ia_done","1");
-  var btn=document.getElementById("completeBtn");
-  btn.textContent="BONUS TERMINE !";
-  btn.classList.add("done");
+  var btn = document.getElementById("completeBtn");
+  btn.textContent = "BONUS TERMINE !"; btn.classList.add("done");
   setTimeout(function(){window.location.href="dashboard.html";},1000);
 }
+
+document.addEventListener("keydown", function(e){
+  if (e.key === "Enter") checkCode();
+});
 </script>
 
 </body>
