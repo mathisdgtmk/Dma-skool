@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Module 03 — Configuration Paiement</title>
+<title>Module 05 — Produits Digitaux</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -22,21 +22,21 @@
 .module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease;}
 
 .hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;}
-.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none;}
+.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.1) 0%,transparent 70%);pointer-events:none;}
 .hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05);}
 .hero-num{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px;}
 .hero-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px;}
-.hero-title span{color:#C0001A}
+.hero-title span{color:#C9A84C}
 .hero-sub{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px;}
 
 .section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
 .section.visible{opacity:1;transform:translateY(0)}
 
 .s-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px;}
-.s-title span{color:#C0001A}
+.s-title span{color:#C9A84C}
 .s-sub{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px;}
 
-.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px;}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C9A84C;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px;}
 .story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85);}
 .story-block strong{color:#f5f0e8;font-weight:600}
 .story-block em{color:#C9A84C;font-style:italic}
@@ -47,26 +47,34 @@
 .impact-quote-text{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px;}
 .impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5);}
 
-/* TABS */
-.tabs{display:flex;gap:6px;margin-bottom:18px;overflow-x:auto;padding-bottom:4px;}
-.tabs::-webkit-scrollbar{display:none}
-.tab-btn{flex-shrink:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 14px;font-family:‘Montserrat’,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.35);cursor:pointer;-webkit-appearance:none;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s;}
-.tab-btn span{font-size:18px;}
-.tab-btn.active{border-color:rgba(192,0,26,.4);color:#C0001A;background:rgba(192,0,26,.06);}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.product-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px 12px;}
+.product-icon{font-size:24px;margin-bottom:8px;display:block;}
+.product-name{font-size:11px;font-weight:600;color:#f5f0e8;margin-bottom:4px;}
+.product-price{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:14px;color:#C9A84C;letter-spacing:1px;}
+.product-desc{font-size:10px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.4;margin-top:5px;}
 
-/* COMPARE TABLE */
-.compare-table{width:100%;border-collapse:collapse;margin-bottom:16px;}
-.compare-table th{background:rgba(255,255,255,.04);padding:10px 12px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);text-align:left;border-bottom:1px solid rgba(255,255,255,.06);}
-.compare-table td{padding:10px 12px;font-size:11px;font-weight:300;color:rgba(245,240,232,.7);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;line-height:1.5;}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-table td:first-child{font-weight:500;color:#f5f0e8;}
-.badge-g{background:rgba(100,200,100,.1);color:#80d080;border-radius:2px;padding:2px 7px;font-size:9px;font-weight:600;}
-.badge-r{background:rgba(192,0,26,.1);color:#ff7070;border-radius:2px;padding:2px 7px;font-size:9px;font-weight:600;}
-.badge-y{background:rgba(201,168,76,.1);color:#C9A84C;border-radius:2px;padding:2px 7px;font-size:9px;font-weight:600;}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer;}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03);}
+.reveal-header{display:flex;align-items:center;justify-content:space-between;}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px;}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s;}
+.reveal-card.open .reveal-icon{transform:rotate(45deg);}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);}
+.reveal-card.open .reveal-content{max-height:500px;}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px;}
+.reveal-content strong{color:#C9A84C;font-weight:600}
 
-/* STEPS */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.tool-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:12px;text-align:center;}
+.tool-icon{font-size:20px;margin-bottom:6px;display:block;}
+.tool-name{font-size:11px;font-weight:600;color:#f5f0e8;margin-bottom:3px;}
+.tool-desc{font-size:10px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.4;}
+.tool-tag{display:inline-block;margin-top:6px;font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:2px;}
+.tag-free{background:rgba(100,200,100,.1);color:#80d080;}
+.tag-freemium{background:rgba(201,168,76,.1);color:#C9A84C;}
+
 .steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px;}
 .step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:‘Bebas Neue’,Impact,sans-serif;font-size:13px;color:#f5f0e8;}
@@ -75,7 +83,6 @@
 .step-text strong{color:#C9A84C;font-weight:600}
 .step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8);}
 
-/* INFO / WARNING */
 .info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px;}
 .info-icon{font-size:18px;flex-shrink:0;}
 .info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6;}
@@ -86,7 +93,6 @@
 .warning-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6;}
 .warning-text strong{color:#ff7070;font-weight:600}
 
-/* QUIZ */
 .quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px;}
 .quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px;}
 .quiz-question em{color:#C9A84C;font-style:normal}
@@ -101,7 +107,6 @@
 .show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important;}
 .show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important;}
 
-/* CHECKLIST */
 .checklist{display:flex;flex-direction:column;gap:10px}
 .check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s;}
 .check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04);}
@@ -112,13 +117,12 @@
 .check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
 .check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
 
-/* COMPLETE */
 .complete-section{padding:28px 20px 48px;text-align:center;background:#050505;}
 .btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:‘Bebas Neue’,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px;}
 .btn-complete:active{transform:scale(.98)}
 .btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a);}
 .nav-modules{display:flex;gap:10px;}
-.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:‘Montserrat’,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;transition:all .2s;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:‘Montserrat’,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;}
 .btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 </style>
 
@@ -130,8 +134,8 @@
     <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Retour
   </a>
-  <div class="module-badge">MODULE 03</div>
-  <div class="header-num">3 / 28</div>
+  <div class="module-badge">MODULE 05</div>
+  <div class="header-num">5 / 28</div>
 </div>
 
 <div class="module-progress">
@@ -139,232 +143,365 @@
 </div>
 
 <div class="hero">
-  <div class="hero-tag">💳 Paiement</div>
-  <span class="hero-num">MODULE 03</span>
-  <div class="hero-title">CONFIG<br><span>PAIEMENT</span></div>
-  <div class="hero-sub">Stripe & PayPal — reçois ton argent partout</div>
+  <div class="hero-tag">📦 Produits Digitaux</div>
+  <span class="hero-num">MODULE 05</span>
+  <div class="hero-title">PRODUITS<br><span>DIGITAUX</span></div>
+  <div class="hero-sub">Crée une fois. Vends à l'infini. Dors pendant que l'argent rentre.</div>
 </div>
 
-<!-- S1 -->
+<!-- S1 — POURQUOI -->
 
 <div class="section" id="s1">
   <div class="story-block">
-    <p>Tu peux avoir la meilleure page de vente du monde. Si <strong>le paiement ne fonctionne pas</strong>, tu ne gagnes pas un centime. C'est l'étape que 80% des débutants bâclent.</p>
+    <p>Un produit physique : tu le vends une fois, tu le livres, il est parti. Un <strong>produit digital</strong> : tu le crées une fois et tu le vends <em>à l'infini</em>. Zéro stock, zéro livraison, zéro limite.</p>
   </div>
   <div class="story-block">
-    <p>Résultat : des clients qui <em>veulent acheter mais ne peuvent pas</em>. Des ventes perdues pour toujours. Ce module règle ça une fois pour toutes.</p>
+    <p>C'est le modèle business le plus puissant pour débuter. <strong>Coût de création : ton temps. Coût de revente : 0€. Marge : quasi 100%.</strong></p>
   </div>
   <div class="impact-quote">
-    <div class="impact-quote-text">"Chaque friction dans le paiement te coûte des ventes. Rends l'achat aussi simple que possible."</div>
+    <div class="impact-quote-text">"Crée une fois. Vends mille fois. Dors pendant que l'argent rentre."</div>
     <div class="impact-quote-author">Principe DMA</div>
   </div>
 </div>
 
-<!-- S2 — STRIPE VS PAYPAL -->
+<!-- S2 — LES IDÉES -->
 
 <div class="section" id="s2">
-  <div class="s-title">STRIPE <span>VS</span> PAYPAL</div>
-  <div class="s-sub">Lequel choisir — et pourquoi les deux</div>
+  <div class="s-title">LES <span>IDÉES</span></div>
+  <div class="s-sub">12 types de produits digitaux qui se vendent en 2025</div>
 
-  <table class="compare-table">
-    <tr>
-      <th>Critère</th>
-      <th>Stripe</th>
-      <th>PayPal</th>
-    </tr>
-    <tr><td>Frais / vente</td><td>1.5% + 0.25€</td><td>3.4% + 0.35€</td></tr>
-    <tr><td>Création compte</td><td><span class="badge-y">Modéré</span></td><td><span class="badge-g">Simple</span></td></tr>
-    <tr><td>Look professionnel</td><td><span class="badge-g">Très pro</span></td><td><span class="badge-y">Reconnu</span></td></tr>
-    <tr><td>Paiement 4x</td><td><span class="badge-g">Oui</span></td><td><span class="badge-g">Oui</span></td></tr>
-    <tr><td>Virement rapide</td><td>2-7 jours</td><td>Instantané</td></tr>
-    <tr><td>Mineur</td><td><span class="badge-r">Non (18+)</span></td><td><span class="badge-y">Tuteur</span></td></tr>
-    <tr><td>Conseil DMA</td><td>✅ Principal</td><td>✅ Backup</td></tr>
-  </table>
-
-  <div class="info-block">
-    <div class="info-icon">💡</div>
-    <div class="info-text"><strong>Active les deux.</strong> Stripe comme solution principale (moins de frais, plus pro), PayPal comme alternative. Tu maximises tes conversions car certains clients ne veulent pas entrer leur carte bancaire.</div>
+  <div class="products-grid">
+    <div class="product-card">
+      <span class="product-icon">📚</span>
+      <div class="product-name">E-book / Guide PDF</div>
+      <div class="product-price">7€ — 97€</div>
+      <div class="product-desc">Le plus simple à créer. Un guide complet sur un sujet précis.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🎓</span>
+      <div class="product-name">Formation vidéo</div>
+      <div class="product-price">97€ — 997€</div>
+      <div class="product-desc">Module par module comme la DMA. Le plus rentable sur le long terme.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">📋</span>
+      <div class="product-name">Templates & Modèles</div>
+      <div class="product-price">17€ — 97€</div>
+      <div class="product-desc">Contrats, scripts, plannings, Canva templates. Rapide à créer.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🤖</span>
+      <div class="product-name">Prompts IA</div>
+      <div class="product-price">9€ — 47€</div>
+      <div class="product-desc">Pack de prompts ChatGPT pour une niche précise. Tendance explosive.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🖼️</span>
+      <div class="product-name">Presets & Filtres</div>
+      <div class="product-price">17€ — 67€</div>
+      <div class="product-desc">Presets Lightroom, filtres CapCut, packs Canva. Très demandé.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">📊</span>
+      <div class="product-name">Notion Templates</div>
+      <div class="product-price">9€ — 47€</div>
+      <div class="product-desc">Tableaux de bord, trackers, planners. Notion est en pleine explosion.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🎯</span>
+      <div class="product-name">Pack MRR</div>
+      <div class="product-price">97€ — 497€</div>
+      <div class="product-desc">Produit avec droits de revente. Tes clients le revendent aussi.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">💬</span>
+      <div class="product-name">Communauté privée</div>
+      <div class="product-price">19€/mois</div>
+      <div class="product-desc">Skool, Discord, Telegram VIP. Revenus récurrents automatiques.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🗂️</span>
+      <div class="product-name">Scripts de vente</div>
+      <div class="product-price">27€ — 97€</div>
+      <div class="product-desc">Scripts DM, accroches TikTok, textes de vente. Très recherché.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🎵</span>
+      <div class="product-name">Audio / Podcast privé</div>
+      <div class="product-price">27€ — 197€</div>
+      <div class="product-desc">Formation audio, coaching enregistré. Sans caméra.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🎨</span>
+      <div class="product-name">Pack graphique</div>
+      <div class="product-price">17€ — 77€</div>
+      <div class="product-desc">Logos, visuels story, mockups, kits de marque.</div>
+    </div>
+    <div class="product-card">
+      <span class="product-icon">🔑</span>
+      <div class="product-name">Accès espace membres</div>
+      <div class="product-price">47€ — 497€</div>
+      <div class="product-desc">Comme la DMA. Accès one-shot à du contenu exclusif.</div>
+    </div>
   </div>
 </div>
 
-<!-- S3 — QUIZ -->
+<!-- S3 — QUIZ IDÉE -->
 
 <div class="section" id="s3">
-  <div class="s-title">QUIZ <span>CALCUL</span></div>
-  <div class="s-sub">Combien tu touches vraiment par vente ?</div>
+  <div class="s-title">TROUVE <span>TON IDÉE</span></div>
+  <div class="s-sub">On va trouver ton produit parfait</div>
   <div class="quiz-wrap">
-    <div class="quiz-question">Tu vends à 97€ avec Stripe (1.5% + 0.25€). Combien tu reçois <em>réellement</em> ?</div>
+    <div class="quiz-question">Quelle est ta <em>situation actuelle</em> ?</div>
     <div class="quiz-options" id="q1">
-      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')">
+      <button class="quiz-option" onclick="ideaAdvice(this,'debutant')">
         <div class="option-letter">A</div>
-        <div class="option-text">97€ — Stripe ne prend rien</div>
+        <div class="option-text">Je débute, pas encore de compétence précise à vendre</div>
       </button>
-      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')">
+      <button class="quiz-option" onclick="ideaAdvice(this,'marketing')">
         <div class="option-letter">B</div>
-        <div class="option-text">94€ environ</div>
+        <div class="option-text">J'ai des compétences en marketing / réseaux sociaux</div>
       </button>
-      <button class="quiz-option" onclick="answer(this,'q1','correct','C')">
+      <button class="quiz-option" onclick="ideaAdvice(this,'createur')">
         <div class="option-letter">C</div>
-        <div class="option-text">95.30€ (97€ − 1.46€ − 0.25€)</div>
+        <div class="option-text">Je crée du contenu (vidéo, photo, design)</div>
       </button>
-      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')">
+      <button class="quiz-option" onclick="ideaAdvice(this,'expert')">
         <div class="option-letter">D</div>
-        <div class="option-text">90€ environ</div>
+        <div class="option-text">J'ai une expertise dans un domaine précis</div>
       </button>
     </div>
-    <div class="quiz-feedback" id="q1-correct">✅ <strong>Exact !</strong> 1.71€ de frais par vente. Sur 100 ventes = 171€ de frais. C'est pour ça qu'on préfère Stripe à PayPal qui prendrait 3.65€ par vente soit 365€ de frais pour 100 ventes.</div>
-    <div class="quiz-feedback" id="q1-wrong">🔍 <strong>Pas tout à fait.</strong> 97€ × 1.5% = 1.46€ + 0.25€ fixe = 1.71€ de frais. Tu touches 95.29€. Comprendre les frais te permet de fixer tes prix intelligemment.</div>
+    <div class="quiz-feedback" id="q1-advice" style="display:none"></div>
   </div>
 </div>
 
-<!-- S4 — CONFIG STRIPE -->
+<!-- S4 — OÙ CRÉER -->
 
 <div class="section" id="s4">
-  <div class="s-title">CONFIG <span>STRIPE</span></div>
-  <div class="s-sub">Étape par étape sur chaque plateforme</div>
+  <div class="s-title">OÙ <span>CRÉER</span> ?</div>
+  <div class="s-sub">Les meilleurs outils — tous gratuits pour commencer</div>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <span class="tool-icon">🎨</span>
+      <div class="tool-name">Canva</div>
+      <div class="tool-desc">PDF, e-books, templates, visuels. Le couteau suisse du créateur.</div>
+      <span class="tool-tag tag-freemium">Freemium</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">📝</span>
+      <div class="tool-name">Notion</div>
+      <div class="tool-desc">Templates, bases de données, guides interactifs. Très tendance.</div>
+      <span class="tool-tag tag-freemium">Freemium</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🎬</span>
+      <div class="tool-name">CapCut</div>
+      <div class="tool-desc">Vidéos de formation, tutos, cours enregistrés. Gratuit et puissant.</div>
+      <span class="tool-tag tag-free">Gratuit</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🖥️</span>
+      <div class="tool-name">Loom</div>
+      <div class="tool-desc">Enregistre ton écran + webcam. Parfait pour les tutos et formations.</div>
+      <span class="tool-tag tag-freemium">Freemium</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🤖</span>
+      <div class="tool-name">ChatGPT / Claude</div>
+      <div class="tool-desc">Génère le contenu de tes e-books, scripts, prompts en minutes.</div>
+      <span class="tool-tag tag-freemium">Freemium</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">📊</span>
+      <div class="tool-name">Google Sheets</div>
+      <div class="tool-desc">Trackers, CRM, tableaux de bord à revendre. Simple et efficace.</div>
+      <span class="tool-tag tag-free">Gratuit</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🎙️</span>
+      <div class="tool-name">GarageBand / Audacity</div>
+      <div class="tool-desc">Enregistrement audio pro pour formations podcast.</div>
+      <span class="tool-tag tag-free">Gratuit</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">📱</span>
+      <div class="tool-name">iPhone / Android</div>
+      <div class="tool-desc">Ton téléphone suffit pour enregistrer des formations vidéo pro.</div>
+      <span class="tool-tag tag-free">Gratuit</span>
+    </div>
+  </div>
+</div>
+
+<!-- S5 — COMMENT CRÉER -->
+
+<div class="section" id="s5">
+  <div class="s-title">COMMENT <span>CRÉER</span></div>
+  <div class="s-sub">Le processus de A à Z pour ton premier produit</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Valide ton idée AVANT de créer</div>
+        <div class="step-text">Poste un sondage en story : <strong>"Tu achèterais un guide sur [sujet] à [prix] ?"</strong> Si moins de 5 "oui" en 24h — change de sujet. Tu ne crées pas ce qui te plaît, tu crées ce que les gens veulent acheter.</div>
+        <div class="step-tip">💡 Une vente avant création = zéro risque</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Structure ton contenu en 3 à 7 parties</div>
+        <div class="step-text">Problème → Solution → Actions concrètes. Pas besoin de 200 pages — un produit <strong>dense et actionnable</strong> vaut 100x un produit long et vide.</div>
+        <div class="step-tip">💡 20 pages de valeur pure > 100 pages de remplissage</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Crée avec les bons outils</div>
+        <div class="step-text">PDF → <strong>Canva</strong> (template premium). Formation vidéo → <strong>Loom ou CapCut</strong>. Template Notion → exporte en lien public. Utilise l'IA pour rédiger le contenu, toi tu vérifies et personnalises.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Soigne le packaging</div>
+        <div class="step-text">Le look de ton produit vend autant que le contenu. <strong>Belle couverture, design premium, mockup professionnel.</strong> Un PDF bien designé se vend 3x plus cher qu'un PDF basique avec le même contenu.</div>
+        <div class="step-tip">💡 Mockup gratuit sur : smartmockups.com</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Fixe ton prix plus haut que tu ne penses</div>
+        <div class="step-text">Règle d'or : <strong>prix bas = perception de faible valeur</strong>. Commence à 27€ minimum même pour un e-book. Pour une formation : 97€ à 497€. Prix psychologique : 47€ > 50€ dans la tête du client.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 — PROTÉGER -->
+
+<div class="section" id="s6">
+  <div class="s-title">COMMENT <span>PROTÉGER</span></div>
+  <div class="s-sub">Évite le vol et la copie de tes créations</div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">©️ Mention de droits d'auteur</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Sur chaque page de ton PDF ajoute : <strong>"© [Ton nom] [Année] — Tous droits réservés. Reproduction interdite sans autorisation écrite."</strong><br><br>En France l'œuvre est automatiquement protégée dès sa création. Pas besoin de dépôt officiel. La mention © renforce ta position en cas de litige.</p>
+    </div>
+  </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">🔒 PDF sécurisé avec mot de passe</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Utilise <strong>ilovepdf.com</strong> pour protéger ton PDF avec un mot de passe et désactiver la copie et l'impression. Chaque acheteur reçoit son propre lien de téléchargement — pas de partage facile entre amis.</p>
+    </div>
+  </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">🖼️ Filigrane avec le nom de l'acheteur</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Ajoute un filigrane semi-transparent avec le nom ou l'email de l'acheteur sur chaque page. Si ton PDF est partagé illégalement, <strong>tu sais exactement qui l'a partagé</strong>. Faisable sur Canva ou Adobe.</p>
+    </div>
+  </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">⚖️ CGV et contrat d'utilisation</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Inclus des CGV claires sur ta page de vente. Précise : <strong>interdiction de revente, de copie, de partage</strong>. En achetant, le client accepte ces conditions. En cas de litige, tu as une base légale solide.</p>
+    </div>
+  </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">📸 Screenshot de chaque vente</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Garde une trace de chaque transaction : <strong>email acheteur, date, montant, plateforme</strong>. En cas de litige Stripe ou PayPal tu dois prouver que tu as livré le produit. Screenshot paiement + livraison = dossier béton.</p>
+    </div>
+  </div>
 
   <div class="warning-block">
     <div class="warning-icon">⚠️</div>
-    <div class="warning-text"><strong>Stripe requiert 18 ans et un IBAN valide.</strong> Si tu es mineur, tu as besoin d'un compte au nom d'un parent ou tuteur légal. Ne crée jamais un compte avec de fausses informations — risque de suspension définitive.</div>
-  </div>
-
-  <div class="tabs" id="stripe-tabs">
-    <button class="tab-btn active" onclick="showTab('stripe','beacons',this)"><span>🔗</span>Beacons</button>
-    <button class="tab-btn" onclick="showTab('stripe','stan',this)"><span>⭐</span>Stan</button>
-    <button class="tab-btn" onclick="showTab('stripe','systeme',this)"><span>⚙️</span>Système</button>
-    <button class="tab-btn" onclick="showTab('stripe','shopify',this)"><span>🛍️</span>Shopify</button>
-  </div>
-
-  <div class="tab-content active" id="stripe-beacons">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Beacons → Settings → Payouts</div><div class="step-text">Dans ton dashboard Beacons → <strong>Settings ⚙️</strong> → <strong>Payouts & Payments</strong>.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Clique "Connect Stripe"</div><div class="step-text">Tu seras redirigé vers Stripe. Crée ton compte ou connecte-toi si tu en as déjà un.</div><div class="step-tip">💡 Crée ton compte Stripe sur stripe.com avant si tu n'en as pas</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Vérifie ton identité</div><div class="step-text">Stripe demande : nom, adresse, date de naissance, <strong>IBAN</strong> et pièce d'identité. Tout doit être exact — c'est obligatoire pour recevoir des virements.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Test à 1€</div><div class="step-text">Crée un produit à <strong>1€</strong> → achète-le toi-même → vérifie que l'argent apparaît dans Stripe sous 24h.</div><div class="step-tip">💡 Supprime le produit test après vérification</div></div></div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="stripe-stan">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">StanStore → Settings → Payments</div><div class="step-text">Dashboard StanStore → <strong>Settings</strong> → <strong>Payment Settings</strong> → <strong>Connect with Stripe</strong>.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Crée ou connecte ton Stripe</div><div class="step-text">Suis les étapes : prénom, nom, pays (France), email, <strong>numéro de téléphone</strong> pour le SMS de vérification.</div><div class="step-tip">💡 Utilise ton vrai numéro — Stripe envoie un SMS</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Entre ton IBAN</div><div class="step-text">Stripe → <strong>Paramètres → Informations bancaires</strong> → entre ton IBAN français. C'est là que les virements arrivent.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Vérifie "Stripe Connected ✅"</div><div class="step-text">Retourne dans Payment Settings — tu dois voir le badge de confirmation. Fais un achat test à 1€.</div></div></div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="stripe-systeme">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Paramètres → Passerelles de paiement</div><div class="step-text">Système.io → <strong>Paramètres ⚙️</strong> → <strong>Passerelles de paiement</strong> → clique sur <strong>Stripe</strong>.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte avec Stripe</div><div class="step-text">Clique <strong>Connecter avec Stripe</strong> → connecte-toi → autorise Système.io à accéder à ton Stripe.</div><div class="step-tip">💡 Système.io est en français — plus simple à naviguer</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Active le paiement en plusieurs fois</div><div class="step-text">Dans les paramètres → active <strong>Paiement en plusieurs fois</strong> → configure 3x ou 4x selon tes offres.</div><div class="step-tip">💡 Le 4x augmente les conversions de 20 à 30%</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Teste ton tunnel</div><div class="step-text">Va sur ton tunnel → bouton d'achat → vérifie que la page Stripe s'affiche avec le bon montant.</div></div></div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="stripe-shopify">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Settings → Payments</div><div class="step-text">Admin Shopify → <strong>Settings</strong> → <strong>Payments</strong> → <strong>Shopify Payments</strong> en haut.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Complete account setup</div><div class="step-text">Entre les infos de ton entreprise, ton IBAN, et ta pièce d'identité si demandée. Shopify Payments = Stripe intégré.</div><div class="step-tip">💡 Shopify Payments supprime les frais de transaction de 2%</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Active Visa, Mastercard, Apple Pay</div><div class="step-text">Coche toutes les méthodes disponibles. Plus de méthodes = plus de clients peuvent acheter.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Vérifie les frais à 0%</div><div class="step-text">Avec Shopify Payments actif, vérifie que les <strong>frais de transaction sont à 0%</strong> dans tes paramètres.</div></div></div>
-    </div>
+    <div class="warning-text"><strong>MRR — Droits de revente :</strong> Si tu vends avec droits de revente, précise exactement ce que l'acheteur a le droit de faire. Revendre oui, modifier non, offrir gratuitement non. Sois précis dans tes CGV.</div>
   </div>
 </div>
 
-<!-- S5 — CONFIG PAYPAL -->
-
-<div class="section" id="s5">
-  <div class="s-title">CONFIG <span>PAYPAL</span></div>
-  <div class="s-sub">Le backup qui récupère les ventes perdues</div>
-
-  <div class="info-block">
-    <div class="info-icon">💡</div>
-    <div class="info-text"><strong>Pourquoi PayPal en plus ?</strong> Certains clients refusent de mettre leur carte en ligne. Avec PayPal ils paient depuis leur solde ou compte bancaire. Tu ne rates aucune vente.</div>
-  </div>
-
-  <div class="tabs" id="paypal-tabs">
-    <button class="tab-btn active" onclick="showTab('paypal','beacons',this)"><span>🔗</span>Beacons</button>
-    <button class="tab-btn" onclick="showTab('paypal','stan',this)"><span>⭐</span>Stan</button>
-    <button class="tab-btn" onclick="showTab('paypal','systeme',this)"><span>⚙️</span>Système</button>
-    <button class="tab-btn" onclick="showTab('paypal','shopify',this)"><span>🛍️</span>Shopify</button>
-  </div>
-
-  <div class="tab-content active" id="paypal-beacons">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Settings → Payouts → PayPal</div><div class="step-text">Dans Settings → <strong>Payouts & Payments</strong> → option PayPal à côté de Stripe.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte ton PayPal Business</div><div class="step-text">Clique <strong>Connect PayPal</strong> → connecte avec ton email. Si tu n'as qu'un compte perso, convertis-le en <strong>Business gratuitement</strong>.</div><div class="step-tip">💡 PayPal Business = mêmes fonctions + stats de vente</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Confirme ton email PayPal</div><div class="step-text">PayPal envoie un email de confirmation. Clique sur le lien pour activer les paiements.</div></div></div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="paypal-stan">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">StanStore ne supporte pas PayPal directement</div><div class="step-text">StanStore = Stripe uniquement. Pour PayPal, crée un <strong>lien de paiement PayPal séparé</strong> et partage-le en DM ou en bio.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Crée un lien PayPal.me</div><div class="step-text">Sur paypal.com → <strong>Envoyer et Demander → Créer un lien</strong> → mets le montant et la description → copie le lien.</div><div class="step-tip">💡 "Pour payer par PayPal : paypal.me/tonnom/97"</div></div></div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="paypal-systeme">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Paramètres → PayPal</div><div class="step-text">Système.io → <strong>Paramètres → Passerelles → PayPal</strong> → <strong>Connecter PayPal</strong>.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte ton PayPal Business</div><div class="step-text">Entre ton email PayPal Business → autorise → PayPal apparaît comme option sur tous tes tunnels automatiquement.</div><div class="step-tip">💡 Tes clients voient les deux options : carte et PayPal</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Teste les deux boutons</div><div class="step-text">Passe par ton tunnel → vérifie que <strong>Payer par carte</strong> et <strong>PayPal</strong> apparaissent tous les deux.</div></div></div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="paypal-shopify">
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Settings → Payments → PayPal</div><div class="step-text">Shopify → Settings → Payments → descends jusqu'à <strong>PayPal</strong> → <strong>Activate PayPal</strong>.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connecte ton PayPal Business</div><div class="step-text">Connecte avec ton email Business → autorise → PayPal apparaît automatiquement sur le checkout.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Active PayPal Express</div><div class="step-text">Coche <strong>PayPal Express Checkout</strong> — paiement en 2 clics depuis l'app PayPal. Réduit l'abandon de panier.</div></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- S6 — PAIEMENT 4X -->
-
-<div class="section" id="s6">
-  <div class="s-title">PAIEMENT <span>EN 4X</span></div>
-  <div class="s-sub">La stratégie qui double tes conversions</div>
-
-  <div class="story-block">
-    <p>Un client hésite à payer <strong>197€ en une fois</strong>. Le même client dit oui immédiatement à <em>4 × 52€</em>. C'est la même somme — mais le cerveau perçoit le risque différemment.</p>
-  </div>
-
-  <div class="info-block">
-    <div class="info-icon">🎯</div>
-    <div class="info-text"><strong>Méthode DMA :</strong> Propose toujours 1x ET 4x. Le prix 4x doit être légèrement plus cher — exemple : 197€ en 1x ou 4 × 55€ (= 220€) — pour compenser le risque d'impayé.</div>
-  </div>
-
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Sur Système.io</div><div class="step-text">Produit → <strong>Plans de paiement → Ajouter un plan</strong> → configure 4 paiements → entre le montant par échéance. Système.io prélève automatiquement.</div><div class="step-tip">💡 Système.io gère tout via Stripe — zéro manuel</div></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Sur Shopify</div><div class="step-text">Installe l'app <strong>Shop Pay Installments</strong> → active dans Settings → Payments. Shopify gère tout.</div></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Sur Beacons / Stan</div><div class="step-text">Crée <strong>deux produits distincts</strong> : "Paiement intégral 197€" et "Paiement 4x 55€". Pour le 4x, gère les 3 factures restantes manuellement via Stripe.</div><div class="step-tip">💡 Plus manuel mais 100% fonctionnel</div></div></div>
-  </div>
-</div>
-
-<!-- S7 — PROBLÈMES FRÉQUENTS -->
+<!-- S7 — SE FAIRE CONNAÎTRE -->
 
 <div class="section" id="s7">
-  <div class="s-title">ERREURS <span>FRÉQUENTES</span></div>
-  <div class="s-sub">Les pièges à éviter absolument</div>
+  <div class="s-title">SE FAIRE <span>CONNAÎTRE</span></div>
+  <div class="s-sub">Les stratégies qui fonctionnent vraiment en 2025</div>
 
-  <div class="warning-block">
-    <div class="warning-icon">🚫</div>
-    <div class="warning-text"><strong>Stripe refusé ?</strong> Vérifie que ton adresse correspond exactement à ta pièce d'identité. Une simple différence peut bloquer la vérification.</div>
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">📱 Contenu gratuit → vente naturelle</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Donne <strong>20% de ton meilleur contenu gratuitement</strong> sur TikTok, Instagram, Snap. Les gens qui voient que tu es bon gratuitement imaginent ce que tu donnes en payant.<br><br><strong>Règle :</strong> 3 posts de valeur → 1 post de promotion. Jamais l'inverse.</p>
+    </div>
   </div>
-  <div class="warning-block">
-    <div class="warning-icon">🚫</div>
-    <div class="warning-text"><strong>Paiements bloqués ?</strong> Les premiers virements peuvent être retenus 7 jours par Stripe pour vérifier ton activité. Normal — ça se débloque automatiquement.</div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">🎁 Lead Magnet — Produit gratuit</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Offre un mini-produit GRATUIT en échange de l'email. Exemple : <strong>"Télécharge mon guide gratuit des 5 erreurs qui t'empêchent de vendre en DM"</strong>. Une fois l'email récupéré, envoie une séquence automatique vers ton produit payant.</p>
+    </div>
   </div>
-  <div class="warning-block">
-    <div class="warning-icon">🚫</div>
-    <div class="warning-text"><strong>Trop de remboursements ?</strong> Stripe peut suspendre ton compte. Ne promets que ce que tu peux livrer et réponds aux litiges rapidement.</div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">🤝 Affiliation — Ton armée de vendeurs</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Propose à d'autres créateurs de <strong>promouvoir ton produit contre une commission de 20% à 50%</strong>. Eux vendent, toi tu reçois l'argent et tu leurs verses leur part. C'est une armée de vendeurs sans rien payer d'avance.<br><br>Système.io et StanStore ont un programme d'affiliation intégré.</p>
+    </div>
   </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">🔥 Le lancement flash 24h</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Annonce une <strong>offre de lancement 24h à 48h</strong> avec un prix réduit. "Les 10 premiers à 47€, ensuite 97€." L'urgence réelle déclenche l'action. Fais-le en story, en DM de masse, en post — partout en même temps.</p>
+    </div>
+  </div>
+
+  <div class="reveal-card" onclick="toggleReveal(this)">
+    <div class="reveal-header">
+      <div class="reveal-title">💬 Témoignages et preuve sociale</div>
+      <div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div>
+    </div>
+    <div class="reveal-content">
+      <p>Les premiers clients sont la priorité absolue. <strong>Vends à 50% de réduction en échange d'un témoignage honnête.</strong> Mets ces témoignages sur ta page de vente, en story, en post. La preuve sociale est le vendeur le plus puissant qui existe.</p>
+    </div>
+  </div>
+
   <div class="info-block">
-    <div class="info-icon">✅</div>
-    <div class="info-text"><strong>Conseil pro :</strong> Garde une capture d'écran de chaque vente et du contenu livré. En cas de litige, tu as la preuve que tu as respecté ta part du contrat.</div>
+    <div class="info-icon">🚀</div>
+    <div class="info-text"><strong>Le combo gagnant DMA :</strong> Contenu gratuit régulier → lead magnet pour collecter des emails → séquence email automatique → offre payante → témoignages → affiliation. C'est le système qui tourne seul.</div>
   </div>
 </div>
 
@@ -376,44 +513,36 @@
   <div class="checklist">
     <div class="check-item" onclick="toggleCheck(this,0)">
       <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <div class="check-text"><strong>Crée ton compte Stripe</strong> sur stripe.com et complète toute la vérification d'identité.</div>
+      <div class="check-text"><strong>Choisis ton type de produit</strong> parmi les 12 catégories selon tes compétences actuelles.</div>
     </div>
     <div class="check-item" onclick="toggleCheck(this,1)">
       <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <div class="check-text"><strong>Connecte Stripe</strong> sur ta plateforme principale et vérifie que ça fonctionne.</div>
+      <div class="check-text"><strong>Valide ton idée</strong> avec un sondage en story avant de passer du temps à créer.</div>
     </div>
     <div class="check-item" onclick="toggleCheck(this,2)">
       <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <div class="check-text"><strong>Connecte PayPal Business</strong> comme option alternative sur ta plateforme.</div>
+      <div class="check-text"><strong>Crée ton premier produit</strong> avec les outils gratuits. Maximum 3 jours de travail.</div>
     </div>
     <div class="check-item" onclick="toggleCheck(this,3)">
       <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <div class="check-text"><strong>Fais un achat test à 1€</strong> pour vérifier que Stripe et PayPal fonctionnent de A à Z.</div>
+      <div class="check-text"><strong>Protège ton produit</strong> avec la mention ©, un PDF sécurisé et des CGV claires.</div>
     </div>
     <div class="check-item" onclick="toggleCheck(this,4)">
       <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <div class="check-text"><strong>Configure le paiement en 4x</strong> sur au moins une de tes offres principales.</div>
+      <div class="check-text"><strong>Fais ton lancement flash</strong> — 24h de promo au prix réduit pour les premiers acheteurs.</div>
     </div>
     <div class="check-item" onclick="toggleCheck(this,5)">
       <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <div class="check-text"><strong>Reçois ton premier virement</strong> sur ton compte bancaire — la boucle est bouclée.</div>
+      <div class="check-text"><strong>Collecte tes premiers témoignages</strong> et mets-les sur ta page de vente et tes stories.</div>
     </div>
   </div>
 </div>
 
 <div class="complete-section">
-  <button class="btn-complete" id="completeBtn" onclick="completeModule()">
-    ✓ MARQUER COMME TERMINÉ
-  </button>
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">✓ MARQUER COMME TERMINÉ</button>
   <div class="nav-modules">
-    <a class="btn-nav" href="module-02.html">
-      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Module 02
-    </a>
-    <a class="btn-nav" href="module-04.html">
-      Module 04
-      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+    <a class="btn-nav" href="module-04.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 04</a>
+    <a class="btn-nav" href="module-06.html">Module 06<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
 </div>
 
@@ -429,43 +558,43 @@
   const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
   document.querySelectorAll('.section').forEach(s=>obs.observe(s));
 
-  function showTab(group,name,btn){
-    const section=btn.closest('.section');
-    section.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-    section.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.getElementById(group+'-'+name).classList.add('active');
-    btn.classList.add('active');
-  }
+  function toggleReveal(c){c.classList.toggle('open');}
 
-  function answer(btn,qid,type,correct){
-    const opts=document.querySelectorAll('#'+qid+' .quiz-option');
+  const msgs={
+    debutant:'🎯 <strong>Commence par un pack MRR.</strong> Tu n\'as pas besoin de compétence spécifique — tu revends un produit qui existe déjà avec droits de revente. Tu apprends le marketing en vendant. C\'est le meilleur point de départ.',
+    marketing:'🚀 <strong>Crée une formation ou un guide sur le marketing digital.</strong> Tu as exactement ce que les gens cherchent. Un e-book "Comment vendre sur Instagram" ou une formation complète peut se vendre entre 47€ et 497€.',
+    createur:'🎨 <strong>Vends tes presets, templates et packs Canva.</strong> Ce que tu utilises quotidiennement a de la valeur pour ceux qui débutent. Pack de presets, templates CapCut, kits Canva — tout ça se vend entre 17€ et 77€ facilement.',
+    expert:'💡 <strong>Transforme ton expertise en formation ou e-book.</strong> Tu as une connaissance que les autres paient pour acquérir. Sportif → programme d\'entraînement. Cuisinier → recettes exclusives. Ton expertise vaut de l\'argent.'
+  };
+
+  function ideaAdvice(btn,type){
+    const opts=document.querySelectorAll('#q1 .quiz-option');
     opts.forEach(o=>{o.classList.add('disabled');o.onclick=null;});
-    btn.classList.add(type==='correct'?'correct':'wrong');
-    if(type==='wrong') opts.forEach(o=>{if(o.querySelector('.option-letter').textContent===correct)o.classList.add('correct');});
-    const fc=document.getElementById(qid+'-correct');
-    const fw=document.getElementById(qid+'-wrong');
-    if(type==='correct'&&fc)fc.classList.add('show-c');
-    if(type==='wrong'&&fw)fw.classList.add('show-w');
+    btn.classList.add('correct');
+    const fb=document.getElementById('q1-advice');
+    fb.innerHTML=msgs[type];
+    fb.className='quiz-feedback show-c';
+    fb.style.display='block';
   }
 
   function toggleCheck(item,idx){
     item.classList.toggle('checked');
-    localStorage.setItem('m03_check_'+idx,item.classList.contains('checked')?'1':'0');
+    localStorage.setItem('m05_check_'+idx,item.classList.contains('checked')?'1':'0');
   }
   document.querySelectorAll('.check-item').forEach((item,i)=>{
-    if(localStorage.getItem('m03_check_'+i)==='1')item.classList.add('checked');
+    if(localStorage.getItem('m05_check_'+i)==='1')item.classList.add('checked');
   });
 
-  if(localStorage.getItem('module_03_done')==='1'){
+  if(localStorage.getItem('module_05_done')==='1'){
     const btn=document.getElementById('completeBtn');
     btn.textContent='✓ MODULE TERMINÉ';btn.classList.add('done');
   }
 
   function completeModule(){
-    localStorage.setItem('module_03_done','1');
+    localStorage.setItem('module_05_done','1');
     const btn=document.getElementById('completeBtn');
     btn.textContent='✓ MODULE TERMINÉ !';btn.classList.add('done');
-    setTimeout(()=>{window.location.href='module-04.html';},1000);
+    setTimeout(()=>{window.location.href='module-06.html';},1000);
   }
 </script>
 
