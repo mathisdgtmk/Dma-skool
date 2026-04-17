@@ -5,345 +5,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DMA — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
-
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;width:100%}
-
-body{
-background:#050505;
-color:#f5f0e8;
-font-family:‘Montserrat’,Arial,sans-serif;
-min-height:100vh;
-overflow-x:hidden;
-}
-
-/* BG */
-body::before{
-content:’’;position:fixed;inset:0;
-background:
-radial-gradient(ellipse 80% 40% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 60%),
-radial-gradient(ellipse 40% 30% at 0% 50%,rgba(201,168,76,.04) 0%,transparent 60%);
-pointer-events:none;z-index:0;
-}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{background:#050505}
+  body{background:#050505!important;color:#f5f0e8;font-family:'Montserrat',Arial,sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:80px;}
 
 /* HEADER */
-.header{
-position:sticky;top:0;z-index:50;
-background:rgba(5,5,5,.92);
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-border-bottom:1px solid rgba(201,168,76,.1);
-padding:14px 20px;
-display:flex;align-items:center;justify-content:space-between;
-}
-
-.header-logo{
-display:flex;align-items:center;gap:10px;
-}
-
-.header-emblem{
-width:34px;height:34px;
-background:linear-gradient(135deg,#C0001A,#7a0010);
-border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-box-shadow:0 0 14px rgba(192,0,26,.4);
-flex-shrink:0;
-}
-.header-emblem span{
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:11px;color:#C9A84C;letter-spacing:.5px;
-}
-
-.header-title{
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:18px;letter-spacing:3px;color:#f5f0e8;
-}
-
-.header-right{display:flex;align-items:center;gap:12px}
-
-.welcome-name{
-font-size:11px;font-weight:500;letter-spacing:1px;
-color:rgba(201,168,76,.7);
-display:none;
-}
-@media(min-width:400px){.welcome-name{display:block}}
-
-.btn-logout{
-background:none;border:1px solid rgba(201,168,76,.2);
-border-radius:2px;padding:6px 12px;
-color:rgba(245,240,232,.4);
-font-family:‘Montserrat’,Arial,sans-serif;
-font-size:9px;font-weight:600;letter-spacing:2px;
-text-transform:uppercase;cursor:pointer;
-transition:all .2s;-webkit-appearance:none;
-}
-.btn-logout:active{border-color:rgba(201,168,76,.5);color:#C9A84C}
-
-/* MAIN */
-.main{position:relative;z-index:1;padding:28px 16px 48px;}
-@media(min-width:480px){.main{padding:32px 24px 60px;}}
+.header{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.96);border-bottom:1px solid rgba(201,168,76,.1);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+.header-logo{display:flex;align-items:center;gap:10px;}
+.header-emblem{width:36px;height:36px;background:linear-gradient(135deg,#C0001A,#7a0010);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(192,0,26,.4);flex-shrink:0;}
+.header-emblem span{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:11px;color:#C9A84C;letter-spacing:.5px;}
+.header-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.welcome-name{font-size:11px;font-weight:500;letter-spacing:1px;color:rgba(201,168,76,.6);}
+.btn-logout{background:none;border:1px solid rgba(201,168,76,.15);border-radius:2px;padding:6px 12px;color:rgba(245,240,232,.35);font-family:‘Montserrat’,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;-webkit-appearance:none;}
 
 /* HERO */
-.hero{
-text-align:center;
-margin-bottom:36px;
-animation:fadeUp .6s cubic-bezier(.16,1,.3,1) both;
-}
-
-.hero-tag{
-display:inline-block;
-font-size:9px;font-weight:600;letter-spacing:3px;
-text-transform:uppercase;color:#C9A84C;
-border:1px solid rgba(201,168,76,.2);
-border-radius:20px;padding:5px 14px;
-margin-bottom:14px;
-background:rgba(201,168,76,.05);
-}
-
-.hero-title{
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:clamp(28px,7vw,48px);
-letter-spacing:clamp(2px,1vw,5px);
-color:#f5f0e8;line-height:1;
-margin-bottom:10px;
-}
-
+.hero{padding:24px 18px 0;position:relative;}
+.hero::before{content:’’;position:fixed;top:0;left:0;right:0;height:300px;background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:12px;background:rgba(201,168,76,.05);}
+.hero-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:clamp(28px,7vw,42px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:6px;}
 .hero-title span{color:#C0001A}
+.hero-sub{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:14px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;}
 
-.hero-sub{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(13px,3vw,16px);
-font-style:italic;
-color:rgba(245,240,232,.45);
-letter-spacing:1px;
-margin-bottom:20px;
-}
+/* PROGRESS */
+.progress-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.1);border-radius:4px;padding:14px 16px;margin:0 18px 28px;}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.progress-label{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,.55);}
+.progress-count{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:18px;letter-spacing:2px;color:#C9A84C;}
+.progress-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);border-radius:2px;transition:width 1s cubic-bezier(.16,1,.3,1);}
 
-/* PROGRESS BAR */
-.progress-wrap{
-background:rgba(255,255,255,.04);
-border:1px solid rgba(201,168,76,.1);
-border-radius:3px;
-padding:14px 16px;
-margin-bottom:32px;
-animation:fadeUp .6s .1s cubic-bezier(.16,1,.3,1) both;
-}
+/* CATEGORY SECTION */
+.cat-section{margin-bottom:32px;padding:0 18px;}
+.cat-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.cat-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.cat-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#f5f0e8;}
+.cat-count{font-size:9px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.3);text-transform:uppercase;}
+.cat-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.08),transparent);}
 
-.progress-top{
-display:flex;justify-content:space-between;align-items:center;
-margin-bottom:10px;
-}
+/* MODULE CARD — Netflix style */
+.module-card{display:flex;align-items:center;gap:0;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;margin-bottom:10px;overflow:hidden;text-decoration:none;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;}
+.module-card:active{transform:scale(.98);border-color:rgba(201,168,76,.25);}
+.module-card.completed{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.03);}
 
-.progress-label{
-font-size:9px;font-weight:600;letter-spacing:2.5px;
-text-transform:uppercase;color:rgba(201,168,76,.6);
-}
+/* CARD THUMBNAIL */
+.card-thumb{width:90px;height:72px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.card-thumb-num{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:28px;letter-spacing:2px;color:rgba(255,255,255,.15);line-height:1;position:absolute;}
+.card-thumb-icon{font-size:26px;position:relative;z-index:1;}
 
-.progress-count{
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:16px;letter-spacing:2px;color:#C9A84C;
-}
+/* CARD BODY */
+.card-body{flex:1;padding:12px 14px 12px 12px;min-width:0;}
+.card-num{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:4px;}
+.card-title{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.3;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-desc{font-size:10px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 
-.progress-bar{
-height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;
-}
+/* CARD RIGHT */
+.card-right{padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
+.card-check{width:22px;height:22px;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.module-card.completed .card-check{background:#C9A84C;border-color:#C9A84C;}
+.card-check svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none;}
+.module-card.completed .card-check svg{display:block;}
+.card-arrow{width:16px;height:16px;stroke:rgba(245,240,232,.2);fill:none;stroke-width:2;}
 
-.progress-fill{
-height:100%;width:0%;
-background:linear-gradient(90deg,#C0001A,#C9A84C);
-border-radius:2px;
-transition:width 1s cubic-bezier(.16,1,.3,1);
-}
+/* CATEGORY COLORS */
+.cat-fondations .card-thumb{background:linear-gradient(135deg,rgba(192,0,26,.3),rgba(120,0,10,.2));}
+.cat-contenu .card-thumb{background:linear-gradient(135deg,rgba(201,168,76,.25),rgba(150,100,20,.15));}
+.cat-vente .card-thumb{background:linear-gradient(135deg,rgba(192,0,26,.25),rgba(201,168,76,.15));}
+.cat-revenus .card-thumb{background:linear-gradient(135deg,rgba(100,60,200,.2),rgba(192,0,26,.2));}
+.cat-premium .card-thumb{background:linear-gradient(135deg,rgba(201,168,76,.3),rgba(192,0,26,.25));}
+.cat-bonus .card-thumb{background:linear-gradient(135deg,rgba(50,150,50,.2),rgba(201,168,76,.15));}
 
-/* SECTION TITLE */
-.section-title{
-display:flex;align-items:center;gap:12px;
-margin-bottom:16px;
-}
-
-.section-title-text{
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:13px;letter-spacing:3px;
-color:rgba(245,240,232,.4);
-text-transform:uppercase;
-white-space:nowrap;
-}
-
-.section-title-line{
-flex:1;height:1px;
-background:linear-gradient(90deg,rgba(201,168,76,.15),transparent);
-}
-
-/* MODULE GRID */
-.modules-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-bottom:24px;
-}
-@media(min-width:480px){.modules-grid{gap:12px}}
-
-/* MODULE CARD */
-.module-card{
-background:rgba(255,255,255,.03);
-border:1px solid rgba(201,168,76,.08);
-border-radius:4px;
-padding:14px 12px;
-cursor:pointer;
-position:relative;
-overflow:hidden;
-transition:border-color .25s,background .25s,transform .15s;
-animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both;
-text-decoration:none;
-display:block;
-}
-
-.module-card::before{
-content:’’;
-position:absolute;inset:0;
-background:linear-gradient(135deg,rgba(192,0,26,.06) 0%,transparent 60%);
-opacity:0;transition:opacity .3s;
-}
-
-.module-card:active{
-border-color:rgba(201,168,76,.3);
-background:rgba(255,255,255,.05);
-transform:scale(.98);
-}
-.module-card:active::before{opacity:1}
-
-.module-card.completed{
-border-color:rgba(201,168,76,.2);
-background:rgba(201,168,76,.04);
-}
-
-.module-card.locked{
-opacity:.45;cursor:default;
-}
-
-.module-num{
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:11px;letter-spacing:2px;
-color:rgba(201,168,76,.4);
-margin-bottom:6px;
-display:block;
-}
-
-.module-title{
-font-size:11px;font-weight:600;
-letter-spacing:.3px;
-color:#f5f0e8;
-line-height:1.3;
-margin-bottom:8px;
-}
-
-.module-card.locked .module-title{color:rgba(245,240,232,.4)}
-
-.module-tag{
-display:inline-block;
-font-size:8px;font-weight:600;letter-spacing:1.5px;
-text-transform:uppercase;
-padding:3px 8px;border-radius:2px;
-}
-
-.tag-mindset{background:rgba(192,0,26,.15);color:#ff6b6b}
-.tag-business{background:rgba(201,168,76,.12);color:#C9A84C}
-.tag-content{background:rgba(100,180,255,.1);color:#7ab8ff}
-.tag-tech{background:rgba(150,255,150,.08);color:#80d080}
-.tag-premium{background:rgba(192,0,26,.2);color:#ff4444;border:1px solid rgba(192,0,26,.3)}
-
-.module-check{
-position:absolute;top:10px;right:10px;
-width:18px;height:18px;
-border:1px solid rgba(201,168,76,.2);
-border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-transition:all .2s;
-}
-
-.module-card.completed .module-check{
-background:#C9A84C;
-border-color:#C9A84C;
-}
-
-.module-check svg{width:9px;height:9px;stroke:#050505;fill:none;stroke-width:3;display:none}
-.module-card.completed .module-check svg{display:block}
-
-.module-lock{
-position:absolute;top:10px;right:10px;
-font-size:12px;opacity:.3;
-}
-
-/* BONUS SECTION */
-.bonus-card{
-background:linear-gradient(135deg,rgba(192,0,26,.08) 0%,rgba(201,168,76,.05) 100%);
-border:1px solid rgba(192,0,26,.2);
-border-radius:4px;
-padding:16px;
-display:flex;align-items:center;gap:14px;
-cursor:pointer;
-transition:border-color .2s,transform .15s;
-text-decoration:none;
-margin-bottom:10px;
-animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both;
-}
-.bonus-card:active{border-color:rgba(192,0,26,.5);transform:scale(.98)}
-
-.bonus-icon{
-width:40px;height:40px;flex-shrink:0;
-background:linear-gradient(135deg,#C0001A,#7a0010);
-border-radius:3px;
-display:flex;align-items:center;justify-content:center;
-font-size:18px;
-}
-
-.bonus-info{}
-.bonus-label{
-font-size:8px;font-weight:600;letter-spacing:2.5px;
-text-transform:uppercase;color:#C9A84C;
-margin-bottom:4px;display:block;
-}
-.bonus-title{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.2}
+.cat-fondations .cat-icon{background:rgba(192,0,26,.15);}
+.cat-contenu .cat-icon{background:rgba(201,168,76,.12);}
+.cat-vente .cat-icon{background:rgba(192,0,26,.12);}
+.cat-revenus .cat-icon{background:rgba(100,60,200,.1);}
+.cat-premium .cat-icon{background:rgba(201,168,76,.15);}
+.cat-bonus .cat-icon{background:rgba(50,150,50,.1);}
 
 /* BOTTOM NAV */
-.bottom-nav{
-position:fixed;bottom:0;left:0;right:0;
-background:rgba(5,5,5,.95);
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-border-top:1px solid rgba(201,168,76,.08);
-display:flex;z-index:50;
-padding-bottom:env(safe-area-inset-bottom);
-}
-
-.nav-item{
-flex:1;display:flex;flex-direction:column;
-align-items:center;justify-content:center;
-padding:10px 4px;
-cursor:pointer;
-border:none;background:none;
-color:rgba(245,240,232,.25);
-transition:color .2s;
--webkit-appearance:none;
-font-family:‘Montserrat’,Arial,sans-serif;
-}
-
-.nav-item.active{color:#C9A84C}
-.nav-item svg{width:20px;height:20px;margin-bottom:4px}
-.nav-item span{font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(16px)}
-to{opacity:1;transform:translateY(0)}
-}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(5,5,5,.97);border-top:1px solid rgba(201,168,76,.08);display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom);}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px;cursor:pointer;border:none;background:none;color:rgba(245,240,232,.25);-webkit-appearance:none;font-family:‘Montserrat’,Arial,sans-serif;}
+.nav-item.active{color:#C9A84C;}
+.nav-item svg{width:20px;height:20px;margin-bottom:3px;stroke:currentColor;fill:none;stroke-width:1.5;}
+.nav-item span{font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
 </style>
 
 </head>
 <body>
-
-<!-- HEADER -->
 
 <div class="header">
   <div class="header-logo">
@@ -356,338 +107,549 @@ to{opacity:1;transform:translateY(0)}
   </div>
 </div>
 
-<!-- MAIN -->
+<div style="position:relative;z-index:1;">
 
-<div class="main" style="padding-bottom:80px">
+<!-- HERO -->
 
-  <!-- HERO -->
-
-  <div class="hero">
-    <div class="hero-tag">✦ Espace Formation</div>
-    <div class="hero-title">TES <span>28</span> MODULES</div>
-    <div class="hero-sub">Maîtrise le digital. Construis ton empire.</div>
-  </div>
-
-  <!-- PROGRESS -->
-
-  <div class="progress-wrap">
-    <div class="progress-top">
-      <span class="progress-label">Progression globale</span>
-      <span class="progress-count" id="progressCount">0 / 28</span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-  </div>
-
-  <!-- MODULES MINDSET -->
-
-  <div class="section-title">
-    <span class="section-title-text">Fondations</span>
-    <div class="section-title-line"></div>
-  </div>
-
-  <div class="modules-grid">
-    <a class="module-card" href="module-01.html" style="animation-delay:.05s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 01</span>
-      <div class="module-title">Mindset & Vision</div>
-      <span class="module-tag tag-mindset">Mindset</span>
-    </a>
-    <a class="module-card" href="module-02.html" style="animation-delay:.08s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 02</span>
-      <div class="module-title">Positionnement Premium</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-03.html" style="animation-delay:.1s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 03</span>
-      <div class="module-title">Page de Vente</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-04.html" style="animation-delay:.12s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 04</span>
-      <div class="module-title">Configuration Paiement</div>
-      <span class="module-tag tag-tech">Tech</span>
-    </a>
-  </div>
-
-  <!-- MODULES CONTENU -->
-
-  <div class="section-title" style="margin-top:8px">
-    <span class="section-title-text">Contenu & Marketing</span>
-    <div class="section-title-line"></div>
-  </div>
-
-  <div class="modules-grid">
-    <a class="module-card" href="module-05.html" style="animation-delay:.14s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 05</span>
-      <div class="module-title">Produits Digitaux</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-06.html" style="animation-delay:.16s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 06</span>
-      <div class="module-title">Content Marketing</div>
-      <span class="module-tag tag-content">Contenu</span>
-    </a>
-    <a class="module-card" href="module-07.html" style="animation-delay:.18s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 07</span>
-      <div class="module-title">Vidéo Faceless</div>
-      <span class="module-tag tag-content">Contenu</span>
-    </a>
-    <a class="module-card" href="module-08.html" style="animation-delay:.2s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 08</span>
-      <div class="module-title">Instagram Mastery</div>
-      <span class="module-tag tag-content">Contenu</span>
-    </a>
-    <a class="module-card" href="module-09.html" style="animation-delay:.22s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 09</span>
-      <div class="module-title">TikTok Hooks</div>
-      <span class="module-tag tag-content">Contenu</span>
-    </a>
-    <a class="module-card" href="module-10.html" style="animation-delay:.24s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 10</span>
-      <div class="module-title">Snapchat Strategy</div>
-      <span class="module-tag tag-content">Contenu</span>
-    </a>
-  </div>
-
-  <!-- MODULES VENTE -->
-
-  <div class="section-title" style="margin-top:8px">
-    <span class="section-title-text">Vente & Closing</span>
-    <div class="section-title-line"></div>
-  </div>
-
-  <div class="modules-grid">
-    <a class="module-card" href="module-11.html" style="animation-delay:.26s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 11</span>
-      <div class="module-title">Closing & Scripts</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-12.html" style="animation-delay:.28s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 12</span>
-      <div class="module-title">Live Selling TikTok</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-13.html" style="animation-delay:.3s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 13</span>
-      <div class="module-title">VSL & Video Sales</div>
-      <span class="module-tag tag-content">Contenu</span>
-    </a>
-    <a class="module-card" href="module-14.html" style="animation-delay:.32s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 14</span>
-      <div class="module-title">Email Marketing</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-15.html" style="animation-delay:.34s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 15</span>
-      <div class="module-title">Funnels & Tunnels</div>
-      <span class="module-tag tag-tech">Tech</span>
-    </a>
-    <a class="module-card" href="module-16.html" style="animation-delay:.36s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 16</span>
-      <div class="module-title">AI Selling</div>
-      <span class="module-tag tag-tech">Tech</span>
-    </a>
-  </div>
-
-  <!-- MODULES AVANCÉS -->
-
-  <div class="section-title" style="margin-top:8px">
-    <span class="section-title-text">Revenus & Systèmes</span>
-    <div class="section-title-line"></div>
-  </div>
-
-  <div class="modules-grid">
-    <a class="module-card" href="module-17.html" style="animation-delay:.38s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 17</span>
-      <div class="module-title">MRR & Récurrence</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-18.html" style="animation-delay:.4s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 18</span>
-      <div class="module-title">SMMA Agency</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-19.html" style="animation-delay:.42s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 19</span>
-      <div class="module-title">Shopify & E-commerce</div>
-      <span class="module-tag tag-tech">Tech</span>
-    </a>
-    <a class="module-card" href="module-20.html" style="animation-delay:.44s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 20</span>
-      <div class="module-title">Système.io & Stan</div>
-      <span class="module-tag tag-tech">Tech</span>
-    </a>
-    <a class="module-card" href="module-21.html" style="animation-delay:.46s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 21</span>
-      <div class="module-title">Déclaration Légale</div>
-      <span class="module-tag tag-tech">Tech</span>
-    </a>
-    <a class="module-card" href="module-22.html" style="animation-delay:.48s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 22</span>
-      <div class="module-title">Automation DM</div>
-      <span class="module-tag tag-tech">Tech</span>
-    </a>
-  </div>
-
-  <!-- MODULES PREMIUM -->
-
-  <div class="section-title" style="margin-top:8px">
-    <span class="section-title-text">Premium & Expert</span>
-    <div class="section-title-line"></div>
-  </div>
-
-  <div class="modules-grid">
-    <a class="module-card" href="module-23.html" style="animation-delay:.5s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 23</span>
-      <div class="module-title">Droits de Revente MRR</div>
-      <span class="module-tag tag-premium">Premium</span>
-    </a>
-    <a class="module-card" href="module-24.html" style="animation-delay:.52s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 24</span>
-      <div class="module-title">Personal Branding</div>
-      <span class="module-tag tag-mindset">Mindset</span>
-    </a>
-    <a class="module-card" href="module-25.html" style="animation-delay:.54s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 25</span>
-      <div class="module-title">Prospection B2B</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-26.html" style="animation-delay:.56s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 26</span>
-      <div class="module-title">Gestion Client</div>
-      <span class="module-tag tag-business">Business</span>
-    </a>
-    <a class="module-card" href="module-27.html" style="animation-delay:.58s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 27</span>
-      <div class="module-title">Scaling & Délégation</div>
-      <span class="module-tag tag-premium">Premium</span>
-    </a>
-    <a class="module-card" href="module-28.html" style="animation-delay:.6s">
-      <div class="module-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
-      <span class="module-num">MODULE 28</span>
-      <div class="module-title">Stratégie 2026</div>
-      <span class="module-tag tag-premium">Premium</span>
-    </a>
-  </div>
-
-  <!-- BONUS -->
-
-  <div class="section-title" style="margin-top:16px">
-    <span class="section-title-text">Bonus Exclusifs</span>
-    <div class="section-title-line"></div>
-  </div>
-
-  <a class="bonus-card" href="bonus-tracker.html" style="animation-delay:.62s">
-    <div class="bonus-icon">📊</div>
-    <div class="bonus-info">
-      <span class="bonus-label">Outil Inclus</span>
-      <div class="bonus-title">Tracker CRM Prospects</div>
-    </div>
-  </a>
-
-  <a class="bonus-card" href="bonus-scripts.html" style="animation-delay:.64s">
-    <div class="bonus-icon">🎯</div>
-    <div class="bonus-info">
-      <span class="bonus-label">Bonus Vente</span>
-      <div class="bonus-title">Scripts & Objections PDF</div>
-    </div>
-  </a>
-
-  <a class="bonus-card" href="bonus-legal.html" style="animation-delay:.66s">
-    <div class="bonus-icon">📋</div>
-    <div class="bonus-info">
-      <span class="bonus-label">Bonus Legal</span>
-      <div class="bonus-title">CGV & Contrats Prêts</div>
-    </div>
-  </a>
-
+<div class="hero">
+  <div class="hero-tag">✦ Espace Formation</div>
+  <div class="hero-title">TES <span>28</span> MODULES</div>
+  <div class="hero-sub">Maîtrise le digital. Construis ton empire.</div>
 </div>
+
+<!-- PROGRESS -->
+
+<div class="progress-wrap">
+  <div class="progress-top">
+    <span class="progress-label">Progression globale</span>
+    <span class="progress-count" id="progressCount">0 / 28</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<!-- CAT 1 — FONDATIONS -->
+
+<div class="cat-section cat-fondations">
+  <div class="cat-header">
+    <div class="cat-icon">🧠</div>
+    <div>
+      <div class="cat-title">FONDATIONS</div>
+      <div class="cat-count">4 modules</div>
+    </div>
+    <div class="cat-line"></div>
+  </div>
+
+  <a class="module-card cat-fondations" href="module-01.html">
+    <div class="card-thumb"><div class="card-thumb-num">01</div><div class="card-thumb-icon">🧠</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 01</div>
+      <div class="card-title">Mindset & Vision</div>
+      <div class="card-desc">Reprogramme ta façon de penser. La fondation de tout ce que tu vas construire.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-fondations" href="module-02.html">
+    <div class="card-thumb"><div class="card-thumb-num">02</div><div class="card-thumb-icon">💎</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 02</div>
+      <div class="card-title">Positionnement Premium</div>
+      <div class="card-desc">Pourquoi certains vendent à 497€ ce que d'autres bradent à 9€.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-fondations" href="module-03.html">
+    <div class="card-thumb"><div class="card-thumb-num">03</div><div class="card-thumb-icon">💳</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 03</div>
+      <div class="card-title">Configuration Paiement</div>
+      <div class="card-desc">Stripe & PayPal sur Beacons, Stan, Système.io et Shopify.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-fondations" href="module-04.html">
+    <div class="card-thumb"><div class="card-thumb-num">04</div><div class="card-thumb-icon">📦</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 04</div>
+      <div class="card-title">Produits Digitaux</div>
+      <div class="card-desc">Crée, protège et vends ce qui ne s'épuise jamais.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
+<!-- CAT 2 — CONTENU -->
+
+<div class="cat-section cat-contenu">
+  <div class="cat-header">
+    <div class="cat-icon">📲</div>
+    <div>
+      <div class="cat-title">CONTENU & MARKETING</div>
+      <div class="cat-count">6 modules</div>
+    </div>
+    <div class="cat-line"></div>
+  </div>
+
+  <a class="module-card cat-contenu" href="module-05.html">
+    <div class="card-thumb"><div class="card-thumb-num">05</div><div class="card-thumb-icon">📲</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 05</div>
+      <div class="card-title">Marketing & Contenu</div>
+      <div class="card-desc">Le système qui attire, engage et convertit en continu.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-contenu" href="module-06.html">
+    <div class="card-thumb"><div class="card-thumb-num">06</div><div class="card-thumb-icon">🎬</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 06</div>
+      <div class="card-title">Vidéo Faceless</div>
+      <div class="card-desc">Crée du contenu viral sans montrer ton visage.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-contenu" href="module-07.html">
+    <div class="card-thumb"><div class="card-thumb-num">07</div><div class="card-thumb-icon">📸</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 07</div>
+      <div class="card-title">Instagram Mastery</div>
+      <div class="card-desc">Stratégie complète pour exploser sur Instagram en 2025.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-contenu" href="module-08.html">
+    <div class="card-thumb"><div class="card-thumb-num">08</div><div class="card-thumb-icon">🎵</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 08</div>
+      <div class="card-title">TikTok Hooks</div>
+      <div class="card-desc">Les accroches qui stoppent le scroll et font exploser tes vues.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-contenu" href="module-09.html">
+    <div class="card-thumb"><div class="card-thumb-num">09</div><div class="card-thumb-icon">👻</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 09</div>
+      <div class="card-title">Snapchat Strategy</div>
+      <div class="card-desc">Snapchat comme levier de vente — la plateforme sous-estimée.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-contenu" href="module-10.html">
+    <div class="card-thumb"><div class="card-thumb-num">10</div><div class="card-thumb-icon">✉️</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 10</div>
+      <div class="card-title">Email Marketing</div>
+      <div class="card-desc">Construis ta liste et vends en automatique 24h/24.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
+<!-- CAT 3 — VENTE -->
+
+<div class="cat-section cat-vente">
+  <div class="cat-header">
+    <div class="cat-icon">🎯</div>
+    <div>
+      <div class="cat-title">VENTE & CLOSING</div>
+      <div class="cat-count">6 modules</div>
+    </div>
+    <div class="cat-line"></div>
+  </div>
+
+  <a class="module-card cat-vente" href="module-11.html">
+    <div class="card-thumb"><div class="card-thumb-num">11</div><div class="card-thumb-icon">🎯</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 11</div>
+      <div class="card-title">Closing & Scripts</div>
+      <div class="card-desc">Les scripts qui transforment les "je vais réfléchir" en ventes.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-vente" href="module-12.html">
+    <div class="card-thumb"><div class="card-thumb-num">12</div><div class="card-thumb-icon">🔴</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 12</div>
+      <div class="card-title">Live Selling TikTok</div>
+      <div class="card-desc">Vendre en live — la méthode qui génère des milliers en quelques heures.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-vente" href="module-13.html">
+    <div class="card-thumb"><div class="card-thumb-num">13</div><div class="card-thumb-icon">🎥</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 13</div>
+      <div class="card-title">VSL & Video Sales</div>
+      <div class="card-desc">Crée une vidéo de vente qui convertit en automatique.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-vente" href="module-14.html">
+    <div class="card-thumb"><div class="card-thumb-num">14</div><div class="card-thumb-icon">🤖</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 14</div>
+      <div class="card-title">AI Selling</div>
+      <div class="card-desc">Utilise l'IA pour vendre plus vite et avec moins d'effort.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-vente" href="module-15.html">
+    <div class="card-thumb"><div class="card-thumb-num">15</div><div class="card-thumb-icon">🔁</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 15</div>
+      <div class="card-title">Funnels & Tunnels</div>
+      <div class="card-desc">Construis un système de vente automatisé qui tourne seul.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-vente" href="module-16.html">
+    <div class="card-thumb"><div class="card-thumb-num">16</div><div class="card-thumb-icon">💬</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 16</div>
+      <div class="card-title">Automation DM</div>
+      <div class="card-desc">Automatise tes DMs pour convertir en masse sans effort.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
+<!-- CAT 4 — REVENUS -->
+
+<div class="cat-section cat-revenus">
+  <div class="cat-header">
+    <div class="cat-icon">💰</div>
+    <div>
+      <div class="cat-title">REVENUS & SYSTÈMES</div>
+      <div class="cat-count">6 modules</div>
+    </div>
+    <div class="cat-line"></div>
+  </div>
+
+  <a class="module-card cat-revenus" href="module-17.html">
+    <div class="card-thumb"><div class="card-thumb-num">17</div><div class="card-thumb-icon">🔄</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 17</div>
+      <div class="card-title">MRR & Récurrence</div>
+      <div class="card-desc">Génère des revenus récurrents chaque mois automatiquement.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-revenus" href="module-18.html">
+    <div class="card-thumb"><div class="card-thumb-num">18</div><div class="card-thumb-icon">🏢</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 18</div>
+      <div class="card-title">SMMA Agency</div>
+      <div class="card-desc">Lance ton agence de gestion réseaux sociaux et signe des clients.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-revenus" href="module-19.html">
+    <div class="card-thumb"><div class="card-thumb-num">19</div><div class="card-thumb-icon">🛍️</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 19</div>
+      <div class="card-title">Shopify & E-commerce</div>
+      <div class="card-desc">Lance ta boutique e-commerce et vends des produits physiques ou digitaux.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-revenus" href="module-20.html">
+    <div class="card-thumb"><div class="card-thumb-num">20</div><div class="card-thumb-icon">⚙️</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 20</div>
+      <div class="card-title">Système.io & Stan</div>
+      <div class="card-desc">Les outils tout-en-un pour automatiser tes ventes et ta formation.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-revenus" href="module-21.html">
+    <div class="card-thumb"><div class="card-thumb-num">21</div><div class="card-thumb-icon">📋</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 21</div>
+      <div class="card-title">Déclaration Légale</div>
+      <div class="card-desc">Auto-entrepreneur, TVA, URSSAF — tout ce qu'il faut savoir pour être en règle.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-revenus" href="module-22.html">
+    <div class="card-thumb"><div class="card-thumb-num">22</div><div class="card-thumb-icon">🤝</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 22</div>
+      <div class="card-title">Prospection B2B</div>
+      <div class="card-desc">Trouve et signe des clients professionnels avec des offres premium.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
+<!-- CAT 5 — PREMIUM -->
+
+<div class="cat-section cat-premium">
+  <div class="cat-header">
+    <div class="cat-icon">👑</div>
+    <div>
+      <div class="cat-title">PREMIUM & EXPERT</div>
+      <div class="cat-count">6 modules</div>
+    </div>
+    <div class="cat-line"></div>
+  </div>
+
+  <a class="module-card cat-premium" href="module-23.html">
+    <div class="card-thumb"><div class="card-thumb-num">23</div><div class="card-thumb-icon">🔑</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 23</div>
+      <div class="card-title">Droits de Revente MRR</div>
+      <div class="card-desc">Vends avec droits de revente et crée une armée de revendeurs.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-premium" href="module-24.html">
+    <div class="card-thumb"><div class="card-thumb-num">24</div><div class="card-thumb-icon">⭐</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 24</div>
+      <div class="card-title">Personal Branding</div>
+      <div class="card-desc">Construis une marque personnelle qui attire les clients naturellement.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-premium" href="module-25.html">
+    <div class="card-thumb"><div class="card-thumb-num">25</div><div class="card-thumb-icon">👥</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 25</div>
+      <div class="card-title">Gestion Client</div>
+      <div class="card-desc">Fidélise, upsell et transforme chaque client en ambassadeur.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-premium" href="module-26.html">
+    <div class="card-thumb"><div class="card-thumb-num">26</div><div class="card-thumb-icon">📈</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 26</div>
+      <div class="card-title">Scaling & Délégation</div>
+      <div class="card-desc">Passe de solo à une vraie équipe qui tourne sans toi.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-premium" href="module-27.html">
+    <div class="card-thumb"><div class="card-thumb-num">27</div><div class="card-thumb-icon">🧩</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 27</div>
+      <div class="card-title">Affiliation & Partenariats</div>
+      <div class="card-desc">Crée un réseau d'affiliés qui vendent pour toi 24h/24.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-premium" href="module-28.html">
+    <div class="card-thumb"><div class="card-thumb-num">28</div><div class="card-thumb-icon">🚀</div></div>
+    <div class="card-body">
+      <div class="card-num">Module 28</div>
+      <div class="card-title">Stratégie 2026</div>
+      <div class="card-desc">Les tendances et stratégies qui vont dominer l'année à venir.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
+<!-- CAT BONUS -->
+
+<div class="cat-section cat-bonus">
+  <div class="cat-header">
+    <div class="cat-icon">🎁</div>
+    <div>
+      <div class="cat-title">BONUS EXCLUSIFS</div>
+      <div class="cat-count">3 outils</div>
+    </div>
+    <div class="cat-line"></div>
+  </div>
+
+  <a class="module-card cat-bonus" href="bonus-tracker.html">
+    <div class="card-thumb"><div class="card-thumb-num">★</div><div class="card-thumb-icon">📊</div></div>
+    <div class="card-body">
+      <div class="card-num">Bonus</div>
+      <div class="card-title">Tracker CRM Prospects</div>
+      <div class="card-desc">Suis tes prospects et ne rate plus jamais une vente.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-bonus" href="bonus-scripts.html">
+    <div class="card-thumb"><div class="card-thumb-num">★</div><div class="card-thumb-icon">🎯</div></div>
+    <div class="card-body">
+      <div class="card-num">Bonus</div>
+      <div class="card-title">Scripts & Objections</div>
+      <div class="card-desc">Réponse à toutes les objections — "c'est trop cher", "je vais réfléchir"...</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <a class="module-card cat-bonus" href="bonus-legal.html">
+    <div class="card-thumb"><div class="card-thumb-num">★</div><div class="card-thumb-icon">📋</div></div>
+    <div class="card-body">
+      <div class="card-num">Bonus</div>
+      <div class="card-title">CGV & Contrats</div>
+      <div class="card-desc">Tous tes documents légaux prêts à l'emploi.</div>
+    </div>
+    <div class="card-right">
+      <div class="card-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+      <svg class="card-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
+</div><!-- end relative -->
 
 <!-- BOTTOM NAV -->
 
 <div class="bottom-nav">
-  <button class="nav-item active" onclick="scrollTop()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-      <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-    </svg>
+  <button class="nav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     <span>Modules</span>
   </button>
   <button class="nav-item" onclick="window.location.href='bonus-tracker.html'">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M3 3h18v18H3z"/><path d="M8 12h8M8 8h8M8 16h5"/>
-    </svg>
+    <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
     <span>CRM</span>
   </button>
-  <button class="nav-item" onclick="window.location.href='profil.html'">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-    </svg>
-    <span>Profil</span>
+  <button class="nav-item" onclick="logout()">
+    <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    <span>Déco</span>
   </button>
 </div>
 
 <script>
-  // Vérifie session
-  const user = JSON.parse(sessionStorage.getItem('dma_user') || 'null');
-  if (!user) { window.location.href = 'index.html'; }
-  else {
-    document.getElementById('welcomeName').textContent = user.name || '';
-  }
+  const user=JSON.parse(sessionStorage.getItem('dma_user')||'null');
+  if(!user) window.location.href='index.html';
+  else document.getElementById('welcomeName').textContent=user.name||'';
 
-  // Progress depuis localStorage
-  const TOTAL = 28;
-  function updateProgress() {
-    let done = 0;
-    for (let i = 1; i <= TOTAL; i++) {
-      if (localStorage.getItem('module_' + i + '_done') === '1') {
+  const TOTAL=28;
+  function updateProgress(){
+    let done=0;
+    for(let i=1;i<=TOTAL;i++){
+      if(localStorage.getItem('module_'+String(i).padStart(2,'0')+'_done')==='1'||localStorage.getItem('module_0'+i+'_done')==='1'||localStorage.getItem('module_'+i+'_done')==='1'){
         done++;
-        const card = document.querySelector('[href="module-' + String(i).padStart(2,'0') + '.html"]');
-        if (card) card.classList.add('completed');
+        const cards=document.querySelectorAll('[href="module-'+String(i).padStart(2,'0')+'.html"]');
+        cards.forEach(c=>c.classList.add('completed'));
       }
     }
-    document.getElementById('progressCount').textContent = done + ' / ' + TOTAL;
-    setTimeout(() => {
-      document.getElementById('progressFill').style.width = (done / TOTAL * 100) + '%';
-    }, 300);
+    document.getElementById('progressCount').textContent=done+' / '+TOTAL;
+    setTimeout(()=>{document.getElementById('progressFill').style.width=(done/TOTAL*100)+'%';},300);
   }
   updateProgress();
 
-  function logout() {
+  function logout(){
     sessionStorage.removeItem('dma_user');
-    window.location.href = 'index.html';
-  }
-
-  function scrollTop() {
-    window.scrollTo({top:0, behavior:'smooth'});
+    window.location.href='index.html';
   }
 </script>
 
