@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 11 — Closing & Scripts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.script-card{background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.script-header{background:#161b22;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.script-dot{width:8px;height:8px;border-radius:50%}
+.script-title{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.7);margin-left:4px}
+.script-body{padding:14px}
+.msg{display:flex;gap:8px;margin-bottom:12px}
+.msg.you{flex-direction:row-reverse}
+.msg-bubble{max-width:80%;padding:10px 12px;border-radius:12px;font-size:11px;font-weight:300;line-height:1.6}
+.msg.them .msg-bubble{background:rgba(255,255,255,.06);border-bottom-left-radius:3px;color:rgba(245,240,232,.8)}
+.msg.you .msg-bubble{background:linear-gradient(135deg,rgba(192,0,26,.6),rgba(192,0,26,.4));border-bottom-right-radius:3px;color:#f5f0e8}
+.msg-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;background:rgba(255,255,255,.06)}
+.msg-label{font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.25);margin-bottom:3px}
+.msg.you .msg-label{text-align:right}
+.objection-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.objection-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.objection-header{display:flex;align-items:center;justify-content:space-between}
+.objection-q{font-size:13px;font-weight:600;color:#ff7070;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.objection-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.objection-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.objection-card.open .objection-content{max-height:400px}
+.objection-r{font-size:12px;font-weight:300;color:rgba(245,240,232,.75);line-height:1.75;padding-top:12px}
+.objection-r strong{color:#C9A84C;font-weight:600}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 11</div>
+  <div class="header-num">11 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🎯 Closing</div>
+  <span class="hero-num">MODULE 11</span>
+  <div class="hero-title">CLOSING<br><span>& SCRIPTS</span></div>
+  <div class="hero-sub">Les scripts qui transforment les je vais reflechir en ventes</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🎯</span>
+    <div class="sensible-title">LA VENTE SE JOUE EN DM</div>
+    <p class="sensible-text">
+      Tu peux avoir la meilleure formation du monde.<br><br>
+      Si tu ne sais pas closer en DM — <strong>tu ne vends rien.</strong><br><br>
+      Le closing c est pas manipuler. C est <em>aider quelqu un a prendre une decision</em> qu il veut deja prendre mais qu il reporte par peur.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Un bon closer ne convainc pas. Il aide le client a se convaincre lui-meme."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES 5 <span>ETAPES</span> DU CLOSING</div>
+  <div class="s-sub">La structure exacte d une conversation qui vend</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Briser la glace — connexion</div><div class="step-text">Commence jamais par vendre. <strong>Pose une question sur eux.</strong> "Hey j ai vu que tu regardes mon contenu depuis un moment, tu essaies de faire quoi exactement ?" La conversation avant tout.</div><div class="step-tip">Objectif : les faire parler de leur situation</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Identifier le probleme</div><div class="step-text">Creuse. <strong>"C est quoi ton plus gros blocage en ce moment ?"</strong> puis <strong>"Et ca te pose quel probleme concretement ?"</strong> Plus tu comprends leur douleur, plus tu peux y repondre precisement.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Amplifier la douleur</div><div class="step-text"><strong>"Si tu ne regles pas ca dans les 3 prochains mois, ca va donner quoi ?"</strong> Laisse-les visualiser le cout de l inaction. Ce n est pas de la manipulation — c est les aider a prendre conscience que le probleme est reel.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Presenter la solution</div><div class="step-text">Seulement apres les etapes 1-2-3. <strong>"Ce que tu decris c est exactement ce que ma formation resout."</strong> Relie leur probleme specifique a ta solution. Pas un pitch generique — une reponse sur mesure.</div><div class="step-tip">Ne presente jamais le prix avant cette etape</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Closer et traiter les objections</div><div class="step-text"><strong>"C est X euros. T as des questions avant qu on continue ?"</strong> Silence apres le prix — laisse-les reagir. La premiere objection qui sort c est rarement le vrai probleme. Creuse.</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">SCRIPT <span>COMPLET</span></div>
+  <div class="s-sub">Une conversation reelle etape par etape</div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div class="script-dot" style="background:#ff5f57"></div>
+      <div class="script-dot" style="background:#febc2e"></div>
+      <div class="script-dot" style="background:#28c840"></div>
+      <div class="script-title">Conversation DM Instagram — closing formation</div>
+    </div>
+    <div class="script-body">
+      <div class="msg them">
+        <div class="msg-avatar">👤</div>
+        <div>
+          <div class="msg-label">Prospect</div>
+          <div class="msg-bubble">Salut, j ai vu tes videos sur le marketing. C est vraiment interessant</div>
+        </div>
+      </div>
+      <div class="msg you">
+        <div class="msg-avatar">😊</div>
+        <div>
+          <div class="msg-label">Toi</div>
+          <div class="msg-bubble">Hey ! Merci. Tu travailles deja sur quelque chose ou tu decouvres encore ?</div>
+        </div>
+      </div>
+      <div class="msg them">
+        <div class="msg-avatar">👤</div>
+        <div>
+          <div class="msg-label">Prospect</div>
+          <div class="msg-bubble">Je poste sur TikTok depuis 3 mois mais j ai pas encore vendu quoi que ce soit...</div>
+        </div>
+      </div>
+      <div class="msg you">
+        <div class="msg-avatar">😊</div>
+        <div>
+          <div class="msg-label">Toi</div>
+          <div class="msg-bubble">Ah ok. Et c est quoi ton plus gros blocage la — le contenu, la strategie derriere ou autre chose ?</div>
+        </div>
+      </div>
+      <div class="msg them">
+        <div class="msg-avatar">👤</div>
+        <div>
+          <div class="msg-label">Prospect</div>
+          <div class="msg-bubble">Je sais pas trop comment monetiser. Je sais pas quoi vendre ni comment m y prendre</div>
+        </div>
+      </div>
+      <div class="msg you">
+        <div class="msg-avatar">😊</div>
+        <div>
+          <div class="msg-label">Toi</div>
+          <div class="msg-bubble">Je comprends. Et si dans 6 mois tu as toujours pas trouve comment monetiser — ca te fait quoi ?</div>
+        </div>
+      </div>
+      <div class="msg them">
+        <div class="msg-avatar">👤</div>
+        <div>
+          <div class="msg-label">Prospect</div>
+          <div class="msg-bubble">Ca serait decourageant... j aurais perdu beaucoup de temps pour rien</div>
+        </div>
+      </div>
+      <div class="msg you">
+        <div class="msg-avatar">😊</div>
+        <div>
+          <div class="msg-label">Toi</div>
+          <div class="msg-bubble">Exactement. Ce que tu decris c est precisement ce que ma formation resout — comment creer et vendre un produit digital meme sans audience. Les etapes dans l ordre. T as 2 minutes que je t explique ?</div>
+        </div>
+      </div>
+      <div class="msg them">
+        <div class="msg-avatar">👤</div>
+        <div>
+          <div class="msg-label">Prospect</div>
+          <div class="msg-bubble">Oui vas-y</div>
+        </div>
+      </div>
+      <div class="msg you">
+        <div class="msg-avatar">😊</div>
+        <div>
+          <div class="msg-label">Toi</div>
+          <div class="msg-bubble">Super. La formation DMA couvre tout — de la creation du produit a la vente en DM. C est 97 euros. Tu veux le lien pour voir tout ce qui est dedans ?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">LES <span>OBJECTIONS</span></div>
+  <div class="s-sub">Une reponse precise pour chaque blocage — clique pour voir</div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="objection-header"><div class="objection-q">C est trop cher pour moi</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="objection-content"><div class="objection-r"><strong>Ne baisse jamais le prix immediatement.</strong> D abord creuse :<br><br>"Par rapport a quoi c est trop cher ?" Laisse-les repondre.<br><br>Puis : <strong>"Si tu appliques ce que t apprend la formation et que tu fais ta premiere vente a 97 euros — la formation est remboursee. La question c est pas le prix, c est est-ce que ca vaut le risque de pas essayer ?"</strong><br><br>Si ils insistent : propose le paiement en 2 ou 3 fois.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="objection-header"><div class="objection-q">Je vais reflechir</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="objection-content"><div class="objection-r">"Je vais reflechir" = il y a une objection cachee qu ils n ont pas dit.<br><br>Reponds : <strong>"Bien sur, prends le temps qu il faut. Juste pour comprendre — c est quoi exactement qui te fait hesiter ? Le prix, le timing, ou autre chose ?"</strong><br><br>La vraie objection sort ici. Traite-la. Ne les laisse jamais partir sans connaitre le vrai blocage.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="objection-header"><div class="objection-q">J ai pas le temps maintenant</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="objection-content"><div class="objection-r"><strong>"La formation est en acces a vie — tu commences quand tu veux, a ton rythme."</strong><br><br>Puis : "Mais je te pose la question : si tu commences pas maintenant, quand tu comptes commencer ? Dans 6 mois les conditions seront exactement les memes, sauf que tu auras perdu 6 mois."<br><br>L urgence est reelle — chaque jour sans systeme c est de l argent perdu.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="objection-header"><div class="objection-q">J ai deja essaye des formations, ca marche pas</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="objection-content"><div class="objection-r">Ne te defends pas. Valide d abord :<br><br><strong>"T as raison, beaucoup de formations sont creuses. C est pour ca que la DMA est construite differemment — c est actionnable etape par etape, pas de la theorie."</strong><br><br>Puis montre la preuve : temoignages, resultats clients, screenshots. La preuve sociale est la seule reponse credible a cette objection.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="objection-header"><div class="objection-q">Je suis pas sur que c est pour moi</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="objection-content"><div class="objection-r">Reviens sur ce qu ils t ont dit :<br><br><strong>"Tu m as dit que tu voulais [leur objectif] et que ton probleme c est [leur blocage]. C est exactement ce que la formation adresse. Qu est-ce qui te fait douter que ca peut marcher pour toi specifiquement ?"</strong><br><br>Ils vont sortir leur vraie peur — traite cette peur, pas l objection de surface.</div></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>CLOSING</span></div>
+  <div class="s-sub">Teste ta reaction face a une objection</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Un prospect dit : <em>"C est trop cher, j ai pas les moyens."</em> Que reponds-tu ?</div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">A</div><div class="option-text">Ok pas de probleme, contacte-moi quand tu auras le budget</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">B</div><div class="option-text">Je peux te faire une reduction speciale a 50 euros</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','C')"><div class="option-letter">C</div><div class="option-text">Par rapport a quoi c est trop cher ? Et si ta premiere vente couvrait le cout de la formation ?</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">D</div><div class="option-text">La formation vaut vraiment le prix, laisse-moi t expliquer tout ce qu elle contient</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. A = tu abandonnes. B = tu dévalorisés ton offre. D = tu pousses sans comprendre. C = tu creuses l objection et tu retournes la question vers le ROI. C est la seule bonne approche.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse C est la bonne. A = tu abandonnes trop vite. B = tu dévalorisés ton offre instantanement. D = tu pousses sans comprendre le vrai blocage. Creuse toujours avant de repondre a une objection.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Memorise les 5 etapes</strong> du closing — connexion, probleme, douleur, solution, close.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Copie le script complet</strong> et adapte-le a ta niche et ton offre specifique.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Entraine-toi avec un ami</strong> — fais un jeu de role closing pendant 15 minutes.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Identifie 5 prospects chauds</strong> dans tes DMs actuels et lance une conversation aujourd hui.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Note toutes les objections</strong> que tu recois et construis ta propre banque de reponses.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Fais 10 conversations de closing</strong> cette semaine — peu importe le resultat, l experience compte.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-10.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 10</a>
+    <a class="btn-nav" href="module-12.html">Module 12<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m11_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m11_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_11_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_11_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-12.html";},1000);
+}
+</script>
+
+</body>
+</html>
