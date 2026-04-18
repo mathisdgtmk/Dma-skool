@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 12 — Live Selling TikTok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.15) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.phase-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden}
+.phase-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.phase-card.p1::before{background:#C9A84C}
+.phase-card.p2::before{background:#7ab8ff}
+.phase-card.p3::before{background:#C0001A}
+.phase-card.p4::before{background:#80d080}
+.phase-card.p5::before{background:#ff9a00}
+.phase-num{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:4px}
+.phase-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:6px}
+.phase-time{display:inline-block;background:rgba(255,255,255,.06);border-radius:2px;padding:2px 8px;font-size:9px;font-weight:600;color:rgba(245,240,232,.4);letter-spacing:1.5px;margin-bottom:8px}
+.phase-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.phase-text strong{color:#C9A84C;font-weight:600}
+.phase-script{background:#0d1117;border-radius:4px;padding:10px 12px;margin-top:10px;font-size:11px;font-style:italic;color:rgba(245,240,232,.7);line-height:1.6;border-left:2px solid rgba(201,168,76,.3)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:600px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.warning-block{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.warning-icon{font-size:18px;flex-shrink:0}
+.warning-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.warning-text strong{color:#ff7070;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 12</div>
+  <div class="header-num">12 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🔴 Live TikTok</div>
+  <span class="hero-num">MODULE 12</span>
+  <div class="hero-title">LIVE<br><span>SELLING</span></div>
+  <div class="hero-sub">Vendre en direct — la methode qui genere des milliers en quelques heures</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🔴</span>
+    <div class="sensible-title">LE LIVE CHANGE TOUT</div>
+    <p class="sensible-text">
+      Un post TikTok peut faire 10 000 vues. Un live TikTok peut faire <strong>10 000 euros en 2 heures.</strong><br><br>
+      Le live c est le format le plus puissant pour vendre — la confiance se cree en temps reel, l urgence est naturelle, et l algorithme TikTok pousse massivement les lives.<br><br>
+      <strong>Un seul live bien execute peut changer ton mois.</strong>
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"En live tu ne vends pas a des abonnes. Tu vends a des personnes qui ont choisi d etre la avec toi en ce moment."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">AVANT LE <span>LIVE</span></div>
+  <div class="s-sub">La preparation qui fait la difference entre 0 et 1000 euros</div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Annonce ton live 24h avant</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Poste une story, un reel et un post d annonce avec l heure exacte. <strong>Cree l anticipation et la curiosite.</strong> Ne revele pas tout — dis juste "ce soir je vous montre [teasing]" et "il y aura quelque chose d exclusif pour ceux qui restent jusqu a la fin."<br><br>Plus tu construis l anticipation, plus tu auras de monde des le debut — et TikTok recompense les lives qui demarrent fort.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Prepare ton setup technique</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Lumiere :</strong> Lumiere naturelle face a toi ou ring light. Jamais de dos a la fenetre.<br><strong>Son :</strong> Ecouteurs avec micro integre ou micro externe. Le son est plus important que l image.<br><strong>Connexion :</strong> WiFi stable ou 4G/5G fort. Teste avant de commencer.<br><strong>Batterie :</strong> Branche ton telephone — un live dure 1 a 2 heures.<br><strong>Fond :</strong> Propre, professionnel, coherent avec ton image de marque.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Prepare ton script et ton offre</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Ecris les grandes phases de ton live sur une feuille a cote de toi. Pas un script mot pour mot — des bullet points pour ne pas perdre le fil.<br><br><strong>Ce que tu dois preparer :</strong><br>- Ton accroche d ouverture (les 30 premieres secondes)<br>- Les 3-4 points de valeur que tu vas partager<br>- Le moment et la facon dont tu vas presenter ton offre<br>- Le prix et l offre exclusive live<br>- Ta phrase de cloture</p></div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">LA <span>STRUCTURE</span> DU LIVE</div>
+  <div class="s-sub">Les 5 phases d un live qui vend</div>
+
+  <div class="phase-card p1">
+    <div class="phase-num">PHASE 01</div>
+    <div class="phase-title">L accroche — les 5 premieres minutes</div>
+    <div class="phase-time">0 - 5 MIN</div>
+    <div class="phase-text">Ne commence pas par "bonjour je suis [nom]". <strong>Commence par une question ou une affirmation forte</strong> qui donne envie de rester. Accueille les nouveaux arrivants par leur prenom. Dis clairement ce qu ils vont apprendre en restant.</div>
+    <div class="phase-script">"Ce soir je vais vous montrer exactement comment j ai fait [resultat] sans [obstacle commun]. Si vous restez jusqu a la fin y a quelque chose d exclusif que j ai jamais partage. Qui est la ce soir ? Dites moi d ou vous regardez !"</div>
+  </div>
+
+  <div class="phase-card p2">
+    <div class="phase-num">PHASE 02</div>
+    <div class="phase-title">La valeur — construire la confiance</div>
+    <div class="phase-time">5 - 30 MIN</div>
+    <div class="phase-text">Donne de la valeur gratuite et concrete. <strong>Partage 3 a 4 conseils actionables</strong> sur ton sujet. Les gens qui apprennent quelque chose gratuitement sont 10 fois plus enclins a acheter. C est ici que tu construis ta credibilite.</div>
+    <div class="phase-script">"Je vais vous partager les 3 erreurs qui empechent 90% des gens de vendre en ligne. La premiere c est..." — Interagis en permanence avec les commentaires.</div>
+  </div>
+
+  <div class="phase-card p3">
+    <div class="phase-num">PHASE 03</div>
+    <div class="phase-title">La transition — vers l offre</div>
+    <div class="phase-time">30 - 40 MIN</div>
+    <div class="phase-text">Fais le lien entre ce que tu viens de partager et ton offre. <strong>Ne presente jamais l offre brutalement</strong> — amene-la naturellement comme la suite logique de ce que tu as dit. "Pour aller plus loin dans ce que je viens de partager..."</div>
+    <div class="phase-script">"Ce que je viens de partager c est la surface. Dans ma formation je vous donne les 28 modules complets avec exactement comment appliquer ca etape par etape. Laissez-moi vous montrer ce qui est dedans."</div>
+  </div>
+
+  <div class="phase-card p4">
+    <div class="phase-num">PHASE 04</div>
+    <div class="phase-title">L offre exclusive live</div>
+    <div class="phase-time">40 - 55 MIN</div>
+    <div class="phase-text"><strong>L offre live doit etre meilleure que partout ailleurs.</strong> Prix reduit, bonus exclusif, premier mois offert, acces immediate. L avantage exclusif au live cree l urgence et recompense ceux qui sont la.</div>
+    <div class="phase-script">"Pour ceux qui sont la ce soir seulement — la formation DMA est a [prix reduit] au lieu de [prix normal]. Et j ajoute [bonus exclusif] que vous ne trouverez pas ailleurs. Le lien est dans ma bio. Cette offre est valable jusqu a la fin du live."</div>
+  </div>
+
+  <div class="phase-card p5">
+    <div class="phase-num">PHASE 05</div>
+    <div class="phase-title">La cloture et les rappels</div>
+    <div class="phase-time">55 - 90 MIN</div>
+    <div class="phase-text">Rappelle l offre toutes les 10-15 minutes. <strong>Chaque nouveau spectateur qui rejoint n a pas vu le debut</strong> — re-presente l offre pour eux. Cree l urgence en comptant le temps restant. Finit par un appel a l action clair.</div>
+    <div class="phase-script">"Il reste 15 minutes sur l offre live. Si vous hesitez encore — la question c est pas le prix, c est est-ce que vous voulez changer votre situation dans les 30 prochains jours ou pas. Lien en bio."</div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">QUIZ <span>LIVE</span></div>
+  <div class="s-sub">Teste ta strategie</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu fais ton premier live. Apres 5 minutes tu as seulement 8 spectateurs. <em>Que fais-tu ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">A</div><div class="option-text">Tu termines le live — c est pas la peine avec si peu de monde</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','B')"><div class="option-letter">B</div><div class="option-text">Tu continues exactement comme prevu — 8 personnes c est deja 8 opportunites</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">C</div><div class="option-text">Tu fais une pause et tu postes un story pour appeler des gens</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">D</div><div class="option-text">Tu baisses ton prix pour motiver les 8 personnes a acheter</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. 8 personnes = 8 opportunites reelles. Les plus grands vendeurs en live ont commence devant 3 personnes. L algorithme TikTok pousse les lives qui durent — continuer est toujours la bonne decision. Et les 8 personnes present racontent souvent a leur entourage.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse B est la seule correcte. Arreter = zero chance de vendre. Baisser le prix = devaloriser ton offre. Pauser = couper l elan. Chaque live est une experience qui te forme. 8 personnes peuvent devenir 8 clients. Continue toujours.</div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">LES <span>SECRETS</span> DU LIVE</div>
+  <div class="s-sub">Ce que font les meilleurs vendeurs en live</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Interagir avec chaque commentaire</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Appelle les spectateurs par leur prenom. Reponds a leurs questions. Remercie les cadeaux virtuels. <strong>Plus les gens se sentent vus, plus ils restent et plus ils achètent.</strong><br><br>Un live ou l hote ignore les commentaires = spectateurs qui partent en moins de 2 minutes. Un live interactif = spectateurs qui restent 45 minutes et achètent.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La technique du decompte</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>"Il reste 20 minutes sur l offre." Puis "Il reste 10 minutes." Puis "Derniere chance — 5 minutes."<br><br><strong>Le decompte cree une urgence reelle et mesurable.</strong> Les gens qui hesitaient prennent leur decision quand ils voient le temps diminuer. C est le principe de l urgence temporelle — tres puissant en live car l offre disparait vraiment a la fin.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Annoncer les ventes en direct</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Chaque fois que tu reçois une vente pendant le live — annonce-le. <strong>"On vient d avoir un nouvel acheteur ! Felicitations [pseudo] !"</strong><br><br>La preuve sociale en direct est la plus puissante qui existe. Quelqu un qui voit que d autres achètent pendant qu il regarde va se dire "si eux ont sauté le pas, peut-etre que je devrais aussi." La vente appelle la vente.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Faire des lives regulierement</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>TikTok recompense les createurs qui font des lives regulierement en les poussant plus dans les recommendations.<br><br><strong>Objectif : 2 a 3 lives par semaine minimum.</strong> Les premiers seront imparfaits — c est normal. A chaque live tu t ameliores. Les createurs qui font le plus de ventes en live sont ceux qui en font le plus souvent, pas necessairement les meilleurs orateurs.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Annonce ton premier live</strong> pour cette semaine — une story d annonce avec l heure et le teasing.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Prepare ton setup</strong> — lumiere, son, connexion, batterie, fond propre.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Ecris ton plan de live</strong> avec les 5 phases et tes bullet points pour ne pas perdre le fil.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Definis ton offre exclusive live</strong> — prix reduit ou bonus que tu ne proposes nulle part ailleurs.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Fais ton premier live</strong> cette semaine — meme si c est imparfait. L experience est irremplacable.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Engage-toi sur 2 lives par semaine</strong> pendant 30 jours. C est la regularite qui fait les gros chiffres.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-11.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 11</a>
+    <a class="btn-nav" href="module-13.html">Module 13<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m12_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m12_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_12_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_12_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-13.html";},1000);
+}
+</script>
+
+</body>
+</html>
