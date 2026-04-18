@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 13 — VSL & Video Sales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.vsl-block{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden}
+.vsl-block::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.vsl-block.b1::before{background:#C9A84C}
+.vsl-block.b2::before{background:#C0001A}
+.vsl-block.b3::before{background:#7ab8ff}
+.vsl-block.b4::before{background:#80d080}
+.vsl-block.b5::before{background:#ff9a00}
+.vsl-block.b6::before{background:#a855f7}
+.vsl-block.b7::before{background:#C0001A}
+.vsl-num{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:4px}
+.vsl-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:6px}
+.vsl-time{display:inline-block;background:rgba(255,255,255,.06);border-radius:2px;padding:2px 8px;font-size:9px;font-weight:600;color:rgba(245,240,232,.4);letter-spacing:1.5px;margin-bottom:8px}
+.vsl-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.vsl-text strong{color:#C9A84C;font-weight:600}
+.vsl-example{background:#0d1117;border-radius:4px;padding:10px 12px;margin-top:10px;font-size:11px;font-style:italic;color:rgba(245,240,232,.7);line-height:1.6;border-left:2px solid rgba(201,168,76,.3)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 13</div>
+  <div class="header-num">13 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🎥 VSL</div>
+  <span class="hero-num">MODULE 13</span>
+  <div class="hero-title">VSL &<br><span>VIDEO SALES</span></div>
+  <div class="hero-sub">Cree une video de vente qui convertit en automatique 24h/24</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🎥</span>
+    <div class="sensible-title">TON VENDEUR AUTOMATIQUE</div>
+    <p class="sensible-text">
+      Une VSL c est une Video Sales Letter — une video de vente.<br><br>
+      Tu la crees <strong>une seule fois</strong> et elle vend pour toi <em>a toute heure</em>, meme quand tu dors.<br><br>
+      C est la difference entre vendre ton temps et vendre un systeme.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Une VSL bien construite vend mieux que la plupart des commerciaux — sans jamais se fatiguer."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LA STRUCTURE <span>VSL</span></div>
+  <div class="s-sub">Les 7 blocs d une video de vente qui convertit</div>
+
+  <div class="vsl-block b1">
+    <div class="vsl-num">BLOC 01</div>
+    <div class="vsl-title">Le Hook — 0 a 30 secondes</div>
+    <div class="vsl-time">30 SEC</div>
+    <div class="vsl-text">La premiere phrase decide si les gens restent ou partent. <strong>Commence par la douleur ou le desir de ta cible.</strong> Pas de presentation, pas de bonjour. Direct dans le vif.</div>
+    <div class="vsl-example">"Si tu postes sur les reseaux depuis des mois sans gagner un seul euro — cette video va t expliquer exactement pourquoi, et comment corriger ca aujourd hui."</div>
+  </div>
+
+  <div class="vsl-block b2">
+    <div class="vsl-num">BLOC 02</div>
+    <div class="vsl-title">Le Probleme — 30 sec a 2 min</div>
+    <div class="vsl-time">1 MIN 30</div>
+    <div class="vsl-text">Decris la situation de ta cible en detail. <strong>Si ils pensent que tu les espionnes — tu as reussi.</strong> Plus la description est precise, plus la personne se sent comprise et reste.</div>
+    <div class="vsl-example">"Tu passes des heures a creer du contenu. Tu regardes tes stats monter. Mais a la fin du mois — zero vente. Ton compte est vide. Et tu te demandes si tu ne te fais pas bercer d illusions..."</div>
+  </div>
+
+  <div class="vsl-block b3">
+    <div class="vsl-num">BLOC 03</div>
+    <div class="vsl-title">La Credibilite — 2 a 4 min</div>
+    <div class="vsl-time">2 MIN</div>
+    <div class="vsl-text">Pourquoi tu es credible pour resoudre ce probleme ? <strong>Ton histoire, tes resultats, ta transformation.</strong> Pas un CV — une histoire humaine avec des chiffres concrets.</div>
+    <div class="vsl-example">"J etais exactement dans ta situation il y a 18 mois. Zero vente, zero audience. Aujourd hui [resultat concret]. Ce n est pas de la chance — c est une methode que je vais te montrer."</div>
+  </div>
+
+  <div class="vsl-block b4">
+    <div class="vsl-num">BLOC 04</div>
+    <div class="vsl-title">La Solution — 4 a 8 min</div>
+    <div class="vsl-time">4 MIN</div>
+    <div class="vsl-text">Presente ta methode ou ton produit. <strong>Bénéfices concrets, pas des features.</strong> Ce qu ils vont obtenir, pas ce que tu leur donnes. La difference : "28 modules" vs "tu vas savoir vendre en DM en moins de 7 jours".</div>
+    <div class="vsl-example">"La DMA te donne exactement les etapes dans l ordre pour creer ton premier produit digital, le vendre en DM et automatiser tes revenus — meme si tu pars de zero."</div>
+  </div>
+
+  <div class="vsl-block b5">
+    <div class="vsl-num">BLOC 05</div>
+    <div class="vsl-title">La Preuve — 8 a 12 min</div>
+    <div class="vsl-time">4 MIN</div>
+    <div class="vsl-text">Temoignages, resultats clients, screenshots de ventes. <strong>La preuve sociale est le moteur le plus puissant de la decision d achat.</strong> Montre des gens comme eux qui ont reussi avec ta methode.</div>
+    <div class="vsl-example">"[Prenom] a commence sans audience. En 3 semaines il a fait sa premiere vente a 97 euros. [Prenom 2] a applique la methode et a genere [X] euros en [delai]. Voici leurs messages..."</div>
+  </div>
+
+  <div class="vsl-block b6">
+    <div class="vsl-num">BLOC 06</div>
+    <div class="vsl-title">L Offre — 12 a 15 min</div>
+    <div class="vsl-time">3 MIN</div>
+    <div class="vsl-text">Presente ton offre complete avec tout ce qu elle inclut. <strong>Stack la valeur</strong> — liste tout ce qu ils recoivent et donne une valeur perçue a chaque element. Puis revele le prix comme une evidence.</div>
+    <div class="vsl-example">"Tu recois les 28 modules (valeur 497 euros) + les scripts de closing (valeur 97 euros) + le tracker CRM (valeur 47 euros). Tout ca — pas pour 641 euros, pas pour 297 euros — mais pour 97 euros aujourd hui seulement."</div>
+  </div>
+
+  <div class="vsl-block b7">
+    <div class="vsl-num">BLOC 07</div>
+    <div class="vsl-title">Le CTA et l Urgence — 15 min +</div>
+    <div class="vsl-time">1 MIN</div>
+    <div class="vsl-text">Un seul bouton d action. <strong>Urgence reelle</strong> — pas inventee. Prix qui remonte, bonus qui disparait, places limitees. Dis exactement quoi faire et pourquoi maintenant.</div>
+    <div class="vsl-example">"Clique sur le bouton ci-dessous maintenant. Cette offre a [prix] est disponible jusqu a [date/heure]. Apres ca revient au prix normal de [prix normal]. Rejoins les [X] membres qui ont deja change leur situation."</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">COMMENT <span>FILMER</span></div>
+  <div class="s-sub">Tout ce dont tu as besoin pour creer une VSL pro</div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Le materiel — ton telephone suffit</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Camera :</strong> iPhone ou Android en 1080p. Pas besoin de camera professionnelle.<br><strong>Son :</strong> Micro-cravate a 20 euros sur Amazon — le son est plus important que l image.<br><strong>Lumiere :</strong> Ring light a 30 euros ou lumiere naturelle face a toi.<br><strong>Fond :</strong> Fond uni ou mur propre. Pas de chambre en desordre.<br><strong>Logiciel :</strong> CapCut ou iMovie pour monter. Gratuit.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Avec ou sans visage ?</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Avec visage :</strong> Plus de confiance, meilleur taux de conversion, connexion emotionnelle. Recommande si tu es a l aise devant la camera.<br><br><strong>Sans visage (screen recording + voix) :</strong> Montre des slides, des resultats, des screenshots pendant que tu commentes en voix off. Parfait si tu ne veux pas apparaitre. Meme efficace si le script est bon.<br><br>Les deux fonctionnent. Ce qui compte c est le script — pas la camera.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Quelle duree ideale ?</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Produit a moins de 100 euros :</strong> 5 a 10 minutes suffisent. L achat est impulsif — trop long tue la conversion.<br><br><strong>Produit entre 100 et 500 euros :</strong> 10 a 20 minutes. Il faut plus de valeur et de preuve sociale.<br><br><strong>Produit au dessus de 500 euros :</strong> 20 a 45 minutes. La VSL longue permet de construire une confiance totale avant de demander un gros cheque.<br><br>Regle : la VSL doit etre aussi longue que necessaire, aussi courte que possible.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Ou heberger et integrer ta VSL</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>YouTube non repertorie :</strong> Gratuit. Upload ta VSL en non repertorie → copie le lien embed → integre sur ta page de vente.<br><br><strong>Vimeo :</strong> Plus professionnel, pas de pub, personnalisable. 7 euros/mois.<br><br><strong>Loom :</strong> Parfait pour les VSL screen recording. Gratuit pour commencer.<br><br>Integre ensuite la video sur ta page de vente Systeme.io, Beacons ou ton site — juste au dessus du bouton d achat.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">QUIZ <span>VSL</span></div>
+  <div class="s-sub">Teste ta comprehension</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Ta VSL doit commencer par quoi pour maximiser le taux de visionnage complet ?</div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">A</div><div class="option-text">Te presenter — nom, parcours, experience</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">B</div><div class="option-text">Presenter ton produit et son prix immediatement</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','C')"><div class="option-letter">C</div><div class="option-text">La douleur ou le desir de ta cible — direct, sans introduction</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">D</div><div class="option-text">Les temoignages clients pour creer la confiance</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Les premieres secondes d une VSL sont les plus importantes. Si tu commences par te presenter tu perds 60% des spectateurs en moins de 30 secondes. La douleur ou le desir de ta cible dans les premieres phrases = ils restent.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse C est la bonne. Se presenter en premier = les gens ne savent pas encore si ca les concerne. Le prix en premier = choc avant la valeur. Les temoignages en premier = pas encore de contexte. La douleur en premier = identification immediate et retention maximale.</div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Ecris ton script VSL</strong> en suivant les 7 blocs — une page de bullet points par bloc.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Prepare ton setup</strong> — micro-cravate, lumiere, fond propre, telephone stable.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Tourne ta VSL en une seule session</strong> — imparfaite mais tournee. Tu pourras l ameliorer apres.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Monte et uploade</strong> sur YouTube non repertorie ou Loom.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Integre ta VSL</strong> sur ta page de vente juste au dessus du bouton d achat.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Envoie le lien</strong> a 5 personnes de confiance pour avoir un retour avant de lancer.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-12.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 12</a>
+    <a class="btn-nav" href="module-14.html">Module 14<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m13_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m13_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_13_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_13_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-14.html";},1000);
+}
+</script>
+
+</body>
+</html>
