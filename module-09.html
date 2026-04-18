@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 09 — Snapchat Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,252,0,.06) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.compare-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px}
+.compare-card.snap{border-color:rgba(255,252,0,.15);background:rgba(255,252,0,.03)}
+.compare-icon{font-size:24px;margin-bottom:8px;display:block}
+.compare-name{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:6px}
+.compare-item{font-size:10px;font-weight:300;color:rgba(245,240,232,.55);line-height:1.6;padding-left:10px;position:relative;margin-bottom:3px}
+.compare-item::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%}
+.compare-card.snap .compare-item::before{background:rgba(255,252,0,.6)}
+.compare-card .compare-item::before{background:rgba(201,168,76,.4)}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:600px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.script-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:16px;margin-bottom:12px}
+.script-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A84C;margin-bottom:8px;display:block}
+.script-line{font-size:12px;font-weight:300;color:rgba(245,240,232,.8);line-height:1.7;margin-bottom:6px;padding-left:12px;position:relative}
+.script-line::before{content:"▸";position:absolute;left:0;color:rgba(201,168,76,.4);font-size:10px;top:2px}
+.script-line strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 09</div>
+  <div class="header-num">9 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">👻 Snapchat</div>
+  <span class="hero-num">MODULE 09</span>
+  <div class="hero-title">SNAPCHAT<br><span>STRATEGY</span></div>
+  <div class="hero-sub">La plateforme sous-estimee qui convertit mieux que TikTok et Instagram</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">👻</span>
+    <div class="sensible-title">TOUT LE MONDE IGNORE SNAP</div>
+    <p class="sensible-text">
+      Tout le monde est sur TikTok et Instagram. <strong>Personne ne se bat sur Snapchat.</strong><br><br>
+      Resultat : moins de concurrence, audience plus accessible, et surtout — <em>un taux de conversion en DM 3 fois superieur</em> a Instagram.<br><br>
+      Snap c est le canal de vente directe le plus sous-utilise du moment.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Sur Snap tu n as pas un abonne. Tu as un ami. Et les amis achevent ce que les abonnes refusent."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">SNAP VS <span>INSTAGRAM</span></div>
+  <div class="s-sub">Pourquoi Snap convertit mieux pour la vente directe</div>
+  <div class="compare-grid">
+    <div class="compare-card snap">
+      <span class="compare-icon">👻</span>
+      <div class="compare-name">Snapchat</div>
+      <div class="compare-item">Relation intime et directe</div>
+      <div class="compare-item">DMs ouverts a presque 90%</div>
+      <div class="compare-item">Moins de concurrence</div>
+      <div class="compare-item">Audience 15-30 ans</div>
+      <div class="compare-item">Contenu ephemere = urgence</div>
+      <div class="compare-item">Proximite = confiance rapide</div>
+    </div>
+    <div class="compare-card">
+      <span class="compare-icon">📸</span>
+      <div class="compare-name">Instagram</div>
+      <div class="compare-item">Relation publique et formelle</div>
+      <div class="compare-item">DMs ouverts a 20-30%</div>
+      <div class="compare-item">Competition tres forte</div>
+      <div class="compare-item">Audience variee</div>
+      <div class="compare-item">Contenu permanent = pression</div>
+      <div class="compare-item">Construction plus longue</div>
+    </div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">🎯</div>
+    <div class="info-text"><strong>La vraie force de Snap :</strong> les gens qui te suivent sur Snap ont accepte une relation plus personnelle. Ils voient ta vie au quotidien. Cette intimite cree une confiance qui convertit 3x mieux qu Instagram a audience egale.</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">OPTIMISE TON <span>PROFIL</span></div>
+  <div class="s-sub">La base avant de commencer a vendre</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Passe en compte Public</div><div class="step-text">Paramètres → <strong>Gestion du compte → Abonnes → Tout le monde</strong>. Sans ca personne ne peut te trouver ni te suivre sans que tu les ajoutes manuellement.</div><div class="step-tip">Sans compte public = 0 croissance organique</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Photo de profil professionnelle</div><div class="step-text">Meme photo que sur tes autres reseaux. <strong>La coherence visuelle entre plateformes cree la reconnaissance de marque.</strong> Fond uni, eclairage correct, expression confiante.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Bio courte et claire</div><div class="step-text">Snap ne donne pas beaucoup de place pour la bio — sois direct. <strong>Ce que tu fais + un emoji + l appel a l action.</strong> Exemple : "Marketing digital et business en ligne. Rejoins la DMA."</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Lien dans la bio</div><div class="step-text">Mets ton lien Beacons ou ta page de vente dans la bio. <strong>C est le seul lien cliquable sur Snap</strong> — ne le gache pas avec un lien inutile.</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">STRATEGIE <span>STORIES</span></div>
+  <div class="s-sub">Le contenu quotidien qui cree la confiance et vend</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Poste tous les jours sans exception</div><div class="step-text">Snap recompense la regularite plus que la qualite. <strong>5 snaps par jour minimum.</strong> Matin : contenu valeur ou lifestyle. Apres-midi : coulisses. Soir : teasing ou offre.</div><div class="step-tip">Un snap imparfait tous les jours bat un snap parfait par semaine</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">La structure en 5 snaps</div><div class="step-text"><strong>Snap 1 :</strong> Hook fort — question ou affirmation qui cree la curiosite.<br><strong>Snap 2-3 :</strong> Valeur ou coulisses de ta vie.<br><strong>Snap 4 :</strong> Preuve sociale ou resultat client.<br><strong>Snap 5 :</strong> CTA direct — "DM moi", "lien en bio".</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Montre ta vraie vie</div><div class="step-text">Snap n est pas Instagram. <strong>L authenticite et les coulisses convertissent mieux que le contenu lisse.</strong> Ton bureau, ton quotidien, tes resultats en temps reel, tes galeres et tes victoires. Les gens achètent a ceux qu ils connaissent.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Utilise le texte sur chaque snap</div><div class="step-text">Beaucoup regardent sans son. <strong>Ajoute toujours du texte sur tes snaps</strong> — la question, le hook, le CTA. Ca double ta portee effective sur les utilisateurs en mode silencieux.</div><div class="step-tip">Texte blanc avec ombre noire = lisible sur tous les fonds</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">VENDRE EN <span>DM</span></div>
+  <div class="s-sub">Le script exact pour convertir sur Snap</div>
+
+  <div class="story-block">
+    <p>Le DM sur Snap c est different du DM sur Instagram. <strong>La relation est deja plus proche</strong> — tu n es pas un inconnu, tu es quelqu un qu ils suivent dans leur vie quotidienne. Profite de cette proximite pour vendre naturellement.</p>
+  </div>
+
+  <div class="script-block">
+    <span class="script-label">Script DM — Premiere approche apres une story vue</span>
+    <div class="script-line">Commence par une reaction a ce qu ils font : <strong>"Hey j ai vu que tu regardes mes snaps sur le business, tu essaies de te lancer ?"</strong></div>
+    <div class="script-line">Laisse-les parler. Pose des questions sur leur situation actuelle.</div>
+    <div class="script-line">Identifie leur probleme principal : <strong>"Ok donc le truc c est que tu sais pas comment [probleme]. C est ca ?"</strong></div>
+    <div class="script-line">Presente la solution sans vendre : <strong>"J ai exactement quelque chose pour ca. C est ce que j ai utilise pour [resultat]. T es dispo que je t explique ?"</strong></div>
+    <div class="script-line">Close naturellement : <strong>"C est X euros, mais la tu peux l avoir a [prix reduit] vu qu on se parle directement. Tu veux le lien ?"</strong></div>
+  </div>
+
+  <div class="info-block">
+    <div class="info-icon">💡</div>
+    <div class="info-text"><strong>Regle d or :</strong> ne jamais envoyer le lien en premier. D abord la conversation, ensuite la qualification, ensuite le lien. Un lien envoye sans conversation = 0% de conversion. Une conversation bien menee = 30 a 50% de conversion.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">QUIZ <span>SNAPCHAT</span></div>
+  <div class="s-sub">Teste ta strategie de vente</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Un abonne regarde toutes tes stories depuis 2 semaines. Il n a jamais ecrit. <em>Que fais-tu ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">A</div><div class="option-text">Tu attends qu il t ecrive en premier</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','B')"><div class="option-letter">B</div><div class="option-text">Tu lui envoies un DM naturel base sur ce qu il regarde</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">C</div><div class="option-text">Tu lui envoies directement le lien de ta formation</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">D</div><div class="option-text">Tu fais un snap dedié pour lui</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Quelqu un qui regarde toutes tes stories depuis 2 semaines est un prospect chaud. Il attend juste que tu prennes l initiative. Un DM simple et naturel suffit pour lancer la conversation. L attente passive = ventes perdues.</div>
+    <div class="quiz-feedback" id="q1-wrong">Pas encore. Attendre = laisser partir le prospect. Envoyer le lien directement = bruler la relation. La bonne approche c est un DM naturel et simple base sur son comportement : il regarde tes stories → il est interesse → tu demandes.</div>
+  </div>
+</div>
+
+<div class="section" id="s7">
+  <div class="s-title">LES <span>SECRETS</span></div>
+  <div class="s-sub">Ce que les vendeurs Snap qui gagnent le plus font differemment</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La liste de diffusion Snap</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Snap permet de créer des <strong>listes de diffusion personnalisees</strong> — tu envoies un snap directement dans la messagerie de plusieurs personnes en meme temps. Contrairement aux stories, ils le recoivent comme un DM personnel.<br><br>Utilise ca pour les annonces importantes, les offres flash ou les contenus exclusifs. Taux d ouverture : plus de 85%.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Le spotlight pour la croissance</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Snap Spotlight = le TikTok de Snap. Tes videos courtes peuvent etre vues par des millions de personnes qui ne te suivent pas. <strong>Meme format que TikTok</strong> — hook fort dans les 2 premieres secondes, sous-titres, musique tendance.<br><br>Un spotlight viral peut te faire gagner des milliers d abonnes en 48h. Et Snap paie les createurs viraux directement.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Repondre a tous les snaps recus</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Chaque personne qui repond a ta story est un prospect chaud. <strong>Repondre en moins de 30 minutes</strong> multiplie tes chances de conversion par 4.<br><br>Consacre 2 fois 15 minutes par jour — matin et soir — uniquement a repondre aux DMs et snaps recus. Ce temps est ton investissement le plus rentable de la journee.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La technique du snap exclusif</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Poste en story : <strong>"J ai quelque chose d exclusif pour les 10 premiers qui me DM aujourd hui."</strong><br><br>Peu importe ce que c est — une info utile, un code promo, un guide gratuit. L exclusivite et la limite cree l urgence. Tu recois des DMs en masse et tu ouvres des conversations de vente naturellement.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s8">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Passe ton compte en Public</strong> et optimise ta bio avec ton lien en bio.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Poste 5 snaps par jour</strong> avec la structure hook, valeur, preuve, CTA pendant 30 jours.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Identifie 10 personnes</strong> qui regardent regulierement tes stories et envoie-leur un DM naturel.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree une liste de diffusion</strong> avec tes contacts les plus engages pour tes prochaines annonces.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Poste un snap exclusif</strong> cette semaine — offre limitee aux 10 premiers qui DM.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Reponds a tous tes DMs</strong> en moins de 30 minutes — matin et soir, 15 minutes chaque fois.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-08.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 08</a>
+    <a class="btn-nav" href="module-10.html">Module 10<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m09_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m09_check_"+i)==="1")item.classList.add("checked");
+});
+
+if(localStorage.getItem("module_09_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+
+function completeModule(){
+  localStorage.setItem("module_09_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-10.html";},1000);
+}
+</script>
+
+</body>
+</html>
