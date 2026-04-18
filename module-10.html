@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 10 — Email Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.tool-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px 12px;position:relative;overflow:hidden}
+.tool-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
+.tool-card.t1::before{background:linear-gradient(90deg,#C9A84C,#e8c96a)}
+.tool-card.t2::before{background:linear-gradient(90deg,#C0001A,#ff4444)}
+.tool-card.t3::before{background:linear-gradient(90deg,#7ab8ff,#4488cc)}
+.tool-card.t4::before{background:linear-gradient(90deg,#80d080,#50a050)}
+.tool-icon{font-size:22px;margin-bottom:8px;display:block}
+.tool-name{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:3px}
+.tool-desc{font-size:10px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.4}
+.tool-tag{display:inline-block;margin-top:6px;font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:2px}
+.tag-free{background:rgba(100,200,100,.1);color:#80d080}
+.tag-freemium{background:rgba(201,168,76,.1);color:#C9A84C}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.email-mock{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.email-header{background:#161b22;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 14px}
+.email-meta{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px}
+.email-subject{font-size:12px;font-weight:600;color:rgba(255,255,255,.85)}
+.email-body{padding:14px;font-size:11px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.8}
+.email-body strong{color:#C9A84C;font-weight:600}
+.email-cta{margin:12px 0;background:rgba(192,0,26,.8);border-radius:4px;padding:10px 14px;text-align:center;font-size:11px;font-weight:600;color:#fff}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:600px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 10</div>
+  <div class="header-num">10 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">✉️ Email</div>
+  <span class="hero-num">MODULE 10</span>
+  <div class="hero-title">EMAIL<br><span>MARKETING</span></div>
+  <div class="hero-sub">L actif le plus precieux de ton business — ta liste email</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">✉️</span>
+    <div class="sensible-title">TON VRAI ACTIF</div>
+    <p class="sensible-text">
+      TikTok peut te bannir. Instagram peut te shadowban. Snap peut fermer.<br><br>
+      <strong>Ta liste email, personne ne peut te la prendre.</strong><br><br>
+      C est le seul canal que tu possedes vraiment. Et c est le plus rentable — <em>42 euros generes pour chaque euro investi</em> en email marketing en moyenne.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Les reseaux sociaux t empruntent une audience. L email t en donne une."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES <span>OUTILS</span></div>
+  <div class="s-sub">Les meilleures plateformes pour commencer gratuitement</div>
+  <div class="tools-grid">
+    <div class="tool-card t1">
+      <span class="tool-icon">📧</span>
+      <div class="tool-name">Systeme.io</div>
+      <div class="tool-desc">Email + tunnel + espace membres. Tout en un. Gratuit jusqu a 2000 contacts.</div>
+      <span class="tool-tag tag-freemium">Gratuit 2000</span>
+    </div>
+    <div class="tool-card t2">
+      <span class="tool-icon">🔴</span>
+      <div class="tool-name">Mailchimp</div>
+      <div class="tool-desc">Le plus connu. Interface simple. Gratuit jusqu a 500 contacts.</div>
+      <span class="tool-tag tag-freemium">Gratuit 500</span>
+    </div>
+    <div class="tool-card t3">
+      <span class="tool-icon">💙</span>
+      <div class="tool-name">Brevo (ex-Sendinblue)</div>
+      <div class="tool-desc">Francais, RGPD natif, 300 emails/jour gratuits. Ideal pour debuter.</div>
+      <span class="tool-tag tag-free">Gratuit</span>
+    </div>
+    <div class="tool-card t4">
+      <span class="tool-icon">⚡</span>
+      <div class="tool-name">Kit (ex-ConvertKit)</div>
+      <div class="tool-desc">Parfait pour les createurs. Sequences avancees. Gratuit jusqu a 1000 contacts.</div>
+      <span class="tool-tag tag-freemium">Gratuit 1000</span>
+    </div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">🎯</div>
+    <div class="info-text"><strong>Notre recommandation :</strong> Commence avec <strong>Systeme.io</strong> — c est gratuit jusqu a 2000 contacts et tu as tout en un. Quand tu depasses 2000 contacts tu es deja rentable et tu peux payer sans probleme.</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">COLLECTE TES <span>EMAILS</span></div>
+  <div class="s-sub">Comment construire ta liste rapidement et legalement</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Cree un lead magnet irresistible</div><div class="step-text">Un lead magnet c est un cadeau gratuit en echange de l email. <strong>Guide PDF, checklist, template, mini-formation, acces exclusif.</strong> Plus il resout un probleme precis, plus les gens s inscrivent.</div><div class="step-tip">Exemple : "Telechargez mes 50 hooks TikTok qui ont fait 1M de vues — gratuit"</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Cree ta page de capture</div><div class="step-text">Sur Systeme.io → Tunnels → Nouvelle etape → Page de capture. <strong>Titre accrocheur, 3 benefices, champ email, bouton CTA.</strong> Simple et direct. Pas besoin de 10 sections — juste l essentiel.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Mets le lien partout</div><div class="step-text">Bio Instagram, bio TikTok, bio Snap, dans tes videos en CTA, dans tes stories. <strong>Chaque piece de contenu doit pointer vers ta page de capture.</strong> C est ton entonnoir permanent.</div><div class="step-tip">1 post = 1 CTA = 1 lien vers ta liste email</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Configure le double opt-in</div><div class="step-text">Le double opt-in = l abonne recoit un email de confirmation et doit cliquer pour valider. <strong>Liste plus petite mais ultra qualifiee.</strong> Meilleur taux d ouverture, moins de spam, plus de ventes.</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">LA <span>SEQUENCE</span> DE BIENVENUE</div>
+  <div class="s-sub">Les 5 emails qui transforment un inconnu en client</div>
+
+  <div class="email-mock">
+    <div class="email-header">
+      <div class="email-meta">Email 1 — Immediat apres inscription</div>
+      <div class="email-subject">Ton guide est la + un cadeau surprise</div>
+    </div>
+    <div class="email-body">
+      Hey [prenom],<br><br>
+      Voila ton guide comme promis : <strong>[lien]</strong><br><br>
+      Je suis [ton prenom]. En quelques mots : j ai commence sans audience et sans argent. Aujourd hui [resultat concret].<br><br>
+      Dans les prochains jours je vais te partager exactement comment.<br><br>
+      A demain,<br>[Prenom]
+      <div class="email-cta">Telecharger mon guide gratuit →</div>
+    </div>
+  </div>
+
+  <div class="email-mock">
+    <div class="email-header">
+      <div class="email-meta">Email 2 — J+1</div>
+      <div class="email-subject">L erreur que j ai faite pendant 8 mois</div>
+    </div>
+    <div class="email-body">
+      Hey [prenom],<br><br>
+      Pendant 8 mois j ai poste tous les jours sans vendre un seul euro.<br><br>
+      Le probleme c etait pas mon contenu. C etait que <strong>je n avais pas de systeme derriere.</strong><br><br>
+      Demain je t explique le systeme exact que j utilise maintenant.
+    </div>
+  </div>
+
+  <div class="email-mock">
+    <div class="email-header">
+      <div class="email-meta">Email 3 — J+2</div>
+      <div class="email-subject">Le systeme en 3 etapes [concret]</div>
+    </div>
+    <div class="email-body">
+      Hey [prenom],<br><br>
+      Comme promis voila le systeme :<br><br>
+      <strong>Etape 1 :</strong> [valeur concrete]<br>
+      <strong>Etape 2 :</strong> [valeur concrete]<br>
+      <strong>Etape 3 :</strong> [valeur concrete]<br><br>
+      Si tu veux que je t aide a implementer ca etape par etape — j ai quelque chose pour toi demain.
+    </div>
+  </div>
+
+  <div class="email-mock">
+    <div class="email-header">
+      <div class="email-meta">Email 4 — J+3</div>
+      <div class="email-subject">Ils ont applique ca. Voila ce qui s est passe.</div>
+    </div>
+    <div class="email-body">
+      Hey [prenom],<br><br>
+      [Prenom client] a applique la methode. En [delai] il a [resultat].<br><br>
+      [Prenom client 2] aussi. [Resultat].<br><br>
+      <strong>Ce n est pas de la chance. C est une methode qui se repete.</strong><br><br>
+      Demain je t explique comment tu peux faire pareil.
+    </div>
+  </div>
+
+  <div class="email-mock">
+    <div class="email-header">
+      <div class="email-meta">Email 5 — J+4</div>
+      <div class="email-subject">Voila comment je peux t aider [offre]</div>
+    </div>
+    <div class="email-body">
+      Hey [prenom],<br><br>
+      Cette semaine je t ai partage ma methode complete.<br><br>
+      Si tu veux aller plus loin — j ai cree [nom formation] pour t accompagner etape par etape.<br><br>
+      <strong>Cette semaine seulement : [prix reduit] au lieu de [prix normal].</strong>
+      <div class="email-cta">Rejoindre la formation →</div>
+      L offre ferme vendredi a minuit.
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>EMAIL</span></div>
+  <div class="s-sub">Teste tes connaissances</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu as 500 abonnes Instagram et 200 emails. <em>Lequel est le plus precieux pour ton business ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">A</div><div class="option-text">Les 500 abonnes Instagram — c est plus visible et ca fait plus d effet</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','B')"><div class="option-letter">B</div><div class="option-text">Les 200 emails — c est un actif que je possede vraiment</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">C</div><div class="option-text">Les deux sont equivalents</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">D</div><div class="option-text">Ni l un ni l autre — ce qui compte c est le contenu</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. 200 emails c est 200 personnes que tu peux contacter directement, a tout moment, sans algorithme. Si Instagram ferme demain tes 500 abonnes disparaissent. Ta liste email reste. C est pour ca que les pros construisent leur liste avant tout le reste.</div>
+    <div class="quiz-feedback" id="q1-wrong">En realite les 200 emails valent bien plus. Un email = acces direct, sans algorithme, a une personne qui t a donne sa confiance. Un abonne Instagram voit ton contenu seulement si l algorithme le decide. Ta liste email t appartient pour toujours.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">LES <span>SECRETS</span></div>
+  <div class="s-sub">Ce que les emaileurs qui vendent le plus font differemment</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">L objet de l email — 80% du succes</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>L objet c est le hook de ton email. Si personne n ouvre, personne ne lit, personne n achete.<br><br><strong>Objets qui marchent :</strong><br>- "L erreur que tu fais sur [sujet]"<br>- "Pourquoi [croyance commune] est fausse"<br>- "Ce que j ai appris apres [experience]"<br>- "3 choses que [audience] doit savoir"<br><br><strong>Evite :</strong> "Newsletter #12", "Nouvelles du mois", "Offre speciale". Ce sont des objets qui font 0% d ouverture.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Frequence ideale d envoi</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Minimum :</strong> 2 emails par semaine. En dessous, les gens t oublient.<br><strong>Maximum :</strong> 1 email par jour. Au dessus, les gens se desinscrivent.<br><br><strong>Sweet spot :</strong> 3 emails par semaine. Lundi valeur, mercredi valeur, vendredi offre ou teasing.<br><br>La regle des 80/20 : 80% de valeur pure, 20% de vente. Si tu inverses, ta liste meurt.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La segmentation — envoyer le bon email a la bonne personne</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>La segmentation c est diviser ta liste en groupes selon leur comportement. <strong>Exemple :</strong><br><br>- Segment "Prospect chaud" : a ouvert les 3 derniers emails → envoie une offre<br>- Segment "Inactif" : n a pas ouvert depuis 30 jours → envoie une sequence de re-engagement<br>- Segment "Acheteur" : a deja achete → envoie un upsell ou une offre complementaire<br><br>Les emails segmentes ont un taux de conversion 6 fois superieur aux envois generaux.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Nettoie ta liste regulierement</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Une liste de 1000 personnes actives vaut plus qu une liste de 10 000 inactifs.<br><br>Tous les 90 jours : <strong>supprime les contacts qui n ont pas ouvert un seul email depuis 60 jours.</strong> Ca ameliore ton taux de delivrabilite, reduit tes couts et augmente ton taux d ouverture moyen. Une liste propre = une liste qui vend.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s7">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton compte Systeme.io</strong> et configure ta premiere liste email.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton lead magnet</strong> — guide PDF, checklist ou template qui resout un probleme precis.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ta page de capture</strong> et mets le lien dans toutes tes bios reseaux sociaux.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Ecris ta sequence de 5 emails</strong> de bienvenue avec la structure du module.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Programme 3 emails par semaine</strong> — lundi valeur, mercredi valeur, vendredi offre.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Teste 3 objets differents</strong> sur tes prochains emails et compare les taux d ouverture.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-09.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 09</a>
+    <a class="btn-nav" href="module-11.html">Module 11<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m10_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m10_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_10_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_10_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-11.html";},1000);
+}
+</script>
+
+</body>
+</html>
