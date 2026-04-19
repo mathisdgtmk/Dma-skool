@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 15 — Funnels & Tunnels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.funnel-visual{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:8px;padding:20px;margin-bottom:16px}
+.funnel-step{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.funnel-box{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:10px 14px;position:relative}
+.funnel-box.active{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.06)}
+.funnel-label{font-size:10px;font-weight:600;color:rgba(245,240,232,.35);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+.funnel-name{font-size:12px;font-weight:600;color:#f5f0e8}
+.funnel-stat{font-size:10px;color:rgba(201,168,76,.7);margin-top:2px}
+.funnel-arrow{color:rgba(201,168,76,.3);font-size:18px;flex-shrink:0}
+.funnel-connector{display:flex;justify-content:center;margin:2px 0}
+.funnel-connector-line{width:2px;height:16px;background:rgba(201,168,76,.2)}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:600px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 15</div>
+  <div class="header-num">15 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🔁 Funnels</div>
+  <span class="hero-num">MODULE 15</span>
+  <div class="hero-title">FUNNELS<br><span>& TUNNELS</span></div>
+  <div class="hero-sub">Construis un systeme de vente automatise qui tourne seul</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🔁</span>
+    <div class="sensible-title">VENDRE SANS ETRE LA</div>
+    <p class="sensible-text">
+      Un tunnel de vente c est ton systeme commercial automatise.<br><br>
+      Pendant que tu dors, que tu sortis, que tu scrolles — <strong>le tunnel attire, convainc et vend.</strong><br><br>
+      C est la difference entre un business et un job.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Un bon tunnel de vente travaille 24h/24 sans salaire, sans pause et sans erreur."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">C EST QUOI UN <span>TUNNEL</span></div>
+  <div class="s-sub">Le parcours automatise de l inconnu a l acheteur</div>
+  <div class="funnel-visual">
+    <div class="funnel-step">
+      <div class="funnel-box">
+        <div class="funnel-label">Etape 1</div>
+        <div class="funnel-name">Trafic</div>
+        <div class="funnel-stat">TikTok, Instagram, Snap, Email</div>
+      </div>
+    </div>
+    <div class="funnel-connector"><div class="funnel-connector-line"></div></div>
+    <div class="funnel-step">
+      <div class="funnel-box">
+        <div class="funnel-label">Etape 2</div>
+        <div class="funnel-name">Page de capture</div>
+        <div class="funnel-stat">Lead magnet gratuit → email</div>
+      </div>
+    </div>
+    <div class="funnel-connector"><div class="funnel-connector-line"></div></div>
+    <div class="funnel-step">
+      <div class="funnel-box">
+        <div class="funnel-label">Etape 3</div>
+        <div class="funnel-name">Sequence email</div>
+        <div class="funnel-stat">5 emails sur 5 jours → confiance</div>
+      </div>
+    </div>
+    <div class="funnel-connector"><div class="funnel-connector-line"></div></div>
+    <div class="funnel-step">
+      <div class="funnel-box active">
+        <div class="funnel-label">Etape 4</div>
+        <div class="funnel-name">Page de vente + VSL</div>
+        <div class="funnel-stat">Offre + prix + bouton achat</div>
+      </div>
+    </div>
+    <div class="funnel-connector"><div class="funnel-connector-line"></div></div>
+    <div class="funnel-step">
+      <div class="funnel-box">
+        <div class="funnel-label">Etape 5</div>
+        <div class="funnel-name">Page de confirmation</div>
+        <div class="funnel-stat">Acces + upsell optionnel</div>
+      </div>
+    </div>
+    <div class="info-block" style="margin-top:14px;margin-bottom:0">
+      <div class="info-icon">🎯</div>
+      <div class="info-text">Ce systeme tourne <strong>24h/24 sans toi</strong>. Tu alimentes le trafic avec ton contenu — le tunnel fait le reste automatiquement.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">CONSTRUIS TON <span>TUNNEL</span></div>
+  <div class="s-sub">Etape par etape sur Systeme.io — 100% gratuit</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Cree ton tunnel sur Systeme.io</div><div class="step-text">Systeme.io → <strong>Tunnels → Creer un tunnel → Vendre un produit</strong> → choisis un template → il genere automatiquement les 3 pages : capture, vente, confirmation.</div><div class="step-tip">Systeme.io gratuit jusqu a 2000 contacts — largement suffisant pour debuter</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Configure la page de capture</div><div class="step-text">Titre accrocheur de ton lead magnet → 3 benefices en bullet points → champ email → bouton CTA. <strong>Une seule chose a faire sur cette page : donner son email.</strong> Supprime tout ce qui distrait.</div><div class="step-tip">Taux de conversion ideal : 30 a 50% des visiteurs laissent leur email</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Configure la page de vente</div><div class="step-text">Integre ta VSL en haut, suis la structure des 7 blocs (module 13), ajoute les temoignages, stack la valeur, revele le prix. <strong>Un seul bouton d achat — visible et clair.</strong></div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Cree la sequence email automatique</div><div class="step-text">Systeme.io → Emails → Creer une campagne → 5 emails espaces de 1 jour chacun. <strong>Email 1 : lead magnet + bienvenue. Emails 2-4 : valeur pure. Email 5 : offre payante.</strong></div><div class="step-tip">Chaque email se declenche automatiquement apres l inscription</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Connecte le paiement et teste</div><div class="step-text">Connecte Stripe → cree ton produit → prix → relie a ton bouton d achat. <strong>Fais un achat test a 1 euro</strong> pour verifier que tout le parcours fonctionne de bout en bout.</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">LES TYPES <span>DE TUNNELS</span></div>
+  <div class="s-sub">Choisis celui qui correspond a ton offre</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Tunnel simple — pour debuter</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Page de capture → page de vente → confirmation.<br><br>Le plus simple et le plus efficace pour commencer. Parfait pour un produit a moins de 200 euros. <strong>Taux de conversion moyen : 1 a 3% des visiteurs achetent.</strong><br><br>Commence par ca — tu compliques apres quand tu as du trafic.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Tunnel avec upsell — pour maximiser</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Page de capture → page de vente → <strong>page upsell</strong> → confirmation.<br><br>Apres l achat tu proposes immediatement un produit complementaire a prix reduit. <strong>Exemple : formation a 97 euros → upsell coaching perso a 197 euros.</strong><br><br>30 a 40% des acheteurs prennent l upsell. Ca peut doubler ton revenu par client sans aucun effort supplementaire.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Tunnel de webinaire — pour les offres premium</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Inscription webinaire → webinaire en direct ou replay → offre en fin de webinaire.<br><br>Ideal pour les offres au dessus de 500 euros. Le webinaire construit la confiance et cree l urgence naturellement. <strong>Taux de conversion d un bon webinaire : 5 a 15%.</strong><br><br>Un webinaire mensuel de 90 minutes peut generer plusieurs milliers d euros en une seule session.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Tunnel tripwire — pour creer des acheteurs</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Page de capture → <strong>offre a 7-17 euros immediatement</strong> → sequence email → offre principale.<br><br>Le tripwire transforme un prospect en acheteur immediatement. <strong>Un client qui a deja achete a 7 euros est 10 fois plus susceptible d acheter a 97 euros.</strong><br><br>La premiere transaction franchit le mur psychologique de l achat. Toutes les suivantes sont beaucoup plus faciles.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>TUNNEL</span></div>
+  <div class="s-sub">Teste ta comprehension</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu envoies 1000 personnes sur ton tunnel. 30 achetent ton produit a 97 euros. <em>Quel est le taux de conversion et que fais-tu pour l ameliorer ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">A</div><div class="option-text">3% — c est trop faible, je dois envoyer plus de trafic</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','B')"><div class="option-letter">B</div><div class="option-text">3% — c est dans la norme, j ameliore ma page de vente et mon email de relance</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">C</div><div class="option-text">3% — je baisse mon prix pour convertir plus</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">D</div><div class="option-text">3% — mon tunnel ne fonctionne pas, je dois tout recommencer</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. 3% c est dans la norme pour un tunnel froid. 1000 visiteurs x 3% x 97 euros = 2910 euros. Pour ameliorer : optimise le hook de ta page de vente, ajoute des temoignages, ameliore ton objet d email. Ne baisse jamais le prix en premier recours.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse B est correcte. 3% est un taux de conversion normal. Envoyer plus de trafic sans optimiser = gaspiller du trafic. Baisser le prix = devaloriser. Tout recommencer = perte de temps. La bonne approche : optimise les elements cles du tunnel existant.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton compte Systeme.io</strong> et ouvre ton premier tunnel depuis le tableau de bord.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Configure ta page de capture</strong> avec ton lead magnet et un titre accrocheur.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Configure ta page de vente</strong> avec la structure des 7 blocs et ton VSL integre.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Programme tes 5 emails</strong> de sequence automatique avec les delais corrects.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Fais un test complet</strong> du tunnel de bout en bout — inscription, emails, achat test a 1 euro.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Mets le lien partout</strong> — bio Instagram, TikTok, Snap, CTA dans chaque video.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-14.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 14</a>
+    <a class="btn-nav" href="module-16.html">Module 16<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m15_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m15_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_15_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_15_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-16.html";},1000);
+}
+</script>
+
+</body>
+</html>
