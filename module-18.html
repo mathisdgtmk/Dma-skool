@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 18 — SMMA Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.package-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.package-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:16px;position:relative;overflow:hidden}
+.package-card.s::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#80d080}
+.package-card.p::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#C9A84C}
+.package-card.pp::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:#C0001A}
+.pkg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pkg-name{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:2px;color:#f5f0e8}
+.pkg-price{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;color:#C9A84C}
+.pkg-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.5;margin-bottom:8px}
+.pkg-item{font-size:10px;color:rgba(245,240,232,.5);padding:2px 0 2px 12px;position:relative}
+.pkg-item::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:#C9A84C}
+.niche-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.niche-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px 12px}
+.niche-icon{font-size:22px;margin-bottom:6px;display:block}
+.niche-name{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:3px}
+.niche-budget{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#C9A84C;letter-spacing:1px;margin-bottom:4px}
+.niche-why{font-size:10px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.4}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 18</div>
+  <div class="header-num">18 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🏢 SMMA</div>
+  <span class="hero-num">MODULE 18</span>
+  <div class="hero-title">SMMA<br><span>AGENCY</span></div>
+  <div class="hero-sub">Lance ton agence de gestion reseaux sociaux et signe des clients</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🏢</span>
+    <div class="sensible-title">LES ENTREPRISES ONT BESOIN DE TOI</div>
+    <p class="sensible-text">
+      90% des PME savent qu elles doivent etre sur les reseaux sociaux.<br><br>
+      <strong>90% ne savent pas comment.</strong><br><br>
+      Toi tu sais. Et ils sont prets a payer <em>entre 500 et 3000 euros par mois</em> pour que quelqu un le fasse a leur place.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Une SMMA c est vendre ton expertise a ceux qui en ont besoin mais pas le temps de l apprendre."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES <span>NICHES CIBLES</span></div>
+  <div class="s-sub">Les secteurs qui paient le mieux et cherchent le plus</div>
+  <div class="niche-grid">
+    <div class="niche-card">
+      <span class="niche-icon">🍕</span>
+      <div class="niche-name">Restaurants</div>
+      <div class="niche-budget">500 - 1500€/mois</div>
+      <div class="niche-why">Visibilite locale critique. Tres accessible. Resultats rapides et visibles.</div>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">💇</span>
+      <div class="niche-name">Salons beaute</div>
+      <div class="niche-budget">400 - 1200€/mois</div>
+      <div class="niche-why">Instagram est leur vitrine principale. Avant/apres = contenu facile.</div>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🏋️</span>
+      <div class="niche-name">Coachs sportifs</div>
+      <div class="niche-budget">500 - 2000€/mois</div>
+      <div class="niche-why">Audience en ligne = clients. Tres motives a investir en marketing.</div>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🏠</span>
+      <div class="niche-name">Immobilier</div>
+      <div class="niche-budget">800 - 3000€/mois</div>
+      <div class="niche-why">Gros budgets. ROI direct sur chaque vente. Tres peu servis.</div>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🦷</span>
+      <div class="niche-name">Dentistes / Medecins</div>
+      <div class="niche-budget">600 - 2000€/mois</div>
+      <div class="niche-why">Pas le temps de gerer les reseaux. Budget disponible. Niche peu concurrentielle.</div>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🎓</span>
+      <div class="niche-name">Formateurs / Coachs</div>
+      <div class="niche-budget">500 - 2500€/mois</div>
+      <div class="niche-why">Comprennent la valeur du digital. Veulent scaler sans s occuper des reseaux.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">TES <span>PACKAGES</span></div>
+  <div class="s-sub">Comment structurer tes offres SMMA</div>
+  <div class="package-cards">
+    <div class="package-card s">
+      <div class="pkg-header"><div class="pkg-name">STARTER</div><div class="pkg-price">500€/mois</div></div>
+      <div class="pkg-desc">Parfait pour tes premiers clients. Simple a livrer seul.</div>
+      <div class="pkg-item">8 posts par mois (2 par semaine)</div>
+      <div class="pkg-item">Redaction des captions et hashtags</div>
+      <div class="pkg-item">Programmation et publication</div>
+      <div class="pkg-item">Rapport mensuel basique</div>
+    </div>
+    <div class="package-card p">
+      <div class="pkg-header"><div class="pkg-name">PRO</div><div class="pkg-price">1200€/mois</div></div>
+      <div class="pkg-desc">Le plus vendu. Bon equilibre valeur et effort.</div>
+      <div class="pkg-item">16 posts par mois (4 par semaine)</div>
+      <div class="pkg-item">Stories quotidiennes</div>
+      <div class="pkg-item">Gestion des commentaires et DMs</div>
+      <div class="pkg-item">1 Reel par semaine</div>
+      <div class="pkg-item">Rapport mensuel detaille</div>
+    </div>
+    <div class="package-card pp">
+      <div class="pkg-header"><div class="pkg-name">PREMIUM</div><div class="pkg-price">2500€/mois</div></div>
+      <div class="pkg-desc">Pour les clients qui veulent une presence complete.</div>
+      <div class="pkg-item">Contenu quotidien sur 2 plateformes</div>
+      <div class="pkg-item">Strategie et calendrier editorial</div>
+      <div class="pkg-item">Shooting photo mensuel</div>
+      <div class="pkg-item">Pub Meta geree et optimisee</div>
+      <div class="pkg-item">Reunion strategique mensuelle</div>
+    </div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">💡</div>
+    <div class="info-text"><strong>Commence par le package Starter.</strong> 3 clients Starter = 1500 euros/mois. C est suffisant pour valider ton modele avant de monter en gamme.</div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">SIGNE TON <span>PREMIER CLIENT</span></div>
+  <div class="s-sub">De la prospection au contrat signe en 7 jours</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisis une niche et une zone</div><div class="step-text">Ne prospecte pas tout le monde. Choisis <strong>une niche dans ta ville</strong>. Exemple : tous les restaurants de ta ville. La specialisation te rend credible et facilite la prospection.</div><div class="step-tip">Liste tous les restaurants de ta ville sur Google Maps</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Fais un audit gratuit</div><div class="step-text">Avant d appeler — analyse leur compte Instagram. <strong>Note 3 problemes concrets</strong> : photos de mauvaise qualite, pas de stories, pas de regularite, zero engagement. L audit gratuit montre que tu connais leur situation avant meme de parler.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Prospecte par DM ou en direct</div><div class="step-text">DM Instagram : <strong>"Bonjour [nom], j ai analyse votre compte et j ai identifie 3 choses simples qui doubleraient votre engagement. Je peux vous montrer ca en 15 minutes ?"</strong> Ou va directement en physique — tu te demarques de 99% des agences.</div><div class="step-tip">Le physique convertit 3 fois mieux que le DM pour les PME locales</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Fais une presentation de 15 minutes</div><div class="step-text">Montre l audit → presente les 3 problemes → presente ta solution → prix. <strong>Pas de presentation powerpoint — juste une conversation naturelle.</strong> Termine par : "Ca vous interesse qu on travaille ensemble ?"</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Signe un contrat 3 mois minimum</div><div class="step-text">Jamais de contrat au mois — tu passes du temps a reconquerir chaque client. <strong>Minimum 3 mois pour voir des resultats.</strong> Si ils hesitent : "Les reseaux sociaux prennent 90 jours pour montrer des resultats — en dessous ca ne sert a rien."</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">LES <span>SECRETS</span></div>
+  <div class="s-sub">Ce que les SMMA qui reussissent font differemment</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Sous-traite pour scaler sans travailler plus</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Quand tu as 3 clients, tu peux tout faire seul. A partir de 5 clients tu dois sous-traiter.<br><br><strong>Embauche des freelances :</strong> graphiste sur Fiverr ou Malt pour les visuels (15-30 euros par visuel), redacteur pour les captions (10-20 euros par caption).<br><br>Tu factures 1200 euros/mois au client — tu sous-traites pour 200-300 euros — tu gardes 900 euros de marge. Tu passes de gestionnaire de contenu a directeur d agence.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Les resultats comme argument de vente</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Apres 3 mois avec ton premier client tu as des chiffres reels. <strong>Screenshots de progression, statistiques, nouveaux clients generes.</strong> Ces resultats deviennent ton argument de vente numero un pour tous les clients suivants.<br><br>Un restaurant qui a gagne 30 nouveaux clients grace a toi en 3 mois = une reference en or. Demande toujours un temoignage video a chaque client satisfait.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Ajoute des services IA pour augmenter ta valeur</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Combine la SMMA avec le module 18 — Agence IA. Propose a tes clients SMMA d ajouter :<br><br><strong>- Chatbot Instagram automatique</strong> : +200 euros/mois<br><strong>- Automation des DMs</strong> : +150 euros/mois<br><strong>- Rapport IA automatise</strong> : +100 euros/mois<br><br>Tu passes d un client a 500 euros/mois a un client a 950 euros/mois sans effort supplementaire.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">QUIZ <span>SMMA</span></div>
+  <div class="s-sub">Teste ta strategie</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu prospectes un restaurant local. Il te dit : <em>"On a deja quelqu un qui gere nos reseaux."</em> Que reponds-tu ?</div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">A</div><div class="option-text">Ah d accord, pas de probleme. Bonne journee !</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">B</div><div class="option-text">Je suis moins cher que lui — je peux vous faire un meilleur prix.</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','C')"><div class="option-letter">C</div><div class="option-text">"Super ! Et vous etes satisfait des resultats ? Combien de nouveaux clients ca vous a genere ces 3 derniers mois ?"</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">D</div><div class="option-text">Je vous propose un mois gratuit pour vous montrer la difference.</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Creuse les resultats de leur prestataire actuel. Si les resultats sont bons — ils n ont pas besoin de toi. Si les resultats sont mauvais — tu as ouvert la porte. La plupart des PME ne mesurent pas les resultats de leur prestataire actuel.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse C est la meilleure. A = tu abandonnes trop vite. B = tu te dévalorisés. D = tu offres de la valeur avant de comprendre le probleme. Creuse toujours les resultats avant de presenter ta solution.</div>
+  </div>
+</div>
+
+<div class="section" id="s7">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis ta niche et ta zone</strong> — une seule niche dans une zone geographique precise.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Liste 20 prospects</strong> dans ta niche et fais un audit rapide de leurs comptes Instagram.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Envoie 10 messages de prospection</strong> avec l approche audit gratuit cette semaine.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Signe ton premier client</strong> au package Starter — 500 euros/mois contrat 3 mois.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Delivre en sur-promesse</strong> le premier mois — donne plus que ce qu ils attendent pour securiser le renouvellement.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Demande un temoignage</strong> apres 30 jours de bons resultats — video de preference.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-17.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 17</a>
+    <a class="btn-nav" href="module-19.html">Module 19<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m18_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m18_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_18_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_18_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-19.html";},1000);
+}
+</script>
+
+</body>
+</html>
