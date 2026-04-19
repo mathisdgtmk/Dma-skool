@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 17 — MRR & Recurrence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.mrr-calc{background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(192,0,26,.04));border:1px solid rgba(201,168,76,.15);border-radius:8px;padding:20px;margin-bottom:16px;text-align:center}
+.mrr-calc-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C;margin-bottom:16px}
+.mrr-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.03);border-radius:4px;padding:10px 14px;margin-bottom:8px}
+.mrr-label{font-size:11px;font-weight:300;color:rgba(245,240,232,.6)}
+.mrr-value{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;color:#C9A84C;letter-spacing:1px}
+.mrr-total{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);border-radius:4px;padding:14px;margin-top:12px}
+.mrr-total-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:4px}
+.mrr-total-value{font-family:Bebas Neue,Impact,sans-serif;font-size:32px;color:#f5f0e8;letter-spacing:2px}
+.mrr-total-sub{font-size:10px;color:rgba(245,240,232,.35);margin-top:4px}
+.model-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden}
+.model-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
+.model-card.m1::before{background:linear-gradient(90deg,#C9A84C,#e8c96a)}
+.model-card.m2::before{background:linear-gradient(90deg,#C0001A,#ff4444)}
+.model-card.m3::before{background:linear-gradient(90deg,#7ab8ff,#4488cc)}
+.model-card.m4::before{background:linear-gradient(90deg,#80d080,#50a050)}
+.model-icon{font-size:24px;margin-bottom:8px;display:block}
+.model-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:4px}
+.model-price{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;color:#C9A84C;letter-spacing:1px;margin-bottom:6px}
+.model-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.5);line-height:1.5}
+.model-example{font-size:10px;color:rgba(201,168,76,.6);margin-top:6px;font-style:italic}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 17</div>
+  <div class="header-num">17 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🔄 Recurrence</div>
+  <span class="hero-num">MODULE 17</span>
+  <div class="hero-title">MRR &<br><span>RECURRENCE</span></div>
+  <div class="hero-sub">Genere des revenus qui rentrent chaque mois automatiquement</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🔄</span>
+    <div class="sensible-title">CHAQUE MOIS REPART DE ZERO</div>
+    <p class="sensible-text">
+      Le probleme avec la vente one-shot — <strong>chaque mois tu repars de zero.</strong><br><br>
+      Janvier tu fais 3000 euros. Super. Fevrier tu dois refaire 3000 euros depuis le debut.<br><br>
+      Le MRR change tout — tu construis une base qui grossit chaque mois <em>sans repartir de zero.</em>
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"La liberte financiere c est pas gagner beaucoup un mois. C est avoir une base solide qui rentre chaque mois."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LE CALCUL <span>MRR</span></div>
+  <div class="s-sub">Combien ca represente concretement</div>
+  <div class="mrr-calc">
+    <div class="mrr-calc-title">SIMULATION MRR — ABONNEMENT 29 EUROS/MOIS</div>
+    <div class="mrr-row"><span class="mrr-label">10 abonnes</span><span class="mrr-value">290€/mois</span></div>
+    <div class="mrr-row"><span class="mrr-label">50 abonnes</span><span class="mrr-value">1 450€/mois</span></div>
+    <div class="mrr-row"><span class="mrr-label">100 abonnes</span><span class="mrr-value">2 900€/mois</span></div>
+    <div class="mrr-row"><span class="mrr-label">200 abonnes</span><span class="mrr-value">5 800€/mois</span></div>
+    <div class="mrr-total">
+      <div class="mrr-total-label">Objectif 6 mois</div>
+      <div class="mrr-total-value">100 ABONNES</div>
+      <div class="mrr-total-sub">= 2 900 euros garanti chaque mois sans repartir de zero</div>
+    </div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">💡</div>
+    <div class="info-text"><strong>La magie de la recurrence :</strong> Mois 1 tu signes 20 abonnes. Mois 2 tu en signes 20 autres — mais les 20 premiers sont toujours la. A chaque mois ta base grandit. C est comme ca que les revenus passifs se construisent reellement.</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">LES 4 MODELES <span>RECURRENTS</span></div>
+  <div class="s-sub">Choisis celui qui correspond a ton business</div>
+
+  <div class="model-card m1">
+    <span class="model-icon">👑</span>
+    <div class="model-title">Communaute privee mensuelle</div>
+    <div class="model-price">19€ — 97€ / mois</div>
+    <div class="model-desc">Acces a un groupe prive Skool, Discord ou Telegram avec contenu exclusif, lives mensuels, coaching de groupe et entraide entre membres.</div>
+    <div class="model-example">Exemple : DMA Premium a 29 euros/mois — acces communaute + nouveaux modules chaque mois</div>
+  </div>
+
+  <div class="model-card m2">
+    <span class="model-icon">🎓</span>
+    <div class="model-title">Formation par abonnement</div>
+    <div class="model-price">17€ — 47€ / mois</div>
+    <div class="model-desc">Acces a une bibliotheque de formations qui grandit chaque mois. Nouveau module chaque semaine ou mois. L abonne paie pour rester a jour.</div>
+    <div class="model-example">Exemple : Acces illimite a toutes les formations + nouvelles sorties pour 17 euros/mois</div>
+  </div>
+
+  <div class="model-card m3">
+    <span class="model-icon">🛠️</span>
+    <div class="model-title">Service mensuel recurrent</div>
+    <div class="model-price">200€ — 2000€ / mois</div>
+    <div class="model-desc">Gestion reseaux sociaux, creation de contenu, coaching mensuel, gestion email. Un service que tu livres chaque mois contre un paiement fixe.</div>
+    <div class="model-example">Exemple : Je gere ton Instagram + TikTok pour 500 euros/mois — contrat 3 mois minimum</div>
+  </div>
+
+  <div class="model-card m4">
+    <span class="model-icon">🔑</span>
+    <div class="model-title">Logiciel ou outil SaaS</div>
+    <div class="model-price">7€ — 97€ / mois</div>
+    <div class="model-desc">Un outil numerique que tu crees une fois et que tes clients utilisent en abonnement. Templates automatises, outils IA, dashboards personnalises.</div>
+    <div class="model-example">Exemple : Acces a ton pack de templates Notion + mise a jour mensuelle pour 9 euros/mois</div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">COMMENT <span>RETENIR</span></div>
+  <div class="s-sub">Les strategies pour minimiser le churn et garder tes abonnes</div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Delivre plus de valeur que le prix</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>La seule raison pour laquelle un abonne part c est qu il ne recoit pas assez de valeur pour justifier le prix.<br><br><strong>Regle :</strong> donne toujours l impression que la valeur recue vaut 10 fois le prix paye. Si ton abonnement est a 29 euros — l abonne doit avoir l impression d en recevoir pour 290 euros.<br><br>Surprise bonus, contenu exclusif inattendu, acces anticipe, cadeaux surprises — tout ca cree une fidelite emotionnelle.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Cree une communaute et pas juste un produit</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Les gens restent pour les autres membres autant que pour le contenu. <strong>Favorise les interactions entre membres</strong> — challenges collectifs, fils de discussion, celebrations de victoires.<br><br>Quand un abonne a des amis dans ta communaute — il ne peut plus partir sans perdre ces relations. Le lien social est le meilleur outil de retention qui existe.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Le premier mois offert — la technique DMA</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Technique : vends ton abonnement en paiement en plusieurs fois avec le premier mois offert immediatement.<br><br><strong>Exemple :</strong> "Rejoins la DMA — premier mois offert, puis 29 euros/mois. Tu peux annuler quand tu veux."<br><br>Le premier mois gratuit cree l habitude d utilisation. Apres 30 jours d utilisation active, le taux de resiliation chute de 60 a 70%. Les gens ne quittent pas ce dont ils ont l habitude.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Engagement precoce des nouveaux membres</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Les 7 premiers jours sont critiques. Un membre qui n utilise pas ta communaute dans les 7 premiers jours a 80% de chances de resilier dans les 30 jours.<br><br><strong>Envoie un DM personnel</strong> a chaque nouveau membre dans les 24h pour l accueillir, lui donner une action concrete a faire et lui montrer les points cles de la communaute. Ce toucher humain cree une fidelite immediate.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>MRR</span></div>
+  <div class="s-sub">Teste ta comprehension</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu as 50 abonnes a 29 euros/mois. 5 resilient mais tu en signes 10 nouveaux. <em>Quel est ton MRR le mois suivant ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">A</div><div class="option-text">1450 euros — c est le meme que le mois precedent</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">B</div><div class="option-text">1160 euros — tu as perdu 5 abonnes donc tu recules</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','C')"><div class="option-letter">C</div><div class="option-text">1595 euros — 50 moins 5 plus 10 = 55 abonnes x 29 euros</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">D</div><div class="option-text">290 euros — seulement les 10 nouveaux comptent ce mois</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. 50 - 5 + 10 = 55 abonnes x 29 euros = 1595 euros. C est la magie du MRR — meme si tu perds des abonnes, tant que tu en gagnes plus que tu en perds ta base grandit chaque mois.</div>
+    <div class="quiz-feedback" id="q1-wrong">La bonne reponse est C. 50 abonnes de depart - 5 qui resilient + 10 nouveaux = 55 abonnes. 55 x 29 euros = 1595 euros. Le MRR grandit meme quand tu perds des abonnes — du moment que tu en gagnes plus que tu en perds.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis ton modele de recurrence</strong> parmi les 4 options selon ton business actuel.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Definis ton prix mensuel</strong> et calcule combien d abonnes il te faut pour atteindre ton objectif de revenu.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton offre recurrente</strong> — page de vente, description claire, valeur percue superieure au prix.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Configure le paiement recurrent</strong> sur Stripe — abonnement mensuel avec renouvellement automatique.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Signe tes 10 premiers abonnes</strong> — offre le premier mois a tes clients existants pour lancer la dynamique.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Accueille chaque nouveau membre</strong> en DM personnel dans les 24h — c est l investissement le plus rentable pour reduire le churn.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-16.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 16</a>
+    <a class="btn-nav" href="module-18.html">Module 18<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m17_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m17_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_17_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_17_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-18.html";},1000);
+}
+</script>
+
+</body>
+</html>
