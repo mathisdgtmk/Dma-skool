@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 21 — Declaration Legale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.info-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:16px;margin-bottom:12px}
+.info-card-title{font-family:Bebas Neue,Impact,sans-serif;font-size:14px;letter-spacing:2px;color:#C9A84C;margin-bottom:10px}
+.info-card-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.info-card-row:last-child{border-bottom:none}
+.info-card-label{font-size:11px;font-weight:500;color:rgba(245,240,232,.5);flex:1}
+.info-card-value{font-size:11px;font-weight:600;color:#f5f0e8;text-align:right;flex:1}
+.info-card-value.gold{color:#C9A84C}
+.info-card-value.green{color:#80d080}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.warning-block{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.warning-icon{font-size:18px;flex-shrink:0}
+.warning-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.warning-text strong{color:#ff7070;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 21</div>
+  <div class="header-num">21 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">📋 Legal</div>
+  <span class="hero-num">MODULE 21</span>
+  <div class="hero-title">DECLARATION<br><span>LEGALE</span></div>
+  <div class="hero-sub">Auto-entrepreneur, TVA, URSSAF — tout ce qu il faut savoir</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">📋</span>
+    <div class="sensible-title">PROTEGE TOI DES LE DEBUT</div>
+    <p class="sensible-text">
+      Beaucoup commencent a vendre sans se declarer.<br><br>
+      C est une erreur. <strong>En France tu dois te declarer des le premier euro gagne.</strong><br><br>
+      La bonne nouvelle : c est simple, rapide et gratuit. Et ca te protege.
+    </p>
+  </div>
+  <div class="warning-block">
+    <div class="warning-icon">⚠️</div>
+    <div class="warning-text"><strong>Important :</strong> Ce module donne des informations generales. Pour ta situation specifique, consulte un comptable ou l URSSAF directement. Les regles peuvent evoluer — verifie toujours les informations officielles sur autoentrepreneur.urssaf.fr</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">AUTO-ENTREPRENEUR <span>EN 2025</span></div>
+  <div class="s-sub">Le statut parfait pour commencer — les chiffres cles</div>
+  <div class="info-card">
+    <div class="info-card-title">LES SEUILS AUTO-ENTREPRENEUR 2025</div>
+    <div class="info-card-row"><span class="info-card-label">Chiffre d affaires max (services)</span><span class="info-card-value gold">77 700 euros/an</span></div>
+    <div class="info-card-row"><span class="info-card-label">Chiffre d affaires max (vente)</span><span class="info-card-value gold">188 700 euros/an</span></div>
+    <div class="info-card-row"><span class="info-card-label">Cotisations sociales (services)</span><span class="info-card-value">21.2% du CA</span></div>
+    <div class="info-card-row"><span class="info-card-label">Seuil franchise TVA (services)</span><span class="info-card-value">36 800 euros/an</span></div>
+    <div class="info-card-row"><span class="info-card-label">Cout de creation</span><span class="info-card-value green">0 euro — gratuit</span></div>
+    <div class="info-card-row"><span class="info-card-label">Comptabilite obligatoire</span><span class="info-card-value green">Simplifiee — livre de recettes</span></div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">💡</div>
+    <div class="info-text"><strong>Ce que ca signifie concrètement :</strong> si tu fais 1000 euros de ventes de formations (services), tu paies environ 212 euros de cotisations. Tu gardes 788 euros. Et en dessous de 36 800 euros par an tu n as pas a facturer la TVA.</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">CREE TON <span>AUTO-ENTREPRISE</span></div>
+  <div class="s-sub">Inscription en 15 minutes sur le site officiel</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Va sur autoentrepreneur.urssaf.fr</div><div class="step-text">C est le site officiel gratuit du gouvernement. <strong>Ne passe jamais par un site prive qui te facture pour creer ton auto-entreprise.</strong> L inscription est 100% gratuite en direct.</div><div class="step-tip">URL officielle : autoentrepreneur.urssaf.fr</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Choisis ton activite</div><div class="step-text">Pour vendre des formations et du coaching en ligne → <strong>"Conseil pour les affaires et autres conseils de gestion"</strong> ou <strong>"Formation"</strong>. Pour la gestion de reseaux sociaux → <strong>"Activites de conseil en communication"</strong>.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Remplis le formulaire</div><div class="step-text">Nom, prenom, adresse, date de naissance, activite, regime fiscal. <strong>Choisis le versement liberatoire si ton taux marginal d imposition est faible</strong> — ca simplifie enormement ta fiscalite.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Recois ton SIRET</div><div class="step-text">Tu recois ton numero SIRET sous <strong>1 a 4 semaines</strong>. En attendant tu peux deja vendre — note simplement "SIRET en cours d attribution" sur tes factures si necessaire.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Ouvre un compte bancaire dedie</div><div class="step-text">Non obligatoire en dessous de 10 000 euros par an mais <strong>fortement recommande</strong>. Separe ton argent personnel de ton argent professionnel. Simplifie enormement la comptabilite et le suivi.</div><div class="step-tip">Shine, Qonto ou N26 Business — comptes pros gratuits ou abordables</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">TES <span>OBLIGATIONS</span></div>
+  <div class="s-sub">Ce que tu dois faire chaque mois ou trimestre</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Declarer ton chiffre d affaires</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Tu declares ton CA chaque mois ou trimestre sur autoentrepreneur.urssaf.fr.<br><br><strong>Si tu n as rien gagne → tu declares 0.</strong> Tu dois quand meme declarer meme si c est zero. L URSSAF calcule automatiquement tes cotisations et te debite.<br><br>Garde tous tes justificatifs de vente — Stripe, PayPal, virements. En cas de controle tu dois pouvoir justifier chaque euro.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Emettre des factures</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Chaque vente doit generer une facture. Mentions obligatoires :<br><br><strong>- Ton nom et adresse</strong><br><strong>- Ton numero SIRET</strong><br><strong>- Le nom et adresse du client</strong><br><strong>- La description du service</strong><br><strong>- Le montant HT et TTC</strong><br><strong>- La mention "TVA non applicable — article 293B du CGI"</strong> si tu es en franchise de TVA<br><br>Outils gratuits pour facturer : Shine, Facture.net, ou simplement un PDF Word/Canva.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La TVA — quand et comment</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>En dessous de 36 800 euros de CA annuel → <strong>franchise de TVA.</strong> Tu n as pas a facturer la TVA a tes clients.<br><br>Au dessus de 36 800 euros → tu dois facturer la TVA (20% sur les services) et la reverser a l Etat.<br><br><strong>Bonne nouvelle :</strong> la plupart des ventes en ligne de formations sont exonerees de TVA en France. Verifie avec un comptable selon ton activite precise.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Le livre de recettes</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Obligation legale simple : tu dois tenir un <strong>registre chronologique de toutes tes recettes.</strong><br><br>Pas besoin de logiciel complexe. Un tableau Excel ou Google Sheets suffit avec : date, nature de la vente, montant, mode de paiement, reference de facture.<br><br>Conserve ce registre et toutes tes factures pendant <strong>10 ans.</strong></p></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>LEGAL</span></div>
+  <div class="s-sub">Teste tes connaissances</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu fais ta premiere vente de 97 euros en ligne. <em>Qu est-ce que tu dois faire legalement ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">A</div><div class="option-text">Rien — en dessous de 1000 euros on n a pas a se declarer</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">B</div><div class="option-text">Attendre d avoir plusieurs ventes avant de se declarer</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','C')"><div class="option-letter">C</div><div class="option-text">Creer son auto-entreprise, emettre une facture et declarer ce CA</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">D</div><div class="option-text">Creer une SARL pour etre mieux protege</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Des le premier euro tu dois etre declare. L auto-entreprise se cree gratuitement en 15 minutes. La SARL est inutile au debut — beaucoup trop de contraintes. Etre en regle des le debut te protege et te permet de dormir sereinement.</div>
+    <div class="quiz-feedback" id="q1-wrong">La bonne reponse est C. En France tu dois te declarer des le premier euro gagne. Il n y a pas de seuil de tolerance. L auto-entreprise est gratuite et se cree en 15 minutes. Vendre sans etre declare est du travail non declare — avec les risques que ca implique.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton auto-entreprise</strong> sur autoentrepreneur.urssaf.fr — gratuit et 15 minutes maximum.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Ouvre un compte bancaire pro</strong> dedie a ton activite — Shine ou Qonto pour commencer.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree un modele de facture</strong> avec toutes les mentions obligatoires — Canva ou Facture.net.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton livre de recettes</strong> sur Google Sheets et note chaque vente des maintenant.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Programme un rappel mensuel</strong> pour declarer ton CA sur le site URSSAF a la date limite.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Consulte un comptable</strong> quand tu depasses 2000 euros par mois — pour optimiser ta fiscalite.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-20.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 20</a>
+    <a class="btn-nav" href="module-22.html">Module 22<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m21_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m21_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_21_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_21_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-22.html";},1000);
+}
+</script>
+
+</body>
+</html>
