@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 20 — Systeme.io & Stan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.compare-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:8px;overflow:hidden;margin-bottom:16px}
+.compare-header{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06)}
+.compare-col{padding:12px 10px;text-align:center}
+.compare-col-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:2px;color:#f5f0e8}
+.compare-col-price{font-size:10px;color:rgba(201,168,76,.6);margin-top:2px}
+.compare-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)}
+.compare-row:last-child{border-bottom:none}
+.compare-feature{padding:10px;font-size:10px;font-weight:300;color:rgba(245,240,232,.6);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.4}
+.compare-feature.yes{color:#80d080}
+.compare-feature.no{color:rgba(192,0,26,.6)}
+.compare-feature.label{color:rgba(245,240,232,.4);font-weight:500;justify-content:flex-start;padding-left:14px}
+.tabs{display:flex;gap:6px;margin-bottom:18px}
+.tab-btn{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px 8px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.35);cursor:pointer;-webkit-appearance:none;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s}
+.tab-btn span{font-size:20px}
+.tab-btn.active{border-color:rgba(201,168,76,.4);color:#C9A84C;background:rgba(201,168,76,.06)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 20</div>
+  <div class="header-num">20 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">⚙️ Outils</div>
+  <span class="hero-num">MODULE 20</span>
+  <div class="hero-title">SYSTEME.IO<br><span>& STAN</span></div>
+  <div class="hero-sub">Les outils tout-en-un pour automatiser tes ventes et ta formation</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="story-block">
+    <p>Tu n as pas besoin de 10 outils differents pour vendre en ligne. <strong>Systeme.io et Stan</strong> font chacun tout ce dont tu as besoin — tunnel, email, paiement, espace membres — dans une seule interface.</p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Le meilleur outil c est celui que tu utilises vraiment. Pas le plus complet."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">COMPARATIF <span>COMPLET</span></div>
+  <div class="s-sub">Systeme.io vs Stan — lequel choisir selon ta situation</div>
+  <div class="compare-wrap">
+    <div class="compare-header">
+      <div class="compare-col"><div class="compare-col-title">Critere</div></div>
+      <div class="compare-col"><div class="compare-col-title">Systeme.io</div><div class="compare-col-price">Gratuit jusqu a 2000</div></div>
+      <div class="compare-col"><div class="compare-col-title">Stan Store</div><div class="compare-col-price">29$/mois</div></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Prix</div>
+      <div class="compare-feature yes">100% Gratuit</div>
+      <div class="compare-feature">29$/mois</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Tunnels de vente</div>
+      <div class="compare-feature yes">Oui complet</div>
+      <div class="compare-feature yes">Oui simple</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Email marketing</div>
+      <div class="compare-feature yes">Oui avance</div>
+      <div class="compare-feature yes">Oui integre</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Espace membres</div>
+      <div class="compare-feature yes">Oui complet</div>
+      <div class="compare-feature yes">Oui simple</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Commission ventes</div>
+      <div class="compare-feature yes">0%</div>
+      <div class="compare-feature yes">0%</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Lien en bio integre</div>
+      <div class="compare-feature no">Non</div>
+      <div class="compare-feature yes">Oui natif</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Langue</div>
+      <div class="compare-feature yes">Francais</div>
+      <div class="compare-feature">Anglais</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-feature label">Ideal pour</div>
+      <div class="compare-feature">Systemes avances</div>
+      <div class="compare-feature">Createurs reseaux</div>
+    </div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">🎯</div>
+    <div class="info-text"><strong>Regle simple :</strong> Si tu debutes avec zero budget → <strong>Systeme.io</strong>. Si tu as une audience sur les reseaux et veux un lien en bio avec boutique integree → <strong>Stan</strong>. Les deux fonctionnent — choisis et vas jusqu au bout.</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">GUIDE <span>COMPLET</span></div>
+  <div class="s-sub">Configuration pas a pas — choisis ta plateforme</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('systeme',this)"><span>⚙️</span>Systeme.io</button>
+    <button class="tab-btn" onclick="showTab('stan',this)"><span>⭐</span>Stan Store</button>
+  </div>
+
+  <div class="tab-content active" id="tab-systeme">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Cree ton compte gratuit</div><div class="step-text">systeme.io → <strong>Commencer gratuitement</strong> → pas de CB demandee → tu accedes immediatement au dashboard complet. Plan gratuit : 2000 contacts, 3 tunnels, emails illimites.</div><div class="step-tip">Zero risque — tu paies seulement si tu depasses 2000 contacts</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Cree ton tunnel de vente</div><div class="step-text">Tunnels → <strong>Creer un tunnel</strong> → Vendre un produit → choisis un template → customise avec tes textes, couleurs et images. Le tunnel genere automatiquement : page capture + page vente + page confirmation.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Configure ton produit et le paiement</div><div class="step-text">Ventes → <strong>Produits → Nouveau produit</strong> → nom, prix, description → connecte Stripe → active le paiement en plusieurs fois si tu veux. Chaque achat declenche automatiquement l acces a ton espace membres.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Cree ton espace membres</div><div class="step-text">Espaces membres → <strong>Creer un espace</strong> → ajoute tes modules avec videos, textes, fichiers → configure les acces selon les produits achetes. C est la que tu heberges ta formation complete.</div><div class="step-tip">Systeme.io heberge tes videos — pas besoin de YouTube</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Active les emails automatiques</div><div class="step-text">Emails → <strong>Campagnes → Creer une campagne</strong> → ajoute tes 5 emails de bienvenue espaces de 1 jour → active. Chaque inscription declenche automatiquement la sequence.</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-stan">
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Cree ton compte Stan</div><div class="step-text">stan.store → <strong>Start Free Trial</strong> → 14 jours gratuits sans CB → connecte ton Instagram ou TikTok pour importer ton profil. Ton lien Stan remplace immediatement ton lien en bio.</div><div class="step-tip">14 jours gratuits — largement suffisant pour faire ta premiere vente</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Ajoute tes produits</div><div class="step-text">Products → <strong>Add Product</strong> → choisis le type : Digital Product pour un PDF ou fichier, Course pour une formation, Booking pour des appels coaching → remplis les infos et mets ton prix.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Personnalise ta boutique</div><div class="step-text">Store → <strong>Customize</strong> → change les couleurs et la photo de profil. <strong>Fond sombre + accents or</strong> = look premium instantane. Coherent avec ton branding sur les reseaux.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Connecte Stripe</div><div class="step-text">Settings → <strong>Payment Settings → Connect with Stripe</strong> → Stan ne prend aucune commission sur tes ventes. Tout l argent va directement sur ton compte Stripe.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Active le programme d affiliation</div><div class="step-text">Stan → <strong>Affiliate Program</strong> → active et definis ton taux de commission (20 a 40% recommande) → tes clients peuvent promouvoir ta formation et gagner une commission. Tu crees une armee de vendeurs gratuitement.</div><div class="step-tip">L affiliation peut doubler tes ventes sans effort supplementaire</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">QUIZ <span>OUTILS</span></div>
+  <div class="s-sub">Lequel choisir selon ta situation</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu debutes, tu n as pas encore de revenus en ligne et tu veux lancer ton premier tunnel de vente. <em>Quel outil utilises-tu ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','correct','A')"><div class="option-letter">A</div><div class="option-text">Systeme.io — gratuit, tunnel complet, email marketing integre</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','A')"><div class="option-letter">B</div><div class="option-text">Stan Store — 29$/mois mais plus moderne</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','A')"><div class="option-letter">C</div><div class="option-text">Shopify — le standard mondial</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','A')"><div class="option-letter">D</div><div class="option-text">Les deux en meme temps pour tester</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Systeme.io gratuit jusqu a 2000 contacts, tunnels complets, emails automatiques, espace membres. Zero risque financier. Tu peux faire tes premieres ventes et valider ton modele avant de payer quoi que ce soit.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse A est la bonne. Quand tu debutes sans revenus, payer 29$/mois pour Stan est inutile. Systeme.io offre exactement les memes fonctionnalites gratuitement jusqu a 2000 contacts. Stan devient pertinent quand tu as deja une audience active sur les reseaux.</div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis ton outil</strong> selon ta situation — Systeme.io si zero budget, Stan si audience active.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton compte</strong> et explore le dashboard pendant 30 minutes avant de commencer a construire.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton premier tunnel</strong> avec page de capture et page de vente en moins de 2 heures.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Configure ton paiement Stripe</strong> et fais un achat test a 1 euro pour valider tout le parcours.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Programme ta sequence email</strong> de 5 messages automatiques apres inscription.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Mets le lien de ton tunnel</strong> dans toutes tes bios reseaux sociaux aujourd hui.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-19.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 19</a>
+    <a class="btn-nav" href="module-21.html">Module 21<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function showTab(name,btn){
+  document.querySelectorAll(".tab-content").forEach(function(t){t.classList.remove("active");});
+  document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active");});
+  document.getElementById("tab-"+name).classList.add("active");
+  btn.classList.add("active");
+}
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m20_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m20_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_20_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_20_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-21.html";},1000);
+}
+</script>
+
+</body>
+</html>
