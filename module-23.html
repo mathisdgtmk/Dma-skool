@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 23 — Droits de Revente MRR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.type-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden}
+.type-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
+.type-card.t1::before{background:linear-gradient(90deg,#C9A84C,#e8c96a)}
+.type-card.t2::before{background:linear-gradient(90deg,#C0001A,#ff4444)}
+.type-card.t3::before{background:linear-gradient(90deg,#7ab8ff,#4488cc)}
+.type-tag{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px;display:inline-block;margin-bottom:8px}
+.type-card.t1 .type-tag{background:rgba(201,168,76,.15);color:#C9A84C}
+.type-card.t2 .type-tag{background:rgba(192,0,26,.15);color:#ff7070}
+.type-card.t3 .type-tag{background:rgba(122,184,255,.1);color:#7ab8ff}
+.type-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:6px}
+.type-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.6}
+.type-desc strong{color:#C9A84C;font-weight:600}
+.mrr-flow{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:8px;padding:18px;margin-bottom:16px}
+.mrr-flow-title{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:3px;color:#C9A84C;margin-bottom:14px;text-align:center}
+.flow-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.flow-box{flex:1;min-width:60px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:8px 10px;text-align:center;font-size:10px;color:rgba(245,240,232,.7);line-height:1.4}
+.flow-box.gold{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.06);color:#C9A84C}
+.flow-arrow-small{color:rgba(201,168,76,.3);font-size:14px;flex-shrink:0}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 23</div>
+  <div class="header-num">23 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🔑 MRR</div>
+  <span class="hero-num">MODULE 23</span>
+  <div class="hero-title">DROITS DE<br><span>REVENTE MRR</span></div>
+  <div class="hero-sub">Vends avec droits de revente et cree une armee de revendeurs</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🔑</span>
+    <div class="sensible-title">TES CLIENTS VENDENT POUR TOI</div>
+    <p class="sensible-text">
+      Le MRR — Master Resell Rights — c est simple.<br><br>
+      Tu crees un produit une fois. Tu le vends avec le droit de le revendre.<br><br>
+      <strong>Tes acheteurs deviennent tes vendeurs.</strong> Et toi tu gardes 100% de chaque vente que tu fais.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Le MRR transforme chaque client en commercial — sans salaire, sans contrainte, sans limite."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES 3 TYPES <span>DE DROITS</span></div>
+  <div class="s-sub">Comprendre les differences pour bien les utiliser et les vendre</div>
+
+  <div class="type-card t1">
+    <span class="type-tag">MASTER RESELL RIGHTS — MRR</span>
+    <div class="type-title">Droits de revente + droits de revendre les droits</div>
+    <div class="type-desc">L acheteur peut vendre le produit ET donner les memes droits a ses propres acheteurs. <strong>Effet boule de neige maximal.</strong> Le produit se propage de vendeur en vendeur. C est le modele DMA.</div>
+  </div>
+
+  <div class="type-card t2">
+    <span class="type-tag">PRIVATE LABEL RIGHTS — PLR</span>
+    <div class="type-title">Droits de modifier + rebaptiser + revendre</div>
+    <div class="type-desc">L acheteur peut changer le nom, le branding, le contenu et le vendre comme le sien. <strong>Permet de personnaliser completement le produit.</strong> Plus de valeur percue mais necessite du travail supplementaire.</div>
+  </div>
+
+  <div class="type-card t3">
+    <span class="type-tag">RESELL RIGHTS — RR</span>
+    <div class="type-title">Droits de revente uniquement</div>
+    <div class="type-desc">L acheteur peut revendre le produit mais <strong>ne peut pas transferer les droits de revente.</strong> Il vend le produit — ses acheteurs ne peuvent pas le revendre. Modele simple et controle.</div>
+  </div>
+
+  <div class="info-block">
+    <div class="info-icon">🎯</div>
+    <div class="info-text"><strong>Pour la DMA :</strong> Le modele MRR est ideal. Tes clients achetent la formation + les droits de la revendre. Ils font leurs propres ventes a 100%. Toi tu continues a vendre ton produit original sans rien partager.</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">COMMENT <span>CA FONCTIONNE</span></div>
+  <div class="s-sub">Le flux complet du modele MRR</div>
+  <div class="mrr-flow">
+    <div class="mrr-flow-title">FLUX MRR — DE TOI A L INFINI</div>
+    <div class="flow-row">
+      <div class="flow-box gold">Toi<br>Tu crees le produit</div>
+      <div class="flow-arrow-small">→</div>
+      <div class="flow-box">Client A<br>Achete 297 euros + droits MRR</div>
+      <div class="flow-arrow-small">→</div>
+      <div class="flow-box">Client A revend<br>Garde 100%</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box gold">Toi<br>Tu continues a vendre</div>
+      <div class="flow-arrow-small">→</div>
+      <div class="flow-box">Client B<br>Achete 297 euros + droits MRR</div>
+      <div class="flow-arrow-small">→</div>
+      <div class="flow-box">Client B revend<br>Garde 100%</div>
+    </div>
+    <div class="info-block" style="margin-top:14px;margin-bottom:0">
+      <div class="info-icon">💡</div>
+      <div class="info-text">Toi tu vends ton produit et tu gardes 100%. Tes clients revendent leur propre copie et gardent 100%. <strong>Personne ne partage rien.</strong> C est ca la puissance du MRR.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">CREE TON <span>PRODUIT MRR</span></div>
+  <div class="s-sub">De la creation au lancement en 5 etapes</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisis le bon produit a vendre avec droits</div><div class="step-text">Les meilleurs produits MRR : formations completes, packs de templates, guides ultra-detailles. <strong>La qualite du produit doit justifier le prix eleve</strong> car tes acheteurs vont le revendre — si le produit est mediocre personne ne l achete deux fois.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Fixe un prix premium</div><div class="step-text">Un produit MRR se vend plus cher qu un produit normal car l acheteur recoit <strong>le produit + les droits de revente</strong>. Formule : prix produit seul + valeur des droits de revente. Exemple : formation a 97 euros → avec MRR a 247 ou 297 euros.</div><div class="step-tip">Prix MRR recommande : 2 a 3 fois le prix normal du produit</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Redige la licence MRR</div><div class="step-text">Un document simple qui precis exactement ce que l acheteur a le droit de faire. Inclure : <strong>peut revendre OUI, peut modifier NON, peut offrir gratuitement NON, peut revendre les droits OUI.</strong> Ajoute ce document dans le produit livre.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Cree un kit marketing pour tes revendeurs</div><div class="step-text">Donne a tes acheteurs MRR un kit complet pour qu ils puissent revendre facilement : page de vente prete, visuels, emails, scripts de vente. <strong>Plus ils vendent facilement, plus le produit se propage.</strong></div><div class="step-tip">Kit marketing = plus de ventes pour eux = plus de credibilite pour toi</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Lance avec une offre de fondateurs</div><div class="step-text">Les premiers acheteurs MRR ont un avantage special — prix reduit en echange de temoignages. <strong>10 acheteurs fondateurs = 10 revendeurs actifs des le premier jour.</strong> L effet boule de neige commence immediatement.</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">LES <span>SECRETS</span></div>
+  <div class="s-sub">Ce que les vendeurs MRR qui reussissent font differemment</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Reste le vendeur le plus actif de ton propre produit</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Erreur classique : croire que les revendeurs vont tout faire. <strong>Toi tu continues a vendre le plus activement.</strong><br><br>Avantage : tu connais ton produit mieux que personne, tu as la meilleure page de vente, et chaque vente que tu fais inspire tes revendeurs. Les createurs qui vendent le plus en MRR sont ceux qui montrent l exemple.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Cree une communaute de revendeurs</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Cree un groupe prive (Skool, Discord, Telegram) pour tes acheteurs MRR. Partage tes stats de vente, donne des conseils, celebre leurs succes.<br><br><strong>Une communaute active de revendeurs se motive mutuellement.</strong> Quand ils voient que les autres vendent, ils vendent aussi. L emulation collective est le meilleur moteur de vente.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Mets a jour le produit regulierement</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Ajoute un nouveau module, un nouveau bonus, une nouvelle ressource tous les 2-3 mois. <strong>Les mises a jour creent de la valeur pour ceux qui ont deja achete</strong> et donnent une raison aux nouveaux d acheter maintenant.<br><br>Un produit MRR qui evolue = revendeurs plus motives = plus de ventes = ton produit reste pertinent longtemps.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Protege la valeur de ton produit</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Le risque du MRR : un revendeur casse les prix et devalue ton produit. <strong>Ajoute dans ta licence un prix minimum de revente.</strong> Exemple : "Ce produit ne peut pas etre vendu en dessous de 197 euros."<br><br>Ca protege ta valeur percue et celle de tous tes revendeurs. Un produit MRR mal protege finit vendu a 9 euros sur des sites de soldes — detruisant toute la chaine de valeur.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">QUIZ <span>MRR</span></div>
+  <div class="s-sub">Teste ta comprehension</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu vends une formation a 97 euros. Tu veux ajouter les droits MRR. <em>A quel prix dois-tu vendre le pack avec droits ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">A</div><div class="option-text">97 euros — meme prix, c est un cadeau pour le client</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">B</div><div class="option-text">147 euros — juste un peu plus pour les droits</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','C')"><div class="option-letter">C</div><div class="option-text">247 a 297 euros — les droits de revente valent autant que le produit</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','C')"><div class="option-letter">D</div><div class="option-text">497 euros — le MRR ca vaut tres cher</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Les droits MRR ont une valeur enorme car ils permettent de generer des revenus illimites. Vendre a 247-297 euros est logique — l acheteur peut recuperer sa mise des la premiere vente et tout le reste est benefice. Trop cher decourage, trop bon marche devalue le produit.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse C est la plus juste. 97 euros = donner les droits gratuitement. 147 euros = sous-evaluer les droits. 497 euros pour une formation a 97 euros = trop cher, peu de conversions. 247-297 euros = juste prix : l acheteur voit la valeur et peut rentabiliser des la premiere vente.</div>
+  </div>
+</div>
+
+<div class="section" id="s7">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis le produit</strong> auquel tu vas ajouter les droits MRR — formation, pack, guide.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Fixe ton prix MRR</strong> a 2-3 fois le prix normal du produit seul.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Redige ta licence MRR</strong> avec le prix minimum de revente et les regles claires.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree le kit marketing</strong> pour tes revendeurs — page de vente, visuels, scripts.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Lance avec 10 acheteurs fondateurs</strong> a prix reduit en echange de temoignages.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree le groupe prive</strong> de ta communaute de revendeurs sur Telegram ou Skool.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-22.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 22</a>
+    <a class="btn-nav" href="module-24.html">Module 24<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m23_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m23_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_23_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_23_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-24.html";},1000);
+}
+</script>
+
+</body>
+</html>
