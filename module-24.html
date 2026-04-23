@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 24 — Personal Branding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.pillar-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start}
+.pillar-num{width:36px;height:36px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;color:#f5f0e8}
+.pillar-card.p1 .pillar-num{background:linear-gradient(135deg,#C9A84C,#a07820)}
+.pillar-card.p2 .pillar-num{background:linear-gradient(135deg,#C0001A,#8a0013)}
+.pillar-card.p3 .pillar-num{background:linear-gradient(135deg,#7ab8ff,#4488cc)}
+.pillar-card.p4 .pillar-num{background:linear-gradient(135deg,#80d080,#50a050)}
+.pillar-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.pillar-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.6}
+.pillar-text strong{color:#C9A84C;font-weight:600}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 24</div>
+  <div class="header-num">24 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">⭐ Branding</div>
+  <span class="hero-num">MODULE 24</span>
+  <div class="hero-title">PERSONAL<br><span>BRANDING</span></div>
+  <div class="hero-sub">Construis une marque personnelle qui attire les clients naturellement</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">⭐</span>
+    <div class="sensible-title">TOI C EST TA MARQUE</div>
+    <p class="sensible-text">
+      Les produits se copient. Les prix se battent. Les features s imitent.<br><br>
+      Mais <strong>toi — ton histoire, ta personnalite, ta vision</strong> — personne ne peut copier ca.<br><br>
+      Le personal branding transforme ta presence en ligne en <em>actif qui attire des clients sans que tu aies a chercher.</em>
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Les gens n achetent pas ce que tu vends. Ils achetent qui tu es."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES 4 <span>PILIERS</span></div>
+  <div class="s-sub">Ce qui construit une marque personnelle puissante</div>
+
+  <div class="pillar-card p1">
+    <div class="pillar-num">1</div>
+    <div>
+      <div class="pillar-title">Ton positionnement — Qui tu aides et comment</div>
+      <div class="pillar-text">Une phrase claire qui repond a : <strong>j aide [qui] a [resultat] grace a [methode].</strong> Sans positionnement clair tu parles a tout le monde et tu touches personne. Le positionnement est la fondation de tout le reste.</div>
+    </div>
+  </div>
+
+  <div class="pillar-card p2">
+    <div class="pillar-num">2</div>
+    <div>
+      <div class="pillar-title">Ton histoire — Pourquoi toi et pas un autre</div>
+      <div class="pillar-text">Ton parcours, tes echecs, ta transformation. <strong>Les gens s identifient aux histoires imparfaites</strong> — pas aux success stories lisses. Ta vulnerabilite authentique est ton avantage concurrentiel le plus fort.</div>
+    </div>
+  </div>
+
+  <div class="pillar-card p3">
+    <div class="pillar-num">3</div>
+    <div>
+      <div class="pillar-title">Ta coherence visuelle — L identite qui te rend reconnaissable</div>
+      <div class="pillar-text">Couleurs, police, ton de voix, style de photo. <strong>Vu 7 fois = memorise.</strong> Coherence sur tous tes reseaux = reconnaissance instantanee. La DMA utilise rouge, noir, or partout — tu la reconnais en une seconde.</div>
+    </div>
+  </div>
+
+  <div class="pillar-card p4">
+    <div class="pillar-num">4</div>
+    <div>
+      <div class="pillar-title">Ta constance — La regularite qui cree l autorite</div>
+      <div class="pillar-text">L autorite ne se construit pas avec un post viral. Elle se construit avec <strong>200 posts de valeur sur 6 mois.</strong> Chaque piece de contenu ajoute une brique. Ensemble elles forment une forteresse.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">DEFINIS TON <span>POSITIONNEMENT</span></div>
+  <div class="s-sub">La formule exacte pour se differencier</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Identifie ta cible precise</div><div class="step-text">Pas "les gens qui veulent gagner de l argent". Mais <strong>"les 18-25 ans qui veulent quitter leur emploi et vivre de leur presence en ligne mais ne savent pas par ou commencer".</strong> Plus c est precis, plus ca resonne fort.</div><div class="step-tip">La niche la plus etroite = la connexion la plus forte</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Definis ta promesse unique</div><div class="step-text">Qu est-ce que tu fais que personne d autre ne fait exactement comme toi ? <strong>Ta methode + ton histoire + ta personnalite = une promesse unique.</strong> Tu n as pas a etre le meilleur du monde — juste different et credible pour ta cible.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Cree ta phrase de positionnement</div><div class="step-text">Remplis la formule : <strong>"J aide [cible precise] a [resultat desire] en [duree realiste] grace a [methode differenciante]."</strong> Cette phrase va dans ta bio, sur ta page de vente, dans ton intro de video.</div><div class="step-tip">Exemple : "J aide les 18-30 ans a generer leurs premiers 1000 euros en ligne en 30 jours grace au marketing digital"</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Cree ton identite visuelle</div><div class="step-text">Choisis <strong>2-3 couleurs maximum</strong>, une police principale, un style de photo coherent. Cree un template Canva avec ces elements et utilise-le pour tous tes visuels. La coherence cree la reconnaissance.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Deploie partout au meme moment</div><div class="step-text">Mets a jour toutes tes bios, photos de profil, bannières. <strong>Meme branding sur Instagram, TikTok, Snap, LinkedIn.</strong> Un visiteur qui passe d un reseau a l autre doit se sentir dans le meme univers.</div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">TON <span>HISTOIRE</span></div>
+  <div class="s-sub">Comment raconter ton parcours pour creer une connexion emotionnelle</div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La structure de l histoire qui connecte</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Avant :</strong> Ta situation de depart — les doutes, les galeres, le point de douleur. Plus tu es honnete sur tes difficultees, plus les gens s identifient.<br><br><strong>Le declic :</strong> Ce qui a tout change — une rencontre, une decision, une realisation. C est le moment emotionnel cle de ton histoire.<br><br><strong>Apres :</strong> Ta transformation et tes resultats. Concrets, chiffres, reels. Pas de survente — juste la verite de ton evolution.<br><br><strong>La lecon :</strong> Ce que ca t a appris et comment tu vas aider les autres a faire le meme chemin plus vite.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Partage tes echecs — pas seulement tes succes</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Les success stories parfaites inspirent — mais n engagent pas.<br><br><strong>Un echec parle vraiment</strong> cree une connexion emotionnelle immediate. Quand tu partages ta vraie galere — les gens pensent "moi aussi j ai vecu ca" et ils te font confiance.<br><br>Regle : pour chaque succes partage, partage un echec ou une difficulte. L equilibre cree l authenticite.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Montres ta vie pas seulement ton business</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Les marques personnelles qui convertissent le plus ne parlent pas uniquement de business. Elles <strong>montrent la vie entiere</strong> — les matins, les voyages, les repas, les moments de doute, les celebrations.<br><br>Les gens achètent a ceux qu ils connaissent vraiment. Plus tu montres ta vraie vie, plus tu deviens proche — et plus ils font confiance a tes recommandations professionnelles.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Prends des positions claires</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Les marques personnelles ternes ont peur de dheranger. Les marques puissantes <strong>prennent position sur leur domaine.</strong><br><br>Dis ce que tu penses vraiment — sur le marche, sur les methodes, sur ce qui marche et ce qui ne marche pas. Les prises de position clivantes attirent les bonnes personnes et repoussent les mauvaises. C est exactement ce que tu veux.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>BRANDING</span></div>
+  <div class="s-sub">Teste ta comprehension</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu veux construire ton personal branding. <em>Quel est le premier element a definir ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">A</div><div class="option-text">Tes couleurs et ta charte graphique</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','B')"><div class="option-letter">B</div><div class="option-text">Ton positionnement — qui tu aides, quel resultat, quelle methode</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">C</div><div class="option-text">Ton logo et ton nom de marque</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">D</div><div class="option-text">Ta presence sur tous les reseaux sociaux</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Le positionnement est la fondation. Sans savoir qui tu aides et comment, tes couleurs ne servent a rien. Ton logo ne veut rien dire. Ta presence sur les reseaux est vide. Tout part du positionnement — le reste suit naturellement.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse B est la bonne. Les couleurs, le logo, la presence sur les reseaux — tout ca vient APRES le positionnement. Si tu ne sais pas qui tu aides et comment, tout le reste est decoration sans sens. Le positionnement est l ADN de ta marque personnelle.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Ecris ta phrase de positionnement</strong> avec la formule — cible, resultat, duree, methode.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Ecris ton histoire</strong> avec la structure avant, declic, apres, lecon en 200 mots.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis 2-3 couleurs</strong> et une police principale pour toute ton identite visuelle.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Mets a jour toutes tes bios</strong> avec ta phrase de positionnement sur chaque reseau.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Poste ton histoire</strong> en video ou en post — authentique, imparfaite, reelle.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Prends une position claire</strong> sur un sujet de ta niche et partage ton opinion dans un post.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-23.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 23</a>
+    <a class="btn-nav" href="module-25.html">Module 25<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m24_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m24_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_24_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_24_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-25.html";},1000);
+}
+</script>
+
+</body>
+</html>
