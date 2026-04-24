@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA — CGV Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.header-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.hero{padding:28px 20px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:14px;background:rgba(201,168,76,.05)}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(26px,7vw,40px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:8px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-size:13px;font-weight:300;color:rgba(245,240,232,.4);font-style:italic}
+.warn-block{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:6px;padding:16px;margin:20px 20px 0;display:flex;gap:10px}
+.warn-icon{font-size:20px;flex-shrink:0}
+.warn-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.7);line-height:1.6}
+.warn-text strong{color:#C9A84C}
+.copy-btn{display:block;width:calc(100% - 40px);margin:16px 20px;background:#C9A84C;border:none;border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#050505;cursor:pointer;-webkit-appearance:none;text-align:center}
+.copy-btn:active{opacity:.85}
+.section{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.s-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:4px}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:2px;color:#f5f0e8;margin-bottom:12px}
+.cgv-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.85}
+.cgv-text strong{color:#f5f0e8;font-weight:600}
+.cgv-text em{color:#C9A84C;font-style:normal;font-weight:500}
+.field{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:2px 7px;font-size:11px;color:#C9A84C;font-weight:600;display:inline}
+.footer{padding:32px 20px 60px;text-align:center}
+.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.08)}
+.footer-logo span{color:rgba(201,168,76,.15)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="header-title">CGV TEMPLATE</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">📄 Bonus DMA</div>
+  <div class="hero-title">CGV<br><span>TEMPLATE</span></div>
+  <div class="hero-sub">Conditions Générales de Vente — à personnaliser avec tes infos</div>
+</div>
+
+<div class="warn-block">
+  <div class="warn-icon">⚠️</div>
+  <div class="warn-text"><strong>Remplace les champs en jaune</strong> par tes informations personnelles avant d'utiliser ce template. Les champs entre crochets <strong>[...]</strong> sont à compléter.</div>
+</div>
+
+<button class="copy-btn" onclick="copyCGV()">📋 COPIER LES CGV COMPLÈTES</button>
+
+<div id="cgv-content">
+
+<div class="section">
+  <div class="s-num">ARTICLE 1</div>
+  <div class="s-title">Objet et champ d'application</div>
+  <div class="cgv-text">Les présentes Conditions Générales de Vente (ci-après "CGV") régissent les relations contractuelles entre <em>[Ton Prénom Nom]</em>, auto-entrepreneur immatriculé sous le numéro SIRET <em>[Ton SIRET]</em>, domicilié(e) à <em>[Ton Adresse]</em> (ci-après "le Prestataire"), et toute personne physique ou morale procédant à un achat via le site <em>[Ton Site Web]</em> (ci-après "le Client").<br><br>
+  Toute commande passée implique l'acceptation pleine et entière des présentes CGV.</div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 2</div>
+  <div class="s-title">Produits et services proposés</div>
+  <div class="cgv-text">Le Prestataire propose les services suivants :<br><br>
+  <strong>— Formation digitale en ligne</strong> : accès à des contenus pédagogiques sous forme de vidéos, documents et ressources numériques.<br>
+  <strong>— Coaching individuel ou collectif</strong> : sessions d'accompagnement personnalisé.<br>
+  <strong>— Produits numériques</strong> : templates, guides, outils téléchargeables.<br><br>
+  Les caractéristiques essentielles de chaque produit sont présentées sur la page de vente correspondante.</div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 3</div>
+  <div class="s-title">Prix et modalités de paiement</div>
+  <div class="cgv-text">Les prix sont indiqués en euros (€) toutes taxes comprises. Le Prestataire bénéficie de la franchise de TVA conformément à l'article 293B du CGI — la mention "TVA non applicable" figure sur les factures.<br><br>
+  Le paiement est exigible à la commande. Les moyens de paiement acceptés sont :<br><br>
+  <strong>— Carte bancaire</strong> via Stripe<br>
+  <strong>— PayPal</strong><br>
+  <strong>— Virement bancaire</strong> (sur demande)<br>
+  <strong>— Paiement en plusieurs fois</strong> via <em>[Klarna / PayPal / autre]</em> selon les offres disponibles.<br><br>
+  En cas de paiement en plusieurs fois, le Client s'engage à honorer l'intégralité des échéances prévues.</div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 4</div>
+  <div class="s-title">Accès et livraison</div>
+  <div class="cgv-text">Pour les formations et produits numériques, l'accès est délivré par voie électronique dans un délai de <strong>24 heures ouvrées</strong> suivant la confirmation du paiement, via l'adresse email fournie lors de la commande.<br><br>
+  L'accès à la formation est personnel et non transférable. Toute tentative de partage ou de revente non autorisée constitue une violation des présentes CGV.</div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 5</div>
+  <div class="s-title">Droit de rétractation</div>
+  <div class="cgv-text">Conformément à l'article L.221-28 du Code de la consommation, <strong>le droit de rétractation ne peut être exercé</strong> pour les contenus numériques dont l'exécution a commencé avec l'accord du consommateur avant la fin du délai de rétractation et si le consommateur a renoncé expressément à son droit de rétractation.<br><br>
+  En acceptant les présentes CGV et en accédant immédiatement au contenu, le Client reconnaît renoncer à son droit de rétractation de 14 jours.<br><br>
+  <strong>Garantie satisfaction</strong> : Nonobstant ce qui précède, le Prestataire propose une garantie résultats de <em>[30 jours]</em> sous conditions d'application de la méthode. Les modalités détaillées sont disponibles sur la page de vente.</div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 6</div>
+  <div class="s-title">Propriété intellectuelle</div>
+  <div class="cgv-text">L'ensemble des contenus proposés (vidéos, textes, documents, supports pédagogiques) sont la propriété exclusive du Prestataire et sont protégés par le droit d'auteur.<br><br>
+  Sauf mention contraire (droits de revente MRR accordés expressément), toute reproduction, diffusion ou exploitation commerciale sans autorisation écrite du Prestataire est strictement interdite et constitue une contrefaçon.</div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 7</div>
+  <div class="s-title">Responsabilité</div>
+  <div class="cgv-text">Le Prestataire s'engage à fournir les contenus et services décrits avec soin et diligence. Cependant, les résultats obtenus par le Client dépendent de son engagement et de l'application des méthodes enseignées.<br><br>
+  <strong>Le Prestataire ne garantit pas de résultats financiers spécifiques</strong> et décline toute responsabilité en cas de mauvaise application de la méthode, de non-respect des conseils ou de facteurs externes indépendants de sa volonté.</div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 8</div>
+  <div class="s-title">Données personnelles</div>
+  <div class="cgv-text">Les données collectées lors de la commande (nom, email, adresse) sont utilisées exclusivement pour le traitement de la commande et la relation commerciale.<br><br>
+  Conformément au RGPD, le Client dispose d'un droit d'accès, de rectification et de suppression de ses données en adressant une demande à : <em>[Ton Email]</em></div>
+</div>
+
+<div class="section">
+  <div class="s-num">ARTICLE 9</div>
+  <div class="s-title">Droit applicable et litiges</div>
+  <div class="cgv-text">Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les tribunaux français seront seuls compétents.<br><br>
+  Le Client peut également recourir à la plateforme européenne de règlement en ligne des litiges : <strong>ec.europa.eu/consumers/odr</strong><br><br>
+  <em>CGV mises à jour le <strong>[Date]</strong> — <strong>[Ton Prénom Nom]</strong></em></div>
+</div>
+
+</div>
+
+<button class="copy-btn" onclick="copyCGV()">📋 COPIER LES CGV COMPLÈTES</button>
+
+<div class="footer"><div class="footer-logo">DM<span>A</span></div></div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+
+function copyCGV(){
+  var text=document.getElementById("cgv-content").innerText;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){alert("CGV copiées ! Colle-les dans ton document et remplace les champs entre [crochets].");});
+  } else {
+    var ta=document.createElement("textarea");
+    ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand("copy");document.body.removeChild(ta);
+    alert("CGV copiées !");
+  }
+}
+</script>
+
+</body>
+</html>
