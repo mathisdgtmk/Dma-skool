@@ -82,9 +82,9 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
   <span class="login-icon">🔐</span>
   <div class="login-title">ACCES ADMIN</div>
   <div class="login-sub">Reserve a Mathis uniquement</div>
-  <input class="login-input" id="adminPwd" type="password" placeholder="Mot de passe admin">
+  <input class="login-input" id="adminPwd" type="password" placeholder="Mot de passe admin" oninput="clearErr()">
   <div class="login-err" id="loginErr">Mot de passe incorrect</div>
-  <button class="btn-red" onclick="adminLogin()">ACCEDER AU PANEL</button>
+  <button class="btn-red" id="loginBtn" type="button">ACCEDER AU PANEL</button>
 </div>
 
 <div class="admin-wrap" id="adminWrap">
@@ -179,6 +179,19 @@ var ADMIN_PWD = "Mathis@DMA#2026";
 document.getElementById("adminPwd").addEventListener("keydown", function(e) {
   if (e.key === "Enter") adminLogin();
 });
+document.getElementById("loginBtn").addEventListener("click", function() {
+  adminLogin();
+});
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("loginBtn").addEventListener("touchend", function(e) {
+    e.preventDefault();
+    adminLogin();
+  });
+});
+
+function clearErr() {
+  document.getElementById("loginErr").style.display = "none";
+}
 
 function adminLogin() {
   var pwd = document.getElementById("adminPwd").value;
