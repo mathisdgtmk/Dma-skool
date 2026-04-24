@@ -6,165 +6,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DMA — Espace Membres</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
-  --red:#C0001A;--gold:#C9A84C;--gold-dim:rgba(201,168,76,.15);
-  --bg:#050505;--surface:rgba(255,255,255,.025);--border:rgba(255,255,255,.06);
-}
-html,body{background:var(--bg);color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* GRAIN OVERLAY */
-body::after{content:””;position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.025;
-background-image:url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’/%3E%3C/svg%3E”)}
-
-/* AMBIENT GLOW */
-.ambient{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:400px;
-background:radial-gradient(ellipse,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none;z-index:0}
+.ambient{position:fixed;top:-150px;left:50%;transform:translateX(-50%);width:500px;height:350px;
+background:radial-gradient(ellipse,rgba(192,0,26,.1) 0%,transparent 70%);
+pointer-events:none;z-index:0}
 
 /* HEADER */
-.header{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.92);backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(201,168,76,.08);padding:0 18px;height:54px;
+.header{position:sticky;top:0;z-index:50;background:#050505;
+border-bottom:1px solid rgba(201,168,76,.1);padding:0 18px;height:54px;
 display:flex;align-items:center;justify-content:space-between}
 .header-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:5px;color:#f5f0e8}
-.header-logo span{color:var(–gold)}
+.header-logo span{color:#C9A84C}
 .header-right{display:flex;align-items:center;gap:12px}
 .header-user{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3)}
-.header-logout{background:none;border:none;color:rgba(245,240,232,.2);font-size:18px;cursor:pointer;padding:4px;line-height:1}
+.header-logout{background:none;border:none;color:rgba(245,240,232,.25);font-size:18px;cursor:pointer;padding:4px;line-height:1;-webkit-appearance:none}
 
-/* HERO WELCOME */
-.welcome{position:relative;z-index:1;padding:28px 20px 20px;text-align:left}
-.welcome-tag{display:inline-flex;align-items:center;gap:6px;font-size:8px;font-weight:700;letter-spacing:3px;
-text-transform:uppercase;color:var(–gold);border:1px solid rgba(201,168,76,.2);
-border-radius:2px;padding:4px 10px;margin-bottom:10px;background:rgba(201,168,76,.05)}
-.welcome-name{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,8vw,44px);
+/* WELCOME */
+.welcome{position:relative;z-index:1;padding:28px 20px 16px}
+.welcome-tag{display:inline-flex;align-items:center;gap:6px;font-size:8px;font-weight:700;
+letter-spacing:3px;text-transform:uppercase;color:#C9A84C;
+border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:4px 10px;
+margin-bottom:12px;background:rgba(201,168,76,.05)}
+.welcome-name{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(26px,7vw,42px);
 letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:6px}
-.welcome-name span{color:var(–red)}
+.welcome-name span{color:#C0001A}
 .welcome-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:14px;font-style:italic;
-color:rgba(245,240,232,.4);letter-spacing:.5px}
+color:rgba(245,240,232,.4)}
 
-/* PROGRESS BAR */
+/* PROGRESS */
 .progress-wrap{position:relative;z-index:1;padding:0 20px 20px}
 .progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.progress-text{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35)}
-.progress-count{font-family:Bebas Neue,Impact,sans-serif;font-size:14px;color:var(–gold);letter-spacing:1px}
-.progress-track{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(–red),var(–gold));border-radius:2px;
+.progress-text{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3)}
+.progress-count{font-family:Bebas Neue,Impact,sans-serif;font-size:15px;color:#C9A84C;letter-spacing:1px}
+.progress-track{height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#C0001A,#C9A84C);border-radius:2px;
 transition:width .8s cubic-bezier(.16,1,.3,1);width:0%}
 
 /* SECTION LABEL */
-.section-label{display:flex;align-items:center;gap:10px;padding:20px 20px 10px;position:relative;z-index:1}
-.section-label-line{flex:1;height:1px;background:var(–border)}
-.section-label-text{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-color:rgba(245,240,232,.25);white-space:nowrap}
+.section-label{display:flex;align-items:center;gap:10px;padding:18px 20px 8px;position:relative;z-index:1}
+.sl-line{flex:1;height:1px;background:rgba(255,255,255,.06)}
+.sl-text{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+color:rgba(245,240,232,.22);white-space:nowrap}
 
-/* MODULE GRID — 2 colonnes cards */
+/* MODULE GRID */
 .module-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px;position:relative;z-index:1}
 
-.mod-card{background:var(–surface);border:1px solid var(–border);border-radius:6px;
-padding:14px 12px;text-decoration:none;display:flex;flex-direction:column;gap:6px;
-position:relative;overflow:hidden;transition:border-color .25s,transform .15s;cursor:pointer;-webkit-appearance:none;
-animation:fadeUp .5s ease both}
-.mod-card::before{content:””;position:absolute;top:0;left:0;right:0;height:2px;
-background:linear-gradient(90deg,var(–red),var(–gold));opacity:0;transition:opacity .25s}
+.mod-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);
+border-radius:6px;padding:14px 12px;text-decoration:none;
+display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;
+transition:border-color .2s,transform .15s}
+.mod-card:before{content:””;position:absolute;top:0;left:0;right:0;height:2px;
+background:linear-gradient(90deg,#C0001A,#C9A84C);opacity:0;transition:opacity .2s}
 .mod-card:hover{border-color:rgba(201,168,76,.2);transform:translateY(-1px)}
-.mod-card:hover::before{opacity:1}
-.mod-card:active{transform:scale(.98)}
-.mod-card.done{border-color:rgba(100,200,100,.15);background:rgba(100,200,100,.02)}
-.mod-card.done::before{background:linear-gradient(90deg,#2a6e2a,#80d080);opacity:.6}
+.mod-card:hover:before{opacity:1}
+.mod-card:active{transform:scale(.97)}
+.mod-card.done{border-color:rgba(100,200,100,.15);background:rgba(100,200,100,.025)}
+.mod-card.done:before{opacity:.5;background:linear-gradient(90deg,#2a6e2a,#80d080)}
 
-.mod-num{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.2)}
-.mod-icon{font-size:20px;line-height:1}
-.mod-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:2px;color:#f5f0e8;line-height:1.2}
-.mod-status{display:flex;align-items:center;justify-content:space-between;margin-top:2px}
-.mod-status-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.12);flex-shrink:0}
-.mod-card.done .mod-status-dot{background:#80d080}
-.mod-check{font-size:10px;color:rgba(100,200,100,.6);font-weight:600;letter-spacing:1px}
+.mod-num{font-size:8px;font-weight:700;letter-spacing:2px;color:rgba(245,240,232,.2)}
+.mod-icon{font-size:20px;line-height:1;margin:2px 0}
+.mod-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:1.5px;
+color:#f5f0e8;line-height:1.2}
+.mod-footer{display:flex;align-items:center;justify-content:space-between;margin-top:3px}
+.mod-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.1);flex-shrink:0}
+.mod-card.done .mod-dot{background:#80d080}
+.mod-check{font-size:9px;color:rgba(100,200,100,.7);font-weight:700}
 
-/* SINGLE WIDE CARD */
-.mod-card.wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:14px;padding:16px}
-.mod-card.wide .mod-icon{font-size:26px}
-.mod-card.wide .mod-title{font-size:15px}
+/* WIDE CARD */
+.mod-card.wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:14px;padding:14px 16px}
+.mod-card.wide .mod-icon{font-size:24px}
+.mod-card.wide .mod-body{flex:1}
+.mod-card.wide .mod-title{font-size:14px}
+.mod-card.wide .mod-footer{margin-top:2px}
 
-/* BONUS SECTION */
+/* BONUS CARDS */
 .bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px;position:relative;z-index:1}
-.bonus-card{background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(192,0,26,.04));
-border:1px solid rgba(201,168,76,.12);border-radius:6px;padding:14px 12px;
-text-decoration:none;display:flex;flex-direction:column;gap:6px;
-transition:border-color .25s,transform .15s;cursor:pointer;animation:fadeUp .5s ease both}
-.bonus-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-1px)}
-.bonus-card:active{transform:scale(.98)}
+.bonus-card{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);
+border-radius:6px;padding:14px 12px;text-decoration:none;
+display:flex;flex-direction:column;gap:5px;
+transition:border-color .2s,transform .15s}
+.bonus-card:hover{border-color:rgba(201,168,76,.25);transform:translateY(-1px)}
+.bonus-card:active{transform:scale(.97)}
 .bonus-icon{font-size:22px}
-.bonus-title{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:2px;color:var(–gold)}
-.bonus-desc{font-size:9px;font-weight:300;color:rgba(245,240,232,.4);line-height:1.5}
+.bonus-title{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:2px;color:#C9A84C}
+.bonus-desc{font-size:9px;font-weight:300;color:rgba(245,240,232,.35);line-height:1.5}
 
-/* EXCLUSIVE BONUS */
-.exclusive-wrap{padding:0 16px;position:relative;z-index:1}
-.exclusive-card{background:linear-gradient(135deg,rgba(192,0,26,.1),rgba(201,168,76,.06));
-border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:20px 16px;
-text-align:center;position:relative;overflow:hidden}
-.exclusive-card::before{content:””;position:absolute;top:-40px;right:-40px;width:120px;height:120px;
-background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%)}
+/* EXCLUSIVE */
+.excl-wrap{padding:0 16px;position:relative;z-index:1}
+.excl-card{background:linear-gradient(135deg,rgba(192,0,26,.1),rgba(201,168,76,.06));
+border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:22px 18px;text-align:center}
 .excl-tag{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-color:var(–gold);border:1px solid rgba(201,168,76,.3);border-radius:2px;
-padding:3px 10px;display:inline-block;margin-bottom:10px}
-.excl-icon{font-size:36px;display:block;margin-bottom:8px}
-.excl-title{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:4px;
-color:#f5f0e8;margin-bottom:6px}
-.excl-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.5);line-height:1.6;margin-bottom:14px}
-.excl-btn{background:linear-gradient(135deg,var(–gold),#a07820);border:none;border-radius:3px;
-padding:13px 24px;font-family:Bebas Neue,Impact,sans-serif;font-size:14px;letter-spacing:3px;
+color:#C9A84C;border:1px solid rgba(201,168,76,.3);border-radius:2px;
+padding:3px 10px;display:inline-block;margin-bottom:12px}
+.excl-icon{font-size:38px;display:block;margin-bottom:10px}
+.excl-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:4px;
+color:#f5f0e8;margin-bottom:8px}
+.excl-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.5);line-height:1.6;margin-bottom:16px}
+.excl-btn{background:linear-gradient(135deg,#C9A84C,#a07820);border:none;border-radius:4px;
+padding:14px 24px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;
 color:#050505;cursor:pointer;-webkit-appearance:none;width:100%;transition:transform .15s}
 .excl-btn:active{transform:scale(.98)}
 
+/* FOOTER */
+.footer{position:relative;z-index:1;padding:28px 20px 52px;text-align:center}
+.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;
+color:rgba(245,240,232,.08);margin-bottom:4px}
+.footer-logo span{color:rgba(201,168,76,.15)}
+.footer-text{font-size:9px;color:rgba(245,240,232,.08);letter-spacing:1.5px}
+
 /* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;
-align-items:flex-end;justify-content:center;backdrop-filter:blur(8px)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;
+display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.show{display:flex}
-.modal{background:#0d0d0d;border:1px solid rgba(201,168,76,.2);border-radius:12px 12px 0 0;
-padding:28px 20px 40px;width:100%;max-width:480px;animation:slideUp .35s ease}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-title{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:4px;
-color:#f5f0e8;margin-bottom:4px}
-.modal-sub{font-size:11px;font-weight:300;color:rgba(245,240,232,.4);margin-bottom:20px;line-height:1.5}
+.modal{background:#0e0e0e;border:1px solid rgba(201,168,76,.2);
+border-radius:14px 14px 0 0;padding:28px 20px 44px;width:100%;max-width:480px}
+.modal-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:4px;
+color:#f5f0e8;margin-bottom:6px}
+.modal-sub{font-size:11px;font-weight:300;color:rgba(245,240,232,.4);margin-bottom:20px;line-height:1.6}
 .modal-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-border-radius:4px;padding:14px 16px;font-family:Montserrat,Arial,sans-serif;font-size:14px;
+border-radius:4px;padding:15px 16px;font-family:Montserrat,Arial,sans-serif;font-size:15px;
 color:#f5f0e8;letter-spacing:3px;text-transform:uppercase;text-align:center;
 margin-bottom:12px;-webkit-appearance:none}
 .modal-input:focus{outline:none;border-color:rgba(201,168,76,.4)}
 .modal-input::placeholder{letter-spacing:1px;text-transform:none;font-size:12px;color:rgba(245,240,232,.2)}
-.modal-btn{width:100%;background:linear-gradient(135deg,var(–gold),#a07820);border:none;
-border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;
+.modal-btn{width:100%;background:linear-gradient(135deg,#C9A84C,#a07820);border:none;
+border-radius:4px;padding:16px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;
 letter-spacing:3px;color:#050505;cursor:pointer;margin-bottom:10px;-webkit-appearance:none}
 .modal-cancel{width:100%;background:none;border:none;font-size:11px;font-weight:500;
-color:rgba(245,240,232,.25);cursor:pointer;padding:8px;-webkit-appearance:none}
+color:rgba(245,240,232,.2);cursor:pointer;padding:8px;-webkit-appearance:none}
 .modal-error{color:#ff7070;font-size:11px;text-align:center;margin-bottom:10px;display:none}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;padding:28px 20px 48px;text-align:center}
-.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;
-color:rgba(245,240,232,.1);margin-bottom:4px}
-.footer-logo span{color:rgba(201,168,76,.2)}
-.footer-text{font-size:9px;color:rgba(245,240,232,.1);letter-spacing:1.5px}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
-/* STAGGER DELAYS */
-.mod-card:nth-child(1){animation-delay:.05s}
-.mod-card:nth-child(2){animation-delay:.1s}
-.mod-card:nth-child(3){animation-delay:.12s}
-.mod-card:nth-child(4){animation-delay:.14s}
-.mod-card:nth-child(5){animation-delay:.16s}
-.mod-card:nth-child(6){animation-delay:.18s}
-.mod-card:nth-child(7){animation-delay:.20s}
-.mod-card:nth-child(8){animation-delay:.22s}
-.mod-card:nth-child(9){animation-delay:.24s}
-.mod-card:nth-child(10){animation-delay:.26s}
-.bonus-card:nth-child(1){animation-delay:.3s}
-.bonus-card:nth-child(2){animation-delay:.35s}
-.bonus-card:nth-child(3){animation-delay:.4s}
-.bonus-card:nth-child(4){animation-delay:.45s}
 </style>
 
 </head>
@@ -176,7 +151,7 @@ color:rgba(245,240,232,.1);margin-bottom:4px}
   <div class="header-logo">DM<span>A</span></div>
   <div class="header-right">
     <div class="header-user" id="headerUser"></div>
-    <button class="header-logout" onclick="logout()" title="Déconnexion">⏻</button>
+    <button class="header-logout" onclick="logout()">⏻</button>
   </div>
 </div>
 
@@ -196,233 +171,77 @@ color:rgba(245,240,232,.1);margin-bottom:4px}
 
 <!-- FONDATIONS -->
 
-<div class="section-label">
-  <div class="section-label-line"></div>
-  <div class="section-label-text">🧠 Fondations</div>
-  <div class="section-label-line"></div>
-</div>
+<div class="section-label"><div class="sl-line"></div><div class="sl-text">🧠 Fondations</div><div class="sl-line"></div></div>
 <div class="module-grid">
-  <a class="mod-card" href="module-01.html" id="mc1">
-    <div class="mod-num">01</div><div class="mod-icon">🧠</div>
-    <div class="mod-title">Mindset & Vision</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-02.html" id="mc2">
-    <div class="mod-num">02</div><div class="mod-icon">💎</div>
-    <div class="mod-title">Positionnement Premium</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-03.html" id="mc3">
-    <div class="mod-num">03</div><div class="mod-icon">💳</div>
-    <div class="mod-title">Config Paiement & Page Vente</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-04.html" id="mc4">
-    <div class="mod-num">04</div><div class="mod-icon">📦</div>
-    <div class="mod-title">Produits Digitaux</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
+  <a class="mod-card" href="module-01.html" id="mc1"><div class="mod-num">01</div><div class="mod-icon">🧠</div><div class="mod-title">Mindset & Vision</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-02.html" id="mc2"><div class="mod-num">02</div><div class="mod-icon">💎</div><div class="mod-title">Positionnement Premium</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-03.html" id="mc3"><div class="mod-num">03</div><div class="mod-icon">💳</div><div class="mod-title">Config Paiement & Page Vente</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-04.html" id="mc4"><div class="mod-num">04</div><div class="mod-icon">📦</div><div class="mod-title">Produits Digitaux</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
 </div>
 
 <!-- CONTENU & MARKETING -->
 
-<div class="section-label">
-  <div class="section-label-line"></div>
-  <div class="section-label-text">📲 Contenu & Marketing</div>
-  <div class="section-label-line"></div>
-</div>
+<div class="section-label"><div class="sl-line"></div><div class="sl-text">📲 Contenu & Marketing</div><div class="sl-line"></div></div>
 <div class="module-grid">
-  <a class="mod-card" href="module-05.html" id="mc5">
-    <div class="mod-num">05</div><div class="mod-icon">📲</div>
-    <div class="mod-title">Marketing & Contenu</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-06.html" id="mc6">
-    <div class="mod-num">06</div><div class="mod-icon">🎬</div>
-    <div class="mod-title">Vidéo Faceless</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-07.html" id="mc7">
-    <div class="mod-num">07</div><div class="mod-icon">📸</div>
-    <div class="mod-title">Instagram Mastery</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-08.html" id="mc8">
-    <div class="mod-num">08</div><div class="mod-icon">🎵</div>
-    <div class="mod-title">TikTok Hooks</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-09.html" id="mc9">
-    <div class="mod-num">09</div><div class="mod-icon">👻</div>
-    <div class="mod-title">Snapchat Strategy</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-10.html" id="mc10">
-    <div class="mod-num">10</div><div class="mod-icon">✉️</div>
-    <div class="mod-title">Email Marketing</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
+  <a class="mod-card" href="module-05.html" id="mc5"><div class="mod-num">05</div><div class="mod-icon">📲</div><div class="mod-title">Marketing & Contenu</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-06.html" id="mc6"><div class="mod-num">06</div><div class="mod-icon">🎬</div><div class="mod-title">Vidéo Faceless</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-07.html" id="mc7"><div class="mod-num">07</div><div class="mod-icon">📸</div><div class="mod-title">Instagram Mastery</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-08.html" id="mc8"><div class="mod-num">08</div><div class="mod-icon">🎵</div><div class="mod-title">TikTok Hooks</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-09.html" id="mc9"><div class="mod-num">09</div><div class="mod-icon">👻</div><div class="mod-title">Snapchat Strategy</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-10.html" id="mc10"><div class="mod-num">10</div><div class="mod-icon">✉️</div><div class="mod-title">Email Marketing</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
 </div>
 
 <!-- VENTE & CLOSING -->
 
-<div class="section-label">
-  <div class="section-label-line"></div>
-  <div class="section-label-text">🎯 Vente & Closing</div>
-  <div class="section-label-line"></div>
-</div>
+<div class="section-label"><div class="sl-line"></div><div class="sl-text">🎯 Vente & Closing</div><div class="sl-line"></div></div>
 <div class="module-grid">
-  <a class="mod-card" href="module-11.html" id="mc11">
-    <div class="mod-num">11</div><div class="mod-icon">🎯</div>
-    <div class="mod-title">Closing & Scripts</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-12.html" id="mc12">
-    <div class="mod-num">12</div><div class="mod-icon">🔴</div>
-    <div class="mod-title">Live Selling TikTok</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-13.html" id="mc13">
-    <div class="mod-num">13</div><div class="mod-icon">🎥</div>
-    <div class="mod-title">VSL & Video Sales</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-14.html" id="mc14">
-    <div class="mod-num">14</div><div class="mod-icon">🤖</div>
-    <div class="mod-title">AI Selling</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card wide" href="module-15.html" id="mc15">
-    <div class="mod-icon">🔁</div>
-    <div><div class="mod-num">15</div><div class="mod-title">Funnels & Tunnels de Vente</div></div>
-    <div class="mod-status" style="margin-left:auto"><div class="mod-status-dot"></div></div>
-  </a>
-  <a class="mod-card wide" href="module-16.html" id="mc16">
-    <div class="mod-icon">💬</div>
-    <div><div class="mod-num">16</div><div class="mod-title">Automation DM</div></div>
-    <div class="mod-status" style="margin-left:auto"><div class="mod-status-dot"></div></div>
-  </a>
+  <a class="mod-card" href="module-11.html" id="mc11"><div class="mod-num">11</div><div class="mod-icon">🎯</div><div class="mod-title">Closing & Scripts</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-12.html" id="mc12"><div class="mod-num">12</div><div class="mod-icon">🔴</div><div class="mod-title">Live Selling TikTok</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-13.html" id="mc13"><div class="mod-num">13</div><div class="mod-icon">🎥</div><div class="mod-title">VSL & Video Sales</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-14.html" id="mc14"><div class="mod-num">14</div><div class="mod-icon">🤖</div><div class="mod-title">AI Selling</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card wide" href="module-15.html" id="mc15"><div class="mod-icon">🔁</div><div class="mod-body"><div class="mod-num">15</div><div class="mod-title">Funnels & Tunnels de Vente</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></div></a>
+  <a class="mod-card wide" href="module-16.html" id="mc16"><div class="mod-icon">💬</div><div class="mod-body"><div class="mod-num">16</div><div class="mod-title">Automation DM</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></div></a>
 </div>
 
 <!-- REVENUS & SYSTEMES -->
 
-<div class="section-label">
-  <div class="section-label-line"></div>
-  <div class="section-label-text">💰 Revenus & Systèmes</div>
-  <div class="section-label-line"></div>
-</div>
+<div class="section-label"><div class="sl-line"></div><div class="sl-text">💰 Revenus & Systèmes</div><div class="sl-line"></div></div>
 <div class="module-grid">
-  <a class="mod-card" href="module-17.html" id="mc17">
-    <div class="mod-num">17</div><div class="mod-icon">🔄</div>
-    <div class="mod-title">MRR & Récurrence</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-18.html" id="mc18">
-    <div class="mod-num">18</div><div class="mod-icon">🏢</div>
-    <div class="mod-title">SMMA Agency</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-19.html" id="mc19">
-    <div class="mod-num">19</div><div class="mod-icon">🛍️</div>
-    <div class="mod-title">Shopify & E-commerce</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-20.html" id="mc20">
-    <div class="mod-num">20</div><div class="mod-icon">⚙️</div>
-    <div class="mod-title">Systeme.io & Stan</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-21.html" id="mc21">
-    <div class="mod-num">21</div><div class="mod-icon">📋</div>
-    <div class="mod-title">Déclaration Légale</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-22.html" id="mc22">
-    <div class="mod-num">22</div><div class="mod-icon">🤝</div>
-    <div class="mod-title">Prospection B2B</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
+  <a class="mod-card" href="module-17.html" id="mc17"><div class="mod-num">17</div><div class="mod-icon">🔄</div><div class="mod-title">MRR & Récurrence</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-18.html" id="mc18"><div class="mod-num">18</div><div class="mod-icon">🏢</div><div class="mod-title">SMMA Agency</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-19.html" id="mc19"><div class="mod-num">19</div><div class="mod-icon">🛍️</div><div class="mod-title">Shopify & E-commerce</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-20.html" id="mc20"><div class="mod-num">20</div><div class="mod-icon">⚙️</div><div class="mod-title">Systeme.io & Stan</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-21.html" id="mc21"><div class="mod-num">21</div><div class="mod-icon">📋</div><div class="mod-title">Déclaration Légale</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-22.html" id="mc22"><div class="mod-num">22</div><div class="mod-icon">🤝</div><div class="mod-title">Prospection B2B</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
 </div>
 
 <!-- PREMIUM & EXPERT -->
 
-<div class="section-label">
-  <div class="section-label-line"></div>
-  <div class="section-label-text">👑 Premium & Expert</div>
-  <div class="section-label-line"></div>
-</div>
+<div class="section-label"><div class="sl-line"></div><div class="sl-text">👑 Premium & Expert</div><div class="sl-line"></div></div>
 <div class="module-grid">
-  <a class="mod-card" href="module-23.html" id="mc23">
-    <div class="mod-num">23</div><div class="mod-icon">🔑</div>
-    <div class="mod-title">Droits de Revente MRR</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-24.html" id="mc24">
-    <div class="mod-num">24</div><div class="mod-icon">⭐</div>
-    <div class="mod-title">Personal Branding</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-25.html" id="mc25">
-    <div class="mod-num">25</div><div class="mod-icon">🤝</div>
-    <div class="mod-title">Gestion Client</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-26.html" id="mc26">
-    <div class="mod-num">26</div><div class="mod-icon">📈</div>
-    <div class="mod-title">Scaling & Délégation</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-27.html" id="mc27">
-    <div class="mod-num">27</div><div class="mod-icon">🤝</div>
-    <div class="mod-title">Affiliation & Partenariats</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
-  <a class="mod-card" href="module-28.html" id="mc28">
-    <div class="mod-num">28</div><div class="mod-icon">👑</div>
-    <div class="mod-title">Stratégie 2026</div>
-    <div class="mod-status"><div class="mod-status-dot"></div><span class="mod-check"></span></div>
-  </a>
+  <a class="mod-card" href="module-23.html" id="mc23"><div class="mod-num">23</div><div class="mod-icon">🔑</div><div class="mod-title">Droits de Revente MRR</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-24.html" id="mc24"><div class="mod-num">24</div><div class="mod-icon">⭐</div><div class="mod-title">Personal Branding</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-25.html" id="mc25"><div class="mod-num">25</div><div class="mod-icon">🤝</div><div class="mod-title">Gestion Client</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-26.html" id="mc26"><div class="mod-num">26</div><div class="mod-icon">📈</div><div class="mod-title">Scaling & Délégation</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-27.html" id="mc27"><div class="mod-num">27</div><div class="mod-icon">🔗</div><div class="mod-title">Affiliation & Partenariats</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+  <a class="mod-card" href="module-28.html" id="mc28"><div class="mod-num">28</div><div class="mod-icon">👑</div><div class="mod-title">Stratégie 2026</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
 </div>
 
-<!-- BONUS -->
+<!-- BONUS INCLUS -->
 
-<div class="section-label">
-  <div class="section-label-line"></div>
-  <div class="section-label-text">🎁 Bonus Inclus</div>
-  <div class="section-label-line"></div>
-</div>
+<div class="section-label"><div class="sl-line"></div><div class="sl-text">🎁 Bonus Inclus</div><div class="sl-line"></div></div>
 <div class="bonus-grid">
-  <a class="bonus-card" href="crm-tracker.html">
-    <div class="bonus-icon">📊</div>
-    <div class="bonus-title">Tracker CRM</div>
-    <div class="bonus-desc">Gère tes prospects et clients</div>
-  </a>
-  <div class="bonus-card" style="cursor:default;opacity:.5">
-    <div class="bonus-icon">📝</div>
-    <div class="bonus-title">Scripts Closing</div>
-    <div class="bonus-desc">Bientôt disponible</div>
-  </div>
-  <div class="bonus-card" style="cursor:default;opacity:.5">
-    <div class="bonus-icon">📄</div>
-    <div class="bonus-title">CGV Template</div>
-    <div class="bonus-desc">Bientôt disponible</div>
-  </div>
-  <div class="bonus-card" style="cursor:default;opacity:.5">
-    <div class="bonus-icon">🗓️</div>
-    <div class="bonus-title">Calendrier Contenu</div>
-    <div class="bonus-desc">Bientôt disponible</div>
-  </div>
+  <a class="bonus-card" href="crm-tracker.html"><div class="bonus-icon">📊</div><div class="bonus-title">Tracker CRM</div><div class="bonus-desc">Gère tes prospects et clients</div></a>
+  <div class="bonus-card" style="opacity:.4"><div class="bonus-icon">📝</div><div class="bonus-title">Scripts Closing</div><div class="bonus-desc">Bientôt disponible</div></div>
+  <div class="bonus-card" style="opacity:.4"><div class="bonus-icon">📄</div><div class="bonus-title">CGV Template</div><div class="bonus-desc">Bientôt disponible</div></div>
+  <div class="bonus-card" style="opacity:.4"><div class="bonus-icon">🗓️</div><div class="bonus-title">Calendrier Contenu</div><div class="bonus-desc">Bientôt disponible</div></div>
 </div>
 
 <!-- BONUS EXCLUSIF -->
 
-<div class="section-label">
-  <div class="section-label-line"></div>
-  <div class="section-label-text">🔐 Bonus Exclusif</div>
-  <div class="section-label-line"></div>
-</div>
-<div class="exclusive-wrap">
-  <div class="exclusive-card">
+<div class="section-label"><div class="sl-line"></div><div class="sl-text">🔐 Bonus Exclusif</div><div class="sl-line"></div></div>
+<div class="excl-wrap">
+  <div class="excl-card">
     <span class="excl-tag">🔐 Accès Restreint</span>
     <span class="excl-icon">🤖</span>
     <div class="excl-title">Agence IA No-Code</div>
@@ -436,14 +255,15 @@ color:rgba(245,240,232,.1);margin-bottom:4px}
   <div class="footer-text">Digital Mastery Academy © 2026</div>
 </div>
 
-<!-- MODAL CODE SECRET -->
+<!-- MODAL -->
 
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal">
     <div class="modal-title">Code Exclusif</div>
     <div class="modal-sub">Entre ton code d'accès pour débloquer le bonus Agence IA. Reçu par DM ou email de Mathis.</div>
-    <input class="modal-input" id="codeInput" type="text" placeholder="Entre ton code..." maxlength="30"
-      oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')checkCode()">
+    <input class="modal-input" id="codeInput" type="text" placeholder="Entre ton code..."
+      maxlength="30" oninput="this.value=this.value.toUpperCase()"
+      onkeydown="if(event.key==='Enter')checkCode()">
     <div class="modal-error" id="modalError">❌ Code incorrect. Contacte Mathis par DM.</div>
     <button class="modal-btn" onclick="checkCode()">VALIDER LE CODE</button>
     <button class="modal-cancel" onclick="closeModal()">Annuler</button>
@@ -451,44 +271,38 @@ color:rgba(245,240,232,.1);margin-bottom:4px}
 </div>
 
 <script>
-var CODES_BONUS=["DMA-ELITE-2025","PREMIUM-001","PREMIUM-002","PREMIUM-003","PREMIUM-004","PREMIUM-005","BONUS-VIP-001","BONUS-VIP-002","MATHIS-ADMIN"];
-
+var CODES=["DMA-ELITE-2025","PREMIUM-001","PREMIUM-002","PREMIUM-003","PREMIUM-004","PREMIUM-005","BONUS-VIP-001","BONUS-VIP-002","MATHIS-ADMIN"];
 var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
-if(!user){window.location.href="index.html";}
+if(!user)window.location.href="index.html";
 
-// Welcome
-document.getElementById("welcomeName").textContent=user.name?user.name.toUpperCase():"MEMBRE";
+document.getElementById("welcomeName").textContent=(user.name||"MEMBRE").toUpperCase();
 document.getElementById("headerUser").textContent=user.name||"";
 
-// Progress
 var done=0;
 for(var i=1;i<=28;i++){
-  if(localStorage.getItem("module_0"+i+"_done")==="1"||localStorage.getItem("module_"+i+"_done")==="1"){
+  var key1="module_0"+i+"_done";
+  var key2="module_"+i+"_done";
+  if(localStorage.getItem(key1)==="1"||localStorage.getItem(key2)==="1"){
     done++;
-    var card=document.getElementById("mc"+i);
-    if(card){
-      card.classList.add("done");
-      var dot=card.querySelector(".mod-check");
-      if(dot)dot.textContent="✓";
+    var c=document.getElementById("mc"+i);
+    if(c){
+      c.classList.add("done");
+      var ck=c.querySelector(".mod-check");
+      if(ck)ck.textContent="✓";
     }
   }
 }
 document.getElementById("progressCount").textContent=done+" / 28";
-setTimeout(function(){document.getElementById("progressFill").style.width=Math.round((done/28)*100)+"%";},300);
+setTimeout(function(){
+  document.getElementById("progressFill").style.width=Math.round((done/28)*100)+"%";
+},400);
 
-// Logout
-function logout(){
-  sessionStorage.removeItem("dma_user");
-  window.location.href="index.html";
-}
+function logout(){sessionStorage.removeItem("dma_user");window.location.href="index.html";}
 
-// Modal
 function openModal(){
-  if(sessionStorage.getItem("bonus_unlocked")==="1"){
-    window.location.href="bonus-agence-ia.html";return;
-  }
+  if(sessionStorage.getItem("bonus_unlocked")==="1"){window.location.href="bonus-agence-ia.html";return;}
   document.getElementById("modalOverlay").classList.add("show");
-  setTimeout(function(){document.getElementById("codeInput").focus();},350);
+  setTimeout(function(){document.getElementById("codeInput").focus();},300);
 }
 function closeModal(){
   document.getElementById("modalOverlay").classList.remove("show");
@@ -498,7 +312,7 @@ function closeModal(){
 function closeModalOutside(e){if(e.target===document.getElementById("modalOverlay"))closeModal();}
 function checkCode(){
   var code=document.getElementById("codeInput").value.trim().toUpperCase();
-  if(CODES_BONUS.includes(code)){
+  if(CODES.includes(code)){
     sessionStorage.setItem("bonus_unlocked","1");
     closeModal();
     window.location.href="bonus-agence-ia.html";
