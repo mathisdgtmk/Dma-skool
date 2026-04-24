@@ -6,240 +6,192 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DMA — Espace Membres</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{background:#050505}
-body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
-
-.ambient{position:fixed;top:-150px;left:50%;transform:translateX(-50%);width:500px;height:350px;
-background:radial-gradient(ellipse,rgba(192,0,26,.1) 0%,transparent 70%);
-pointer-events:none;z-index:0}
+body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
 
 /* HEADER */
-.header{position:sticky;top:0;z-index:50;background:#050505;
-border-bottom:1px solid rgba(201,168,76,.1);padding:0 18px;height:54px;
-display:flex;align-items:center;justify-content:space-between}
-.header-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:5px;color:#f5f0e8}
-.header-logo span{color:#C9A84C}
-.header-right{display:flex;align-items:center;gap:12px}
-.header-user{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3)}
-.header-logout{background:none;border:none;color:rgba(245,240,232,.25);font-size:18px;cursor:pointer;padding:4px;line-height:1;-webkit-appearance:none}
+.header{background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:0 16px;height:52px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;position:sticky;top:0;z-index:50}
+.logo{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:5px;color:#f5f0e8}
+.logo span{color:#C9A84C}
+.hright{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:10px}
+.huser{font-size:10px;font-weight:600;letter-spacing:1px;color:rgba(245,240,232,.3);text-transform:uppercase}
+.hlogout{background:none;border:none;color:rgba(245,240,232,.25);font-size:16px;cursor:pointer;padding:4px;-webkit-appearance:none}
 
 /* WELCOME */
-.welcome{position:relative;z-index:1;padding:28px 20px 16px}
-.welcome-tag{display:inline-flex;align-items:center;gap:6px;font-size:8px;font-weight:700;
-letter-spacing:3px;text-transform:uppercase;color:#C9A84C;
-border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:4px 10px;
-margin-bottom:12px;background:rgba(201,168,76,.05)}
-.welcome-name{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(26px,7vw,42px);
-letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:6px}
-.welcome-name span{color:#C0001A}
-.welcome-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:14px;font-style:italic;
-color:rgba(245,240,232,.4)}
+.welcome{padding:24px 16px 14px}
+.wtag{display:inline-block;font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:3px 9px;margin-bottom:10px;background:rgba(201,168,76,.05)}
+.wname{font-family:Bebas Neue,Impact,sans-serif;font-size:34px;letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:4px}
+.wname span{color:#C0001A}
+.wsub{font-size:12px;font-weight:300;color:rgba(245,240,232,.4);font-style:italic}
 
 /* PROGRESS */
-.progress-wrap{position:relative;z-index:1;padding:0 20px 20px}
-.progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.progress-text{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3)}
-.progress-count{font-family:Bebas Neue,Impact,sans-serif;font-size:15px;color:#C9A84C;letter-spacing:1px}
-.progress-track{height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,#C0001A,#C9A84C);border-radius:2px;
-transition:width .8s cubic-bezier(.16,1,.3,1);width:0%}
+.prog-wrap{padding:0 16px 18px}
+.prog-top{display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center;margin-bottom:7px}
+.prog-label{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3)}
+.prog-num{font-family:Bebas Neue,Impact,sans-serif;font-size:15px;color:#C9A84C;letter-spacing:1px}
+.prog-track{height:2px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:#C0001A;border-radius:2px;width:0%;-webkit-transition:width .7s;transition:width .7s}
 
-/* SECTION LABEL */
-.section-label{display:flex;align-items:center;gap:10px;padding:18px 20px 8px;position:relative;z-index:1}
-.sl-line{flex:1;height:1px;background:rgba(255,255,255,.06)}
-.sl-text{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-color:rgba(245,240,232,.22);white-space:nowrap}
+/* SECTION TITLE */
+.stitle{padding:16px 16px 8px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:8px}
+.stitle-line{-webkit-flex:1;flex:1;height:1px;background:rgba(255,255,255,.06)}
+.stitle-text{font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.22);white-space:nowrap}
 
-/* MODULE GRID */
-.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px;position:relative;z-index:1}
+/* MODULE ROW — 2 colonnes avec flexbox */
+.mrow{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:8px;padding:0 16px;margin-bottom:0}
 
-.mod-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);
-border-radius:6px;padding:14px 12px;text-decoration:none;
-display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;
-transition:border-color .2s,transform .15s}
-.mod-card:before{content:””;position:absolute;top:0;left:0;right:0;height:2px;
-background:linear-gradient(90deg,#C0001A,#C9A84C);opacity:0;transition:opacity .2s}
-.mod-card:hover{border-color:rgba(201,168,76,.2);transform:translateY(-1px)}
-.mod-card:hover:before{opacity:1}
-.mod-card:active{transform:scale(.97)}
-.mod-card.done{border-color:rgba(100,200,100,.15);background:rgba(100,200,100,.025)}
-.mod-card.done:before{opacity:.5;background:linear-gradient(90deg,#2a6e2a,#80d080)}
+.mcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:13px 11px;text-decoration:none;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:5px;width:calc(50% - 4px);position:relative;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}
+.mcard:active{opacity:.8}
+.mcard.done{border-color:rgba(100,200,100,.2);background:rgba(100,200,100,.03)}
+.mcard.wide{width:100%;-webkit-flex-direction:row;flex-direction:row;-webkit-align-items:center;align-items:center;gap:12px;padding:13px 14px}
+.mcard.wide .mbody{-webkit-flex:1;flex:1}
 
-.mod-num{font-size:8px;font-weight:700;letter-spacing:2px;color:rgba(245,240,232,.2)}
-.mod-icon{font-size:20px;line-height:1;margin:2px 0}
-.mod-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:1.5px;
-color:#f5f0e8;line-height:1.2}
-.mod-footer{display:flex;align-items:center;justify-content:space-between;margin-top:3px}
-.mod-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.1);flex-shrink:0}
-.mod-card.done .mod-dot{background:#80d080}
-.mod-check{font-size:9px;color:rgba(100,200,100,.7);font-weight:700}
+.mnum{font-size:8px;font-weight:700;letter-spacing:2px;color:rgba(245,240,232,.2)}
+.micon{font-size:20px;line-height:1;margin:2px 0}
+.mcard.wide .micon{font-size:22px;margin:0;-webkit-flex-shrink:0;flex-shrink:0}
+.mtitle{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:1.5px;color:#f5f0e8;line-height:1.2}
+.mcard.wide .mtitle{font-size:14px}
+.mfoot{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;margin-top:3px}
+.mdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.1);-webkit-flex-shrink:0;flex-shrink:0}
+.mcard.done .mdot{background:#80d080}
+.mcheck{font-size:9px;color:rgba(100,200,100,.7);font-weight:700}
 
-/* WIDE CARD */
-.mod-card.wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:14px;padding:14px 16px}
-.mod-card.wide .mod-icon{font-size:24px}
-.mod-card.wide .mod-body{flex:1}
-.mod-card.wide .mod-title{font-size:14px}
-.mod-card.wide .mod-footer{margin-top:2px}
+/* BONUS */
+.brow{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:8px;padding:0 16px}
+.bcard{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:13px 11px;text-decoration:none;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:5px;width:calc(50% - 4px);-webkit-box-sizing:border-box;box-sizing:border-box}
+.bcard:active{opacity:.8}
+.bicon{font-size:22px}
+.btitle{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:2px;color:#C9A84C}
+.bdesc{font-size:9px;font-weight:300;color:rgba(245,240,232,.35);line-height:1.5}
 
-/* BONUS CARDS */
-.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px;position:relative;z-index:1}
-.bonus-card{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);
-border-radius:6px;padding:14px 12px;text-decoration:none;
-display:flex;flex-direction:column;gap:5px;
-transition:border-color .2s,transform .15s}
-.bonus-card:hover{border-color:rgba(201,168,76,.25);transform:translateY(-1px)}
-.bonus-card:active{transform:scale(.97)}
-.bonus-icon{font-size:22px}
-.bonus-title{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:2px;color:#C9A84C}
-.bonus-desc{font-size:9px;font-weight:300;color:rgba(245,240,232,.35);line-height:1.5}
-
-/* EXCLUSIVE */
-.excl-wrap{padding:0 16px;position:relative;z-index:1}
-.excl-card{background:linear-gradient(135deg,rgba(192,0,26,.1),rgba(201,168,76,.06));
-border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:22px 18px;text-align:center}
-.excl-tag{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-color:#C9A84C;border:1px solid rgba(201,168,76,.3);border-radius:2px;
-padding:3px 10px;display:inline-block;margin-bottom:12px}
-.excl-icon{font-size:38px;display:block;margin-bottom:10px}
-.excl-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:4px;
-color:#f5f0e8;margin-bottom:8px}
-.excl-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.5);line-height:1.6;margin-bottom:16px}
-.excl-btn{background:linear-gradient(135deg,#C9A84C,#a07820);border:none;border-radius:4px;
-padding:14px 24px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;
-color:#050505;cursor:pointer;-webkit-appearance:none;width:100%;transition:transform .15s}
-.excl-btn:active{transform:scale(.98)}
+/* EXCLUSIF */
+.excl-wrap{padding:0 16px}
+.excl-card{background:#0a0a0a;border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:22px 18px;text-align:center}
+.excl-tag{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:3px 10px;display:inline-block;margin-bottom:12px}
+.excl-icon{font-size:36px;display:block;margin-bottom:10px}
+.excl-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:4px;color:#f5f0e8;margin-bottom:8px}
+.excl-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.6;margin-bottom:16px}
+.excl-btn{background:#C9A84C;border:none;border-radius:4px;padding:14px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#050505;cursor:pointer;-webkit-appearance:none;width:100%}
+.excl-btn:active{opacity:.85}
 
 /* FOOTER */
-.footer{position:relative;z-index:1;padding:28px 20px 52px;text-align:center}
-.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;
-color:rgba(245,240,232,.08);margin-bottom:4px}
-.footer-logo span{color:rgba(201,168,76,.15)}
-.footer-text{font-size:9px;color:rgba(245,240,232,.08);letter-spacing:1.5px}
+.footer{padding:28px 16px 52px;text-align:center}
+.flogo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.07)}
+.flogo span{color:rgba(201,168,76,.12)}
 
 /* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;
-display:none;align-items:flex-end;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal{background:#0e0e0e;border:1px solid rgba(201,168,76,.2);
-border-radius:14px 14px 0 0;padding:28px 20px 44px;width:100%;max-width:480px}
-.modal-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:4px;
-color:#f5f0e8;margin-bottom:6px}
-.modal-sub{font-size:11px;font-weight:300;color:rgba(245,240,232,.4);margin-bottom:20px;line-height:1.6}
-.modal-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-border-radius:4px;padding:15px 16px;font-family:Montserrat,Arial,sans-serif;font-size:15px;
-color:#f5f0e8;letter-spacing:3px;text-transform:uppercase;text-align:center;
-margin-bottom:12px;-webkit-appearance:none}
-.modal-input:focus{outline:none;border-color:rgba(201,168,76,.4)}
-.modal-input::placeholder{letter-spacing:1px;text-transform:none;font-size:12px;color:rgba(245,240,232,.2)}
-.modal-btn{width:100%;background:linear-gradient(135deg,#C9A84C,#a07820);border:none;
-border-radius:4px;padding:16px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;
-letter-spacing:3px;color:#050505;cursor:pointer;margin-bottom:10px;-webkit-appearance:none}
-.modal-cancel{width:100%;background:none;border:none;font-size:11px;font-weight:500;
-color:rgba(245,240,232,.2);cursor:pointer;padding:8px;-webkit-appearance:none}
-.modal-error{color:#ff7070;font-size:11px;text-align:center;margin-bottom:10px;display:none}
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:200;display:none;-webkit-align-items:flex-end;align-items:flex-end;-webkit-justify-content:center;justify-content:center}
+.overlay.show{display:-webkit-flex;display:flex}
+.modal{background:#111;border:1px solid rgba(201,168,76,.2);border-radius:14px 14px 0 0;padding:26px 18px 44px;width:100%;max-width:480px}
+.modal-title{font-family:Bebas Neue,Impact,sans-serif;font-size:21px;letter-spacing:4px;color:#f5f0e8;margin-bottom:6px}
+.modal-sub{font-size:11px;font-weight:300;color:rgba(245,240,232,.4);margin-bottom:18px;line-height:1.6}
+.modal-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:14px;font-size:15px;color:#f5f0e8;letter-spacing:3px;text-transform:uppercase;text-align:center;margin-bottom:10px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
+.modal-inp:focus{outline:none;border-color:rgba(201,168,76,.4)}
+.modal-inp::-webkit-input-placeholder{letter-spacing:1px;text-transform:none;font-size:12px;color:rgba(245,240,232,.2)}
+.modal-err{color:#ff7070;font-size:11px;text-align:center;margin-bottom:10px;display:none}
+.modal-btn{width:100%;background:#C9A84C;border:none;border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#050505;cursor:pointer;margin-bottom:10px;-webkit-appearance:none}
+.modal-cancel{width:100%;background:none;border:none;font-size:11px;color:rgba(245,240,232,.2);cursor:pointer;padding:8px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
 </style>
 
 </head>
 <body>
 
-<div class="ambient"></div>
-
 <div class="header">
-  <div class="header-logo">DM<span>A</span></div>
-  <div class="header-right">
-    <div class="header-user" id="headerUser"></div>
-    <button class="header-logout" onclick="logout()">⏻</button>
+  <div class="logo">DM<span>A</span></div>
+  <div class="hright">
+    <div class="huser" id="huser"></div>
+    <button class="hlogout" onclick="logout()">⏻</button>
   </div>
 </div>
 
 <div class="welcome">
-  <div class="welcome-tag">✦ Espace Membres</div>
-  <div class="welcome-name">BON RETOUR,<br><span id="welcomeName">MEMBRE</span></div>
-  <div class="welcome-sub">Ta formation t'attend. Chaque module compte.</div>
+  <div class="wtag">✦ Espace Membres</div>
+  <div class="wname">BON RETOUR,<br><span id="wname">MEMBRE</span></div>
+  <div class="wsub">Ta formation t'attend. Chaque module compte.</div>
 </div>
 
-<div class="progress-wrap">
-  <div class="progress-label">
-    <span class="progress-text">Progression globale</span>
-    <span class="progress-count" id="progressCount">0 / 28</span>
+<div class="prog-wrap">
+  <div class="prog-top">
+    <span class="prog-label">Progression globale</span>
+    <span class="prog-num" id="progNum">0 / 28</span>
   </div>
-  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
 </div>
 
 <!-- FONDATIONS -->
 
-<div class="section-label"><div class="sl-line"></div><div class="sl-text">🧠 Fondations</div><div class="sl-line"></div></div>
-<div class="module-grid">
-  <a class="mod-card" href="module-01.html" id="mc1"><div class="mod-num">01</div><div class="mod-icon">🧠</div><div class="mod-title">Mindset & Vision</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-02.html" id="mc2"><div class="mod-num">02</div><div class="mod-icon">💎</div><div class="mod-title">Positionnement Premium</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-03.html" id="mc3"><div class="mod-num">03</div><div class="mod-icon">💳</div><div class="mod-title">Config Paiement & Page Vente</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-04.html" id="mc4"><div class="mod-num">04</div><div class="mod-icon">📦</div><div class="mod-title">Produits Digitaux</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🧠 Fondations</div><div class="stitle-line"></div></div>
+<div class="mrow">
+  <a class="mcard" href="module-01.html" id="mc1"><div class="mnum">01</div><div class="micon">🧠</div><div class="mtitle">Mindset & Vision</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-02.html" id="mc2"><div class="mnum">02</div><div class="micon">💎</div><div class="mtitle">Positionnement Premium</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-03.html" id="mc3"><div class="mnum">03</div><div class="micon">💳</div><div class="mtitle">Config Paiement & Page Vente</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-04.html" id="mc4"><div class="mnum">04</div><div class="micon">📦</div><div class="mtitle">Produits Digitaux</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
 </div>
 
 <!-- CONTENU & MARKETING -->
 
-<div class="section-label"><div class="sl-line"></div><div class="sl-text">📲 Contenu & Marketing</div><div class="sl-line"></div></div>
-<div class="module-grid">
-  <a class="mod-card" href="module-05.html" id="mc5"><div class="mod-num">05</div><div class="mod-icon">📲</div><div class="mod-title">Marketing & Contenu</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-06.html" id="mc6"><div class="mod-num">06</div><div class="mod-icon">🎬</div><div class="mod-title">Vidéo Faceless</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-07.html" id="mc7"><div class="mod-num">07</div><div class="mod-icon">📸</div><div class="mod-title">Instagram Mastery</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-08.html" id="mc8"><div class="mod-num">08</div><div class="mod-icon">🎵</div><div class="mod-title">TikTok Hooks</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-09.html" id="mc9"><div class="mod-num">09</div><div class="mod-icon">👻</div><div class="mod-title">Snapchat Strategy</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-10.html" id="mc10"><div class="mod-num">10</div><div class="mod-icon">✉️</div><div class="mod-title">Email Marketing</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">📲 Contenu & Marketing</div><div class="stitle-line"></div></div>
+<div class="mrow">
+  <a class="mcard" href="module-05.html" id="mc5"><div class="mnum">05</div><div class="micon">📲</div><div class="mtitle">Marketing & Contenu</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-06.html" id="mc6"><div class="mnum">06</div><div class="micon">🎬</div><div class="mtitle">Vidéo Faceless</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-07.html" id="mc7"><div class="mnum">07</div><div class="micon">📸</div><div class="mtitle">Instagram Mastery</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-08.html" id="mc8"><div class="mnum">08</div><div class="micon">🎵</div><div class="mtitle">TikTok Hooks</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-09.html" id="mc9"><div class="mnum">09</div><div class="micon">👻</div><div class="mtitle">Snapchat Strategy</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-10.html" id="mc10"><div class="mnum">10</div><div class="micon">✉️</div><div class="mtitle">Email Marketing</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
 </div>
 
 <!-- VENTE & CLOSING -->
 
-<div class="section-label"><div class="sl-line"></div><div class="sl-text">🎯 Vente & Closing</div><div class="sl-line"></div></div>
-<div class="module-grid">
-  <a class="mod-card" href="module-11.html" id="mc11"><div class="mod-num">11</div><div class="mod-icon">🎯</div><div class="mod-title">Closing & Scripts</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-12.html" id="mc12"><div class="mod-num">12</div><div class="mod-icon">🔴</div><div class="mod-title">Live Selling TikTok</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-13.html" id="mc13"><div class="mod-num">13</div><div class="mod-icon">🎥</div><div class="mod-title">VSL & Video Sales</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-14.html" id="mc14"><div class="mod-num">14</div><div class="mod-icon">🤖</div><div class="mod-title">AI Selling</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card wide" href="module-15.html" id="mc15"><div class="mod-icon">🔁</div><div class="mod-body"><div class="mod-num">15</div><div class="mod-title">Funnels & Tunnels de Vente</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></div></a>
-  <a class="mod-card wide" href="module-16.html" id="mc16"><div class="mod-icon">💬</div><div class="mod-body"><div class="mod-num">16</div><div class="mod-title">Automation DM</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></div></a>
+<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🎯 Vente & Closing</div><div class="stitle-line"></div></div>
+<div class="mrow">
+  <a class="mcard" href="module-11.html" id="mc11"><div class="mnum">11</div><div class="micon">🎯</div><div class="mtitle">Closing & Scripts</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-12.html" id="mc12"><div class="mnum">12</div><div class="micon">🔴</div><div class="mtitle">Live Selling TikTok</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-13.html" id="mc13"><div class="mnum">13</div><div class="micon">🎥</div><div class="mtitle">VSL & Video Sales</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-14.html" id="mc14"><div class="mnum">14</div><div class="micon">🤖</div><div class="mtitle">AI Selling</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard wide" href="module-15.html" id="mc15"><div class="micon">🔁</div><div class="mbody"><div class="mnum">15</div><div class="mtitle">Funnels & Tunnels de Vente</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></div></a>
+  <a class="mcard wide" href="module-16.html" id="mc16"><div class="micon">💬</div><div class="mbody"><div class="mnum">16</div><div class="mtitle">Automation DM</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></div></a>
 </div>
 
 <!-- REVENUS & SYSTEMES -->
 
-<div class="section-label"><div class="sl-line"></div><div class="sl-text">💰 Revenus & Systèmes</div><div class="sl-line"></div></div>
-<div class="module-grid">
-  <a class="mod-card" href="module-17.html" id="mc17"><div class="mod-num">17</div><div class="mod-icon">🔄</div><div class="mod-title">MRR & Récurrence</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-18.html" id="mc18"><div class="mod-num">18</div><div class="mod-icon">🏢</div><div class="mod-title">SMMA Agency</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-19.html" id="mc19"><div class="mod-num">19</div><div class="mod-icon">🛍️</div><div class="mod-title">Shopify & E-commerce</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-20.html" id="mc20"><div class="mod-num">20</div><div class="mod-icon">⚙️</div><div class="mod-title">Systeme.io & Stan</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-21.html" id="mc21"><div class="mod-num">21</div><div class="mod-icon">📋</div><div class="mod-title">Déclaration Légale</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-22.html" id="mc22"><div class="mod-num">22</div><div class="mod-icon">🤝</div><div class="mod-title">Prospection B2B</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">💰 Revenus & Systèmes</div><div class="stitle-line"></div></div>
+<div class="mrow">
+  <a class="mcard" href="module-17.html" id="mc17"><div class="mnum">17</div><div class="micon">🔄</div><div class="mtitle">MRR & Récurrence</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-18.html" id="mc18"><div class="mnum">18</div><div class="micon">🏢</div><div class="mtitle">SMMA Agency</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-19.html" id="mc19"><div class="mnum">19</div><div class="micon">🛍️</div><div class="mtitle">Shopify & E-commerce</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-20.html" id="mc20"><div class="mnum">20</div><div class="micon">⚙️</div><div class="mtitle">Systeme.io & Stan</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-21.html" id="mc21"><div class="mnum">21</div><div class="micon">📋</div><div class="mtitle">Déclaration Légale</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-22.html" id="mc22"><div class="mnum">22</div><div class="micon">🤝</div><div class="mtitle">Prospection B2B</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
 </div>
 
 <!-- PREMIUM & EXPERT -->
 
-<div class="section-label"><div class="sl-line"></div><div class="sl-text">👑 Premium & Expert</div><div class="sl-line"></div></div>
-<div class="module-grid">
-  <a class="mod-card" href="module-23.html" id="mc23"><div class="mod-num">23</div><div class="mod-icon">🔑</div><div class="mod-title">Droits de Revente MRR</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-24.html" id="mc24"><div class="mod-num">24</div><div class="mod-icon">⭐</div><div class="mod-title">Personal Branding</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-25.html" id="mc25"><div class="mod-num">25</div><div class="mod-icon">🤝</div><div class="mod-title">Gestion Client</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-26.html" id="mc26"><div class="mod-num">26</div><div class="mod-icon">📈</div><div class="mod-title">Scaling & Délégation</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-27.html" id="mc27"><div class="mod-num">27</div><div class="mod-icon">🔗</div><div class="mod-title">Affiliation & Partenariats</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
-  <a class="mod-card" href="module-28.html" id="mc28"><div class="mod-num">28</div><div class="mod-icon">👑</div><div class="mod-title">Stratégie 2026</div><div class="mod-footer"><div class="mod-dot"></div><span class="mod-check"></span></div></a>
+<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">👑 Premium & Expert</div><div class="stitle-line"></div></div>
+<div class="mrow">
+  <a class="mcard" href="module-23.html" id="mc23"><div class="mnum">23</div><div class="micon">🔑</div><div class="mtitle">Droits de Revente MRR</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-24.html" id="mc24"><div class="mnum">24</div><div class="micon">⭐</div><div class="mtitle">Personal Branding</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-25.html" id="mc25"><div class="mnum">25</div><div class="micon">🤝</div><div class="mtitle">Gestion Client</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-26.html" id="mc26"><div class="mnum">26</div><div class="micon">📈</div><div class="mtitle">Scaling & Délégation</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-27.html" id="mc27"><div class="mnum">27</div><div class="micon">🔗</div><div class="mtitle">Affiliation & Partenariats</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+  <a class="mcard" href="module-28.html" id="mc28"><div class="mnum">28</div><div class="micon">👑</div><div class="mtitle">Stratégie 2026</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
 </div>
 
 <!-- BONUS INCLUS -->
 
-<div class="section-label"><div class="sl-line"></div><div class="sl-text">🎁 Bonus Inclus</div><div class="sl-line"></div></div>
-<div class="bonus-grid">
-  <a class="bonus-card" href="crm-tracker.html"><div class="bonus-icon">📊</div><div class="bonus-title">Tracker CRM</div><div class="bonus-desc">Gère tes prospects et clients</div></a>
-  <div class="bonus-card" style="opacity:.4"><div class="bonus-icon">📝</div><div class="bonus-title">Scripts Closing</div><div class="bonus-desc">Bientôt disponible</div></div>
-  <div class="bonus-card" style="opacity:.4"><div class="bonus-icon">📄</div><div class="bonus-title">CGV Template</div><div class="bonus-desc">Bientôt disponible</div></div>
-  <div class="bonus-card" style="opacity:.4"><div class="bonus-icon">🗓️</div><div class="bonus-title">Calendrier Contenu</div><div class="bonus-desc">Bientôt disponible</div></div>
+<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🎁 Bonus Inclus</div><div class="stitle-line"></div></div>
+<div class="brow">
+  <a class="bcard" href="crm-tracker.html"><div class="bicon">📊</div><div class="btitle">Tracker CRM</div><div class="bdesc">Gère tes prospects</div></a>
+  <div class="bcard" style="opacity:.4"><div class="bicon">📝</div><div class="btitle">Scripts Closing</div><div class="bdesc">Bientôt dispo</div></div>
+  <div class="bcard" style="opacity:.4"><div class="bicon">📄</div><div class="btitle">CGV Template</div><div class="bdesc">Bientôt dispo</div></div>
+  <div class="bcard" style="opacity:.4"><div class="bicon">🗓️</div><div class="btitle">Calendrier</div><div class="bdesc">Bientôt dispo</div></div>
 </div>
 
 <!-- BONUS EXCLUSIF -->
 
-<div class="section-label"><div class="sl-line"></div><div class="sl-text">🔐 Bonus Exclusif</div><div class="sl-line"></div></div>
+<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🔐 Bonus Exclusif</div><div class="stitle-line"></div></div>
 <div class="excl-wrap">
   <div class="excl-card">
     <span class="excl-tag">🔐 Accès Restreint</span>
@@ -250,22 +202,19 @@ color:rgba(245,240,232,.2);cursor:pointer;padding:8px;-webkit-appearance:none}
   </div>
 </div>
 
-<div class="footer">
-  <div class="footer-logo">DM<span>A</span></div>
-  <div class="footer-text">Digital Mastery Academy © 2026</div>
-</div>
+<div class="footer"><div class="flogo">DM<span>A</span></div></div>
 
 <!-- MODAL -->
 
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+<div class="overlay" id="overlay" onclick="closeOut(event)">
   <div class="modal">
     <div class="modal-title">Code Exclusif</div>
-    <div class="modal-sub">Entre ton code d'accès pour débloquer le bonus Agence IA. Reçu par DM ou email de Mathis.</div>
-    <input class="modal-input" id="codeInput" type="text" placeholder="Entre ton code..."
+    <div class="modal-sub">Entre ton code d'accès pour débloquer le bonus Agence IA.</div>
+    <input class="modal-inp" id="codeInput" type="text" placeholder="Entre ton code..."
       maxlength="30" oninput="this.value=this.value.toUpperCase()"
-      onkeydown="if(event.key==='Enter')checkCode()">
-    <div class="modal-error" id="modalError">❌ Code incorrect. Contacte Mathis par DM.</div>
-    <button class="modal-btn" onclick="checkCode()">VALIDER LE CODE</button>
+      onkeydown="if(event.key==='Enter')check()">
+    <div class="modal-err" id="merr">❌ Code incorrect. Contacte Mathis par DM.</div>
+    <button class="modal-btn" onclick="check()">VALIDER LE CODE</button>
     <button class="modal-cancel" onclick="closeModal()">Annuler</button>
   </div>
 </div>
@@ -275,49 +224,41 @@ var CODES=["DMA-ELITE-2025","PREMIUM-001","PREMIUM-002","PREMIUM-003","PREMIUM-0
 var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
 if(!user)window.location.href="index.html";
 
-document.getElementById("welcomeName").textContent=(user.name||"MEMBRE").toUpperCase();
-document.getElementById("headerUser").textContent=user.name||"";
+document.getElementById("wname").textContent=(user.name||"MEMBRE").toUpperCase();
+document.getElementById("huser").textContent=user.name||"";
 
 var done=0;
 for(var i=1;i<=28;i++){
-  var key1="module_0"+i+"_done";
-  var key2="module_"+i+"_done";
-  if(localStorage.getItem(key1)==="1"||localStorage.getItem(key2)==="1"){
+  if(localStorage.getItem("module_0"+i+"_done")==="1"||localStorage.getItem("module_"+i+"_done")==="1"){
     done++;
     var c=document.getElementById("mc"+i);
-    if(c){
-      c.classList.add("done");
-      var ck=c.querySelector(".mod-check");
-      if(ck)ck.textContent="✓";
-    }
+    if(c){c.classList.add("done");var ck=c.querySelector(".mcheck");if(ck)ck.textContent="✓";}
   }
 }
-document.getElementById("progressCount").textContent=done+" / 28";
-setTimeout(function(){
-  document.getElementById("progressFill").style.width=Math.round((done/28)*100)+"%";
-},400);
+document.getElementById("progNum").textContent=done+" / 28";
+setTimeout(function(){document.getElementById("progFill").style.width=Math.round((done/28)*100)+"%";},400);
 
 function logout(){sessionStorage.removeItem("dma_user");window.location.href="index.html";}
 
 function openModal(){
   if(sessionStorage.getItem("bonus_unlocked")==="1"){window.location.href="bonus-agence-ia.html";return;}
-  document.getElementById("modalOverlay").classList.add("show");
+  document.getElementById("overlay").classList.add("show");
   setTimeout(function(){document.getElementById("codeInput").focus();},300);
 }
 function closeModal(){
-  document.getElementById("modalOverlay").classList.remove("show");
-  document.getElementById("modalError").style.display="none";
+  document.getElementById("overlay").classList.remove("show");
+  document.getElementById("merr").style.display="none";
   document.getElementById("codeInput").value="";
 }
-function closeModalOutside(e){if(e.target===document.getElementById("modalOverlay"))closeModal();}
-function checkCode(){
+function closeOut(e){if(e.target===document.getElementById("overlay"))closeModal();}
+function check(){
   var code=document.getElementById("codeInput").value.trim().toUpperCase();
   if(CODES.includes(code)){
     sessionStorage.setItem("bonus_unlocked","1");
     closeModal();
     window.location.href="bonus-agence-ia.html";
   } else {
-    document.getElementById("modalError").style.display="block";
+    document.getElementById("merr").style.display="block";
     document.getElementById("codeInput").style.borderColor="rgba(192,0,26,.5)";
     setTimeout(function(){document.getElementById("codeInput").style.borderColor="";},1500);
   }
