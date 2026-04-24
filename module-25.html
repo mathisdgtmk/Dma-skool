@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 25 — Gestion Client</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.story-block{background:rgba(255,255,255,.03);border-left:2px solid #C0001A;border-radius:0 4px 4px 0;padding:18px 16px;margin-bottom:14px}
+.story-block p{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.85)}
+.story-block strong{color:#f5f0e8;font-weight:600}
+.story-block em{color:#C9A84C;font-style:italic}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.phase-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden}
+.phase-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.phase-card.p1::before{background:#C9A84C}
+.phase-card.p2::before{background:#7ab8ff}
+.phase-card.p3::before{background:#C0001A}
+.phase-card.p4::before{background:#80d080}
+.phase-num{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:4px}
+.phase-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:8px}
+.phase-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.phase-text strong{color:#C9A84C;font-weight:600}
+.phase-script{background:#0d1117;border-radius:4px;padding:10px 12px;margin-top:10px;font-size:11px;font-style:italic;color:rgba(245,240,232,.7);line-height:1.6;border-left:2px solid rgba(201,168,76,.3)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 25</div>
+  <div class="header-num">25 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🤝 Clients</div>
+  <span class="hero-num">MODULE 25</span>
+  <div class="hero-title">GESTION<br><span>CLIENT</span></div>
+  <div class="hero-sub">Garde tes clients, maximise leur satisfaction et transforme-les en ambassadeurs</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🤝</span>
+    <div class="sensible-title">UN CLIENT GARDE VAUT 10 NOUVEAUX</div>
+    <p class="sensible-text">
+      Trouver un nouveau client coute 5 a 7 fois plus cher que garder un client existant.<br><br>
+      <strong>Un client satisfait revient, achete plus et te recommande.</strong><br><br>
+      La gestion client c est l art de transformer une transaction en relation durable.
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"Ton meilleur commercial c est un client que tu as bien traite."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES 4 PHASES <span>DU CYCLE CLIENT</span></div>
+  <div class="s-sub">De l achat au bouche-a-oreille — le parcours complet</div>
+
+  <div class="phase-card p1">
+    <div class="phase-num">PHASE 01</div>
+    <div class="phase-title">Onboarding — Les 48 premieres heures</div>
+    <div class="phase-text">Les 48h apres l achat sont critiques. <strong>Un client qui ne recoit pas de signe de vie dans les 48h perd confiance immediatement.</strong> Envoie un message de bienvenue personnalise, donne l acces clair, precise les prochaines etapes.</div>
+    <div class="phase-script">"Hey [prenom] ! Bienvenue dans la DMA — tu as fait le bon choix. Ton acces est ici : [lien]. Commence par le module 1 — ca prend 20 minutes et ca pose les bases de tout. Des questions ? Je suis la."</div>
+  </div>
+
+  <div class="phase-card p2">
+    <div class="phase-num">PHASE 02</div>
+    <div class="phase-title">Activation — Les 7 premiers jours</div>
+    <div class="phase-text">Un client qui n utilise pas ton produit dans les 7 premiers jours a 80% de chances de demander un remboursement ou de ne jamais revenir. <strong>Envoie un check-in a J+3 et J+7</strong> pour t assurer qu il avance et repondre a ses questions.</div>
+    <div class="phase-script">"Hey [prenom], ca fait 3 jours — tu as commence ? Tu es ou dans les modules ? Si t as des blocages dis-moi, je peux t aider a debloquer ca rapidement."</div>
+  </div>
+
+  <div class="phase-card p3">
+    <div class="phase-num">PHASE 03</div>
+    <div class="phase-title">Suivi — Les 30 premiers jours</div>
+    <div class="phase-text">Apres la premiere semaine continue a suivre l avancement. <strong>Celebre chaque victoire</strong> — meme petite. Un client qui obtient un premier resultat meme modeste devient un fan. Et un fan achete encore et parle de toi autour de lui.</div>
+    <div class="phase-script">"Hey [prenom] ! T as fait ta premiere vente ? C est enorme. Partage ca dans la communaute — les autres membres ont besoin de voir que ca marche. Et dis-moi : quelle est la prochaine etape pour toi ?"</div>
+  </div>
+
+  <div class="phase-card p4">
+    <div class="phase-num">PHASE 04</div>
+    <div class="phase-title">Fidelisation — Au dela de 30 jours</div>
+    <div class="phase-text">Apres 30 jours un client satisfait est pret pour un upsell ou une recommandation. <strong>Demande un temoignage video</strong>, propose une offre complementaire, integre-le dans ta communaute de membres actifs.</div>
+    <div class="phase-script">"Ca fait un mois [prenom], t as bien avance. J ai un truc pour toi — je lance [produit upsell] pour aller encore plus loin. Vu ou t en es, c est la suite logique. Tu veux que je t explique ?"</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">GERER LES <span>INSATISFACTIONS</span></div>
+  <div class="s-sub">Comment transformer un client mecontent en client fidele</div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Repondre vite — dans les 2 heures</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Un client mecontent qui attend plus de 24h sans reponse est un client perdu — et un client qui va parler en mal de toi.<br><br><strong>Regle absolue : repondre a toute plainte dans les 2 heures.</strong> Pas pour regler le probleme en 2 heures — juste pour accuser reception et montrer que tu es la. Cette simple reactivite calme 70% de la tension.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La methode ARCA pour les plaintes</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>A — Accuser reception :</strong> "J ai bien recu ton message et je comprends ta frustration."<br><br><strong>R — Reconnaitre :</strong> "Tu as raison, ce point n etait pas assez clair / ce probleme ne devrait pas exister."<br><br><strong>C — Corriger :</strong> Propose une solution concrete — remboursement partiel, acces supplementaire, session bonus.<br><br><strong>A — Ameliorer :</strong> "Merci de me l avoir signale — ca m aide a ameliorer la formation pour les prochains."<br><br>Un client dont la plainte est bien geree devient souvent plus fidele qu un client qui n a jamais eu de probleme.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Quand accepter un remboursement</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Critere simple : si le client n a clairement pas eu ce qui etait promis — rembourse sans discussion. Ca protege ta reputation et ta credibilite sur le long terme.<br><br><strong>Ne jamais rembourser :</strong> si le client n a pas applique la methode et demande un remboursement apres 3 semaines en disant "ca marche pas".<br><br>Ta garantie est base sur les resultats — pas sur les efforts. Si tu as une garantie conditionelle, applique-la strictement et equitablement.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">TRANSFORME EN <span>AMBASSADEURS</span></div>
+  <div class="s-sub">Tes clients satisfaits sont ton meilleur outil de croissance</div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Demande des temoignages video</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Le temoignage video convertit 5 fois mieux que le temoignage ecrit. Demande-le apres un succes client — au moment ou il est le plus enthousiaste.<br><br><strong>Script de demande :</strong> "Tu m as dit que t as fait [resultat] — je voudrais te demander un service. Tu peux enregistrer 60 secondes sur ton telephone en expliquant ta situation avant et apres ? Ca va aider d autres personnes dans ta situation a se lancer."<br><br>La majorite des clients satisfaits acceptent quand tu leur demandes directement et simplement.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Le programme de parrainage</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Propose a tes clients satisfaits de gagner une commission ou un bonus pour chaque personne qu ils referent.<br><br><strong>Exemple :</strong> "Pour chaque ami que tu m envoies et qui achete — je te donne 30% de la vente ou un mois d acces gratuit supplementaire."<br><br>Un client qui gagne quelque chose a te recommander est 10 fois plus actif qu un client qui recommande juste par gentillesse. Le parrainage est la forme de marketing la moins chere et la plus efficace.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Celebre publiquement tes clients</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Quand un client obtient un resultat — partage-le publiquement sur tes reseaux (avec sa permission).<br><br><strong>Double benefice :</strong> le client se sent valorise et devient encore plus fidele. Tes prospects voient une preuve sociale reelle et sont rassures.<br><br>Les stories "succes client" sont parmi les contenus qui generent le plus d engagement et de ventes directes. Un screenshot de resultat avec le nom du client vaut 10 posts de valeur generiques.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>GESTION CLIENT</span></div>
+  <div class="s-sub">Teste ta reaction</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Un client t ecrit : <em>"Je suis pas satisfait, ca fait 2 semaines et j ai pas encore eu de resultats."</em> Que fais-tu en premier ?</div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">A</div><div class="option-text">Tu lui rappelles les conditions de ta garantie</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','correct','B')"><div class="option-letter">B</div><div class="option-text">Tu accuses reception, tu valides sa frustration et tu poses des questions pour comprendre ou il en est</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">C</div><div class="option-text">Tu lui proposes directement un remboursement pour eviter les problemes</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','B')"><div class="option-letter">D</div><div class="option-text">Tu lui envoies les modules qu il n a pas encore regardes</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Avant toute solution — comprendre. Peut-etre qu il n a pas applique. Peut-etre qu il a un vrai blocage. Peut-etre que le probleme est de ton cote. Sans comprendre ou il en est tu ne peux pas l aider. La methode ARCA commence toujours par accuser reception et reconnaitre.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse B est la bonne. Rappeler les conditions = defensif. Rembourser direct = abandonner sans essayer. Envoyer les modules = ignorer sa frustration. La premiere etape est toujours d accuser reception, valider et comprendre la situation avant de proposer quoi que ce soit.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ton message de bienvenue</strong> personnalise a envoyer dans les 48h apres chaque achat.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Programme tes check-ins</strong> automatiques a J+3 et J+7 pour tous les nouveaux clients.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Applique la methode ARCA</strong> sur la prochaine plainte ou insatisfaction que tu recois.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Contacte 3 clients satisfaits</strong> cette semaine et demande-leur un temoignage video.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Lance ton programme de parrainage</strong> — definis le bonus et communique-le a tes clients actuels.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Partage un succes client</strong> publiquement sur tes reseaux cette semaine avec sa permission.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-24.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 24</a>
+    <a class="btn-nav" href="module-26.html">Module 26<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m25_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m25_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_25_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_25_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-26.html";},1000);
+}
+</script>
+
+</body>
+</html>
