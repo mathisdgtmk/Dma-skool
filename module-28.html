@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 28 — Strategie 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 32px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(201,168,76,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.hero-badge{display:inline-block;margin-top:18px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(192,0,26,.1));border:1px solid rgba(201,168,76,.3);border-radius:4px;padding:8px 18px;font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:3px;color:#C9A84C}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.trend-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;display:flex;gap:14px}
+.trend-icon{font-size:28px;flex-shrink:0}
+.trend-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:4px}
+.trend-badge{display:inline-block;font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-bottom:6px}
+.trend-badge.hot{background:rgba(192,0,26,.15);color:#ff7070}
+.trend-badge.grow{background:rgba(201,168,76,.15);color:#C9A84C}
+.trend-badge.new{background:rgba(100,200,100,.1);color:#80d080}
+.trend-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.55);line-height:1.5}
+.trend-text strong{color:#C9A84C;font-weight:600}
+.roadmap{display:flex;flex-direction:column;gap:0;margin-bottom:16px}
+.roadmap-item{display:flex;gap:14px;position:relative}
+.roadmap-item:not(:last-child)::before{content:"";position:absolute;left:19px;top:40px;bottom:0;width:2px;background:rgba(255,255,255,.06)}
+.roadmap-dot{width:38px;height:38px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8;position:relative;z-index:1;margin-bottom:14px}
+.roadmap-dot.q1{background:linear-gradient(135deg,#C9A84C,#a07820)}
+.roadmap-dot.q2{background:linear-gradient(135deg,#C0001A,#8a0013)}
+.roadmap-dot.q3{background:linear-gradient(135deg,#7ab8ff,#4488cc)}
+.roadmap-dot.q4{background:linear-gradient(135deg,#80d080,#50a050)}
+.roadmap-content{flex:1;padding-bottom:20px}
+.roadmap-period{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:4px}
+.roadmap-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:6px}
+.roadmap-items{display:flex;flex-direction:column;gap:5px}
+.roadmap-item-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.55);padding-left:12px;position:relative;line-height:1.5}
+.roadmap-item-text::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:#C9A84C}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.congrats-block{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(192,0,26,.08));border:1px solid rgba(201,168,76,.25);border-radius:8px;padding:28px 20px;text-align:center;margin-bottom:20px}
+.congrats-icon{font-size:48px;display:block;margin-bottom:14px}
+.congrats-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(22px,6vw,32px);letter-spacing:4px;color:#f5f0e8;margin-bottom:10px}
+.congrats-title span{color:#C9A84C}
+.congrats-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.65);line-height:1.8;max-width:340px;margin:0 auto}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C9A84C,#a07820);border:none;border-radius:3px;padding:20px;font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:4px;color:#050505;cursor:pointer;box-shadow:0 4px 32px rgba(201,168,76,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:16px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a);color:#f5f0e8}
+.btn-dashboard{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:16px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:rgba(245,240,232,.5);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-dashboard svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 28</div>
+  <div class="header-num">28 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">👑 Final</div>
+  <span class="hero-num">MODULE 28 — DERNIER MODULE</span>
+  <div class="hero-title">STRATEGIE<br><span>2026</span></div>
+  <div class="hero-sub">Les tendances qui vont dominer — et ton plan d action pour en profiter</div>
+  <div class="hero-badge">🏆 MODULE FINAL DMA</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="impact-quote">
+    <div class="impact-quote-text">"L avenir appartient a ceux qui construisent leur systeme aujourd hui — pas a ceux qui attendent que tout soit parfait."</div>
+    <div class="impact-quote-author">Digital Mastery Academy</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES <span>TENDANCES 2026</span></div>
+  <div class="s-sub">Ce qui va exploser — et comment te positionner maintenant</div>
+
+  <div class="trend-card">
+    <div class="trend-icon">🤖</div>
+    <div>
+      <div class="trend-title">L IA comme avantage competitif</div>
+      <span class="trend-badge hot">Incontournable</span>
+      <div class="trend-text">Les createurs qui integrent l IA dans leur workflow produisent <strong>10 fois plus de contenu</strong> pour le meme effort. En 2026 l IA n est plus un avantage — c est le minimum requis. Ceux qui ne l utilisent pas seront ecraes par ceux qui le font.</div>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-icon">🎥</div>
+    <div>
+      <div class="trend-title">La video courte reste reine</div>
+      <span class="trend-badge hot">En croissance</span>
+      <div class="trend-text">TikTok, Reels, Shorts — le format video courte continue de dominer. <strong>Les algorithmes favorisent massivement la video sur le texte.</strong> En 2026 si tu ne fais pas de video courte tu n existes pas pour 90% de ta cible.</div>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-icon">🏘️</div>
+    <div>
+      <div class="trend-title">Les communautes privees explosent</div>
+      <span class="trend-badge grow">Tendance forte</span>
+      <div class="trend-text">Skool, Discord, Telegram premium. Les gens quittent les reseaux publics pour des espaces prives ou le signal/bruit est meilleur. <strong>Une communaute de 200 membres actifs vaut plus qu une audience de 50 000 abonnes passifs.</strong></div>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-icon">📧</div>
+    <div>
+      <div class="trend-title">L email marketing revient en force</div>
+      <span class="trend-badge grow">Renaissance</span>
+      <div class="trend-text">Avec la saturation des reseaux sociaux, l email reprend de la valeur. <strong>Les createurs qui ont une liste email de 1000 personnes engagees surpassent ceux qui ont 100 000 abonnes Instagram.</strong> Construis ta liste — c est la priorite absolue.</div>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-icon">🎯</div>
+    <div>
+      <div class="trend-title">L hyper-niche comme avantage</div>
+      <span class="trend-badge new">Opportunite</span>
+      <div class="trend-text">En 2026 etre "coach marketing general" ne suffit plus. <strong>Etre "specialiste TikTok pour les coachs sportifs" te rend incontournable dans ta niche.</strong> Plus tu te specifies, plus tu peux facturer cher et moins tu as de competition directe.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">TON PLAN <span>2026</span></div>
+  <div class="s-sub">La roadmap trimestre par trimestre pour exploser cette annee</div>
+  <div class="roadmap">
+    <div class="roadmap-item">
+      <div class="roadmap-dot q1">Q1</div>
+      <div class="roadmap-content">
+        <div class="roadmap-period">Janvier — Mars</div>
+        <div class="roadmap-title">FONDATIONS — Construire les bases</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item-text">Finaliser ton positionnement et ta niche precise</div>
+          <div class="roadmap-item-text">Lancer ton premier produit digital ou offre de service</div>
+          <div class="roadmap-item-text">Creer ton tunnel de vente et ta sequence email</div>
+          <div class="roadmap-item-text">Poste quotidiennement sur 2 plateformes max</div>
+          <div class="roadmap-item-text">Objectif : premieres 1000 euros en ligne</div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot q2">Q2</div>
+      <div class="roadmap-content">
+        <div class="roadmap-period">Avril — Juin</div>
+        <div class="roadmap-title">ACCELERATION — Scaler ce qui marche</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item-text">Doubler la frequence de contenu avec delegation du montage</div>
+          <div class="roadmap-item-text">Lancer ton abonnement MRR ou communaute premium</div>
+          <div class="roadmap-item-text">Premiers partenariats avec createurs complementaires</div>
+          <div class="roadmap-item-text">Configurer les automations DM et email</div>
+          <div class="roadmap-item-text">Objectif : 3000 euros/mois de revenus recurrents</div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot q3">Q3</div>
+      <div class="roadmap-content">
+        <div class="roadmap-period">Juillet — Septembre</div>
+        <div class="roadmap-title">OPTIMISATION — Maximiser les marges</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item-text">Ajouter un upsell et maximiser la valeur par client</div>
+          <div class="roadmap-item-text">Lancer ton programme affiliation</div>
+          <div class="roadmap-item-text">Premier employe ou assistant virtuel</div>
+          <div class="roadmap-item-text">Tester la publicite payante avec budget maîtrise</div>
+          <div class="roadmap-item-text">Objectif : 5000 euros/mois — vivre de ton activite</div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot q4">Q4</div>
+      <div class="roadmap-content">
+        <div class="roadmap-period">Octobre — Decembre</div>
+        <div class="roadmap-title">EXPANSION — Passer au niveau superieur</div>
+        <div class="roadmap-items">
+          <div class="roadmap-item-text">Lancer une offre premium ou haute valeur</div>
+          <div class="roadmap-item-text">Developper ta presence sur une troisieme plateforme</div>
+          <div class="roadmap-item-text">Consolider ta communaute et tes revendeurs MRR</div>
+          <div class="roadmap-item-text">Preparer la strategie 2027 depuis une position de force</div>
+          <div class="roadmap-item-text">Objectif : 10 000 euros/mois — liberte financiere reelle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">LES <span>REGLES</span> QUI CHANGENT TOUT</div>
+  <div class="s-sub">Les principes fondamentaux que les membres DMA qui reussissent appliquent tous</div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Agis avant d etre pret</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>La majorite des gens attendent d etre parfaitement prets avant de lancer. <strong>Les meilleurs lancent imparfaitement et s ameliorent en marchant.</strong><br><br>Ta premiere video sera imparfaite. Ton premier tunnel sera imparfait. Ta premiere vente sera imparfaite. C est normal — et c est exactement ce qu il faut faire. L experience bat la preparation a chaque fois.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">La constance bat le talent</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Dans le marketing digital, <strong>celui qui poste tous les jours pendant 6 mois bat celui qui poste parfaitement une fois par semaine.</strong><br><br>L algorithme recompense la regularite. L audience se construit avec la constance. La confiance se cree avec le temps. La personne qui ne rate jamais un jour l emporte toujours sur celle qui fait le post parfait de temps en temps.</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Construis un systeme pas une to-do list</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Une to-do list te dit quoi faire aujourd hui. Un systeme tourne sans toi.<br><br><strong>Chaque action repetitive que tu fais manuellement est une opportunite d automatisation.</strong> Chaque competence que seul toi possedes est un risque pour ta scalabilite.<br><br>Pense toujours : comment est-ce que ce process peut tourner sans moi dans 6 mois ?</p></div>
+  </div>
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Investis en toi avant tout</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Le meilleur investissement que tu puisses faire c est sur toi-meme — tes competences, ton reseau, ta sante mentale et physique.<br><br><strong>Un entrepreneur en forme, qui apprend constamment et s entoure bien, surpasse toujours un entrepreneur epuise qui travaille seul 16h par jour.</strong><br><br>Lis, forme-toi, dors bien, bouge ton corps. Ces "non-productives" activites sont le carburant de tout le reste.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="congrats-block">
+    <span class="congrats-icon">🏆</span>
+    <div class="congrats-title">FORMATION <span>TERMINEE</span></div>
+    <p class="congrats-text">Tu viens de completer les 28 modules de la Digital Mastery Academy.<br><br>Tu as maintenant toutes les cles — le reste c est de l execution. Un module a la fois. Un jour a la fois. La communaute DMA est la pour t accompagner.<br><br>Le moment de commencer c est maintenant.</p>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS FINALES</span></div>
+  <div class="s-sub">Les engagements concrets pour 2026</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Ecris ton objectif 2026</strong> en une phrase concrete — revenus, liberte, style de vie. Colle-le partout.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Choisis une seule action</strong> a lancer cette semaine — pas dix. Une. Lance-la avant vendredi.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Rejoins la communaute DMA</strong> sur Skool et presente-toi avec ton objectif 2026.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Partage ta premiere victoire</strong> dans la communaute — meme si c est juste ton premier post publie.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Revisite les modules cles</strong> chaque mois — la connaissance se consolide avec la repetition.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Engage-toi sur 90 jours</strong> — poste tous les jours pendant 90 jours sans exception. C est la que tout change.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">TERMINER LA FORMATION DMA</button>
+  <a class="btn-dashboard" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>RETOUR AU DASHBOARD</a>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m28_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m28_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_28_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="FORMATION TERMINEE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_28_done","1");
+  for(var i=1;i<=28;i++) localStorage.setItem("module_0"+i+"_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="FORMATION TERMINEE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="dashboard.html";},1500);
+}
+</script>
+
+</body>
+</html>
