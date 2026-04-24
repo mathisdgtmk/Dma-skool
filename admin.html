@@ -82,9 +82,11 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
   <span class="login-icon">🔐</span>
   <div class="login-title">ACCES ADMIN</div>
   <div class="login-sub">Reserve a Mathis uniquement</div>
-  <input class="login-input" id="adminPwd" type="password" placeholder="Mot de passe admin" oninput="clearErr()">
-  <div class="login-err" id="loginErr">Mot de passe incorrect</div>
-  <button class="btn-red" id="loginBtn" type="button">ACCEDER AU PANEL</button>
+  <form onsubmit="adminLogin(); return false;" action="#">
+    <input class="login-input" id="adminPwd" name="pwd" type="password" placeholder="Mot de passe admin" autocomplete="current-password">
+    <div class="login-err" id="loginErr">Mot de passe incorrect</div>
+    <input type="submit" class="btn-red" value="ACCEDER AU PANEL">
+  </form>
 </div>
 
 <div class="admin-wrap" id="adminWrap">
