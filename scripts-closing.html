@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA — Scripts Closing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.header-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.hero{padding:28px 20px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:14px;background:rgba(201,168,76,.05)}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(26px,7vw,40px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:8px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-size:13px;font-weight:300;color:rgba(245,240,232,.4);font-style:italic}
+.section{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:3px;color:#f5f0e8;margin-bottom:4px}
+.s-title span{color:#C0001A}
+.s-sub{font-size:12px;font-style:italic;color:rgba(245,240,232,.35);margin-bottom:16px}
+.script-card{background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.script-header{background:#161b22;border-bottom:1px solid rgba(255,255,255,.06);padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.script-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A84C}
+.script-copy{background:rgba(201,168,76,.1);border:none;border-radius:3px;padding:4px 10px;font-size:9px;font-weight:600;color:#C9A84C;cursor:pointer;letter-spacing:1px;-webkit-appearance:none}
+.script-body{padding:14px}
+.script-line{font-size:12px;font-weight:300;color:rgba(245,240,232,.75);line-height:1.8;margin-bottom:8px;padding-left:12px;position:relative}
+.script-line::before{content:"▸";position:absolute;left:0;color:rgba(201,168,76,.4);font-size:10px;top:3px}
+.script-line strong{color:#C9A84C;font-weight:600}
+.script-line em{color:rgba(245,240,232,.45);font-style:italic}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.7);line-height:1.6}
+.info-text strong{color:#C9A84C}
+.objection-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:14px;margin-bottom:10px;cursor:pointer}
+.objection-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.obj-header{display:flex;align-items:center;justify-content:space-between}
+.obj-q{font-size:12px;font-weight:600;color:#ff7070;padding-right:10px}
+.obj-icon{width:22px;height:22px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s;font-size:12px;color:#C9A84C}
+.objection-card.open .obj-icon{transform:rotate(45deg)}
+.obj-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.objection-card.open .obj-answer{max-height:400px}
+.obj-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.obj-text strong{color:#C9A84C;font-weight:600}
+.footer{padding:32px 20px 60px;text-align:center}
+.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.08)}
+.footer-logo span{color:rgba(201,168,76,.15)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="header-title">SCRIPTS CLOSING</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">📝 Bonus DMA</div>
+  <div class="hero-title">SCRIPTS<br><span>CLOSING</span></div>
+  <div class="hero-sub">Les scripts exacts pour fermer chaque conversation en vente</div>
+</div>
+
+<div class="section">
+  <div class="s-title">SCRIPT <span>INSTAGRAM DM</span></div>
+  <div class="s-sub">Pour convertir un abonné chaud en acheteur</div>
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Ouverture naturelle</span>
+      <button class="script-copy" onclick="copyScript(0)">COPIER</button>
+    </div>
+    <div class="script-body" id="sc0">
+      <div class="script-line"><strong>"Hey [prénom] !"</strong> <em>— Utilise toujours le prénom, jamais "bonjour"</em></div>
+      <div class="script-line"><strong>"J'ai vu que tu regardes mon contenu depuis un moment — t'essaies de te lancer dans quoi exactement ?"</strong></div>
+      <div class="script-line"><em>→ Laisse-les parler. Ne coupe pas. Plus ils parlent, plus tu comprends leur situation.</em></div>
+    </div>
+  </div>
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Identification du problème</span>
+      <button class="script-copy" onclick="copyScript(1)">COPIER</button>
+    </div>
+    <div class="script-body" id="sc1">
+      <div class="script-line"><strong>"C'est quoi ton plus gros blocage en ce moment ?"</strong></div>
+      <div class="script-line"><strong>"Et ça te pose quel problème concrètement dans ta vie ?"</strong></div>
+      <div class="script-line"><em>→ Creuse toujours 2 niveaux de profondeur. La première réponse est rarement le vrai problème.</em></div>
+    </div>
+  </div>
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Amplifier la douleur</span>
+      <button class="script-copy" onclick="copyScript(2)">COPIER</button>
+    </div>
+    <div class="script-body" id="sc2">
+      <div class="script-line"><strong>"Si dans 6 mois t'as toujours pas réglé ça — ça donne quoi pour toi ?"</strong></div>
+      <div class="script-line"><em>→ Laisse-les visualiser le coût de l'inaction. Ne réponds pas tout de suite après — attends leur réponse.</em></div>
+    </div>
+  </div>
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Présenter la solution</span>
+      <button class="script-copy" onclick="copyScript(3)">COPIER</button>
+    </div>
+    <div class="script-body" id="sc3">
+      <div class="script-line"><strong>"Ce que tu décris c'est exactement ce que la DMA résout."</strong></div>
+      <div class="script-line"><strong>"C'est [X] euros. T'as des questions avant qu'on continue ?"</strong></div>
+      <div class="script-line"><em>→ Silence après le prix. Ne rajoute rien. Laisse-les réagir en premier.</em></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="s-title">SCRIPT <span>LIVE TIKTOK</span></div>
+  <div class="s-sub">Pour closer pendant un live</div>
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Accroche live</span>
+      <button class="script-copy" onclick="copyScript(4)">COPIER</button>
+    </div>
+    <div class="script-body" id="sc4">
+      <div class="script-line"><strong>"Ce soir je vous montre exactement comment j'ai fait [résultat] — restez jusqu'à la fin y'a quelque chose d'exclusif."</strong></div>
+      <div class="script-line"><strong>"Qui est là ce soir ? Dites-moi d'où vous regardez !"</strong></div>
+    </div>
+  </div>
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Présenter l'offre live</span>
+      <button class="script-copy" onclick="copyScript(5)">COPIER</button>
+    </div>
+    <div class="script-body" id="sc5">
+      <div class="script-line"><strong>"Pour ceux qui sont là ce soir seulement — la formation DMA est à [prix réduit] au lieu de [prix normal]."</strong></div>
+      <div class="script-line"><strong>"J'ajoute [bonus exclusif] que vous ne trouvez pas ailleurs. Le lien est dans ma bio."</strong></div>
+      <div class="script-line"><strong>"Cette offre ferme à la fin du live."</strong></div>
+    </div>
+  </div>
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Relance décompte</span>
+      <button class="script-copy" onclick="copyScript(6)">COPIER</button>
+    </div>
+    <div class="script-body" id="sc6">
+      <div class="script-line"><strong>"Il reste 15 minutes sur l'offre live."</strong></div>
+      <div class="script-line"><strong>"Si vous hésitez encore — la question c'est pas le prix, c'est est-ce que vous voulez changer votre situation dans les 30 prochains jours ou pas."</strong></div>
+      <div class="script-line"><strong>"Lien en bio."</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="s-title">OBJECTIONS <span>& RÉPONSES</span></div>
+  <div class="s-sub">Clique sur chaque objection pour voir la réponse exacte</div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"C'est trop cher pour moi"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>Ne baisse jamais le prix immédiatement.</strong> Creuse d'abord : "Par rapport à quoi c'est trop cher ?"<br><br>Puis : <strong>"Si t'appliques ce que t'apprend la formation et que tu fais ta première vente — la formation est remboursée. La question c'est pas le prix, c'est est-ce que ça vaut le risque de pas essayer ?"</strong><br><br>Si ils insistent → propose le paiement en 2 ou 3 fois.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"Je vais réfléchir"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text">"Je vais réfléchir" = il y a une objection cachée qu'ils n'ont pas dite.<br><br><strong>"Bien sûr, prends le temps. Juste pour comprendre — c'est quoi exactement qui te fait hésiter ? Le prix, le timing, ou autre chose ?"</strong><br><br>La vraie objection sort ici. Traite-la — ne les laisse jamais partir sans connaître le vrai blocage.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"J'ai pas le temps maintenant"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"La formation est en accès à vie — tu commences quand tu veux, à ton rythme."</strong><br><br>Puis : <strong>"Mais je te pose la question : si tu commences pas maintenant, quand tu comptes commencer ? Dans 6 mois les conditions seront exactement les mêmes."</strong></div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"J'ai déjà essayé des formations, ça marche pas"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text">Ne te défends pas. Valide d'abord :<br><br><strong>"T'as raison, beaucoup de formations sont creuses. C'est pour ça que la DMA est construite différemment — c'est actionnable étape par étape, pas de la théorie."</strong><br><br>Puis montre la preuve : témoignages, résultats clients, screenshots.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"Je suis pas sûr que c'est pour moi"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text">Reviens sur ce qu'ils t'ont dit :<br><br><strong>"Tu m'as dit que tu voulais [leur objectif] et que ton problème c'est [leur blocage]. C'est exactement ce que la formation adresse. Qu'est-ce qui te fait douter que ça peut marcher pour toi ?"</strong><br><br>Ils vont sortir leur vraie peur — traite cette peur, pas l'objection de surface.</div></div>
+  </div>
+</div>
+
+<div class="footer"><div class="footer-logo">DM<span>A</span></div></div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+
+var scripts=[
+  "Hey [prénom] ! J'ai vu que tu regardes mon contenu depuis un moment — t'essaies de te lancer dans quoi exactement ?",
+  "C'est quoi ton plus gros blocage en ce moment ? Et ça te pose quel problème concrètement dans ta vie ?",
+  "Si dans 6 mois t'as toujours pas réglé ça — ça donne quoi pour toi ?",
+  "Ce que tu décris c'est exactement ce que la DMA résout. C'est [X] euros. T'as des questions avant qu'on continue ?",
+  "Ce soir je vous montre exactement comment j'ai fait [résultat] — restez jusqu'à la fin y'a quelque chose d'exclusif. Qui est là ce soir ?",
+  "Pour ceux qui sont là ce soir seulement — la formation DMA est à [prix réduit] au lieu de [prix normal]. Lien en bio.",
+  "Il reste 15 minutes sur l'offre live. La question c'est pas le prix, c'est est-ce que vous voulez changer votre situation dans les 30 prochains jours ou pas."
+];
+
+function copyScript(idx){
+  var text=document.getElementById("sc"+idx).innerText;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){alert("Script copié !");});
+  } else {
+    var ta=document.createElement("textarea");
+    ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand("copy");document.body.removeChild(ta);
+    alert("Script copié !");
+  }
+}
+</script>
+
+</body>
+</html>
