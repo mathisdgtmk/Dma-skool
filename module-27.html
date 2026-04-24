@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Module 27 — Affiliation & Partenariats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.module-badge{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.header-num{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(245,240,232,.25)}
+.module-progress{height:3px;background:rgba(255,255,255,.05);position:sticky;top:49px;z-index:49}
+.module-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C0001A,#C9A84C);transition:width .4s ease}
+.hero{padding:36px 20px 28px;text-align:center;position:relative;border-bottom:1px solid rgba(255,255,255,.04);background:#050505}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,.12) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:16px;background:rgba(201,168,76,.05)}
+.hero-num{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.7);display:block;margin-bottom:6px}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,7vw,46px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:12px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.5);letter-spacing:1px}
+.section{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,.04);background:#050505;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(20px,5vw,28px);letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
+.s-title span{color:#C0001A}
+.s-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:13px;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:20px;letter-spacing:.5px}
+.impact-quote{text-align:center;padding:22px 16px;margin:16px 0;position:relative}
+.impact-quote::before,.impact-quote::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:40px;height:1px;background:rgba(201,168,76,.3)}
+.impact-quote::before{top:0}.impact-quote::after{bottom:0}
+.impact-quote-text{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(16px,4vw,21px);font-weight:600;font-style:italic;color:#f5f0e8;line-height:1.4;margin-bottom:8px}
+.impact-quote-author{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.sensible-block{background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.sensible-icon{font-size:32px;margin-bottom:12px;display:block}
+.sensible-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:10px}
+.sensible-text{font-size:13px;font-weight:300;line-height:1.8;color:rgba(245,240,232,.75)}
+.sensible-text strong{color:#C9A84C;font-weight:600}
+.model-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden}
+.model-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
+.model-card.m1::before{background:linear-gradient(90deg,#C9A84C,#e8c96a)}
+.model-card.m2::before{background:linear-gradient(90deg,#C0001A,#ff4444)}
+.model-card.m3::before{background:linear-gradient(90deg,#80d080,#50a050)}
+.model-icon{font-size:24px;margin-bottom:8px;display:block}
+.model-title{font-size:13px;font-weight:600;color:#f5f0e8;margin-bottom:4px}
+.model-rate{font-family:Bebas Neue,Impact,sans-serif;font-size:15px;color:#C9A84C;letter-spacing:1px;margin-bottom:6px}
+.model-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.55);line-height:1.5}
+.model-desc strong{color:#C9A84C;font-weight:600}
+.script-block{background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:14px;margin-bottom:12px}
+.script-label{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:8px;display:block}
+.script-text{font-size:11px;color:rgba(245,240,232,.75);line-height:1.7;font-style:italic}
+.script-text strong{color:#C9A84C;font-style:normal;font-weight:600}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.step{display:flex;gap:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:14px}
+.step-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;color:#f5f0e8}
+.step-title{font-size:12px;font-weight:600;color:#f5f0e8;margin-bottom:5px}
+.step-text{font-size:11px;font-weight:300;color:rgba(245,240,232,.6);line-height:1.65}
+.step-text strong{color:#C9A84C;font-weight:600}
+.step-tip{display:inline-block;margin-top:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:5px 10px;font-size:10px;font-weight:500;color:rgba(201,168,76,.8)}
+.reveal-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:16px;margin-bottom:10px;cursor:pointer}
+.reveal-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.reveal-header{display:flex;align-items:center;justify-content:space-between}
+.reveal-title{font-size:13px;font-weight:600;color:#f5f0e8;padding-right:12px}
+.reveal-icon{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.reveal-card.open .reveal-icon{transform:rotate(45deg)}
+.reveal-icon svg{width:10px;height:10px;stroke:#C9A84C;fill:none;stroke-width:2.5}
+.reveal-content{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.reveal-card.open .reveal-content{max-height:500px}
+.reveal-content p{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.reveal-content strong{color:#C9A84C;font-weight:600}
+.info-block{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.6}
+.info-text strong{color:#C9A84C;font-weight:600}
+.quiz-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:18px 16px;margin-bottom:14px}
+.quiz-question{font-size:13px;font-weight:600;color:#f5f0e8;line-height:1.5;margin-bottom:14px}
+.quiz-question em{color:#C9A84C;font-style:normal}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s;-webkit-appearance:none;width:100%;text-align:left;font-family:Montserrat,Arial,sans-serif}
+.quiz-option.correct{border-color:rgba(100,200,100,.4);background:rgba(100,200,100,.06)}
+.quiz-option.wrong{border-color:rgba(192,0,26,.4);background:rgba(192,0,26,.06)}
+.quiz-option.disabled{cursor:default}
+.option-letter{width:24px;height:24px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C9A84C}
+.option-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.4}
+.quiz-feedback{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:12px;font-weight:500;line-height:1.5;display:none}
+.show-c{background:rgba(100,200,100,.08);border:1px solid rgba(100,200,100,.2);color:#80d080;display:block!important}
+.show-w{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);color:#ff7070;display:block!important}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.check-item.checked{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
+.check-box{width:20px;height:20px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);border-radius:3px;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item.checked .check-box{background:#C9A84C;border-color:#C9A84C}
+.check-box svg{width:10px;height:10px;stroke:#050505;fill:none;stroke-width:3;display:none}
+.check-item.checked .check-box svg{display:block}
+.check-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.75);line-height:1.5}
+.check-item.checked .check-text{color:rgba(245,240,232,.35);text-decoration:line-through}
+.complete-section{padding:28px 20px 48px;text-align:center;background:#050505}
+.btn-complete{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:3px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#f5f0e8;cursor:pointer;box-shadow:0 4px 24px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s;margin-bottom:12px}
+.btn-complete:active{transform:scale(.98)}
+.btn-complete.done{background:linear-gradient(135deg,#2a6e2a,#1a4a1a)}
+.nav-modules{display:flex;gap:10px}
+.btn-nav{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:13px;font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);-webkit-appearance:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="module-badge">MODULE 27</div>
+  <div class="header-num">27 / 28</div>
+</div>
+<div class="module-progress"><div class="module-progress-fill" id="readProgress"></div></div>
+
+<div class="hero">
+  <div class="hero-tag">🤝 Affiliation</div>
+  <span class="hero-num">MODULE 27</span>
+  <div class="hero-title">AFFILIATION &<br><span>PARTENARIATS</span></div>
+  <div class="hero-sub">Multiplie tes revenus en vendant les produits des autres — et en faisant vendre les tiens</div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sensible-block">
+    <span class="sensible-icon">🤝</span>
+    <div class="sensible-title">GAGNER SANS RIEN CREER</div>
+    <p class="sensible-text">
+      L affiliation c est recommander un produit que tu n as pas cree et toucher une commission sur chaque vente.<br><br>
+      <strong>Tu n as pas de stock, pas de SAV, pas de livraison.</strong><br><br>
+      Tu generes du trafic — quelqu un d autre gere le reste. Et toi tu touches <em>20 a 50% de chaque vente.</em>
+    </p>
+  </div>
+  <div class="impact-quote">
+    <div class="impact-quote-text">"L affiliation c est vendre l audience que tu as construite a des produits que tu aurais achetes toi-meme."</div>
+    <div class="impact-quote-author">Principe DMA</div>
+  </div>
+</div>
+
+<div class="section" id="s2">
+  <div class="s-title">LES 3 MODELES <span>D AFFILIATION</span></div>
+  <div class="s-sub">Choisis celui qui correspond a ta situation</div>
+
+  <div class="model-card m1">
+    <span class="model-icon">💰</span>
+    <div class="model-title">Affiliation de produits digitaux</div>
+    <div class="model-rate">Commission 30-50%</div>
+    <div class="model-desc">Formations, logiciels, outils en ligne. Les meilleures commissions du marche. <strong>Exemple : tu recommandes Systeme.io → tu touches 40% de chaque abonnement a vie.</strong> Un client = des commissions recurrentes chaque mois.</div>
+  </div>
+
+  <div class="model-card m2">
+    <span class="model-icon">🛍️</span>
+    <div class="model-title">Affiliation e-commerce</div>
+    <div class="model-rate">Commission 5-15%</div>
+    <div class="model-desc">Amazon, Cdiscount, marques physiques. Commissions plus faibles mais volume enorme. <strong>Ideal si ton audience consomme des produits physiques specifiques</strong> — beaute, sport, tech, cuisine.</div>
+  </div>
+
+  <div class="model-card m3">
+    <span class="model-icon">🔄</span>
+    <div class="model-title">Partenariat de co-creation</div>
+    <div class="model-rate">Partage 50/50</div>
+    <div class="model-desc">Tu crees un produit avec un autre createur — vous divisez les revenus. <strong>Tes competences + son audience ou l inverse.</strong> Le partenariat multiplie la portee sans diviser l effort.</div>
+  </div>
+</div>
+
+<div class="section" id="s3">
+  <div class="s-title">COMMENT <span>DEMARRER</span></div>
+  <div class="s-sub">Tes premieres commissions en moins de 7 jours</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Liste les outils que tu utilises deja</div><div class="step-text">Systeme.io, Manychat, Canva, Stan, CapCut, ChatGPT — <strong>tout ce que tu utilises a probablement un programme d affiliation.</strong> Commence par la ce que tu recommandes naturellement.</div><div class="step-tip">Cherche "[nom outil] + programme affiliation" sur Google</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Inscris-toi aux programmes</div><div class="step-text">Chaque outil a une page "Affiliates" ou "Partenaires". <strong>Inscription gratuite en 5 minutes</strong> → tu recois un lien unique → chaque vente via ton lien te rapporte une commission automatiquement.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Integre naturellement dans ton contenu</div><div class="step-text">Ne fait pas un post "achetez ca". <strong>Montre l outil en action dans tes videos</strong> — comment tu l utilises, le resultat que tu obtiens. La recommandation naturelle convertit 5 fois mieux que le lien brut.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Cree une page ressources</div><div class="step-text">Une page Beacons ou Notion avec <strong>tous tes outils recommandes et leurs liens affilies.</strong> Mets le lien dans ta bio. Chaque personne qui cherche tes recommandations clique et tu touches une commission sans rien faire.</div><div class="step-tip">Exemple : "Mes outils preferes pour mon business en ligne"</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Track tes commissions et optimise</div><div class="step-text">Chaque programme affiliation donne acces a un dashboard avec clics, conversions, commissions. <strong>Concentre 80% de ton energie sur les 20% de liens qui generent 80% des commissions.</strong></div></div></div>
+  </div>
+</div>
+
+<div class="section" id="s4">
+  <div class="s-title">PROPOSER DES <span>PARTENARIATS</span></div>
+  <div class="s-sub">Comment contacter et convaincre des createurs de collaborer avec toi</div>
+
+  <div class="script-block">
+    <span class="script-label">DM de proposition de partenariat — createur complementaire</span>
+    <div class="script-text">"Hey [prenom], je suis ton contenu depuis un moment et ton approche sur [sujet] est vraiment alignee avec ce que je fais.<br><br>Moi j aide [ta cible] a [ton resultat]. Toi tu aides [sa cible] a [son resultat]. Nos audiences se completent sans se cannibalement.<br><br>J aurais une idee de collab qui pourrait etre utile pour nos deux communautes — t as 15 minutes cette semaine pour qu on en parle ?"</div>
+  </div>
+
+  <div class="info-block">
+    <div class="info-icon">🎯</div>
+    <div class="info-text"><strong>Regles d or du partenariat :</strong> choisis des createurs avec une audience similaire mais un contenu complementaire. Jamais un concurrent direct. Propose toujours quelque chose de specifique et de mutuellement benefique.</div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Les formats de partenariat qui marchent</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p><strong>Live commun :</strong> vous faites un live ensemble — chacun presente son expertise. Vous croisez vos audiences. Resultat : nouveaux abonnes pour les deux en 1 heure.<br><br><strong>Newsletter croisee :</strong> tu mentionnes son produit a ta liste — il mentionne le tien a la sienne. Zero cout, audience qualifiee.<br><br><strong>Bundle de produits :</strong> vous vendez vos formations ensemble a prix reduit. Chacun fait la promo. Les deux gagnent des ventes sans effort supplementaire.<br><br><strong>Interview croisee :</strong> tu l interviewes sur ta plateforme — il t interviewe sur la sienne. Contenu de valeur + exposition croisee.</p></div>
+  </div>
+
+  <div class="reveal-card" onclick="this.classList.toggle('open')">
+    <div class="reveal-header"><div class="reveal-title">Comment evaluer un bon partenaire</div><div class="reveal-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></div></div>
+    <div class="reveal-content"><p>Avant de proposer un partenariat — analyse :<br><br><strong>Taille d audience :</strong> similaire a la tienne ou 2-3 fois superieure maximum. Un createur avec 10 fois ton audience ne te repondra pas.<br><br><strong>Engagement :</strong> 1000 abonnes engages valent plus que 10 000 abonnes fantomes. Regarde les commentaires et les likes relatifs.<br><br><strong>Valeurs alignees :</strong> son contenu doit etre compatible avec ton image. Un partenariat avec quelqu un de controversee peut te nuire.<br><br><strong>Audience complementaire :</strong> ses abonnes doivent avoir besoin de ce que tu vends — et les tiens de ce qu il vend.</p></div>
+  </div>
+</div>
+
+<div class="section" id="s5">
+  <div class="s-title">QUIZ <span>AFFILIATION</span></div>
+  <div class="s-sub">Teste ta strategie</div>
+  <div class="quiz-wrap">
+    <div class="quiz-question">Tu veux commencer l affiliation. Tu n as pas encore de gros produit a recommander. <em>Par ou commences-tu ?</em></div>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-option" onclick="answer(this,'q1','correct','A')"><div class="option-letter">A</div><div class="option-text">Les outils que tu utilises deja — Systeme.io, Canva, ChatGPT, etc.</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','A')"><div class="option-letter">B</div><div class="option-text">Tu cherches les produits avec les commissions les plus elevees</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','A')"><div class="option-letter">C</div><div class="option-text">Tu t inscris a Amazon Affiliates et tu places des liens partout</div></button>
+      <button class="quiz-option" onclick="answer(this,'q1','wrong','A')"><div class="option-letter">D</div><div class="option-text">Tu attends d avoir 10 000 abonnes pour commencer l affiliation</div></button>
+    </div>
+    <div class="quiz-feedback" id="q1-correct">Exactement. Les outils que tu utilises deja sont les plus faciles a recommander authentiquement. Tu parles de quelque chose que tu connais vraiment — et ca se sent. La credibilite de ta recommandation depend de ton experience personnelle avec le produit.</div>
+    <div class="quiz-feedback" id="q1-wrong">La reponse A est la meilleure. Commission elevee sans connaissance du produit = recommandation peu credible. Amazon Affiliates partout = spam. Attendre 10 000 abonnes = perdre des mois de commissions. Commence avec ce que tu connais et utilises vraiment.</div>
+  </div>
+</div>
+
+<div class="section" id="s6">
+  <div class="s-title">TES <span>ACTIONS</span></div>
+  <div class="s-sub">Coche chaque etape accomplie</div>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this,0)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Liste 5 outils</strong> que tu utilises et cherche leur programme d affiliation.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,1)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Inscris-toi</strong> au programme affiliation de Systeme.io — 40% de commission recurrente.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,2)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Cree ta page ressources</strong> sur Beacons ou Notion avec tous tes liens affilies.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,3)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Integre un lien affilie</strong> naturellement dans ta prochaine video ou story.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,4)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Identifie 3 createurs</strong> complementaires et envoie-leur un DM de proposition de partenariat.</div></div>
+    <div class="check-item" onclick="toggleCheck(this,5)"><div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="check-text"><strong>Lance un programme affiliation</strong> pour ton propre produit — active-le sur Stan ou Systeme.io.</div></div>
+  </div>
+</div>
+
+<div class="complete-section">
+  <button class="btn-complete" id="completeBtn" onclick="completeModule()">MARQUER COMME TERMINE</button>
+  <div class="nav-modules">
+    <a class="btn-nav" href="module-26.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Module 26</a>
+    <a class="btn-nav" href="module-28.html">Module 28<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+window.addEventListener("scroll",function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById("readProgress").style.width=Math.min(100,(window.scrollY/t)*100)+"%";
+});
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add("visible");});
+},{threshold:0.1});
+document.querySelectorAll(".section").forEach(function(s){obs.observe(s);});
+function answer(btn,qid,type,correct){
+  var opts=document.querySelectorAll("#"+qid+" .quiz-option");
+  opts.forEach(function(o){o.classList.add("disabled");o.onclick=null;});
+  btn.classList.add(type==="correct"?"correct":"wrong");
+  if(type==="wrong") opts.forEach(function(o){if(o.querySelector(".option-letter").textContent===correct)o.classList.add("correct");});
+  if(type==="correct") document.getElementById(qid+"-correct").classList.add("show-c");
+  else document.getElementById(qid+"-wrong").classList.add("show-w");
+}
+function toggleCheck(item,idx){
+  item.classList.toggle("checked");
+  localStorage.setItem("m27_check_"+idx,item.classList.contains("checked")?"1":"0");
+}
+document.querySelectorAll(".check-item").forEach(function(item,i){
+  if(localStorage.getItem("m27_check_"+i)==="1")item.classList.add("checked");
+});
+if(localStorage.getItem("module_27_done")==="1"){
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE";btn.classList.add("done");
+}
+function completeModule(){
+  localStorage.setItem("module_27_done","1");
+  var btn=document.getElementById("completeBtn");
+  btn.textContent="MODULE TERMINE !";btn.classList.add("done");
+  setTimeout(function(){window.location.href="module-28.html";},1000);
+}
+</script>
+
+</body>
+</html>
