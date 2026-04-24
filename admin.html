@@ -5,50 +5,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DMA Admin</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box}
 html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
-.header{background:#050505;border-bottom:1px solid rgba(192,0,26,.2);padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.header{background:#050505;border-bottom:1px solid rgba(192,0,26,.2);padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between}
 .logo{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:4px;color:#f5f0e8}
 .logo span{color:#C0001A}
-.admin-badge{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:2px;padding:3px 8px;color:#ff7070}
-
-/* LOGIN */
-#loginPage{padding:48px 24px;text-align:center}
-.login-icon{font-size:48px;display:block;margin-bottom:16px}
-.login-title{font-family:Bebas Neue,Impact,sans-serif;font-size:28px;letter-spacing:4px;color:#f5f0e8;margin-bottom:6px}
-.login-sub{font-size:12px;color:rgba(245,240,232,.4);margin-bottom:28px}
-.login-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:16px;font-size:16px;color:#f5f0e8;text-align:center;margin-bottom:12px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:block}
-.login-err{color:#ff7070;font-size:11px;text-align:center;display:none;margin-bottom:10px}
-.btn-login{width:100%;background:#C0001A;border:none;border-radius:4px;padding:18px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#f5f0e8;cursor:pointer;-webkit-appearance:none;display:block;-webkit-appearance:none;appearance:none}
-
-/* ADMIN */
-#adminPage{display:none;padding-bottom:60px}
-.stats-row{display:flex;gap:8px;padding:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.badge{font-size:9px;font-weight:700;letter-spacing:2px;background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:2px;padding:3px 8px;color:#ff7070}
+.block{display:none}
+.stats{display:flex;gap:8px;padding:16px;border-bottom:1px solid rgba(255,255,255,.06)}
 .stat{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:12px 8px;text-align:center}
-.stat-n{font-family:Bebas Neue,Impact,sans-serif;font-size:26px}
-.stat-l{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
-.form-section{padding:16px}
-.stitle{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8;margin-bottom:14px}
+.sn{font-family:Bebas Neue,Impact,sans-serif;font-size:26px}
+.sl{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
+.form{padding:16px}
+.ftitle{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;margin-bottom:14px}
 .flabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:5px;margin-top:12px;display:block}
-.finput{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px;font-size:13px;color:#f5f0e8;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:block}
-.fselect{width:100%;background:#111;border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px;font-size:13px;color:#f5f0e8;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:block}
+.finput{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px;font-size:13px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif}
+.fsel{width:100%;background:#111;border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px;font-size:13px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif}
 .row2{display:flex;gap:8px}
 .row2 .col{flex:1}
-.gen-row{display:flex;gap:8px}
-.gen-row .finput{flex:1}
-.btn-gen{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:12px;font-size:10px;font-weight:700;color:#C9A84C;cursor:pointer;-webkit-appearance:none;flex-shrink:0}
-.btn-create{width:100%;background:#C0001A;border:none;border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#f5f0e8;cursor:pointer;-webkit-appearance:none;margin-top:16px;display:block}
+.grow{display:flex;gap:8px}
+.grow .finput{flex:1}
+.bgen{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:12px;font-size:10px;font-weight:700;color:#C9A84C;cursor:pointer;flex-shrink:0}
+.bcreate{width:100%;background:#C0001A;border:none;border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#f5f0e8;cursor:pointer;margin-top:16px}
 .sep{height:1px;background:rgba(255,255,255,.06);margin:0 16px}
-.list-section{padding:16px}
-.list-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.ltitle{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8}
-.sinput{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:9px 12px;font-size:11px;color:#f5f0e8;width:130px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
+.lsec{padding:16px}
+.lhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ltitle{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px}
+.sinput{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:9px 12px;font-size:11px;color:#f5f0e8;width:130px;font-family:Montserrat,Arial,sans-serif}
 .ccard{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-bottom:8px}
 .ctop{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.cname{font-size:13px;font-weight:600;color:#f5f0e8}
+.cname{font-size:13px;font-weight:600}
 .ctier{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px}
 .ts{background:rgba(122,184,255,.1);color:#7ab8ff}
 .tp{background:rgba(201,168,76,.1);color:#C9A84C}
@@ -58,316 +46,219 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
 .crow:last-child{margin-bottom:0}
 .cl{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3)}
 .cv{font-size:11px;font-weight:600;color:#C9A84C;letter-spacing:1px}
-.cactions{display:flex;gap:6px}
-.bcopy{flex:1;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:9px;font-size:10px;font-weight:600;letter-spacing:1px;color:#C9A84C;cursor:pointer;-webkit-appearance:none;text-align:center}
-.bdel{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.15);border-radius:3px;padding:9px 13px;font-size:14px;cursor:pointer;-webkit-appearance:none}
+.cact{display:flex;gap:6px}
+.bcopy{flex:1;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:9px;font-size:10px;font-weight:600;color:#C9A84C;cursor:pointer;text-align:center}
+.bdel{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.15);border-radius:3px;padding:9px 13px;font-size:14px;cursor:pointer}
 .cnote{font-size:10px;color:rgba(245,240,232,.3);margin-top:6px;font-style:italic}
 .empty{text-align:center;padding:32px;color:rgba(245,240,232,.2)}
-.export-wrap{padding:0 16px 16px}
-.bexport{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;display:block}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
-.toast.show{display:block}
+.bexport{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;margin:0 16px;width:calc(100% - 32px)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
 </style>
-
 </head>
 <body>
-
 <div class="header">
-  <div class="logo">DMA <span>ADMIN</span></div>
-  <div class="admin-badge">ADMIN</div>
+  <div class="logo">DMA <span>ADMIN</span></div>
+  <div class="badge">ADMIN</div>
 </div>
 
-<div id="loginPage">
-  <span class="login-icon">🔐</span>
-  <div class="login-title">ACCES ADMIN</div>
-  <div class="login-sub">Reserve a Mathis uniquement</div>
-  <input class="login-input" id="pwd" type="password" placeholder="Mot de passe">
-  <div class="login-err" id="loginErr">Mot de passe incorrect</div>
-  <button class="btn-login" id="loginBtn">ACCEDER AU PANEL</button>
-</div>
-
-<div id="adminPage">
-  <div class="stats-row">
-    <div class="stat"><div class="stat-n" style="color:#C0001A" id="stTotal">0</div><div class="stat-l">Total</div></div>
-    <div class="stat"><div class="stat-n" style="color:#7ab8ff" id="stS">0</div><div class="stat-l">Starter</div></div>
-    <div class="stat"><div class="stat-n" style="color:#C9A84C" id="stP">0</div><div class="stat-l">Premium</div></div>
-    <div class="stat"><div class="stat-n" style="color:#80d080" id="stD">0</div><div class="stat-l">Du King</div></div>
-  </div>
-
-  <div class="form-section">
-    <div class="stitle">NOUVEAU CLIENT</div>
-    <div class="row2">
-      <div class="col"><span class="flabel">Prenom</span><input class="finput" id="fP" placeholder="Jean" type="text"></div>
-      <div class="col"><span class="flabel">Nom</span><input class="finput" id="fN" placeholder="Dupont" type="text"></div>
-    </div>
-    <div class="row2">
-      <div class="col">
-        <span class="flabel">Offre</span>
-        <select class="fselect" id="fT">
-          <option value="starter">Starter 249e</option>
-          <option value="premium">Premium 349e</option>
-          <option value="duking">Du King</option>
-        </select>
-      </div>
-      <div class="col">
-        <span class="flabel">Bonus IA</span>
-        <select class="fselect" id="fB">
-          <option value="non">Non</option>
-          <option value="oui">Oui</option>
-        </select>
-      </div>
-    </div>
-    <span class="flabel">Identifiant</span>
-    <div class="gen-row">
-      <input class="finput" id="fL" placeholder="Ex: jean123" type="text">
-      <button class="btn-gen" id="btnGL">GEN</button>
-    </div>
-    <span class="flabel">Mot de passe</span>
-    <div class="gen-row">
-      <input class="finput" id="fPW" placeholder="Ex: Jean456" type="text">
-      <button class="btn-gen" id="btnGP">GEN</button>
-    </div>
-    <span class="flabel">Code Bonus IA</span>
-    <div class="gen-row">
-      <input class="finput" id="fCB" placeholder="Si bonus inclus" type="text">
-      <button class="btn-gen" id="btnGC">GEN</button>
-    </div>
-    <span class="flabel">Note</span>
-    <input class="finput" id="fNO" placeholder="Ex: paye en 2 fois" type="text">
-    <button class="btn-create" id="btnCreate">CREER LE CLIENT</button>
-  </div>
-
-  <div class="sep"></div>
-
-  <div class="list-section">
-    <div class="list-header">
-      <div class="ltitle">MES CLIENTS</div>
-      <input class="sinput" id="search" placeholder="Rechercher...">
-    </div>
-    <div id="clientList"></div>
-  </div>
-  <div class="export-wrap">
-    <button class="bexport" id="btnExport">EXPORTER TOUS LES ACCES</button>
-  </div>
+<div id="panel" class="block">
+  <div class="stats">
+    <div class="stat"><div class="sn" style="color:#C0001A" id="stT">0</div><div class="sl">Total</div></div>
+    <div class="stat"><div class="sn" style="color:#7ab8ff" id="stS">0</div><div class="sl">Starter</div></div>
+    <div class="stat"><div class="sn" style="color:#C9A84C" id="stP">0</div><div class="sl">Premium</div></div>
+    <div class="stat"><div class="sn" style="color:#80d080" id="stD">0</div><div class="sl">Du King</div></div>
+  </div>
+  <div class="form">
+    <div class="ftitle">NOUVEAU CLIENT</div>
+    <div class="row2">
+      <div class="col"><span class="flabel">Prenom</span><input class="finput" id="fP" placeholder="Jean" type="text"></div>
+      <div class="col"><span class="flabel">Nom</span><input class="finput" id="fN" placeholder="Dupont" type="text"></div>
+    </div>
+    <div class="row2">
+      <div class="col"><span class="flabel">Offre</span>
+        <select class="fsel" id="fT"><option value="starter">Starter 249e</option><option value="premium">Premium 349e</option><option value="duking">Du King</option></select>
+      </div>
+      <div class="col"><span class="flabel">Bonus IA</span>
+        <select class="fsel" id="fB"><option value="non">Non</option><option value="oui">Oui</option></select>
+      </div>
+    </div>
+    <span class="flabel">Identifiant</span>
+    <div class="grow"><input class="finput" id="fL" placeholder="jean123" type="text"><button class="bgen" id="bGL">GEN</button></div>
+    <span class="flabel">Mot de passe</span>
+    <div class="grow"><input class="finput" id="fPW" placeholder="Jean456x" type="text"><button class="bgen" id="bGP">GEN</button></div>
+    <span class="flabel">Code Bonus IA</span>
+    <div class="grow"><input class="finput" id="fCB" placeholder="Si bonus inclus" type="text"><button class="bgen" id="bGC">GEN</button></div>
+    <span class="flabel">Note</span>
+    <input class="finput" id="fNO" placeholder="Ex: paye en 2 fois" type="text">
+    <button class="bcreate" id="bCR">CREER LE CLIENT</button>
+  </div>
+  <div class="sep"></div>
+  <div class="lsec">
+    <div class="lhead"><div class="ltitle">MES CLIENTS</div><input class="sinput" id="srch" placeholder="Rechercher..."></div>
+    <div id="list"></div>
+  </div>
+  <button class="bexport" id="bEX">EXPORTER TOUS LES ACCES</button>
+  <div style="height:40px"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-(function() {
-  var PWD = "MathisDMA2026";
+// Acces par hash secret dans URL
+// URL : admin.html#MathisDMA2026
+var SECRET = "MathisDMA2026";
+var hash = window.location.hash.replace("#","");
+if(hash === SECRET){
+  document.getElementById("panel").style.display = "block";
+  init();
+} else {
+  document.body.innerHTML += "<div style='padding:60px 24px;text-align:center'><div style='font-size:48px;margin-bottom:16px'>🔐</div><div style='font-family:Bebas Neue,Impact,sans-serif;font-size:28px;letter-spacing:4px;margin-bottom:8px'>ACCES REFUSE</div><div style='font-size:12px;color:rgba(245,240,232,.4)'>Lien invalide. Contacte Mathis.</div></div>";
+}
 
-  function show(id) { document.getElementById(id).style.display = "block"; }
-  function hide(id) { document.getElementById(id).style.display = "none"; }
+function init(){
+  document.getElementById("bGL").onclick = genL;
+  document.getElementById("bGP").onclick = genP;
+  document.getElementById("bGC").onclick = genC;
+  document.getElementById("bCR").onclick = create;
+  document.getElementById("bEX").onclick = exportAll;
+  document.getElementById("srch").oninput = render;
+  document.getElementById("fP").oninput = function(){ genL(); genP(); };
+  render();
+  stats();
+}
 
-  function doLogin() {
-    var v = document.getElementById("pwd").value;
-    if (v === PWD) {
-      hide("loginPage");
-      show("adminPage");
-      renderList();
-      updateStats();
-    } else {
-      show("loginErr");
-    }
-  }
+function r(a,b){return Math.floor(Math.random()*(b-a)+a);}
+function genL(){var p=(document.getElementById("fP").value||"client").toLowerCase().trim();document.getElementById("fL").value=p+r(100,999);}
+function genP(){var p=(document.getElementById("fP").value||"DMA").trim();document.getElementById("fPW").value=p+r(100,999)+"k";}
+function genC(){var p=(document.getElementById("fP").value||"CLIENT").toUpperCase().trim();document.getElementById("fCB").value="DMA"+p+r(1000,9999);}
 
-  document.getElementById("loginBtn").addEventListener("click", doLogin);
-  document.getElementById("pwd").addEventListener("keyup", function(e) {
-    if (e.keyCode === 13) doLogin();
-  });
+function gc(){try{return JSON.parse(localStorage.getItem("dma_cl")||"[]");}catch(e){return[];}}
+function sc(a){localStorage.setItem("dma_cl",JSON.stringify(a));}
 
-  function rand(min, max) { return Math.floor(Math.random() * (max - min) + min); }
+function create(){
+  var p=document.getElementById("fP").value.trim();
+  var n=document.getElementById("fN").value.trim();
+  var l=document.getElementById("fL").value.trim();
+  var pw=document.getElementById("fPW").value.trim();
+  var t=document.getElementById("fT").value;
+  var b=document.getElementById("fB").value;
+  var cb=document.getElementById("fCB").value.trim();
+  var no=document.getElementById("fNO").value.trim();
+  if(!p||!l||!pw){toast("Remplis prenom login et mdp");return;}
+  var list=gc();
+  list.unshift({id:Date.now(),p:p,n:n,l:l,pw:pw,t:t,b:b,cb:cb,no:no,d:new Date().toLocaleDateString("fr-FR")});
+  sc(list);
+  document.getElementById("fP").value="";
+  document.getElementById("fN").value="";
+  document.getElementById("fL").value="";
+  document.getElementById("fPW").value="";
+  document.getElementById("fCB").value="";
+  document.getElementById("fNO").value="";
+  render();stats();toast("Client cree !");
+}
 
-  function genLogin() {
-    var p = document.getElementById("fP").value.trim().toLowerCase() || "client";
-    document.getElementById("fL").value = p + rand(100, 999);
-  }
+function del(id){
+  sc(gc().filter(function(c){return c.id!==id;}));
+  render();stats();toast("Supprime");
+}
 
-  function genPwd() {
-    var p = document.getElementById("fP").value.trim() || "DMA";
-    document.getElementById("fPW").value = p + rand(100, 999) + "x";
-  }
-
-  function genCode() {
-    var p = document.getElementById("fP").value.trim().toUpperCase() || "CLIENT";
-    document.getElementById("fCB").value = "DMA" + p + rand(1000, 9999);
-  }
-
-  document.getElementById("btnGL").addEventListener("click", genLogin);
-  document.getElementById("btnGP").addEventListener("click", genPwd);
-  document.getElementById("btnGC").addEventListener("click", genCode);
-
-  document.getElementById("fP").addEventListener("input", function() {
-    genLogin();
-    genPwd();
-  });
-
-  function getClients() {
-    try { return JSON.parse(localStorage.getItem("dma_cl") || "[]"); }
-    catch(e) { return []; }
-  }
-  function saveClients(arr) { localStorage.setItem("dma_cl", JSON.stringify(arr)); }
-
-  function createClient() {
-    var prenom = document.getElementById("fP").value.trim();
-    var nom = document.getElementById("fN").value.trim();
-    var login = document.getElementById("fL").value.trim();
-    var pwd = document.getElementById("fPW").value.trim();
-    var tier = document.getElementById("fT").value;
-    var bonus = document.getElementById("fB").value;
-    var code = document.getElementById("fCB").value.trim();
-    var note = document.getElementById("fNO").value.trim();
-    if (!prenom || !login || !pwd) { showToast("Remplis prenom login et mdp"); return; }
-    var list = getClients();
-    list.unshift({ id: Date.now(), prenom: prenom, nom: nom, login: login, pwd: pwd, tier: tier, bonus: bonus, code: code, note: note, date: new Date().toLocaleDateString("fr-FR") });
-    saveClients(list);
-    document.getElementById("fP").value = "";
-    document.getElementById("fN").value = "";
-    document.getElementById("fL").value = "";
-    document.getElementById("fPW").value = "";
-    document.getElementById("fCB").value = "";
-    document.getElementById("fNO").value = "";
-    renderList();
-    updateStats();
-    showToast("Client cree !");
-  }
-
-  document.getElementById("btnCreate").addEventListener("click", createClient);
-
-  function delClient(id) {
-    var list = getClients().filter(function(c) { return c.id !== id; });
-    saveClients(list);
-    renderList();
-    updateStats();
-    showToast("Supprime");
-  }
-
-  function copyClient(id) {
-    var list = getClients();
-    var c = null;
-    for (var i = 0; i < list.length; i++) { if (list[i].id === id) { c = list[i]; break; } }
-    if (!c) return;
-    var tl = { starter: "Starter 249e", premium: "Premium 349e", duking: "Du King" };
-    var txt = "Acces DMA - " + c.prenom + " " + c.nom + "
+function copy(id){
+  var list=gc();
+  var c=null;
+  for(var i=0;i<list.length;i++){if(list[i].id===id){c=list[i];break;}}
+  if(!c)return;
+  var tl={starter:"Starter 249e",premium:"Premium 349e",duking:"Du King"};
+  var txt="Acces DMA - "+c.p+" "+c.n+"
 ";
-    txt += "Site : mathisdgtmk.github.io/Dma-skool
+  txt+="Site : mathisdgtmk.github.io/Dma-skool
 ";
-    txt += "Identifiant : " + c.login + "
+  txt+="Identifiant : "+c.l+"
 ";
-    txt += "Mot de passe : " + c.pwd + "
+  txt+="Mot de passe : "+c.pw+"
 ";
-    txt += "Offre : " + (tl[c.tier] || c.tier) + "
+  txt+="Offre : "+(tl[c.t]||c.t)+"
 ";
-    if (c.bonus === "oui" && c.code) txt += "Code Bonus IA : " + c.code + "
+  if(c.b==="oui"&&c.cb)txt+="Code Bonus IA : "+c.cb+"
 ";
-    txt += "Bonne formation !";
-    copyText(txt, "Copie pret a envoyer !");
-  }
+  txt+="Bonne formation !";
+  cp(txt,"Copie pret a envoyer !");
+}
 
-  function exportAll() {
-    var list = getClients();
-    if (!list.length) { showToast("Aucun client"); return; }
-    var txt = "CLIENTS DMA
+function exportAll(){
+  var list=gc();
+  if(!list.length){toast("Aucun client");return;}
+  var txt="CLIENTS DMA
 
 ";
-    for (var i = 0; i < list.length; i++) {
-      var c = list[i];
-      txt += (i+1) + ". " + c.prenom + " " + c.nom + "
+  for(var i=0;i<list.length;i++){
+    var c=list[i];
+    txt+=(i+1)+". "+c.p+" "+c.n+"
 ";
-      txt += "Login: " + c.login + " | Mdp: " + c.pwd + "
+    txt+="Login: "+c.l+" | Mdp: "+c.pw+"
 ";
-      if (c.bonus === "oui" && c.code) txt += "Code: " + c.code + "
+    if(c.b==="oui"&&c.cb)txt+="Code: "+c.cb+"
 ";
-      txt += "
+    txt+="
 ";
-    }
-    copyText(txt, "Export copie !");
-  }
+  }
+  cp(txt,"Export copie !");
+}
 
-  document.getElementById("btnExport").addEventListener("click", exportAll);
-  document.getElementById("search").addEventListener("input", renderList);
+function cp(txt,msg){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){toast(msg);});
+  } else {
+    var ta=document.createElement("textarea");
+    ta.value=txt;ta.style.cssText="position:fixed;top:-9999px";
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");}catch(e){}
+    document.body.removeChild(ta);toast(msg);
+  }
+}
 
-  function copyText(txt, msg) {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(txt).then(function() { showToast(msg); });
-    } else {
-      var ta = document.createElement("textarea");
-      ta.value = txt;
-      ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      try { document.execCommand("copy"); } catch(e) {}
-      document.body.removeChild(ta);
-      showToast(msg);
-    }
-  }
+function render(){
+  var q=(document.getElementById("srch").value||"").toLowerCase();
+  var list=gc().filter(function(c){return !q||(c.p+c.n+c.l).toLowerCase().indexOf(q)!==-1;});
+  var tl={starter:"Starter",premium:"Premium",duking:"Du King"};
+  var tc={starter:"ts",premium:"tp",duking:"td"};
+  if(!list.length){document.getElementById("list").innerHTML="<div class=empty>Aucun client encore</div>";return;}
+  var html="";
+  for(var i=0;i<list.length;i++){
+    var c=list[i];
+    html+="<div class=ccard>";
+    html+="<div class=ctop><div class=cname>"+c.p+" "+c.n+"</div>";
+    html+="<span class='ctier "+(tc[c.t]||"ts")+"'>"+(tl[c.t]||c.t)+"</span></div>";
+    html+="<div class=ccreds>";
+    html+="<div class=crow><span class=cl>Login</span><span class=cv>"+c.l+"</span></div>";
+    html+="<div class=crow><span class=cl>Mdp</span><span class=cv>"+c.pw+"</span></div>";
+    if(c.b==="oui"&&c.cb)html+="<div class=crow><span class=cl>Code IA</span><span class=cv>"+c.cb+"</span></div>";
+    html+="<div class=crow><span class=cl>Date</span><span class=cv style='color:rgba(245,240,232,.3)'>"+c.d+"</span></div>";
+    html+="</div>";
+    html+="<div class=cact>";
+    html+="<div class=bcopy onclick='copy("+c.id+")'>COPIER ET ENVOYER</div>";
+    html+="<div class=bdel onclick='del("+c.id+")'>🗑</div>";
+    html+="</div>";
+    if(c.no)html+="<div class=cnote>"+c.no+"</div>";
+    html+="</div>";
+  }
+  document.getElementById("list").innerHTML=html;
+}
 
-  function renderList() {
-    var q = document.getElementById("search").value.toLowerCase();
-    var list = getClients();
-    var filtered = list.filter(function(c) {
-      return !q || (c.prenom + c.nom + c.login).toLowerCase().indexOf(q) !== -1;
-    });
-    var tl = { starter: "Starter", premium: "Premium", duking: "Du King" };
-    var tc = { starter: "ts", premium: "tp", duking: "td" };
-    if (!filtered.length) {
-      document.getElementById("clientList").innerHTML = "<div class='empty'>Aucun client encore</div>";
-      return;
-    }
-    var html = "";
-    for (var i = 0; i < filtered.length; i++) {
-      var c = filtered[i];
-      html += "<div class='ccard'>";
-      html += "<div class='ctop'><div class='cname'>" + c.prenom + " " + c.nom + "</div>";
-      html += "<span class='ctier " + (tc[c.tier] || "ts") + "'>" + (tl[c.tier] || c.tier) + "</span></div>";
-      html += "<div class='ccreds'>";
-      html += "<div class='crow'><span class='cl'>Login</span><span class='cv'>" + c.login + "</span></div>";
-      html += "<div class='crow'><span class='cl'>Mdp</span><span class='cv'>" + c.pwd + "</span></div>";
-      if (c.bonus === "oui" && c.code) html += "<div class='crow'><span class='cl'>Code IA</span><span class='cv'>" + c.code + "</span></div>";
-      html += "<div class='crow'><span class='cl'>Date</span><span class='cv' style='color:rgba(245,240,232,.3)'>" + c.date + "</span></div>";
-      html += "</div>";
-      html += "<div class='cactions'>";
-      html += "<button class='bcopy' data-id='" + c.id + "'>COPIER ET ENVOYER</button>";
-      html += "<button class='bdel' data-id='" + c.id + "'>🗑</button>";
-      html += "</div>";
-      if (c.note) html += "<div class='cnote'>" + c.note + "</div>";
-      html += "</div>";
-    }
-    document.getElementById("clientList").innerHTML = html;
+function stats(){
+  var list=gc();var s=0,p=0,d=0;
+  for(var i=0;i<list.length;i++){if(list[i].t==="starter")s++;else if(list[i].t==="premium")p++;else d++;}
+  document.getElementById("stT").textContent=list.length;
+  document.getElementById("stS").textContent=s;
+  document.getElementById("stP").textContent=p;
+  document.getElementById("stD").textContent=d;
+}
 
-    var copies = document.querySelectorAll(".bcopy");
-    for (var j = 0; j < copies.length; j++) {
-      copies[j].addEventListener("click", function() { copyClient(parseInt(this.getAttribute("data-id"))); });
-    }
-    var dels = document.querySelectorAll(".bdel");
-    for (var k = 0; k < dels.length; k++) {
-      dels[k].addEventListener("click", function() { delClient(parseInt(this.getAttribute("data-id"))); });
-    }
-  }
-
-  function updateStats() {
-    var list = getClients();
-    var s = 0, p = 0, d = 0;
-    for (var i = 0; i < list.length; i++) {
-      if (list[i].tier === "starter") s++;
-      else if (list[i].tier === "premium") p++;
-      else d++;
-    }
-    document.getElementById("stTotal").textContent = list.length;
-    document.getElementById("stS").textContent = s;
-    document.getElementById("stP").textContent = p;
-    document.getElementById("stD").textContent = d;
-  }
-
-  function showToast(msg) {
-    var t = document.getElementById("toast");
-    t.textContent = msg;
-    t.className = "toast show";
-    setTimeout(function() { t.className = "toast"; }, 2500);
-  }
-})();
+function toast(msg){
+  var t=document.getElementById("toast");
+  t.textContent=msg;t.className="toast show";
+  setTimeout(function(){t.className="toast";},2500);
+}
 </script>
 
 </body>
