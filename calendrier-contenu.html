@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA — Calendrier Contenu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#050505}
+body{background:#050505!important;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.header{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.header-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.header-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.header-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.hero{padding:28px 20px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:14px;background:rgba(201,168,76,.05)}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(26px,7vw,40px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:8px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-size:13px;font-weight:300;color:rgba(245,240,232,.4);font-style:italic}
+.rule-block{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.12);border-radius:6px;padding:16px;margin:20px 20px 0;display:flex;gap:12px;align-items:center}
+.rule-icon{font-size:28px;flex-shrink:0}
+.rule-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.6}
+.rule-text strong{color:#C9A84C;font-weight:600}
+.week-section{padding:20px 20px 0}
+.week-label{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.week-label span{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(201,168,76,.6);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:2px;padding:3px 8px}
+.day-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.day-name{font-family:Bebas Neue,Impact,sans-serif;font-size:11px;letter-spacing:2px;color:rgba(245,240,232,.3);width:32px;flex-shrink:0;padding-top:2px}
+.day-content{flex:1}
+.day-type{display:inline-block;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-bottom:6px}
+.type-valeur{background:rgba(100,200,100,.1);color:#80d080}
+.type-story{background:rgba(122,184,255,.1);color:#7ab8ff}
+.type-vente{background:rgba(192,0,26,.15);color:#ff7070}
+.type-proof{background:rgba(201,168,76,.1);color:#C9A84C}
+.type-off{background:rgba(255,255,255,.05);color:rgba(245,240,232,.3)}
+.day-idea{font-size:12px;font-weight:500;color:#f5f0e8;margin-bottom:4px}
+.day-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.5}
+.day-platforms{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.platform-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:2px;background:rgba(255,255,255,.06);color:rgba(245,240,232,.4)}
+.divider{height:1px;background:rgba(255,255,255,.04);margin:20px 20px}
+.footer{padding:32px 20px 60px;text-align:center}
+.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.08)}
+.footer-logo span{color:rgba(201,168,76,.15)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="dashboard.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="header-title">CALENDRIER CONTENU</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">🗓️ Bonus DMA</div>
+  <div class="hero-title">CALENDRIER<br><span>CONTENU</span></div>
+  <div class="hero-sub">4 semaines de contenu planifié pour vendre chaque jour</div>
+</div>
+
+<div class="rule-block">
+  <div class="rule-icon">📐</div>
+  <div class="rule-text"><strong>La règle 3-1-1 :</strong> 3 posts de valeur pure → 1 post de preuve sociale → 1 post de vente directe. Répète chaque semaine. Ne vends jamais sans avoir donné de la valeur avant.</div>
+</div>
+
+<!-- SEMAINE 1 -->
+
+<div class="week-section">
+  <div class="week-label">SEMAINE 1 <span>🎯 LANCEMENT</span></div>
+
+  <div class="day-card">
+    <div class="day-name">LUN</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Les 3 erreurs qui t'empêchent de vendre en ligne</div>
+      <div class="day-desc">Hook fort + liste des 3 erreurs + solution rapide. Termine par "Sauve ce post pour y revenir."</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span><span class="platform-tag">Story</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MAR</div>
+    <div class="day-content">
+      <span class="day-type type-story">Storytelling</span>
+      <div class="day-idea">Mon histoire — avant/après</div>
+      <div class="day-desc">Ta situation de départ, le déclic, où tu en es aujourd'hui. Authentique et imparfait = plus de connexion.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MER</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Comment j'ai fait [résultat] en [délai]</div>
+      <div class="day-desc">Process concret étape par étape. Donne la méthode gratuitement — les gens paient pour l'accompagnement, pas l'info.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">JEU</div>
+    <div class="day-content">
+      <span class="day-type type-proof">Preuve sociale</span>
+      <div class="day-idea">Résultat d'un client / screenshot</div>
+      <div class="day-desc">Partage un résultat réel avec le contexte. "X avait ce problème → voilà ce qu'il a fait → voilà le résultat."</div>
+      <div class="day-platforms"><span class="platform-tag">Story</span><span class="platform-tag">Instagram</span><span class="platform-tag">TikTok</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">VEN</div>
+    <div class="day-content">
+      <span class="day-type type-vente">Vente</span>
+      <div class="day-idea">Présentation de la DMA + CTA clair</div>
+      <div class="day-desc">Récap de la valeur de la semaine → "Pour aller plus loin j'ai créé [formation]" → lien en bio. Urgent si possible.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Story</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">SAM</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Conseil rapide — format court 30 secondes</div>
+      <div class="day-desc">Un conseil actionable en moins d'une minute. Simple, direct, partageable.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">DIM</div>
+    <div class="day-content">
+      <span class="day-type type-off">Repos</span>
+      <div class="day-idea">Stories coulisses / vie perso</div>
+      <div class="day-desc">Montre ta vie, pas ton business. Repas, sport, famille. Le dimanche humanise ta marque personnelle.</div>
+      <div class="day-platforms"><span class="platform-tag">Story</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SEMAINE 2 -->
+
+<div class="week-section">
+  <div class="week-label">SEMAINE 2 <span>🔥 ENGAGEMENT</span></div>
+
+  <div class="day-card">
+    <div class="day-name">LUN</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Ce que personne ne te dit sur [sujet de ta niche]</div>
+      <div class="day-desc">Contredit une croyance commune. Les posts qui disent "tout le monde a tort" créent 3x plus d'engagement.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MAR</div>
+    <div class="day-content">
+      <span class="day-type type-story">Storytelling</span>
+      <div class="day-idea">Mon plus gros échec et ce que j'en ai appris</div>
+      <div class="day-desc">Vulnérabilité = connexion. La galère racontée authentiquement convertit mieux que le succès parfait.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MER</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Tutoriel — comment faire [action spécifique]</div>
+      <div class="day-desc">Format "screen record" ou face cam avec sous-titres. Step by step. Les tutoriels = plus de sauvegardes.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span><span class="platform-tag">YouTube Shorts</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">JEU</div>
+    <div class="day-content">
+      <span class="day-type type-proof">Preuve sociale</span>
+      <div class="day-idea">DM reçu d'un client satisfait</div>
+      <div class="day-desc">Screenshot de témoignage ou résultat. Flou le nom si besoin. La vraie preuve bat tous les arguments.</div>
+      <div class="day-platforms"><span class="platform-tag">Story</span><span class="platform-tag">Snap</span><span class="platform-tag">Instagram</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">VEN</div>
+    <div class="day-content">
+      <span class="day-type type-vente">Vente</span>
+      <div class="day-idea">Offre limitée weekend — prix ou bonus spécial</div>
+      <div class="day-desc">Crée l'urgence avec une limite temporelle réelle. "Jusqu'à dimanche soir seulement." Live ou story countdown.</div>
+      <div class="day-platforms"><span class="platform-tag">Story</span><span class="platform-tag">Snap</span><span class="platform-tag">TikTok Live</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">SAM</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Ma routine / journée type</div>
+      <div class="day-desc">Montre ta journée d'entrepreneur — matin, travail, résultats. Les gens achètent le style de vie autant que la méthode.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Story</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">DIM</div>
+    <div class="day-content">
+      <span class="day-type type-proof">Preuve sociale</span>
+      <div class="day-idea">Bilan de la semaine — tes résultats</div>
+      <div class="day-desc">Partage tes stats de la semaine — ventes, abonnés gagnés, DMs reçus. La transparence crée la confiance.</div>
+      <div class="day-platforms"><span class="platform-tag">Story</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SEMAINE 3 -->
+
+<div class="week-section">
+  <div class="week-label">SEMAINE 3 <span>💰 VENTE INTENSIVE</span></div>
+
+  <div class="day-card">
+    <div class="day-name">LUN</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Comparatif — avec vs sans [ta méthode]</div>
+      <div class="day-desc">Format avant/après. Montre concrètement la différence. Chiffres, délai, facilité.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MAR</div>
+    <div class="day-content">
+      <span class="day-type type-vente">Vente</span>
+      <div class="day-idea">Live TikTok de vente — 60 à 90 minutes</div>
+      <div class="day-desc">Annonce la veille. Structure 5 phases du module 12. Offre exclusive live. Rappelle le lien toutes les 10 min.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok Live</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MER</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">FAQ — les questions que tout le monde pose</div>
+      <div class="day-desc">Réponds à 3-5 vraies questions reçues en DM. Format rapide, naturel. "On me demande souvent..."</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Story</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">JEU</div>
+    <div class="day-content">
+      <span class="day-type type-proof">Preuve sociale</span>
+      <div class="day-idea">Témoignage vidéo d'un client</div>
+      <div class="day-desc">Partage un témoignage vidéo avec contexte. "X était dans cette situation → voilà son résultat."</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Story</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">VEN</div>
+    <div class="day-content">
+      <span class="day-type type-vente">Vente</span>
+      <div class="day-idea">Dernier rappel de l'offre de la semaine</div>
+      <div class="day-desc">"C'est la dernière fois que je parle de [offre] cette semaine." Urgence finale. CTA clair et simple.</div>
+      <div class="day-platforms"><span class="platform-tag">Story</span><span class="platform-tag">Snap</span><span class="platform-tag">TikTok</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">SAM</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Outil ou ressource gratuite</div>
+      <div class="day-desc">Partage un template, un outil, une ressource utile gratuitement. La générosité crée la réciprocité.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Instagram</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">DIM</div>
+    <div class="day-content">
+      <span class="day-type type-story">Storytelling</span>
+      <div class="day-idea">Pourquoi j'ai créé [ton produit]</div>
+      <div class="day-desc">L'histoire de la création — le problème que tu as vécu, pourquoi tu as construit cette solution. Émotion + mission.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SEMAINE 4 -->
+
+<div class="week-section">
+  <div class="week-label">SEMAINE 4 <span>🚀 RÉCURRENCE</span></div>
+
+  <div class="day-card">
+    <div class="day-name">LUN</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Le hack que j'aurais voulu connaître quand j'ai commencé</div>
+      <div class="day-desc">Conseil nostalgique — "si je devais recommencer voilà ce que je ferais dès le départ."</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MAR</div>
+    <div class="day-content">
+      <span class="day-type type-story">Storytelling</span>
+      <div class="day-idea">La journée où tout a changé</div>
+      <div class="day-desc">Le moment précis de déclic. La première vente, la première victoire, la décision qui a tout changé.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">MER</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Checklist — les 5 choses à faire cette semaine pour [résultat]</div>
+      <div class="day-desc">Format liste actionnable. Simple, direct, sauvegardable. Adapte à ton domaine.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Reels</span><span class="platform-tag">Story</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">JEU</div>
+    <div class="day-content">
+      <span class="day-type type-proof">Preuve sociale</span>
+      <div class="day-idea">Bilan du mois — tes résultats et ceux de tes clients</div>
+      <div class="day-desc">Transparence mensuelle. Chiffres, apprentissages, victoires. Les gens adorent les bilans honnêtes.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Story</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">VEN</div>
+    <div class="day-content">
+      <span class="day-type type-vente">Vente</span>
+      <div class="day-idea">Lancement du mois suivant — nouvelle offre ou nouveau bonus</div>
+      <div class="day-desc">Annonce quelque chose de nouveau pour le mois prochain. Crée l'anticipation et l'impatience.</div>
+      <div class="day-platforms"><span class="platform-tag">TikTok</span><span class="platform-tag">Story</span><span class="platform-tag">Snap</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">SAM</div>
+    <div class="day-content">
+      <span class="day-type type-valeur">Valeur</span>
+      <div class="day-idea">Recommandation — outil ou ressource que j'utilise</div>
+      <div class="day-desc">Partage un outil que tu utilises vraiment avec ton lien affilié si possible. Naturel et honnête.</div>
+      <div class="day-platforms"><span class="platform-tag">Story</span><span class="platform-tag">TikTok</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">DIM</div>
+    <div class="day-content">
+      <span class="day-type type-off">Repos / Recharge</span>
+      <div class="day-idea">Off ou contenu spontané si inspiré</div>
+      <div class="day-desc">Le repos est productif. Un créateur qui se recharge crée mieux. Répète le cycle la semaine suivante.</div>
+      <div class="day-platforms"><span class="platform-tag">Optionnel</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer"><div class="footer-logo">DM<span>A</span></div></div>
+
+<script>
+var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!user)window.location.href="index.html";
+</script>
+
+</body>
+</html>
