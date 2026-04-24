@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
+.header{background:#050505;border-bottom:1px solid rgba(192,0,26,.2);padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.logo{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:4px;color:#f5f0e8}
+.logo span{color:#C0001A}
+.admin-badge{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:2px;padding:3px 8px;color:#ff7070}
+.login-wrap{padding:48px 24px;text-align:center}
+.login-icon{font-size:48px;display:block;margin-bottom:16px}
+.login-title{font-family:Bebas Neue,Impact,sans-serif;font-size:28px;letter-spacing:4px;color:#f5f0e8;margin-bottom:6px}
+.login-sub{font-size:12px;color:rgba(245,240,232,.4);margin-bottom:28px;line-height:1.6}
+.login-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:16px;font-size:15px;color:#f5f0e8;letter-spacing:3px;text-align:center;margin-bottom:12px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:block}
+.login-input:focus{outline:none;border-color:rgba(192,0,26,.4)}
+.login-err{color:#ff7070;font-size:11px;text-align:center;display:none;margin-bottom:10px}
+.btn-red{width:100%;background:#C0001A;border:none;border-radius:4px;padding:16px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#f5f0e8;cursor:pointer;-webkit-appearance:none;display:block}
+.btn-red:active{opacity:.85}
+.admin-wrap{display:none;padding-bottom:60px}
+.stats-row{display:flex;gap:8px;padding:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.stat{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:12px 8px;text-align:center}
+.stat-n{font-family:Bebas Neue,Impact,sans-serif;font-size:26px;letter-spacing:1px}
+.stat-l{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
+.form-section{padding:16px}
+.section-title{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8;margin-bottom:14px}
+.field-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:5px;display:block;margin-top:10px}
+.field-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 12px;font-size:12px;color:#f5f0e8;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:block}
+.field-input:focus{outline:none;border-color:rgba(201,168,76,.3)}
+.field-select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:11px 12px;font-size:12px;color:#f5f0e8;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:block}
+.row2{display:flex;gap:8px}
+.row2 .col{flex:1}
+.gen-row{display:flex;gap:8px;align-items:flex-end}
+.gen-row .field-input{flex:1}
+.btn-gen{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:11px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#C9A84C;cursor:pointer;-webkit-appearance:none;white-space:nowrap;flex-shrink:0}
+.btn-create{width:100%;background:linear-gradient(135deg,#C0001A,#8a0013);border:none;border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#f5f0e8;cursor:pointer;-webkit-appearance:none;margin-top:14px;display:block}
+.btn-create:active{opacity:.85}
+.sep{height:1px;background:rgba(255,255,255,.06);margin:0 16px}
+.list-section{padding:16px}
+.list-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.list-title{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8}
+.search-inp{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:8px 12px;font-size:11px;color:#f5f0e8;width:140px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
+.search-inp:focus{outline:none;border-color:rgba(201,168,76,.25)}
+.client-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-bottom:8px}
+.client-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.client-name{font-size:13px;font-weight:600;color:#f5f0e8}
+.client-tier{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+.t-s{background:rgba(122,184,255,.1);color:#7ab8ff}
+.t-p{background:rgba(201,168,76,.1);color:#C9A84C}
+.t-d{background:rgba(192,0,26,.1);color:#ff7070}
+.client-creds{background:#0a0a0a;border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:10px 12px;margin-bottom:8px}
+.cred-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.cred-row:last-child{margin-bottom:0}
+.cred-l{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3)}
+.cred-v{font-size:11px;font-weight:600;color:#C9A84C;letter-spacing:1px;font-family:monospace}
+.client-actions{display:flex;gap:6px}
+.btn-copy{flex:1;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:9px;font-size:10px;font-weight:600;letter-spacing:1.5px;color:#C9A84C;cursor:pointer;-webkit-appearance:none;text-align:center}
+.btn-del{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.15);border-radius:3px;padding:9px 13px;font-size:14px;cursor:pointer;-webkit-appearance:none}
+.client-note{font-size:10px;color:rgba(245,240,232,.3);margin-top:6px;font-style:italic}
+.empty-state{text-align:center;padding:32px;color:rgba(245,240,232,.2)}
+.empty-icon{font-size:32px;display:block;margin-bottom:8px}
+.export-wrap{padding:0 16px 16px}
+.btn-export{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;display:block}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
+.toast.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">DMA <span>ADMIN</span></div>
+  <div class="admin-badge">ADMIN</div>
+</div>
+
+<div class="login-wrap" id="loginWrap">
+  <span class="login-icon">🔐</span>
+  <div class="login-title">ACCES ADMIN</div>
+  <div class="login-sub">Reserve a Mathis uniquement</div>
+  <input class="login-input" id="adminPwd" type="password" placeholder="Mot de passe admin">
+  <div class="login-err" id="loginErr">Mot de passe incorrect</div>
+  <button class="btn-red" onclick="adminLogin()">ACCEDER AU PANEL</button>
+</div>
+
+<div class="admin-wrap" id="adminWrap">
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n" style="color:#C0001A" id="stTotal">0</div><div class="stat-l">Total</div></div>
+    <div class="stat"><div class="stat-n" style="color:#7ab8ff" id="stStarter">0</div><div class="stat-l">Starter</div></div>
+    <div class="stat"><div class="stat-n" style="color:#C9A84C" id="stPremium">0</div><div class="stat-l">Premium</div></div>
+    <div class="stat"><div class="stat-n" style="color:#80d080" id="stDuking">0</div><div class="stat-l">Du King</div></div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-title">NOUVEAU CLIENT</div>
+
+```
+<div class="row2">
+  <div class="col">
+    <span class="field-label">Prenom</span>
+    <input class="field-input" id="fPrenom" placeholder="Jean" type="text" oninput="autoFill()">
+  </div>
+  <div class="col">
+    <span class="field-label">Nom</span>
+    <input class="field-input" id="fNom" placeholder="Dupont" type="text" oninput="autoFill()">
+  </div>
+</div>
+
+<div class="row2">
+  <div class="col">
+    <span class="field-label">Offre</span>
+    <select class="field-select" id="fTier">
+      <option value="starter">Starter 249euros</option>
+      <option value="premium">Premium 349euros</option>
+      <option value="duking">Du King</option>
+    </select>
+  </div>
+  <div class="col">
+    <span class="field-label">Bonus IA</span>
+    <select class="field-select" id="fBonus" onchange="onBonusChange()">
+      <option value="non">Non inclus</option>
+      <option value="oui">Oui inclus</option>
+    </select>
+  </div>
+</div>
+
+<span class="field-label">Identifiant</span>
+<div class="gen-row">
+  <input class="field-input" id="fLogin" placeholder="Auto-genere..." type="text">
+  <button class="btn-gen" onclick="genLogin()">GENERER</button>
+</div>
+
+<span class="field-label">Mot de passe</span>
+<div class="gen-row">
+  <input class="field-input" id="fPassword" placeholder="Auto-genere..." type="text">
+  <button class="btn-gen" onclick="genPassword()">GENERER</button>
+</div>
+
+<span class="field-label" id="codeLabel" style="opacity:.4">Code Bonus IA</span>
+<div class="gen-row">
+  <input class="field-input" id="fCodeBonus" placeholder="Si bonus inclus..." type="text" style="opacity:.4">
+  <button class="btn-gen" onclick="genCodeBonus()" style="opacity:.4">GENERER</button>
+</div>
+
+<span class="field-label">Note optionnelle</span>
+<input class="field-input" id="fNote" placeholder="Ex: paye en 2 fois..." type="text">
+
+<button class="btn-create" onclick="createClient()">CREER LE CLIENT</button>
+```
+
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="list-section">
+    <div class="list-header">
+      <div class="list-title">MES CLIENTS</div>
+      <input class="search-inp" id="searchInput" placeholder="Rechercher..." oninput="renderList()">
+    </div>
+    <div id="clientList"></div>
+  </div>
+
+  <div class="export-wrap">
+    <button class="btn-export" onclick="exportAll()">EXPORTER TOUS LES ACCES</button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var ADMIN_PWD = "AdminDMA2026!";
+
+document.getElementById("adminPwd").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") adminLogin();
+});
+
+function adminLogin() {
+  var pwd = document.getElementById("adminPwd").value;
+  if (pwd === ADMIN_PWD) {
+    document.getElementById("loginWrap").style.display = "none";
+    document.getElementById("adminWrap").style.display = "block";
+    renderList();
+    updateStats();
+  } else {
+    document.getElementById("loginErr").style.display = "block";
+  }
+}
+
+function autoFill() {
+  var p = document.getElementById("fPrenom").value.trim().toLowerCase();
+  var n = document.getElementById("fNom").value.trim().toLowerCase();
+  if (p) {
+    var initial = n ? n.charAt(0) : "";
+    var num = Math.floor(Math.random() * 900 + 100);
+    document.getElementById("fLogin").value = p + initial + num;
+    genPassword();
+  }
+}
+
+function genLogin() {
+  var p = document.getElementById("fPrenom").value.trim().toLowerCase();
+  var n = document.getElementById("fNom").value.trim().toLowerCase();
+  if (!p) p = "client";
+  var initial = n ? n.charAt(0) : "";
+  var num = Math.floor(Math.random() * 900 + 100);
+  document.getElementById("fLogin").value = p + initial + num;
+}
+
+function genPassword() {
+  var p = document.getElementById("fPrenom").value.trim().toUpperCase();
+  if (!p) p = "DMA";
+  var num = Math.floor(Math.random() * 900 + 100);
+  var syms = ["!", "@", "#", "*"];
+  var sym = syms[Math.floor(Math.random() * syms.length)];
+  document.getElementById("fPassword").value = p + num + sym;
+}
+
+function genCodeBonus() {
+  var p = document.getElementById("fPrenom").value.trim().toUpperCase();
+  if (!p) p = "CLIENT";
+  var num = Math.floor(Math.random() * 9000 + 1000);
+  document.getElementById("fCodeBonus").value = "DMA-" + p + "-" + num;
+}
+
+function onBonusChange() {
+  var bonus = document.getElementById("fBonus").value;
+  var opacity = bonus === "oui" ? "1" : "0.4";
+  document.getElementById("codeLabel").style.opacity = opacity;
+  document.getElementById("fCodeBonus").style.opacity = opacity;
+  if (bonus === "oui") genCodeBonus();
+  else document.getElementById("fCodeBonus").value = "";
+}
+
+function getClients() {
+  var raw = localStorage.getItem("dma_clients");
+  if (!raw) return [];
+  try { return JSON.parse(raw); } catch(e) { return []; }
+}
+
+function saveClients(list) {
+  localStorage.setItem("dma_clients", JSON.stringify(list));
+}
+
+function createClient() {
+  var prenom = document.getElementById("fPrenom").value.trim();
+  var nom = document.getElementById("fNom").value.trim();
+  var login = document.getElementById("fLogin").value.trim();
+  var password = document.getElementById("fPassword").value.trim();
+  var tier = document.getElementById("fTier").value;
+  var bonus = document.getElementById("fBonus").value;
+  var codeBonus = document.getElementById("fCodeBonus").value.trim();
+  var note = document.getElementById("fNote").value.trim();
+
+  if (!prenom || !login || !password) {
+    showToast("Remplis prenom, login et mot de passe");
+    return;
+  }
+
+  var clients = getClients();
+  var exists = false;
+  for (var i = 0; i < clients.length; i++) {
+    if (clients[i].login === login) { exists = true; break; }
+  }
+  if (exists) {
+    showToast("Ce login existe deja - regénère-en un");
+    return;
+  }
+
+  var client = {
+    id: Date.now(),
+    prenom: prenom,
+    nom: nom,
+    login: login,
+    password: password,
+    tier: tier,
+    bonus: bonus,
+    codeBonus: codeBonus,
+    note: note,
+    date: new Date().toLocaleDateString("fr-FR")
+  };
+
+  clients.unshift(client);
+  saveClients(clients);
+
+  document.getElementById("fPrenom").value = "";
+  document.getElementById("fNom").value = "";
+  document.getElementById("fLogin").value = "";
+  document.getElementById("fPassword").value = "";
+  document.getElementById("fCodeBonus").value = "";
+  document.getElementById("fNote").value = "";
+
+  renderList();
+  updateStats();
+  showToast("Client cree avec succes !");
+}
+
+function deleteClient(id) {
+  var clients = getClients().filter(function(c) { return c.id !== id; });
+  saveClients(clients);
+  renderList();
+  updateStats();
+  showToast("Client supprime");
+}
+
+function copyClient(id) {
+  var clients = getClients();
+  var c = null;
+  for (var i = 0; i < clients.length; i++) {
+    if (clients[i].id === id) { c = clients[i]; break; }
+  }
+  if (!c) return;
+
+  var tiers = {starter: "Starter 249euros", premium: "Accompagnement Premium 349euros", duking: "Du King"};
+  var lines = [];
+  lines.push("Acces DMA - " + c.prenom + " " + c.nom);
+  lines.push("---");
+  lines.push("Site : mathisdgtmk.github.io/Dma-skool");
+  lines.push("Identifiant : " + c.login);
+  lines.push("Mot de passe : " + c.password);
+  lines.push("Offre : " + (tiers[c.tier] || c.tier));
+  if (c.bonus === "oui" && c.codeBonus) {
+    lines.push("Code Bonus Agence IA : " + c.codeBonus);
+  }
+  lines.push("---");
+  lines.push("Garde ces infos precieusement. Bonne formation !");
+
+  var text = lines.join("
+");
+  copyText(text, "Infos copiees - pret a envoyer par DM !");
+}
+
+function exportAll() {
+  var clients = getClients();
+  if (!clients.length) { showToast("Aucun client"); return; }
+  var tiers = {starter: "Starter", premium: "Premium", duking: "Du King"};
+  var lines = [];
+  lines.push("=== ACCES DMA - TOUS LES CLIENTS ===");
+  lines.push("Exporte le " + new Date().toLocaleDateString("fr-FR"));
+  lines.push("");
+  for (var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    lines.push((i+1) + ". " + c.prenom + " " + c.nom);
+    lines.push("   Login : " + c.login);
+    lines.push("   Password : " + c.password);
+    lines.push("   Offre : " + (tiers[c.tier] || c.tier));
+    if (c.bonus === "oui" && c.codeBonus) lines.push("   Code Bonus : " + c.codeBonus);
+    if (c.note) lines.push("   Note : " + c.note);
+    lines.push("");
+  }
+  copyText(lines.join("
+"), "Export copie !");
+}
+
+function copyText(text, msg) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() { showToast(msg); });
+  } else {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand("copy"); } catch(e) {}
+    document.body.removeChild(ta);
+    showToast(msg);
+  }
+}
+
+function renderList() {
+  var q = document.getElementById("searchInput").value.toLowerCase();
+  var clients = getClients();
+  var filtered = [];
+  for (var i = 0; i < clients.length; i++) {
+    var c = clients[i];
+    var match = (c.prenom + c.nom + c.login).toLowerCase().indexOf(q) !== -1;
+    if (!q || match) filtered.push(c);
+  }
+
+  var tiers = {starter: "Starter", premium: "Premium", duking: "Du King"};
+  var tierClass = {starter: "t-s", premium: "t-p", duking: "t-d"};
+
+  if (!filtered.length) {
+    document.getElementById("clientList").innerHTML =
+      "<div class='empty-state'><span class='empty-icon'>👥</span><div>Aucun client encore</div></div>";
+    return;
+  }
+
+  var parts = [];
+  for (var j = 0; j < filtered.length; j++) {
+    var c = filtered[j];
+    var cid = c.id;
+    var html = "<div class='client-card'>";
+    html += "<div class='client-top'>";
+    html += "<div class='client-name'>" + c.prenom + " " + c.nom + "</div>";
+    html += "<span class='client-tier " + (tierClass[c.tier] || "t-s") + "'>" + (tiers[c.tier] || c.tier) + "</span>";
+    html += "</div>";
+    html += "<div class='client-creds'>";
+    html += "<div class='cred-row'><span class='cred-l'>Identifiant</span><span class='cred-v'>" + c.login + "</span></div>";
+    html += "<div class='cred-row'><span class='cred-l'>Mot de passe</span><span class='cred-v'>" + c.password + "</span></div>";
+    if (c.bonus === "oui" && c.codeBonus) {
+      html += "<div class='cred-row'><span class='cred-l'>Code Bonus</span><span class='cred-v'>" + c.codeBonus + "</span></div>";
+    }
+    html += "<div class='cred-row'><span class='cred-l'>Date</span><span class='cred-v' style='color:rgba(245,240,232,.3)'>" + c.date + "</span></div>";
+    html += "</div>";
+    html += "<div class='client-actions'>";
+    html += "<button class='btn-copy' onclick='copyClient(" + cid + ")'>COPIER ET ENVOYER PAR DM</button>";
+    html += "<button class='btn-del' onclick='deleteClient(" + cid + ")'>🗑</button>";
+    html += "</div>";
+    if (c.note) html += "<div class='client-note'>" + c.note + "</div>";
+    html += "</div>";
+    parts.push(html);
+  }
+  document.getElementById("clientList").innerHTML = parts.join("");
+}
+
+function updateStats() {
+  var clients = getClients();
+  document.getElementById("stTotal").textContent = clients.length;
+  var s = 0, p = 0, d = 0;
+  for (var i = 0; i < clients.length; i++) {
+    if (clients[i].tier === "starter") s++;
+    else if (clients[i].tier === "premium") p++;
+    else if (clients[i].tier === "duking") d++;
+  }
+  document.getElementById("stStarter").textContent = s;
+  document.getElementById("stPremium").textContent = p;
+  document.getElementById("stDuking").textContent = d;
+}
+
+function showToast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function() { t.classList.remove("show"); }, 2500);
+}
+</script>
+
+</body>
+</html>
