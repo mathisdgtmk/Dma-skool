@@ -3,62 +3,51 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DMA Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;padding-bottom:80px}
-.hdr{background:#050505;border-bottom:2px solid #C0001A;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99}
-.logo{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px}
+body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;padding:16px 16px 80px}
+.logo{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:4px;padding:16px 0;border-bottom:2px solid #C0001A;margin-bottom:20px}
 .logo b{color:#C0001A;font-weight:400}
-.badge{font-size:9px;font-weight:700;letter-spacing:2px;background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:2px;padding:3px 8px;color:#ff7070}
-.stats{display:flex;gap:8px;padding:14px}
+.stats{display:flex;gap:8px;margin-bottom:20px}
 .stat{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:12px 8px;text-align:center}
 .sn{font-family:Bebas Neue,Impact,sans-serif;font-size:28px}
 .sl{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
-.sec{padding:0 14px}
-.stitle{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;padding:14px 0 10px}
-.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:5px;margin-top:10px;display:block}
-.inp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:12px;font-size:14px;color:#f5f0e8;display:block;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
-.inp:focus{outline:none;border-color:rgba(201,168,76,.4)}
-.inp-auto{width:100%;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:12px;font-size:14px;color:#C9A84C;display:block;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none;letter-spacing:1px;font-weight:600}
-.sel{width:100%;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:12px;font-size:14px;color:#f5f0e8;display:block;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
+h2{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;margin-bottom:14px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:6px;margin-top:14px;display:block}
+input,select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:13px 12px;font-size:15px;color:#f5f0e8;display:block;font-family:inherit;-webkit-appearance:none;margin-bottom:2px}
+.auto{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.2);color:#C9A84C;font-weight:600}
+select{background:#111}
 .r2{display:flex;gap:8px}
 .r2 .c{flex:1}
-.info{font-size:10px;color:rgba(245,240,232,.3);margin-top:4px;font-style:italic}
-.bcreate{width:100%;background:#C0001A;border:none;border-radius:4px;padding:16px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#fff;margin-top:16px;display:block;cursor:pointer;-webkit-appearance:none;text-align:center}
-.sep{height:1px;background:rgba(255,255,255,.06);margin:14px 0 0}
-.lhead{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px}
-.ltitle{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px}
-.srch{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:8px 12px;font-size:12px;color:#f5f0e8;width:120px;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
-.cc{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-bottom:8px}
+.btn{width:100%;padding:18px;margin-top:20px;background:#C0001A;border:none;border-radius:6px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#fff;cursor:pointer;display:block;-webkit-appearance:none}
+.sep{height:1px;background:rgba(255,255,255,.08);margin:24px 0}
+.srch{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:10px 12px;font-size:13px;color:#f5f0e8;font-family:inherit;-webkit-appearance:none;margin-bottom:12px}
+.cc{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-bottom:10px}
 .ct{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.cn{font-size:13px;font-weight:600}
-.ti{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+.cn{font-size:14px;font-weight:700}
+.ti{font-size:8px;font-weight:700;letter-spacing:2px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
 .ts{background:rgba(122,184,255,.1);color:#7ab8ff}
 .tp{background:rgba(201,168,76,.1);color:#C9A84C}
 .td{background:rgba(192,0,26,.1);color:#ff7070}
 .cr{background:#0a0a0a;border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:10px 12px;margin-bottom:8px}
-.rw{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.rw{display:flex;justify-content:space-between;margin-bottom:5px}
 .rw:last-child{margin-bottom:0}
 .rl{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3)}
-.rv{font-size:11px;font-weight:600;color:#C9A84C;letter-spacing:1px;font-family:monospace}
+.rv{font-size:12px;font-weight:600;color:#C9A84C;font-family:monospace}
 .ca{display:flex;gap:6px}
-.bcp{flex:1;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:10px;font-size:10px;font-weight:600;color:#C9A84C;text-align:center;cursor:pointer;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
-.bdl{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.15);border-radius:3px;padding:10px 14px;cursor:pointer;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;color:#ff7070}
-.nt{font-size:10px;color:rgba(245,240,232,.3);margin-top:6px;font-style:italic}
+.bcp{flex:1;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:10px;font-size:10px;font-weight:700;color:#C9A84C;cursor:pointer;-webkit-appearance:none;font-family:inherit;text-align:center}
+.bdl{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2);border-radius:4px;padding:10px 14px;cursor:pointer;-webkit-appearance:none;color:#ff7070;font-family:inherit}
 .empty{text-align:center;padding:32px;color:rgba(245,240,232,.2);font-size:13px}
-.bex{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;display:block;margin-top:10px;text-align:center}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
+.bex{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;margin-top:8px;display:block}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:12px;font-weight:700;letter-spacing:2px;padding:12px 24px;border-radius:4px;display:none;z-index:999}
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <div class="logo">DMA <b>ADMIN</b></div>
-  <div class="badge">ADMIN</div>
-</div>
+<div class="logo">DMA <b>ADMIN</b></div>
 
 <div class="stats">
   <div class="stat"><div class="sn" style="color:#C0001A" id="t0">0</div><div class="sl">Total</div></div>
@@ -67,265 +56,237 @@ body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;pa
   <div class="stat"><div class="sn" style="color:#80d080" id="t3">0</div><div class="sl">Du King</div></div>
 </div>
 
-<div class="sec">
-  <div class="stitle">NOUVEAU CLIENT</div>
+<h2>NOUVEAU CLIENT</h2>
 
-  <div class="r2">
-    <div class="c">
-      <span class="lbl">Prenom</span>
-      <input class="inp" id="fP" type="text" placeholder="Jean" autocomplete="off">
-    </div>
-    <div class="c">
-      <span class="lbl">Nom</span>
-      <input class="inp" id="fN" type="text" placeholder="Dupont" autocomplete="off">
-    </div>
+<div class="r2">
+  <div class="c"><span class="lbl">Prenom</span><input id="fP" type="text" placeholder="Jean" autocomplete="off"></div>
+  <div class="c"><span class="lbl">Nom</span><input id="fN" type="text" placeholder="Dupont" autocomplete="off"></div>
+</div>
+<div class="r2">
+  <div class="c">
+    <span class="lbl">Offre</span>
+    <select id="fT"><option value="s">Starter 249e</option><option value="p">Premium 349e</option><option value="d">Du King</option></select>
   </div>
-
-  <div class="r2">
-    <div class="c">
-      <span class="lbl">Offre</span>
-      <select class="sel" id="fT">
-        <option value="s">Starter 249e</option>
-        <option value="p">Premium 349e</option>
-        <option value="d">Du King</option>
-      </select>
-    </div>
-    <div class="c">
-      <span class="lbl">Bonus IA</span>
-      <select class="sel" id="fB">
-        <option value="n">Non</option>
-        <option value="o">Oui</option>
-      </select>
-    </div>
+  <div class="c">
+    <span class="lbl">Bonus IA</span>
+    <select id="fB"><option value="n">Non</option><option value="o">Oui</option></select>
   </div>
-
+</div>
 <span class="lbl">Identifiant (auto)</span>
-<input class="inp-auto" id="fL" type="text" placeholder="Tape le prenom..." readonly>
-
+<input class="auto" id="fL" type="text" readonly>
 <span class="lbl">Mot de passe (auto)</span>
-<input class="inp-auto" id="fPW" type="text" placeholder="Tape le prenom..." readonly>
-
+<input class="auto" id="fPW" type="text" readonly>
 <span class="lbl">Code Bonus IA (auto)</span>
-<input class="inp-auto" id="fCB" type="text" placeholder="Auto si bonus IA = Oui" readonly>
-
-  <div class="info">Tout se genere automatiquement quand tu tapes le prenom</div>
-
+<input class="auto" id="fCB" type="text" readonly>
 <span class="lbl">Note</span>
-<input class="inp" id="fNO" type="text" placeholder="Ex: paye en 2 fois" autocomplete="off">
+<input id="fNO" type="text" placeholder="Ex: paye en 2 fois" autocomplete="off">
+<button class="btn" id="bAdd">CREER LE CLIENT</button>
 
-<button class="bcreate" id="bAdd">CREER LE CLIENT</button>
-
-</div>
-
-<div class="sec">
-  <div class="sep"></div>
-  <div class="lhead">
-    <div class="ltitle">MES CLIENTS</div>
-    <input class="srch" id="sr" type="text" placeholder="Rechercher...">
-  </div>
-  <div id="li"></div>
-  <button class="bex" id="bEx">EXPORTER TOUS LES ACCES</button>
-</div>
+<div class="sep"></div>
+<h2>MES CLIENTS</h2>
+<input class="srch" id="sr" type="text" placeholder="Rechercher...">
+<div id="li"></div>
+<button class="bex" id="bEx">EXPORTER TOUS LES ACCES</button>
 
 <div class="toast" id="toast"></div>
 
 <script>
-function rnd(a,b){return Math.floor(Math.random()*(b-a)+a)}
-function v(id){var el=document.getElementById(id);return el?el.value.trim():""}
-function sv(id,val){var el=document.getElementById(id);if(el)el.value=val}
+var TIERS = {"s": "Starter", "p": "Premium", "d": "Du King"};
+var TCLASS = {"s": "ts", "p": "tp", "d": "td"};
 
-function genAll(){
-  var p=v("fP").toLowerCase()||"client";
-  var pu=v("fP").toUpperCase()||"CLIENT";
-  sv("fL", p+rnd(100,999));
-  sv("fPW", v("fP")||"DMA"+rnd(100,999)+"k");
-  var bon=document.getElementById("fB");
-  if(bon&&bon.value==="o"){
-    sv("fCB","DMA"+pu+rnd(1000,9999));
+function rnd(a, b) { return Math.floor(Math.random() * (b - a) + a); }
+function gi(id) { return document.getElementById(id); }
+function gv(id) { var e = gi(id); return e ? e.value.trim() : ""; }
+function sv(id, val) { var e = gi(id); if (e) e.value = val; }
+function gc() { try { return JSON.parse(localStorage.getItem("dc") || "[]"); } catch(e) { return []; } }
+function sc(a) { localStorage.setItem("dc", JSON.stringify(a)); }
+
+function genAuto() {
+  var p = gv("fP");
+  if (!p) { sv("fL", ""); sv("fPW", ""); sv("fCB", ""); return; }
+  sv("fL", p.toLowerCase() + rnd(100, 999));
+  sv("fPW", p + rnd(100, 999) + "k");
+  if (gi("fB").value === "o") {
+    sv("fCB", "DMA" + p.toUpperCase() + rnd(1000, 9999));
   } else {
-    sv("fCB","");
+    sv("fCB", "");
   }
 }
 
-// Input sur prenom
-var fpEl=document.getElementById("fP");
-if(fpEl){
-  fpEl.addEventListener("input",genAll);
-  fpEl.addEventListener("keyup",genAll);
-  fpEl.addEventListener("change",genAll);
-}
-
-// Changement bonus
-var fbEl=document.getElementById("fB");
-if(fbEl){
-  fbEl.addEventListener("change",genAll);
-}
-
-// Bouton creer
-var bAddEl=document.getElementById("bAdd");
-if(bAddEl){
-  bAddEl.addEventListener("touchend",function(e){e.preventDefault();addClient()});
-  bAddEl.addEventListener("click",function(){addClient()});
-}
-
-// Bouton export
-var bExEl=document.getElementById("bEx");
-if(bExEl){
-  bExEl.addEventListener("touchend",function(e){e.preventDefault();exportAll()});
-  bExEl.addEventListener("click",function(){exportAll()});
-}
-
-// Search
-var srEl=document.getElementById("sr");
-if(srEl){
-  srEl.addEventListener("input",render);
-  srEl.addEventListener("keyup",render);
-}
-
-function gc(){try{return JSON.parse(localStorage.getItem("dc")||"[]")}catch(e){return[]}}
-function sc(a){localStorage.setItem("dc",JSON.stringify(a))}
-
-function addClient(){
-  var pr=v("fP"),lo=v("fL"),pw=v("fPW");
-  if(!pr||!lo||!pw){toast("Remplis le prenom dabord");return}
-  var a=gc();
+function addClient() {
+  var pr = gv("fP");
+  var lo = gv("fL");
+  var pw = gv("fPW");
+  if (!pr || !lo || !pw) { showToast("Entre le prenom dabord"); return; }
+  var a = gc();
   a.unshift({
-    id:Date.now(),
-    pr:pr,no:v("fN"),lo:lo,pw:pw,
-    ti:document.getElementById("fT").value,
-    bo:document.getElementById("fB").value,
-    cb:v("fCB"),nt:v("fNO"),
-    dt:new Date().toLocaleDateString("fr-FR")
+    id: Date.now(),
+    pr: pr, no: gv("fN"), lo: lo, pw: pw,
+    ti: gi("fT").value, bo: gi("fB").value,
+    cb: gv("fCB"), nt: gv("fNO"),
+    dt: new Date().toLocaleDateString("fr-FR")
   });
   sc(a);
-  sv("fP","");sv("fN","");sv("fL","");sv("fPW","");sv("fCB","");sv("fNO","");
-  render();stats();toast("Client cree !");
+  sv("fP", ""); sv("fN", ""); sv("fL", ""); sv("fPW", ""); sv("fCB", ""); sv("fNO", "");
+  render(); updateStats(); showToast("Client cree");
 }
 
-function delClient(id){
-  sc(gc().filter(function(c){return c.id!==id}));
-  render();stats();toast("Supprime");
+function delClient(id) {
+  sc(gc().filter(function(c) { return c.id !== id; }));
+  render(); updateStats(); showToast("Supprime");
 }
 
-function copyClient(id){
-  var a=gc(),c=null;
-  for(var i=0;i<a.length;i++){if(a[i].id===id){c=a[i];break}}
-  if(!c)return;
-  var tl={s:"Starter 249e",p:"Premium 349e",d:"Du King"};
-  var txt="Acces DMA - "+c.pr+" "+c.no+"
-";
-  txt+="Site : mathisdgtmk.github.io/Dma-skool
-";
-  txt+="Identifiant : "+c.lo+"
-";
-  txt+="Mot de passe : "+c.pw+"
-";
-  txt+="Offre : "+(tl[c.ti]||c.ti)+"
-";
-  if(c.bo==="o"&&c.cb)txt+="Code Bonus IA : "+c.cb+"
-";
-  txt+="Bonne formation !";
-  copyTxt(txt,"Copie pret a envoyer !");
+function copyClient(id) {
+  var a = gc(), c = null;
+  for (var i = 0; i < a.length; i++) { if (a[i].id === id) { c = a[i]; break; } }
+  if (!c) return;
+  var lines = [
+    "Acces DMA - " + c.pr + " " + c.no,
+    "Site : mathisdgtmk.github.io/Dma-skool",
+    "Identifiant : " + c.lo,
+    "Mot de passe : " + c.pw,
+    "Offre : " + (TIERS[c.ti] || c.ti)
+  ];
+  if (c.bo === "o" && c.cb) lines.push("Code Bonus IA : " + c.cb);
+  lines.push("Bonne formation");
+  var txt = lines.join("
+");
+  doopy(txt, "Copie pret a envoyer");
 }
 
-function exportAll(){
-  var a=gc();
-  if(!a.length){toast("Aucun client");return}
-  var tl={s:"Starter",p:"Premium",d:"Du King"};
-  var txt="CLIENTS DMA
-
-";
-  for(var i=0;i<a.length;i++){
-    var c=a[i];
-    txt+=(i+1)+". "+c.pr+" "+c.no+"
-";
-    txt+="Login: "+c.lo+" | Mdp: "+c.pw+"
-";
-    txt+="Offre: "+(tl[c.ti]||c.ti)+"
-";
-    if(c.bo==="o"&&c.cb)txt+="Code: "+c.cb+"
-";
-    txt+="
-";
+function exportAll() {
+  var a = gc();
+  if (!a.length) { showToast("Aucun client"); return; }
+  var lines = ["CLIENTS DMA", ""];
+  for (var i = 0; i < a.length; i++) {
+    var c = a[i];
+    lines.push((i + 1) + ". " + c.pr + " " + c.no);
+    lines.push("Login: " + c.lo + " | Mdp: " + c.pw);
+    lines.push("Offre: " + (TIERS[c.ti] || c.ti));
+    if (c.bo === "o" && c.cb) lines.push("Code: " + c.cb);
+    lines.push("");
   }
-  copyTxt(txt,"Export copie !");
+  doopy(lines.join("
+"), "Export copie");
 }
 
-function copyTxt(txt,msg){
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(function(){toast(msg)}).catch(function(){fallbackCopy(txt,msg)});
-  } else {
-    fallbackCopy(txt,msg);
+function doopy(txt, msg) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(txt).then(function() { showToast(msg); }).catch(function() { fallback(txt, msg); });
+  } else { fallback(txt, msg); }
+}
+
+function fallback(txt, msg) {
+  var ta = document.createElement("textarea");
+  ta.value = txt;
+  ta.style.position = "fixed";
+  ta.style.top = "0";
+  ta.style.left = "0";
+  ta.style.opacity = "0";
+  ta.style.fontSize = "16px";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+  showToast(msg);
+}
+
+function render() {
+  var q = gv("sr").toLowerCase();
+  var a = gc().filter(function(c) { return !q || (c.pr + c.no + c.lo).toLowerCase().indexOf(q) !== -1; });
+  var container = gi("li");
+  container.innerHTML = "";
+  if (!a.length) {
+    var empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "Aucun client encore";
+    container.appendChild(empty);
+    return;
+  }
+  for (var i = 0; i < a.length; i++) {
+    var c = a[i];
+    var card = document.createElement("div");
+    card.className = "cc";
+
+    var top = document.createElement("div");
+    top.className = "ct";
+    var name = document.createElement("div");
+    name.className = "cn";
+    name.textContent = c.pr + " " + c.no;
+    var tier = document.createElement("span");
+    tier.className = "ti " + (TCLASS[c.ti] || "ts");
+    tier.textContent = TIERS[c.ti] || c.ti;
+    top.appendChild(name);
+    top.appendChild(tier);
+    card.appendChild(top);
+
+    var creds = document.createElement("div");
+    creds.className = "cr";
+    creds.innerHTML =
+      "<div class=rw><span class=rl>Login</span><span class=rv>" + c.lo + "</span></div>" +
+      "<div class=rw><span class=rl>Mdp</span><span class=rv>" + c.pw + "</span></div>" +
+      (c.bo === "o" && c.cb ? "<div class=rw><span class=rl>Code IA</span><span class=rv>" + c.cb + "</span></div>" : "") +
+      "<div class=rw><span class=rl>Date</span><span class=rv style="color:rgba(245,240,232,.3)">" + c.dt + "</span></div>";
+    card.appendChild(creds);
+
+    var actions = document.createElement("div");
+    actions.className = "ca";
+    var btnCopy = document.createElement("button");
+    btnCopy.className = "bcp";
+    btnCopy.textContent = "COPIER ET ENVOYER";
+    var btnDel = document.createElement("button");
+    btnDel.className = "bdl";
+    btnDel.textContent = "X";
+
+    (function(cid) {
+      btnCopy.addEventListener("click", function() { copyClient(cid); });
+      btnDel.addEventListener("click", function() { delClient(cid); });
+    })(c.id);
+
+    actions.appendChild(btnCopy);
+    actions.appendChild(btnDel);
+    card.appendChild(actions);
+
+    if (c.nt) {
+      var note = document.createElement("div");
+      note.style.cssText = "font-size:10px;color:rgba(245,240,232,.3);margin-top:6px";
+      note.textContent = c.nt;
+      card.appendChild(note);
+    }
+
+    container.appendChild(card);
   }
 }
 
-function fallbackCopy(txt,msg){
-  var ta=document.createElement("textarea");
-  ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";
-  document.body.appendChild(ta);ta.focus();ta.select();
-  try{document.execCommand("copy")}catch(e){}
-  document.body.removeChild(ta);toast(msg);
-}
-
-function render(){
-  var q=(v("sr")||"").toLowerCase();
-  var a=gc().filter(function(c){return !q||(c.pr+c.no+c.lo).toLowerCase().indexOf(q)!==-1});
-  var tl={s:"Starter",p:"Premium",d:"Du King"};
-  var tc={s:"ts",p:"tp",d:"td"};
-  if(!a.length){document.getElementById("li").innerHTML="<div class=empty>Aucun client encore</div>";return}
-  var h="";
-  for(var i=0;i<a.length;i++){
-    var c=a[i];
-    h+="<div class=cc>";
-    h+="<div class=ct><div class=cn>"+c.pr+" "+c.no+"</div><span class='ti "+(tc[c.ti]||"ts")+"'>"+(tl[c.ti]||c.ti)+"</span></div>";
-    h+="<div class=cr>";
-    h+="<div class=rw><span class=rl>Login</span><span class=rv>"+c.lo+"</span></div>";
-    h+="<div class=rw><span class=rl>Mdp</span><span class=rv>"+c.pw+"</span></div>";
-    if(c.bo==="o"&&c.cb)h+="<div class=rw><span class=rl>Code IA</span><span class=rv>"+c.cb+"</span></div>";
-    h+="<div class=rw><span class=rl>Date</span><span class=rv style='color:rgba(245,240,232,.3)'>"+c.dt+"</span></div>";
-    h+="</div>";
-    h+="<div class=ca>";
-    h+="<button class=bcp id='cp"+c.id+"'>COPIER ET ENVOYER</button>";
-    h+="<button class=bdl id='dl"+c.id+"'>X</button>";
-    h+="</div>";
-    if(c.nt)h+="<div class=nt>"+c.nt+"</div>";
-    h+="</div>";
+function updateStats() {
+  var a = gc(); var s = 0, p = 0, d = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].ti === "s") s++;
+    else if (a[i].ti === "p") p++;
+    else d++;
   }
-  document.getElementById("li").innerHTML=h;
-
-  // Attacher les events apres rendu
-  for(var j=0;j<a.length;j++){
-    (function(cid){
-      var cpEl=document.getElementById("cp"+cid);
-      var dlEl=document.getElementById("dl"+cid);
-      if(cpEl){
-        cpEl.addEventListener("touchend",function(e){e.preventDefault();copyClient(cid)});
-        cpEl.addEventListener("click",function(){copyClient(cid)});
-      }
-      if(dlEl){
-        dlEl.addEventListener("touchend",function(e){e.preventDefault();delClient(cid)});
-        dlEl.addEventListener("click",function(){delClient(cid)});
-      }
-    })(a[j].id);
-  }
+  gi("t0").textContent = a.length;
+  gi("t1").textContent = s;
+  gi("t2").textContent = p;
+  gi("t3").textContent = d;
 }
 
-function stats(){
-  var a=gc();var s=0,p=0,d=0;
-  for(var i=0;i<a.length;i++){if(a[i].ti==="s")s++;else if(a[i].ti==="p")p++;else d++}
-  document.getElementById("t0").textContent=a.length;
-  document.getElementById("t1").textContent=s;
-  document.getElementById("t2").textContent=p;
-  document.getElementById("t3").textContent=d;
+function showToast(msg) {
+  var t = gi("toast");
+  t.textContent = msg;
+  t.style.display = "block";
+  setTimeout(function() { t.style.display = "none"; }, 2500);
 }
 
-function toast(msg){
-  var t=document.getElementById("toast");
-  t.textContent=msg;t.style.display="block";
-  setTimeout(function(){t.style.display="none"},2500);
-}
+gi("fP").addEventListener("input", genAuto);
+gi("fB").addEventListener("change", genAuto);
+gi("bAdd").addEventListener("click", addClient);
+gi("bEx").addEventListener("click", exportAll);
+gi("sr").addEventListener("input", render);
 
-render();stats();
+render();
+updateStats();
 </script>
 
 </body>
