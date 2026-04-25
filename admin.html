@@ -3,36 +3,35 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>DMA Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
-.hdr{background:#050505;border-bottom:1px solid rgba(192,0,26,.2);padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:4px;color:#f5f0e8}
+body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;padding-bottom:80px}
+.hdr{background:#050505;border-bottom:2px solid #C0001A;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99}
+.logo{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px}
 .logo b{color:#C0001A;font-weight:400}
 .badge{font-size:9px;font-weight:700;letter-spacing:2px;background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:2px;padding:3px 8px;color:#ff7070}
-.stats{display:flex;gap:8px;padding:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.stats{display:flex;gap:8px;padding:14px}
 .stat{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:12px 8px;text-align:center}
-.sn{font-family:Bebas Neue,Impact,sans-serif;font-size:26px}
-.sl{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
-.frm{padding:16px}
-.ftit{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;margin-bottom:14px}
-.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:5px;margin-top:12px;display:block}
-.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px;font-size:13px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
-.sel{width:100%;background:#111;border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:12px;font-size:13px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif}
+.sn{font-family:Bebas Neue,Impact,sans-serif;font-size:28px}
+.sl{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
+.sec{padding:0 14px}
+.stitle{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;padding:14px 0 10px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:5px;margin-top:10px;display:block}
+.inp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:12px;font-size:14px;color:#f5f0e8;display:block;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
+.inp:focus{outline:none;border-color:rgba(201,168,76,.4)}
+.inp-auto{width:100%;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:12px;font-size:14px;color:#C9A84C;display:block;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none;letter-spacing:1px;font-weight:600}
+.sel{width:100%;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:12px;font-size:14px;color:#f5f0e8;display:block;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
 .r2{display:flex;gap:8px}
 .r2 .c{flex:1}
-.gr{display:flex;gap:8px}
-.gr .inp{flex:1}
-.bg{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:12px 14px;font-size:10px;font-weight:700;color:#C9A84C;cursor:pointer;-webkit-appearance:none;flex-shrink:0}
-.bc{width:100%;background:#C0001A;border:none;border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#f5f0e8;cursor:pointer;-webkit-appearance:none;margin-top:16px;display:block}
-.sp{height:1px;background:rgba(255,255,255,.06);margin:0 16px}
-.ls{padding:16px}
-.lh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.lt{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px}
-.si{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:9px 12px;font-size:11px;color:#f5f0e8;width:130px;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
+.info{font-size:10px;color:rgba(245,240,232,.3);margin-top:4px;font-style:italic}
+.bcreate{width:100%;background:#C0001A;border:none;border-radius:4px;padding:16px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#fff;margin-top:16px;display:block;cursor:pointer;-webkit-appearance:none;text-align:center}
+.sep{height:1px;background:rgba(255,255,255,.06);margin:14px 0 0}
+.lhead{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px}
+.ltitle{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px}
+.srch{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:8px 12px;font-size:12px;color:#f5f0e8;width:120px;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
 .cc{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-bottom:8px}
 .ct{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .cn{font-size:13px;font-weight:600}
@@ -44,145 +43,274 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
 .rw{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
 .rw:last-child{margin-bottom:0}
 .rl{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.3)}
-.rv{font-size:11px;font-weight:600;color:#C9A84C;letter-spacing:1px}
+.rv{font-size:11px;font-weight:600;color:#C9A84C;letter-spacing:1px;font-family:monospace}
 .ca{display:flex;gap:6px}
-.bcp{flex:1;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:9px;font-size:10px;font-weight:600;color:#C9A84C;cursor:pointer;-webkit-appearance:none;text-align:center}
-.bdl{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.15);border-radius:3px;padding:9px 13px;font-size:14px;cursor:pointer;-webkit-appearance:none}
+.bcp{flex:1;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:10px;font-size:10px;font-weight:600;color:#C9A84C;text-align:center;cursor:pointer;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
+.bdl{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.15);border-radius:3px;padding:10px 14px;cursor:pointer;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;color:#ff7070}
 .nt{font-size:10px;color:rgba(245,240,232,.3);margin-top:6px;font-style:italic}
-.emp{text-align:center;padding:32px;color:rgba(245,240,232,.2)}
-.bex{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;display:block;width:calc(100% - 32px);margin:0 16px 32px}
-.tst{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;white-space:nowrap;z-index:999}
+.empty{text-align:center;padding:32px;color:rgba(245,240,232,.2);font-size:13px}
+.bex{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;-webkit-appearance:none;display:block;margin-top:10px;text-align:center}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
 </style>
 </head>
 <body>
+
 <div class="hdr">
   <div class="logo">DMA <b>ADMIN</b></div>
   <div class="badge">ADMIN</div>
 </div>
+
 <div class="stats">
   <div class="stat"><div class="sn" style="color:#C0001A" id="t0">0</div><div class="sl">Total</div></div>
   <div class="stat"><div class="sn" style="color:#7ab8ff" id="t1">0</div><div class="sl">Starter</div></div>
   <div class="stat"><div class="sn" style="color:#C9A84C" id="t2">0</div><div class="sl">Premium</div></div>
   <div class="stat"><div class="sn" style="color:#80d080" id="t3">0</div><div class="sl">Du King</div></div>
 </div>
-<div class="frm">
-  <div class="ftit">NOUVEAU CLIENT</div>
+
+<div class="sec">
+  <div class="stitle">NOUVEAU CLIENT</div>
+
   <div class="r2">
-    <div class="c"><span class="lbl">Prenom</span><input class="inp" id="p1" type="text" placeholder="Jean"></div>
-    <div class="c"><span class="lbl">Nom</span><input class="inp" id="p2" type="text" placeholder="Dupont"></div>
+    <div class="c">
+      <span class="lbl">Prenom</span>
+      <input class="inp" id="fP" type="text" placeholder="Jean" autocomplete="off">
+    </div>
+    <div class="c">
+      <span class="lbl">Nom</span>
+      <input class="inp" id="fN" type="text" placeholder="Dupont" autocomplete="off">
+    </div>
   </div>
+
   <div class="r2">
-    <div class="c"><span class="lbl">Offre</span>
-      <select class="sel" id="p3"><option value="s">Starter 249e</option><option value="p">Premium 349e</option><option value="d">Du King</option></select>
+    <div class="c">
+      <span class="lbl">Offre</span>
+      <select class="sel" id="fT">
+        <option value="s">Starter 249e</option>
+        <option value="p">Premium 349e</option>
+        <option value="d">Du King</option>
+      </select>
     </div>
-    <div class="c"><span class="lbl">Bonus IA</span>
-      <select class="sel" id="p4"><option value="n">Non</option><option value="o">Oui</option></select>
+    <div class="c">
+      <span class="lbl">Bonus IA</span>
+      <select class="sel" id="fB">
+        <option value="n">Non</option>
+        <option value="o">Oui</option>
+      </select>
     </div>
   </div>
-  <span class="lbl">Identifiant</span>
-  <div class="gr"><input class="inp" id="p5" type="text" placeholder="jean123"><button class="bg" onclick="gL()">GEN</button></div>
-  <span class="lbl">Mot de passe</span>
-  <div class="gr"><input class="inp" id="p6" type="text" placeholder="Jean456k"><button class="bg" onclick="gP()">GEN</button></div>
-  <span class="lbl">Code Bonus IA</span>
-  <div class="gr"><input class="inp" id="p7" type="text" placeholder="Si bonus inclus"><button class="bg" onclick="gC()">GEN</button></div>
-  <span class="lbl">Note</span>
-  <input class="inp" id="p8" type="text" placeholder="Ex: paye en 2 fois">
-  <button class="bc" onclick="add()">CREER LE CLIENT</button>
+
+<span class="lbl">Identifiant (auto)</span>
+<input class="inp-auto" id="fL" type="text" placeholder="Tape le prenom..." readonly>
+
+<span class="lbl">Mot de passe (auto)</span>
+<input class="inp-auto" id="fPW" type="text" placeholder="Tape le prenom..." readonly>
+
+<span class="lbl">Code Bonus IA (auto)</span>
+<input class="inp-auto" id="fCB" type="text" placeholder="Auto si bonus IA = Oui" readonly>
+
+  <div class="info">Tout se genere automatiquement quand tu tapes le prenom</div>
+
+<span class="lbl">Note</span>
+<input class="inp" id="fNO" type="text" placeholder="Ex: paye en 2 fois" autocomplete="off">
+
+<button class="bcreate" id="bAdd">CREER LE CLIENT</button>
+
 </div>
-<div class="sp"></div>
-<div class="ls">
-  <div class="lh">
-    <div class="lt">MES CLIENTS</div>
-    <input class="si" id="sr" type="text" placeholder="Rechercher...">
+
+<div class="sec">
+  <div class="sep"></div>
+  <div class="lhead">
+    <div class="ltitle">MES CLIENTS</div>
+    <input class="srch" id="sr" type="text" placeholder="Rechercher...">
   </div>
   <div id="li"></div>
+  <button class="bex" id="bEx">EXPORTER TOUS LES ACCES</button>
 </div>
-<button class="bex" onclick="exp()">EXPORTER TOUS LES ACCES</button>
-<div class="tst" id="ts"></div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-function r(a,b){return Math.floor(Math.random()*(b-a)+a)}
+function rnd(a,b){return Math.floor(Math.random()*(b-a)+a)}
+function v(id){var el=document.getElementById(id);return el?el.value.trim():""}
+function sv(id,val){var el=document.getElementById(id);if(el)el.value=val}
 
-// LISTENERS — compatibilite Safari iPad
-window.onload = function() {
-  document.getElementById("btnL").addEventListener("click", function(e){ e.preventDefault(); gL(); });
-  document.getElementById("btnP").addEventListener("click", function(e){ e.preventDefault(); gP(); });
-  document.getElementById("btnC").addEventListener("click", function(e){ e.preventDefault(); gC(); });
-  document.getElementById("btnAdd").addEventListener("click", function(e){ e.preventDefault(); add(); });
-  document.getElementById("btnExp").addEventListener("click", function(e){ e.preventDefault(); exp(); });
-  document.getElementById("p1").addEventListener("input", function(){ gL(); gP(); });
-  document.getElementById("sr").addEventListener("input", function(){ ren(); });
-};
-function v(id){return document.getElementById(id).value.trim()}
-function s(id,val){document.getElementById(id).value=val}
-function gL(){s("p5",(v("p1")||"client").toLowerCase()+r(100,999))}
-function gP(){s("p6",(v("p1")||"DMA")+r(100,999)+"k")}
-function gC(){s("p7","DMA"+(v("p1")||"CLIENT").toUpperCase()+r(1000,9999))}
-document.getElementById("p1").oninput=function(){gL();gP()}
+function genAll(){
+  var p=v("fP").toLowerCase()||"client";
+  var pu=v("fP").toUpperCase()||"CLIENT";
+  sv("fL", p+rnd(100,999));
+  sv("fPW", v("fP")||"DMA"+rnd(100,999)+"k");
+  var bon=document.getElementById("fB");
+  if(bon&&bon.value==="o"){
+    sv("fCB","DMA"+pu+rnd(1000,9999));
+  } else {
+    sv("fCB","");
+  }
+}
+
+// Input sur prenom
+var fpEl=document.getElementById("fP");
+if(fpEl){
+  fpEl.addEventListener("input",genAll);
+  fpEl.addEventListener("keyup",genAll);
+  fpEl.addEventListener("change",genAll);
+}
+
+// Changement bonus
+var fbEl=document.getElementById("fB");
+if(fbEl){
+  fbEl.addEventListener("change",genAll);
+}
+
+// Bouton creer
+var bAddEl=document.getElementById("bAdd");
+if(bAddEl){
+  bAddEl.addEventListener("touchend",function(e){e.preventDefault();addClient()});
+  bAddEl.addEventListener("click",function(){addClient()});
+}
+
+// Bouton export
+var bExEl=document.getElementById("bEx");
+if(bExEl){
+  bExEl.addEventListener("touchend",function(e){e.preventDefault();exportAll()});
+  bExEl.addEventListener("click",function(){exportAll()});
+}
+
+// Search
+var srEl=document.getElementById("sr");
+if(srEl){
+  srEl.addEventListener("input",render);
+  srEl.addEventListener("keyup",render);
+}
+
 function gc(){try{return JSON.parse(localStorage.getItem("dc")||"[]")}catch(e){return[]}}
 function sc(a){localStorage.setItem("dc",JSON.stringify(a))}
-function add(){
-  var pr=v("p1"),no=v("p2"),lo=v("p5"),pw=v("p6");
-  if(!pr||!lo||!pw){toast("Remplis prenom login et mdp");return}
+
+function addClient(){
+  var pr=v("fP"),lo=v("fL"),pw=v("fPW");
+  if(!pr||!lo||!pw){toast("Remplis le prenom dabord");return}
   var a=gc();
-  a.unshift({id:Date.now(),pr:pr,no:no,lo:lo,pw:pw,ti:v("p3"),bo:v("p4"),cb:v("p7"),nt:v("p8"),dt:new Date().toLocaleDateString("fr-FR")});
+  a.unshift({
+    id:Date.now(),
+    pr:pr,no:v("fN"),lo:lo,pw:pw,
+    ti:document.getElementById("fT").value,
+    bo:document.getElementById("fB").value,
+    cb:v("fCB"),nt:v("fNO"),
+    dt:new Date().toLocaleDateString("fr-FR")
+  });
   sc(a);
-  ["p1","p2","p5","p6","p7","p8"].forEach(function(i){s(i,"")});
-  ren();st();toast("Client cree !")
+  sv("fP","");sv("fN","");sv("fL","");sv("fPW","");sv("fCB","");sv("fNO","");
+  render();stats();toast("Client cree !");
 }
-function del(id){sc(gc().filter(function(c){return c.id!==id}));ren();st();toast("Supprime")}
-function cop(id){
+
+function delClient(id){
+  sc(gc().filter(function(c){return c.id!==id}));
+  render();stats();toast("Supprime");
+}
+
+function copyClient(id){
   var a=gc(),c=null;
   for(var i=0;i<a.length;i++){if(a[i].id===id){c=a[i];break}}
   if(!c)return;
   var tl={s:"Starter 249e",p:"Premium 349e",d:"Du King"};
   var txt="Acces DMA - "+c.pr+" "+c.no+"
-Site : mathisdgtmk.github.io/Dma-skool
-Identifiant : "+c.lo+"
-Mot de passe : "+c.pw+"
-Offre : "+(tl[c.ti]||c.ti)+"
+";
+  txt+="Site : mathisdgtmk.github.io/Dma-skool
+";
+  txt+="Identifiant : "+c.lo+"
+";
+  txt+="Mot de passe : "+c.pw+"
+";
+  txt+="Offre : "+(tl[c.ti]||c.ti)+"
 ";
   if(c.bo==="o"&&c.cb)txt+="Code Bonus IA : "+c.cb+"
 ";
   txt+="Bonne formation !";
-  cp(txt,"Copie pret a envoyer !")
+  copyTxt(txt,"Copie pret a envoyer !");
 }
-function exp(){
-  var a=gc();if(!a.length){toast("Aucun client");return}
+
+function exportAll(){
+  var a=gc();
+  if(!a.length){toast("Aucun client");return}
+  var tl={s:"Starter",p:"Premium",d:"Du King"};
   var txt="CLIENTS DMA
 
 ";
-  for(var i=0;i<a.length;i++){var c=a[i];txt+=(i+1)+". "+c.pr+" "+c.no+"
-Login: "+c.lo+" | Mdp: "+c.pw+"
+  for(var i=0;i<a.length;i++){
+    var c=a[i];
+    txt+=(i+1)+". "+c.pr+" "+c.no+"
+";
+    txt+="Login: "+c.lo+" | Mdp: "+c.pw+"
+";
+    txt+="Offre: "+(tl[c.ti]||c.ti)+"
+";
+    if(c.bo==="o"&&c.cb)txt+="Code: "+c.cb+"
+";
+    txt+="
+";
+  }
+  copyTxt(txt,"Export copie !");
+}
 
-"}
-  cp(txt,"Export copie !")
+function copyTxt(txt,msg){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){toast(msg)}).catch(function(){fallbackCopy(txt,msg)});
+  } else {
+    fallbackCopy(txt,msg);
+  }
 }
-function cp(txt,msg){
-  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast(msg)})}
-  else{var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:-999px";document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);toast(msg)}
+
+function fallbackCopy(txt,msg){
+  var ta=document.createElement("textarea");
+  ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand("copy")}catch(e){}
+  document.body.removeChild(ta);toast(msg);
 }
-function ren(){
+
+function render(){
   var q=(v("sr")||"").toLowerCase();
   var a=gc().filter(function(c){return !q||(c.pr+c.no+c.lo).toLowerCase().indexOf(q)!==-1});
   var tl={s:"Starter",p:"Premium",d:"Du King"};
   var tc={s:"ts",p:"tp",d:"td"};
-  if(!a.length){document.getElementById("li").innerHTML="<div class=emp>Aucun client encore</div>";return}
+  if(!a.length){document.getElementById("li").innerHTML="<div class=empty>Aucun client encore</div>";return}
   var h="";
   for(var i=0;i<a.length;i++){
     var c=a[i];
-    h+="<div class=cc><div class=ct><div class=cn>"+c.pr+" "+c.no+"</div><span class='ti "+(tc[c.ti]||"ts")+"'>"+(tl[c.ti]||c.ti)+"</span></div>";
-    h+="<div class=cr><div class=rw><span class=rl>Login</span><span class=rv>"+c.lo+"</span></div>";
+    h+="<div class=cc>";
+    h+="<div class=ct><div class=cn>"+c.pr+" "+c.no+"</div><span class='ti "+(tc[c.ti]||"ts")+"'>"+(tl[c.ti]||c.ti)+"</span></div>";
+    h+="<div class=cr>";
+    h+="<div class=rw><span class=rl>Login</span><span class=rv>"+c.lo+"</span></div>";
     h+="<div class=rw><span class=rl>Mdp</span><span class=rv>"+c.pw+"</span></div>";
     if(c.bo==="o"&&c.cb)h+="<div class=rw><span class=rl>Code IA</span><span class=rv>"+c.cb+"</span></div>";
-    h+="<div class=rw><span class=rl>Date</span><span class=rv style='color:rgba(245,240,232,.3)'>"+c.dt+"</span></div></div>";
-    h+="<div class=ca><button class=bcp onclick='cop("+c.id+")'>COPIER ET ENVOYER</button><button class=bdl onclick='del("+c.id+")'>X</button></div>";
+    h+="<div class=rw><span class=rl>Date</span><span class=rv style='color:rgba(245,240,232,.3)'>"+c.dt+"</span></div>";
+    h+="</div>";
+    h+="<div class=ca>";
+    h+="<button class=bcp id='cp"+c.id+"'>COPIER ET ENVOYER</button>";
+    h+="<button class=bdl id='dl"+c.id+"'>X</button>";
+    h+="</div>";
     if(c.nt)h+="<div class=nt>"+c.nt+"</div>";
     h+="</div>";
   }
-  document.getElementById("li").innerHTML=h
+  document.getElementById("li").innerHTML=h;
+
+  // Attacher les events apres rendu
+  for(var j=0;j<a.length;j++){
+    (function(cid){
+      var cpEl=document.getElementById("cp"+cid);
+      var dlEl=document.getElementById("dl"+cid);
+      if(cpEl){
+        cpEl.addEventListener("touchend",function(e){e.preventDefault();copyClient(cid)});
+        cpEl.addEventListener("click",function(){copyClient(cid)});
+      }
+      if(dlEl){
+        dlEl.addEventListener("touchend",function(e){e.preventDefault();delClient(cid)});
+        dlEl.addEventListener("click",function(){delClient(cid)});
+      }
+    })(a[j].id);
+  }
 }
-function st(){
+
+function stats(){
   var a=gc();var s=0,p=0,d=0;
   for(var i=0;i<a.length;i++){if(a[i].ti==="s")s++;else if(a[i].ti==="p")p++;else d++}
   document.getElementById("t0").textContent=a.length;
@@ -190,8 +318,14 @@ function st(){
   document.getElementById("t2").textContent=p;
   document.getElementById("t3").textContent=d;
 }
-function toast(msg){var t=document.getElementById("ts");t.textContent=msg;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
-ren();st();
+
+function toast(msg){
+  var t=document.getElementById("toast");
+  t.textContent=msg;t.style.display="block";
+  setTimeout(function(){t.style.display="none"},2500);
+}
+
+render();stats();
 </script>
 
 </body>
