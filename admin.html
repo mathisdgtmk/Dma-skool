@@ -93,7 +93,7 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
 <div class="ls">
   <div class="lh">
     <div class="lt">MES CLIENTS</div>
-    <input class="si" id="sr" type="text" placeholder="Rechercher..." oninput="ren()">
+    <input class="si" id="sr" type="text" placeholder="Rechercher...">
   </div>
   <div id="li"></div>
 </div>
@@ -102,6 +102,17 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
 
 <script>
 function r(a,b){return Math.floor(Math.random()*(b-a)+a)}
+
+// LISTENERS — compatibilite Safari iPad
+window.onload = function() {
+  document.getElementById("btnL").addEventListener("click", function(e){ e.preventDefault(); gL(); });
+  document.getElementById("btnP").addEventListener("click", function(e){ e.preventDefault(); gP(); });
+  document.getElementById("btnC").addEventListener("click", function(e){ e.preventDefault(); gC(); });
+  document.getElementById("btnAdd").addEventListener("click", function(e){ e.preventDefault(); add(); });
+  document.getElementById("btnExp").addEventListener("click", function(e){ e.preventDefault(); exp(); });
+  document.getElementById("p1").addEventListener("input", function(){ gL(); gP(); });
+  document.getElementById("sr").addEventListener("input", function(){ ren(); });
+};
 function v(id){return document.getElementById(id).value.trim()}
 function s(id,val){document.getElementById(id).value=val}
 function gL(){s("p5",(v("p1")||"client").toLowerCase()+r(100,999))}
