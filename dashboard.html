@@ -268,7 +268,7 @@ function check(){
 <!-- BOUTON ADMIN -->
 
 <div style="padding:20px 16px 40px;text-align:center;position:relative;z-index:10">
-  <button id="btnAdminOpen" style="background:rgba(192,0,26,.1);border:1px solid rgba(192,0,26,.3);border-radius:4px;padding:14px 28px;font-size:12px;font-weight:700;letter-spacing:3px;color:#ff7070;cursor:pointer;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none;display:inline-block;width:auto">ACCES ADMIN</button>
+  <button onclick="ouvrirAdmin()" style="background:rgba(192,0,26,.1);border:1px solid rgba(192,0,26,.3);border-radius:4px;padding:14px 28px;font-size:12px;font-weight:700;letter-spacing:3px;color:#ff7070;cursor:pointer;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none;display:inline-block;width:auto">ACCES ADMIN</button>
 </div>
 
 <!-- PANEL ADMIN -->
@@ -277,7 +277,7 @@ function check(){
 
   <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:2px solid #C0001A;margin-bottom:20px">
     <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:4px">DMA <span style="color:#C0001A">ADMIN</span></div>
-    <button id="btnAdminClose" style="background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:4px;padding:6px 14px;font-size:10px;font-weight:700;letter-spacing:2px;color:#ff7070;cursor:pointer;font-family:Montserrat,Arial,sans-serif">FERMER</button>
+    <button onclick="fermerAdmin()" style="background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:4px;padding:6px 14px;font-size:10px;font-weight:700;letter-spacing:2px;color:#ff7070;cursor:pointer;font-family:Montserrat,Arial,sans-serif">FERMER</button>
   </div>
 
   <div style="display:flex;gap:8px;margin-bottom:20px">
@@ -290,13 +290,13 @@ function check(){
   <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;margin-bottom:14px">NOUVEAU CLIENT</div>
 
   <div style="display:flex;gap:8px;margin-bottom:8px">
-    <div style="flex:1"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Prenom</div><input id="aP" type="text" placeholder="Jean" autocomplete="off" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px;font-size:15px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif"></div>
+    <div style="flex:1"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Prenom</div><input id="aP" oninput="aGenAuto()" type="text" placeholder="Jean" autocomplete="off" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px;font-size:15px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif"></div>
     <div style="flex:1"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Nom</div><input id="aN" type="text" placeholder="Dupont" autocomplete="off" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px;font-size:15px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif"></div>
   </div>
 
   <div style="display:flex;gap:8px;margin-bottom:8px">
     <div style="flex:1"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Offre</div><select id="aO" style="width:100%;background:#111;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px;font-size:14px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif"><option value="s">Starter 249e</option><option value="p">Premium 349e</option><option value="d">Du King</option></select></div>
-    <div style="flex:1"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Bonus IA</div><select id="aB" style="width:100%;background:#111;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px;font-size:14px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif"><option value="n">Non</option><option value="o">Oui</option></select></div>
+    <div style="flex:1"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Bonus IA</div><select id="aB" onchange="aGenAuto()" style="width:100%;background:#111;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px;font-size:14px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif"><option value="n">Non</option><option value="o">Oui</option></select></div>
   </div>
 
   <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Identifiant (auto)</div>
@@ -311,14 +311,14 @@ function check(){
   <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:5px">Note</div>
   <input id="aNO" type="text" placeholder="Ex: paye en 2 fois" autocomplete="off" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px;font-size:15px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;margin-bottom:8px">
 
-<button id="btnAjout" style="width:100%;padding:18px;background:#C0001A;border:none;border-radius:6px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#fff;cursor:pointer;margin-bottom:24px;display:block">CREER LE CLIENT</button>
+<button onclick="aAddClient()" style="width:100%;padding:18px;background:#C0001A;border:none;border-radius:6px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#fff;cursor:pointer;margin-bottom:24px;display:block">CREER LE CLIENT</button>
 
   <div style="height:1px;background:rgba(255,255,255,.08);margin-bottom:16px"></div>
 
   <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;margin-bottom:12px">MES CLIENTS</div>
-  <input id="aSR" type="text" placeholder="Rechercher..." style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:10px 12px;font-size:13px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;margin-bottom:12px">
+  <input id="aSR" oninput="aRender()" type="text" placeholder="Rechercher..." style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:10px 12px;font-size:13px;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;margin-bottom:12px">
   <div id="aList"></div>
-  <button id="btnExport" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;margin-top:8px;display:block">EXPORTER TOUS LES ACCES</button>
+  <button onclick="aExport()" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:13px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:rgba(245,240,232,.4);cursor:pointer;margin-top:8px;display:block">EXPORTER TOUS LES ACCES</button>
 
 </div>
 
@@ -481,7 +481,7 @@ function aToast(msg){
   setTimeout(function(){t.style.display="none"},2500);
 }
 
-document.getElementById("btnAdminOpen").addEventListener("click",function(){
+function ouvrirAdmin(){
   var code = prompt("Code admin :");
   if(code === "MathisDMA2026"){
     document.getElementById("adminPanel").style.display="block";
@@ -489,15 +489,15 @@ document.getElementById("btnAdminOpen").addEventListener("click",function(){
   } else {
     alert("Code incorrect");
   }
-});
-document.getElementById("btnAdminClose").addEventListener("click",function(){
+}
+function fermerAdmin(){
   document.getElementById("adminPanel").style.display="none";
-});
-document.getElementById("aP").addEventListener("input",aGenAuto);
-document.getElementById("aB").addEventListener("change",aGenAuto);
-document.getElementById("btnAjout").addEventListener("click",aAddClient);
-document.getElementById("btnExport").addEventListener("click",aExport);
-document.getElementById("aSR").addEventListener("input",aRender);
+}
+
+
+
+
+
 </script>
 
 </body>
