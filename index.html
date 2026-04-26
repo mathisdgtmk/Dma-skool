@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DMA — Accès Membre</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;width:100%}
@@ -153,6 +153,11 @@ font-size:12px;font-weight:500;color:#ff7070;text-align:center;
 .success-sub{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:14px;color:#C9A84C;font-style:italic;letter-spacing:2px}
 </style>
 
+<style>
+html,body,div,main,section,header,footer{background-color:#050505!important}
+body::after{content:"";position:fixed;inset:0;background:#050505;z-index:-999;pointer-events:none}
+</style>
+
 </head>
 <body>
 
@@ -162,112 +167,131 @@ font-size:12px;font-weight:500;color:#ff7070;text-align:center;
 <div class="corner corner--br"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 L2 2 L48 2" stroke="#C9A84C" stroke-width="1" opacity=".6"/><circle cx="2" cy="2" r="2" fill="#C9A84C" opacity=".7"/></svg></div>
 
 <div class="card">
-  <div class="logo-wrap">
-    <div class="logo-icon"><span>DMA</span></div>
-    <span class="logo-title">DIGITAL MASTERY</span>
-    <span class="logo-sub">Academy — Espace Membre</span>
-  </div>
-  <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-  <div class="error-msg" id="errorMsg">Identifiants incorrects.</div>
-  <div class="form-group">
-    <label class="form-label" for="username">Identifiant</label>
-    <input class="form-input" type="text" id="username" placeholder="Ton identifiant membre" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
-  </div>
-  <div class="form-group">
-    <label class="form-label" for="password">Mot de passe</label>
-    <input class="form-input" type="password" id="password" placeholder="••••••••" autocomplete="current-password">
-    <button class="toggle-pw" onclick="togglePw()" type="button" id="toggleBtn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-    </button>
-  </div>
-  <button class="btn" id="loginBtn" onclick="handleLogin()" type="button">
-    <span class="btn-text">Accéder à la formation</span>
-    <div class="btn-loader"></div>
-  </button>
-  <div class="attempt-info" id="attemptInfo"></div>
-  <div class="card-footer">
-    <div class="footer-divider"><div class="divider-line"></div><div class="divider-dot" style="opacity:.12"></div><div class="divider-line"></div></div>
-    <span class="footer-text">Accès strictement personnel et non transférable</span>
-    <a href="mailto:mathisreservation@gmail.com" class="contact-link">Support</a>
-  </div>
+  <div class="logo-wrap">
+    <div class="logo-icon"><span>DMA</span></div>
+    <span class="logo-title">DIGITAL MASTERY</span>
+    <span class="logo-sub">Academy — Espace Membre</span>
+  </div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+  <div class="error-msg" id="errorMsg">Identifiants incorrects.</div>
+  <div class="form-group">
+    <label class="form-label" for="username">Identifiant</label>
+    <input class="form-input" type="text" id="username" placeholder="Ton identifiant membre" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="password">Mot de passe</label>
+    <input class="form-input" type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+    <button class="toggle-pw" onclick="togglePw()" type="button" id="toggleBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+  </div>
+  <button class="btn" id="loginBtn" onclick="handleLogin()" type="button">
+    <span class="btn-text">Accéder à la formation</span>
+    <div class="btn-loader"></div>
+  </button>
+  <div class="attempt-info" id="attemptInfo"></div>
+  <div class="card-footer">
+    <div class="footer-divider"><div class="divider-line"></div><div class="divider-dot" style="opacity:.12"></div><div class="divider-line"></div></div>
+    <span class="footer-text">Accès strictement personnel et non transférable</span>
+    <a href="mailto:mathisreservation@gmail.com" class="contact-link">Support</a>
+  </div>
 </div>
 
 <div class="success-overlay" id="successOverlay">
-  <div class="success-content">
-    <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <div class="success-title">Accès accordé</div>
-    <div class="success-sub">Bienvenue dans la DMA</div>
-  </div>
+  <div class="success-content">
+    <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="success-title">Accès accordé</div>
+    <div class="success-sub">Bienvenue dans la DMA</div>
+  </div>
 </div>
 
 <script>
 const MEMBRES = {
-    "matheo247": { password: "Matheo583k", name: "Matheo", tier: "starter" },
-  "romeo391": { password: "Romeo741k", name: "Romeo", tier: "starter" },
-  "zahia156": { password: "Zahia362k", name: "Zahia", tier: "starter" },
-  "yedrox824": { password: "Yedrox195k", name: "Yedrox", tier: "starter" },
-"momo374": { password: "Momo829k", name: "Momo", tier: "starter" },
-"clint512": { password: "Clint347k", name: "Clint", tier: "starter" },
-"lola691": { password: "Lola256k", name: "Lola", tier: "starter" },
-"lucas183": { password: "Lucas748k", name: "Lucas", tier: "starter" },
-"eric924": { password: "Eric531k", name: "Eric", tier: "starter" },
-"theo267": { password: "Theo412k", name: "Theo", tier: "starter" },
-"jenny845": { password: "Jenny193k", name: "Jenny", tier: "starter" },
-"enola638": { password: "Enola574k", name: "Enola", tier: "starter" },
-"liam493": { password: "Liam827k", name: "Liam", tier: "starter" },
-
-  "mathis":    { password: "AdminDMA!", name: "Mathis", tier: "duking" },
+  "client001": { password: "DMA2025!", name: "Jean D.", tier: "starter" },
+  "client002": { password: "Elite007", name: "Sarah M.", tier: "jcvd" },
+  "client003": { password: "King2025", name: "Thomas R.", tier: "duking" },
+  "mathis":    { password: "AdminDMA!", name: "Mathis", tier: "duking" },
 };
 
 let attempts = 0, locked = false;
 
 function handleLogin() {
-  if (locked) return;
-  const u = document.getElementById('username').value.trim().toLowerCase();
-  const p = document.getElementById('password').value;
-  const err = document.getElementById('errorMsg');
-  const btn = document.getElementById('loginBtn');
-  err.classList.remove('show');
-  document.getElementById('username').classList.remove('error');
-  document.getElementById('password').classList.remove('error');
-  if (!u || !p) { err.textContent = "Remplis tous les champs."; err.classList.add('show'); return; }
-  btn.classList.add('loading');
-  setTimeout(() => {
-    btn.classList.remove('loading');
-    const m = MEMBRES[u];
-    if (m && m.password === p) {
-      sessionStorage.setItem('dma_user', JSON.stringify({ id: u, name: m.name, tier: m.tier }));
-      document.getElementById('successOverlay').classList.add('show');
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1800);
-    } else {
-      attempts++;
-      document.getElementById('username').classList.add('error');
-      document.getElementById('password').classList.add('error');
-      document.getElementById('password').value = '';
-      if (attempts >= 5) {
-        locked = true;
-        err.textContent = "Trop de tentatives. Réessaie dans 10 min.";
-        setTimeout(() => { locked = false; attempts = 0; }, 600000);
-      } else {
-        err.textContent = "Identifiants incorrects.";
-        if (attempts >= 2) {
-          const i = document.getElementById('attemptInfo');
-          const r = 5 - attempts;
-          i.textContent = r + " tentative" + (r>1?"s":"") + " restante" + (r>1?"s":"");
-          i.classList.add('show');
-        }
-      }
-      err.classList.add('show');
-    }
-  }, 700);
+  if (locked) return;
+  const u = document.getElementById('username').value.trim().toLowerCase();
+  const p = document.getElementById('password').value;
+  const err = document.getElementById('errorMsg');
+  const btn = document.getElementById('loginBtn');
+  err.classList.remove('show');
+  document.getElementById('username').classList.remove('error');
+  document.getElementById('password').classList.remove('error');
+  if (!u || !p) { err.textContent = "Remplis tous les champs."; err.classList.add('show'); return; }
+  btn.classList.add('loading');
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    const m = MEMBRES[u];
+    if (m && m.password === p) {
+      sessionStorage.setItem('dma_user', JSON.stringify({ id: u, name: m.name, tier: m.tier }));
+      document.getElementById('successOverlay').classList.add('show');
+      trackLogin(u, m.name);
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1800);
+    } else {
+      attempts++;
+      document.getElementById('username').classList.add('error');
+      document.getElementById('password').classList.add('error');
+      document.getElementById('password').value = '';
+      if (attempts >= 5) {
+        locked = true;
+        err.textContent = "Trop de tentatives. Réessaie dans 10 min.";
+        setTimeout(() => { locked = false; attempts = 0; }, 600000);
+      } else {
+        err.textContent = "Identifiants incorrects.";
+        if (attempts >= 2) {
+          const i = document.getElementById('attemptInfo');
+          const r = 5 - attempts;
+          i.textContent = r + " tentative" + (r>1?"s":"") + " restante" + (r>1?"s":"");
+          i.classList.add('show');
+        }
+      }
+      err.classList.add('show');
+    }
+  }, 700);
 }
 
 function togglePw() {
-  const pw = document.getElementById('password');
-  pw.type = pw.type === 'password' ? 'text' : 'password';
+  const pw = document.getElementById('password');
+  pw.type = pw.type === 'password' ? 'text' : 'password';
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+
+function trackLogin(identifiant, nom) {
+  var token = "patqxKulxpZ2ERSII.a9a8d52b13701bde569c6693e43ad3c1eb14ab50ce4e4ffb187df13c77afb7c5";
+  var baseId = "app1N7fUuN5pcWE5S";
+  var table = "Table 1";
+  var now = new Date();
+  var date = now.toLocaleDateString("fr-FR");
+  var heure = now.toLocaleTimeString("fr-FR", {hour: "2-digit", minute: "2-digit"});
+  var appareil = navigator.userAgent.indexOf("iPhone") !== -1 ? "iPhone" :
+                 navigator.userAgent.indexOf("iPad") !== -1 ? "iPad" :
+                 navigator.userAgent.indexOf("Android") !== -1 ? "Android" : "Ordinateur";
+  fetch("https://api.airtable.com/v0/" + baseId + "/" + encodeURIComponent(table), {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      records: [{
+        fields: {
+          "Identifiant": identifiant,
+          "Nom": nom,
+          "Date": date,
+          "Heure": heure
+        }
+      }]
+    })
+  }).catch(function() {});
+}
 </script>
 
 </body>
