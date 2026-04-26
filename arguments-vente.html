@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA — Arguments de Vente</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
+.hdr{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.hdr-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.hdr-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.hero{padding:28px 20px 20px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:14px;background:rgba(201,168,76,.05)}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,8vw,42px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:8px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:14px;font-style:italic;color:rgba(245,240,232,.4);line-height:1.6}
+
+/* SECTIONS */
+.section{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:3px;color:#f5f0e8;margin-bottom:4px}
+.s-title span{color:#C0001A}
+.s-sub{font-size:12px;font-style:italic;color:rgba(245,240,232,.35);margin-bottom:16px}
+
+/* ARGUMENT CARDS */
+.arg-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-bottom:10px;position:relative;overflow:hidden}
+.arg-card::before{content:””;position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#C0001A,#C9A84C)}
+.arg-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:6px}
+.arg-title{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:2px;color:#C9A84C;margin-bottom:8px}
+.arg-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.75);line-height:1.75}
+.arg-text strong{color:#f5f0e8;font-weight:600}
+.arg-copy{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:6px 12px;font-size:9px;font-weight:700;letter-spacing:1.5px;color:#C9A84C;margin-top:10px;cursor:pointer;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:inline-block}
+
+/* SCRIPT CARDS */
+.script-card{background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.script-header{background:#161b22;border-bottom:1px solid rgba(255,255,255,.06);padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.script-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A84C}
+.script-copy{background:rgba(201,168,76,.1);border:none;border-radius:3px;padding:4px 10px;font-size:9px;font-weight:600;color:#C9A84C;cursor:pointer;letter-spacing:1px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
+.script-body{padding:14px}
+.script-line{font-size:12px;font-weight:300;color:rgba(245,240,232,.8);line-height:1.85;margin-bottom:6px;padding-left:12px;position:relative}
+.script-line::before{content:“▸”;position:absolute;left:0;color:rgba(201,168,76,.4);font-size:10px;top:3px}
+.script-line strong{color:#C9A84C;font-weight:600}
+.script-line em{color:rgba(245,240,232,.4);font-style:italic}
+
+/* OBJECTIONS */
+.objection-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:14px;margin-bottom:10px;cursor:pointer}
+.objection-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.obj-header{display:flex;align-items:center;justify-content:space-between}
+.obj-q{font-size:12px;font-weight:600;color:#ff7070;padding-right:10px}
+.obj-icon{width:22px;height:22px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s;font-size:12px;color:#C9A84C}
+.objection-card.open .obj-icon{transform:rotate(45deg)}
+.obj-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.objection-card.open .obj-answer{max-height:500px}
+.obj-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.obj-text strong{color:#C9A84C;font-weight:600}
+
+/* TABLEAU COMPARATIF */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px}
+.comp-table{width:100%;border-collapse:collapse;min-width:300px}
+.comp-table th{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.15);padding:10px 12px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C9A84C;text-align:left}
+.comp-table td{border:1px solid rgba(255,255,255,.06);padding:10px 12px;font-size:12px;color:rgba(245,240,232,.7)}
+.comp-table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.comp-table .check{color:#80d080;font-size:14px}
+.comp-table .cross{color:#ff7070;font-size:14px}
+
+/* INFO BLOCK */
+.info-block{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;color:rgba(245,240,232,.7);line-height:1.6}
+.info-text strong{color:#C9A84C}
+
+.footer{padding:32px 20px 60px;text-align:center}
+.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.08)}
+.footer-logo span{color:rgba(201,168,76,.15)}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
+</style>
+
+</head>
+<body>
+
+<div class="hdr">
+  <a class="hdr-back" href="dashboard.html">← Retour</a>
+  <div class="hdr-title">ARGUMENTS DE VENTE</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">💰 Bonus DMA</div>
+  <div class="hero-title">ARGUMENTS<br><span>DE VENTE</span></div>
+  <div class="hero-sub">Tout ce qu'il faut savoir pour vendre la DMA<br>et convaincre chaque prospect</div>
+</div>
+
+<!-- POURQUOI LA DMA -->
+
+<div class="section">
+  <div class="s-title">POURQUOI <span>LA DMA ?</span></div>
+  <div class="s-sub">Les arguments béton à utiliser avec chaque prospect</div>
+
+  <div class="arg-card">
+    <div class="arg-num">Argument 01</div>
+    <div class="arg-title">TON PROPRE SITE — PAS UNE APPLI</div>
+    <div class="arg-text">La DMA n'est pas sur Skool ou une plateforme tierce. <strong>Tu accèdes depuis ton navigateur</strong>, sur n'importe quel appareil. Pas de téléchargement, pas de compte à créer — juste un identifiant et un code. C'est pro, c'est simple, c'est immédiat.</div>
+    <button class="arg-copy" onclick="copyArg(0)">COPIER L'ARGUMENT</button>
+  </div>
+
+  <div class="arg-card">
+    <div class="arg-num">Argument 02</div>
+    <div class="arg-title">MRR 100% — ZERO COMMISSION</div>
+    <div class="arg-text">Tu gardes <strong>100% de ce que tu vends</strong>. Pas de commission, pas d'intermédiaire. Tu revends la formation au prix que tu veux. Tes clients peuvent faire pareil. C'est un système qui se multiplie tout seul.</div>
+    <button class="arg-copy" onclick="copyArg(1)">COPIER L'ARGUMENT</button>
+  </div>
+
+  <div class="arg-card">
+    <div class="arg-num">Argument 03</div>
+    <div class="arg-title">28 MODULES — TOUT EST INCLUS</div>
+    <div class="arg-text">Mindset, Instagram, TikTok, Snapchat, Closing, Live TikTok, VSL, Funnels, MRR, Scaling, Légal, B2B... <strong>Rien à acheter en plus.</strong> Une seule formation, tout ce qu'il faut pour lancer et scaler.</div>
+    <button class="arg-copy" onclick="copyArg(2)">COPIER L'ARGUMENT</button>
+  </div>
+
+  <div class="arg-card">
+    <div class="arg-num">Argument 04</div>
+    <div class="arg-title">ACCÈS À VIE — MISES À JOUR INCLUSES</div>
+    <div class="arg-text">Tu paies une fois, tu accèdes à vie. <strong>Pas d'abonnement mensuel.</strong> Toutes les mises à jour futures sont incluses. La formation évolue avec le marché — tu ne paies jamais plus.</div>
+    <button class="arg-copy" onclick="copyArg(3)">COPIER L'ARGUMENT</button>
+  </div>
+
+  <div class="arg-card">
+    <div class="arg-num">Argument 05</div>
+    <div class="arg-title">PAIEMENT EN PLUSIEURS FOIS</div>
+    <div class="arg-text">Le prix n'est plus une excuse. <strong>4x 62€ via PayPal</strong> pour le Starter, <strong>3x 116€ via Klarna</strong> pour le Premium. Soit moins que ton abonnement Netflix par semaine pour changer ta situation financière.</div>
+    <button class="arg-copy" onclick="copyArg(4)">COPIER L'ARGUMENT</button>
+  </div>
+
+  <div class="arg-card">
+    <div class="arg-num">Argument 06</div>
+    <div class="arg-title">BONUS AGENCE IA NO-CODE</div>
+    <div class="arg-text">En plus de la formation, tu accèdes au <strong>Bonus Agence IA</strong> — lance ton agence digitale alimentée par l'IA sans coder. Outils, workflows, clients. Un bonus qui vaut à lui seul le prix de la formation.</div>
+    <button class="arg-copy" onclick="copyArg(5)">COPIER L'ARGUMENT</button>
+  </div>
+</div>
+
+<!-- COMPARATIF -->
+
+<div class="section">
+  <div class="s-title">COMPARATIF <span>CONCURRENCE</span></div>
+  <div class="s-sub">Montre pourquoi la DMA est le meilleur choix</div>
+  <div class="table-wrap">
+    <table class="comp-table">
+      <tr><th>Caracteristique</th><th>DMA</th><th>Autres formations</th></tr>
+      <tr><td>Prix</td><td>249€ ou 349€</td><td>500€ a 2000€+</td></tr>
+      <tr><td>MRR 100%</td><td><span class="check">✓</span> Inclus</td><td><span class="cross">✗</span> Rarement</td></tr>
+      <tr><td>Acces a vie</td><td><span class="check">✓</span> Oui</td><td><span class="cross">✗</span> Abonnement</td></tr>
+      <tr><td>Paiement fractionne</td><td><span class="check">✓</span> 3x ou 4x</td><td><span class="cross">✗</span> Rarement</td></tr>
+      <tr><td>Bonus IA inclus</td><td><span class="check">✓</span> Oui</td><td><span class="cross">✗</span> Non</td></tr>
+      <tr><td>Support direct</td><td><span class="check">✓</span> DM Mathis</td><td><span class="cross">✗</span> Forum</td></tr>
+      <tr><td>Zero telechargement</td><td><span class="check">✓</span> 100% web</td><td><span class="cross">✗</span> Appli requise</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SCRIPTS DM -->
+
+<div class="section">
+  <div class="s-title">SCRIPTS <span>DE VENTE DMA</span></div>
+  <div class="s-sub">Utilise ces scripts mot pour mot en DM</div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Ouverture froide</span>
+      <button class="script-copy" onclick="copyScript(0)">COPIER</button>
+    </div>
+    <div class="script-body" id="scr0">
+      <div class="script-line"><strong>"Hey [Prenom] ! T'es sur quoi en ce moment pour generer des revenus en ligne ?"</strong></div>
+      <div class="script-line"><em>→ Attends la reponse. Ne pitche pas encore.</em></div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Apres avoir identifie le besoin</span>
+      <button class="script-copy" onclick="copyScript(1)">COPIER</button>
+    </div>
+    <div class="script-body" id="scr1">
+      <div class="script-line"><strong>"J'ai quelque chose qui correspond exactement a ce que tu cherches."</strong></div>
+      <div class="script-line"><strong>"La DMA c'est 28 modules pour apprendre a vendre en ligne — avec les droits de revente a 100%. Tu gardes tout ce que tu vends."</strong></div>
+      <div class="script-line"><strong>"C'est 249€ en une fois ou 4x 62€ via PayPal. T'as des questions ?"</strong></div>
+      <div class="script-line"><em>→ Silence apres le prix. Laisse reagir.</em></div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Relance 24h apres</span>
+      <button class="script-copy" onclick="copyScript(2)">COPIER</button>
+    </div>
+    <div class="script-body" id="scr2">
+      <div class="script-line"><strong>"Hey [Prenom] ! T'as eu le temps de reflechir ?"</strong></div>
+      <div class="script-line"><strong>"Je voulais juste te dire que l'offre a 249€ est limitee. Apres ca remonte a 499€."</strong></div>
+      <div class="script-line"><strong>"Si tu veux on peut faire le paiement en 4x via PayPal pour que ce soit plus simple pour toi."</strong></div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Pour les indecis</span>
+      <button class="script-copy" onclick="copyScript(3)">COPIER</button>
+    </div>
+    <div class="script-body" id="scr3">
+      <div class="script-line"><strong>"Je comprends l'hesitation. Laisse moi te poser une question."</strong></div>
+      <div class="script-line"><strong>"Dans 6 mois, tu veux etre dans la meme situation ou tu veux avoir avance ?"</strong></div>
+      <div class="script-line"><strong>"La DMA c'est pas une depense — c'est un investissement. Ta premiere vente rembourse la formation."</strong></div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <span class="script-label">Pour pitcher le Premium 349€</span>
+      <button class="script-copy" onclick="copyScript(4)">COPIER</button>
+    </div>
+    <div class="script-body" id="scr4">
+      <div class="script-line"><strong>"Si tu veux aller encore plus vite, j'ai une offre Premium a 349€."</strong></div>
+      <div class="script-line"><strong>"En plus des 28 modules tu as un coaching direct avec moi — je te suis de A a Z jusqu'a ta premiere vente."</strong></div>
+      <div class="script-line"><strong>"Disponible en 3x 116€ via Klarna. Seulement quelques places dispo."</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- OBJECTIONS -->
+
+<div class="section">
+  <div class="s-title">OBJECTIONS <span>& REPONSES</span></div>
+  <div class="s-sub">Clique pour voir la reponse exacte</div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"C'est trop cher"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>Ne baisse jamais le prix en premier.</strong> Creuse d'abord : "Par rapport a quoi ?"<br><br>"Si tu fais une seule vente avec ce que t'apprend la formation, elle est remboursee. Et avec le MRR tu peux revendre la formation le meme prix. <strong>C'est pas un cout, c'est un multiplicateur.</strong>"<br><br>Si besoin : propose le paiement en 4x 62€ via PayPal.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"Je vais reflechir"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text">"Je vais reflechir" = il y a une objection cachee.<br><br><strong>"Bien sur, prends ton temps. Juste pour comprendre — c'est quoi exactement qui te fait hesiter ? Le prix, le timing, ou autre chose ?"</strong><br><br>La vraie objection sort ici. Traite-la — ne laisse jamais partir sans connaitre le vrai blocage.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"J'ai pas le temps"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"L'acces est a vie — tu commences quand tu veux, a ton rythme."</strong><br><br>"Mais je te pose la question : si tu commences pas maintenant, quand tu comptes commencer ? Dans 6 mois les conditions seront exactement les memes et tu auras perdu 6 mois."</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"J'ai deja essaye, ca marche pas"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text">Valide d'abord, ne te defends pas :<br><br><strong>"T'as raison, beaucoup de formations sont creuses. C'est pour ca que la DMA est differente — c'est pas de la theorie, c'est des actions concretes etape par etape."</strong><br><br>Puis montre les preuves : resultats membres, screenshots, temoignages.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"C'est quoi le MRR exactement ?"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"MRR = Master Resell Rights = droits de revente."</strong><br><br>"Tu achetes la formation une fois. Tu peux la revendre au meme prix — 249€ ou plus. Tu gardes 100% de ce que tu encaisses. Pas de commission, pas d'intermédiaire.<br><br>Tes clients peuvent faire pareil. C'est un systeme qui se multiplie automatiquement."</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"C'est pas une pyramide de Ponzi ?"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text">Non et voila pourquoi :<br><br><strong>"Un Ponzi c'est quand les anciens sont payes par les nouveaux. Ici tu vends un VRAI produit — 28 modules de formation avec une vraie valeur. Le contenu existe independamment des ventes."</strong><br><br>"C'est comme acheter une licence de logiciel et avoir le droit de le revendre. Totalement legal et transparent."</div></div>
+  </div>
+</div>
+
+<!-- TIPS -->
+
+<div class="section">
+  <div class="s-title">REGLES D'OR <span>POUR VENDRE</span></div>
+  <div class="s-sub">Les principes qui font la difference</div>
+
+  <div class="info-block">
+    <div class="info-icon">🎯</div>
+    <div class="info-text"><strong>Qualifie avant de pitcher.</strong> Pose 2-3 questions sur leur situation avant de parler de la DMA. Plus tu comprends leur probleme, plus ton pitch sera percutant.</div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">🤫</div>
+    <div class="info-text"><strong>Silence apres le prix.</strong> Dis le prix et dis rien. La premiere personne qui parle apres le prix est en position de faiblesse. Laisse le prospect reagir.</div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">🔄</div>
+    <div class="info-text"><strong>La relance est obligatoire.</strong> 80% des ventes se font apres le 5eme contact. Si t'as pas de reponse apres 24h, relance. Si toujours rien apres 48h, relance encore.</div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">📸</div>
+    <div class="info-text"><strong>La preuve sociale bat tout.</strong> Un screenshot d'un membre satisfait vaut 10 arguments. Collecte les temoignages et utilise-les systematiquement dans tes DM.</div>
+  </div>
+  <div class="info-block">
+    <div class="info-icon">⚡</div>
+    <div class="info-text"><strong>L'urgence accelere la decision.</strong> "L'offre a 249€ est limitee", "il reste X places au prix de lancement". L'urgence reelle ou percue pousse a l'action.</div>
+  </div>
+</div>
+
+<div class="footer"><div class="footer-logo">DM<span>A</span></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+var user = JSON.parse(sessionStorage.getItem("dma_user") || "null");
+if (!user) window.location.href = "index.html";
+
+var args = [
+  "La DMA n'est pas sur Skool ou une appli. Tu accedes depuis ton navigateur, sur n'importe quel appareil. Pas de telechargement, pas de compte a creer — juste un identifiant et un code.",
+  "Tu gardes 100% de ce que tu vends. Pas de commission, pas d'intermediaire. Tu revends la formation au prix que tu veux. Tes clients peuvent faire pareil.",
+  "Mindset, Instagram, TikTok, Snapchat, Closing, Live TikTok, VSL, Funnels, MRR, Scaling, Legal, B2B — tout est inclus. Une seule formation, rien a acheter en plus.",
+  "Tu paies une fois, tu accedes a vie. Pas d'abonnement mensuel. Toutes les mises a jour futures sont incluses.",
+  "4x 62 euros via PayPal pour le Starter, 3x 116 euros via Klarna pour le Premium. Moins que ton abonnement Netflix par semaine pour changer ta situation financiere.",
+  "En plus de la formation, tu accedes au Bonus Agence IA — lance ton agence digitale alimentee par l'IA sans coder. Outils, workflows, clients inclus."
+];
+
+var scripts = [
+  document.getElementById("scr0") ? document.getElementById("scr0").innerText : "",
+  document.getElementById("scr1") ? document.getElementById("scr1").innerText : "",
+  document.getElementById("scr2") ? document.getElementById("scr2").innerText : "",
+  document.getElementById("scr3") ? document.getElementById("scr3").innerText : "",
+  document.getElementById("scr4") ? document.getElementById("scr4").innerText : ""
+];
+
+function copyArg(i) {
+  copyText(args[i], "Argument copie !");
+}
+
+function copyScript(i) {
+  var el = document.getElementById("scr" + i);
+  if (el) copyText(el.innerText, "Script copie !");
+}
+
+function copyText(txt, msg) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(txt).then(function() { showToast(msg); });
+  } else {
+    var ta = document.createElement("textarea");
+    ta.value = txt;
+    ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand("copy"); } catch(e) {}
+    document.body.removeChild(ta);
+    showToast(msg);
+  }
+}
+
+function showToast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.style.display = "block";
+  setTimeout(function() { t.style.display = "none"; }, 2500);
+}
+</script>
+
+</body>
+</html>
