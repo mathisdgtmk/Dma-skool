@@ -91,8 +91,7 @@ select option{background:var(--surface2)}
 <div class="app">
   <div class="sidebar">
     <div class="tabs">
-      <button class="tab active" onclick="switchTab(event,'tuto')">📖 Tuto A-Z</button>
-      <button class="tab" onclick="switchTab(event,'form')">⚡ Générer</button>
+      <button class="tab active" style="cursor:default">📖 Tuto Beacons A-Z</button>
     </div>
 
 ```
@@ -107,89 +106,25 @@ select option{background:var(--surface2)}
   <div class="step"><div class="step-num">06</div><div class="step-content"><h3>PUBLIER ET TESTER</h3><p>Clique <code>Publish</code> → ouvre en navigation privée → teste le bouton d'achat. Partage en story et en bio.</p></div></div>
 </div>
 
-<div class="form-panel" id="tab-form">
-  <div class="form-section">
-    <div class="section-label">① Ton offre</div>
-    <label>Nom du produit / formation</label>
-    <input type="text" id="produit" placeholder="ex: Digital Mastery Academy">
-    <label>Ta promesse principale</label>
-    <input type="text" id="promesse" placeholder="ex: Gagne tes premiers 1000€/mois en 30 jours">
-    <label>Prix</label>
-    <input type="text" id="prix" placeholder="ex: 249€ ou 4x 62€">
-    <label>Format</label>
-    <select id="format">
-      <option value="">-- Sélectionne --</option>
-      <option>Skool / espace membres</option>
-      <option>Vidéos en accès immédiat</option>
-      <option>PDF + templates</option>
-      <option>Coaching 1-to-1</option>
-      <option>Programme hybride</option>
-      <option>Abonnement mensuel</option>
-    </select>
-  </div>
-  <div class="form-section">
-    <div class="section-label">② Ta cible</div>
-    <label>Qui est ton client idéal ?</label>
-    <input type="text" id="cible" placeholder="ex: Jeunes 18-30 ans qui veulent se lancer en ligne">
-    <label>Son problème principal</label>
-    <textarea id="probleme" placeholder="ex: Il essaie de se lancer mais ne sait pas par où commencer..."></textarea>
-    <label>Ce qu'il a déjà essayé sans succès</label>
-    <input type="text" id="echecs" placeholder="ex: Tutos YouTube gratuits, formations inutiles...">
-  </div>
-  <div class="form-section">
-    <div class="section-label">③ Ton autorité</div>
-    <label>Ton prénom / pseudo</label>
-    <input type="text" id="prenom" placeholder="ex: Mathis">
-    <label>Ta preuve (résultats, chiffres)</label>
-    <textarea id="preuve" placeholder="ex: J'ai généré 8000€ en 3 mois depuis Aix-en-Provence..."></textarea>
-    <label>Témoignage client</label>
-    <textarea id="temoignage" placeholder="ex: En 3 semaines j'ai fait mes 500€. — Laura, 22 ans"></textarea>
-  </div>
-  <div class="form-section">
-    <div class="section-label">④ L'offre irrésistible</div>
-    <label>Bonus inclus</label>
-    <input type="text" id="bonus" placeholder="ex: Accès vie entière, communauté, templates">
-    <label>Urgence / rareté</label>
-    <input type="text" id="urgence" placeholder="ex: Tarif de lancement jusqu'au dimanche">
-    <label>Garantie</label>
-    <input type="text" id="garantie" placeholder="ex: 1er mois remboursé si 0 résultat">
-  </div>
-  <button class="btn-generate" id="btnGenerate" onclick="generatePage()">✦ GÉNÉRER MA PAGE BEACONS</button>
 </div>
 ```
 
   </div>
-
-  <div class="output-panel" id="outputPanel">
-    <div class="output-empty" id="emptyState">
-      <div class="icon">⚡</div>
-      <p>Ta page apparaîtra ici</p>
-      <p style="font-size:12px;font-family:'DM Mono';letter-spacing:1px">Remplis le formulaire → Génère</p>
-    </div>
-    <div id="outputContent" style="display:none">
-      <div class="output-header">
-        <div class="output-title">✦ TA PAGE BEACONS</div>
-        <button class="btn-copy-all" onclick="copyAll()">TOUT COPIER</button>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <div id="blocsContainer"></div>
-      <div class="beacons-guide" id="beaconsGuide" style="display:none">
-        <div class="guide-title">📋 COMMENT COLLER DANS BEACONS</div>
-        <ul class="guide-steps">
-          <li>Connecte-toi à <strong>beacons.ai</strong> → va sur ton profil → clique <strong>Edit Page</strong></li>
-          <li>Clique <strong>+ Add Block</strong> → choisis <strong>Text</strong> → colle le contenu du Bloc 1</li>
-          <li>Répète pour chaque bloc dans l'ordre affiché</li>
-          <li>Pour les bénéfices, utilise le bloc <strong>List</strong> de Beacons</li>
-          <li>Pour le CTA final, ajoute un bloc <strong>Button</strong> ou <strong>Payment Link</strong></li>
-          <li>Dans <strong>Design</strong>, personnalise les couleurs pour matcher ton branding</li>
-          <li>Clique <strong>Publish</strong> → partage ton lien en bio et en story !</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
+var BLOCS_PREFILLED = [
+  "T'as envie de gagner de l'argent en ligne mais tu sais pas par ou commencer ? 🚀\n\nStop. Lis ce qui suit. Ca va tout changer.\n\nLa Formule DMA c'est le seul produit digital cle en main ou tu gardes 100% de chaque vente. Pas de commission. Pas d'intermediaire. Tout pour toi.\n\nTu commences aujourd'hui. Tu revends des demain. 🔥",
+  "Tu scrolles depuis des heures. Tu vois des gens gagner de l'argent en ligne et toi tu sais meme pas par ou attaquer.\n\nT'as peut-etre essaye des tutos YouTube. Des formations a 500€ qui t'ont rien appris. Des methodes floues sans resultats.\n\nLe probleme c'est pas toi. C'est que personne t'a donne un vrai systeme cle en main avec un produit deja cree, deja valide, pret a vendre.\n\nJusqu'a aujourd'hui.",
+  "La Formule DMA c'est exactement ca.\n\nUn produit digital deja cree. Deja utilise. Deja prouve.\n\nTu le mets en face des bonnes personnes — et tu gardes 100% des benefices sur chaque vente.\n\nPas besoin d'experience. Pas besoin d'un gros reseau. Juste la volonte de passer a l'action. 💡",
+  "✅ MRR 100% — tu gardes chaque centime de chaque vente\n✅ Produit deja cree — zero temps de creation\n✅ Acces immediat — tu attaques le jour meme meme en paiement fractionne\n✅ Guide offert — pour demarrer sans se perdre\n✅ Garantie 30 jours — zero risque pour toi\n✅ Revenus qui s'accumulent — mois apres mois sans rien recreer\n✅ Paiement flexible — 3x Klarna ou 4x PayPal",
+  "Je m'appelle Mathis. @mathisdgtmk\n\nJ'ai construit la DMA depuis Aix-en-Provence avec un telephone et une connexion Wi-Fi.\n\nAujourd'hui des dizaines de membres appliquent la methode et generent leurs premieres ventes. Pas de chance. Pas de reseau. Juste un systeme qui marche.\n\nEt maintenant ce systeme est entre tes mains.",
+  "Franchement j'y croyais pas trop au debut. Mais j'ai suivi la methode et en 3 semaines j'avais deja fait ma premiere vente. Le fait de garder 100% ca change tout psychologiquement — t'as vraiment l'impression que c'est TON business. 🔥\n\n— Membre DMA, 21 ans",
+  "FORMULE DMA — 249€ (au lieu de 499€) 🔥\n\nCe que tu obtiens :\n\n📚 La Digital Mastery Academy — formation complete en ligne\n🔑 MRR 100% — droits de revente inclus, tu gardes tout\n🎁 Guide offert — pour demarrer immediatement\n🛡️ Garantie 30 jours — satisfait ou rembourse\n⚡ Acces immediat — des le paiement, meme en plusieurs fois\n\n💳 Paiement en 3x sans frais avec Klarna\n💳 Ou en 4x avec PayPal\n\nLien validation paiement → https://dmabeacons.my.canva.site/paiementclient\nGuide offert → https://dmamgtmk.my.canva.site/guidedma249",
+  "❓ C'est quoi le MRR exactement ?\nMRR = Master Resell Rights = droits de revente. Tu achetes une fois, tu revends autant de fois que tu veux. Tu gardes 100% a chaque vente.\n\n❓ Et si j'ai aucune experience en vente ?\nAucun probleme. Le guide inclus t'explique exactement comment faire ta premiere vente etape par etape.\n\n❓ La garantie 30 jours c'est comment ?\nSi tu appliques la methode et que t'as zero resultat en 30 jours — on te rembourse. Sans question. Zero risque.",
+  "Le prix de 249€ c'est une offre de lancement.\n\nLe tarif normal c'est 499€.\n\nT'as pas a reflechir pendant des semaines. Le business est la. Il attend juste que t'appuies sur le bouton. 🔥\n\n👇 REJOINS LA DMA MAINTENANT\n→ Paiement securise en 3x ou 4x\n→ Acces immediat des confirmation\n→ Garantie 30 jours sans risque"
+];
+
 var BLOCS_CONFIG = [
   {tag:"🎯 HOOK / ACCROCHE",icon:"①",instruction:"Ajoute un bloc Text ou Header dans Beacons. C'est la premiere chose que voit ton visiteur."},
   {tag:"😤 LE PROBLEME",icon:"②",instruction:"Bloc Text dans Beacons. Le client doit se reconnaitre a 100% dans ces lignes."},
@@ -338,6 +273,16 @@ function copyBloc(btn, index) {
     });
   }
 }
+
+window.addEventListener("load", function() {
+  document.getElementById("progressFill").style.width = "100%";
+  var container = document.getElementById("blocsContainer");
+  container.innerHTML = "";
+  BLOCS_PREFILLED.forEach(function(text, i) {
+    renderBloc(i, text);
+  });
+  document.getElementById("beaconsGuide").style.display = "block";
+});
 
 function copyAll() {
   var fullText = "";
