@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA — Scripts Closing Téléphone</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
+.hdr{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.hdr-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.hdr-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.hero{padding:28px 20px 20px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:14px;background:rgba(201,168,76,.05)}
+.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,8vw,42px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:8px}
+.hero-title span{color:#C0001A}
+.hero-sub{font-size:12px;font-style:italic;color:rgba(245,240,232,.35);line-height:1.6}
+.section{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
+.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8;margin-bottom:4px}
+.s-title span{color:#C0001A}
+.s-sub{font-size:11px;font-style:italic;color:rgba(245,240,232,.3);margin-bottom:16px}
+.script-card{background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:6px;overflow:hidden;margin-bottom:14px}
+.script-header{background:#161b22;border-bottom:1px solid rgba(255,255,255,.06);padding:11px 14px;display:flex;align-items:center;justify-content:space-between}
+.script-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A84C}
+.script-phase{font-size:8px;font-weight:600;letter-spacing:1px;color:rgba(245,240,232,.3)}
+.script-copy{background:rgba(201,168,76,.1);border:none;border-radius:3px;padding:5px 12px;font-size:9px;font-weight:600;color:#C9A84C;cursor:pointer;letter-spacing:1px;font-family:Montserrat,Arial,sans-serif;-webkit-appearance:none}
+.script-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.line{display:flex;gap:10px;align-items:flex-start}
+.line-role{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;flex-shrink:0;width:14vw;max-width:60px;padding-top:2px}
+.role-toi{color:#C9A84C}
+.role-client{color:rgba(245,240,232,.3)}
+.line-text{font-size:12px;font-weight:400;color:rgba(245,240,232,.8);line-height:1.7}
+.line-text.gold{color:#C9A84C;font-weight:600}
+.line-text em{color:rgba(245,240,232,.35);font-style:italic;font-size:11px}
+.tip-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:10px 14px;margin-top:4px}
+.tip-text{font-size:11px;color:rgba(245,240,232,.6);line-height:1.6}
+.tip-text strong{color:#C9A84C}
+.objection-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:14px;margin-bottom:10px;cursor:pointer}
+.objection-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
+.obj-header{display:flex;align-items:center;justify-content:space-between}
+.obj-q{font-size:12px;font-weight:600;color:#ff7070;padding-right:10px}
+.obj-icon{width:22px;height:22px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s;font-size:12px;color:#C9A84C}
+.objection-card.open .obj-icon{transform:rotate(45deg)}
+.obj-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.objection-card.open .obj-answer{max-height:600px}
+.obj-text{font-size:12px;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
+.obj-text strong{color:#C9A84C;font-weight:600}
+.rule-card{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:5px;padding:14px;margin-bottom:10px}
+.rule-icon{font-size:20px;flex-shrink:0}
+.rule-text{font-size:12px;color:rgba(245,240,232,.7);line-height:1.6}
+.rule-text strong{color:#f5f0e8;font-weight:700}
+.footer{padding:32px 20px 60px;text-align:center}
+.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.06)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a class="hdr-back" href="dashboard.html">← Retour</a>
+  <div class="hdr-title">CLOSING TELEPHONE</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">📞 Bonus DMA</div>
+  <div class="hero-title">SCRIPTS<br><span>CLOSING</span> TEL</div>
+  <div class="hero-sub">Scripts mot pour mot pour closer au téléphone<br>De l'accroche au paiement — tout est là</div>
+</div>
+
+<!-- REGLES D'OR -->
+
+<div class="section">
+  <div class="s-title">REGLES D'OR <span>AU TEL</span></div>
+  <div class="s-sub">Avant de décrocher — grave ça dans ta tête</div>
+  <div class="rule-card"><div class="rule-icon">🎙️</div><div class="rule-text"><strong>Parle lentement et avec confiance.</strong> Les gens achètent à ceux qui semblent sûrs d'eux. Si tu parles vite tu sembles nerveux — tu perds le deal avant même de pitcher.</div></div>
+  <div class="rule-card"><div class="rule-icon">🤫</div><div class="rule-text"><strong>Silence après le prix.</strong> Tu annonces le prix et tu te tais. Peu importe combien de temps ça dure. Celui qui parle en premier après le prix est en position de faiblesse.</div></div>
+  <div class="rule-card"><div class="rule-icon">❓</div><div class="rule-text"><strong>Questions avant pitch.</strong> Pose 3-4 questions avant de parler de la DMA. Tu vends une solution à un problème — mais d'abord tu dois connaître le problème.</div></div>
+  <div class="rule-card"><div class="rule-icon">📵</div><div class="rule-text"><strong>Pas de rappel à froid sans contexte.</strong> L'appel doit être préparé en DM d'abord. Le prospect doit s'attendre à ton appel et avoir déjà exprimé un intérêt.</div></div>
+  <div class="rule-card"><div class="rule-icon">🔄</div><div class="rule-text"><strong>L'objection est une invitation.</strong> Quand le prospect dit "c'est cher" ou "je vais réfléchir" c'est pas un refus — c'est une question déguisée. Ton job c'est de la décoder et répondre.</div></div>
+</div>
+
+<!-- SCRIPT 1 — OUVERTURE -->
+
+<div class="section">
+  <div class="s-title">SCRIPT 1 — <span>OUVERTURE</span></div>
+  <div class="s-sub">Les 60 premières secondes — les plus importantes</div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div><span class="script-label">Ouverture de l'appel</span><br><span class="script-phase">Phase 1 — Briser la glace</span></div>
+      <button class="script-copy" onclick="copyScript('sc1')">COPIER</button>
+    </div>
+    <div class="script-body" id="sc1">
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Allo [Prenom] ! C'est Mathis, on s'est parlé sur [Instagram/TikTok/Snap]. Tu m'entends bien ?"</span></div>
+      <div class="line"><span class="line-role role-client">Client</span><span class="line-text">"Oui ça va et toi ?"</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Très bien merci ! Je t'appelle comme promis pour te parler de la DMA. T'as 10-15 minutes là ?"</span></div>
+      <div class="tip-box"><div class="tip-text"><strong>Pourquoi demander si il a le temps ?</strong> Ça montre du respect et ça engage l'attention. S'il dit non — reprogramme direct. S'il dit oui — il est engagé à écouter.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT 2 — QUALIFICATION -->
+
+<div class="section">
+  <div class="s-title">SCRIPT 2 — <span>QUALIFICATION</span></div>
+  <div class="s-sub">Comprendre la situation avant de pitcher</div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div><span class="script-label">Questions de qualification</span><br><span class="script-phase">Phase 2 — Identifier le besoin</span></div>
+      <button class="script-copy" onclick="copyScript('sc2')">COPIER</button>
+    </div>
+    <div class="script-body" id="sc2">
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Avant de te parler de ce que je propose — dis moi, t'es dans quelle situation là ? Tu travailles, tu es étudiant ?"</span></div>
+      <div class="line"><span class="line-role role-client">Client</span><span class="line-text">[Il répond]</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"OK et par rapport à l'argent en ligne — t'as déjà essayé des trucs ou t'es complètement débutant ?"</span></div>
+      <div class="line"><span class="line-role role-client">Client</span><span class="line-text">[Il répond]</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Et c'est quoi ton objectif principal là — t'as besoin d'un complément de revenu ou tu veux vraiment remplacer ton salaire ?"</span></div>
+      <div class="tip-box"><div class="tip-text"><strong>Écoute vraiment les réponses.</strong> Ces infos te permettent de personnaliser ton pitch. Si il dit "complément" — tu parles des 249€. Si il dit "remplacer le salaire" — tu montes direct sur l'accompagnement.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT 3 — PITCH -->
+
+<div class="section">
+  <div class="s-title">SCRIPT 3 — <span>PITCH DMA</span></div>
+  <div class="s-sub">Présenter la formation de façon irrésistible</div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div><span class="script-label">Pitch principal</span><br><span class="script-phase">Phase 3 — Présenter la solution</span></div>
+      <button class="script-copy" onclick="copyScript('sc3')">COPIER</button>
+    </div>
+    <div class="script-body" id="sc3">
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"OK donc voilà ce que je propose. La Digital Mastery Academy c'est une formation complète en ligne — 28 modules pour apprendre à vendre des produits digitaux."</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Mais ce qui est différent c'est que t'as les droits de revente à 100%. Ça veut dire que tu peux revendre la formation au même prix et garder tout l'argent. Zéro commission."</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"En plus de ça tu as un accompagnement direct avec moi — je te suis jusqu'à ta première vente. Et le bonus Agence IA No-Code est inclus."</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Tout ça c'est 397€. Tu peux payer en 3 fois avec Klarna ou 4 fois avec PayPal."</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text"><em>[Silence. Tu attends. Tu ne parles plus.]</em></span></div>
+      <div class="tip-box"><div class="tip-text"><strong>Le silence après le prix est une arme.</strong> Laisse le prospect réagir. Sa première réaction te dit tout. S'il dit "c'est combien en plusieurs fois ?" — il est intéressé. S'il dit "c'est cher" — tu passes aux objections.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT 4 — CLOSING -->
+
+<div class="section">
+  <div class="s-title">SCRIPT 4 — <span>CLOSING</span></div>
+  <div class="s-sub">Transformer l'intérêt en paiement</div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div><span class="script-label">Close direct</span><br><span class="script-phase">Phase 4 — Demander la vente</span></div>
+      <button class="script-copy" onclick="copyScript('sc4')">COPIER</button>
+    </div>
+    <div class="script-body" id="sc4">
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Donc est-ce que t'as des questions ou on peut partir sur quoi comme option de paiement ?"</span></div>
+      <div class="line"><span class="line-role role-client">Client</span><span class="line-text">"Je peux payer en combien de fois ?"</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"En 3 fois avec Klarna — ça fait 3x 132€. Ou en 4 fois avec PayPal — 4x 99€. Les deux c'est sans frais supplémentaires. Tu préfères quoi ?"</span></div>
+      <div class="line"><span class="line-role role-client">Client</span><span class="line-text">"Le PayPal c'est bien."</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Parfait. Je t'envoie le lien de paiement maintenant sur [Instagram/WhatsApp]. Dès que c'est fait t'as accès immédiatement."</span></div>
+      <div class="tip-box"><div class="tip-text"><strong>Ne laisse jamais raccrocher sans une action concrète.</strong> Soit il paie pendant l'appel, soit tu lui envoies le lien pendant qu'il est au téléphone et tu restes en ligne jusqu'à confirmation.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- OBJECTIONS -->
+
+<div class="section">
+  <div class="s-title">OBJECTIONS <span>AU TEL</span></div>
+  <div class="s-sub">Clique pour voir la réponse exacte mot pour mot</div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"C'est trop cher pour moi"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"Je comprends. Par rapport à quoi tu trouves que c'est cher ?"</strong><br><br>Laisse répondre. Puis :<br><br><strong>"Écoute — 99€ par mois pendant 4 mois avec PayPal. C'est moins que beaucoup d'abonnements. Et ta première vente rembourse tout. Est-ce que le problème c'est vraiment le prix ou c'est que tu n'es pas encore convaincu que ça va marcher pour toi ?"</strong><br><br>Sa réponse te donne la vraie objection.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"Je dois en parler à ma famille"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"Je comprends tout à fait. Et si ta famille te demande — c'est quoi exactement que tu vas leur expliquer sur la formation ?"</strong><br><br>Tu le fais reformuler — ça le convainc lui-même. Puis :<br><br><strong>"Là t'as le prix de lancement à 397€. Après le 10 mai ça passe à 997€. Si tu reviens dans 2 semaines tu paies 600€ de plus pour exactement la même chose."</strong></div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"Je vais réfléchir"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"Bien sûr. Juste pour comprendre — c'est quoi qui te fait hésiter exactement ? C'est le prix, le contenu, ou tu n'es pas sûr que ça soit le bon moment ?"</strong><br><br>Ne laisse jamais raccrocher sur "je réfléchis" sans avoir la vraie raison. Une fois qu'il te dit la vraie raison — tu peux la traiter et closer.</div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"J'ai pas le temps en ce moment"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"L'accès est à vie — tu commences quand tu veux, à ton rythme. 20 minutes par jour c'est suffisant."</strong><br><br>Puis :<br><br><strong>"Mais je vais te poser une question directe — dans 6 mois tu seras dans la même situation ou t'auras avancé ? Le bon moment c'est maintenant. T'as juste à appuyer sur le bouton."</strong></div></div>
+  </div>
+
+  <div class="objection-card" onclick="this.classList.toggle('open')">
+    <div class="obj-header"><div class="obj-q">"Est-ce que c'est vraiment légal ?"</div><div class="obj-icon">+</div></div>
+    <div class="obj-answer"><div class="obj-text"><strong>"Excellente question. Oui c'est 100% légal. Le MRR — Master Resell Rights — c'est comme acheter une licence logiciel et avoir le droit de la revendre. C'est un contrat commercial classique."</strong><br><br><strong>"La différence avec une pyramide de Ponzi : ici tu vends un vrai produit avec une vraie valeur — 28 modules de formation. L'argent vient de la valeur du produit, pas des membres."</strong></div></div>
+  </div>
+</div>
+
+<!-- SCRIPT RELANCE -->
+
+<div class="section">
+  <div class="s-title">SCRIPT — <span>RELANCE</span></div>
+  <div class="s-sub">Si il n'a pas donné suite après l'appel</div>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div><span class="script-label">Relance 24-48h après</span><br><span class="script-phase">Phase 5 — Relance</span></div>
+      <button class="script-copy" onclick="copyScript('sc5')">COPIER</button>
+    </div>
+    <div class="script-body" id="sc5">
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Hey [Prenom] ! T'as eu le temps de réfléchir depuis notre appel ?"</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Je voulais juste te rappeler que le prix de lancement à 397€ c'est limité. Le 10 mai ça passe à 997€. Après cette date plus jamais ce prix."</span></div>
+      <div class="line"><span class="line-role role-toi">Toi</span><span class="line-text gold">"Si t'as des questions je suis là. Et si t'es prêt je t'envoie le lien maintenant."</span></div>
+      <div class="tip-box"><div class="tip-text"><strong>80% des ventes se font après 3+ contacts.</strong> Ne relance pas plus de 3 fois. Si après 3 relances il répond pas — laisse tomber et passe au suivant.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer"><div class="footer-logo">DMA</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+var user = JSON.parse(sessionStorage.getItem("dma_user") || "null");
+if (!user) window.location.href = "index.html";
+
+function copyScript(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var lines = el.querySelectorAll(".line");
+  var txt = "";
+  lines.forEach(function(l) {
+    var role = l.querySelector(".line-role");
+    var text = l.querySelector(".line-text");
+    if (role && text) txt += role.innerText + " : " + text.innerText + "
+";
+  });
+  doCopy(txt.trim(), "Script copie !");
+}
+
+function doCopy(txt, msg) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(txt).then(function() { showToast(msg); });
+  } else {
+    var ta = document.createElement("textarea");
+    ta.value = txt; ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand("copy"); } catch(e) {}
+    document.body.removeChild(ta); showToast(msg);
+  }
+}
+
+function showToast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg; t.style.display = "block";
+  setTimeout(function() { t.style.display = "none"; }, 2500);
+}
+</script>
+
+</body>
+</html>
