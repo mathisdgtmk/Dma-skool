@@ -594,38 +594,20 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
 <div class="toast" id="toast"></div>
 
 <script>
-// Codes valides
-var VALID_CODES = ["DMA-ELITE-2025","PREMIUM-001","PREMIUM-002","PREMIUM-003","PREMIUM-004","PREMIUM-005","BONUS-VIP-001","BONUS-VIP-002","MATHIS-ADMIN"];
-
-// Verif code dynamique depuis l'identifiant membre
-var user = null;
-try { user = JSON.parse(sessionStorage.getItem("dma_user") || "null"); } catch(e){}
-if (user && user.id) {
-  var dynCode = "DMA" + user.id.replace(/[0-9]/g,"").toUpperCase() + user.id.replace(/[^0-9]/g,"");
-  VALID_CODES.push(dynCode);
-}
-
 function checkCode() {
   var input = document.getElementById("codeInput").value.trim().toUpperCase();
-  var validUpper = VALID_CODES.map(function(c){return c.toUpperCase()});
-  if (validUpper.indexOf(input) !== -1) {
+  var codes = ["DMA-ELITE-2025","PREMIUM-001","PREMIUM-002","PREMIUM-003","PREMIUM-004","PREMIUM-005","BONUS-VIP-001","BONUS-VIP-002","MATHIS-ADMIN"];
+  var ok = false;
+  for (var i = 0; i < codes.length; i++) {
+    if (input === codes[i]) { ok = true; break; }
+  }
+  if (ok) {
     document.getElementById("lockScreen").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
-    sessionStorage.setItem("bonusIA_unlocked","1");
   } else {
     document.getElementById("lockError").style.display = "block";
-    document.getElementById("codeInput").style.borderColor = "rgba(192,0,26,.5)";
-    setTimeout(function(){
-      document.getElementById("lockError").style.display = "none";
-      document.getElementById("codeInput").style.borderColor = "rgba(255,255,255,.15)";
-    }, 3000);
+    setTimeout(function(){ document.getElementById("lockError").style.display = "none"; }, 3000);
   }
-}
-
-// Auto-unlock si deja déverrouillé
-if (sessionStorage.getItem("bonusIA_unlocked") === "1") {
-  document.getElementById("lockScreen").style.display = "none";
-  document.getElementById("mainContent").style.display = "block";
 }
 
 // Enter key
