@@ -181,8 +181,8 @@ html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-ser
     <div class="lock-title">BONUS EXCLUSIF</div>
     <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#7ab8ff;margin-bottom:16px">AGENCE IA NO-CODE</div>
     <div class="lock-sub">Ce bonus est reservé aux membres DMA.<br>Entre ton code d'acces pour deverrouiller.</div>
-    <input class="lock-input" id="codeInput" type="text" placeholder="ENTRE TON CODE" autocapitalize="characters" autocomplete="off" spellcheck="false">
-    <button class="lock-btn" onclick="checkCode()">DEVERROUILLER →</button>
+    <input class="lock-input" id="codeInput" type="text" onkeydown="if(event.key==='Enter')checkCode()" placeholder="ENTRE TON CODE" autocapitalize="characters" autocomplete="off" spellcheck="false">
+    <input type="submit" value="DEVERROUILLER →" onclick="checkCode();return false;" style="width:100%;padding:16px;background:linear-gradient(135deg,#C9A84C,#8B6914);border:none;border-radius:4px;font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#050505;cursor:pointer;-webkit-appearance:none;display:block">
     <div class="lock-error" id="lockError">Code incorrect. Vérifie ton code DMA.</div>
   </div>
 </div>
@@ -629,9 +629,7 @@ if (sessionStorage.getItem("bonusIA_unlocked") === "1") {
 }
 
 // Enter key
-document.getElementById("codeInput").addEventListener("keydown", function(e){
-  if (e.key === "Enter") checkCode();
-});
+
 
 // SCENARIOS
 function switchScenario(index, btn) {
