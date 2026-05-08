@@ -182,29 +182,31 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
 <!-- ═══ OUTIL 2 — PROSPECTS ═══ -->
 
 <div class="tool-panel" id="t1">
-  <div class="t-title">TROUVEUR & <span>QUALIFICATEUR</span></div>
-  <div class="t-sub">Décris ta niche et l'IA génère une liste de profils de prospects à cibler avec leur score de chaleur.</div>
+  <div class="t-title">CIBLAGE & <span>APPROCHE</span></div>
+  <div class="t-sub">Décris ta cible et ce qu'elle veut accomplir — l'IA génère les critères pour la trouver ET le message d'approche parfait.</div>
 
-<span class="lbl">Ta niche cible</span>
-<select class="sel" id="p-niche" style="margin-bottom:10px">
-<option value="jeunes 18-25 ans qui veulent gagner de l'argent en ligne">Jeunes 18-25 — argent en ligne</option>
-<option value="étudiants qui cherchent un revenu complémentaire">Étudiants — revenu complémentaire</option>
-<option value="personnes qui commentent des posts sur le MRR et le marketing digital">Commentateurs MRR/digital</option>
-<option value="gens qui suivent des créateurs de contenu sur le business en ligne">Followers business en ligne</option>
-<option value="personnes qui ont liké ou commenté mes contenus">Engagés sur mes contenus</option>
-</select>
-
-<span class="lbl">Plateforme</span>
-<select class="sel" id="p-platform" style="margin-bottom:0">
+<span class="lbl">Plateforme de prospection</span>
+<select class="sel" id="p-platform" style="margin-bottom:10px">
 <option value="Instagram">Instagram</option>
 <option value="TikTok">TikTok</option>
 <option value="Snapchat">Snapchat</option>
 </select>
 
-<button class="btn-run" id="p-btn" onclick="runProspects()">🎯 GÉNÉRER LES PROFILS</button>
+<span class="lbl">Qui tu veux cibler ?</span>
+
+  <textarea class="inp" id="p-cible" rows="2" placeholder="Ex: Des gens qui suivent des créateurs comme @mthsdgtmk, @lena_situations, qui parlent de business, MRR, liberté financière..."></textarea>
+
+<span class="lbl">Ce qu’ils veulent accomplir</span>
+
+  <textarea class="inp" id="p-objectif" rows="2" placeholder="Ex: Ils veulent gagner de l'argent en ligne, quitter leur job, avoir un revenu complémentaire, être libre financièrement..."></textarea>
+
+<span class="lbl">Signaux à repérer sur leur profil</span>
+<input class="inp" id="p-signaux" type="text" placeholder="Ex: Ils commentent 'comment tu fais ?' sur des posts business, ils postent sur leur galère financière...">
+
+<button class="btn-run" id="p-btn" onclick="runProspects()">🎯 GÉNÉRER MON PLAN DE CIBLAGE</button>
 
   <div class="loading-bar" id="p-loading"><div class="loading-fill"></div></div>
-  <div class="prospect-grid" id="p-result"></div>
+  <div id="p-result" style="margin-top:12px"></div>
 </div>
 
 <!-- ═══ OUTIL 3 — CONTENU VIRAL ═══ -->
