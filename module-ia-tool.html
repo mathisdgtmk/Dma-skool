@@ -378,18 +378,27 @@ function switchTool(i, el) {
 function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
 
 async function callAI(prompt, systemPrompt) {
-  var res = await fetch("https://api.anthropic.com/v1/messages", {
+  var sys = systemPrompt || "Tu es un expert en vente et marketing digital francophone. Tes reponses sont directes, percutantes et immediatement utilisables. Tu parles comme un pro du terrain, pas comme un livre. Utilise le tutoiement, sois concis et impactant.";
+  var res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
-    headers: {"Content-Type":"application/json"},
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer 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"
+    },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      system: systemPrompt || "Tu es un expert en vente et marketing digital francophone. Tes réponses sont directes, percutantes et immédiatement utilisables. Tu parles comme un pro du terrain, pas comme un livre. Utilise le tutoiement, sois concis et impactant.",
-      messages: [{role:"user", content: prompt}]
+      model: "llama-3.3-70b-versatile",
+      max_tokens: 1024,
+      messages: [
+        {role: "system", content: sys},
+        {role: "user", content: prompt}
+      ]
     })
   });
   var data = await res.json();
-  return data.content && data.content[0] ? data.content[0].text : "Erreur — réessaie.";
+  if (data.choices && data.choices[0]) {
+    return data.choices[0].message.content;
+  }
+  return "Erreur — reessaie.";
 }
 
 function showLoading(id, btnId) {
