@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DMA — Générateur Beacons</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--red:#C0001A;--gold:#C9A84C;--blue:#7ab8ff;--bg:#050505;--s1:#0a0a0a;--s2:#111;--border:rgba(255,255,255,.07);--text:#f5f0e8;--dim:rgba(245,240,232,.4)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
+.hdr{position:sticky;top:0;z-index:100;background:rgba(5,5,5,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,.2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.hdr-back{text-decoration:none;color:var(--dim);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.hdr-logo{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:4px;color:var(--text)}
+.hdr-logo span{color:var(--gold)}
+.hero{padding:24px 16px 18px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:150%;height:80%;background:radial-gradient(ellipse,rgba(201,168,76,.1) 0%,transparent 65%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:5px 14px;margin-bottom:14px}
+.hero-tag-text{font-size:9px;font-weight:700;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,8vw,46px);letter-spacing:3px;line-height:.85;margin-bottom:8px}
+.hero-title .g{color:var(--gold)}
+.hero-sub{font-size:12px;color:var(--dim);line-height:1.7}
+/* STEPS NAV */
+.steps-nav{display:flex;padding:16px;gap:6px;border-bottom:1px solid var(--border)}
+.snav{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.snav-num{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--dim);transition:all .3s}
+.snav.active .snav-num{border-color:var(--gold);background:rgba(201,168,76,.1);color:var(--gold)}
+.snav.done .snav-num{border-color:var(--gold);background:var(--gold);color:#050505}
+.snav-label{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);text-align:center}
+.snav.active .snav-label{color:var(--gold)}
+/* PANELS */
+.panel{display:none;padding:20px 16px;animation:fadeIn .3s ease}
+.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.p-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;margin-bottom:4px}
+.p-title span{color:var(--gold)}
+.p-sub{font-size:11px;color:var(--dim);margin-bottom:18px;line-height:1.6}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:6px;display:block;margin-top:12px}
+.lbl:first-child{margin-top:0}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:12px 14px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none;transition:border-color .2s;resize:none}
+.inp:focus{border-color:rgba(201,168,76,.4)}
+.sel{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:3px;padding:12px 14px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none}
+.row2{display:flex;gap:10px}
+.row2 .c{flex:1}
+.btn-next{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),#8B6914);border:none;border-radius:3px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:#050505;cursor:pointer;margin-top:16px;-webkit-appearance:none}
+.btn-gen{width:100%;padding:14px;background:linear-gradient(135deg,var(--red),#8a0013);border:none;border-radius:3px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:#fff;cursor:pointer;margin-top:16px;-webkit-appearance:none;box-shadow:0 4px 20px rgba(192,0,26,.3)}
+.btn-gen:disabled{opacity:.5}
+/* LOADING */
+.loading-bar{height:2px;background:var(--border);overflow:hidden;display:none;border-radius:1px}
+.loading-fill{height:100%;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:load 1.2s linear infinite;width:60%}
+@keyframes load{0%{transform:translateX(-200%)}100%{transform:translateX(300%)}}
+/* RESULT BLOCKS */
+.result-section{margin-top:16px}
+.result-block{background:var(--s1);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.rb-header{background:var(--s2);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.rb-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.rb-copy{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:4px 10px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:'Syne',sans-serif;-webkit-appearance:none}
+.rb-content{padding:14px;font-size:12px;line-height:1.8;color:rgba(245,240,232,.85);white-space:pre-wrap;font-family:'JetBrains Mono',monospace}
+/* IMAGE PREVIEW */
+.img-preview{background:var(--s1);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.img-ph{width:100%;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(160deg,#0a0a12,#050505);position:relative;overflow:hidden}
+.img-ph-content{position:relative;z-index:2;text-align:center;padding:20px}
+.img-actions{padding:12px 14px;display:flex;gap:8px;border-top:1px solid var(--border)}
+.img-btn{flex:1;padding:10px;border:1px solid var(--border);border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:none;color:var(--dim);cursor:pointer;font-family:'Syne',sans-serif;-webkit-appearance:none}
+.img-btn.gold{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.2);color:var(--gold)}
+/* TUTO */
+.tuto-step{display:flex;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.tuto-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tuto-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:15px;color:#050505;flex-shrink:0}
+.tuto-body{}
+.tuto-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.tuto-desc{font-size:12px;color:var(--dim);line-height:1.6}
+.tuto-desc strong{color:var(--gold)}
+.tuto-desc code{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:2px;padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(245,240,232,.7)}
+/* INFO BOX */
+.info-box{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:12px 14px;display:flex;gap:10px;margin-bottom:14px}
+.info-icon{font-size:18px;flex-shrink:0}
+.info-text{font-size:12px;color:var(--dim);line-height:1.6}
+.info-text strong{color:var(--gold)}
+/* PRICE TAG */
+.price-badge{display:inline-flex;flex-direction:column;align-items:center;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:8px 14px;margin-top:8px}
+.price-badge-old{font-size:11px;color:rgba(245,240,232,.2);text-decoration:line-through}
+.price-badge-new{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold)}
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a class="hdr-back" href="dashboard.html">← Dashboard</a>
+  <div class="hdr-logo">BEACONS <span>GEN</span></div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag"><span class="hero-tag-text">✦ Propulsé par IA</span></div>
+  <div class="hero-title">GÉNÈRE TA<br><span class="g">PAGE BEACONS</span></div>
+  <div class="hero-sub">Remplis les infos de ton produit — l'IA génère tous les textes, les images et t'explique comment tout importer sur Beacons.</div>
+</div>
+
+<!-- STEPS NAV -->
+
+<div class="steps-nav">
+  <div class="snav active" id="snav0" onclick="goStep(0)"><div class="snav-num">1</div><div class="snav-label">Produit</div></div>
+  <div class="snav" id="snav1" onclick="goStep(1)"><div class="snav-num">2</div><div class="snav-label">Audience</div></div>
+  <div class="snav" id="snav2" onclick="goStep(2)"><div class="snav-num">3</div><div class="snav-label">Offre</div></div>
+  <div class="snav" id="snav3" onclick="goStep(3)"><div class="snav-num">4</div><div class="snav-label">Générer</div></div>
+  <div class="snav" id="snav4" onclick="goStep(4)"><div class="snav-num">5</div><div class="snav-label">Images</div></div>
+  <div class="snav" id="snav5" onclick="goStep(5)"><div class="snav-num">6</div><div class="snav-label">Importer</div></div>
+</div>
+
+<!-- STEP 1 — PRODUIT -->
+
+<div class="panel active" id="p0">
+  <div class="p-title">TON <span>PRODUIT</span></div>
+  <div class="p-sub">Décris ce que tu vends — plus tu es précis, meilleure sera la page générée.</div>
+  <span class="lbl">Nom du produit</span>
+  <input class="inp" id="s1-nom" type="text" placeholder="Ex: Digital Mastery Academy — Formule DMA">
+  <span class="lbl">Description en 2-3 phrases</span>
+  <textarea class="inp" id="s1-desc" rows="3" placeholder="Ex: Formation complète en marketing digital avec droits de revente 100%. 28 modules, accès à vie, coaching offert..."></textarea>
+  <span class="lbl">Type de produit</span>
+  <select class="sel" id="s1-type">
+    <option value="formation digitale avec MRR">Formation digitale MRR</option>
+    <option value="coaching 1-to-1">Coaching 1-to-1</option>
+    <option value="formation en ligne">Formation en ligne</option>
+    <option value="pack formation + bonus">Pack formation + bonus</option>
+    <option value="agence de services">Service / Agence</option>
+  </select>
+  <span class="lbl">Ce que ça inclut (liste rapide)</span>
+  <textarea class="inp" id="s1-inclus" rows="2" placeholder="Ex: 28 modules, MRR 100%, coaching offert, bonus agence IA, accès à vie..."></textarea>
+  <button class="btn-next" onclick="nextStep(0)">SUIVANT →</button>
+</div>
+
+<!-- STEP 2 — AUDIENCE -->
+
+<div class="panel" id="p1">
+  <div class="p-title">TON <span>AUDIENCE</span></div>
+  <div class="p-sub">Qui est ton client idéal ? L'IA adapte le copywriting à ton audience.</div>
+  <span class="lbl">Qui est ton client idéal ?</span>
+  <input class="inp" id="s2-cible" type="text" placeholder="Ex: Jeunes 18-30 ans qui veulent gagner de l'argent en ligne">
+  <span class="lbl">Son problème principal</span>
+  <textarea class="inp" id="s2-prob" rows="2" placeholder="Ex: Il veut se lancer mais ne sait pas par où commencer, pas de réseau, pas d'expérience..."></textarea>
+  <span class="lbl">Ce qu'il a déjà essayé sans succès</span>
+  <input class="inp" id="s2-echec" type="text" placeholder="Ex: Tutos YouTube gratuits, dropshipping, formations trop chères...">
+  <span class="lbl">Sa transformation idéale</span>
+  <input class="inp" id="s2-transfo" type="text" placeholder="Ex: Gagner ses premiers 1000€/mois en ligne avec son téléphone">
+  <button class="btn-next" onclick="nextStep(1)">SUIVANT →</button>
+</div>
+
+<!-- STEP 3 — OFFRE -->
+
+<div class="panel" id="p2">
+  <div class="p-title">TON <span>OFFRE</span></div>
+  <div class="p-sub">Les détails commerciaux pour maximiser les conversions.</div>
+  <div class="row2">
+    <div class="c">
+      <span class="lbl">Prix actuel</span>
+      <input class="inp" id="s3-prix" type="text" placeholder="397€">
+    </div>
+    <div class="c">
+      <span class="lbl">Prix barré</span>
+      <input class="inp" id="s3-barre" type="text" placeholder="997€">
+    </div>
+  </div>
+  <span class="lbl">Paiement fractionné</span>
+  <input class="inp" id="s3-frac" type="text" placeholder="Ex: 3x 132€ Klarna ou 4x 99€ PayPal">
+  <span class="lbl">Garantie</span>
+  <input class="inp" id="s3-garantie" type="text" placeholder="Ex: Satisfait ou remboursé 30 jours">
+  <span class="lbl">Urgence / Rareté (optionnel)</span>
+  <input class="inp" id="s3-urgence" type="text" placeholder="Ex: Prix de lancement — monte le 10 mai à 997€">
+  <span class="lbl">Ton prénom / pseudo</span>
+  <input class="inp" id="s3-prenom" type="text" placeholder="Ex: Mathis — @mthsdgtmk">
+  <span class="lbl">Ta preuve / résultats</span>
+  <textarea class="inp" id="s3-preuve" rows="2" placeholder="Ex: +60 membres, revenus générés en ligne depuis Aix-en-Provence avec mon téléphone..."></textarea>
+  <button class="btn-next" onclick="nextStep(2)">SUIVANT →</button>
+</div>
+
+<!-- STEP 4 — GENERER -->
+
+<div class="panel" id="p3">
+  <div class="p-title">GÉNÉRER <span>TA PAGE</span></div>
+  <div class="p-sub">L'IA va créer tous les blocs de texte prêts à copier-coller dans Beacons.</div>
+
+  <div class="info-box">
+    <div class="info-icon">💡</div>
+    <div class="info-text">L'IA génère <strong>8 blocs complets</strong> : titre accrocheur, hook, problème, solution, bénéfices, offre complète, témoignage et CTA final. Chaque bloc se copie en 1 clic.</div>
+  </div>
+
+<button class="btn-gen" id="gen-btn" onclick="generatePage()">⚡ GÉNÉRER MA PAGE BEACONS</button>
+
+  <div class="loading-bar" id="gen-loading" style="margin-top:12px"><div class="loading-fill"></div></div>
+
+  <div class="result-section" id="gen-results"></div>
+</div>
+
+<!-- STEP 5 — IMAGES -->
+
+<div class="panel" id="p4">
+  <div class="p-title">TES <span>IMAGES</span></div>
+  <div class="p-sub">L'IA génère les descriptions d'images parfaites — tu les crées avec Canva ou Midjourney.</div>
+
+  <div class="info-box">
+    <div class="info-icon">🎨</div>
+    <div class="info-text">Beacons accepte les images en <strong>format 1:1 (carré)</strong> pour les miniatures produit. Recommandé : <strong>1080x1080px</strong>. Fond sombre, texte lisible.</div>
+  </div>
+
+<button class="btn-gen" id="img-btn" onclick="generateImages()" style="background:linear-gradient(135deg,var(--blue),#3a7ad4);color:#050505">🎨 GÉNÉRER LES BRIEFS VISUELS</button>
+
+  <div class="loading-bar" id="img-loading" style="margin-top:12px"><div class="loading-fill"></div></div>
+
+  <div id="img-results" style="margin-top:14px"></div>
+
+  <div style="margin-top:20px;background:var(--s1);border:1px solid var(--border);border-radius:6px;overflow:hidden">
+    <div style="background:var(--s2);padding:10px 14px;border-bottom:1px solid var(--border)">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase">🛠️ Outils recommandés pour créer tes images</div>
+    </div>
+    <div style="padding:14px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span style="font-size:20px">🎨</span>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px">Canva (Gratuit)</div>
+          <div style="font-size:11px;color:var(--dim)">canva.com → Nouveau design → Post Instagram (1080x1080) → Fond noir → Colle le brief de l'IA</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span style="font-size:20px">🤖</span>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px">Midjourney / DALL-E (Payant)</div>
+          <div style="font-size:11px;color:var(--dim)">Colle le prompt généré par l'IA directement dans Midjourney pour une image pro</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span style="font-size:20px">📱</span>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px">Screenshots DMA (Gratuit)</div>
+          <div style="font-size:11px;color:var(--dim)">Utilise les miniatures déjà créées dans ce site — ouvre miniature-397.html et screenshot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6 — IMPORTER -->
+
+<div class="panel" id="p5">
+  <div class="p-title">IMPORTER <span>SUR BEACONS</span></div>
+  <div class="p-sub">Suis ces étapes exactement pour avoir ta page live en moins de 20 minutes.</div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">1</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Connecte-toi à Beacons</div>
+      <div class="tuto-desc">Va sur <strong>beacons.ai</strong> → clique sur ton profil → <strong>Edit Page</strong>. Tu vas voir ton éditeur de page.</div>
+    </div>
+  </div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">2</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Crée un nouveau produit</div>
+      <div class="tuto-desc">Clique <strong>+ Add Block</strong> → choisis <strong>"Store Item"</strong> ou <strong>"Payment Link"</strong>. C'est là où tu mets ton produit avec le prix.</div>
+    </div>
+  </div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">3</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Upload ta miniature</div>
+      <div class="tuto-desc">Dans le Store Item → clique sur l'image → <strong>Upload</strong> → sélectionne ta miniature 1080x1080. <strong>Important :</strong> fond sombre et texte lisible.</div>
+    </div>
+  </div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">4</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Colle le titre généré</div>
+      <div class="tuto-desc">Copie le <strong>Bloc 1 — Titre</strong> généré par l'IA et colle-le dans le champ <code>Product Name</code> de Beacons.</div>
+    </div>
+  </div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">5</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Colle la description complète</div>
+      <div class="tuto-desc">Copie tous les blocs générés (hook + problème + solution + bénéfices + offre + CTA) et colle-les dans le champ <code>Description</code>. Beacons garde le formatage.</div>
+    </div>
+  </div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">6</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Configure le prix</div>
+      <div class="tuto-desc">Entre le prix dans <code>Price</code>. Active <strong>"Show original price"</strong> pour afficher le prix barré. Entre le prix barré dans le champ prévu.</div>
+    </div>
+  </div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">7</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Ajoute le lien après achat</div>
+      <div class="tuto-desc">Dans <code>Redirect URL after purchase</code> colle :<br><code>mathisdgtmk.github.io/Dma-skool/merci-achat.html</code></div>
+    </div>
+  </div>
+
+  <div class="tuto-step">
+    <div class="tuto-num">8</div>
+    <div class="tuto-body">
+      <div class="tuto-title">Publie et teste</div>
+      <div class="tuto-desc">Clique <strong>Save</strong> → <strong>Publish</strong>. Ouvre ta page en navigation privée et teste le parcours d'achat de A à Z avant de la partager.</div>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,rgba(192,0,26,.1),rgba(192,0,26,.05));border:1px solid rgba(192,0,26,.2);border-radius:6px;padding:16px;margin-top:4px">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:#ff7070;margin-bottom:8px">⚡ TIPS PRO</div>
+    <div style="font-size:12px;color:rgba(245,240,232,.6);line-height:1.7">
+      • Mets ton lien Beacons en <strong style="color:var(--text)">bio Instagram</strong> ET en description TikTok<br>
+      • Ajoute un <strong style="color:var(--text)">compte à rebours</strong> si tu as une offre limitée<br>
+      • Utilise le bloc <strong style="color:var(--text)">Video</strong> pour ajouter une VSL de 60 secondes<br>
+      • Active les <strong style="color:var(--text)">analytics Beacons</strong> pour voir qui visite ta page
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var user = JSON.parse(sessionStorage.getItem("dma_user") || "null");
+if (!user) window.location.href = "index.html";
+
+var currentStep = 0;
+
+function goStep(n) {
+  document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});
+  document.querySelectorAll(".snav").forEach(function(s){s.classList.remove("active")});
+  document.getElementById("p"+n).classList.add("active");
+  document.getElementById("snav"+n).classList.add("active");
+  currentStep = n;
+  window.scrollTo(0,0);
+}
+
+function nextStep(current) {
+  // Marquer comme done
+  document.getElementById("snav"+current).classList.add("done");
+  goStep(current+1);
+}
+
+function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
+
+async function callGroq(prompt, system) {
+  var sys = system || "Tu es un expert en copywriting et marketing digital francophone. Tes textes sont percutants, directs et orientés conversion. Tu utilises le tutoiement et un ton jeune mais professionnel.";
+  var res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer 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"
+    },
+    body: JSON.stringify({
+      model: "llama-3.3-70b-versatile",
+      max_tokens: 1500,
+      messages: [{role:"system",content:sys},{role:"user",content:prompt}]
+    })
+  });
+  var data = await res.json();
+  return data.choices && data.choices[0] ? data.choices[0].message.content : "Erreur — reessaie.";
+}
+
+var BLOCS = [
+  {label:"🏷️ TITRE DU PRODUIT", key:"titre"},
+  {label:"🎯 HOOK D'ACCROCHE", key:"hook"},
+  {label:"😤 LE PROBLÈME", key:"probleme"},
+  {label:"💡 LA SOLUTION", key:"solution"},
+  {label:"🏆 LES BÉNÉFICES", key:"benefices"},
+  {label:"🎁 L'OFFRE COMPLÈTE", key:"offre"},
+  {label:"💬 TÉMOIGNAGE", key:"temoignage"},
+  {label:"⚡ CTA FINAL", key:"cta"}
+];
+
+async function generatePage() {
+  var nom = gv("s1-nom");
+  var desc = gv("s1-desc");
+  var type = gv("s1-type");
+  var inclus = gv("s1-inclus");
+  var cible = gv("s2-cible");
+  var prob = gv("s2-prob");
+  var echec = gv("s2-echec");
+  var transfo = gv("s2-transfo");
+  var prix = gv("s3-prix");
+  var barre = gv("s3-barre");
+  var frac = gv("s3-frac");
+  var garantie = gv("s3-garantie");
+  var urgence = gv("s3-urgence");
+  var prenom = gv("s3-prenom");
+  var preuve = gv("s3-preuve");
+
+  if(!nom || !cible || !prix){toast("Remplis les étapes 1, 2 et 3 d'abord");return}
+
+  document.getElementById("gen-btn").disabled = true;
+  document.getElementById("gen-loading").style.display = "block";
+  document.getElementById("gen-results").innerHTML = "";
+
+  var prompt = "Génère une page de vente Beacons complète en français pour ce produit.\n\n" +
+    "PRODUIT : " + nom + "\n" +
+    "TYPE : " + type + "\n" +
+    "DESCRIPTION : " + desc + "\n" +
+    "INCLUS : " + inclus + "\n" +
+    "CLIENT IDÉAL : " + cible + "\n" +
+    "PROBLÈME : " + prob + "\n" +
+    "DÉJÀ ESSAYÉ : " + echec + "\n" +
+    "TRANSFORMATION : " + transfo + "\n" +
+    "PRIX : " + prix + " (barré : " + barre + ")\n" +
+    "PAIEMENT : " + frac + "\n" +
+    "GARANTIE : " + garantie + "\n" +
+    "URGENCE : " + urgence + "\n" +
+    "VENDEUR : " + prenom + "\n" +
+    "PREUVES : " + preuve + "\n\n" +
+    "Génère EXACTEMENT 8 blocs séparés par ===BLOC=== dans cet ordre :\n" +
+    "1. TITRE : court et accrocheur (max 10 mots)\n" +
+    "2. HOOK : 3-4 lignes qui arrêtent le scroll\n" +
+    "3. PROBLÈME : agite la douleur, empathie, 4-5 lignes\n" +
+    "4. SOLUTION : présente le produit comme LA réponse, 3-4 lignes\n" +
+    "5. BÉNÉFICES : liste 5-6 bénéfices concrets avec emojis\n" +
+    "6. OFFRE COMPLÈTE : ce qui est inclus + prix + paiement + garantie\n" +
+    "7. TÉMOIGNAGE : reformule de façon authentique et crédible\n" +
+    "8. CTA FINAL : urgence + appel à l'action irrésistible\n\n" +
+    "Style : direct, émotionnel, tutoiement, langue jeune pro, emojis appropriés.";
+
+  try {
+    var result = await callGroq(prompt);
+    var blocs = result.split("===BLOC===").map(function(b){return b.trim()}).filter(Boolean);
+    var html = "";
+    BLOCS.forEach(function(b, i) {
+      var txt = blocs[i] || "En cours de génération...";
+      html += '<div class="result-block">' +
+        '<div class="rb-header"><span class="rb-label">' + b.label + '</span>' +
+        '<button class="rb-copy" onclick="copyTxt(\'' + txt.replace(/'/g,"\\'").replace(/\n/g,"\\n") + '\')">COPIER</button></div>' +
+        '<div class="rb-content">' + txt.replace(/</g,"&lt;") + '</div></div>';
+    });
+    html += '<button onclick="copyAll(\'' + blocs.join("\\n\\n---\\n\\n").replace(/'/g,"\\'").replace(/\n/g,"\\n") + '\')" style="width:100%;padding:14px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:3px;font-family:Bebas Neue,sans-serif;font-size:14px;letter-spacing:3px;color:var(--gold);cursor:pointer;-webkit-appearance:none;margin-top:4px">TOUT COPIER EN 1 CLIC →</button>';
+    document.getElementById("gen-results").innerHTML = html;
+    // Marquer step 4 done
+    document.getElementById("snav3").classList.add("done");
+  } catch(e) {
+    document.getElementById("gen-results").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — vérifie ta connexion et réessaie.</div>';
+  }
+
+  document.getElementById("gen-btn").disabled = false;
+  document.getElementById("gen-loading").style.display = "none";
+}
+
+async function generateImages() {
+  var nom = gv("s1-nom") || "ma formation";
+  var prix = gv("s3-prix") || "397€";
+  var barre = gv("s3-barre") || "997€";
+  var inclus = gv("s1-inclus") || "formation complète";
+
+  document.getElementById("img-btn").disabled = true;
+  document.getElementById("img-loading").style.display = "block";
+  document.getElementById("img-results").innerHTML = "";
+
+  var prompt = "Génère 3 briefs visuels détaillés pour des images Beacons produit (format 1:1, 1080x1080px) pour : " + nom + " à " + prix + " (barré " + barre + "). Inclus : " + inclus + ".\n\n" +
+    "Pour chaque image donne :\n- Concept visuel précis\n- Texte à afficher (titre + prix + 2-3 éléments clés)\n- Couleurs recommandées\n- Prompt Midjourney/DALL-E en anglais\n\n" +
+    "Format JSON : [{\"concept\":\"...\",\"texte\":\"...\",\"couleurs\":\"...\",\"prompt\":\"...\"}]";
+
+  try {
+    var result = await callGroq(prompt, "Tu es un directeur artistique expert en design marketing digital. Réponds UNIQUEMENT en JSON valide.");
+    var clean = result.replace(/```json|```/g,"").trim();
+    var images = JSON.parse(clean);
+    var concepts = ["Miniature Produit Principal", "Bannière Résultats", "Image CTA"];
+    var html = "";
+    images.forEach(function(img, i) {
+      html += '<div class="img-preview">' +
+        '<div class="rb-header"><span class="rb-label">🖼️ ' + (concepts[i]||"Image "+(i+1)) + '</span></div>' +
+        '<div style="padding:14px;display:flex;flex-direction:column;gap:10px">' +
+        '<div><div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--blue);margin-bottom:4px;text-transform:uppercase">Concept</div><div style="font-size:12px;color:rgba(245,240,232,.75)">' + (img.concept||"") + '</div></div>' +
+        '<div><div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:4px;text-transform:uppercase">Texte à afficher</div><div style="font-size:12px;color:rgba(245,240,232,.75);font-weight:600">' + (img.texte||"") + '</div></div>' +
+        '<div><div style="font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(255,128,128,.7);margin-bottom:4px;text-transform:uppercase">Couleurs</div><div style="font-size:12px;color:rgba(245,240,232,.75)">' + (img.couleurs||"") + '</div></div>' +
+        '<div style="background:#0a0d12;border:1px solid rgba(100,150,255,.15);border-radius:3px;padding:10px">' +
+        '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--blue);margin-bottom:6px;text-transform:uppercase">Prompt Midjourney / DALL-E</div>' +
+        '<div style="font-family:JetBrains Mono,monospace;font-size:11px;color:rgba(122,184,255,.8);line-height:1.6" id="img-prompt-'+i+'">' + (img.prompt||"") + '</div></div>' +
+        '</div>' +
+        '<div class="img-actions">' +
+        '<button class="img-btn gold" onclick="copyTxt(\'' + (img.prompt||"").replace(/'/g,"\\'") + '\')">COPIER PROMPT</button>' +
+        '<button class="img-btn" onclick="copyTxt(\'' + (img.texte||"").replace(/'/g,"\\'") + '\')">COPIER TEXTE</button>' +
+        '</div></div>';
+    });
+    document.getElementById("img-results").innerHTML = html;
+    document.getElementById("snav4").classList.add("done");
+  } catch(e) {
+    document.getElementById("img-results").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — réessaie</div>';
+  }
+
+  document.getElementById("img-btn").disabled = false;
+  document.getElementById("img-loading").style.display = "none";
+}
+
+function copyTxt(txt) {
+  txt = txt.replace(/\\n/g,"\n");
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast("Copié !")})}
+  else{var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);toast("Copié !")}
+}
+
+function copyAll(txt) {
+  copyTxt(txt);
+}
+
+function toast(msg){
+  var t=document.getElementById("toast");
+  t.textContent=msg;t.style.display="block";
+  setTimeout(function(){t.style.display="none"},2500);
+}
+</script>
+
+</body>
+</html>
