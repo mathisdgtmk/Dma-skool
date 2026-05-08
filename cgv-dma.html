@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CGV — Digital Mastery Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+.hdr{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.95);border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.hdr-back{text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.hdr-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
+.wrap{max-width:680px;margin:0 auto;padding:32px 20px 60px}
+.logo-block{text-align:center;padding:24px 0 32px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:32px}
+.logo-title{font-family:Bebas Neue,Impact,sans-serif;font-size:28px;letter-spacing:5px;color:#f5f0e8;margin-bottom:4px}
+.logo-sub{font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.5)}
+.doc-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:4px;color:#C9A84C;text-align:center;margin-bottom:6px}
+.doc-date{font-size:10px;color:rgba(245,240,232,.3);text-align:center;letter-spacing:2px;margin-bottom:32px}
+.vendor-box{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:6px;padding:18px;margin-bottom:28px}
+.vendor-title{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin-bottom:12px}
+.vendor-row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.vendor-row:last-child{border-bottom:none;padding-bottom:0}
+.vendor-label{font-size:11px;color:rgba(245,240,232,.4);font-weight:600;min-width:100px}
+.vendor-value{font-size:11px;color:#f5f0e8;font-weight:500;text-align:right;flex:1;margin-left:10px}
+.article{margin-bottom:28px}
+.article-title{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#f5f0e8;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px}
+.article-num{color:#C0001A}
+.article-body{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.85}
+.article-body p{margin-bottom:10px}
+.article-body p:last-child{margin-bottom:0}
+.article-body strong{color:#f5f0e8;font-weight:600}
+.article-body ul{padding-left:16px;margin:8px 0}
+.article-body ul li{margin-bottom:6px;list-style:none;padding-left:12px;position:relative}
+.article-body ul li::before{content:"▸";position:absolute;left:0;color:rgba(201,168,76,.5);font-size:10px;top:3px}
+.alert-box{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.25);border-radius:4px;padding:14px 16px;margin-top:12px}
+.alert-text{font-size:12px;color:rgba(245,240,232,.75);line-height:1.7}
+.alert-text strong{color:#ff7070}
+.info-box{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:4px;padding:14px 16px;margin-top:12px}
+.info-text{font-size:12px;color:rgba(245,240,232,.7);line-height:1.7}
+.info-text strong{color:#C9A84C}
+.separator{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:28px 0}
+.signature-block{text-align:center;padding:24px;border:1px solid rgba(201,168,76,.1);border-radius:6px;background:rgba(201,168,76,.03)}
+.sig-title{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#C9A84C;margin-bottom:8px}
+.sig-text{font-size:11px;color:rgba(245,240,232,.4);line-height:1.6}
+.copy-btn{display:block;width:100%;padding:14px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:4px;font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C;cursor:pointer;text-align:center;margin-top:20px;-webkit-appearance:none}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a class="hdr-back" href="dashboard.html">← Retour</a>
+  <div class="hdr-title">CGV DMA</div>
+</div>
+
+<div class="wrap">
+
+  <div class="logo-block">
+    <div class="logo-title">DIGITAL MASTERY ACADEMY</div>
+    <div class="logo-sub">Conditions Générales de Vente</div>
+  </div>
+
+  <div class="doc-title">CONDITIONS GÉNÉRALES DE VENTE</div>
+  <div class="doc-date">Version en vigueur au 8 mai 2025 — Mise à jour : Mai 2025</div>
+
+  <!-- VENDEUR -->
+
+  <div class="vendor-box">
+    <div class="vendor-title">Informations du vendeur</div>
+    <div class="vendor-row"><span class="vendor-label">Vendeur</span><span class="vendor-value">Mathis Drouet</span></div>
+    <div class="vendor-row"><span class="vendor-label">Activité</span><span class="vendor-value">Auto-entrepreneur — Formation digitale & Services numériques</span></div>
+    <div class="vendor-row"><span class="vendor-label">SIRET</span><span class="vendor-value">930 115 555 00037</span></div>
+    <div class="vendor-row"><span class="vendor-label">Email</span><span class="vendor-value">mathisreservation@gmail.com</span></div>
+    <div class="vendor-row"><span class="vendor-label">Instagram</span><span class="vendor-value">@mthsdgtmk</span></div>
+    <div class="vendor-row"><span class="vendor-label">Site</span><span class="vendor-value">mathisdgtmk.github.io/Dma-skool</span></div>
+  </div>
+
+  <!-- ARTICLE 1 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 1</span> — CHAMP D'APPLICATION</div>
+    <div class="article-body">
+      <p>Les présentes Conditions Générales de Vente (ci-après "CGV") régissent l'ensemble des ventes de produits et services numériques proposés par Mathis Drouet, auto-entrepreneur inscrit sous le SIRET 930 115 555 00037, ci-après désigné le "Vendeur".</p>
+      <p>Toute commande passée auprès du Vendeur implique l'acceptation pleine, entière et sans réserve des présentes CGV par l'acheteur, ci-après désigné le "Client". Ces CGV prévalent sur tout autre document émanant du Client.</p>
+      <p>Le Vendeur se réserve le droit de modifier les présentes CGV à tout moment. Les CGV applicables sont celles en vigueur au moment de la commande.</p>
+    </div>
+  </div>
+
+  <!-- ARTICLE 2 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 2</span> — PRODUITS ET SERVICES</div>
+    <div class="article-body">
+      <p>Le Vendeur commercialise les produits et services suivants :</p>
+      <ul>
+        <li><strong>Formule DMA (Digital Mastery Academy)</strong> — Formation digitale complète comprenant 28 modules en ligne, accessible via un espace membre sécurisé, avec droits de revente MRR (Master Resell Rights) à 100%</li>
+        <li><strong>Bonus Agence IA No-Code</strong> — Module complémentaire (add-on) traitant de la création d'une agence digitale alimentée par l'intelligence artificielle</li>
+        <li><strong>Accompagnement Premium 1-to-1</strong> — Suivi personnalisé intensif avec le Vendeur, comprenant des sessions de coaching individuel et un accès direct par messagerie</li>
+      </ul>
+      <p>Les caractéristiques essentielles de chaque produit sont présentées sur la page de vente correspondante. Le Vendeur se réserve le droit de modifier le contenu des formations sans préavis, dans le but d'améliorer la qualité de l'offre.</p>
+    </div>
+  </div>
+
+  <!-- ARTICLE 3 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 3</span> — PRIX ET MODALITÉS DE PAIEMENT</div>
+    <div class="article-body">
+      <p>Les prix sont indiqués en euros toutes taxes comprises (TTC). En tant qu'auto-entrepreneur bénéficiant de la franchise en base de TVA (article 293 B du CGI), le Vendeur n'est pas assujetti à la TVA. Aucune TVA n'est donc appliquée sur les ventes.</p>
+      <p><strong>Tarifs en vigueur :</strong></p>
+      <ul>
+        <li>Formule DMA : 397€ (prix barré 997€)</li>
+        <li>Bonus Agence IA No-Code : 197€ (add-on)</li>
+        <li>Accompagnement Premium 1-to-1 : 697€ (prix barré 1 497€)</li>
+      </ul>
+      <p>Le paiement peut être effectué en une fois ou de manière fractionnée selon les modalités proposées lors de la commande (PayPal 4x, Klarna 3x). En cas de paiement fractionné, l'accès au produit est accordé dès réception du premier versement, sans attendre la totalité du règlement.</p>
+      <div class="info-box">
+        <div class="info-text">Le paiement fractionné est une facilité accordée au Client. En cas de défaut de paiement d'une échéance, le Vendeur se réserve le droit de suspendre l'accès aux produits jusqu'à régularisation complète de la situation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE 4 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 4</span> — ACCÈS AU PRODUIT ET LIVRAISON</div>
+    <div class="article-body">
+      <p>Les produits vendus étant des biens numériques dématérialisés, leur "livraison" consiste en la communication des identifiants d'accès à l'espace membre sécurisé, transmis par le Vendeur par voie électronique (email ou messagerie instantanée) dans un délai maximum de <strong>24 heures ouvrées</strong> suivant la réception et la validation du paiement.</p>
+      <p>L'accès est accordé à titre personnel et non transférable. L'acheteur s'engage à ne pas communiquer ses identifiants à des tiers.</p>
+      <p>L'accès à la plateforme est garanti pour une durée indéterminée, sous réserve du bon fonctionnement des infrastructures techniques et du respect des présentes CGV par le Client.</p>
+    </div>
+  </div>
+
+  <!-- ARTICLE 5 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 5</span> — DROITS DE REVENTE (MRR)</div>
+    <div class="article-body">
+      <p>La Formule DMA est commercialisée avec des droits de revente de type <strong>Master Resell Rights (MRR)</strong>. Ces droits permettent au Client de revendre le produit tel quel à des tiers et d'en conserver 100% des bénéfices, dans le strict respect des conditions suivantes :</p>
+      <ul>
+        <li>Le Client peut revendre la formation à ses propres clients au prix qu'il souhaite</li>
+        <li>Le Client peut transmettre les droits MRR à ses propres acheteurs</li>
+        <li>Le Client <strong>ne peut pas</strong> modifier le contenu de la formation sans autorisation écrite préalable du Vendeur</li>
+        <li>Le Client <strong>ne peut pas</strong> inclure la formation DMA dans une compilation, un pack ou une autre formation sans autorisation écrite préalable et explicite du Vendeur</li>
+        <li>Le Client <strong>ne peut pas</strong> présenter la formation comme étant sa propre création originale</li>
+        <li>Le Client <strong>ne peut pas</strong> sous-licencier, céder ou transférer les droits de revente dans des conditions différentes de celles définies aux présentes CGV</li>
+        <li>Le Client <strong>ne peut pas</strong> distribuer la formation gratuitement</li>
+      </ul>
+      <div class="alert-box">
+        <div class="alert-text"><strong>Clause anti-agrégation :</strong> Il est expressément interdit d'inclure tout ou partie du contenu de la formation Digital Mastery Academy dans une formation tierce, un pack multi-formations, une offre groupée ou tout produit composite, sans l'accord écrit et préalable du Vendeur. Toute violation de cette clause expose l'auteur à des poursuites civiles et commerciales, ainsi qu'à une demande de cessation immédiate et de dommages et intérêts.</div>
+      </div>
+      <div class="alert-box" style="margin-top:8px">
+        <div class="alert-text"><strong>Propriété intellectuelle :</strong> Le contenu pédagogique, les textes, les modules, les outils et tout élément constitutif de la formation DMA restent la propriété intellectuelle exclusive de Mathis Drouet (SIRET 930 115 555 00037). Les droits MRR accordés ne constituent pas un transfert de propriété intellectuelle mais une simple licence d'exploitation commerciale à usage de revente.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE 6 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 6</span> — DROIT DE RÉTRACTATION ET GARANTIE</div>
+    <div class="article-body">
+      <p>Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation de 14 jours ne s'applique pas aux contenus numériques fournis sur un support immatériel dont l'exécution a commencé avec l'accord du consommateur.</p>
+      <p>Cependant, et à titre commercial, le Vendeur propose une <strong>garantie satisfaction de 30 jours</strong> dans les conditions suivantes :</p>
+      <ul>
+        <li>Le Client a accédé à la formation et a appliqué les méthodes enseignées</li>
+        <li>Le Client n'obtient aucun résultat malgré une mise en application sérieuse</li>
+        <li>Le Client contacte le Vendeur dans les 30 jours suivant l'achat à l'adresse : mathisreservation@gmail.com</li>
+        <li>Le Vendeur et le Client cherchent ensemble une solution adaptée avant tout remboursement</li>
+      </ul>
+      <div class="info-box">
+        <div class="info-text">La garantie commerciale est accordée à la discrétion du Vendeur après examen de la situation du Client. Elle ne constitue pas un droit légal automatique. En cas de remboursement accepté, les droits de revente MRR sont automatiquement révoqués.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE 7 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 7</span> — OBLIGATIONS ET RESPONSABILITÉS</div>
+    <div class="article-body">
+      <p><strong>Obligations du Vendeur :</strong></p>
+      <ul>
+        <li>Fournir les accès au produit dans les délais annoncés</li>
+        <li>Assurer la disponibilité de la plateforme avec un objectif de continuité de service</li>
+        <li>Répondre aux demandes de support dans un délai raisonnable</li>
+        <li>Mettre à jour le contenu de formation régulièrement</li>
+      </ul>
+      <p><strong>Obligations du Client :</strong></p>
+      <ul>
+        <li>Fournir des informations exactes lors de l'achat</li>
+        <li>Ne pas partager ses identifiants d'accès</li>
+        <li>Respecter les droits de propriété intellectuelle du Vendeur</li>
+        <li>Utiliser les méthodes enseignées dans le respect de la législation applicable</li>
+      </ul>
+      <p>Le Vendeur ne saurait être tenu responsable des résultats obtenus par le Client. Les revenus présentés à titre d'exemple dans la formation sont des résultats non garantis. Chaque situation est individuelle et les résultats dépendent de nombreux facteurs extérieurs au Vendeur.</p>
+    </div>
+  </div>
+
+  <!-- ARTICLE 8 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 8</span> — PROTECTION DES DONNÉES PERSONNELLES</div>
+    <div class="article-body">
+      <p>Les données personnelles collectées dans le cadre de la vente (nom, prénom, adresse email) sont utilisées exclusivement pour la gestion de la relation commerciale et la livraison des produits. Elles ne sont pas transmises à des tiers.</p>
+      <p>Conformément au Règlement Général sur la Protection des Données (RGPD - Règlement UE 2016/679), le Client dispose d'un droit d'accès, de rectification, de suppression et de portabilité de ses données. Pour exercer ces droits : mathisreservation@gmail.com</p>
+    </div>
+  </div>
+
+  <!-- ARTICLE 9 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 9</span> — RÉSILIATION ET SANCTION</div>
+    <div class="article-body">
+      <p>Le Vendeur se réserve le droit de <strong>résilier immédiatement</strong> l'accès au produit et de révoquer les droits MRR sans remboursement ni préavis dans les cas suivants :</p>
+      <ul>
+        <li>Non-respect des conditions d'utilisation des droits MRR</li>
+        <li>Partage non autorisé des accès ou du contenu</li>
+        <li>Inclusion de la formation dans une offre tierce sans autorisation</li>
+        <li>Présentation frauduleuse du contenu comme une création propre</li>
+        <li>Défaut de paiement non régularisé dans un délai de 15 jours</li>
+        <li>Comportement abusif ou frauduleux envers le Vendeur ou d'autres clients</li>
+      </ul>
+      <div class="alert-box">
+        <div class="alert-text">Toute violation des droits de propriété intellectuelle ou des conditions MRR fera l'objet d'une mise en demeure par lettre recommandée avec accusé de réception, suivie si nécessaire d'une action en justice devant les juridictions compétentes françaises. Le Vendeur pourra réclamer des dommages et intérêts correspondant au préjudice subi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE 10 -->
+
+  <div class="article">
+    <div class="article-title"><span class="article-num">ART. 10</span> — DROIT APPLICABLE ET LITIGES</div>
+    <div class="article-body">
+      <p>Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée en priorité. Le Client peut adresser sa réclamation à : mathisreservation@gmail.com</p>
+      <p>En cas d'échec de la résolution amiable, le litige sera porté devant les juridictions françaises compétentes. Pour les consommateurs résidant dans l'Union Européenne, la plateforme de règlement en ligne des litiges est accessible à l'adresse : ec.europa.eu/consumers/odr</p>
+      <p>Médiateur de la consommation : conformément à l'article L.612-1 du Code de la consommation, le Client peut recourir gratuitement au médiateur de la consommation en cas de litige non résolu.</p>
+    </div>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="signature-block">
+    <div class="sig-title">ACCEPTATION DES CGV</div>
+    <div class="sig-text">En procédant au paiement, le Client reconnaît avoir lu, compris et accepté sans réserve l'intégralité des présentes Conditions Générales de Vente.<br><br>
+    <strong style="color:#C9A84C">Mathis Drouet — Digital Mastery Academy</strong><br>
+    SIRET 930 115 555 00037<br>
+    mathisreservation@gmail.com — @mthsdgtmk</div>
+  </div>
+
+<button class="copy-btn" onclick="copyCGV()">COPIER LES CGV COMPLÈTES →</button>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function copyCGV() {
+  var txt = document.querySelector(".wrap").innerText;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){showToast("CGV copiées !")});
+  } else {
+    var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";
+    document.body.appendChild(ta);ta.focus();ta.select();
+    try{document.execCommand("copy")}catch(e){}
+    document.body.removeChild(ta);showToast("CGV copiées !");
+  }
+}
+function showToast(msg){
+  var t=document.getElementById("toast");
+  t.textContent=msg;t.style.display="block";
+  setTimeout(function(){t.style.display="none"},2500);
+}
+</script>
+
+</body>
+</html>
