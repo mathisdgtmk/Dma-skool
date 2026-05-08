@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — Affiliation Mastery</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020805;--s1:#061008;--s2:#0b1a0d;--green:#3ecf8e;--gold:#C9A84C;--blue:#4fa3e8;--red:#C0001A;--orange:#ff7c3e;--text:#eeffee;--dim:rgba(238,255,238,.4);--border:rgba(62,207,142,.12)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(62,207,142,.06) 0%,transparent 50%),radial-gradient(ellipse at 85% 100%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+.hdr{position:sticky;top:0;z-index:100;background:rgba(2,8,5,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.hdr-back{text-decoration:none;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.hdr-title{font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:4px;color:var(--green)}
+.hdr-badge{font-size:10px;font-weight:700;color:rgba(62,207,142,.6);background:rgba(62,207,142,.08);border:1px solid rgba(62,207,142,.2);border-radius:2px;padding:3px 8px}
+.hero{position:relative;z-index:1;padding:28px 16px 24px;border-bottom:1px solid var(--border);overflow:hidden}
+.hero-num{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(62,207,142,.4);margin-bottom:8px}
+.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(30px,9vw,52px);letter-spacing:3px;line-height:.82;margin-bottom:14px}
+.hl{color:var(--green);display:block}
+.hero-desc{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:20px}
+.hero-stats{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.sn{font-family:"Bebas Neue",sans-serif;font-size:22px;display:block}
+.sl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px;display:block}
+.chnav{display:flex;overflow-x:auto;background:var(--s1);border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch}
+.chnav::-webkit-scrollbar{display:none}
+.chbtn{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:"Space Grotesk",sans-serif;white-space:nowrap}
+.chbtn.active{color:var(--green);border-bottom-color:var(--green)}
+.panel{display:none;padding:16px 16px 60px;position:relative;z-index:1;animation:fi .3s ease}
+.panel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.lesson{background:var(--s1);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.lhdr{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer}
+.lnum{font-family:"Bebas Neue",sans-serif;font-size:20px;color:rgba(62,207,142,.3);min-width:32px}
+.linfo{flex:1}.ltitle{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.lmeta{font-size:10px;color:var(--dim)}
+.larrow{font-size:12px;color:var(--dim);transition:transform .3s}
+.lesson.open .larrow{transform:rotate(90deg)}
+.lbody{display:none;padding:16px}.lesson.open .lbody{display:block}
+.box{border-radius:5px;padding:14px;margin-bottom:12px}
+.box.g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15)}
+.box.r{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2)}
+.box.go{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15)}
+.box.b{background:rgba(79,163,232,.05);border:1px solid rgba(79,163,232,.15)}
+.box.o{background:rgba(255,124,62,.05);border:1px solid rgba(255,124,62,.15)}
+.bt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.bt.g{color:var(--green)}.bt.r{color:#ff6060}.bt.go{color:var(--gold)}.bt.b{color:var(--blue)}.bt.o{color:var(--orange)}
+.btext{font-size:12px;color:rgba(238,255,238,.72);line-height:1.8}
+.btext p{margin-bottom:8px}.btext p:last-child{margin-bottom:0}
+.btext strong{color:var(--text);font-weight:600}
+.kp{display:flex;gap:8px;font-size:12px;color:rgba(238,255,238,.7);margin-bottom:6px}
+.ki{flex-shrink:0;font-size:14px}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.step{display:flex;gap:12px}
+.snum{width:28px;height:28px;border-radius:50%;background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.25);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:14px;color:var(--green);flex-shrink:0}
+.stitle{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.sdesc{font-size:12px;color:rgba(238,255,238,.6);line-height:1.6}
+.sdesc strong{color:var(--green)}
+.prog-card{background:var(--s2);border:1px solid rgba(62,207,142,.15);border-radius:6px;overflow:hidden;margin-bottom:10px}
+.prog-card-hdr{background:rgba(62,207,142,.06);padding:10px 14px;border-bottom:1px solid rgba(62,207,142,.1);display:flex;align-items:center;justify-content:space-between}
+.prog-card-title{font-size:11px;font-weight:700;color:var(--text)}
+.prog-card-comm{font-family:"Bebas Neue",sans-serif;font-size:18px;color:var(--green)}
+.prog-card-body{padding:12px 14px;font-size:12px;color:rgba(238,255,238,.6);line-height:1.6}
+.prog-card-tag{display:inline-flex;background:rgba(62,207,142,.08);border:1px solid rgba(62,207,142,.15);border-radius:2px;padding:2px 8px;font-size:9px;font-weight:700;color:var(--green);margin-top:6px}
+.cs{background:var(--s2);border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.cshdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.1);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.csbody{padding:14px}
+.csrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.csrow:last-child{border-bottom:none}
+.csl{color:var(--dim)}.csv{font-weight:700;color:var(--text)}.csv.g{color:var(--green)}.csv.go{color:var(--gold)}
+.csq{font-size:12px;color:rgba(238,255,238,.65);line-height:1.75;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
+.cli{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
+.clb{width:20px;height:20px;border-radius:3px;border:2px solid rgba(62,207,142,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cli.done .clb{background:var(--green);border-color:var(--green)}
+.clck{display:none;color:#000;font-size:12px;font-weight:700}.cli.done .clck{display:block}
+.clt{font-size:12px;color:rgba(238,255,238,.7)}.cli.done .clt{color:rgba(238,255,238,.3);text-decoration:line-through}
+.qq{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:10px}
+.qqt{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.5}
+.qo{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(238,255,238,.7);margin-bottom:6px}
+.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:var(--green)}
+.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff6060}
+.qex{margin-top:10px;padding:10px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(238,255,238,.65);line-height:1.6;display:none}
+.iat{background:var(--bg);border:1px solid rgba(62,207,142,.2);border-radius:6px;overflow:hidden;margin-top:10px}
+.iatbar{background:var(--s2);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.iatl{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green)}
+.iatb{font-size:8px;color:rgba(62,207,142,.4);font-weight:600}
+.iatbody{padding:12px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:5px;display:block;margin-top:10px}
+.lbl:first-child{margin-top:0}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none;resize:none}
+.inp:focus{border-color:rgba(62,207,142,.4)}
+.sel{width:100%;background:var(--s2);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none}
+.r2{display:flex;gap:8px}.r2 .c{flex:1}
+.rbtn{width:100%;padding:12px;border:none;border-radius:3px;font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:3px;color:#000;cursor:pointer;margin-top:10px;-webkit-appearance:none;background:linear-gradient(135deg,var(--green),#259c65)}
+.rbtn:disabled{opacity:.4}
+.rbtn.g{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.25);color:var(--green);font-size:12px;letter-spacing:2px}
+.ld{height:2px;background:rgba(255,255,255,.05);overflow:hidden;display:none;border-radius:1px;margin-top:4px}
+.ldf{height:100%;width:50%;border-radius:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);animation:lf 1.2s linear infinite}
+@keyframes lf{0%{transform:translateX(-200%)}100%{transform:translateX(300%)}}
+.out{background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px;margin-top:8px;font-size:12px;font-family:"JetBrains Mono",monospace;line-height:1.8;color:rgba(238,255,238,.82);white-space:pre-wrap;display:none}
+.cpbtn{display:none;width:100%;margin-top:6px;padding:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:2px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:"Space Grotesk",sans-serif;letter-spacing:2px;text-transform:uppercase;-webkit-appearance:none}
+.sim{background:var(--s2);border:1px solid rgba(62,207,142,.12);border-radius:3px;margin-top:10px}
+.simrow{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.simrow:last-child{border-bottom:none}
+.siml{color:var(--dim)}.simv{font-family:"Bebas Neue",sans-serif;font-size:18px}
+.simv.g{color:var(--green)}.simv.go{color:var(--gold)}.simv.b{font-size:22px;color:var(--text)}
+.prog{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.12);border-radius:6px;padding:14px;margin-bottom:14px}
+.progt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.progt2{background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;height:6px;margin-bottom:6px}
+.progf{height:100%;background:linear-gradient(90deg,var(--green),rgba(62,207,142,.5));border-radius:3px;transition:width .5s}
+.progi{font-size:11px;color:var(--dim);display:flex;justify-content:space-between}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <a class="hdr-back" href="module-business-models.html">&#8592; Business Models</a>
+  <div class="hdr-title">AFFILIATION</div>
+  <div class="hdr-badge">MODULE 04/07</div>
+</div>
+<div class="hero">
+  <div class="hero-num">Business Model 04 / 07</div>
+  <div class="hero-title">AFFILIATION<span class="hl">MASTERY</span></div>
+  <div class="hero-desc">Vendre les produits des autres et encaisser des commissions. Zero creation de produit, revenus passifs, scalable a l infini.</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="sn" style="color:var(--green)">5</span><span class="sl">Chapitres</span></div>
+    <div class="stat"><span class="sn" style="color:var(--gold)">12</span><span class="sl">Lecons</span></div>
+    <div class="stat"><span class="sn" style="color:var(--blue)">4</span><span class="sl">Outils IA</span></div>
+    <div class="stat"><span class="sn" style="color:var(--text)">100%</span><span class="sl">Passif</span></div>
+  </div>
+</div>
+<div class="chnav">
+  <button class="chbtn active" onclick="ch(0,this)">01 Fondations</button>
+  <button class="chbtn" onclick="ch(1,this)">02 Choisir ses programmes</button>
+  <button class="chbtn" onclick="ch(2,this)">03 Creer du contenu</button>
+  <button class="chbtn" onclick="ch(3,this)">04 Optimiser</button>
+  <button class="chbtn" onclick="ch(4,this)">05 Scale passif</button>
+</div>
+
+<!-- CH1 FONDATIONS -->
+
+<div class="panel active" id="ch0">
+<div class="prog"><div class="progt">Progression Ch.1</div><div class="progt2"><div class="progf" id="pf0" style="width:0%"></div></div><div class="progi"><span id="pt0">0/3 lecons</span><span id="pp0">0%</span></div></div>
+
+<div class="lesson" id="l0">
+<div class="lhdr" onclick="tl(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">Le marketing d affiliation explique simplement</div><div class="lmeta">Fondamentaux - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Definition</div><div class="btext"><p>L affiliation c est recommander des produits via un lien unique. Quelqu un clique sur ton lien et achete — tu touches une commission automatiquement. <strong>Zero produit a creer, zero stock, zero SAV.</strong></p><p>Tu es un apporteur d affaires numerique. Tu connectes des acheteurs potentiels avec des vendeurs, et tu es paye pour ca.</p></div></div>
+<div class="box g"><div class="bt g">Le flux d une commission</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Tu rejoins un programme d affiliation</div><div class="sdesc">Gratuit. Tu obtiens un lien unique avec ton ID (ex: amazon.fr/product?ref=tonID).</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Tu partages ce lien dans ton contenu</div><div class="sdesc">TikTok, Instagram, YouTube, newsletter, blog, Discord... Partout ou tu as une audience.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Quelqu un clique et achete</div><div class="sdesc">Un cookie suit le clic (30 jours en general). Si la personne achete dans ce delai, tu es credite.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">La commission arrive automatiquement</div><div class="sdesc">Directement sur ton compte bancaire ou PayPal selon le programme. 100% automatique.</div></div></div>
+</div></div>
+<div class="box go"><div class="bt go">Les 3 types d affiliation</div>
+<div class="kp"><span class="ki">&#127800;</span><span><strong>Affiliation directe</strong> — tu rejoint le programme d une marque specifique (Shopify, NordVPN, formations...)</span></div>
+<div class="kp"><span class="ki">&#127800;</span><span><strong>Reseaux d affiliation</strong> — plateformes qui regroupent des milliers de programmes (Amazon Partenaires, Awin, Impact, ClickBank)</span></div>
+<div class="kp"><span class="ki">&#127800;</span><span><strong>MRR affiliation</strong> — tu revends des produits avec droits de revente comme la DMA — mais ca c est un modele different que tu connais deja ;)</span></div>
+</div>
+<button class="rbtn g" onclick="md(0,0,3)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l1">
+<div class="lhdr" onclick="tl(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Pourquoi l affiliation est le business le plus passif</div><div class="lmeta">Avantages - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Ce qui rend l affiliation unique</div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Un contenu publie = revenus potentiellement perpetuels</strong> — une video YouTube sur un produit peut generer des commissions pendant 5 ans.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Zero SAV et zero logistique</strong> — si un client a un probleme, c est le vendeur qui gere. Toi tu n as rien a faire.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Revenus pendant ton sommeil</strong> — les liens d affiliation fonctionnent 24h/24 dans toutes les timezones.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Scalable infiniment</strong> — plus tu crees de contenu, plus tu as de liens actifs, plus tu gagnes.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Plusieurs programmes simultanement</strong> — tu peux promouvoir 10 programmes differents en meme temps.</span></div>
+</div>
+<div class="box r"><div class="bt r">Les pieges a eviter</div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Ne promouvoir que des produits de merde pour la commission</strong> — tu perds la confiance de ton audience pour toujours.</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Ne pas diversifier</strong> — si Amazon change ses taux du jour au lendemain, tu perds tout. Plusieurs programmes = securite.</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Ne pas etre transparent</strong> — la loi oblige a mentionner "lien affilié" ou "partenariat". Le faire aussi pour la confiance.</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Attendre des resultats immédiats</strong> — l affiliation prend 2-4 mois avant de generer des revenus significatifs. C est un jeu long.</span></div>
+</div>
+<button class="rbtn g" onclick="md(1,0,3)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l2">
+<div class="lhdr" onclick="tl(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz interactif - 3 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="qq"><div class="qqt">Si quelqu un clique sur ton lien affilié mais achète 10 jours plus tard, touches-tu une commission ?</div>
+<div class="qo" onclick="qa(this,true,0)">A. Oui, grace au cookie de tracking (generalement 30 jours)</div>
+<div class="qo" onclick="qa(this,false,0)">B. Non, il faut acheter immediatement</div>
+<div class="qo" onclick="qa(this,false,0)">C. Ca depend du produit</div>
+<div class="qo" onclick="qa(this,false,0)">D. Seulement si il revient via ton lien</div>
+<div class="qex" id="qe0">Exact ! Les programmes d affiliation utilisent des cookies qui "se souviennent" du clic pendant une duree donnee (souvent 30 jours, parfois 90 ou 365). Si la personne achete dans ce delai, tu es credite.</div>
+</div>
+<div class="qq"><div class="qqt">Quel est le principal risque de ne pas diversifier ses programmes d affiliation ?</div>
+<div class="qo" onclick="qa(this,false,1)">A. Trop de commissions a gerer</div>
+<div class="qo" onclick="qa(this,true,1)">B. Si un programme change ses taux, tu perds tout</div>
+<div class="qo" onclick="qa(this,false,1)">C. Ca prend trop de temps</div>
+<div class="qo" onclick="qa(this,false,1)">D. L audience ne fait pas confiance</div>
+<div class="qex" id="qe1">Correct ! Amazon a plusieurs fois reduit ses commissions du jour au lendemain. Des creators qui dependaient a 100% d Amazon ont perdu 50-70% de leurs revenus overnight. Diversifier = securite.</div>
+</div>
+<div class="qq"><div class="qqt">Combien de temps faut-il en general avant de generer des revenus significatifs avec l affiliation ?</div>
+<div class="qo" onclick="qa(this,false,2)">A. 1-2 semaines</div>
+<div class="qo" onclick="qa(this,false,2)">B. 1 mois maximum</div>
+<div class="qo" onclick="qa(this,true,2)">C. 2-4 mois minimum</div>
+<div class="qo" onclick="qa(this,false,2)">D. Plus d un an</div>
+<div class="qex" id="qe2">Exactement. L affiliation est un jeu long. Il faut du contenu accumule, du SEO qui monte ou une audience qui grossit. Mais une fois lance, les revenus sont vraiment passifs.</div>
+</div>
+<button class="rbtn g" onclick="md(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH2 CHOISIR SES PROGRAMMES -->
+
+<div class="panel" id="ch1">
+<div class="prog"><div class="progt">Progression Ch.2</div><div class="progt2"><div class="progf" id="pf1" style="width:0%"></div></div><div class="progi"><span id="pt1">0/3 lecons</span><span id="pp1">0%</span></div></div>
+
+<div class="lesson" id="l3">
+<div class="lhdr" onclick="tl(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Les meilleurs programmes d affiliation 2025</div><div class="lmeta">Selection - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Programmes HIGH TICKET (100EUR+ par vente)</div>
+<div class="prog-card">
+<div class="prog-card-hdr"><span class="prog-card-title">Shopify Partenaires</span><span class="prog-card-comm">150EUR/vente</span></div>
+<div class="prog-card-body">Commission fixe par inscription payante. Produit connu mondialement. Parfait pour contenu e-commerce et entrepreneuriat.<div class="prog-card-tag">Cookie 30 jours</div></div>
+</div>
+<div class="prog-card">
+<div class="prog-card-hdr"><span class="prog-card-title">Formations premium</span><span class="prog-card-comm">30-50%</span></div>
+<div class="prog-card-body">Formations en ligne a 500-2000EUR avec 30-50% de commission = 150-1000EUR par vente. Les mieux payes du marche.<div class="prog-card-tag">Cookie 60-90 jours</div></div>
+</div>
+<div class="prog-card">
+<div class="prog-card-hdr"><span class="prog-card-title">Logiciels SaaS (Systeme.io, etc)</span><span class="prog-card-comm">50% recurr.</span></div>
+<div class="prog-card-body">Commission mensuelle recurrente tant que ton filleul reste abonne. Revenus passifs permanents.<div class="prog-card-tag">Recurrant a vie</div></div>
+</div>
+</div>
+<div class="box g"><div class="bt g">Programmes VOLUME (5-15% mais enorme catalogue)</div>
+<div class="prog-card">
+<div class="prog-card-hdr"><span class="prog-card-title">Amazon Partenaires</span><span class="prog-card-comm">3-10%</span></div>
+<div class="prog-card-body">Millions de produits disponibles. Cookie 24h seulement mais si la personne ajoute au panier, cookie 90 jours. Ideal pour reviews produits.<div class="prog-card-tag">Cookie 24h (panier 90j)</div></div>
+</div>
+<div class="prog-card">
+<div class="prog-card-hdr"><span class="prog-card-title">Awin / ShareASale</span><span class="prog-card-comm">Variable</span></div>
+<div class="prog-card-body">Reseaux avec milliers de marques. Mode, tech, lifestyle, beaute. Rejoindre une fois, acceder a tout.<div class="prog-card-tag">Reseau multi-marques</div></div>
+</div>
+</div>
+<div class="box go"><div class="bt go">Criteres de selection d un bon programme</div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Cookie longue duree</strong> — minimum 30 jours. Evite les cookies 24h si possible.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Produit que tu utilises vraiment</strong> — ton authenticite se sent et convertit mieux.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Taux de conversion du vendeur</strong> — un produit a 50% de commission mais 0.1% de conversion vaut moins qu un a 10% a 5% de conversion.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Paiement fiable et frequent</strong> — verifier les avis sur le programme avant de s engager.</span></div>
+</div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Trouveur de programmes IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Ta niche / audience</span>
+<input class="inp" id="pg-n" type="text" placeholder="Ex: business en ligne, fitness, beaute, gaming, developpement perso...">
+<span class="lbl">Ta plateforme principale</span>
+<select class="sel" id="pg-p">
+<option value="TikTok et Instagram">TikTok / Instagram</option>
+<option value="YouTube">YouTube</option>
+<option value="Newsletter email">Newsletter</option>
+<option value="Blog / Site web">Blog / Site</option>
+<option value="Discord / Telegram">Discord / Telegram</option>
+</select>
+<span class="lbl">Type de commission recherche</span>
+<select class="sel" id="pg-t">
+<option value="high ticket, peu de ventes mais grosse commission">High ticket - grosses commissions</option>
+<option value="volume, beaucoup de ventes avec petites commissions">Volume - petites commissions x beaucoup</option>
+<option value="recurrente, commission mensuelle permanente">Recurrente - revenus permanents</option>
+</select>
+<button class="rbtn" id="pg-btn" onclick="rPrograms()">TROUVER MES PROGRAMMES IDEAUX</button>
+<div class="ld" id="pg-ld"><div class="ldf"></div></div>
+<div class="out" id="pg-out"></div>
+<button class="cpbtn" id="pg-cp" onclick="doCopy('pg-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(3,1,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l4">
+<div class="lhdr" onclick="tl(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Simulateur de revenus affiliation</div><div class="lmeta">Calculateur - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Comprendre les variables</div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Trafic</strong> — nombre de personnes qui voient ton contenu avec le lien</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>CTR</strong> — % de personnes qui cliquent sur ton lien</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Taux de conversion</strong> — % de cliqueurs qui achetent</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Commission</strong> — ce que tu touches par vente</span></div>
+</div>
+<div style="background:var(--s2);border:1px solid var(--border);border-radius:5px;padding:12px;margin-top:6px">
+<div class="r2">
+<div class="c"><span class="lbl">Vues/visiteurs jour</span><input class="inp" id="sr-v" type="number" value="500" oninput="calcAff()"></div>
+<div class="c"><span class="lbl">CTR % (clics)</span><input class="inp" id="sr-ctr" type="number" value="3" oninput="calcAff()"></div>
+</div>
+<div class="r2" style="margin-top:8px">
+<div class="c"><span class="lbl">Taux conversion %</span><input class="inp" id="sr-cv" type="number" value="2" oninput="calcAff()"></div>
+<div class="c"><span class="lbl">Commission par vente (EUR)</span><input class="inp" id="sr-c" type="number" value="30" oninput="calcAff()"></div>
+</div>
+<div class="sim">
+<div class="simrow"><span class="siml">Clics par jour</span><span class="simv go" id="sr-clics">15</span></div>
+<div class="simrow"><span class="siml">Ventes par jour</span><span class="simv go" id="sr-ventes">0.3</span></div>
+<div class="simrow"><span class="siml">Revenu par jour</span><span class="simv g" id="sr-jour">9EUR</span></div>
+<div class="simrow"><span class="siml">Revenu mensuel</span><span class="simv g" id="sr-month">270EUR</span></div>
+<div class="simrow"><span class="siml">Revenu annuel</span><span class="simv b" id="sr-year">3240EUR</span></div>
+</div>
+<div style="margin-top:10px;font-size:11px;color:var(--dim)">Si tu doubles les vues : <span id="sr-2x" style="color:var(--green);font-weight:700">540EUR/mois</span> | x5 : <span id="sr-5x" style="color:var(--green);font-weight:700">1350EUR/mois</span></div>
+</div>
+<button class="rbtn g" onclick="md(4,1,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l5">
+<div class="lhdr" onclick="tl(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Etude de cas - 0 a 5800EUR/mois passif</div><div class="lmeta">Cas reel - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="cs"><div class="cshdr">Creator Business/Outils - 10 mois</div>
+<div class="csbody">
+<div class="csrow"><span class="csl">Niche</span><span class="csv">Outils IA et business en ligne</span></div>
+<div class="csrow"><span class="csl">Programmes principaux</span><span class="csv">Systeme.io, Shopify, formations</span></div>
+<div class="csrow"><span class="csl">Plateforme</span><span class="csv">YouTube + newsletter (8200 abonnes)</span></div>
+<div class="csrow"><span class="csl">Contenu publie</span><span class="csv go">87 videos + 42 editions newsletter</span></div>
+<div class="csrow"><span class="csl">Revenu mois 3</span><span class="csv">380EUR</span></div>
+<div class="csrow"><span class="csl">Revenu mois 6</span><span class="csv">1 850EUR</span></div>
+<div class="csrow"><span class="csl">Revenu mois 10</span><span class="csv g">5 800EUR</span></div>
+<div class="csrow"><span class="csl">Temps semaine actuel</span><span class="csv">3-4h (1 video/semaine)</span></div>
+<div class="csq">"Le tournant c est quand j ai arrete de promouvoir Amazon et me suis concentre sur Systeme.io et des formations high ticket. 10 ventes de formations a 500EUR = 5000EUR en un mois, avec le meme volume de trafic. Le high ticket change tout."</div>
+</div></div>
+<div class="box g"><div class="bt g">La lecon</div><div class="btext">Moins de ventes mais plus grosses commissions = meme effort, bien plus d argent. Priorite aux programmes high ticket ou recurrents.</div></div>
+<button class="rbtn g" onclick="md(5,1,3)">MARQUER COMME VU &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH3 CREER DU CONTENU -->
+
+<div class="panel" id="ch2">
+<div class="prog"><div class="progt">Progression Ch.3</div><div class="progt2"><div class="progf" id="pf2" style="width:0%"></div></div><div class="progi"><span id="pt2">0/2 lecons</span><span id="pp2">0%</span></div></div>
+
+<div class="lesson" id="l6">
+<div class="lhdr" onclick="tl(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Les formats de contenu affiliation qui convertissent</div><div class="lmeta">Strategie - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Top 5 formats qui generent des commissions</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Review honnete</div><div class="sdesc">Tu testes le produit et tu partages ton avis reel — avantages ET inconvenients. <strong>L honnêtete convertit mieux que la pub.</strong> Format roi sur YouTube et blog.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Comparatif</div><div class="sdesc">Produit A vs Produit B. Tu peux mettre des liens affilies sur les deux. Les gens cherchent specifiquement "comparatif XYZ vs ABC" avant d acheter.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Tutoriel avec outil integre</div><div class="sdesc">"Comment créer ta boutique Shopify en 10 minutes" — tu utilises Shopify pendant le tuto, tu mets ton lien affilié en description. Valeur elevee, conversion naturelle.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">Top X produits</div><div class="sdesc">"Top 5 outils IA pour entrepreneurs" — plusieurs liens affilies dans un seul contenu. Format tres cherche sur Google et TikTok.</div></div></div>
+<div class="step"><div class="snum">5</div><div><div class="stitle">Email newsletter recommendation</div><div class="sdesc">Une fois par semaine, recommander un produit ou outil que tu utilises vraiment. Ton audience fait confiance a ta newsletter. Taux de conversion = 3-8% vs 1-2% sur les reseaux.</div></div></div>
+</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur de contenu affiliation IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Produit a promouvoir</span>
+<input class="inp" id="ca-p" type="text" placeholder="Ex: Shopify, NordVPN, une formation digitale, Systeme.io...">
+<span class="lbl">Commission estimee</span>
+<input class="inp" id="ca-c" type="text" placeholder="Ex: 30% - 150EUR par inscription...">
+<span class="lbl">Plateforme de diffusion</span>
+<select class="sel" id="ca-pl">
+<option value="TikTok">TikTok</option>
+<option value="Instagram">Instagram</option>
+<option value="YouTube">YouTube</option>
+<option value="Newsletter email">Newsletter</option>
+<option value="Blog article SEO">Blog SEO</option>
+</select>
+<span class="lbl">Type de contenu</span>
+<select class="sel" id="ca-t">
+<option value="review honnete">Review honnete</option>
+<option value="tutoriel pratique avec le produit">Tutoriel pratique</option>
+<option value="top 5 outils similaires">Top 5 / Comparatif</option>
+<option value="storytelling personnel">Mon histoire avec ce produit</option>
+</select>
+<button class="rbtn" id="ca-btn" onclick="rContenu()">GENERER MON CONTENU AFFILIATION</button>
+<div class="ld" id="ca-ld"><div class="ldf"></div></div>
+<div class="out" id="ca-out"></div>
+<button class="cpbtn" id="ca-cp" onclick="doCopy('ca-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(6,2,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l7">
+<div class="lhdr" onclick="tl(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Checklist lancement campagne affiliation</div><div class="lmeta">Checklist - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Programme d affiliation rejoint et lien unique recupere</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Produit teste et utilise personnellement avant de le promouvoir</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Mention legale "lien affilie" ou "partenariat commercial" presente</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Contenu cree avec de la valeur reelle (pas juste une pub)</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Lien en bio / description / pinned comment selon la plateforme</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Lien teste et fonctionnel (clique toi-meme pour verifier)</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Tableau de suivi cree (contenu publie, clics, conversions, revenus)</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Minimum 5 programmes differents dans des niches complementaires</span></div>
+<button class="rbtn g" onclick="md(7,2,2)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH4 OPTIMISER -->
+
+<div class="panel" id="ch3">
+<div class="prog"><div class="progt">Progression Ch.4</div><div class="progt2"><div class="progf" id="pf3" style="width:0%"></div></div><div class="progi"><span id="pt3">0/2 lecons</span><span id="pp3">0%</span></div></div>
+
+<div class="lesson" id="l8">
+<div class="lhdr" onclick="tl(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">Analyser et optimiser ses conversions</div><div class="lmeta">Analytics - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Les metriques a suivre</div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>EPC (Earnings Per Click)</strong> — revenus divises par nombre de clics. Indicateur numero 1 de la performance d un programme.</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Taux de conversion</strong> — % de cliqueurs qui achetent. Si faible = probleme page de vente du vendeur ou mauvais alignement audience.</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Contenu vs revenus</strong> — identifier quel contenu genere le plus de commissions. Creer plus du meme type.</span></div>
+</div>
+<div class="box go"><div class="bt go">Optimisations rapides</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Tester le placement du lien</div><div class="sdesc">Dans le texte vs en fin d article vs en premiere ligne de description — le placement impacte directement le CTR. Tester A/B systematiquement.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Ajouter un CTA explicite</div><div class="sdesc">"Lien en bio", "Clique ici pour essayer", "Voir le prix". Ne jamais supposer que les gens savent quoi faire.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Creer du contenu autour des intent d achat</div><div class="sdesc">Cibler les mots-cles "meilleur [produit]", "[produit] avis", "[produit] vs concurrent". Ces audiences sont deja prets a acheter.</div></div></div>
+</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Analyseur de campagne affiliation</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Tes stats (colle ou decris)</span>
+<textarea class="inp" id="an-s" rows="3" placeholder="Ex: 1200 clics ce mois, 18 ventes, 540EUR de commissions, contenu TikTok + newsletter, produit formation 297EUR..."></textarea>
+<span class="lbl">Ce qui ne marche pas selon toi</span>
+<input class="inp" id="an-p" type="text" placeholder="Ex: beaucoup de clics mais peu de ventes, contenu peu vu...">
+<button class="rbtn" id="an-btn" onclick="rAnalyse()">ANALYSER MA CAMPAGNE</button>
+<div class="ld" id="an-ld"><div class="ldf"></div></div>
+<div class="out" id="an-out"></div>
+<button class="cpbtn" id="an-cp" onclick="doCopy('an-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(8,3,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l9">
+<div class="lhdr" onclick="tl(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Combiner affiliation + MRR DMA</div><div class="lmeta">Synergies - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">La combinaison gagnante</div><div class="btext"><p>Tu as deja les droits MRR avec la DMA. <strong>Combine l affiliation ET le MRR pour maximiser tes revenus sur chaque piece de contenu.</strong></p><p>Exemple: une video TikTok sur "les meilleurs outils pour lancer son business en ligne" peut contenir:</p><ul style="margin:8px 0 0 16px;color:rgba(238,255,238,.7);font-size:12px;line-height:1.8"><li>Lien affilie Shopify (100-150EUR/inscription)</li><li>Lien affilie Systeme.io (50% recurrent)</li><li>Lien DMA avec MRR 100% (397EUR que tu gardes)</li></ul></div></div>
+<div class="box go"><div class="bt go">Monetiser chaque contenu au maximum</div>
+<div class="kp"><span class="ki">&#128176;</span><span>Contenu sur le "business en ligne" → lien DMA + lien Shopify + lien outil IA</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span>Contenu sur le "marketing" → lien DMA + lien Systeme.io + lien outil email</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span>Contenu sur "gagner de l argent" → lien DMA + lien formation affiliation + lien outil POD</span></div>
+</div>
+<button class="rbtn g" onclick="md(9,3,2)">MARQUER COMME VU &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH5 SCALE PASSIF -->
+
+<div class="panel" id="ch4">
+<div class="lesson" id="l10">
+<div class="lhdr" onclick="tl(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">Creer un systeme de contenu evergreen</div><div class="lmeta">Strategie long terme - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Contenu evergreen vs contenu viral</div><div class="btext"><p><strong>Contenu viral</strong> — fait beaucoup de vues en peu de temps puis disparait. Bon pour l audience, moins bon pour l affiliation.</p><p><strong>Contenu evergreen</strong> — cherche sur Google ou YouTube pendant des annees. "Meilleur outil pour creer une boutique en ligne" = gens qui cherchent CA depuis 5 ans et encore dans 5 ans. <strong>C est le vrai revenus passif.</strong></p></div></div>
+<div class="box g"><div class="bt g">Construire son asset d affiliation</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Identifier 20 sujets evergreen dans ta niche</div><div class="sdesc">Sujets qui seront encore recherches dans 3 ans. "Meilleur [categorie]", "Comment [action] avec [outil]", "[Produit] avis honnete".</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Creer 1 piece de contenu par semaine</div><div class="sdesc">Systematiquement. Chaque contenu = un lien affilie potentiellement actif pendant des annees. C est un investissement de temps qui se remunere a long terme.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="snum" style="width:auto;height:auto;border-radius:0;background:none;border:none;font-size:12px;color:rgba(238,255,238,.6)">Repurpose chaque piece de contenu</div><div class="stitle">Repurpose chaque piece</div><div class="sdesc">1 video YouTube → script du video → article de blog → script TikTok → edition newsletter. 1 idee = 5 pieces de contenu = 5 fois plus de liens actifs.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">Mettre a jour le contenu ancien</div><div class="sdesc">Chaque trimestre, mettre a jour tes articles et videos. Google et YouTube favorisent le contenu frais. Tes anciennes pieces reprennent vie.</div></div></div>
+</div></div>
+<button class="rbtn g" onclick="md(10,4,2)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l11">
+<div class="lhdr" onclick="tl(11)"><div class="lnum">12</div><div class="linfo"><div class="ltitle">Plan 6 mois - de 0 a revenus passifs stables</div><div class="lmeta">Roadmap - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box g"><div class="bt g">Le plan exact</div>
+<div class="steps">
+<div class="step"><div class="snum" style="background:rgba(62,207,142,.2);font-size:11px">M1</div><div><div class="stitle">Setup et premiers programmes</div><div class="sdesc">Rejoindre 3-5 programmes. Creer 8-10 pieces de contenu. Apprendre les bases SEO/TikTok.</div></div></div>
+<div class="step"><div class="snum" style="background:rgba(62,207,142,.2);font-size:11px">M2-3</div><div><div class="stitle">Volume et tests</div><div class="sdesc">1 contenu par jour (TikTok) ou 2-3 par semaine (YouTube). Identifier ce qui convertit. Premiers revenus 100-400EUR/mois.</div></div></div>
+<div class="step"><div class="snum" style="background:rgba(62,207,142,.2);font-size:11px">M4-5</div><div><div class="stitle">Doubler ce qui marche</div><div class="sdesc">Plus de contenu sur les formats et programmes qui convertissent. Ajouter newsletter. Objectif 800-1500EUR/mois.</div></div></div>
+<div class="step"><div class="snum" style="background:rgba(62,207,142,.3);font-size:11px">M6</div><div><div class="stitle">Systeme passif consolide</div><div class="sdesc"><strong>Objectif : 1500-3000EUR/mois passifs</strong> avec 3-4h de travail par semaine. Le contenu existant continue de generer des commissions.</div></div></div>
+</div></div>
+<button class="rbtn g" onclick="toast('Module Affiliation complete ! &#128293;')">MODULE COMPLETE &#10003;</button>
+</div></div>
+
+<div style="background:linear-gradient(135deg,rgba(62,207,142,.08),rgba(201,168,76,.06));border:1px solid rgba(62,207,142,.2);border-radius:8px;padding:18px;margin-top:6px">
+<div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:3px;color:var(--green);margin-bottom:12px">RECAP - PLAN D ACTION</div>
+<div style="font-size:12px;color:rgba(238,255,238,.7);line-height:1.9">
+<strong style="color:var(--text)">Semaine 1 :</strong> Rejoindre 3-5 programmes, identifier ta niche<br>
+<strong style="color:var(--text)">Semaine 2-4 :</strong> Creer 10-15 pieces de contenu avec liens<br>
+<strong style="color:var(--text)">Mois 2-3 :</strong> Volume + tests + premiers revenus<br>
+<strong style="color:var(--text)">Mois 4-6 :</strong> Doubler les gagnants + newsletter<br>
+<strong style="color:var(--green)">Objectif mois 6 : 1 500 - 3 000EUR / mois passif</strong>
+</div>
+<a href="module-business-models.html" style="display:block;margin-top:14px;background:linear-gradient(135deg,var(--green),#259c65);border-radius:3px;padding:12px;text-align:center;text-decoration:none"><span style="font-family:Bebas Neue,sans-serif;font-size:13px;letter-spacing:3px;color:#000">MODULE SUIVANT : NEWSLETTER &#8594;</span></a>
+</div>
+</div>
+
+<div class="toast" id="tk"></div>
+<script>
+var u=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!u)window.location.href="index.html";
+function ch(i,el){document.querySelectorAll(".chbtn").forEach(function(b){b.classList.remove("active")});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});el.classList.add("active");document.getElementById("ch"+i).classList.add("active");window.scrollTo(0,0);}
+function tl(i){document.getElementById("l"+i).classList.toggle("open")}
+var lch=[[0,1,2],[3,4,5],[6,7],[8,9],[10,11]];var dL={};
+function md(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById("pf"+ch);if(f)f.style.width=pct+"%";var t=document.getElementById("pt"+ch);if(t)t.textContent=cnt+"/"+tot+" lecons";var p=document.getElementById("pp"+ch);if(p)p.textContent=pct+"%";toast("Lecon validee !");}
+function qa(el,ok,qIdx){el.classList.add(ok?"ok":"ko");if(!ok){setTimeout(function(){el.parentElement.querySelectorAll(".qo").forEach(function(o){if(!o.classList.contains("ko"))o.classList.add("ok")})},700)}var e=document.getElementById("qe"+qIdx);if(e)e.style.display="block";}
+function calcAff(){var v=parseFloat(document.getElementById("sr-v").value)||0,ctr=parseFloat(document.getElementById("sr-ctr").value)||0,cv=parseFloat(document.getElementById("sr-cv").value)||0,c=parseFloat(document.getElementById("sr-c").value)||0;var clics=Math.round(v*ctr/100),ventes=clics*cv/100,jour=ventes*c,month=jour*30;document.getElementById("sr-clics").textContent=clics;document.getElementById("sr-ventes").textContent=ventes.toFixed(1);document.getElementById("sr-jour").textContent=jour.toFixed(0)+"EUR";document.getElementById("sr-month").textContent=month.toFixed(0)+"EUR";document.getElementById("sr-year").textContent=(month*12).toFixed(0)+"EUR";document.getElementById("sr-2x").textContent=(month*2).toFixed(0)+"EUR/mois";document.getElementById("sr-5x").textContent=(month*5).toFixed(0)+"EUR/mois";}
+function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
+function sl(id,on){var e=document.getElementById(id);if(e)e.style.display=on?"block":"none"}
+function showO(oid,cpid,txt){var o=document.getElementById(oid);if(o){o.textContent=txt;o.style.display="block"}var c=document.getElementById(cpid);if(c)c.style.display="block"}
+async function groq(p){var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer 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"},body:JSON.stringify({model:"llama-3.3-70b-versatile",max_tokens:1200,messages:[{role:"system",content:"Tu es expert affiliation et content marketing francophone avec 4 ans d experience. Conseils ultra concrets, tutoiement."},{role:"user",content:p}]})});var d=await r.json();return d.choices&&d.choices[0]?d.choices[0].message.content:"Erreur - reessaie.";}
+async function rPrograms(){var n=gv("pg-n"),p=gv("pg-p"),t=gv("pg-t");if(!n){toast("Entre ta niche");return}sl("pg-ld",true);document.getElementById("pg-btn").disabled=true;try{var r=await groq("Je fais de l affiliation. Niche: "+n+". Plateforme: "+p+". Type commission: "+t+".
+Recommande les 5-7 meilleurs programmes d affiliation pour mon profil avec: nom du programme, commission exacte, duree cookie, comment rejoindre, potentiel mensuel realiste, pourquoi c est adapte a ma niche. Tres concret.");showO("pg-out","pg-cp",r)}catch(e){toast("Erreur")}sl("pg-ld",false);document.getElementById("pg-btn").disabled=false;}
+async function rContenu(){var p=gv("ca-p"),c=gv("ca-c"),pl=gv("ca-pl"),t=gv("ca-t");if(!p){toast("Entre le produit");return}sl("ca-ld",true);document.getElementById("ca-btn").disabled=true;try{var r=await groq("Je veux creer du contenu affiliation pour: "+p+". Commission: "+c+". Plateforme: "+pl+". Type: "+t+".
+Cree: titre/hook accrocheur, structure complete du contenu avec les points cles, comment integrer le lien naturellement, CTA final. Authentique, valeur reelle, pas juste une pub.");showO("ca-out","ca-cp",r)}catch(e){toast("Erreur")}sl("ca-ld",false);document.getElementById("ca-btn").disabled=false;}
+async function rAnalyse(){var s=gv("an-s"),p=gv("an-p");if(!s){toast("Entre tes stats");return}sl("an-ld",true);document.getElementById("an-btn").disabled=true;try{var r=await groq("Analyse cette campagne affiliation:
+Stats: "+s+"
+Probleme percu: "+p+"
+Dis: ce qui va bien, le probleme principal identifie, 3 actions concretes a faire maintenant, ce qui manque dans la strategie. Direct et honnete.");showO("an-out","an-cp",r)}catch(e){toast("Erreur")}sl("an-ld",false);document.getElementById("an-btn").disabled=false;}
+function doCopy(id){var txt=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast("Copie!")});else{var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);toast("Copie!");}}
+function toast(m){var t=document.getElementById("tk");t.textContent=m;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
+calcAff();
+</script>
+</body>
+</html>
