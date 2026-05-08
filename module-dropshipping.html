@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — Dropshipping Mastery</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030308;--s1:#080810;--s2:#0e0e1a;--blue:#4fa3e8;--gold:#C9A84C;--red:#C0001A;--green:#3ecf8e;--text:#f0f0ff;--dim:rgba(240,240,255,.4);--border:rgba(79,163,232,.12)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(79,163,232,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+.hdr{position:sticky;top:0;z-index:100;background:rgba(3,3,8,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.hdr-back{text-decoration:none;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.hdr-title{font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:4px;color:var(--blue)}
+.hdr-badge{font-size:10px;font-weight:700;color:rgba(79,163,232,.6);background:rgba(79,163,232,.08);border:1px solid rgba(79,163,232,.2);border-radius:2px;padding:3px 8px}
+.hero{position:relative;z-index:1;padding:28px 16px 24px;border-bottom:1px solid var(--border);overflow:hidden}
+.hero-num{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(79,163,232,.4);margin-bottom:8px}
+.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(32px,10vw,54px);letter-spacing:3px;line-height:.82;margin-bottom:14px}
+.hl{color:var(--blue);display:block}
+.hero-desc{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:20px}
+.hero-stats{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.sn{font-family:"Bebas Neue",sans-serif;font-size:22px;display:block}
+.sl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px;display:block}
+.chnav{display:flex;overflow-x:auto;background:var(--s1);border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch}
+.chnav::-webkit-scrollbar{display:none}
+.chbtn{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:"Space Grotesk",sans-serif;white-space:nowrap}
+.chbtn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.panel{display:none;padding:16px 16px 60px;position:relative;z-index:1;animation:fi .3s ease}
+.panel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.lesson{background:var(--s1);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.lhdr{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer}
+.lnum{font-family:"Bebas Neue",sans-serif;font-size:20px;color:rgba(79,163,232,.3);min-width:32px}
+.linfo{flex:1}
+.ltitle{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.lmeta{font-size:10px;color:var(--dim)}
+.larrow{font-size:12px;color:var(--dim);transition:transform .3s}
+.lesson.open .larrow{transform:rotate(90deg)}
+.lbody{display:none;padding:16px}
+.lesson.open .lbody{display:block}
+.box{border-radius:5px;padding:14px;margin-bottom:12px}
+.box.blue{background:rgba(79,163,232,.05);border:1px solid rgba(79,163,232,.12)}
+.box.red{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2)}
+.box.green{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15)}
+.box.gold{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15)}
+.bt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.bt.blue{color:var(--blue)}.bt.red{color:#ff6060}.bt.green{color:var(--green)}.bt.gold{color:var(--gold)}
+.btext{font-size:12px;color:rgba(240,240,255,.72);line-height:1.8}
+.btext p{margin-bottom:8px}.btext p:last-child{margin-bottom:0}
+.btext strong{color:var(--text);font-weight:600}
+.kp{display:flex;gap:8px;font-size:12px;color:rgba(240,240,255,.7);margin-bottom:6px}
+.ki{flex-shrink:0;font-size:14px}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.step{display:flex;gap:12px}
+.snum{width:28px;height:28px;border-radius:50%;background:rgba(79,163,232,.12);border:1px solid rgba(79,163,232,.25);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:14px;color:var(--blue);flex-shrink:0}
+.stitle{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.sdesc{font-size:12px;color:rgba(240,240,255,.6);line-height:1.6}
+.sdesc strong{color:var(--blue)}
+.tcard{background:var(--s2);border:1px solid rgba(201,168,76,.1);border-radius:5px;padding:12px 14px;display:flex;gap:12px;margin-bottom:8px}
+.tico{font-size:22px;flex-shrink:0}.tname{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:2px}
+.trole{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:4px}
+.tdesc{font-size:11px;color:rgba(240,240,255,.5);line-height:1.5}
+.cs{background:var(--s2);border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.cshdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.1);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.csbody{padding:14px}
+.csrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.csrow:last-child{border-bottom:none}
+.csl{color:var(--dim)}.csv{font-weight:700;color:var(--text)}
+.csv.g{color:var(--green)}.csv.go{color:var(--gold)}
+.csq{font-size:12px;color:rgba(240,240,255,.65);line-height:1.75;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
+.cli{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
+.clb{width:20px;height:20px;border-radius:3px;border:2px solid rgba(79,163,232,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cli.done .clb{background:var(--blue);border-color:var(--blue)}
+.clck{display:none;color:#000;font-size:12px;font-weight:700}
+.cli.done .clck{display:block}
+.clt{font-size:12px;color:rgba(240,240,255,.7)}
+.cli.done .clt{color:rgba(240,240,255,.3);text-decoration:line-through}
+.qq{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:10px}
+.qqt{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.5}
+.qo{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(240,240,255,.7);margin-bottom:6px;-webkit-tap-highlight-color:transparent}
+.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:var(--green)}
+.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff6060}
+.qex{margin-top:10px;padding:10px 12px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(240,240,255,.65);line-height:1.6;display:none}
+.iat{background:var(--bg);border:1px solid rgba(79,163,232,.2);border-radius:6px;overflow:hidden;margin-top:10px}
+.iatbar{background:var(--s2);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.iatl{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue)}
+.iatb{font-size:8px;color:rgba(79,163,232,.4);font-weight:600}
+.iatbody{padding:12px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:5px;display:block;margin-top:10px}
+.lbl:first-child{margin-top:0}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none;resize:none}
+.inp:focus{border-color:rgba(79,163,232,.4)}
+.sel{width:100%;background:var(--s2);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none}
+.r2{display:flex;gap:8px}.r2 .c{flex:1}
+.rbtn{width:100%;padding:12px;border:none;border-radius:3px;font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:3px;color:#fff;cursor:pointer;margin-top:10px;-webkit-appearance:none;background:linear-gradient(135deg,var(--blue),#2a7ab8)}
+.rbtn:disabled{opacity:.4}
+.rbtn.g{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.25);color:var(--green);font-size:12px;letter-spacing:2px}
+.ld{height:2px;background:rgba(255,255,255,.05);overflow:hidden;display:none;border-radius:1px;margin-top:4px}
+.ldf{height:100%;width:50%;border-radius:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);animation:lf 1.2s linear infinite}
+@keyframes lf{0%{transform:translateX(-200%)}100%{transform:translateX(300%)}}
+.out{background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px;margin-top:8px;font-size:12px;font-family:"JetBrains Mono",monospace;line-height:1.8;color:rgba(240,240,255,.82);white-space:pre-wrap;display:none}
+.cpbtn{display:none;width:100%;margin-top:6px;padding:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:2px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:"Space Grotesk",sans-serif;letter-spacing:2px;text-transform:uppercase;-webkit-appearance:none}
+.prog{background:rgba(79,163,232,.05);border:1px solid rgba(79,163,232,.12);border-radius:6px;padding:14px;margin-bottom:14px}
+.progt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.progt2{background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;height:6px;margin-bottom:6px}
+.progf{height:100%;background:linear-gradient(90deg,var(--blue),rgba(79,163,232,.5));border-radius:3px;transition:width .5s}
+.progi{font-size:11px;color:var(--dim);display:flex;justify-content:space-between}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--blue);color:#000;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <a class="hdr-back" href="module-business-models.html">&#8592; Business Models</a>
+  <div class="hdr-title">DROPSHIPPING</div>
+  <div class="hdr-badge">MODULE 01/07</div>
+</div>
+<div class="hero">
+  <div class="hero-num">Business Model 01 / 07</div>
+  <div class="hero-title">DROP<span class="hl">SHIPPING</span>MASTERY</div>
+  <div class="hero-desc">De zero a ta premiere vente - tout pour lancer, optimiser et scaler une boutique dropshipping rentable en 2025.</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="sn" style="color:var(--blue)">6</span><span class="sl">Chapitres</span></div>
+    <div class="stat"><span class="sn" style="color:var(--gold)">13</span><span class="sl">Lecons</span></div>
+    <div class="stat"><span class="sn" style="color:var(--green)">5</span><span class="sl">Outils IA</span></div>
+    <div class="stat"><span class="sn" style="color:var(--text)">3-4</span><span class="sl">Sem.</span></div>
+  </div>
+</div>
+<div class="chnav">
+  <button class="chbtn active" onclick="ch(0,this)">01 Fondations</button>
+  <button class="chbtn" onclick="ch(1,this)">02 Niche &amp; Produit</button>
+  <button class="chbtn" onclick="ch(2,this)">03 Boutique</button>
+  <button class="chbtn" onclick="ch(3,this)">04 Publicite</button>
+  <button class="chbtn" onclick="ch(4,this)">05 Optimisation</button>
+  <button class="chbtn" onclick="ch(5,this)">06 Scale</button>
+</div>
+
+<!-- CH1 -->
+
+<div class="panel active" id="ch0">
+<div class="prog"><div class="progt">Progression Ch.1</div><div class="progt2"><div class="progf" id="pf0" style="width:0%"></div></div><div class="progi"><span id="pt0">0/3 lecons</span><span id="pp0">0%</span></div></div>
+
+<div class="lesson" id="l0">
+<div class="lhdr" onclick="tl(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">C est quoi le dropshipping ?</div><div class="lmeta">Fondamentaux - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">Definition</div><div class="btext"><p>Le dropshipping c est vendre des produits physiques <strong>sans jamais les stocker</strong>. Tu transmets la commande au fournisseur qui livre directement ton client. Tu es l intermediaire.</p></div></div>
+<div class="box blue"><div class="bt blue">Le flux d une vente</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Client commande (29EUR)</div><div class="sdesc">L argent arrive sur ton compte Stripe/PayPal.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Tu transmets au fournisseur (auto)</div><div class="sdesc">DSers envoie la commande. Tu paies 8EUR. La difference = ta marge.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Fournisseur livre au client</div><div class="sdesc">Directement. Tu ne touches pas le produit.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">Tu empoche la marge</div><div class="sdesc"><strong>29 - 8 - 3EUR livraison = 18EUR de marge brute par vente.</strong></div></div></div>
+</div></div>
+<div class="box green"><div class="bt green">Le vrai avantage</div><div class="btext">Tu testes des dizaines de produits sans investir en stock. Risque financier minimal.</div></div>
+<button class="rbtn g" onclick="md(0,0,3)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l1">
+<div class="lhdr" onclick="tl(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Avantages, inconvenients et verite</div><div class="lmeta">Analyse realiste - 7 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">Les vrais avantages</div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Zero stock</strong> - pas d investissement initial.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Scalable</strong> - 10 ou 10 000 ventes, meme logistique de ton cote.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Localisation libre</strong> - tu geres depuis n importe ou.</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Test rapide</strong> - un nouveau produit en 24h pour quelques euros.</span></div>
+</div>
+<div class="box red"><div class="bt red">Les inconvenients</div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Marges plus faibles</strong> - tu compenses par le volume.</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Dependance fournisseur</strong> - rupture = probleme pour toi.</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Concurrence elevee</strong> - tout le monde peut vendre les memes produits. Ton avantage = le marketing.</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Delais livraison</strong> - AliExpress = 10-30 jours. A bien communiquer.</span></div>
+</div>
+<div class="box green"><div class="bt green">La verite que personne dit</div><div class="btext">Le drop n est pas passif au debut. 2-3 mois de travail serieux. Apres ca, tres scalable et satisfaisant.</div></div>
+<button class="rbtn g" onclick="md(1,0,3)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l2">
+<div class="lhdr" onclick="tl(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz interactif - 3 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="qq"><div class="qqt">Dans le dropshipping, qui expedie le produit au client ?</div>
+<div class="qo" onclick="qa(this,false,0)">A. Toi depuis ton domicile</div>
+<div class="qo" onclick="qa(this,false,0)">B. Un entrepot que tu loues</div>
+<div class="qo" onclick="qa(this,true,0)">C. Le fournisseur directement</div>
+<div class="qo" onclick="qa(this,false,0)">D. Une plateforme logistique</div>
+<div class="qex" id="qe0">Correct ! Le fournisseur stocke et livre directement. Tu ne touches jamais le produit.</div>
+</div>
+<div class="qq"><div class="qqt">Tu vends 35EUR, fournisseur 9EUR, livraison 4EUR. Marge brute ?</div>
+<div class="qo" onclick="qa(this,false,1)">A. 9EUR</div>
+<div class="qo" onclick="qa(this,false,1)">B. 26EUR</div>
+<div class="qo" onclick="qa(this,true,1)">C. 22EUR</div>
+<div class="qo" onclick="qa(this,false,1)">D. 35EUR</div>
+<div class="qex" id="qe1">Correct ! 35 - 9 - 4 = 22EUR marge brute. Deduis le cout pub pour la marge nette.</div>
+</div>
+<div class="qq"><div class="qqt">Ton principal avantage concurrentiel en drop ?</div>
+<div class="qo" onclick="qa(this,true,2)">A. Le marketing et le branding</div>
+<div class="qo" onclick="qa(this,false,2)">B. Le prix le plus bas</div>
+<div class="qo" onclick="qa(this,false,2)">C. Le nombre de produits</div>
+<div class="qo" onclick="qa(this,false,2)">D. La vitesse de livraison</div>
+<div class="qex" id="qe2">Parfait ! Le produit est le meme partout. Ton avantage = marketing, branding et confiance inspiree.</div>
+</div>
+<button class="rbtn g" onclick="md(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH2 -->
+
+<div class="panel" id="ch1">
+<div class="prog"><div class="progt">Progression Ch.2</div><div class="progt2"><div class="progf" id="pf1" style="width:0%"></div></div><div class="progi"><span id="pt1">0/4 lecons</span><span id="pp1">0%</span></div></div>
+
+<div class="lesson" id="l3">
+<div class="lhdr" onclick="tl(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Choisir sa niche - la methode exacte</div><div class="lmeta">Strategie - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">4 criteres d une bonne niche</div>
+<div class="kp"><span class="ki">&#127919;</span><span><strong>Passion ou probleme</strong> - achat emotionnel ou fonctionnel.</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Pouvoir d achat</strong> - passionnes de golf depensent plus que des ados.</span></div>
+<div class="kp"><span class="ki">&#128202;</span><span><strong>Volume suffisant</strong> - verifiable sur Google Trends.</span></div>
+<div class="kp"><span class="ki">&#128257;</span><span><strong>Achat repetitif</strong> - consommables, accessoires = clients fidelisables.</span></div>
+</div>
+<div class="box blue"><div class="bt blue">Niches recommandees 2025</div>
+<div class="kp"><span class="ki">&#128062;</span><span><strong>Animaux</strong> - marche enormee, acheteurs passionnes, prix acceptes</span></div>
+<div class="kp"><span class="ki">&#127968;</span><span><strong>Maison &amp; deco</strong> - produits viraux TikTok, fort potentiel d impulsion</span></div>
+<div class="kp"><span class="ki">&#128170;</span><span><strong>Fitness &amp; sante</strong> - croissance constante, problemes concrets</span></div>
+<div class="kp"><span class="ki">&#128118;</span><span><strong>Bebe &amp; maternite</strong> - parents qui depensent sans compter</span></div>
+</div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur de niche IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Tes interets</span>
+<input class="inp" id="ni-i" type="text" placeholder="Ex: sport, animaux, gaming, cuisine...">
+<span class="lbl">Ta cible</span>
+<select class="sel" id="ni-c">
+<option value="hommes 18-35 ans">Hommes 18-35</option>
+<option value="femmes 25-45 ans">Femmes 25-45</option>
+<option value="parents avec enfants">Parents</option>
+<option value="seniors 50+">Seniors 50+</option>
+</select>
+<span class="lbl">Budget pub mensuel</span>
+<select class="sel" id="ni-b">
+<option value="50-150EUR/mois">50-150EUR/mois</option>
+<option value="150-500EUR/mois">150-500EUR/mois</option>
+<option value="500EUR+/mois">500EUR+/mois</option>
+</select>
+<button class="rbtn" id="ni-btn" onclick="rNiche()">TROUVER MA NICHE</button>
+<div class="ld" id="ni-ld"><div class="ldf"></div></div>
+<div class="out" id="ni-out"></div>
+<button class="cpbtn" id="ni-cp" onclick="doCopy('ni-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(3,1,4)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l4">
+<div class="lhdr" onclick="tl(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Trouver un produit gagnant</div><div class="lmeta">Recherche produit - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">Criteres d un produit gagnant</div>
+<div class="kp"><span class="ki">&#128230;</span><span><strong>Prix fournisseur 5-25EUR</strong> pour vendre 25-80EUR - marge 3x mini</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Note AliExpress &gt;4.5</strong> et 500+ commandes</span></div>
+<div class="kp"><span class="ki">&#127919;</span><span><strong>Probleme evident</strong> - facilite le copywriting et le ciblage</span></div>
+<div class="kp"><span class="ki">&#127916;</span><span><strong>Visuel fort</strong> - bonne video TikTok = potentiel viral</span></div>
+<div class="kp"><span class="ki">&#128683;</span><span><strong>Pas de marque connue</strong> - evite les problemes legaux</span></div>
+</div>
+<div class="box blue"><div class="bt blue">Ou trouver les produits gagnants</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">TikTok #TikTokMadeMeBuyIt</div><div class="sdesc">Produits viraux = meilleurs candidats. Outils spy: Minea, AdSpy, TikTok Creative Center.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">AliExpress Best Sellers</div><div class="sdesc">Filtrer commandes + notes dans ta niche. 1000+ commandes = valide par le marche.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Facebook Ads Library</div><div class="sdesc">Pub concurrent depuis 2+ mois = produit qui convertit. Preuve la plus fiable.</div></div></div>
+</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Analyseur de produit IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Decris ton produit</span>
+<textarea class="inp" id="pr-d" rows="3" placeholder="Ex: Masque LED anti-acne, prix 12EUR AliExpress, note 4.7, 2300 commandes..."></textarea>
+<span class="lbl">Prix de vente envisage</span>
+<input class="inp" id="pr-p" type="text" placeholder="Ex: 39EUR">
+<button class="rbtn" id="pr-btn" onclick="rProd()">ANALYSER CE PRODUIT</button>
+<div class="ld" id="pr-ld"><div class="ldf"></div></div>
+<div class="out" id="pr-out"></div>
+<button class="cpbtn" id="pr-cp" onclick="doCopy('pr-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(4,1,4)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l5">
+<div class="lhdr" onclick="tl(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Etude de cas - 0 a 8000EUR/mois</div><div class="lmeta">Cas reel - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="cs"><div class="cshdr">Boutique Animaux - 4 mois</div>
+<div class="csbody">
+<div class="csrow"><span class="csl">Niche</span><span class="csv">Accessoires chiens/chats</span></div>
+<div class="csrow"><span class="csl">Produit gagnant</span><span class="csv">Fontaine a eau automatique</span></div>
+<div class="csrow"><span class="csl">Prix fournisseur</span><span class="csv">11EUR</span></div>
+<div class="csrow"><span class="csl">Prix de vente</span><span class="csv go">38EUR</span></div>
+<div class="csrow"><span class="csl">CA mois 1</span><span class="csv">820EUR</span></div>
+<div class="csrow"><span class="csl">CA mois 4</span><span class="csv g">8 400EUR</span></div>
+<div class="csrow"><span class="csl">Marge nette mois 4</span><span class="csv g">2 900EUR</span></div>
+<div class="csq">"J ai commence avec 150EUR de budget pub et une video TikTok tournee chez moi avec mon chat. 280k vues en 3 jours. J ai reinvesti chaque euro. Produit gagnant trouve apres 3 semaines et 8 produits testes."</div>
+</div></div>
+<div class="box green"><div class="bt green">La lecon</div><div class="btext">Le succes vient rarement du 1er produit. Teste systematiquement et reinvestis rapidement.</div></div>
+<button class="rbtn g" onclick="md(5,1,4)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l6">
+<div class="lhdr" onclick="tl(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Checklist - Valider un produit</div><div class="lmeta">Checklist interactive - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Note AliExpress superieure a 4.5 etoiles</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Plus de 500 commandes sur AliExpress</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Marge brute d au moins 3x le prix fournisseur</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Produit non fragile, poids raisonnable</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Aucune marque visible sur le produit</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Resout un probleme clair ou genere une emotion</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Potentiel de contenu video (demo 15-30 secondes)</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Delai de livraison inferieur a 20 jours</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Introuvable facilement en grande surface ou Amazon France</span></div>
+<button class="rbtn g" onclick="md(6,1,4)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH3 -->
+
+<div class="panel" id="ch2">
+<div class="prog"><div class="progt">Progression Ch.3</div><div class="progt2"><div class="progf" id="pf2" style="width:0%"></div></div><div class="progi"><span id="pt2">0/3 lecons</span><span id="pp2">0%</span></div></div>
+
+<div class="lesson" id="l7">
+<div class="lhdr" onclick="tl(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Creer sa boutique Shopify de A a Z</div><div class="lmeta">Technique - 12 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="tcard"><div class="tico">&#128722;</div><div><div class="tname">Shopify</div><div class="trole">Plateforme e-commerce</div><div class="tdesc">La reference drop. Plan Basic 29USD/mois suffisant pour debuter.</div></div></div>
+<div class="tcard"><div class="tico">&#128279;</div><div><div class="tname">DSers</div><div class="trole">Import AliExpress - Shopify</div><div class="tdesc">Importe produits en 1 clic, transmets les commandes automatiquement. Gratuit jusqu a 3000 produits.</div></div></div>
+<div class="box blue" style="margin-top:12px"><div class="bt blue">Elements indispensables</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Nom de marque clair</div><div class="sdesc">Evoque la niche sans la limiter. Ex: PawHaven animaux, FlexPeak fitness.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Theme Dawn (gratuit)</div><div class="sdesc">Minimaliste, mobile-first, rapide. Evite les themes surcharges.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Page produit optimisee</div><div class="sdesc">Photos HD + video + description benefices + avis + garantie. Tout visible sans scroller.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">Pages legales</div><div class="sdesc">Shopify les genere auto. CGV, confidentialite, remboursement. Indispensable.</div></div></div>
+</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur nom de boutique</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Ta niche</span>
+<input class="inp" id="sh-n" type="text" placeholder="Ex: accessoires chiens, fitness femme, gadgets maison...">
+<span class="lbl">Style</span>
+<select class="sel" id="sh-s"><option value="moderne et minimaliste">Moderne</option><option value="premium et luxueux">Premium</option><option value="fun et accessible">Fun</option><option value="nature eco">Eco</option></select>
+<button class="rbtn" id="sh-btn" onclick="rShop()">GENERER 10 NOMS</button>
+<div class="ld" id="sh-ld"><div class="ldf"></div></div>
+<div class="out" id="sh-out"></div>
+<button class="cpbtn" id="sh-cp" onclick="doCopy('sh-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(7,2,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l8">
+<div class="lhdr" onclick="tl(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">Ecrire une page produit qui vend</div><div class="lmeta">Copywriting - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">La structure gagnante</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Titre - le benefice pas le produit</div><div class="sdesc">Pas "Fontaine a eau automatique" mais <strong>"Votre chat boit enfin assez - plus jamais d inquietude"</strong>.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Video en premier</div><div class="sdesc">Montre le produit EN ACTION avec une vraie personne. C est ce qui fait basculer a l achat.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">5-7 bullets benefices</div><div class="sdesc">Format: ok [Benefice] - [Pourquoi c est important]. Transformation, pas specs techniques.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">15-20 avis avec photos</div><div class="sdesc">Preuve sociale juste avant "Ajouter au panier" = +30% conversions.</div></div></div>
+<div class="step"><div class="snum">5</div><div><div class="stitle">Garantie + urgence</div><div class="sdesc">Satisfait ou rembourse 30j + stock limite. Cree friction a ne PAS acheter.</div></div></div>
+</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur page produit IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Ton produit</span>
+<input class="inp" id="pp-p" type="text" placeholder="Ex: Ceinture chauffante lombaire, masque LED anti-acne...">
+<span class="lbl">Ta cible</span>
+<input class="inp" id="pp-c" type="text" placeholder="Ex: femmes 30-50 ans avec maux de dos...">
+<span class="lbl">Prix de vente</span>
+<input class="inp" id="pp-pr" type="text" placeholder="Ex: 39EUR">
+<button class="rbtn" id="pp-btn" onclick="rPage()">GENERER MA PAGE PRODUIT</button>
+<div class="ld" id="pp-ld"><div class="ldf"></div></div>
+<div class="out" id="pp-out"></div>
+<button class="cpbtn" id="pp-cp" onclick="doCopy('pp-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(8,2,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l9">
+<div class="lhdr" onclick="tl(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Checklist lancement boutique</div><div class="lmeta">Checklist interactive - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Domaine personnalise achete et connecte</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Stripe et PayPal actives et testes</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">DSers installe et produit(s) importes</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Page produit avec video et photos HD</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Minimum 10 avis importes</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Pages legales configurees</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Test complet d une commande passe</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Pixel TikTok ou Meta installe</span></div>
+<button class="rbtn g" onclick="md(9,2,3)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH4 -->
+
+<div class="panel" id="ch3">
+<div class="lesson" id="l10">
+<div class="lhdr" onclick="tl(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">TikTok Ads vs Meta Ads</div><div class="lmeta">Strategie pub - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">Comparaison 2025</div>
+<div class="kp"><span class="ki">&#127925;</span><span><strong>TikTok Ads</strong> - CPC bas, audience 18-35, viralite organique, video obligatoire.</span></div>
+<div class="kp"><span class="ki">&#128216;</span><span><strong>Meta Ads</strong> - ciblage precis, audience 18-65+, photo ou video, retargeting puissant.</span></div>
+</div>
+<div class="box green"><div class="bt green">Recommandation pour debuter</div><div class="btext">Commence par TikTok Ads si produit visuel et budget inferieur a 500EUR/mois. Ajoute Meta une fois produit valide.</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur script pub video</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Ton produit</span>
+<input class="inp" id="pu-p" type="text" placeholder="Ex: Ceinture chauffante anti-douleur lombaire...">
+<span class="lbl">Cible</span>
+<input class="inp" id="pu-c" type="text" placeholder="Ex: femmes 30-50 ans avec douleurs de dos...">
+<div class="r2">
+<div class="c"><span class="lbl">Plateforme</span><select class="sel" id="pu-pl"><option value="TikTok Ads">TikTok</option><option value="Meta Ads">Meta</option></select></div>
+<div class="c"><span class="lbl">Duree</span><select class="sel" id="pu-du"><option value="15 secondes">15 sec</option><option value="30 secondes">30 sec</option><option value="60 secondes">60 sec</option></select></div>
+</div>
+<button class="rbtn" id="pu-btn" onclick="rPub()">GENERER MON SCRIPT PUB</button>
+<div class="ld" id="pu-ld"><div class="ldf"></div></div>
+<div class="out" id="pu-out"></div>
+<button class="cpbtn" id="pu-cp" onclick="doCopy('pu-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="toast('Lecon validee &#128293;')" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH5 -->
+
+<div class="panel" id="ch4">
+<div class="lesson" id="l11">
+<div class="lhdr" onclick="tl(11)"><div class="lnum">12</div><div class="linfo"><div class="ltitle">Lire et interpreter ses stats pub</div><div class="lmeta">Data - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">Les KPIs essentiels</div>
+<div class="kp"><span class="ki">&#128065;</span><span><strong>CPM</strong> - cout 1000 impressions. Vise 5-12EUR. &gt;15EUR = probleme.</span></div>
+<div class="kp"><span class="ki">&#128432;</span><span><strong>CTR</strong> - % de clics sur ta pub. Bon: &gt;1.5% Meta, &gt;1% TikTok.</span></div>
+<div class="kp"><span class="ki">&#128179;</span><span><strong>CVR</strong> - % visiteurs qui achetent. Bon: 1-3%. &lt;1% = probleme page produit.</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>ROAS</strong> - CA / budget pub. Vise &gt;2.5 pour etre rentable.</span></div>
+<div class="kp"><span class="ki">&#128230;</span><span><strong>CPP</strong> - cout par achat. Doit etre inferieur a ta marge nette.</span></div>
+</div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Interpreteur de stats IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Tes stats</span>
+<textarea class="inp" id="st-in" rows="4" placeholder="Ex: CPM 18EUR, CTR 0.8%, 230 visiteurs, 2 ventes, ROAS 1.2, budget 45EUR..."></textarea>
+<span class="lbl">Ta marge nette par vente</span>
+<input class="inp" id="st-ma" type="text" placeholder="Ex: 22EUR">
+<button class="rbtn" id="st-btn" onclick="rStats()">ANALYSER MES STATS</button>
+<div class="ld" id="st-ld"><div class="ldf"></div></div>
+<div class="out" id="st-out"></div>
+<button class="cpbtn" id="st-cp" onclick="doCopy('st-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="toast('Lecon validee &#128293;')" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH6 -->
+
+<div class="panel" id="ch5">
+<div class="lesson" id="l12">
+<div class="lhdr" onclick="tl(12)"><div class="lnum">13</div><div class="linfo"><div class="ltitle">Scaler de 1000 a 10 000EUR/mois</div><div class="lmeta">Growth - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box blue"><div class="bt blue">5 leviers du scale</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Budget progressif</div><div class="sdesc">+20% toutes les 48-72h. Jamais de doublement brutal - ca reset l algorithme.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Dupliquer les campagnes gagnantes</div><div class="sdesc">Nouvelles campagnes, memes creatifs, nouvelles audiences. Diversifie pour ne pas saturer.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Retargeting</div><div class="sdesc">Visiteurs qui n ont pas achete. Convertissent 3-5x mieux et moins cher.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">Email marketing auto</div><div class="sdesc">Abandons panier + post-achat upsell + re-engagement. Le mail est gratuit = pur profit.</div></div></div>
+<div class="step"><div class="snum">5</div><div><div class="stitle">Contenu organique</div><div class="sdesc">TikTok/Instagram gratuits. Une video virale = autant de ventes que 500EUR de pub.</div></div></div>
+</div></div>
+<div class="box green"><div class="bt green">Le secret du scale</div><div class="btext">80% creatifs, 20% budget. Si ca scale plus, le probleme vient des visuels - teste de nouveaux angles et hooks.</div></div>
+<button class="rbtn g" onclick="toast('Module Dropshipping complete ! &#128293;')">MODULE COMPLETE &#10003;</button>
+</div></div>
+
+<div style="background:linear-gradient(135deg,rgba(79,163,232,.08),rgba(201,168,76,.06));border:1px solid rgba(79,163,232,.2);border-radius:8px;padding:18px;margin-top:6px">
+<div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:3px;color:var(--blue);margin-bottom:12px">PLAN DE LANCEMENT</div>
+<div style="font-size:12px;color:rgba(240,240,255,.7);line-height:1.9">
+<strong style="color:var(--text)">Sem 1-2 :</strong> Choisir niche + tester 5-8 produits<br>
+<strong style="color:var(--text)">Sem 3-4 :</strong> Boutique + premieres pubs<br>
+<strong style="color:var(--text)">Mois 2 :</strong> Optimiser ce qui marche<br>
+<strong style="color:var(--text)">Mois 3 :</strong> Scale + retargeting + emails<br>
+<strong style="color:var(--green)">Objectif mois 3 : 2 000 - 5 000EUR de CA</strong>
+</div>
+<a href="module-business-models.html" style="display:block;margin-top:14px;background:linear-gradient(135deg,var(--blue),#2a7ab8);border-radius:3px;padding:12px;text-align:center;text-decoration:none"><span style="font-family:Bebas Neue,sans-serif;font-size:13px;letter-spacing:3px;color:#fff">PASSER AU MODULE SUIVANT &#8594;</span></a>
+</div>
+</div>
+
+<div class="toast" id="tk"></div>
+<script>
+var u=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!u)window.location.href="index.html";
+function ch(i,el){document.querySelectorAll(".chbtn").forEach(function(b){b.classList.remove("active")});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});el.classList.add("active");document.getElementById("ch"+i).classList.add("active");window.scrollTo(0,0);}
+function tl(i){document.getElementById("l"+i).classList.toggle("open")}
+var lch=[[0,1,2],[3,4,5,6],[7,8,9]];var dL={};
+function md(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById("pf"+ch);if(f)f.style.width=pct+"%";var t=document.getElementById("pt"+ch);if(t)t.textContent=cnt+"/"+tot+" lecons";var p=document.getElementById("pp"+ch);if(p)p.textContent=pct+"%";toast("Lecon validee ! &#128293;");}
+function qa(el,ok,qIdx){el.classList.add(ok?"ok":"ko");if(!ok){setTimeout(function(){el.parentElement.querySelectorAll(".qo").forEach(function(o){if(!o.classList.contains("ko"))o.classList.add("ok")})},700)}var e=document.getElementById("qe"+qIdx);if(e)e.style.display="block";}
+function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
+function sl(id,on){var e=document.getElementById(id);if(e)e.style.display=on?"block":"none"}
+function showO(oid,cpid,txt){var o=document.getElementById(oid);if(o){o.textContent=txt;o.style.display="block"}var c=document.getElementById(cpid);if(c)c.style.display="block"}
+async function groq(p){var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer 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"},body:JSON.stringify({model:"llama-3.3-70b-versatile",max_tokens:1200,messages:[{role:"system",content:"Tu es expert e-commerce et dropshipping francophone. Conseils ultra concrets, tutoiement."},{role:"user",content:p}]})});var d=await r.json();return d.choices&&d.choices[0]?d.choices[0].message.content:"Erreur - reessaie.";}
+async function rNiche(){var i=gv("ni-i"),c=gv("ni-c"),b=gv("ni-b");if(!i){toast("Entre tes interets");return}sl("ni-ld",true);document.getElementById("ni-btn").disabled=true;try{var r=await groq("Dropshipping. Interets: "+i+". Cible: "+c+". Budget: "+b+".
+Top 3 niches avec justification, 2-3 produits gagnants par niche (prix fournisseur/vente), potentiel marge, recommandation prioritaire. Tres specifique.");showO("ni-out","ni-cp",r)}catch(e){toast("Erreur")}sl("ni-ld",false);document.getElementById("ni-btn").disabled=false;}
+async function rProd(){var d=gv("pr-d"),p=gv("pr-p");if(!d){toast("Decris ton produit");return}sl("pr-ld",true);document.getElementById("pr-btn").disabled=true;try{var r=await groq("Analyse produit dropshipping:
+"+d+"
+Prix vente: "+p+"
+Donne: score/10, analyse marge, points forts, risques, recommendation LANCER/PRUDENCE/EVITER, angle marketing. Honnete.");showO("pr-out","pr-cp",r)}catch(e){toast("Erreur")}sl("pr-ld",false);document.getElementById("pr-btn").disabled=false;}
+async function rShop(){var n=gv("sh-n"),s=gv("sh-s");if(!n){toast("Entre ta niche");return}sl("sh-ld",true);document.getElementById("sh-btn").disabled=true;try{var r=await groq("Genere 10 noms boutique dropshipping pour: "+n+". Style: "+s+". Memorable, prononable, evoque la niche, unique. Pour chaque: pourquoi ca marche en 1 phrase.");showO("sh-out","sh-cp",r)}catch(e){toast("Erreur")}sl("sh-ld",false);document.getElementById("sh-btn").disabled=false;}
+async function rPage(){var p=gv("pp-p"),c=gv("pp-c"),pr=gv("pp-pr");if(!p){toast("Entre ton produit");return}sl("pp-ld",true);document.getElementById("pp-btn").disabled=true;try{var r=await groq("Page produit Shopify pour:
+Produit: "+p+"
+Cible: "+c+"
+Prix: "+pr+"
+Inclus: titre accrocheur (benefice pas produit), sous-titre, 5 bullets ok [benefice]-[pourquoi], description 3-4 lignes, garantie, CTA. Convainquant, empathique.");showO("pp-out","pp-cp",r)}catch(e){toast("Erreur")}sl("pp-ld",false);document.getElementById("pp-btn").disabled=false;}
+async function rPub(){var p=gv("pu-p"),c=gv("pu-c"),pl=gv("pu-pl"),du=gv("pu-du");if(!p){toast("Entre ton produit");return}sl("pu-ld",true);document.getElementById("pu-btn").disabled=true;try{var r=await groq("Script pub video "+du+" pour "+pl+".
+Produit: "+p+"
+Cible: "+c+"
+[0-3s] HOOK / [3-10s] PROBLEME / [10-20s] SOLUTION / [fin] PREUVE+CTA. Inclus indications camera. Naturel pas publicitaire.");showO("pu-out","pu-cp",r)}catch(e){toast("Erreur")}sl("pu-ld",false);document.getElementById("pu-btn").disabled=false;}
+async function rStats(){var s=gv("st-in"),m=gv("st-ma");if(!s){toast("Entre tes stats");return}sl("st-ld",true);document.getElementById("st-btn").disabled=true;try{var r=await groq("Stats campagne drop:
+"+s+"
+Marge nette: "+m+"
+Dis: ce qui va/probleme, cause principale (pub/page/prix?), 3 actions concretes maintenant, rentable ou pas. Direct et honnete.");showO("st-out","st-cp",r)}catch(e){toast("Erreur")}sl("st-ld",false);document.getElementById("st-btn").disabled=false;}
+function doCopy(id){var txt=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast("Copie!")});else{var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);toast("Copie!");}}
+function toast(m){var t=document.getElementById("tk");t.textContent=m;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
+</script>
+</body>
+</html>
