@@ -484,38 +484,165 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 
 <div class="toast" id="tk"></div>
 <script>
-var u={id:"guest",name:"Membre"};try{var _s=sessionStorage.getItem("dma_user");if(_s)u=JSON.parse(_s);}catch(e){}
-function ch(i,el){document.querySelectorAll(".chbtn").forEach(function(b){b.classList.remove("active")});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});el.classList.add("active");document.getElementById("ch"+i).classList.add("active");window.scrollTo(0,0);}
-function tl(i){document.getElementById("l"+i).classList.toggle("open")}
-var lch=[[0,1,2],[3,4,5,6],[7,8,9]];var dL={};
-function md(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById("pf"+ch);if(f)f.style.width=pct+"%";var t=document.getElementById("pt"+ch);if(t)t.textContent=cnt+"/"+tot+" lecons";var p=document.getElementById("pp"+ch);if(p)p.textContent=pct+"%";toast("Lecon validee ! &#128293;");}
-function qa(el,ok,qIdx){el.classList.add(ok?"ok":"ko");if(!ok){setTimeout(function(){el.parentElement.querySelectorAll(".qo").forEach(function(o){if(!o.classList.contains("ko"))o.classList.add("ok")})},700)}var e=document.getElementById("qe"+qIdx);if(e)e.style.display="block";}
-function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
-function sl(id,on){var e=document.getElementById(id);if(e)e.style.display=on?"block":"none"}
-function showO(oid,cpid,txt){var o=document.getElementById(oid);if(o){o.textContent=txt;o.style.display="block"}var c=document.getElementById(cpid);if(c)c.style.display="block"}
-async function groq(p){var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer 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"},body:JSON.stringify({model:"llama-3.3-70b-versatile",max_tokens:1200,messages:[{role:"system",content:"Tu es expert e-commerce et dropshipping francophone. Conseils ultra concrets, tutoiement."},{role:"user",content:p}]})});var d=await r.json();return d.choices&&d.choices[0]?d.choices[0].message.content:"Erreur - reessaie.";}
-async function rNiche(){var i=gv("ni-i"),c=gv("ni-c"),b=gv("ni-b");if(!i){toast("Entre tes interets");return}sl("ni-ld",true);document.getElementById("ni-btn").disabled=true;try{var r=await groq("Dropshipping. Interets: "+i+". Cible: "+c+". Budget: "+b+".
-Top 3 niches avec justification, 2-3 produits gagnants par niche (prix fournisseur/vente), potentiel marge, recommandation prioritaire. Tres specifique.");showO("ni-out","ni-cp",r)}catch(e){toast("Erreur")}sl("ni-ld",false);document.getElementById("ni-btn").disabled=false;}
-async function rProd(){var d=gv("pr-d"),p=gv("pr-p");if(!d){toast("Decris ton produit");return}sl("pr-ld",true);document.getElementById("pr-btn").disabled=true;try{var r=await groq("Analyse produit dropshipping:
-"+d+"
-Prix vente: "+p+"
-Donne: score/10, analyse marge, points forts, risques, recommendation LANCER/PRUDENCE/EVITER, angle marketing. Honnete.");showO("pr-out","pr-cp",r)}catch(e){toast("Erreur")}sl("pr-ld",false);document.getElementById("pr-btn").disabled=false;}
-async function rShop(){var n=gv("sh-n"),s=gv("sh-s");if(!n){toast("Entre ta niche");return}sl("sh-ld",true);document.getElementById("sh-btn").disabled=true;try{var r=await groq("Genere 10 noms boutique dropshipping pour: "+n+". Style: "+s+". Memorable, prononable, evoque la niche, unique. Pour chaque: pourquoi ca marche en 1 phrase.");showO("sh-out","sh-cp",r)}catch(e){toast("Erreur")}sl("sh-ld",false);document.getElementById("sh-btn").disabled=false;}
-async function rPage(){var p=gv("pp-p"),c=gv("pp-c"),pr=gv("pp-pr");if(!p){toast("Entre ton produit");return}sl("pp-ld",true);document.getElementById("pp-btn").disabled=true;try{var r=await groq("Page produit Shopify pour:
-Produit: "+p+"
-Cible: "+c+"
-Prix: "+pr+"
-Inclus: titre accrocheur (benefice pas produit), sous-titre, 5 bullets ok [benefice]-[pourquoi], description 3-4 lignes, garantie, CTA. Convainquant, empathique.");showO("pp-out","pp-cp",r)}catch(e){toast("Erreur")}sl("pp-ld",false);document.getElementById("pp-btn").disabled=false;}
-async function rPub(){var p=gv("pu-p"),c=gv("pu-c"),pl=gv("pu-pl"),du=gv("pu-du");if(!p){toast("Entre ton produit");return}sl("pu-ld",true);document.getElementById("pu-btn").disabled=true;try{var r=await groq("Script pub video "+du+" pour "+pl+".
-Produit: "+p+"
-Cible: "+c+"
-[0-3s] HOOK / [3-10s] PROBLEME / [10-20s] SOLUTION / [fin] PREUVE+CTA. Inclus indications camera. Naturel pas publicitaire.");showO("pu-out","pu-cp",r)}catch(e){toast("Erreur")}sl("pu-ld",false);document.getElementById("pu-btn").disabled=false;}
-async function rStats(){var s=gv("st-in"),m=gv("st-ma");if(!s){toast("Entre tes stats");return}sl("st-ld",true);document.getElementById("st-btn").disabled=true;try{var r=await groq("Stats campagne drop:
-"+s+"
-Marge nette: "+m+"
-Dis: ce qui va/probleme, cause principale (pub/page/prix?), 3 actions concretes maintenant, rentable ou pas. Direct et honnete.");showO("st-out","st-cp",r)}catch(e){toast("Erreur")}sl("st-ld",false);document.getElementById("st-btn").disabled=false;}
-function doCopy(id){var txt=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast("Copie!")});else{var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);toast("Copie!");}}
-function toast(m){var t=document.getElementById("tk");t.textContent=m;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
+// DMA Module - v3 fix
+(function(){
+  // Session - jamais bloquant
+  var u = {id:"guest", name:"Membre"};
+  try { var s = sessionStorage.getItem("dma_user"); if(s) u = JSON.parse(s); } catch(e){}
+
+// Navigation chapitres
+window.ch = function(i, el) {
+document.querySelectorAll(”.chbtn”).forEach(function(b){ b.classList.remove(“active”); });
+document.querySelectorAll(”.panel”).forEach(function(p){ p.classList.remove(“active”); });
+el.classList.add(“active”);
+var panel = document.getElementById(“ch” + i);
+if(panel) panel.classList.add(“active”);
+window.scrollTo(0, 0);
+};
+
+// Toggle lecon
+window.tl = function(i) {
+var l = document.getElementById(“l” + i);
+if(l) l.classList.toggle(“open”);
+};
+
+// Marquer lecon done
+var dL = {};
+var lch = [[0,1,2],[3,4,5,6],[7,8,9]];
+window.md = function(li, ch, tot) {
+dL[li] = true;
+var cnt = 0;
+(lch[ch] || []).forEach(function(l){ if(dL[l]) cnt++; });
+var pct = Math.round(cnt / tot * 100);
+var f = document.getElementById(“pf” + ch);
+if(f) f.style.width = pct + “%”;
+var t = document.getElementById(“pt” + ch);
+if(t) t.textContent = cnt + “/” + tot + “ lecons”;
+var p = document.getElementById(“pp” + ch);
+if(p) p.textContent = pct + “%”;
+toast(“Lecon validee !”);
+};
+
+// Quiz
+window.qa = function(el, ok, qIdx) {
+el.classList.add(ok ? “ok” : “ko”);
+if(!ok){
+setTimeout(function(){
+el.parentElement.querySelectorAll(”.qo”).forEach(function(o){
+if(!o.classList.contains(“ko”)) o.classList.add(“ok”);
+});
+}, 700);
+}
+var e = document.getElementById(“qe” + qIdx);
+if(e) e.style.display = “block”;
+};
+
+// IA Groq
+function gv(id){ var e = document.getElementById(id); return e ? e.value.trim() : “”; }
+function sl(id, on){ var e = document.getElementById(id); if(e) e.style.display = on ? “block” : “none”; }
+function showO(oid, cpid, txt){
+var o = document.getElementById(oid);
+if(o){ o.textContent = txt; o.style.display = “block”; }
+var c = document.getElementById(cpid);
+if(c) c.style.display = “block”;
+}
+
+async function groq(prompt){
+try {
+var r = await fetch(“https://api.groq.com/openai/v1/chat/completions”, {
+method: “POST”,
+headers: { “Content-Type”: “application/json”, “Authorization”: “Bearer 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” },
+body: JSON.stringify({ model: “llama-3.3-70b-versatile”, max_tokens: 1200, messages: [
+{ role: “system”, content: “Tu es expert e-commerce et dropshipping francophone. Conseils concrets, tutoiement.” },
+{ role: “user”, content: prompt }
+]})
+});
+var d = await r.json();
+return d.choices && d.choices[0] ? d.choices[0].message.content : “Erreur - reessaie.”;
+} catch(e) { return “Erreur reseau - verifie ta connexion.”; }
+}
+
+window.rNiche = async function(){
+var i=gv(“ni-i”), c=gv(“ni-c”), b=gv(“ni-b”);
+if(!i){ toast(“Entre tes interets”); return; }
+sl(“ni-ld”, true); document.getElementById(“ni-btn”).disabled = true;
+var r = await groq(“Dropshipping. Interets: “+i+”. Cible: “+c+”. Budget: “+b+”.
+Top 3 niches avec justification, 2-3 produits gagnants par niche (prix fournisseur/vente), potentiel marge, recommandation. Tres specifique.”);
+showO(“ni-out”, “ni-cp”, r);
+sl(“ni-ld”, false); document.getElementById(“ni-btn”).disabled = false;
+};
+
+window.rProd = async function(){
+var d=gv(“pr-d”), p=gv(“pr-p”);
+if(!d){ toast(“Decris ton produit”); return; }
+sl(“pr-ld”, true); document.getElementById(“pr-btn”).disabled = true;
+var r = await groq(“Analyse produit dropshipping:
+“+d+”
+Prix vente: “+p+”
+Score/10, analyse marge, points forts, risques, LANCER/PRUDENCE/EVITER, angle marketing.”);
+showO(“pr-out”, “pr-cp”, r);
+sl(“pr-ld”, false); document.getElementById(“pr-btn”).disabled = false;
+};
+
+window.rShop = async function(){
+var n=gv(“sh-n”), s=gv(“sh-s”);
+if(!n){ toast(“Entre ta niche”); return; }
+sl(“sh-ld”, true); document.getElementById(“sh-btn”).disabled = true;
+var r = await groq(“10 noms boutique dropshipping pour: “+n+”. Style: “+s+”. Memorable, prononable, unique. Pourquoi ca marche en 1 phrase chacun.”);
+showO(“sh-out”, “sh-cp”, r);
+sl(“sh-ld”, false); document.getElementById(“sh-btn”).disabled = false;
+};
+
+window.rPage = async function(){
+var p=gv(“pp-p”), c=gv(“pp-c”), pr=gv(“pp-pr”);
+if(!p){ toast(“Entre ton produit”); return; }
+sl(“pp-ld”, true); document.getElementById(“pp-btn”).disabled = true;
+var r = await groq(“Page produit Shopify:
+Produit: “+p+”
+Cible: “+c+”
+Prix: “+pr+”
+Titre benefice, sous-titre, 5 bullets ok, description 3-4 lignes, garantie, CTA.”);
+showO(“pp-out”, “pp-cp”, r);
+sl(“pp-ld”, false); document.getElementById(“pp-btn”).disabled = false;
+};
+
+window.rPub = async function(){
+var p=gv(“pu-p”), c=gv(“pu-c”), pl=gv(“pu-pl”), du=gv(“pu-du”);
+if(!p){ toast(“Entre ton produit”); return; }
+sl(“pu-ld”, true); document.getElementById(“pu-btn”).disabled = true;
+var r = await groq(“Script pub “+du+” pour “+pl+”.
+Produit: “+p+”
+Cible: “+c+”
+[0-3s] HOOK / [3-10s] PROBLEME / [10-20s] SOLUTION / CTA. Naturel.”);
+showO(“pu-out”, “pu-cp”, r);
+sl(“pu-ld”, false); document.getElementById(“pu-btn”).disabled = false;
+};
+
+window.rStats = async function(){
+var s=gv(“st-in”), m=gv(“st-ma”);
+if(!s){ toast(“Entre tes stats”); return; }
+sl(“st-ld”, true); document.getElementById(“st-btn”).disabled = true;
+var r = await groq(“Stats campagne drop:
+“+s+”
+Marge nette: “+m+”
+Ce qui va/probleme, cause principale, 3 actions concretes, rentable ou pas.”);
+showO(“st-out”, “st-cp”, r);
+sl(“st-ld”, false); document.getElementById(“st-btn”).disabled = false;
+};
+
+window.doCopy = function(id){
+var txt = document.getElementById(id).textContent;
+if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ toast(“Copie!”); }); }
+else { var ta = document.createElement(“textarea”); ta.value = txt; ta.style.cssText = “position:fixed;top:0;left:0;opacity:0;font-size:16px”; document.body.appendChild(ta); ta.focus(); ta.select(); try{ document.execCommand(“copy”); }catch(e){} document.body.removeChild(ta); toast(“Copie!”); }
+};
+
+window.toast = function(m){
+var t = document.getElementById(“tk”);
+if(t){ t.textContent = m; t.style.display = “block”; setTimeout(function(){ t.style.display = “none”; }, 2500); }
+};
+
+})();
 </script>
+
 </body>
 </html>
