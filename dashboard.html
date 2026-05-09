@@ -3,299 +3,419 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>DMA — Espace Membres</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ── TOKENS ── */
+:root{
+  --ink:#0c0c0e;--paper:#f5f2ec;--cream:#ede9e0;
+  --red:#b8001a;--red-dim:rgba(184,0,26,.12);
+  --gold:#b8942a;--gold-dim:rgba(184,148,42,.1);
+  --smoke:rgba(12,12,14,.06);--smoke2:rgba(12,12,14,.04);
+  --rule:rgba(12,12,14,.08);
+  --serif:"Bebas Neue",serif;
+  --sans:"DM Sans",sans-serif;
+  --mono:"DM Mono",monospace;
+}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:#050505}
-body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
+html,body{min-height:100vh;font-family:var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden}
 
-/* HEADER */
-.header{background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:0 16px;height:52px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;position:sticky;top:0;z-index:50}
-.logo{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:5px;color:#f5f0e8}
-.logo span{color:#C9A84C}
-.hright{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:10px}
-.huser{font-size:10px;font-weight:600;letter-spacing:1px;color:rgba(245,240,232,.3);text-transform:uppercase}
-.hlogout{background:none;border:none;color:rgba(245,240,232,.25);font-size:16px;cursor:pointer;padding:4px;-webkit-appearance:none}
+/* ── NOISE TEXTURE ── */
+body::before{
+content:””;position:fixed;inset:0;
+background-image:url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+background-size:200px 200px;pointer-events:none;z-index:0;opacity:.6
+}
 
-/* WELCOME */
-.welcome{padding:24px 16px 14px}
-.wtag{display:inline-block;font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:3px 9px;margin-bottom:10px;background:rgba(201,168,76,.05)}
-.wname{font-family:Bebas Neue,Impact,sans-serif;font-size:34px;letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:4px}
-.wname span{color:#C0001A}
-.wsub{font-size:12px;font-weight:300;color:rgba(245,240,232,.4);font-style:italic}
+/* ── HEADER ── */
+.hdr{
+position:sticky;top:0;z-index:100;
+background:rgba(245,242,236,.92);backdrop-filter:blur(12px);
+border-bottom:1px solid var(–rule);
+padding:0 20px;
+display:flex;align-items:center;justify-content:space-between;
+height:52px;
+}
+.hdr-brand{display:flex;align-items:center;gap:10px}
+.hdr-logo{font-family:var(–serif);font-size:20px;letter-spacing:4px;color:var(–ink);line-height:1}
+.hdr-dot{width:6px;height:6px;border-radius:50%;background:var(–red);flex-shrink:0;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hdr-user{font-size:11px;font-weight:500;color:rgba(12,12,14,.45);letter-spacing:.5px}
+.logout-btn{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:rgba(12,12,14,.3);background:none;border:none;cursor:pointer;font-family:var(–sans);padding:4px 8px;border-radius:2px;transition:color .2s}
+.logout-btn:hover{color:var(–red)}
 
-/* PROGRESS */
-.prog-wrap{padding:0 16px 18px}
-.prog-top{display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center;margin-bottom:7px}
-.prog-label{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3)}
-.prog-num{font-family:Bebas Neue,Impact,sans-serif;font-size:15px;color:#C9A84C;letter-spacing:1px}
-.prog-track{height:2px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;background:#C0001A;border-radius:2px;width:0%;-webkit-transition:width .7s;transition:width .7s}
+/* ── HERO ── */
+.hero{
+position:relative;z-index:1;
+padding:32px 20px 28px;
+border-bottom:1px solid var(–rule);
+display:flex;gap:16px;align-items:flex-end;justify-content:space-between;
+overflow:hidden;
+}
+.hero::after{
+content:“DMA”;position:absolute;right:-10px;top:50%;transform:translateY(-50%);
+font-family:var(–serif);font-size:clamp(80px,25vw,160px);letter-spacing:-4px;
+color:rgba(12,12,14,.035);line-height:1;pointer-events:none;user-select:none;
+}
+.hero-left{}
+.hero-eyebrow{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(–gold);margin-bottom:8px}
+.hero-title{font-family:var(–serif);font-size:clamp(28px,8vw,42px);letter-spacing:3px;line-height:.88;color:var(–ink)}
+.hero-sub{margin-top:10px;font-size:12px;font-weight:300;color:rgba(12,12,14,.5);line-height:1.6;max-width:240px}
+.hero-badge{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.badge-mrr{background:var(–ink);color:var(–paper);padding:8px 14px;border-radius:2px;text-align:center}
+.badge-mrr-label{font-size:8px;font-weight:500;letter-spacing:3px;text-transform:uppercase;opacity:.5}
+.badge-mrr-val{font-family:var(–serif);font-size:24px;letter-spacing:2px;color:#fff;line-height:1.1}
+.badge-tag{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(–gold);padding:4px 10px;border:1px solid rgba(184,148,42,.3);border-radius:2px}
 
-/* SECTION TITLE */
-.stitle{padding:16px 16px 8px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;gap:8px}
-.stitle-line{-webkit-flex:1;flex:1;height:1px;background:rgba(255,255,255,.06)}
-.stitle-text{font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.22);white-space:nowrap}
+/* ── IA SUITE FEATURED ── */
+.ia-featured{
+position:relative;z-index:1;
+margin:16px;
+border-radius:6px;
+overflow:hidden;
+background:var(–ink);
+border:1px solid rgba(184,0,26,.3);
+}
+.ia-featured-inner{padding:18px 20px}
+.ia-tag{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px}
+.ia-tag-dot{width:6px;height:6px;border-radius:50%;background:var(–red);animation:blink 1s infinite}
+.ia-tag-text{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(184,0,26,.8)}
+.ia-title{font-family:var(–serif);font-size:22px;letter-spacing:3px;color:#fff;margin-bottom:6px}
+.ia-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:16px}
+.ia-pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.ia-pill{font-size:9px;font-weight:500;letter-spacing:1px;padding:3px 9px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:2px;color:rgba(255,255,255,.5)}
+.ia-cta{display:block;text-decoration:none;background:var(–red);color:#fff;text-align:center;padding:13px;border-radius:3px;font-family:var(–serif);font-size:14px;letter-spacing:3px}
 
-/* MODULE ROW — 2 colonnes avec flexbox */
-.mrow{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:8px;padding:0 16px;margin-bottom:0}
+/* ── SECTION ── */
+.section{position:relative;z-index:1;padding:0 16px;margin-top:20px}
+.section-hdr{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:0 4px}
+.section-line{flex:1;height:1px;background:var(–rule)}
+.section-label{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(12,12,14,.35);white-space:nowrap}
+.section-num{font-family:var(–mono);font-size:9px;color:rgba(12,12,14,.2)}
 
-.mcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:13px 11px;text-decoration:none;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:5px;width:calc(50% - 4px);position:relative;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}
-.mcard:active{opacity:.8}
-.mcard.done{border-color:rgba(100,200,100,.2);background:rgba(100,200,100,.03)}
-.mcard.wide{width:100%;-webkit-flex-direction:row;flex-direction:row;-webkit-align-items:center;align-items:center;gap:12px;padding:13px 14px}
-.mcard.wide .mbody{-webkit-flex:1;flex:1}
+/* ── MODULE GRID ── */
+.mod-grid{display:flex;flex-direction:column;gap:2px}
+.mod-row{
+display:flex;align-items:center;gap:0;
+text-decoration:none;
+background:var(–smoke2);
+border:1px solid var(–rule);
+border-radius:4px;
+overflow:hidden;
+transition:background .15s;
+}
+.mod-row:hover{background:var(–smoke)}
+.mod-num{
+font-family:var(–mono);font-size:10px;color:rgba(12,12,14,.2);
+width:36px;text-align:center;padding:12px 0;flex-shrink:0;
+border-right:1px solid var(–rule);
+}
+.mod-icon{font-size:16px;width:40px;text-align:center;flex-shrink:0}
+.mod-info{flex:1;padding:10px 12px 10px 0}
+.mod-title{font-size:12px;font-weight:500;color:var(–ink);margin-bottom:1px}
+.mod-desc{font-size:10px;font-weight:300;color:rgba(12,12,14,.4)}
+.mod-arrow{font-size:10px;color:rgba(12,12,14,.2);padding-right:14px;flex-shrink:0}
 
-.mnum{font-size:8px;font-weight:700;letter-spacing:2px;color:rgba(245,240,232,.2)}
-.micon{font-size:20px;line-height:1;margin:2px 0}
-.mcard.wide .micon{font-size:22px;margin:0;-webkit-flex-shrink:0;flex-shrink:0}
-.mtitle{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:1.5px;color:#f5f0e8;line-height:1.2}
-.mcard.wide .mtitle{font-size:14px}
-.mfoot{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;margin-top:3px}
-.mdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.1);-webkit-flex-shrink:0;flex-shrink:0}
-.mcard.done .mdot{background:#80d080}
-.mcheck{font-size:9px;color:rgba(100,200,100,.7);font-weight:700}
+/* ── BONUS GRID ── */
+.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bonus-card{
+text-decoration:none;
+background:var(–smoke2);
+border:1px solid var(–rule);
+border-radius:4px;
+padding:14px 12px;
+display:flex;flex-direction:column;gap:6px;
+transition:background .15s;
+position:relative;overflow:hidden;
+}
+.bonus-card:hover{background:var(–smoke)}
+.bonus-card::after{
+content:””;position:absolute;bottom:-20px;right:-20px;
+width:60px;height:60px;border-radius:50%;
+background:rgba(12,12,14,.02);
+}
+.bonus-icon{font-size:20px}
+.bonus-title{font-size:11px;font-weight:600;color:var(–ink);line-height:1.3}
+.bonus-desc{font-size:9px;font-weight:300;color:rgba(12,12,14,.4);line-height:1.4}
+.bonus-card.featured{background:var(–red-dim);border-color:rgba(184,0,26,.15)}
+.bonus-card.featured .bonus-title{color:var(–red)}
+.bonus-card.gold-feat{background:var(–gold-dim);border-color:rgba(184,148,42,.15)}
+.bonus-card.gold-feat .bonus-title{color:var(–gold)}
 
-/* BONUS */
-.brow{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:8px;padding:0 16px}
-.bcard{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);border-radius:6px;padding:13px 11px;text-decoration:none;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;gap:5px;width:calc(50% - 4px);-webkit-box-sizing:border-box;box-sizing:border-box}
-.bcard:active{opacity:.8}
-.bicon{font-size:22px}
-.btitle{font-family:Bebas Neue,Impact,sans-serif;font-size:12px;letter-spacing:2px;color:#C9A84C}
-.bdesc{font-size:9px;font-weight:300;color:rgba(245,240,232,.35);line-height:1.5}
+/* ── BUSINESS MODELS ── */
+.bm-grid{display:flex;flex-direction:column;gap:2px}
+.bm-row{
+display:flex;align-items:center;gap:12px;
+text-decoration:none;
+background:var(–smoke2);border:1px solid var(–rule);
+border-radius:4px;padding:12px 14px;
+transition:background .15s;
+}
+.bm-row:hover{background:var(–smoke)}
+.bm-icon{font-size:18px;flex-shrink:0}
+.bm-info{flex:1}
+.bm-title{font-size:12px;font-weight:500;color:var(–ink);margin-bottom:1px}
+.bm-desc{font-size:10px;font-weight:300;color:rgba(12,12,14,.4)}
+.bm-badge{font-family:var(–mono);font-size:9px;color:rgba(12,12,14,.25);flex-shrink:0}
 
-/* EXCLUSIF */
-.excl-wrap{padding:0 16px}
-.excl-card{background:#0a0a0a;border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:22px 18px;text-align:center}
-.excl-tag{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:3px 10px;display:inline-block;margin-bottom:12px}
-.excl-icon{font-size:36px;display:block;margin-bottom:10px}
-.excl-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:4px;color:#f5f0e8;margin-bottom:8px}
-.excl-desc{font-size:11px;font-weight:300;color:rgba(245,240,232,.45);line-height:1.6;margin-bottom:16px}
-.excl-btn{background:#C9A84C;border:none;border-radius:4px;padding:14px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#050505;cursor:pointer;-webkit-appearance:none;width:100%}
-.excl-btn:active{opacity:.85}
+/* ── FOOTER ── */
+.footer{position:relative;z-index:1;margin:28px 16px 40px;padding-top:20px;border-top:1px solid var(–rule)}
+.footer-row{display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-family:var(–serif);font-size:14px;letter-spacing:3px;color:rgba(12,12,14,.2)}
+.footer-handle{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(12,12,14,.25)}
 
-/* FOOTER */
-.footer{padding:28px 16px 52px;text-align:center}
-.flogo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.07)}
-.flogo span{color:rgba(201,168,76,.12)}
-
-/* MODAL */
-.overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:200;display:none;-webkit-align-items:flex-end;align-items:flex-end;-webkit-justify-content:center;justify-content:center}
-.overlay.show{display:-webkit-flex;display:flex}
-.modal{background:#111;border:1px solid rgba(201,168,76,.2);border-radius:14px 14px 0 0;padding:26px 18px 44px;width:100%;max-width:480px}
-.modal-title{font-family:Bebas Neue,Impact,sans-serif;font-size:21px;letter-spacing:4px;color:#f5f0e8;margin-bottom:6px}
-.modal-sub{font-size:11px;font-weight:300;color:rgba(245,240,232,.4);margin-bottom:18px;line-height:1.6}
-.modal-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:14px;font-size:15px;color:#f5f0e8;letter-spacing:3px;text-transform:uppercase;text-align:center;margin-bottom:10px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
-.modal-inp:focus{outline:none;border-color:rgba(201,168,76,.4)}
-.modal-inp::-webkit-input-placeholder{letter-spacing:1px;text-transform:none;font-size:12px;color:rgba(245,240,232,.2)}
-.modal-err{color:#ff7070;font-size:11px;text-align:center;margin-bottom:10px;display:none}
-.modal-btn{width:100%;background:#C9A84C;border:none;border-radius:4px;padding:15px;font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:3px;color:#050505;cursor:pointer;margin-bottom:10px;-webkit-appearance:none}
-.modal-cancel{width:100%;background:none;border:none;font-size:11px;color:rgba(245,240,232,.2);cursor:pointer;padding:8px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
+/* ── ANIMATIONS ── */
+.fade-in{opacity:0;transform:translateY(12px);animation:fadeUp .5s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}
+.d4{animation-delay:.2s}.d5{animation-delay:.25s}.d6{animation-delay:.3s}
 </style>
 
 </head>
 <body>
 
-<div class="header">
-  <div class="logo">DM<span>A</span></div>
-  <div class="hright">
-    <div class="huser" id="huser"></div>
-    <button class="hlogout" onclick="logout()">⏻</button>
+<!-- HDR -->
+
+<div class="hdr">
+  <div class="hdr-brand">
+    <div class="hdr-dot"></div>
+    <div class="hdr-logo">DMA</div>
+  </div>
+  <div class="hdr-user" id="user-name">Espace membres</div>
+  <button class="logout-btn" onclick="logout()">Quitter</button>
+</div>
+
+<!-- HERO -->
+
+<div class="hero fade-in">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Digital Mastery Academy</div>
+    <div class="hero-title">TON<br>EMPIRE<br>DIGITAL</div>
+    <div class="hero-sub">28 modules · MRR 100% · Outils IA exclusifs</div>
+  </div>
+  <div class="hero-badge">
+    <div class="badge-mrr">
+      <div class="badge-mrr-label">Potentiel</div>
+      <div class="badge-mrr-val">∞</div>
+    </div>
+    <div class="badge-tag">MRR 100%</div>
   </div>
 </div>
 
-<div class="welcome">
-  <div class="wtag">✦ Espace Membres</div>
-  <div class="wname">BON RETOUR,<br><span id="wname">MEMBRE</span></div>
-  <div class="wsub">Ta formation t'attend. Chaque module compte.</div>
-</div>
+<!-- IA SUITE -->
 
-<div class="prog-wrap">
-  <div class="prog-top">
-    <span class="prog-label">Progression globale</span>
-    <span class="prog-num" id="progNum">0 / 28</span>
+<div class="ia-featured fade-in d1">
+  <div class="ia-featured-inner">
+    <div class="ia-tag"><div class="ia-tag-dot"></div><span class="ia-tag-text">Exclusif DMA — Nouveau</span></div>
+    <div class="ia-title">DMA IA SUITE PRO</div>
+    <div class="ia-sub">6 outils IA qui travaillent pour toi — scripts, prospects, hooks, revenus, objections, contenu viral.</div>
+    <div class="ia-pills">
+      <span class="ia-pill">📨 Script DM</span>
+      <span class="ia-pill">🎯 Ciblage</span>
+      <span class="ia-pill">📲 Contenu</span>
+      <span class="ia-pill">💰 Revenus</span>
+      <span class="ia-pill">🥊 Objections</span>
+      <span class="ia-pill">🎣 Hooks</span>
+    </div>
+    <a class="ia-cta" href="module-ia-tool.html">ACCÉDER À L'IA SUITE →</a>
   </div>
-  <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
 </div>
 
-<!-- FONDATIONS -->
+<!-- FONDATIONS & BUSINESS -->
 
-<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🧠 Fondations</div><div class="stitle-line"></div></div>
-<div class="mrow">
-  <a class="mcard" href="module-01.html" id="mc1"><div class="mnum">01</div><div class="micon">🧠</div><div class="mtitle">Mindset & Vision</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-02.html" id="mc2"><div class="mnum">02</div><div class="micon">💎</div><div class="mtitle">Positionnement Premium</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-03.html" id="mc3"><div class="mnum">03</div><div class="micon">💳</div><div class="mtitle">Config Paiement & Page Vente</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-04.html" id="mc4"><div class="mnum">04</div><div class="micon">📦</div><div class="mtitle">Produits Digitaux</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+<div class="section fade-in d2">
+  <div class="section-hdr">
+    <div class="section-line"></div>
+    <div class="section-label">Fondations &amp; Business</div>
+    <div class="section-num">01</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="mod-grid">
+    <a class="mod-row" href="module-01.html"><div class="mod-num">01</div><div class="mod-icon">🧠</div><div class="mod-info"><div class="mod-title">Mindset &amp; Vision</div><div class="mod-desc">L état d esprit qui gagne</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-02.html"><div class="mod-num">02</div><div class="mod-icon">💎</div><div class="mod-info"><div class="mod-title">Positionnement &amp; Branding</div><div class="mod-desc">Devenir LA référence</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-03.html"><div class="mod-num">03</div><div class="mod-icon">💳</div><div class="mod-info"><div class="mod-title">Config Paiement &amp; Beacons</div><div class="mod-desc">Page de vente en 20 min</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-04.html"><div class="mod-num">04</div><div class="mod-icon">🔑</div><div class="mod-info"><div class="mod-title">Produits Digitaux &amp; MRR 100%</div><div class="mod-desc">Droits de revente totaux</div></div><div class="mod-arrow">→</div></a>
+  </div>
 </div>
 
-<!-- CONTENU & MARKETING -->
+<!-- 7 BUSINESS MODELS -->
 
-<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">📲 Contenu & Marketing</div><div class="stitle-line"></div></div>
-<div class="mrow">
-  <a class="mcard" href="module-05.html" id="mc5"><div class="mnum">05</div><div class="micon">📲</div><div class="mtitle">Marketing & Contenu</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-06.html" id="mc6"><div class="mnum">06</div><div class="micon">🎬</div><div class="mtitle">Vidéo Faceless</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-07.html" id="mc7"><div class="mnum">07</div><div class="micon">📸</div><div class="mtitle">Instagram Mastery</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-08.html" id="mc8"><div class="mnum">08</div><div class="micon">🎵</div><div class="mtitle">TikTok Hooks</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-09.html" id="mc9"><div class="mnum">09</div><div class="micon">👻</div><div class="mtitle">Snapchat Strategy</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-10.html" id="mc10"><div class="mnum">10</div><div class="micon">✉️</div><div class="mtitle">Email Marketing</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
+<div class="section fade-in d2">
+  <div class="section-hdr">
+    <div class="section-line"></div>
+    <div class="section-label">Les 7 Business Models</div>
+    <div class="section-num">02</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="bm-grid">
+    <a class="bm-row" href="module-dropshipping.html"><div class="bm-icon">🛒</div><div class="bm-info"><div class="bm-title">Dropshipping Mastery</div><div class="bm-desc">6 chapitres · 13 leçons · 5 outils IA</div></div><div class="bm-badge">01/07</div></a>
+    <a class="bm-row" href="module-pod.html"><div class="bm-icon">🎨</div><div class="bm-info"><div class="bm-title">Print on Demand Mastery</div><div class="bm-desc">5 chapitres · 11 leçons · Midjourney</div></div><div class="bm-badge">02/07</div></a>
+    <a class="bm-row" href="module-ugc.html"><div class="bm-icon">🎬</div><div class="bm-info"><div class="bm-title">UGC Creator Mastery</div><div class="bm-desc">5 chapitres · 12 leçons · Scripts IA</div></div><div class="bm-badge">03/07</div></a>
+    <a class="bm-row" href="module-affiliation.html"><div class="bm-icon">🤝</div><div class="bm-info"><div class="bm-title">Affiliation Mastery</div><div class="bm-desc">5 chapitres · 12 leçons · 100% passif</div></div><div class="bm-badge">04/07</div></a>
+    <a class="bm-row" href="bonus-agence-ia.html"><div class="bm-icon">🤖</div><div class="bm-info"><div class="bm-title">AI Agency No-Code</div><div class="bm-desc">8 secteurs · 12 apps · Plan d action</div></div><div class="bm-badge">05/07</div></a>
+    <a class="bm-row" href="module-newsletter.html"><div class="bm-icon">📧</div><div class="bm-info"><div class="bm-title">Newsletter Payante</div><div class="bm-desc">5 chapitres · 11 leçons · Lead magnets</div></div><div class="bm-badge">06/07</div></a>
+    <a class="bm-row" href="module-flipping.html"><div class="bm-icon">🔄</div><div class="bm-info"><div class="bm-title">Flipping Digital</div><div class="bm-desc">5 chapitres · 11 leçons · ROI calculator</div></div><div class="bm-badge">07/07</div></a>
+  </div>
+</div>
+
+<!-- RESEAUX & CONTENU -->
+
+<div class="section fade-in d3">
+  <div class="section-hdr">
+    <div class="section-line"></div>
+    <div class="section-label">Réseaux &amp; Contenu</div>
+    <div class="section-num">03</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="mod-grid">
+    <a class="mod-row" href="module-05.html"><div class="mod-num">05</div><div class="mod-icon">📲</div><div class="mod-info"><div class="mod-title">Marketing de Contenu</div><div class="mod-desc">Contenu qui convertit</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-06.html"><div class="mod-num">06</div><div class="mod-icon">🎭</div><div class="mod-info"><div class="mod-title">Vidéo Faceless</div><div class="mod-desc">Monétise sans te montrer</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-07.html"><div class="mod-num">07</div><div class="mod-icon">📸</div><div class="mod-info"><div class="mod-title">Instagram Mastery</div><div class="mod-desc">Exploser sur Insta</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-08.html"><div class="mod-num">08</div><div class="mod-icon">🎵</div><div class="mod-info"><div class="mod-title">TikTok Hooks &amp; Viral</div><div class="mod-desc">0 à 100k vues</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-09.html"><div class="mod-num">09</div><div class="mod-icon">👻</div><div class="mod-info"><div class="mod-title">Snapchat &amp; Proximité</div><div class="mod-desc">Closer en DM Snap</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-12.html"><div class="mod-num">12</div><div class="mod-icon">🔴</div><div class="mod-info"><div class="mod-title">Live TikTok</div><div class="mod-desc">Vendre en direct</div></div><div class="mod-arrow">→</div></a>
+  </div>
 </div>
 
 <!-- VENTE & CLOSING -->
 
-<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🎯 Vente & Closing</div><div class="stitle-line"></div></div>
-<div class="mrow">
-  <a class="mcard" href="module-11.html" id="mc11"><div class="mnum">11</div><div class="micon">🎯</div><div class="mtitle">Closing & Scripts</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-12.html" id="mc12"><div class="mnum">12</div><div class="micon">🔴</div><div class="mtitle">Live Selling TikTok</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-13.html" id="mc13"><div class="mnum">13</div><div class="micon">🎥</div><div class="mtitle">VSL & Video Sales</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-14.html" id="mc14"><div class="mnum">14</div><div class="micon">🤖</div><div class="mtitle">AI Selling</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard wide" href="module-15.html" id="mc15"><div class="micon">🔁</div><div class="mbody"><div class="mnum">15</div><div class="mtitle">Funnels & Tunnels de Vente</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></div></a>
-  <a class="mcard wide" href="module-16.html" id="mc16"><div class="micon">💬</div><div class="mbody"><div class="mnum">16</div><div class="mtitle">Automation DM</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></div></a>
-</div>
-
-<!-- REVENUS & SYSTEMES -->
-
-<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">💰 Revenus & Systèmes</div><div class="stitle-line"></div></div>
-<div class="mrow">
-  <a class="mcard" href="module-17.html" id="mc17"><div class="mnum">17</div><div class="micon">🔄</div><div class="mtitle">MRR & Récurrence</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-18.html" id="mc18"><div class="mnum">18</div><div class="micon">🏢</div><div class="mtitle">SMMA Agency</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-19.html" id="mc19"><div class="mnum">19</div><div class="micon">🛍️</div><div class="mtitle">Shopify & E-commerce</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-20.html" id="mc20"><div class="mnum">20</div><div class="micon">⚙️</div><div class="mtitle">Systeme.io & Stan</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-21.html" id="mc21"><div class="mnum">21</div><div class="micon">📋</div><div class="mtitle">Déclaration Légale</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-22.html" id="mc22"><div class="mnum">22</div><div class="micon">🤝</div><div class="mtitle">Prospection B2B</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-</div>
-
-<!-- PREMIUM & EXPERT -->
-
-<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">👑 Premium & Expert</div><div class="stitle-line"></div></div>
-<div class="mrow">
-  <a class="mcard" href="module-23.html" id="mc23"><div class="mnum">23</div><div class="micon">🔑</div><div class="mtitle">Droits de Revente MRR</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-24.html" id="mc24"><div class="mnum">24</div><div class="micon">⭐</div><div class="mtitle">Personal Branding</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-25.html" id="mc25"><div class="mnum">25</div><div class="micon">🤝</div><div class="mtitle">Gestion Client</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-26.html" id="mc26"><div class="mnum">26</div><div class="micon">📈</div><div class="mtitle">Scaling & Délégation</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-27.html" id="mc27"><div class="mnum">27</div><div class="micon">🔗</div><div class="mtitle">Affiliation & Partenariats</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-  <a class="mcard" href="module-28.html" id="mc28"><div class="mnum">28</div><div class="micon">👑</div><div class="mtitle">Stratégie 2026</div><div class="mfoot"><div class="mdot"></div><span class="mcheck"></span></div></a>
-</div>
-
-<!-- IA SUITE PRO — FEATURED -->
-
-<div style="padding:0 14px;margin-bottom:20px">
-  <a href="module-ia-tool.html" style="display:block;background:linear-gradient(135deg,rgba(192,0,26,.15),rgba(192,0,26,.05));border:1px solid rgba(192,0,26,.35);border-radius:10px;padding:18px;text-decoration:none;position:relative;overflow:hidden">
-    <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(192,0,26,.2),transparent 70%);pointer-events:none"></div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-      <div style="width:8px;height:8px;border-radius:50%;background:#C0001A;animation:blink 1s infinite"></div>
-      <span style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ff6060">NOUVEAU — Exclusif DMA</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <span style="font-size:36px">🤖</span>
-      <div>
-        <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;line-height:1">DMA IA SUITE PRO</div>
-        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(192,0,26,.8);text-transform:uppercase">6 outils IA en 1 seul module</div>
-      </div>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
-      <span style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:3px 8px;font-size:9px;font-weight:700;color:rgba(245,240,232,.5)">📨 Script DM</span>
-      <span style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:3px 8px;font-size:9px;font-weight:700;color:rgba(245,240,232,.5)">🎯 Prospects</span>
-      <span style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:3px 8px;font-size:9px;font-weight:700;color:rgba(245,240,232,.5)">📲 Contenu</span>
-      <span style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:3px 8px;font-size:9px;font-weight:700;color:rgba(245,240,232,.5)">💰 Revenus</span>
-      <span style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:3px 8px;font-size:9px;font-weight:700;color:rgba(245,240,232,.5)">🥊 Objections</span>
-      <span style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:3px 8px;font-size:9px;font-weight:700;color:rgba(245,240,232,.5)">🎣 Hooks</span>
-    </div>
-    <div style="background:linear-gradient(135deg,#C0001A,#8a0013);border-radius:4px;padding:12px;text-align:center">
-      <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:14px;letter-spacing:3px;color:#f5f0e8">ACCÉDER À L'IA SUITE →</div>
-    </div>
-  </a>
-</div>
-
-<!-- BONUS INCLUS -->
-
-<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🎁 Bonus Inclus</div><div class="stitle-line"></div></div>
-<div class="brow">
-  <a class="bcard" href="crm-tracker.html"><div class="bicon">📊</div><div class="btitle">Tracker CRM</div><div class="bdesc">Gère tes prospects</div></a>
-  <a class="bcard" href="scripts-closing.html"><div class="bicon">📝</div><div class="btitle">Scripts Closing</div><div class="bdesc">Scripts DM & Live</div></a>
-  <a class="bcard" href="cgv-dma.html"><div class="bicon">⚖️</div><div class="btitle">CGV Officielles</div><div class="bdesc">CGV complètes DMA 2025</div></a>
-  <a class="bcard" href="calendrier-contenu.html"><div class="bicon">🗓️</div><div class="btitle">Calendrier</div><div class="bdesc">4 semaines de contenu</div></a>
-  <a class="bcard" href="arguments-vente.html"><div class="bicon">💰</div><div class="btitle">Arguments Vente</div><div class="bdesc">Scripts & objections DMA</div></a>
-  <a class="bcard" href="scripts-telephone.html"><div class="bicon">📞</div><div class="btitle">Closing Téléphone</div><div class="bdesc">Scripts mot pour mot</div></a>
-  <a class="bcard" href="module-beacons-gen.html"><div class="bicon">🌐</div><div class="btitle">Beacons Gen IA</div><div class="bdesc">Génère ta page de vente</div></a>
-</div>
-
-<!-- BONUS EXCLUSIF -->
-
-<div class="stitle"><div class="stitle-line"></div><div class="stitle-text">🔐 Bonus Exclusif</div><div class="stitle-line"></div></div>
-<div class="excl-wrap">
-  <div class="excl-card">
-    <span class="excl-tag">🔐 Accès Restreint</span>
-    <span class="excl-icon">🤖</span>
-    <div class="excl-title">Agence IA No-Code</div>
-    <div class="excl-desc">Lance ton agence digitale alimentée par l'IA. Outils, workflows et stratégie complète — réservé aux membres premium.</div>
-    <button class="excl-btn" onclick="openModal()">DÉVERROUILLER L'ACCÈS →</button>
+<div class="section fade-in d3">
+  <div class="section-hdr">
+    <div class="section-line"></div>
+    <div class="section-label">Vente &amp; Closing</div>
+    <div class="section-num">04</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="mod-grid">
+    <a class="mod-row" href="module-11.html"><div class="mod-num">11</div><div class="mod-icon">🎯</div><div class="mod-info"><div class="mod-title">Scripts Closing DM</div><div class="mod-desc">Mot pour mot</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-13.html"><div class="mod-num">13</div><div class="mod-icon">🎬</div><div class="mod-info"><div class="mod-title">VSL &amp; Vidéo Vente</div><div class="mod-desc">Vidéos qui convertissent</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-14.html"><div class="mod-num">14</div><div class="mod-icon">🤖</div><div class="mod-info"><div class="mod-title">AI Selling</div><div class="mod-desc">Vendre 10x plus vite</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="scripts-closing.html"><div class="mod-num">—</div><div class="mod-icon">📝</div><div class="mod-info"><div class="mod-title">Scripts DM &amp; Live</div><div class="mod-desc">Templates prêts à copier</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="scripts-telephone.html"><div class="mod-num">—</div><div class="mod-icon">📞</div><div class="mod-info"><div class="mod-title">Closing Téléphone</div><div class="mod-desc">Scripts mot pour mot</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="arguments-vente.html"><div class="mod-num">—</div><div class="mod-icon">💰</div><div class="mod-info"><div class="mod-title">Arguments &amp; Objections</div><div class="mod-desc">Réponses qui closent</div></div><div class="mod-arrow">→</div></a>
   </div>
 </div>
 
-<div class="footer"><div class="flogo">DM<span>A</span></div></div>
+<!-- SCALE & AUTO -->
 
-<!-- MODAL -->
+<div class="section fade-in d4">
+  <div class="section-hdr">
+    <div class="section-line"></div>
+    <div class="section-label">Scale &amp; Automatisation</div>
+    <div class="section-num">05</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="mod-grid">
+    <a class="mod-row" href="module-10.html"><div class="mod-num">10</div><div class="mod-icon">✉️</div><div class="mod-info"><div class="mod-title">Email Marketing</div><div class="mod-desc">Ventes automatiques 24h/24</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-15.html"><div class="mod-num">15</div><div class="mod-icon">🔁</div><div class="mod-info"><div class="mod-title">Funnels &amp; Automatisation</div><div class="mod-desc">Tunnel sans toi</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-16.html"><div class="mod-num">16</div><div class="mod-icon">💬</div><div class="mod-info"><div class="mod-title">Automation DM</div><div class="mod-desc">Close en pilote auto</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-17.html"><div class="mod-num">17</div><div class="mod-icon">💵</div><div class="mod-info"><div class="mod-title">MRR Avancé</div><div class="mod-desc">Maximise tes droits</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-19.html"><div class="mod-num">19</div><div class="mod-icon">📈</div><div class="mod-info"><div class="mod-title">Paid Ads</div><div class="mod-desc">1€ investi = 3€ récupérés</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-27.html"><div class="mod-num">27</div><div class="mod-icon">🚀</div><div class="mod-info"><div class="mod-title">Scaling &amp; Délégation</div><div class="mod-desc">De solo à entrepreneur</div></div><div class="mod-arrow">→</div></a>
+  </div>
+</div>
 
-<div class="overlay" id="overlay" onclick="closeOut(event)">
-  <div class="modal">
-    <div class="modal-title">Code Exclusif</div>
-    <div class="modal-sub">Entre ton code d'accès pour débloquer le bonus Agence IA.</div>
-    <input class="modal-inp" id="codeInput" type="text" placeholder="Entre ton code..."
-      maxlength="30" oninput="this.value=this.value.toUpperCase()"
-      onkeydown="if(event.key==='Enter')check()">
-    <div class="modal-err" id="merr">❌ Code incorrect. Contacte Mathis par DM.</div>
-    <button class="modal-btn" onclick="check()">VALIDER LE CODE</button>
-    <button class="modal-cancel" onclick="closeModal()">Annuler</button>
+<!-- GESTION & LEGAL -->
+
+<div class="section fade-in d4">
+  <div class="section-hdr">
+    <div class="section-line"></div>
+    <div class="section-label">Gestion &amp; Légal</div>
+    <div class="section-num">06</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="mod-grid">
+    <a class="mod-row" href="module-23.html"><div class="mod-num">23</div><div class="mod-icon">⚖️</div><div class="mod-info"><div class="mod-title">Légal &amp; Administratif</div><div class="mod-desc">Auto-entrepreneur, CGV</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-24.html"><div class="mod-num">24</div><div class="mod-icon">💳</div><div class="mod-info"><div class="mod-title">Gestion Financière</div><div class="mod-desc">Gérer, épargner, réinvestir</div></div><div class="mod-arrow">→</div></a>
+    <a class="mod-row" href="module-25.html"><div class="mod-num">25</div><div class="mod-icon">⚡</div><div class="mod-info"><div class="mod-title">Productivité &amp; Organisation</div><div class="mod-desc">Les systèmes des pros</div></div><div class="mod-arrow">→</div></a>
+  </div>
+</div>
+
+<!-- OUTILS BONUS -->
+
+<div class="section fade-in d5">
+  <div class="section-hdr">
+    <div class="section-line"></div>
+    <div class="section-label">Outils &amp; Bonus</div>
+    <div class="section-num">07</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="bonus-grid">
+    <a class="bonus-card gold-feat" href="module-beacons-gen.html">
+      <div class="bonus-icon">🌐</div>
+      <div class="bonus-title">Beacons Generator IA</div>
+      <div class="bonus-desc">Page de vente générée en 5 min</div>
+    </a>
+    <a class="bonus-card featured" href="bonus-agence-ia.html">
+      <div class="bonus-icon">🏢</div>
+      <div class="bonus-title">Agence IA No-Code</div>
+      <div class="bonus-desc">8 business types, 12 apps</div>
+    </a>
+    <a class="bonus-card" href="crm-tracker.html">
+      <div class="bonus-icon">📊</div>
+      <div class="bonus-title">Tracker CRM</div>
+      <div class="bonus-desc">Suis tes prospects</div>
+    </a>
+    <a class="bonus-card" href="scripts-closing.html">
+      <div class="bonus-icon">📝</div>
+      <div class="bonus-title">Scripts Closing</div>
+      <div class="bonus-desc">DM &amp; téléphone</div>
+    </a>
+    <a class="bonus-card" href="cgv-dma.html">
+      <div class="bonus-icon">⚖️</div>
+      <div class="bonus-title">CGV Officielles</div>
+      <div class="bonus-desc">DMA 2025 complètes</div>
+    </a>
+    <a class="bonus-card" href="calendrier-contenu.html">
+      <div class="bonus-icon">🗓️</div>
+      <div class="bonus-title">Calendrier Contenu</div>
+      <div class="bonus-desc">28 posts planifiés</div>
+    </a>
+    <a class="bonus-card" href="arguments-vente.html">
+      <div class="bonus-icon">💰</div>
+      <div class="bonus-title">Arguments de Vente</div>
+      <div class="bonus-desc">Crusher d objections</div>
+    </a>
+    <a class="bonus-card" href="module-business-models.html">
+      <div class="bonus-icon">🗺️</div>
+      <div class="bonus-title">Hub Business Models</div>
+      <div class="bonus-desc">Vue d ensemble 7 modèles</div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer fade-in d6">
+  <div class="footer-row">
+    <div class="footer-brand">DMA</div>
+    <div class="footer-handle">@mthsdgtmk</div>
   </div>
 </div>
 
 <script>
-var CODES=["DMA-ELITE-2025","PREMIUM-001","PREMIUM-002","PREMIUM-003","PREMIUM-004","PREMIUM-005","BONUS-VIP-001","BONUS-VIP-002","MATHIS-ADMIN"];
 var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
 if(!user)window.location.href="index.html";
-
-document.getElementById("wname").textContent=(user.name||"MEMBRE").toUpperCase();
-document.getElementById("huser").textContent=user.name||"";
-
-var done=0;
-for(var i=1;i<=28;i++){
-  if(localStorage.getItem("module_0"+i+"_done")==="1"||localStorage.getItem("module_"+i+"_done")==="1"){
-    done++;
-    var c=document.getElementById("mc"+i);
-    if(c){c.classList.add("done");var ck=c.querySelector(".mcheck");if(ck)ck.textContent="✓";}
-  }
+else{
+  var n=document.getElementById("user-name");
+  if(n)n.textContent="Bonjour, "+(user.name||user.id)+" 👋";
 }
-document.getElementById("progNum").textContent=done+" / 28";
-setTimeout(function(){document.getElementById("progFill").style.width=Math.round((done/28)*100)+"%";},400);
 
-function logout(){sessionStorage.removeItem("dma_user");window.location.href="index.html";}
+function logout(){
+  sessionStorage.removeItem("dma_user");
+  window.location.href="index.html";
+}
 
-function openModal(){
-  if(sessionStorage.getItem("bonus_unlocked")==="1"){window.location.href="bonus-agence-ia.html";return;}
-  document.getElementById("overlay").classList.add("show");
-  setTimeout(function(){document.getElementById("codeInput").focus();},300);
-}
-function closeModal(){
-  document.getElementById("overlay").classList.remove("show");
-  document.getElementById("merr").style.display="none";
-  document.getElementById("codeInput").value="";
-}
-function closeOut(e){if(e.target===document.getElementById("overlay"))closeModal();}
-function check(){
-  var code=document.getElementById("codeInput").value.trim().toUpperCase();
-  if(CODES.includes(code)){
-    sessionStorage.setItem("bonus_unlocked","1");
-    closeModal();
-    window.location.href="bonus-agence-ia.html";
-  } else {
-    document.getElementById("merr").style.display="block";
-    document.getElementById("codeInput").style.borderColor="rgba(192,0,26,.5)";
-    setTimeout(function(){document.getElementById("codeInput").style.borderColor="";},1500);
-  }
-}
+// Track login
+try{
+  fetch("https://api.airtable.com/v0/app1N7fUuN5pcWE5S/Table%201",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Authorization":"Bearer patqxKulxpZ2ERSII.a9a8d52b13701bde569c6693e43ad3c1eb14ab50ce4e4ffb187df13c77afb7c5"},
+    body:JSON.stringify({fields:{Membre:user.id||"",Action:"Dashboard V2",Date:new Date().toLocaleString("fr-FR")}})
+  });
+}catch(e){}
 </script>
 
 </body>
+</html>
