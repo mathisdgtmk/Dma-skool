@@ -1,420 +1,290 @@
 <!DOCTYPE html>
 
-<html lang="fr">
+<html lang="fr" style="background:#0d0d0f !important">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>DMA — Espace Membres</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ── TOKENS ── */
 :root{
-  --ink:#0c0c0e;--paper:#f5f2ec;--cream:#ede9e0;
-  --red:#b8001a;--red-dim:rgba(184,0,26,.12);
-  --gold:#b8942a;--gold-dim:rgba(184,148,42,.1);
-  --smoke:rgba(12,12,14,.06);--smoke2:rgba(12,12,14,.04);
-  --rule:rgba(12,12,14,.08);
+  --bg:#0d0d0f;
+  --card:#141416;
+  --card2:#1a1a1d;
+  --border:rgba(255,255,255,.06);
+  --border2:rgba(255,255,255,.1);
+  --red:#c0001a;
+  --gold:#c9a84c;
+  --blue:#4fa3e8;
+  --green:#3ecf8e;
+  --text:#f0ede8;
+  --dim:rgba(240,237,232,.38);
   --serif:"Bebas Neue",serif;
   --sans:"DM Sans",sans-serif;
   --mono:"DM Mono",monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{min-height:100vh;font-family:var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden}
+html,body{min-height:100vh;font-family:var(--sans);color:var(--text);background:var(--bg);overflow-x:hidden}
 
-/* ── NOISE TEXTURE ── */
-body::before{
-content:””;position:fixed;inset:0;
-background-image:url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.04’/%3E%3C/svg%3E”);
-background-size:200px 200px;pointer-events:none;z-index:0;opacity:.6
-}
+/* diagonal stripes accent */
+.stripe-bg{position:fixed;top:0;right:0;width:40%;height:100%;background:repeating-linear-gradient(135deg,transparent,transparent 40px,rgba(255,255,255,.008) 40px,rgba(255,255,255,.008) 41px);pointer-events:none;z-index:0}
 
-/* ── HEADER ── */
-.hdr{
-position:sticky;top:0;z-index:100;
-background:rgba(245,242,236,.92);backdrop-filter:blur(12px);
-border-bottom:1px solid var(–rule);
-padding:0 20px;
-display:flex;align-items:center;justify-content:space-between;
-height:52px;
-}
-.hdr-brand{display:flex;align-items:center;gap:10px}
-.hdr-logo{font-family:var(–serif);font-size:20px;letter-spacing:4px;color:var(–ink);line-height:1}
-.hdr-dot{width:6px;height:6px;border-radius:50%;background:var(–red);flex-shrink:0;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.hdr-user{font-size:11px;font-weight:500;color:rgba(12,12,14,.45);letter-spacing:.5px}
-.logout-btn{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:rgba(12,12,14,.3);background:none;border:none;cursor:pointer;font-family:var(–sans);padding:4px 8px;border-radius:2px;transition:color .2s}
-.logout-btn:hover{color:var(–red)}
+/* HDR */
+.hdr{position:sticky;top:0;z-index:100;background:rgba(13,13,15,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(–border);padding:0 18px;height:50px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left{display:flex;align-items:center;gap:10px}
+.hdr-pill{display:flex;align-items:center;gap:6px;background:var(–red);padding:4px 12px;border-radius:2px}
+.hdr-pill-dot{width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hdr-pill-text{font-family:var(–serif);font-size:12px;letter-spacing:3px;color:#fff}
+.hdr-name{font-size:11px;font-weight:300;color:var(–dim);letter-spacing:.5px}
+.logout{font-size:10px;color:rgba(240,237,232,.2);background:none;border:none;cursor:pointer;font-family:var(–sans);letter-spacing:1px;text-transform:uppercase}
+.logout:hover{color:var(–red)}
 
-/* ── HERO ── */
-.hero{
-position:relative;z-index:1;
-padding:32px 20px 28px;
-border-bottom:1px solid var(–rule);
-display:flex;gap:16px;align-items:flex-end;justify-content:space-between;
-overflow:hidden;
-}
-.hero::after{
-content:“DMA”;position:absolute;right:-10px;top:50%;transform:translateY(-50%);
-font-family:var(–serif);font-size:clamp(80px,25vw,160px);letter-spacing:-4px;
-color:rgba(12,12,14,.035);line-height:1;pointer-events:none;user-select:none;
-}
-.hero-left{}
-.hero-eyebrow{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(–gold);margin-bottom:8px}
-.hero-title{font-family:var(–serif);font-size:clamp(28px,8vw,42px);letter-spacing:3px;line-height:.88;color:var(–ink)}
-.hero-sub{margin-top:10px;font-size:12px;font-weight:300;color:rgba(12,12,14,.5);line-height:1.6;max-width:240px}
-.hero-badge{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.badge-mrr{background:var(–ink);color:var(–paper);padding:8px 14px;border-radius:2px;text-align:center}
-.badge-mrr-label{font-size:8px;font-weight:500;letter-spacing:3px;text-transform:uppercase;opacity:.5}
-.badge-mrr-val{font-family:var(–serif);font-size:24px;letter-spacing:2px;color:#fff;line-height:1.1}
-.badge-tag{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(–gold);padding:4px 10px;border:1px solid rgba(184,148,42,.3);border-radius:2px}
+/* HERO */
+.hero{position:relative;z-index:1;padding:28px 18px 24px;border-bottom:1px solid var(–border);overflow:hidden}
+.hero-bg{position:absolute;top:-40px;right:-30px;font-family:var(–serif);font-size:clamp(100px,38vw,220px);color:rgba(255,255,255,.025);letter-spacing:-8px;line-height:1;pointer-events:none;user-select:none;z-index:0}
+.hero-content{position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;padding:4px 12px;border:1px solid rgba(201,168,76,.25);border-radius:2px;background:rgba(201,168,76,.06)}
+.hero-tag-text{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(–gold)}
+.hero-title{font-family:var(–serif);font-size:clamp(36px,11vw,56px);letter-spacing:3px;line-height:.85;margin-bottom:14px}
+.hero-title .line2{color:var(–red)}
+.hero-title .line3{color:rgba(240,237,232,.2)}
+.hero-stats{display:flex;gap:0;border:1px solid var(–border);border-radius:4px;overflow:hidden}
+.hstat{flex:1;padding:12px 10px;text-align:center;border-right:1px solid var(–border)}
+.hstat:last-child{border-right:none}
+.hstat-n{font-family:var(–serif);font-size:20px;display:block;line-height:1}
+.hstat-l{font-size:8px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(–dim);margin-top:3px;display:block}
 
-/* ── IA SUITE FEATURED ── */
-.ia-featured{
-position:relative;z-index:1;
-margin:16px;
-border-radius:6px;
-overflow:hidden;
-background:var(–ink);
-border:1px solid rgba(184,0,26,.3);
-}
-.ia-featured-inner{padding:18px 20px}
-.ia-tag{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px}
-.ia-tag-dot{width:6px;height:6px;border-radius:50%;background:var(–red);animation:blink 1s infinite}
-.ia-tag-text{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(184,0,26,.8)}
-.ia-title{font-family:var(–serif);font-size:22px;letter-spacing:3px;color:#fff;margin-bottom:6px}
-.ia-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:16px}
-.ia-pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
-.ia-pill{font-size:9px;font-weight:500;letter-spacing:1px;padding:3px 9px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:2px;color:rgba(255,255,255,.5)}
-.ia-cta{display:block;text-decoration:none;background:var(–red);color:#fff;text-align:center;padding:13px;border-radius:3px;font-family:var(–serif);font-size:14px;letter-spacing:3px}
+/* IA SUITE */
+.ia-block{position:relative;z-index:1;margin:14px;background:linear-gradient(135deg,#1a0005,#0d0d0f);border:1px solid rgba(192,0,26,.25);border-radius:6px;overflow:hidden}
+.ia-block::before{content:””;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(–red),transparent)}
+.ia-inner{padding:18px 18px 14px}
+.ia-header{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.ia-dot{width:6px;height:6px;border-radius:50%;background:var(–red);flex-shrink:0;animation:pulse 1s infinite}
+.ia-eyebrow{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(192,0,26,.6)}
+.ia-title{font-family:var(–serif);font-size:22px;letter-spacing:3px;color:var(–text);margin-bottom:6px}
+.ia-sub{font-size:11px;font-weight:300;color:var(–dim);line-height:1.6;margin-bottom:14px}
+.ia-tools{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.ia-tool{font-size:9px;padding:3px 9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:2px;color:rgba(240,237,232,.45)}
+.ia-btn{display:block;text-decoration:none;text-align:center;padding:13px;background:var(–red);font-family:var(–serif);font-size:14px;letter-spacing:3px;color:#fff;border-radius:3px}
 
-/* ── SECTION ── */
-.section{position:relative;z-index:1;padding:0 16px;margin-top:20px}
-.section-hdr{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:0 4px}
-.section-line{flex:1;height:1px;background:var(–rule)}
-.section-label{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(12,12,14,.35);white-space:nowrap}
-.section-num{font-family:var(–mono);font-size:9px;color:rgba(12,12,14,.2)}
+/* SECTION */
+.sec{position:relative;z-index:1;margin:20px 14px 0}
+.sec-hdr{display:flex;align-items:center;gap:0;margin-bottom:10px}
+.sec-num{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,.12);width:28px;flex-shrink:0}
+.sec-label{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,232,.25);flex:1}
+.sec-count{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,.12)}
 
-/* ── MODULE GRID ── */
-.mod-grid{display:flex;flex-direction:column;gap:2px}
-.mod-row{
-display:flex;align-items:center;gap:0;
-text-decoration:none;
-background:var(–smoke2);
-border:1px solid var(–rule);
-border-radius:4px;
-overflow:hidden;
-transition:background .15s;
-}
-.mod-row:hover{background:var(–smoke)}
-.mod-num{
-font-family:var(–mono);font-size:10px;color:rgba(12,12,14,.2);
-width:36px;text-align:center;padding:12px 0;flex-shrink:0;
-border-right:1px solid var(–rule);
-}
-.mod-icon{font-size:16px;width:40px;text-align:center;flex-shrink:0}
-.mod-info{flex:1;padding:10px 12px 10px 0}
-.mod-title{font-size:12px;font-weight:500;color:var(–ink);margin-bottom:1px}
-.mod-desc{font-size:10px;font-weight:300;color:rgba(12,12,14,.4)}
-.mod-arrow{font-size:10px;color:rgba(12,12,14,.2);padding-right:14px;flex-shrink:0}
+/* MODULE LIST */
+.mlist{display:flex;flex-direction:column;gap:2px}
+.mitem{display:flex;align-items:center;text-decoration:none;background:var(–card);border:1px solid var(–border);border-radius:4px;overflow:hidden;transition:border-color .2s}
+.mitem:hover{border-color:var(–border2)}
+.mitem-num{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,.15);width:32px;text-align:center;padding:13px 0;flex-shrink:0;border-right:1px solid var(–border)}
+.mitem-icon{font-size:15px;width:38px;text-align:center;flex-shrink:0}
+.mitem-body{flex:1;padding:10px 10px 10px 0}
+.mitem-title{font-size:12px;font-weight:500;color:var(–text);margin-bottom:2px}
+.mitem-sub{font-size:10px;font-weight:300;color:var(–dim)}
+.mitem-arr{font-size:9px;color:rgba(255,255,255,.15);padding-right:14px;flex-shrink:0}
 
-/* ── BONUS GRID ── */
-.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.bonus-card{
-text-decoration:none;
-background:var(–smoke2);
-border:1px solid var(–rule);
-border-radius:4px;
-padding:14px 12px;
-display:flex;flex-direction:column;gap:6px;
-transition:background .15s;
-position:relative;overflow:hidden;
-}
-.bonus-card:hover{background:var(–smoke)}
-.bonus-card::after{
-content:””;position:absolute;bottom:-20px;right:-20px;
-width:60px;height:60px;border-radius:50%;
-background:rgba(12,12,14,.02);
-}
-.bonus-icon{font-size:20px}
-.bonus-title{font-size:11px;font-weight:600;color:var(–ink);line-height:1.3}
-.bonus-desc{font-size:9px;font-weight:300;color:rgba(12,12,14,.4);line-height:1.4}
-.bonus-card.featured{background:var(–red-dim);border-color:rgba(184,0,26,.15)}
-.bonus-card.featured .bonus-title{color:var(–red)}
-.bonus-card.gold-feat{background:var(–gold-dim);border-color:rgba(184,148,42,.15)}
-.bonus-card.gold-feat .bonus-title{color:var(–gold)}
+/* BM LIST */
+.bmlist{display:flex;flex-direction:column;gap:2px}
+.bmitem{display:flex;align-items:center;gap:12px;text-decoration:none;background:var(–card);border:1px solid var(–border);border-radius:4px;padding:12px 14px;transition:border-color .2s}
+.bmitem:hover{border-color:var(–border2)}
+.bm-ico{font-size:18px;flex-shrink:0}
+.bm-body{flex:1}
+.bm-t{font-size:12px;font-weight:500;color:var(–text);margin-bottom:2px}
+.bm-s{font-size:10px;font-weight:300;color:var(–dim)}
+.bm-badge{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,.15);flex-shrink:0}
+/* color accents per model */
+.bmitem.drop{border-left:2px solid var(–blue)}
+.bmitem.pod{border-left:2px solid #9b59ff}
+.bmitem.ugc{border-left:2px solid var(–gold)}
+.bmitem.aff{border-left:2px solid var(–green)}
+.bmitem.ai{border-left:2px solid var(–red)}
+.bmitem.nl{border-left:2px solid #e8a84f}
+.bmitem.flip{border-left:2px solid rgba(255,255,255,.3)}
 
-/* ── BUSINESS MODELS ── */
-.bm-grid{display:flex;flex-direction:column;gap:2px}
-.bm-row{
-display:flex;align-items:center;gap:12px;
-text-decoration:none;
-background:var(–smoke2);border:1px solid var(–rule);
-border-radius:4px;padding:12px 14px;
-transition:background .15s;
-}
-.bm-row:hover{background:var(–smoke)}
-.bm-icon{font-size:18px;flex-shrink:0}
-.bm-info{flex:1}
-.bm-title{font-size:12px;font-weight:500;color:var(–ink);margin-bottom:1px}
-.bm-desc{font-size:10px;font-weight:300;color:rgba(12,12,14,.4)}
-.bm-badge{font-family:var(–mono);font-size:9px;color:rgba(12,12,14,.25);flex-shrink:0}
+/* BONUS GRID */
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.bitem{text-decoration:none;background:var(–card);border:1px solid var(–border);border-radius:4px;padding:13px 12px;display:flex;flex-direction:column;gap:5px;transition:border-color .2s}
+.bitem:hover{border-color:var(–border2)}
+.bitem-icon{font-size:18px}
+.bitem-title{font-size:11px;font-weight:600;color:var(–text);line-height:1.3}
+.bitem-sub{font-size:9px;font-weight:300;color:var(–dim);line-height:1.4}
+.bitem.red{border-color:rgba(192,0,26,.2);background:rgba(192,0,26,.06)}
+.bitem.red .bitem-title{color:#ff7070}
+.bitem.gold{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.05)}
+.bitem.gold .bitem-title{color:var(–gold)}
 
-/* ── FOOTER ── */
-.footer{position:relative;z-index:1;margin:28px 16px 40px;padding-top:20px;border-top:1px solid var(–rule)}
-.footer-row{display:flex;align-items:center;justify-content:space-between}
-.footer-brand{font-family:var(–serif);font-size:14px;letter-spacing:3px;color:rgba(12,12,14,.2)}
-.footer-handle{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(12,12,14,.25)}
+/* FOOTER */
+.foot{position:relative;z-index:1;margin:28px 14px 50px;padding-top:18px;border-top:1px solid var(–border);display:flex;align-items:center;justify-content:space-between}
+.foot-brand{font-family:var(–serif);font-size:14px;letter-spacing:4px;color:rgba(255,255,255,.15)}
+.foot-handle{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2)}
 
-/* ── ANIMATIONS ── */
-.fade-in{opacity:0;transform:translateY(12px);animation:fadeUp .5s ease forwards}
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-.d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}
-.d4{animation-delay:.2s}.d5{animation-delay:.25s}.d6{animation-delay:.3s}
+/* ANIMS */
+[data-a]{opacity:0;transform:translateY(10px)}
+[data-a].in{opacity:1;transform:translateY(0);transition:opacity .45s ease,transform .45s ease}
 </style>
 
 </head>
-<body>
-
-<!-- HDR -->
+<body style="background:#0d0d0f !important;color:#f0ede8 !important">
+<div class="stripe-bg"></div>
 
 <div class="hdr">
-  <div class="hdr-brand">
-    <div class="hdr-dot"></div>
-    <div class="hdr-logo">DMA</div>
+  <div class="hdr-left">
+    <div class="hdr-pill"><div class="hdr-pill-dot"></div><div class="hdr-pill-text">DMA</div></div>
+    <span class="hdr-name" id="uname">Espace membres</span>
   </div>
-  <div class="hdr-user" id="user-name">Espace membres</div>
-  <button class="logout-btn" onclick="logout()">Quitter</button>
+  <button class="logout" onclick="out()">Quitter</button>
 </div>
 
-<!-- HERO -->
-
-<div class="hero fade-in">
-  <div class="hero-left">
-    <div class="hero-eyebrow">Digital Mastery Academy</div>
-    <div class="hero-title">TON<br>EMPIRE<br>DIGITAL</div>
-    <div class="hero-sub">28 modules · MRR 100% · Outils IA exclusifs</div>
-  </div>
-  <div class="hero-badge">
-    <div class="badge-mrr">
-      <div class="badge-mrr-label">Potentiel</div>
-      <div class="badge-mrr-val">∞</div>
+<div class="hero" data-a>
+  <div class="hero-bg">DMA</div>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="hero-tag-text">✦ Digital Mastery Academy</span></div>
+    <div class="hero-title">
+      TON<br>
+      <span class="line2">EMPIRE</span><br>
+      <span class="line3">DIGITAL</span>
     </div>
-    <div class="badge-tag">MRR 100%</div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n" style="color:var(--red)">28</span><span class="hstat-l">Modules</span></div>
+      <div class="hstat"><span class="hstat-n" style="color:var(--gold)">7</span><span class="hstat-l">Business models</span></div>
+      <div class="hstat"><span class="hstat-n" style="color:var(--green)">100%</span><span class="hstat-l">MRR</span></div>
+      <div class="hstat"><span class="hstat-n" style="color:var(--blue)">∞</span><span class="hstat-l">Acces vie</span></div>
+    </div>
   </div>
 </div>
 
 <!-- IA SUITE -->
 
-<div class="ia-featured fade-in d1">
-  <div class="ia-featured-inner">
-    <div class="ia-tag"><div class="ia-tag-dot"></div><span class="ia-tag-text">Exclusif DMA — Nouveau</span></div>
+<div class="ia-block" data-a>
+  <div class="ia-inner">
+    <div class="ia-header"><div class="ia-dot"></div><span class="ia-eyebrow">Exclusif DMA — Nouveau</span></div>
     <div class="ia-title">DMA IA SUITE PRO</div>
-    <div class="ia-sub">6 outils IA qui travaillent pour toi — scripts, prospects, hooks, revenus, objections, contenu viral.</div>
-    <div class="ia-pills">
-      <span class="ia-pill">📨 Script DM</span>
-      <span class="ia-pill">🎯 Ciblage</span>
-      <span class="ia-pill">📲 Contenu</span>
-      <span class="ia-pill">💰 Revenus</span>
-      <span class="ia-pill">🥊 Objections</span>
-      <span class="ia-pill">🎣 Hooks</span>
+    <div class="ia-sub">6 outils IA qui travaillent pour toi. Scripts DM, ciblage, contenu viral, revenus, objections, hooks.</div>
+    <div class="ia-tools">
+      <span class="ia-tool">📨 Script DM</span><span class="ia-tool">🎯 Ciblage</span>
+      <span class="ia-tool">📲 Contenu</span><span class="ia-tool">💰 Revenus</span>
+      <span class="ia-tool">🥊 Objections</span><span class="ia-tool">🎣 Hooks</span>
     </div>
-    <a class="ia-cta" href="module-ia-tool.html">ACCÉDER À L'IA SUITE →</a>
-  </div>
-</div>
-
-<!-- FONDATIONS & BUSINESS -->
-
-<div class="section fade-in d2">
-  <div class="section-hdr">
-    <div class="section-line"></div>
-    <div class="section-label">Fondations &amp; Business</div>
-    <div class="section-num">01</div>
-    <div class="section-line"></div>
-  </div>
-  <div class="mod-grid">
-    <a class="mod-row" href="module-01.html"><div class="mod-num">01</div><div class="mod-icon">🧠</div><div class="mod-info"><div class="mod-title">Mindset &amp; Vision</div><div class="mod-desc">L état d esprit qui gagne</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-02.html"><div class="mod-num">02</div><div class="mod-icon">💎</div><div class="mod-info"><div class="mod-title">Positionnement &amp; Branding</div><div class="mod-desc">Devenir LA référence</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-03.html"><div class="mod-num">03</div><div class="mod-icon">💳</div><div class="mod-info"><div class="mod-title">Config Paiement &amp; Beacons</div><div class="mod-desc">Page de vente en 20 min</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-04.html"><div class="mod-num">04</div><div class="mod-icon">🔑</div><div class="mod-info"><div class="mod-title">Produits Digitaux &amp; MRR 100%</div><div class="mod-desc">Droits de revente totaux</div></div><div class="mod-arrow">→</div></a>
+    <a class="ia-btn" href="module-ia-tool.html">ACCEDER A L IA SUITE →</a>
   </div>
 </div>
 
 <!-- 7 BUSINESS MODELS -->
 
-<div class="section fade-in d2">
-  <div class="section-hdr">
-    <div class="section-line"></div>
-    <div class="section-label">Les 7 Business Models</div>
-    <div class="section-num">02</div>
-    <div class="section-line"></div>
-  </div>
-  <div class="bm-grid">
-    <a class="bm-row" href="module-dropshipping.html"><div class="bm-icon">🛒</div><div class="bm-info"><div class="bm-title">Dropshipping Mastery</div><div class="bm-desc">6 chapitres · 13 leçons · 5 outils IA</div></div><div class="bm-badge">01/07</div></a>
-    <a class="bm-row" href="module-pod.html"><div class="bm-icon">🎨</div><div class="bm-info"><div class="bm-title">Print on Demand Mastery</div><div class="bm-desc">5 chapitres · 11 leçons · Midjourney</div></div><div class="bm-badge">02/07</div></a>
-    <a class="bm-row" href="module-ugc.html"><div class="bm-icon">🎬</div><div class="bm-info"><div class="bm-title">UGC Creator Mastery</div><div class="bm-desc">5 chapitres · 12 leçons · Scripts IA</div></div><div class="bm-badge">03/07</div></a>
-    <a class="bm-row" href="module-affiliation.html"><div class="bm-icon">🤝</div><div class="bm-info"><div class="bm-title">Affiliation Mastery</div><div class="bm-desc">5 chapitres · 12 leçons · 100% passif</div></div><div class="bm-badge">04/07</div></a>
-    <a class="bm-row" href="bonus-agence-ia.html"><div class="bm-icon">🤖</div><div class="bm-info"><div class="bm-title">AI Agency No-Code</div><div class="bm-desc">8 secteurs · 12 apps · Plan d action</div></div><div class="bm-badge">05/07</div></a>
-    <a class="bm-row" href="module-newsletter.html"><div class="bm-icon">📧</div><div class="bm-info"><div class="bm-title">Newsletter Payante</div><div class="bm-desc">5 chapitres · 11 leçons · Lead magnets</div></div><div class="bm-badge">06/07</div></a>
-    <a class="bm-row" href="module-flipping.html"><div class="bm-icon">🔄</div><div class="bm-info"><div class="bm-title">Flipping Digital</div><div class="bm-desc">5 chapitres · 11 leçons · ROI calculator</div></div><div class="bm-badge">07/07</div></a>
+<div class="sec" data-a>
+  <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-label">Les 7 Business Models</span><span class="sec-count">7</span></div>
+  <div class="bmlist">
+    <a class="bmitem drop" href="module-dropshipping.html"><div class="bm-ico">🛒</div><div class="bm-body"><div class="bm-t">Dropshipping Mastery</div><div class="bm-s">6 chapitres · 13 lecons · 5 outils IA</div></div><div class="bm-badge">01/07</div></a>
+    <a class="bmitem pod" href="module-pod.html"><div class="bm-ico">🎨</div><div class="bm-body"><div class="bm-t">Print on Demand Mastery</div><div class="bm-s">5 chapitres · 11 lecons · Midjourney</div></div><div class="bm-badge">02/07</div></a>
+    <a class="bmitem ugc" href="module-ugc.html"><div class="bm-ico">🎬</div><div class="bm-body"><div class="bm-t">UGC Creator Mastery</div><div class="bm-s">5 chapitres · 12 lecons · Scripts IA</div></div><div class="bm-badge">03/07</div></a>
+    <a class="bmitem aff" href="module-affiliation.html"><div class="bm-ico">🤝</div><div class="bm-body"><div class="bm-t">Affiliation Mastery</div><div class="bm-s">5 chapitres · 12 lecons · 100% passif</div></div><div class="bm-badge">04/07</div></a>
+    <a class="bmitem ai" href="bonus-agence-ia.html"><div class="bm-ico">🤖</div><div class="bm-body"><div class="bm-t">AI Agency No-Code</div><div class="bm-s">8 secteurs · 12 apps · Plan d action</div></div><div class="bm-badge">05/07</div></a>
+    <a class="bmitem nl" href="module-newsletter.html"><div class="bm-ico">📧</div><div class="bm-body"><div class="bm-t">Newsletter Payante</div><div class="bm-s">5 chapitres · 11 lecons · Lead magnets</div></div><div class="bm-badge">06/07</div></a>
+    <a class="bmitem flip" href="module-flipping.html"><div class="bm-ico">🔄</div><div class="bm-body"><div class="bm-t">Flipping Digital</div><div class="bm-s">5 chapitres · 11 lecons · ROI calculator</div></div><div class="bm-badge">07/07</div></a>
   </div>
 </div>
 
-<!-- RESEAUX & CONTENU -->
+<!-- FONDATIONS -->
 
-<div class="section fade-in d3">
-  <div class="section-hdr">
-    <div class="section-line"></div>
-    <div class="section-label">Réseaux &amp; Contenu</div>
-    <div class="section-num">03</div>
-    <div class="section-line"></div>
-  </div>
-  <div class="mod-grid">
-    <a class="mod-row" href="module-05.html"><div class="mod-num">05</div><div class="mod-icon">📲</div><div class="mod-info"><div class="mod-title">Marketing de Contenu</div><div class="mod-desc">Contenu qui convertit</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-06.html"><div class="mod-num">06</div><div class="mod-icon">🎭</div><div class="mod-info"><div class="mod-title">Vidéo Faceless</div><div class="mod-desc">Monétise sans te montrer</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-07.html"><div class="mod-num">07</div><div class="mod-icon">📸</div><div class="mod-info"><div class="mod-title">Instagram Mastery</div><div class="mod-desc">Exploser sur Insta</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-08.html"><div class="mod-num">08</div><div class="mod-icon">🎵</div><div class="mod-info"><div class="mod-title">TikTok Hooks &amp; Viral</div><div class="mod-desc">0 à 100k vues</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-09.html"><div class="mod-num">09</div><div class="mod-icon">👻</div><div class="mod-info"><div class="mod-title">Snapchat &amp; Proximité</div><div class="mod-desc">Closer en DM Snap</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-12.html"><div class="mod-num">12</div><div class="mod-icon">🔴</div><div class="mod-info"><div class="mod-title">Live TikTok</div><div class="mod-desc">Vendre en direct</div></div><div class="mod-arrow">→</div></a>
+<div class="sec" data-a>
+  <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-label">Fondations &amp; Business</span></div>
+  <div class="mlist">
+    <a class="mitem" href="module-01.html"><div class="mitem-num">01</div><div class="mitem-icon">🧠</div><div class="mitem-body"><div class="mitem-title">Mindset &amp; Vision</div><div class="mitem-sub">L etat d esprit qui gagne</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-02.html"><div class="mitem-num">02</div><div class="mitem-icon">💎</div><div class="mitem-body"><div class="mitem-title">Positionnement &amp; Branding</div><div class="mitem-sub">Devenir LA reference</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-03.html"><div class="mitem-num">03</div><div class="mitem-icon">💳</div><div class="mitem-body"><div class="mitem-title">Config Paiement &amp; Beacons</div><div class="mitem-sub">Page de vente en 20 min</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-04.html"><div class="mitem-num">04</div><div class="mitem-icon">🔑</div><div class="mitem-body"><div class="mitem-title">Produits Digitaux &amp; MRR 100%</div><div class="mitem-sub">Droits de revente totaux</div></div><div class="mitem-arr">→</div></a>
   </div>
 </div>
 
-<!-- VENTE & CLOSING -->
+<!-- RESEAUX -->
 
-<div class="section fade-in d3">
-  <div class="section-hdr">
-    <div class="section-line"></div>
-    <div class="section-label">Vente &amp; Closing</div>
-    <div class="section-num">04</div>
-    <div class="section-line"></div>
-  </div>
-  <div class="mod-grid">
-    <a class="mod-row" href="module-11.html"><div class="mod-num">11</div><div class="mod-icon">🎯</div><div class="mod-info"><div class="mod-title">Scripts Closing DM</div><div class="mod-desc">Mot pour mot</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-13.html"><div class="mod-num">13</div><div class="mod-icon">🎬</div><div class="mod-info"><div class="mod-title">VSL &amp; Vidéo Vente</div><div class="mod-desc">Vidéos qui convertissent</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-14.html"><div class="mod-num">14</div><div class="mod-icon">🤖</div><div class="mod-info"><div class="mod-title">AI Selling</div><div class="mod-desc">Vendre 10x plus vite</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="scripts-closing.html"><div class="mod-num">—</div><div class="mod-icon">📝</div><div class="mod-info"><div class="mod-title">Scripts DM &amp; Live</div><div class="mod-desc">Templates prêts à copier</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="scripts-telephone.html"><div class="mod-num">—</div><div class="mod-icon">📞</div><div class="mod-info"><div class="mod-title">Closing Téléphone</div><div class="mod-desc">Scripts mot pour mot</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="arguments-vente.html"><div class="mod-num">—</div><div class="mod-icon">💰</div><div class="mod-info"><div class="mod-title">Arguments &amp; Objections</div><div class="mod-desc">Réponses qui closent</div></div><div class="mod-arrow">→</div></a>
+<div class="sec" data-a>
+  <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-label">Reseaux &amp; Contenu</span></div>
+  <div class="mlist">
+    <a class="mitem" href="module-05.html"><div class="mitem-num">05</div><div class="mitem-icon">📲</div><div class="mitem-body"><div class="mitem-title">Marketing de Contenu</div><div class="mitem-sub">Contenu qui convertit</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-06.html"><div class="mitem-num">06</div><div class="mitem-icon">🎭</div><div class="mitem-body"><div class="mitem-title">Video Faceless</div><div class="mitem-sub">Monetise sans te montrer</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-07.html"><div class="mitem-num">07</div><div class="mitem-icon">📸</div><div class="mitem-body"><div class="mitem-title">Instagram Mastery</div><div class="mitem-sub">Exploser sur Insta</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-08.html"><div class="mitem-num">08</div><div class="mitem-icon">🎵</div><div class="mitem-body"><div class="mitem-title">TikTok Hooks &amp; Viral</div><div class="mitem-sub">0 a 100k vues</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-09.html"><div class="mitem-num">09</div><div class="mitem-icon">👻</div><div class="mitem-body"><div class="mitem-title">Snapchat &amp; Proximite</div><div class="mitem-sub">Closer en DM Snap</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-12.html"><div class="mitem-num">12</div><div class="mitem-icon">🔴</div><div class="mitem-body"><div class="mitem-title">Live TikTok</div><div class="mitem-sub">Vendre en direct</div></div><div class="mitem-arr">→</div></a>
   </div>
 </div>
 
-<!-- SCALE & AUTO -->
+<!-- VENTE -->
 
-<div class="section fade-in d4">
-  <div class="section-hdr">
-    <div class="section-line"></div>
-    <div class="section-label">Scale &amp; Automatisation</div>
-    <div class="section-num">05</div>
-    <div class="section-line"></div>
-  </div>
-  <div class="mod-grid">
-    <a class="mod-row" href="module-10.html"><div class="mod-num">10</div><div class="mod-icon">✉️</div><div class="mod-info"><div class="mod-title">Email Marketing</div><div class="mod-desc">Ventes automatiques 24h/24</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-15.html"><div class="mod-num">15</div><div class="mod-icon">🔁</div><div class="mod-info"><div class="mod-title">Funnels &amp; Automatisation</div><div class="mod-desc">Tunnel sans toi</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-16.html"><div class="mod-num">16</div><div class="mod-icon">💬</div><div class="mod-info"><div class="mod-title">Automation DM</div><div class="mod-desc">Close en pilote auto</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-17.html"><div class="mod-num">17</div><div class="mod-icon">💵</div><div class="mod-info"><div class="mod-title">MRR Avancé</div><div class="mod-desc">Maximise tes droits</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-19.html"><div class="mod-num">19</div><div class="mod-icon">📈</div><div class="mod-info"><div class="mod-title">Paid Ads</div><div class="mod-desc">1€ investi = 3€ récupérés</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-27.html"><div class="mod-num">27</div><div class="mod-icon">🚀</div><div class="mod-info"><div class="mod-title">Scaling &amp; Délégation</div><div class="mod-desc">De solo à entrepreneur</div></div><div class="mod-arrow">→</div></a>
+<div class="sec" data-a>
+  <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-label">Vente &amp; Closing</span></div>
+  <div class="mlist">
+    <a class="mitem" href="module-11.html"><div class="mitem-num">11</div><div class="mitem-icon">🎯</div><div class="mitem-body"><div class="mitem-title">Scripts Closing DM</div><div class="mitem-sub">Mot pour mot</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-13.html"><div class="mitem-num">13</div><div class="mitem-icon">🎬</div><div class="mitem-body"><div class="mitem-title">VSL &amp; Video Vente</div><div class="mitem-sub">Videos qui convertissent</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-14.html"><div class="mitem-num">14</div><div class="mitem-icon">🤖</div><div class="mitem-body"><div class="mitem-title">AI Selling</div><div class="mitem-sub">Vendre 10x plus vite</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="scripts-closing.html"><div class="mitem-num">—</div><div class="mitem-icon">📝</div><div class="mitem-body"><div class="mitem-title">Scripts DM &amp; Live</div><div class="mitem-sub">Templates prets a copier</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="scripts-telephone.html"><div class="mitem-num">—</div><div class="mitem-icon">📞</div><div class="mitem-body"><div class="mitem-title">Closing Telephone</div><div class="mitem-sub">Scripts mot pour mot</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="arguments-vente.html"><div class="mitem-num">—</div><div class="mitem-icon">💰</div><div class="mitem-body"><div class="mitem-title">Arguments &amp; Objections</div><div class="mitem-sub">Reponses qui closent</div></div><div class="mitem-arr">→</div></a>
   </div>
 </div>
 
-<!-- GESTION & LEGAL -->
+<!-- SCALE -->
 
-<div class="section fade-in d4">
-  <div class="section-hdr">
-    <div class="section-line"></div>
-    <div class="section-label">Gestion &amp; Légal</div>
-    <div class="section-num">06</div>
-    <div class="section-line"></div>
-  </div>
-  <div class="mod-grid">
-    <a class="mod-row" href="module-23.html"><div class="mod-num">23</div><div class="mod-icon">⚖️</div><div class="mod-info"><div class="mod-title">Légal &amp; Administratif</div><div class="mod-desc">Auto-entrepreneur, CGV</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-24.html"><div class="mod-num">24</div><div class="mod-icon">💳</div><div class="mod-info"><div class="mod-title">Gestion Financière</div><div class="mod-desc">Gérer, épargner, réinvestir</div></div><div class="mod-arrow">→</div></a>
-    <a class="mod-row" href="module-25.html"><div class="mod-num">25</div><div class="mod-icon">⚡</div><div class="mod-info"><div class="mod-title">Productivité &amp; Organisation</div><div class="mod-desc">Les systèmes des pros</div></div><div class="mod-arrow">→</div></a>
+<div class="sec" data-a>
+  <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-label">Scale &amp; Automatisation</span></div>
+  <div class="mlist">
+    <a class="mitem" href="module-10.html"><div class="mitem-num">10</div><div class="mitem-icon">✉️</div><div class="mitem-body"><div class="mitem-title">Email Marketing</div><div class="mitem-sub">Ventes automatiques 24h/24</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-15.html"><div class="mitem-num">15</div><div class="mitem-icon">🔁</div><div class="mitem-body"><div class="mitem-title">Funnels &amp; Automatisation</div><div class="mitem-sub">Tunnel sans toi</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-16.html"><div class="mitem-num">16</div><div class="mitem-icon">💬</div><div class="mitem-body"><div class="mitem-title">Automation DM</div><div class="mitem-sub">Close en pilote auto</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-17.html"><div class="mitem-num">17</div><div class="mitem-icon">💵</div><div class="mitem-body"><div class="mitem-title">MRR Avance</div><div class="mitem-sub">Maximise tes droits</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-19.html"><div class="mitem-num">19</div><div class="mitem-icon">📈</div><div class="mitem-body"><div class="mitem-title">Paid Ads</div><div class="mitem-sub">1EUR investi = 3EUR recuperes</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-27.html"><div class="mitem-num">27</div><div class="mitem-icon">🚀</div><div class="mitem-body"><div class="mitem-title">Scaling &amp; Delegation</div><div class="mitem-sub">De solo a entrepreneur</div></div><div class="mitem-arr">→</div></a>
   </div>
 </div>
 
-<!-- OUTILS BONUS -->
+<!-- GESTION -->
 
-<div class="section fade-in d5">
-  <div class="section-hdr">
-    <div class="section-line"></div>
-    <div class="section-label">Outils &amp; Bonus</div>
-    <div class="section-num">07</div>
-    <div class="section-line"></div>
-  </div>
-  <div class="bonus-grid">
-    <a class="bonus-card gold-feat" href="module-beacons-gen.html">
-      <div class="bonus-icon">🌐</div>
-      <div class="bonus-title">Beacons Generator IA</div>
-      <div class="bonus-desc">Page de vente générée en 5 min</div>
-    </a>
-    <a class="bonus-card featured" href="bonus-agence-ia.html">
-      <div class="bonus-icon">🏢</div>
-      <div class="bonus-title">Agence IA No-Code</div>
-      <div class="bonus-desc">8 business types, 12 apps</div>
-    </a>
-    <a class="bonus-card" href="crm-tracker.html">
-      <div class="bonus-icon">📊</div>
-      <div class="bonus-title">Tracker CRM</div>
-      <div class="bonus-desc">Suis tes prospects</div>
-    </a>
-    <a class="bonus-card" href="scripts-closing.html">
-      <div class="bonus-icon">📝</div>
-      <div class="bonus-title">Scripts Closing</div>
-      <div class="bonus-desc">DM &amp; téléphone</div>
-    </a>
-    <a class="bonus-card" href="cgv-dma.html">
-      <div class="bonus-icon">⚖️</div>
-      <div class="bonus-title">CGV Officielles</div>
-      <div class="bonus-desc">DMA 2025 complètes</div>
-    </a>
-    <a class="bonus-card" href="calendrier-contenu.html">
-      <div class="bonus-icon">🗓️</div>
-      <div class="bonus-title">Calendrier Contenu</div>
-      <div class="bonus-desc">28 posts planifiés</div>
-    </a>
-    <a class="bonus-card" href="arguments-vente.html">
-      <div class="bonus-icon">💰</div>
-      <div class="bonus-title">Arguments de Vente</div>
-      <div class="bonus-desc">Crusher d objections</div>
-    </a>
-    <a class="bonus-card" href="module-business-models.html">
-      <div class="bonus-icon">🗺️</div>
-      <div class="bonus-title">Hub Business Models</div>
-      <div class="bonus-desc">Vue d ensemble 7 modèles</div>
-    </a>
+<div class="sec" data-a>
+  <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-label">Gestion &amp; Legal</span></div>
+  <div class="mlist">
+    <a class="mitem" href="module-23.html"><div class="mitem-num">23</div><div class="mitem-icon">⚖️</div><div class="mitem-body"><div class="mitem-title">Legal &amp; Administratif</div><div class="mitem-sub">Auto-entrepreneur, CGV</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-24.html"><div class="mitem-num">24</div><div class="mitem-icon">💳</div><div class="mitem-body"><div class="mitem-title">Gestion Financiere</div><div class="mitem-sub">Gerer, epargner, reinvestir</div></div><div class="mitem-arr">→</div></a>
+    <a class="mitem" href="module-25.html"><div class="mitem-num">25</div><div class="mitem-icon">⚡</div><div class="mitem-body"><div class="mitem-title">Productivite &amp; Organisation</div><div class="mitem-sub">Les systemes des pros</div></div><div class="mitem-arr">→</div></a>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- OUTILS & BONUS -->
 
-<div class="footer fade-in d6">
-  <div class="footer-row">
-    <div class="footer-brand">DMA</div>
-    <div class="footer-handle">@mthsdgtmk</div>
+<div class="sec" data-a>
+  <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-label">Outils &amp; Bonus Exclusifs</span></div>
+  <div class="bgrid">
+    <a class="bitem gold" href="module-beacons-gen.html"><div class="bitem-icon">🌐</div><div class="bitem-title">Beacons Generator IA</div><div class="bitem-sub">Page de vente en 5 min</div></a>
+    <a class="bitem red" href="bonus-agence-ia.html"><div class="bitem-icon">🏢</div><div class="bitem-title">Agence IA No-Code</div><div class="bitem-sub">8 secteurs, 12 apps</div></a>
+    <a class="bitem" href="crm-tracker.html"><div class="bitem-icon">📊</div><div class="bitem-title">Tracker CRM</div><div class="bitem-sub">Suis tes prospects</div></a>
+    <a class="bitem" href="cgv-dma.html"><div class="bitem-icon">⚖️</div><div class="bitem-title">CGV Officielles</div><div class="bitem-sub">DMA 2025 completes</div></a>
+    <a class="bitem" href="calendrier-contenu.html"><div class="bitem-icon">🗓️</div><div class="bitem-title">Calendrier Contenu</div><div class="bitem-sub">28 posts planifies</div></a>
+    <a class="bitem" href="arguments-vente.html"><div class="bitem-icon">💬</div><div class="bitem-title">Arguments de Vente</div><div class="bitem-sub">Crusher d objections</div></a>
   </div>
+</div>
+
+<div class="foot">
+  <div class="foot-brand">DMA</div>
+  <div class="foot-handle">@mthsdgtmk</div>
 </div>
 
 <script>
 var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
 if(!user)window.location.href="index.html";
-else{
-  var n=document.getElementById("user-name");
-  if(n)n.textContent="Bonjour, "+(user.name||user.id)+" 👋";
-}
+else{var n=document.getElementById("uname");if(n)n.textContent="Bonjour "+(user.name||user.id)+" 👋";}
 
-function logout(){
-  sessionStorage.removeItem("dma_user");
-  window.location.href="index.html";
-}
+function out(){sessionStorage.removeItem("dma_user");window.location.href="index.html";}
 
-// Track login
-try{
-  fetch("https://api.airtable.com/v0/app1N7fUuN5pcWE5S/Table%201",{
-    method:"POST",
-    headers:{"Content-Type":"application/json","Authorization":"Bearer patqxKulxpZ2ERSII.a9a8d52b13701bde569c6693e43ad3c1eb14ab50ce4e4ffb187df13c77afb7c5"},
-    body:JSON.stringify({fields:{Membre:user.id||"",Action:"Dashboard V2",Date:new Date().toLocaleString("fr-FR")}})
-  });
-}catch(e){}
+// Scroll animations
+var els=document.querySelectorAll("[data-a]");
+var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.08});
+els.forEach(function(el,i){el.style.transitionDelay=(i*0.04)+"s";io.observe(el);});
+
+// Airtable track
+try{fetch("https://api.airtable.com/v0/app1N7fUuN5pcWE5S/Table%201",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer patqxKulxpZ2ERSII.a9a8d52b13701bde569c6693e43ad3c1eb14ab50ce4e4ffb187df13c77afb7c5"},body:JSON.stringify({fields:{Membre:user.id||"",Action:"Dashboard V3",Date:new Date().toLocaleString("fr-FR")}})});}catch(e){}
 </script>
 
 </body>
