@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — Newsletter Mastery</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030408;--s1:#060810;--s2:#0c1018;--gold:#C9A84C;--blue:#4fa3e8;--green:#3ecf8e;--red:#C0001A;--purple:#9b59ff;--text:#eef0ff;--dim:rgba(238,240,255,.4);--border:rgba(201,168,76,.12)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(201,168,76,.06) 0%,transparent 50%),radial-gradient(ellipse at 85% 100%,rgba(79,163,232,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+.hdr{position:sticky;top:0;z-index:100;background:rgba(3,4,8,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.hdr-back{text-decoration:none;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.hdr-title{font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:4px;color:var(--gold)}
+.hdr-badge{font-size:10px;font-weight:700;color:rgba(201,168,76,.6);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:3px 8px}
+.hero{position:relative;z-index:1;padding:28px 16px 24px;border-bottom:1px solid var(--border);overflow:hidden}
+.hero-num{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(201,168,76,.4);margin-bottom:8px}
+.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(30px,9vw,52px);letter-spacing:3px;line-height:.82;margin-bottom:14px}
+.hl{color:var(--gold);display:block}
+.hero-desc{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:20px}
+.hero-stats{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.sn{font-family:"Bebas Neue",sans-serif;font-size:22px;display:block}
+.sl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px;display:block}
+.chnav{display:flex;overflow-x:auto;background:var(--s1);border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch}
+.chnav::-webkit-scrollbar{display:none}
+.chbtn{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:"Space Grotesk",sans-serif;white-space:nowrap}
+.chbtn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.panel{display:none;padding:16px 16px 60px;position:relative;z-index:1;animation:fi .3s ease}
+.panel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.lesson{background:var(--s1);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.lhdr{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer}
+.lnum{font-family:"Bebas Neue",sans-serif;font-size:20px;color:rgba(201,168,76,.3);min-width:32px}
+.linfo{flex:1}.ltitle{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.lmeta{font-size:10px;color:var(--dim)}
+.larrow{font-size:12px;color:var(--dim);transition:transform .3s}
+.lesson.open .larrow{transform:rotate(90deg)}
+.lbody{display:none;padding:16px}.lesson.open .lbody{display:block}
+.box{border-radius:5px;padding:14px;margin-bottom:12px}
+.box.go{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15)}
+.box.r{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2)}
+.box.g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15)}
+.box.b{background:rgba(79,163,232,.05);border:1px solid rgba(79,163,232,.15)}
+.box.p{background:rgba(155,89,255,.05);border:1px solid rgba(155,89,255,.15)}
+.bt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.bt.go{color:var(--gold)}.bt.r{color:#ff6060}.bt.g{color:var(--green)}.bt.b{color:var(--blue)}.bt.p{color:var(--purple)}
+.btext{font-size:12px;color:rgba(238,240,255,.72);line-height:1.8}
+.btext p{margin-bottom:8px}.btext p:last-child{margin-bottom:0}
+.btext strong{color:var(--text);font-weight:600}
+.kp{display:flex;gap:8px;font-size:12px;color:rgba(238,240,255,.7);margin-bottom:6px}
+.ki{flex-shrink:0;font-size:14px}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.step{display:flex;gap:12px}
+.snum{width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:14px;color:var(--gold);flex-shrink:0}
+.stitle{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.sdesc{font-size:12px;color:rgba(238,240,255,.6);line-height:1.6}
+.sdesc strong{color:var(--gold)}
+.cs{background:var(--s2);border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.cshdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.1);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.csbody{padding:14px}
+.csrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.csrow:last-child{border-bottom:none}
+.csl{color:var(--dim)}.csv{font-weight:700;color:var(--text)}.csv.g{color:var(--green)}.csv.go{color:var(--gold)}
+.csq{font-size:12px;color:rgba(238,240,255,.65);line-height:1.75;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
+.cli{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
+.clb{width:20px;height:20px;border-radius:3px;border:2px solid rgba(201,168,76,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cli.done .clb{background:var(--gold);border-color:var(--gold)}
+.clck{display:none;color:#000;font-size:12px;font-weight:700}.cli.done .clck{display:block}
+.clt{font-size:12px;color:rgba(238,240,255,.7)}.cli.done .clt{color:rgba(238,240,255,.3);text-decoration:line-through}
+.qq{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:10px}
+.qqt{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.5}
+.qo{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(238,240,255,.7);margin-bottom:6px}
+.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:var(--green)}
+.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff6060}
+.qex{margin-top:10px;padding:10px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(238,240,255,.65);line-height:1.6;display:none}
+.iat{background:var(--bg);border:1px solid rgba(201,168,76,.2);border-radius:6px;overflow:hidden;margin-top:10px}
+.iatbar{background:var(--s2);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.iatl{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.iatb{font-size:8px;color:rgba(201,168,76,.4);font-weight:600}
+.iatbody{padding:12px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:5px;display:block;margin-top:10px}
+.lbl:first-child{margin-top:0}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none;resize:none}
+.inp:focus{border-color:rgba(201,168,76,.4)}
+.sel{width:100%;background:var(--s2);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none}
+.r2{display:flex;gap:8px}.r2 .c{flex:1}
+.rbtn{width:100%;padding:12px;border:none;border-radius:3px;font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:3px;color:#050505;cursor:pointer;margin-top:10px;-webkit-appearance:none;background:linear-gradient(135deg,var(--gold),#8B6914)}
+.rbtn:disabled{opacity:.4}
+.rbtn.g{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.25);color:var(--green);font-size:12px;letter-spacing:2px}
+.ld{height:2px;background:rgba(255,255,255,.05);overflow:hidden;display:none;border-radius:1px;margin-top:4px}
+.ldf{height:100%;width:50%;border-radius:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:lf 1.2s linear infinite}
+@keyframes lf{0%{transform:translateX(-200%)}100%{transform:translateX(300%)}}
+.out{background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px;margin-top:8px;font-size:12px;font-family:"JetBrains Mono",monospace;line-height:1.8;color:rgba(238,240,255,.82);white-space:pre-wrap;display:none}
+.cpbtn{display:none;width:100%;margin-top:6px;padding:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:2px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:"Space Grotesk",sans-serif;letter-spacing:2px;text-transform:uppercase;-webkit-appearance:none}
+.sim{background:var(--s2);border:1px solid rgba(201,168,76,.12);border-radius:3px;margin-top:10px}
+.simrow{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.simrow:last-child{border-bottom:none}
+.siml{color:var(--dim)}.simv{font-family:"Bebas Neue",sans-serif;font-size:18px}
+.simv.g{color:var(--green)}.simv.go{color:var(--gold)}.simv.b{font-size:22px;color:var(--text)}
+.prog{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:6px;padding:14px;margin-bottom:14px}
+.progt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.progt2{background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;height:6px;margin-bottom:6px}
+.progf{height:100%;background:linear-gradient(90deg,var(--gold),rgba(201,168,76,.5));border-radius:3px;transition:width .5s}
+.progi{font-size:11px;color:var(--dim);display:flex;justify-content:space-between}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <a class="hdr-back" href="module-business-models.html">&#8592; Business Models</a>
+  <div class="hdr-title">NEWSLETTER</div>
+  <div class="hdr-badge">MODULE 05/07</div>
+</div>
+<div class="hero">
+  <div class="hero-num">Business Model 05 / 07</div>
+  <div class="hero-title">NEWSLETTER<span class="hl">PAYANTE</span>MASTERY</div>
+  <div class="hero-desc">Construire un actif numerique durable. Une liste email t appartient pour toujours. Ni algorithme ni shadowban. L actif le plus solide d internet.</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="sn" style="color:var(--gold)">5</span><span class="sl">Chapitres</span></div>
+    <div class="stat"><span class="sn" style="color:var(--blue)">11</span><span class="sl">Lecons</span></div>
+    <div class="stat"><span class="sn" style="color:var(--green)">4</span><span class="sl">Outils IA</span></div>
+    <div class="stat"><span class="sn" style="color:var(--text)">Long</span><span class="sl">Terme</span></div>
+  </div>
+</div>
+<div class="chnav">
+  <button class="chbtn active" onclick="ch(0,this)">01 Fondations</button>
+  <button class="chbtn" onclick="ch(1,this)">02 Lancer</button>
+  <button class="chbtn" onclick="ch(2,this)">03 Creer le contenu</button>
+  <button class="chbtn" onclick="ch(3,this)">04 Monetiser</button>
+  <button class="chbtn" onclick="ch(4,this)">05 Croissance</button>
+</div>
+
+<!-- CH1 -->
+
+<div class="panel active" id="ch0">
+<div class="prog"><div class="progt">Progression Ch.1</div><div class="progt2"><div class="progf" id="pf0" style="width:0%"></div></div><div class="progi"><span id="pt0">0/3 lecons</span><span id="pp0">0%</span></div></div>
+
+<div class="lesson" id="l0">
+<div class="lhdr" onclick="tl(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">Pourquoi la newsletter est l actif numero 1</div><div class="lmeta">Fondamentaux - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box go"><div class="bt go">Ce que tu possedes vraiment</div><div class="btext"><p>Sur TikTok, Instagram ou YouTube — <strong>tu ne possedes rien</strong>. L algorithme peut reduire ta portee du jour au lendemain. Ton compte peut etre banni. La plateforme peut disparaitre.</p><p>Ta liste email t appartient. <strong>Personne ne peut te la confisquer.</strong> Pas d algorithme, pas de ban, pas de reach artificiel. Tu envoies, ca arrive dans la boite de chaque abonne.</p></div></div>
+<div class="box go"><div class="bt go">Les chiffres qui font la difference</div>
+<div class="kp"><span class="ki">&#128140;</span><span><strong>Taux d ouverture email : 20-40%</strong> vs portee organique Instagram : 2-5%</span></div>
+<div class="kp"><span class="ki">&#128140;</span><span><strong>Taux de conversion email : 3-8%</strong> vs reseaux sociaux : 0.5-2%</span></div>
+<div class="kp"><span class="ki">&#128140;</span><span><strong>Valeur par abonne : 1-3EUR/mois</strong> si bien monetise = 10 000 abonnes = 10-30k EUR/mois</span></div>
+<div class="kp"><span class="ki">&#128140;</span><span><strong>ROI email : 3600%</strong> — pour 1EUR investi dans l email marketing, retour moyen de 36EUR</span></div>
+</div>
+<div class="box g"><div class="bt g">Les 3 modeles de monetisation</div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Abonnement payant</strong> — tes lecteurs paient 5-15EUR/mois pour du contenu premium</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Sponsoring</strong> — des marques paient pour apparaitre dans ta newsletter</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Affiliation</strong> — tu recommandes des produits et touches des commissions</span></div>
+</div>
+<button class="rbtn g" onclick="md(0,0,3)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l1">
+<div class="lhdr" onclick="tl(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Choisir son sujet et se positionner</div><div class="lmeta">Strategie - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box go"><div class="bt go">La formule d un bon positionnement newsletter</div><div class="btext"><p><strong>[Sujet specifique] pour [audience precise] par [ton angle unique]</strong></p><p>Exemples :<br>- "Business en ligne pour les 20-30 ans qui veulent quitter leur 9-5 — par quelqu un qui l a fait en 18 mois"<br>- "Outils IA pour entrepreneurs — 1 outil pratique par semaine avec guide pas a pas"<br>- "Investissement et liberte financiere pour debutants — sans jargon financier"</p></div></div>
+<div class="box go"><div class="bt go">Les sujets qui fonctionnent en 2025</div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Business et revenus en ligne</strong> — enorme demande, audience engagee et disposee a payer</span></div>
+<div class="kp"><span class="ki">&#129302;</span><span><strong>Intelligence artificielle pratique</strong> — sujet en explosion, besoin constant de contenu pedagogique</span></div>
+<div class="kp"><span class="ki">&#128170;</span><span><strong>Productivite et mindset</strong> — audience passionnee qui cherche des insights actionnables</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Investissement personnel</strong> — immense marche, forte willingness to pay</span></div>
+<div class="kp"><span class="ki">&#127968;</span><span><strong>Niche tres specifique</strong> — restaurants locaux, parents d enfants autistes, passionnes de whisky — audience petite mais ultra engagee</span></div>
+</div>
+<div class="box r"><div class="bt r">Les erreurs de positionnement a eviter</div>
+<div class="kp"><span class="ki">&#9888;</span><span>Sujet trop large ("business") — personne ne sait pourquoi te lire toi plutot qu un autre</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span>Copier exactement une newsletter existante — il faut un angle unique</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span>Sujet dont tu n es pas passionne — tu dois ecrire regulierement, il faut que ce soit un plaisir</span></div>
+</div>
+<button class="rbtn g" onclick="md(1,0,3)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l2">
+<div class="lhdr" onclick="tl(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz interactif - 3 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="qq"><div class="qqt">Quel est le principal avantage d une liste email par rapport aux followers sur les reseaux ?</div>
+<div class="qo" onclick="qa(this,false,0)">A. C est moins cher a gerer</div>
+<div class="qo" onclick="qa(this,true,0)">B. Ta liste t appartient — aucun algorithme ne peut te la confisquer</div>
+<div class="qo" onclick="qa(this,false,0)">C. Les emails ont plus de contenu que les posts</div>
+<div class="qo" onclick="qa(this,false,0)">D. C est plus facile a faire grossir</div>
+<div class="qex" id="qe0">Exact ! Ta liste email t appartient a vie. Pas d algorithme, pas de ban, pas de portee reduite. Si demain TikTok disparait, ta newsletter continue. C est un actif que tu possedes vraiment.</div>
+</div>
+<div class="qq"><div class="qqt">Quel est le taux de conversion moyen de l email par rapport aux reseaux sociaux ?</div>
+<div class="qo" onclick="qa(this,false,1)">A. Environ le meme</div>
+<div class="qo" onclick="qa(this,true,1)">B. L email convertit 3 a 5x mieux</div>
+<div class="qo" onclick="qa(this,false,1)">C. Les reseaux convertissent mieux</div>
+<div class="qo" onclick="qa(this,false,1)">D. Ca depend du secteur</div>
+<div class="qex" id="qe1">Exact ! Email : 3-8% de taux de conversion. Reseaux sociaux : 0.5-2%. L email est le canal de vente le plus efficace d internet depuis 30 ans — et ca ne change pas.</div>
+</div>
+<div class="qq"><div class="qqt">Quelle formule de positionnement est la meilleure ?</div>
+<div class="qo" onclick="qa(this,false,2)">A. "Newsletter business"</div>
+<div class="qo" onclick="qa(this,false,2)">B. "Newsletter sur le marketing digital"</div>
+<div class="qo" onclick="qa(this,true,2)">C. "1 outil IA pratique par semaine pour entrepreneurs debutants — sans jargon"</div>
+<div class="qo" onclick="qa(this,false,2)">D. "Newsletter sur tout ce qui concerne le business"</div>
+<div class="qex" id="qe2">Parfait ! La version C est specifique, identifie une audience precise, donne un format clair et un differentiateur unique. Les gens savent exactement pourquoi s abonner.</div>
+</div>
+<button class="rbtn g" onclick="md(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH2 LANCER -->
+
+<div class="panel" id="ch1">
+<div class="prog"><div class="progt">Progression Ch.2</div><div class="progt2"><div class="progf" id="pf1" style="width:0%"></div></div><div class="progi"><span id="pt1">0/2 lecons</span><span id="pp1">0%</span></div></div>
+
+<div class="lesson" id="l3">
+<div class="lhdr" onclick="tl(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Choisir sa plateforme et faire son setup</div><div class="lmeta">Technique - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box go"><div class="bt go">Comparatif plateformes 2025</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Beehiiv — Notre recommandation</div><div class="sdesc">Plateforme dediee newsletters. Gratuit jusqu a 2500 abonnes. Design propre, analytics excellents, abonnements payants integres, reseau de referral pour grossir. <strong>Le choix numero 1 en 2025.</strong></div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Substack — Simple pour debuter</div><div class="sdesc">Tres facile d utilisation, communaute integree. Commission 10% sur les abonnements payants (vs 0% Beehiiv). Bien pour demarrer, migration vers Beehiiv ensuite.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">ConvertKit — Pour les pros</div><div class="sdesc">Automation avancee, sequences email, segmentation. Plus complexe mais tres puissant pour les funnels de vente. A partir de 9USD/mois.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">Systeme.io — Tout en un</div><div class="sdesc">Si tu veux aussi un tunnel de vente, une page de vente et une formation en meme temps. Parfait pour monetiser directement via la DMA.</div></div></div>
+</div></div>
+<div class="box go"><div class="bt go">Setup en 30 minutes</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Creer le compte Beehiiv</div><div class="sdesc">Nom de newsletter + description courte + logo simple (Canva 5 min)</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="snum" style="width:auto;height:auto;border-radius:0;background:none;border:none;font-size:12px;color:rgba(238,240,255,.6)">.</div><div class="stitle">Creer la page d inscription</div><div class="sdesc">Titre + sous-titre + ce que le lecteur recoit + 1 seul CTA. Simple et clair.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Ecrire et envoyer la premiere edition</div><div class="sdesc">N attends pas d avoir 100 abonnes. La premiere edition, c est ton acte de foi. Envoie a tes contacts, famille, amis.</div></div></div>
+</div></div>
+<button class="rbtn g" onclick="md(3,1,2)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l4">
+<div class="lhdr" onclick="tl(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Simulateur de revenus newsletter</div><div class="lmeta">Calculateur - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div style="background:var(--s2);border:1px solid var(--border);border-radius:5px;padding:12px">
+<div class="r2">
+<div class="c"><span class="lbl">Abonnes gratuits</span><input class="inp" id="nl-f" type="number" value="1000" oninput="calcNL()"></div>
+<div class="c"><span class="lbl">Taux conversion payant %</span><input class="inp" id="nl-t" type="number" value="5" oninput="calcNL()"></div>
+</div>
+<div class="r2" style="margin-top:8px">
+<div class="c"><span class="lbl">Prix abonnement EUR/mois</span><input class="inp" id="nl-p" type="number" value="9" oninput="calcNL()"></div>
+<div class="c"><span class="lbl">Sponsoring EUR/edition</span><input class="inp" id="nl-s" type="number" value="0" oninput="calcNL()"></div>
+</div>
+<div class="r2" style="margin-top:8px">
+<div class="c"><span class="lbl">Editions par mois</span><input class="inp" id="nl-e" type="number" value="4" oninput="calcNL()"></div>
+<div class="c"><span class="lbl">Commission affil. EUR/mois</span><input class="inp" id="nl-a" type="number" value="0" oninput="calcNL()"></div>
+</div>
+<div class="sim">
+<div class="simrow"><span class="siml">Abonnes payants</span><span class="simv go" id="nl-pay">50</span></div>
+<div class="simrow"><span class="siml">MRR abonnements</span><span class="simv go" id="nl-mrr">450EUR</span></div>
+<div class="simrow"><span class="siml">Sponsoring mensuel</span><span class="simv go" id="nl-sp">0EUR</span></div>
+<div class="simrow"><span class="siml">Affiliation mensuelle</span><span class="simv go" id="nl-af">0EUR</span></div>
+<div class="simrow"><span class="siml">TOTAL mensuel</span><span class="simv b" id="nl-tot">450EUR</span></div>
+<div class="simrow"><span class="siml">Objectif 1000 abonnes payants</span><span class="simv g" id="nl-goal">9 000EUR/mois</span></div>
+</div>
+</div>
+<button class="rbtn g" onclick="md(4,1,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH3 CREER LE CONTENU -->
+
+<div class="panel" id="ch2">
+<div class="prog"><div class="progt">Progression Ch.3</div><div class="progt2"><div class="progf" id="pf2" style="width:0%"></div></div><div class="progi"><span id="pt2">0/2 lecons</span><span id="pp2">0%</span></div></div>
+
+<div class="lesson" id="l5">
+<div class="lhdr" onclick="tl(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">La structure d une edition parfaite</div><div class="lmeta">Ecriture - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box go"><div class="bt go">La structure qui fonctionne</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">OBJET — Le seul job: faire ouvrir</div><div class="sdesc">Court (40 chars max), curieux ou utile, pas clickbait. Ex: "L outil IA que j utilise tous les jours" ou "Pourquoi j ai arrete Instagram" ou "3 erreurs qui tuent ta newsletter".</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">ACCROCHE — Les 2 premieres lignes sont cruciales</div><div class="sdesc">Commence par la chose la plus interessante. Pas "Bonjour, c est votre edition du lundi". Commence par une stat choc, une question, une histoire.</div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">CORPS — Valeur concentree</div><div class="sdesc">1 seul sujet bien traite plutot que 5 sujets survoLes. Mots simples, paragraphes courts (max 3 lignes), une idee par paragraphe.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">SECTION SPONSORING (optionnel)</div><div class="sdesc">Si tu as un sponsor, integre-le naturellement entre deux sections. Jamais plus d un sponsor par edition.</div></div></div>
+<div class="step"><div class="snum">5</div><div><div class="stitle">CTA FINAL — UNE action</div><div class="sdesc">Repondre a cet email, partager, cliquer sur un lien. Une seule action demandee. Plusieurs CTA = aucune action.</div></div></div>
+</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur d edition newsletter IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Sujet de ta newsletter</span>
+<input class="inp" id="ed-s" type="text" placeholder="Ex: business en ligne, outils IA, marketing, investissement...">
+<span class="lbl">Sujet de cette edition</span>
+<textarea class="inp" id="ed-t" rows="2" placeholder="Ex: Les 3 outils IA qui m ont fait gagner 10h par semaine, comment j ai triple mon taux d ouverture..."></textarea>
+<span class="lbl">Ton audience</span>
+<input class="inp" id="ed-a" type="text" placeholder="Ex: entrepreneurs debutants 20-35 ans, freelances, createurs de contenu...">
+<span class="lbl">Ton ton</span>
+<select class="sel" id="ed-to">
+<option value="personnel et conversationnel comme un ami">Personnel et conversationnel</option>
+<option value="expert mais accessible">Expert mais accessible</option>
+<option value="direct et sans blabla">Direct et concis</option>
+<option value="inspirant et motivant">Inspirant et motivant</option>
+</select>
+<button class="rbtn" id="ed-btn" onclick="rEdition()">GENERER MON EDITION</button>
+<div class="ld" id="ed-ld"><div class="ldf"></div></div>
+<div class="out" id="ed-out"></div>
+<button class="cpbtn" id="ed-cp" onclick="doCopy('ed-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(5,2,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l6">
+<div class="lhdr" onclick="tl(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Checklist avant d envoyer une edition</div><div class="lmeta">Qualite - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Objet email tente (court, curieux, sans spam words)</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Les 2 premieres lignes sont accrocheuses</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Paragraphes courts, lisible sur mobile</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Un seul sujet traite, pas plusieurs</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Liens testes et fonctionnels</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Un seul CTA a la fin</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Envoye a toi-meme en test avant envoi general</span></div>
+<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Lien de desabonnement present (obligatoire legalement)</span></div>
+<button class="rbtn g" onclick="md(6,2,2)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH4 MONETISER -->
+
+<div class="panel" id="ch3">
+<div class="prog"><div class="progt">Progression Ch.4</div><div class="progt2"><div class="progf" id="pf3" style="width:0%"></div></div><div class="progi"><span id="pt3">0/2 lecons</span><span id="pp3">0%</span></div></div>
+
+<div class="lesson" id="l7">
+<div class="lhdr" onclick="tl(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Trouver ses premiers sponsors</div><div class="lmeta">Business - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box go"><div class="bt go">Combien facturer pour un sponsoring</div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Formule simple : 30 x nombre d abonnes / 1000</strong><br>500 abonnes = 15EUR/edition, 2000 abonnes = 60EUR/edition, 10 000 abonnes = 300EUR/edition</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Taux d ouverture eleve = tarif plus haut</strong> — si 50% d ouverture vs 20% industrie, tu peux charger 2x le prix standard</span></div>
+</div>
+<div class="box go"><div class="bt go">Ou trouver des sponsors</div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Marques que tu utilises deja</strong> — les pitches les plus credibles sont pour les produits que tu recommandes naturellement</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Sparktoro / Paved</strong> — marketplaces de sponsoring newsletter</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Contacter directement</strong> — trouver le responsable marketing sur LinkedIn, envoyer un kit media simple</span></div>
+</div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur de kit media sponsoring</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Nom de ta newsletter</span>
+<input class="inp" id="km-n" type="text" placeholder="Ex: The Business Weekly, Outils IA Pro...">
+<span class="lbl">Tes stats actuelles</span>
+<textarea class="inp" id="km-s" rows="2" placeholder="Ex: 850 abonnes, 42% taux ouverture, 1 edition par semaine, niche business en ligne..."></textarea>
+<span class="lbl">Type de marques ciblees</span>
+<input class="inp" id="km-m" type="text" placeholder="Ex: outils SaaS, formations en ligne, agences digitales...">
+<button class="rbtn" id="km-btn" onclick="rKit()">GENERER MON KIT MEDIA</button>
+<div class="ld" id="km-ld"><div class="ldf"></div></div>
+<div class="out" id="km-out"></div>
+<button class="cpbtn" id="km-cp" onclick="doCopy('km-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(7,3,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l8">
+<div class="lhdr" onclick="tl(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">Etude de cas — De 0 a 12 000EUR/mois</div><div class="lmeta">Cas reel - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="cs"><div class="cshdr">Newsletter Business IA — 14 mois</div>
+<div class="csbody">
+<div class="csrow"><span class="csl">Sujet</span><span class="csv">1 outil IA par semaine pour entrepreneurs</span></div>
+<div class="csrow"><span class="csl">Frequence</span><span class="csv">1 fois par semaine (mardi)</span></div>
+<div class="csrow"><span class="csl">Plateforme</span><span class="csv">Beehiiv</span></div>
+<div class="csrow"><span class="csl">Abonnes mois 3</span><span class="csv">1 200</span></div>
+<div class="csrow"><span class="csl">Abonnes mois 14</span><span class="csv go">14 800</span></div>
+<div class="csrow"><span class="csl">Taux ouverture</span><span class="csv">48%</span></div>
+<div class="csrow"><span class="csl">Revenus mois 6</span><span class="csv">1 400EUR (abonnements + 1 sponsor)</span></div>
+<div class="csrow"><span class="csl">Revenus mois 14</span><span class="csv g">12 200EUR</span></div>
+<div class="csq">"Le positionnement super specifique a tout change. Au lieu de dire 'newsletter business', j ai dit '1 outil IA concret par semaine, chaque mardi, avec guide pas a pas'. Les gens savaient exactement ce qu ils allaient recevoir. Mon taux de conversion abonnement gratuit vers payant est de 6.2%. A 14 000 abonnes, ca fait 870 payants a 10EUR/mois = 8700EUR juste en abonnements, le reste vient des 3 sponsors."</div>
+</div></div>
+<button class="rbtn g" onclick="md(8,3,2)">MARQUER COMME VU &#10003;</button>
+</div></div>
+</div>
+
+<!-- CH5 CROISSANCE -->
+
+<div class="panel" id="ch4">
+<div class="lesson" id="l9">
+<div class="lhdr" onclick="tl(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Faire grossir sa liste — strategies 2025</div><div class="lmeta">Growth - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box go"><div class="bt go">Les 5 meilleurs canaux d acquisition</div>
+<div class="steps">
+<div class="step"><div class="snum">1</div><div><div class="stitle">Contenu organique (TikTok / Instagram)</div><div class="sdesc">Partage des extraits de tes editions en stories/reels. "Si tu veux la suite, abonne-toi a la newsletter (lien en bio)". Le contenu court amene vers le contenu long.</div></div></div>
+<div class="step"><div class="snum">2</div><div><div class="stitle">Lead magnet iresistible</div><div class="sdesc">Offre quelque chose de tres precieux en echange de l email. Guide PDF, template, checklist, acces a un outil. <strong>Plus c est specifique, plus ca convertit.</strong></div></div></div>
+<div class="step"><div class="snum">3</div><div><div class="stitle">Mentions croisees avec d autres newsletters</div><div class="sdesc">Tu mentionnes leur newsletter, ils mentionnent la tienne. Win-win. Sur Beehiiv, la fonctionnalite "Boosts" automatise ca.</div></div></div>
+<div class="step"><div class="snum">4</div><div><div class="stitle">LinkedIn et Twitter/X</div><div class="sdesc">Partager des threads de tes editions = trafic gratuit tres qualifie. Une seule bonne edition peut amener 50-200 nouveaux abonnes.</div></div></div>
+<div class="step"><div class="snum">5</div><div><div class="stitle">Pub Meta ciblee (quand les bases sont la)</div><div class="sdesc">Une fois que ton taux de conversion landing page est > 30%, acheter du trafic pub devient tres rentable. Cout d acquisition : 1-3EUR par abonne.</div></div></div>
+</div></div>
+<div class="iat">
+<div class="iatbar"><span class="iatl">&#129302; Generateur de lead magnet IA</span><span class="iatb">GROQ</span></div>
+<div class="iatbody">
+<span class="lbl">Sujet de ta newsletter</span>
+<input class="inp" id="lm-s" type="text" placeholder="Ex: business en ligne, outils IA, marketing digital...">
+<span class="lbl">Ton audience cible</span>
+<input class="inp" id="lm-a" type="text" placeholder="Ex: entrepreneurs debutants, freelances, createurs de contenu...">
+<button class="rbtn" id="lm-btn" onclick="rLeadMagnet()">GENERER 5 IDEES DE LEAD MAGNET</button>
+<div class="ld" id="lm-ld"><div class="ldf"></div></div>
+<div class="out" id="lm-out"></div>
+<button class="cpbtn" id="lm-cp" onclick="doCopy('lm-out')">COPIER</button>
+</div></div>
+<button class="rbtn g" onclick="md(9,4,2)">MARQUER COMME VU &#10003;</button>
+</div></div>
+
+<div class="lesson" id="l10">
+<div class="lhdr" onclick="tl(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">Plan 12 mois — de 0 a revenus passifs</div><div class="lmeta">Roadmap - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lbody">
+<div class="box go"><div class="bt go">Le plan exact</div>
+<div class="steps">
+<div class="step"><div class="snum" style="background:rgba(201,168,76,.15);font-size:10px">M1-2</div><div><div class="stitle">Setup et consistance</div><div class="sdesc">Choisir sujet + plateforme. Ecrire et envoyer 8 editions. Partager sur tous tes reseaux. Objectif: 100-300 premiers abonnes.</div></div></div>
+<div class="step"><div class="snum" style="background:rgba(201,168,76,.15);font-size:10px">M3-4</div><div><div class="stitle">Lead magnet et croissance</div><div class="sdesc">Creer un lead magnet. Premiers sponsors ou ouverture abonnement payant. Objectif: 500-1000 abonnes.</div></div></div>
+<div class="step"><div class="snum" style="background:rgba(201,168,76,.15);font-size:10px">M5-8</div><div><div class="stitle">Monetisation active</div><div class="sdesc">2-3 sponsors reguliers + abonnements payants + affiliation. Mentions croisees. Objectif: 2000-5000 abonnes, 500-2000EUR/mois.</div></div></div>
+<div class="step"><div class="snum" style="background:rgba(62,207,142,.2);font-size:10px">M9-12</div><div><div class="stitle">Scale et automatisation</div><div class="sdesc">Pub Meta pour accelerer la croissance. Sequences automatiques d emails. <strong>Objectif: 5000-15 000 abonnes, 2000-8000EUR/mois.</strong></div></div></div>
+</div></div>
+<button class="rbtn g" onclick="toast('Module Newsletter complete ! &#128293;')">MODULE COMPLETE &#10003;</button>
+</div></div>
+
+<div style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(79,163,232,.06));border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:18px;margin-top:6px">
+<div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:3px;color:var(--gold);margin-bottom:12px">PLAN D ACTION</div>
+<div style="font-size:12px;color:rgba(238,240,255,.7);line-height:1.9">
+<strong style="color:var(--text)">Semaine 1 :</strong> Choisir sujet, creer compte Beehiiv, ecrire 1ere edition<br>
+<strong style="color:var(--text)">Semaine 2-4 :</strong> Envoyer regulierement + partager sur reseaux<br>
+<strong style="color:var(--text)">Mois 2 :</strong> Lead magnet + premiers sponsors<br>
+<strong style="color:var(--text)">Mois 3-6 :</strong> Volume + monetisation + croissance<br>
+<strong style="color:var(--green)">Objectif mois 12 : 2 000 - 8 000EUR / mois</strong>
+</div>
+<a href="module-business-models.html" style="display:block;margin-top:14px;background:linear-gradient(135deg,var(--gold),#8B6914);border-radius:3px;padding:12px;text-align:center;text-decoration:none"><span style="font-family:Bebas Neue,sans-serif;font-size:13px;letter-spacing:3px;color:#050505">DERNIER MODULE : FLIPPING &#8594;</span></a>
+</div>
+</div>
+
+<div class="toast" id="tk"></div>
+<script>
+var u=JSON.parse(sessionStorage.getItem("dma_user")||"null");
+if(!u)window.location.href="index.html";
+function ch(i,el){document.querySelectorAll(".chbtn").forEach(function(b){b.classList.remove("active")});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});el.classList.add("active");document.getElementById("ch"+i).classList.add("active");window.scrollTo(0,0);}
+function tl(i){document.getElementById("l"+i).classList.toggle("open")}
+var lch=[[0,1,2],[3,4],[5,6],[7,8],[9,10]];var dL={};
+function md(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById("pf"+ch);if(f)f.style.width=pct+"%";var t=document.getElementById("pt"+ch);if(t)t.textContent=cnt+"/"+tot+" lecons";var p=document.getElementById("pp"+ch);if(p)p.textContent=pct+"%";toast("Lecon validee !");}
+function qa(el,ok,qIdx){el.classList.add(ok?"ok":"ko");if(!ok){setTimeout(function(){el.parentElement.querySelectorAll(".qo").forEach(function(o){if(!o.classList.contains("ko"))o.classList.add("ok")})},700)}var e=document.getElementById("qe"+qIdx);if(e)e.style.display="block";}
+function calcNL(){var f=parseFloat(document.getElementById("nl-f").value)||0,t=parseFloat(document.getElementById("nl-t").value)||0,p=parseFloat(document.getElementById("nl-p").value)||0,s=parseFloat(document.getElementById("nl-s").value)||0,e=parseFloat(document.getElementById("nl-e").value)||0,a=parseFloat(document.getElementById("nl-a").value)||0;var pay=Math.round(f*t/100),mrr=pay*p,sp=s*e,tot=mrr+sp+a;document.getElementById("nl-pay").textContent=pay;document.getElementById("nl-mrr").textContent=mrr.toFixed(0)+"EUR";document.getElementById("nl-sp").textContent=sp.toFixed(0)+"EUR";document.getElementById("nl-af").textContent=a.toFixed(0)+"EUR";document.getElementById("nl-tot").textContent=tot.toFixed(0)+"EUR";document.getElementById("nl-goal").textContent=(1000*p+sp+a).toFixed(0)+"EUR/mois";}
+function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
+function sl(id,on){var e=document.getElementById(id);if(e)e.style.display=on?"block":"none"}
+function showO(oid,cpid,txt){var o=document.getElementById(oid);if(o){o.textContent=txt;o.style.display="block"}var c=document.getElementById(cpid);if(c)c.style.display="block"}
+async function groq(p){var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer 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"},body:JSON.stringify({model:"llama-3.3-70b-versatile",max_tokens:1200,messages:[{role:"system",content:"Tu es expert newsletter et email marketing francophone avec 4 ans d experience. Conseils ultra concrets, tutoiement, ton pro."},{role:"user",content:p}]})});var d=await r.json();return d.choices&&d.choices[0]?d.choices[0].message.content:"Erreur - reessaie.";}
+async function rEdition(){var s=gv("ed-s"),t=gv("ed-t"),a=gv("ed-a"),to=gv("ed-to");if(!s||!t){toast("Remplis les champs");return}sl("ed-ld",true);document.getElementById("ed-btn").disabled=true;try{var r=await groq("Ecris une edition complete de newsletter.
+Sujet newsletter: "+s+"
+Sujet de cette edition: "+t+"
+Audience: "+a+"
+Ton: "+to+"
+
+Structure EXACTE:
+
+- OBJET EMAIL (1 ligne percutante)
+- ACCROCHE (2-3 lignes qui accrochent)
+- CORPS (400-500 mots, valeur reelle, paragraphes courts)
+- RESSOURCE/OUTIL recommande (1 seul, avec lien placeholder)
+- CTA FINAL (1 seule action demandee)
+
+Ecris comme une vraie personne passionnee, pas comme un robot.”);showO(“ed-out”,“ed-cp”,r)}catch(e){toast(“Erreur”)}sl(“ed-ld”,false);document.getElementById(“ed-btn”).disabled=false;}
+async function rKit(){var n=gv(“km-n”),s=gv(“km-s”),m=gv(“km-m”);if(!n){toast(“Entre le nom de ta newsletter”);return}sl(“km-ld”,true);document.getElementById(“km-btn”).disabled=true;try{var r=await groq(“Cree un kit media sponsoring newsletter pour:
+Nom: “+n+”
+Stats: “+s+”
+Marques ciblees: “+m+”
+
+Inclus:
+
+1. Presentation de la newsletter (3-4 lignes percutantes)
+1. Chiffres cles mis en valeur
+1. Types de placements disponibles et prix recommandes
+1. Ce que les sponsors obtiennent
+1. CTA et contact
+
+Ton pro et vendeur.”);showO(“km-out”,“km-cp”,r)}catch(e){toast(“Erreur”)}sl(“km-ld”,false);document.getElementById(“km-btn”).disabled=false;}
+async function rLeadMagnet(){var s=gv(“lm-s”),a=gv(“lm-a”);if(!s){toast(“Entre le sujet”);return}sl(“lm-ld”,true);document.getElementById(“lm-btn”).disabled=true;try{var r=await groq(“Genere 5 idees de lead magnet iresistibles pour une newsletter sur: “+s+”. Audience: “+a+”.
+
+Pour chaque idee:
+
+- Nom accrocheur du lead magnet
+- Format (PDF, template, checklist, video, outil…)
+- Pourquoi ca va convertir pour cette audience
+- Contenu approximatif (3-4 points cles a inclure)
+
+Les idees doivent etre tres specifiques et immediatement actionnables.”);showO(“lm-out”,“lm-cp”,r)}catch(e){toast(“Erreur”)}sl(“lm-ld”,false);document.getElementById(“lm-btn”).disabled=false;}
+function doCopy(id){var txt=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast(“Copie!”)});else{var ta=document.createElement(“textarea”);ta.value=txt;ta.style.cssText=“position:fixed;top:0;left:0;opacity:0;font-size:16px”;document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand(“copy”)}catch(e){}document.body.removeChild(ta);toast(“Copie!”);}}
+function toast(m){var t=document.getElementById(“tk”);t.textContent=m;t.style.display=“block”;setTimeout(function(){t.style.display=“none”},2500)}
+calcNL();
+</script>
+
+</body>
+</html>
