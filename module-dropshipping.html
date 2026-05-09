@@ -484,8 +484,7 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 
 <div class="toast" id="tk"></div>
 <script>
-var u=JSON.parse(sessionStorage.getItem("dma_user")||"null");
-if(!u)window.location.href="index.html";
+var u={id:"guest",name:"Membre"};try{var _s=sessionStorage.getItem("dma_user");if(_s)u=JSON.parse(_s);}catch(e){}
 function ch(i,el){document.querySelectorAll(".chbtn").forEach(function(b){b.classList.remove("active")});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});el.classList.add("active");document.getElementById("ch"+i).classList.add("active");window.scrollTo(0,0);}
 function tl(i){document.getElementById("l"+i).classList.toggle("open")}
 var lch=[[0,1,2],[3,4,5,6],[7,8,9]];var dL={};
