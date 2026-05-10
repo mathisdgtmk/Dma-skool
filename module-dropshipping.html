@@ -618,10 +618,7 @@ function qa(el, ok, qIdx) {
 
 function gv(id) { var e = document.getElementById(id); return e ? e.value.trim() : ""; }
 function sl(id, on) { var e = document.getElementById(id); if(e) e.style.display = on ? "block" : "none"; }
-function showO(oid, cpid, txt) {
-  var o = document.getElementById(oid); if(o){ o.textContent = txt; o.style.display = "block"; }
-  var c = document.getElementById(cpid); if(c) c.style.display = "block";
-}
+
 
       ]})
     });
@@ -655,90 +652,125 @@ function toast(m) {
 }
 
 
-async function callAI(prompt, sys) {
-  if(!sys) sys = "Tu es un expert en business digital francophone. Conseils ultra concrets, tutoiement.";
-  try {
-    var res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer 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"
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        max_tokens: 1024,
-        messages: [
-          {role: "system", content: sys},
-          {role: "user", content: prompt}
-        ]
-      })
-    });
-    var data = await res.json();
-    if (data.choices && data.choices[0]) return data.choices[0].message.content;
-    return "Erreur — reessaie.";
-  } catch(e) { return "Erreur reseau — verifie ta connexion."; }
+
+
+
+
+
+
+
+
+
+
+
+async function callAI(prompt, systemPrompt) {
+  var sys = systemPrompt || "Tu es un expert en business digital francophone. Conseils concrets et actionnables. Tutoiement.";
+  var res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer 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"
+    },
+    body: JSON.stringify({
+      model: "llama-3.3-70b-versatile",
+      max_tokens: 1024,
+      messages: [
+        {role: "system", content: sys},
+        {role: "user", content: prompt}
+      ]
+    })
+  });
+  var data = await res.json();
+  if (data.choices && data.choices[0]) {
+    return data.choices[0].message.content;
+  }
+  return "Erreur — reessaie.";
 }
 
+function showLoading(ldId, btnId) {
+  var ld = document.getElementById(ldId); if(ld) ld.style.display = "block";
+  var btn = document.getElementById(btnId); if(btn) btn.disabled = true;
+}
+function hideLoading(ldId, btnId) {
+  var ld = document.getElementById(ldId); if(ld) ld.style.display = "none";
+  var btn = document.getElementById(btnId); if(btn) btn.disabled = false;
+}
+function showOutput(outId, cpId, txt) {
+  var o = document.getElementById(outId); if(o){o.textContent=txt;o.style.display="block";}
+  var c = document.getElementById(cpId); if(c) c.style.display="block";
+}
 
 async function rNiche() {
   var i=gv("ni-i"), c=gv("ni-c"), b=gv("ni-b");
   if(!i){toast("Entre tes interets");return;}
-  sl("ni-ld",true);document.getElementById("ni-btn").disabled=true;
-  var r = await callAI(
-    "Interets: "+i+". Cible: "+c+". Budget: "+b+".\nTop 3 niches dropshipping avec justification, 2-3 produits gagnants (prix fournisseur/vente), recommandation finale.",
-    "Tu es expert dropshipping francophone. Conseils concrets, tutoiement."
-  );
-  showO("ni-out","ni-cp",r);sl("ni-ld",false);document.getElementById("ni-btn").disabled=false;
+  showLoading("ni-ld","ni-btn");
+  document.getElementById("ni-out").style.display="none";
+  var prompt = "Interets: "+i+". Cible: "+c+". Budget: "+b+".\nTop 3 niches dropshipping avec justification, 2-3 produits gagnants (prix fournisseur/vente), recommandation finale.";
+  try {
+    var result = await callAI(prompt, "Tu es expert dropshipping francophone. Conseils concrets, tutoiement.");
+    showOutput("ni-out","ni-cp",result);
+  } catch(e) { toast("Erreur reseau — reessaie"); }
+  hideLoading("ni-ld","ni-btn");
 }
 async function rProd() {
   var d=gv("pr-d"), p=gv("pr-p");
   if(!d){toast("Decris ton produit");return;}
-  sl("pr-ld",true);document.getElementById("pr-btn").disabled=true;
-  var r = await callAI(
-    "Produit: "+d+"\nPrix vente: "+p+"\nScore/10, analyse marge, points forts, risques, LANCER/PRUDENCE/EVITER, angle marketing.",
-    "Tu es expert dropshipping francophone. Conseils concrets, tutoiement."
-  );
-  showO("pr-out","pr-cp",r);sl("pr-ld",false);document.getElementById("pr-btn").disabled=false;
+  showLoading("pr-ld","pr-btn");
+  document.getElementById("pr-out").style.display="none";
+  var prompt = "Produit: "+d+"\nPrix vente: "+p+"\nScore/10, analyse marge, points forts, risques, LANCER/PRUDENCE/EVITER.";
+  try {
+    var result = await callAI(prompt, "Tu es expert dropshipping francophone. Analyse concrete, tutoiement.");
+    showOutput("pr-out","pr-cp",result);
+  } catch(e) { toast("Erreur reseau — reessaie"); }
+  hideLoading("pr-ld","pr-btn");
 }
 async function rShop() {
   var n=gv("sh-n"), s=gv("sh-s");
   if(!n){toast("Entre ta niche");return;}
-  sl("sh-ld",true);document.getElementById("sh-btn").disabled=true;
-  var r = await callAI(
-    "10 noms boutique dropshipping pour: "+n+". Style: "+s+". Memorable, unique. Pourquoi ca marche en 1 phrase chacun.",
-    "Tu es expert dropshipping francophone. Conseils concrets, tutoiement."
-  );
-  showO("sh-out","sh-cp",r);sl("sh-ld",false);document.getElementById("sh-btn").disabled=false;
+  showLoading("sh-ld","sh-btn");
+  document.getElementById("sh-out").style.display="none";
+  var prompt = "10 noms boutique dropshipping pour: "+n+". Style: "+s+". Memorable, unique. Pourquoi ca marche en 1 phrase chacun.";
+  try {
+    var result = await callAI(prompt, "Tu es expert dropshipping francophone. Noms de marque impactants.");
+    showOutput("sh-out","sh-cp",result);
+  } catch(e) { toast("Erreur reseau — reessaie"); }
+  hideLoading("sh-ld","sh-btn");
 }
 async function rPage() {
   var p=gv("pp-p"), c=gv("pp-c"), pr=gv("pp-pr");
   if(!p){toast("Entre ton produit");return;}
-  sl("pp-ld",true);document.getElementById("pp-btn").disabled=true;
-  var r = await callAI(
-    "Page produit Shopify:\nProduit: "+p+"\nCible: "+c+"\nPrix: "+pr+"\nTitre benefice, 5 bullets ok [benefice]-[pourquoi], description, garantie, CTA.",
-    "Tu es expert dropshipping et copywriting francophone. Conseils concrets, tutoiement."
-  );
-  showO("pp-out","pp-cp",r);sl("pp-ld",false);document.getElementById("pp-btn").disabled=false;
+  showLoading("pp-ld","pp-btn");
+  document.getElementById("pp-out").style.display="none";
+  var prompt = "Page produit Shopify:\nProduit: "+p+"\nCible: "+c+"\nPrix: "+pr+"\nTitre benefice, 5 bullets ok [benefice]-[pourquoi], description, garantie, CTA.";
+  try {
+    var result = await callAI(prompt, "Tu es expert dropshipping et copywriting francophone.");
+    showOutput("pp-out","pp-cp",result);
+  } catch(e) { toast("Erreur reseau — reessaie"); }
+  hideLoading("pp-ld","pp-btn");
 }
 async function rPub() {
   var p=gv("pu-p"), c=gv("pu-c"), pl=gv("pu-pl"), du=gv("pu-du");
   if(!p){toast("Entre ton produit");return;}
-  sl("pu-ld",true);document.getElementById("pu-btn").disabled=true;
-  var r = await callAI(
-    "Script pub video "+du+" pour "+pl+".\nProduit: "+p+"\nCible: "+c+"\n[0-3s] HOOK / [3-10s] PROBLEME / [10-20s] SOLUTION / CTA. Naturel.",
-    "Tu es expert dropshipping et publicite digitale francophone. Conseils concrets, tutoiement."
-  );
-  showO("pu-out","pu-cp",r);sl("pu-ld",false);document.getElementById("pu-btn").disabled=false;
+  showLoading("pu-ld","pu-btn");
+  document.getElementById("pu-out").style.display="none";
+  var prompt = "Script pub video "+du+" pour "+pl+".\nProduit: "+p+"\nCible: "+c+"\n[0-3s] HOOK / [3-10s] PROBLEME / [10-20s] SOLUTION / CTA. Naturel.";
+  try {
+    var result = await callAI(prompt, "Tu es expert dropshipping et publicite digitale francophone.");
+    showOutput("pu-out","pu-cp",result);
+  } catch(e) { toast("Erreur reseau — reessaie"); }
+  hideLoading("pu-ld","pu-btn");
 }
 async function rStats() {
   var s=gv("st-in"), m=gv("st-ma");
   if(!s){toast("Entre tes stats");return;}
-  sl("st-ld",true);document.getElementById("st-btn").disabled=true;
-  var r = await callAI(
-    "Stats campagne:\n"+s+"\nMarge nette: "+m+"\nCe qui va/probleme, cause principale, 3 actions concretes.",
-    "Tu es expert dropshipping francophone. Analyse directe, tutoiement."
-  );
-  showO("st-out","st-cp",r);sl("st-ld",false);document.getElementById("st-btn").disabled=false;
+  showLoading("st-ld","st-btn");
+  document.getElementById("st-out").style.display="none";
+  var prompt = "Stats campagne:\n"+s+"\nMarge nette: "+m+"\nCe qui va/probleme, cause principale, 3 actions concretes.";
+  try {
+    var result = await callAI(prompt, "Tu es expert dropshipping francophone. Analyse directe.");
+    showOutput("st-out","st-cp",result);
+  } catch(e) { toast("Erreur reseau — reessaie"); }
+  hideLoading("st-ld","st-btn");
 }
 
 </script>
