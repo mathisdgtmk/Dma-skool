@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — 7 Business Models</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;padding-bottom:30px}
+.hdr{background:rgba(3,3,8,.97);border-bottom:1px solid rgba(192,0,26,.2);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.hdr a{color:rgba(240,240,255,.4);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hdr-t{font-size:12px;font-weight:800;letter-spacing:3px;color:#C9A84C}
+.hero{padding:22px 16px 16px;text-align:center}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(192,0,26,.6);margin-bottom:8px}
+.hero-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:6px}
+.hero-title span{color:#C9A84C}
+.hero-sub{font-size:12px;color:rgba(240,240,255,.35);line-height:1.6}
+.stats{display:flex;margin:12px 16px;border:1px solid rgba(201,168,76,.15);border-radius:8px;overflow:hidden}
+.stat{flex:1;padding:10px 6px;text-align:center;border-right:1px solid rgba(201,168,76,.08)}
+.stat:last-child{border-right:none}
+.stat-n{font-size:15px;font-weight:900;display:block;color:#C9A84C}
+.stat-l{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3);display:block;margin-top:2px}
+.cards{padding:8px 16px;display:flex;flex-direction:column;gap:10px}
+.card{border-radius:10px;overflow:hidden;background:#0a0a0f;border:1px solid rgba(255,255,255,.06);text-decoration:none;display:block;cursor:pointer}
+.card:active{opacity:.75}
+.card-top{padding:16px}
+.card-row{display:flex;align-items:center;gap:12px}
+.card-ic{font-size:32px;flex-shrink:0}
+.card-info{flex:1}
+.card-num{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);display:block;margin-bottom:3px}
+.card-title{font-size:16px;font-weight:900;color:#fff;display:block;margin-bottom:2px}
+.card-sub{font-size:11px;color:rgba(240,240,255,.4);line-height:1.5;display:block}
+.card-arr{font-size:20px;color:rgba(255,255,255,.15);flex-shrink:0}
+.card-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.pill{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 8px;border-radius:3px}
+.card-bar{height:3px;width:100%}
+
+/* Couleurs */
+.c1{border-color:rgba(79,163,232,.2)}.c1 .card-bar{background:linear-gradient(90deg,#4fa3e8,transparent)}.c1 .pill{background:rgba(79,163,232,.1);color:#4fa3e8;border:1px solid rgba(79,163,232,.2)}
+.c2{border-color:rgba(155,89,255,.2)}.c2 .card-bar{background:linear-gradient(90deg,#9b59ff,transparent)}.c2 .pill{background:rgba(155,89,255,.1);color:#9b59ff;border:1px solid rgba(155,89,255,.2)}
+.c3{border-color:rgba(255,124,62,.2)}.c3 .card-bar{background:linear-gradient(90deg,#ff7c3e,transparent)}.c3 .pill{background:rgba(255,124,62,.1);color:#ff7c3e;border:1px solid rgba(255,124,62,.2)}
+.c4{border-color:rgba(62,207,142,.2)}.c4 .card-bar{background:linear-gradient(90deg,#3ecf8e,transparent)}.c4 .pill{background:rgba(62,207,142,.1);color:#3ecf8e;border:1px solid rgba(62,207,142,.2)}
+.c5{border-color:rgba(201,168,76,.2)}.c5 .card-bar{background:linear-gradient(90deg,#C9A84C,transparent)}.c5 .pill{background:rgba(201,168,76,.1);color:#C9A84C;border:1px solid rgba(201,168,76,.2)}
+.c6{border-color:rgba(200,200,200,.15)}.c6 .card-bar{background:linear-gradient(90deg,#ccc,transparent)}.c6 .pill{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1)}
+.c7{border-color:rgba(192,0,26,.25);background:linear-gradient(135deg,#0f0508,#0a0a0f)}.c7 .card-bar{background:linear-gradient(90deg,#C0001A,transparent)}.c7 .pill{background:rgba(192,0,26,.1);color:#C0001A;border:1px solid rgba(192,0,26,.2)}
+
+.note{margin:16px;padding:14px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:8px;font-size:11px;color:rgba(240,240,255,.5);line-height:1.7;text-align:center}
+.note strong{color:#C9A84C}
+</style>
+
+</head>
+<body>
+
+<div class="hdr">
+  <a href="dashboard.html">&#8592; Retour</a>
+  <div class="hdr-t">7 BUSINESS MODELS</div>
+  <div style="width:60px"></div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Bonus Exclusif DMA</div>
+  <div class="hero-title">7 Facons de <span>Generer des Revenus</span></div>
+  <div class="hero-sub">Chaque model est independant. Choisis celui qui correspond a ton profil et lance-toi.</div>
+</div>
+
+<div class="stats">
+  <div class="stat"><span class="stat-n">7</span><span class="stat-l">Modeles</span></div>
+  <div class="stat"><span class="stat-n">0EUR</span><span class="stat-l">Stock requis</span></div>
+  <div class="stat"><span class="stat-n">IA</span><span class="stat-l">Integree</span></div>
+  <div class="stat"><span class="stat-n">MRR</span><span class="stat-l">Sur chacun</span></div>
+</div>
+
+<div class="cards">
+
+  <a class="card c1" href="module-dropshipping.html">
+    <div class="card-top">
+      <div class="card-row">
+        <span class="card-ic">&#128722;</span>
+        <div class="card-info">
+          <span class="card-num">Business Model 01</span>
+          <span class="card-title">Dropshipping</span>
+          <span class="card-sub">Vends des produits sans stock. Tu geres le marketing, le fournisseur livre.</span>
+        </div>
+        <span class="card-arr">&#9658;</span>
+      </div>
+      <div class="card-pills">
+        <span class="pill">Zero stock</span>
+        <span class="pill">TikTok Ads</span>
+        <span class="pill">Shopify</span>
+        <span class="pill">3-4 semaines</span>
+      </div>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card c2" href="module-pod.html">
+    <div class="card-top">
+      <div class="card-row">
+        <span class="card-ic">&#127912;</span>
+        <div class="card-info">
+          <span class="card-num">Business Model 02</span>
+          <span class="card-title">Print on Demand</span>
+          <span class="card-sub">Cree des designs avec l IA, vends sur Etsy. Revenu 100% passif.</span>
+        </div>
+        <span class="card-arr">&#9658;</span>
+      </div>
+      <div class="card-pills">
+        <span class="pill">Passif</span>
+        <span class="pill">Etsy</span>
+        <span class="pill">Midjourney</span>
+        <span class="pill">Printful</span>
+      </div>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card c3" href="module-ugc.html">
+    <div class="card-top">
+      <div class="card-row">
+        <span class="card-ic">&#127916;</span>
+        <div class="card-info">
+          <span class="card-num">Business Model 03</span>
+          <span class="card-title">UGC Creator</span>
+          <span class="card-sub">Les marques te paient pour filmer leurs produits. Zero audience requise.</span>
+        </div>
+        <span class="card-arr">&#9658;</span>
+      </div>
+      <div class="card-pills">
+        <span class="pill">Zero abonnes</span>
+        <span class="pill">150-800EUR/video</span>
+        <span class="pill">Billo</span>
+        <span class="pill">2 semaines</span>
+      </div>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card c4" href="module-affiliation.html">
+    <div class="card-top">
+      <div class="card-row">
+        <span class="card-ic">&#128279;</span>
+        <div class="card-info">
+          <span class="card-num">Business Model 04</span>
+          <span class="card-title">Affiliation</span>
+          <span class="card-sub">Recommande des produits via un lien, touche des commissions automatiques.</span>
+        </div>
+        <span class="card-arr">&#9658;</span>
+      </div>
+      <div class="card-pills">
+        <span class="pill">100% passif</span>
+        <span class="pill">Zero SAV</span>
+        <span class="pill">High ticket</span>
+        <span class="pill">Recurrent</span>
+      </div>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card c5" href="module-newsletter.html">
+    <div class="card-top">
+      <div class="card-row">
+        <span class="card-ic">&#128140;</span>
+        <div class="card-info">
+          <span class="card-num">Business Model 05</span>
+          <span class="card-title">Newsletter Payante</span>
+          <span class="card-sub">Construis ta liste email. L actif numero 1 — personne ne peut te la confisquer.</span>
+        </div>
+        <span class="card-arr">&#9658;</span>
+      </div>
+      <div class="card-pills">
+        <span class="pill">Actif permanent</span>
+        <span class="pill">Sponsoring</span>
+        <span class="pill">Beehiiv</span>
+        <span class="pill">Long terme</span>
+      </div>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card c6" href="module-flipping.html">
+    <div class="card-top">
+      <div class="card-row">
+        <span class="card-ic">&#128200;</span>
+        <div class="card-info">
+          <span class="card-num">Business Model 06</span>
+          <span class="card-title">Website Flipping</span>
+          <span class="card-sub">Achete des sites ou comptes monetises, optimise et revends avec une forte plus-value.</span>
+        </div>
+        <span class="card-arr">&#9658;</span>
+      </div>
+      <div class="card-pills">
+        <span class="pill">Achat/revente</span>
+        <span class="pill">Flippa</span>
+        <span class="pill">ROI eleve</span>
+        <span class="pill">Actifs digitaux</span>
+      </div>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card c7" href="module-generateurs.html">
+    <div class="card-top">
+      <div class="card-row">
+        <span class="card-ic">&#129302;</span>
+        <div class="card-info">
+          <span class="card-num">Business Model 07 — BONUS</span>
+          <span class="card-title">Generateurs IA Business</span>
+          <span class="card-sub">Tous les outils IA pour tous les business models. Niche, produit, contenu, SEO.</span>
+        </div>
+        <span class="card-arr">&#9658;</span>
+      </div>
+      <div class="card-pills">
+        <span class="pill">Drop Niche</span>
+        <span class="pill">Script Pub</span>
+        <span class="pill">Pitch UGC</span>
+        <span class="pill">SEO Etsy</span>
+      </div>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+</div>
+
+<div class="note">
+  <strong>Droits MRR inclus sur chaque business model.</strong><br>
+  Tu peux revendre la DMA a 397EUR et garder 100% — sur tous les profils, pas seulement ceux qui veulent du MRR.
+</div>
+
+</body>
+</html>
