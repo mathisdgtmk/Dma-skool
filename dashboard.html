@@ -10,93 +10,87 @@
 html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;padding-bottom:80px}
 
 /* HEADER */
-.hdr{background:#030308;border-bottom:1px solid rgba(192,0,26,.2);padding:16px;display:flex;align-items:center;justify-content:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}
-.logo{display:flex;flex-direction:column;align-items:center;gap:4px}
-.logo-dma{font-size:32px;font-weight:900;letter-spacing:8px;color:#fff;line-height:1}
+.hdr{background:rgba(3,3,8,.97);border-bottom:1px solid rgba(192,0,26,.2);padding:14px 16px;display:flex;align-items:center;justify-content:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}
+.logo{text-align:center}
+.logo-dma{font-size:28px;font-weight:900;letter-spacing:8px;color:#fff;line-height:1}
 .logo-dma span{color:#C0001A}
-.logo-sub{font-size:8px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.6)}
-.logo-line{width:40px;height:1px;background:linear-gradient(90deg,transparent,#C9A84C,transparent);margin-top:4px}
+.logo-sub{font-size:7px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-top:3px}
+.logo-line{width:36px;height:1px;background:linear-gradient(90deg,transparent,#C9A84C,transparent);margin:4px auto 0}
 
 /* HERO */
-.hero{padding:24px 16px 16px;text-align:center}
-.hero-tag{font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(192,0,26,.6);margin-bottom:8px}
-.hero-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
-.hero-title span{color:#C9A84C}
-.hero-sub{font-size:12px;color:rgba(240,240,255,.35);line-height:1.6}
+.hero{padding:18px 16px 0;text-align:center}
+.hero-name{font-size:12px;color:rgba(240,240,255,.4);margin-bottom:6px}
+.hero-name strong{color:#C9A84C}
+.hero-title{font-size:18px;font-weight:800;color:#fff;line-height:1.3}
+.hero-title span{color:#C0001A}
 
-/* STATS BAR */
-.stats{display:flex;margin:16px;border:1px solid rgba(192,0,26,.15);border-radius:8px;overflow:hidden;background:rgba(192,0,26,.03)}
-.stat{flex:1;padding:12px 8px;text-align:center;border-right:1px solid rgba(192,0,26,.1)}
+/* STATS */
+.stats{display:flex;margin:14px 16px 0;border:1px solid rgba(201,168,76,.15);border-radius:8px;overflow:hidden}
+.stat{flex:1;padding:10px 6px;text-align:center;border-right:1px solid rgba(201,168,76,.08)}
 .stat:last-child{border-right:none}
-.stat-n{font-size:18px;font-weight:900;display:block;color:#C9A84C}
-.stat-l{font-size:7px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(240,240,255,.3);margin-top:2px;display:block}
+.stat-n{font-size:15px;font-weight:900;display:block;color:#C9A84C}
+.stat-l{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3);display:block;margin-top:2px}
 
-/* SECTION TITLE */
-.section{padding:16px 16px 8px;display:flex;align-items:center;justify-content:space-between}
-.section-t{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(240,240,255,.4)}
-.section-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.2),transparent);margin-left:12px}
+/* SECTION TITRE */
+.sec{padding:18px 16px 8px;display:flex;align-items:center;gap:10px}
+.sec-t{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.6);white-space:nowrap}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.2),transparent)}
 
-/* CARDS GRILLE */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+/* MODULES LISTE */
+.mod-list{padding:0 16px;display:flex;flex-direction:column;gap:5px}
+.mod{display:flex;align-items:center;gap:10px;background:#0a0a0f;border:1px solid rgba(255,255,255,.05);border-radius:7px;padding:11px 14px;text-decoration:none;cursor:pointer;transition:border-color .15s}
+.mod:active{background:rgba(192,0,26,.05);border-color:rgba(192,0,26,.2)}
+.mod-ic{font-size:18px;flex-shrink:0;width:26px;text-align:center}
+.mod-info{flex:1;min-width:0}
+.mod-num{font-size:8px;font-weight:700;letter-spacing:1px;color:rgba(240,240,255,.25);text-transform:uppercase;display:block}
+.mod-title{font-size:13px;font-weight:700;color:#f0f0ff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mod-arr{color:rgba(255,255,255,.15);font-size:12px;flex-shrink:0}
+.mod-tag{font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 6px;border-radius:3px;flex-shrink:0}
+.tag-r{background:rgba(192,0,26,.08);color:rgba(192,0,26,.7);border:1px solid rgba(192,0,26,.15)}
+.tag-g{background:rgba(201,168,76,.08);color:rgba(201,168,76,.7);border:1px solid rgba(201,168,76,.15)}
+.tag-b{background:rgba(79,163,232,.08);color:rgba(79,163,232,.7);border:1px solid rgba(79,163,232,.15)}
+.tag-p{background:rgba(155,89,255,.08);color:rgba(155,89,255,.7);border:1px solid rgba(155,89,255,.15)}
+.tag-gr{background:rgba(62,207,142,.08);color:rgba(62,207,142,.7);border:1px solid rgba(62,207,142,.15)}
 
-.card{border-radius:10px;overflow:hidden;position:relative;cursor:pointer;text-decoration:none;display:block;background:#0a0a10;border:1px solid rgba(255,255,255,.06);transition:transform .15s}
-.card:active{transform:scale(.97)}
-.card-top{padding:16px 14px 12px;position:relative}
-.card-icon{font-size:28px;margin-bottom:8px;display:block}
-.card-num{position:absolute;top:10px;right:12px;font-size:9px;font-weight:700;color:rgba(255,255,255,.15);letter-spacing:1px}
-.card-title{font-size:13px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:2px}
-.card-sub{font-size:10px;color:rgba(240,240,255,.35);line-height:1.4}
-.card-bar{height:3px;width:100%}
-.card-badge{display:inline-block;font-size:8px;font-weight:700;letter-spacing:2px;padding:3px 7px;border-radius:2px;margin-top:6px;text-transform:uppercase}
+/* BONUS CARDS */
+.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px}
+.bonus-card{background:#0a0a0f;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:14px;text-decoration:none;display:block;cursor:pointer}
+.bonus-card:active{opacity:.7}
+.bonus-ic{font-size:24px;display:block;margin-bottom:8px}
+.bonus-title{font-size:12px;font-weight:800;color:#fff;margin-bottom:3px;line-height:1.3}
+.bonus-sub{font-size:10px;color:rgba(240,240,255,.3);line-height:1.4}
+.bonus-bar{height:2px;border-radius:1px;margin-top:10px}
 
-/* Couleurs par card */
-.c-drop .card-bar{background:linear-gradient(90deg,#4fa3e8,rgba(79,163,232,.2))}
-.c-drop .card-badge{background:rgba(79,163,232,.1);color:#4fa3e8;border:1px solid rgba(79,163,232,.2)}
-.c-pod .card-bar{background:linear-gradient(90deg,#9b59ff,rgba(155,89,255,.2))}
-.c-pod .card-badge{background:rgba(155,89,255,.1);color:#9b59ff;border:1px solid rgba(155,89,255,.2)}
-.c-ugc .card-bar{background:linear-gradient(90deg,#ff7c3e,rgba(255,124,62,.2))}
-.c-ugc .card-badge{background:rgba(255,124,62,.1);color:#ff7c3e;border:1px solid rgba(255,124,62,.2)}
-.c-aff .card-bar{background:linear-gradient(90deg,#3ecf8e,rgba(62,207,142,.2))}
-.c-aff .card-badge{background:rgba(62,207,142,.1);color:#3ecf8e;border:1px solid rgba(62,207,142,.2)}
-.c-nl .card-bar{background:linear-gradient(90deg,#C9A84C,rgba(201,168,76,.2))}
-.c-nl .card-badge{background:rgba(201,168,76,.1);color:#C9A84C;border:1px solid rgba(201,168,76,.2)}
-.c-flip .card-bar{background:linear-gradient(90deg,#e8e8e8,rgba(232,232,232,.2))}
-.c-flip .card-badge{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1)}
-.c-ia .card-bar{background:linear-gradient(90deg,#C0001A,rgba(192,0,26,.2))}
-.c-ia .card-badge{background:rgba(192,0,26,.1);color:#C0001A;border:1px solid rgba(192,0,26,.3)}
+/* OFFRE */
+.offre{margin:0 16px;background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.25);border-radius:10px;padding:18px;text-align:center}
+.offre-titre{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(192,0,26,.7);margin-bottom:8px}
+.offre-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px}
+.offre-name span{color:#C9A84C}
+.offre-prix{font-size:36px;font-weight:900;color:#C9A84C;margin:10px 0 4px}
+.offre-prix span{font-size:14px;font-weight:400;color:rgba(240,240,255,.4)}
+.offre-inclus{font-size:11px;color:rgba(240,240,255,.5);margin-bottom:14px;line-height:1.7}
+.offre-inclus strong{color:#f0f0ff}
+.offre-btn{display:block;background:linear-gradient(135deg,#C0001A,#8b0012);border-radius:5px;padding:14px;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff;text-decoration:none}
+.offre-garantie{font-size:9px;color:rgba(240,240,255,.3);margin-top:10px;letter-spacing:1px}
 
-/* CARD LARGE (IA Suite) */
-.card-large{grid-column:1/-1;display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#0f0508,#0a0a10);border:1px solid rgba(192,0,26,.25)}
-.card-large .card-top{flex:1;padding:18px}
-.card-large .card-icon{font-size:36px;margin-bottom:0}
-.card-large-right{padding:18px 18px 18px 0;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.card-large-right .card-bar{display:none}
+/* BUSINESS MODELS GRID */
+.biz-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px}
+.biz-card{background:#0a0a0f;border-radius:8px;padding:14px;text-decoration:none;display:block;cursor:pointer;overflow:hidden;position:relative}
+.biz-card:active{opacity:.7}
+.biz-ic{font-size:26px;display:block;margin-bottom:6px}
+.biz-num{font-size:8px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.2);text-transform:uppercase;display:block}
+.biz-title{font-size:12px;font-weight:800;color:#fff;line-height:1.3;display:block;margin-bottom:4px}
+.biz-sub{font-size:10px;color:rgba(240,240,255,.3);line-height:1.4;display:block}
+.biz-bar{height:2px;border-radius:1px;margin-top:10px}
 
-/* SECTION BONUS */
-.grid-list{padding:0 16px;display:flex;flex-direction:column;gap:8px}
-.list-card{background:#0a0a10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 16px;display:flex;align-items:center;gap:12px;text-decoration:none;cursor:pointer}
-.list-card:active{background:rgba(255,255,255,.04)}
-.list-icon{font-size:22px;flex-shrink:0}
-.list-info{flex:1}
-.list-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
-.list-sub{font-size:10px;color:rgba(240,240,255,.35)}
-.list-arr{font-size:14px;color:rgba(255,255,255,.2)}
-
-/* BOTTOM NAV */
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(3,3,8,.97);border-top:1px solid rgba(255,255,255,.06);display:flex;height:70px;backdrop-filter:blur(20px);z-index:100}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;text-decoration:none;-webkit-tap-highlight-color:transparent}
-.nav-icon{font-size:20px}
-.nav-label{font-size:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3)}
-.nav-item.active .nav-label{color:#C9A84C}
-.nav-dot{width:4px;height:4px;border-radius:50%;background:#C9A84C;display:none}
-.nav-item.active .nav-dot{display:block}
-
-/* WELCOME BANNER */
-.welcome{margin:0 16px 16px;background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.15);border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px}
-.welcome-txt{flex:1}
-.welcome-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:2px}
-.welcome-sub{font-size:11px;color:rgba(240,240,255,.4);line-height:1.5}
-.welcome-emoji{font-size:32px}
+/* NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(3,3,8,.97);border-top:1px solid rgba(255,255,255,.06);display:flex;height:62px;backdrop-filter:blur(20px);z-index:100}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;text-decoration:none}
+.nav-ic{font-size:18px}
+.nav-lb{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3)}
+.nav-item.on .nav-lb{color:#C9A84C}
+.nav-dot{width:3px;height:3px;border-radius:50%;background:#C9A84C;display:none}
+.nav-item.on .nav-dot{display:block}
 </style>
 
 </head>
@@ -115,209 +109,134 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 <!-- HERO -->
 
 <div class="hero">
-  <div class="hero-tag">Tableau de bord membre</div>
-  <div class="hero-title">Bienvenue dans la <span>DMA</span></div>
-  <div class="hero-sub">7 business models. Des outils IA. Tout ce qu il faut pour generer des revenus en ligne.</div>
+  <div class="hero-name">Connecte en tant que <strong id="uname">Membre</strong></div>
+  <div class="hero-title">Ton espace <span>formation</span> complet</div>
 </div>
 
 <!-- STATS -->
 
 <div class="stats">
-  <div class="stat"><span class="stat-n">7</span><span class="stat-l">Modules</span></div>
-  <div class="stat"><span class="stat-n">50+</span><span class="stat-l">Lecons</span></div>
-  <div class="stat"><span class="stat-n">13</span><span class="stat-l">Outils IA</span></div>
-  <div class="stat"><span class="stat-n">MRR</span><span class="stat-l">Inclus</span></div>
+  <div class="stat"><span class="stat-n">28</span><span class="stat-l">Modules</span></div>
+  <div class="stat"><span class="stat-n">7</span><span class="stat-l">Business</span></div>
+  <div class="stat"><span class="stat-n">13+</span><span class="stat-l">Outils IA</span></div>
+  <div class="stat"><span class="stat-n">MRR</span><span class="stat-l">Droits</span></div>
 </div>
 
-<!-- WELCOME -->
+<!-- 28 MODULES -->
 
-<div class="welcome">
-  <div class="welcome-txt">
-    <div class="welcome-title">Pret a generer tes premiers revenus ?</div>
-    <div class="welcome-sub">Commence par choisir ton business model ci-dessous. Chaque module contient tout ce dont tu as besoin.</div>
+<div class="sec"><span class="sec-t">Les 28 Modules</span><div class="sec-line"></div></div>
+<div class="mod-list">
+  <a class="mod" href="module-01.html"><span class="mod-ic">&#127774;</span><div class="mod-info"><span class="mod-num">Module 01</span><span class="mod-title">Mindset &amp; Vision</span></div><span class="mod-tag tag-g">Mindset</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-02.html"><span class="mod-ic">&#127775;</span><div class="mod-info"><span class="mod-num">Module 02</span><span class="mod-title">Positionnement Premium</span></div><span class="mod-tag tag-g">Strategie</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-03.html"><span class="mod-ic">&#128179;</span><div class="mod-info"><span class="mod-num">Module 03</span><span class="mod-title">Paiement &amp; Page de Vente</span></div><span class="mod-tag tag-r">Business</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-04.html"><span class="mod-ic">&#128190;</span><div class="mod-info"><span class="mod-num">Module 04</span><span class="mod-title">Produits Digitaux</span></div><span class="mod-tag tag-r">Produits</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-05.html"><span class="mod-ic">&#128247;</span><div class="mod-info"><span class="mod-num">Module 05</span><span class="mod-title">Marketing &amp; Contenu</span></div><span class="mod-tag tag-b">Marketing</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-06.html"><span class="mod-ic">&#127916;</span><div class="mod-info"><span class="mod-num">Module 06</span><span class="mod-title">Video Faceless</span></div><span class="mod-tag tag-b">Content</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-07.html"><span class="mod-ic">&#128247;</span><div class="mod-info"><span class="mod-num">Module 07</span><span class="mod-title">Instagram Mastery</span></div><span class="mod-tag tag-p">Instagram</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-08.html"><span class="mod-ic">&#127926;</span><div class="mod-info"><span class="mod-num">Module 08</span><span class="mod-title">TikTok Hooks</span></div><span class="mod-tag tag-p">TikTok</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-09.html"><span class="mod-ic">&#128155;</span><div class="mod-info"><span class="mod-num">Module 09</span><span class="mod-title">Snapchat Strategy</span></div><span class="mod-tag tag-p">Snap</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-10.html"><span class="mod-ic">&#128140;</span><div class="mod-info"><span class="mod-num">Module 10</span><span class="mod-title">Email Marketing</span></div><span class="mod-tag tag-b">Email</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-11.html"><span class="mod-ic">&#128172;</span><div class="mod-info"><span class="mod-num">Module 11</span><span class="mod-title">Closing &amp; Scripts</span></div><span class="mod-tag tag-r">Closing</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-12.html"><span class="mod-ic">&#128250;</span><div class="mod-info"><span class="mod-num">Module 12</span><span class="mod-title">Live Selling TikTok</span></div><span class="mod-tag tag-r">Live</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-13.html"><span class="mod-ic">&#127909;</span><div class="mod-info"><span class="mod-num">Module 13</span><span class="mod-title">VSL &amp; Video Sales</span></div><span class="mod-tag tag-r">VSL</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-14.html"><span class="mod-ic">&#129302;</span><div class="mod-info"><span class="mod-num">Module 14</span><span class="mod-title">AI Selling</span></div><span class="mod-tag tag-g">IA</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-15.html"><span class="mod-ic">&#127915;</span><div class="mod-info"><span class="mod-num">Module 15</span><span class="mod-title">Funnels &amp; Tunnels</span></div><span class="mod-tag tag-b">Funnels</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-16.html"><span class="mod-ic">&#9889;</span><div class="mod-info"><span class="mod-num">Module 16</span><span class="mod-title">Automation DM</span></div><span class="mod-tag tag-b">Auto</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-17.html"><span class="mod-ic">&#128176;</span><div class="mod-info"><span class="mod-num">Module 17</span><span class="mod-title">MRR &amp; Recurrence</span></div><span class="mod-tag tag-g">MRR</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-18.html"><span class="mod-ic">&#127970;</span><div class="mod-info"><span class="mod-num">Module 18</span><span class="mod-title">SMMA Agency</span></div><span class="mod-tag tag-g">Agency</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-19.html"><span class="mod-ic">&#128722;</span><div class="mod-info"><span class="mod-num">Module 19</span><span class="mod-title">Shopify &amp; E-commerce</span></div><span class="mod-tag tag-r">E-com</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-20.html"><span class="mod-ic">&#128736;</span><div class="mod-info"><span class="mod-num">Module 20</span><span class="mod-title">Systeme.io &amp; Stan</span></div><span class="mod-tag tag-b">Tech</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-21.html"><span class="mod-ic">&#128196;</span><div class="mod-info"><span class="mod-num">Module 21</span><span class="mod-title">Declaration Legale</span></div><span class="mod-tag tag-g">Legal</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-22.html"><span class="mod-ic">&#128188;</span><div class="mod-info"><span class="mod-num">Module 22</span><span class="mod-title">Prospection B2B</span></div><span class="mod-tag tag-b">B2B</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-23.html"><span class="mod-ic">&#128281;</span><div class="mod-info"><span class="mod-num">Module 23</span><span class="mod-title">Droits de Revente MRR</span></div><span class="mod-tag tag-g">Revente</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-24.html"><span class="mod-ic">&#127775;</span><div class="mod-info"><span class="mod-num">Module 24</span><span class="mod-title">Personal Branding</span></div><span class="mod-tag tag-p">Branding</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-25.html"><span class="mod-ic">&#129309;</span><div class="mod-info"><span class="mod-num">Module 25</span><span class="mod-title">Gestion Client</span></div><span class="mod-tag tag-b">CRM</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-26.html"><span class="mod-ic">&#128640;</span><div class="mod-info"><span class="mod-num">Module 26</span><span class="mod-title">Scaling &amp; Delegation</span></div><span class="mod-tag tag-r">Scale</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-27.html"><span class="mod-ic">&#128279;</span><div class="mod-info"><span class="mod-num">Module 27</span><span class="mod-title">Affiliation &amp; Partenariats</span></div><span class="mod-tag tag-gr">Affil.</span><span class="mod-arr">&#9658;</span></a>
+  <a class="mod" href="module-28.html"><span class="mod-ic">&#128205;</span><div class="mod-info"><span class="mod-num">Module 28</span><span class="mod-title">Strategie 2026</span></div><span class="mod-tag tag-g">Vision</span><span class="mod-arr">&#9658;</span></a>
+</div>
+
+<!-- BONUS -->
+
+<div class="sec" style="margin-top:6px"><span class="sec-t">Bonus Inclus</span><div class="sec-line"></div></div>
+<div class="biz-grid">
+  <a class="biz-card" href="module-business-models.html" style="border:1px solid rgba(79,163,232,.15)">
+    <span class="biz-ic">&#128200;</span>
+    <span class="biz-num">Bonus 01</span>
+    <span class="biz-title">7 Business Models</span>
+    <span class="biz-sub">Drop, POD, UGC, Affil., Newsletter, Flipping + IA</span>
+    <div class="biz-bar" style="background:linear-gradient(90deg,#4fa3e8,transparent)"></div>
+  </a>
+  <a class="biz-card" href="bonus-agence-ia.html" style="border:1px solid rgba(155,89,255,.15)">
+    <span class="biz-ic">&#129302;</span>
+    <span class="biz-num">Bonus 02</span>
+    <span class="biz-title">Agence IA No Code</span>
+    <span class="biz-sub">Lance ton agence IA sans coder</span>
+    <div class="biz-bar" style="background:linear-gradient(90deg,#9b59ff,transparent)"></div>
+  </a>
+  <a class="biz-card" href="arguments-vente.html" style="border:1px solid rgba(192,0,26,.15)">
+    <span class="biz-ic">&#128172;</span>
+    <span class="biz-num">Bonus 03</span>
+    <span class="biz-title">Arguments de Vente DMA</span>
+    <span class="biz-sub">Closer la DMA a tous les profils</span>
+    <div class="biz-bar" style="background:linear-gradient(90deg,#C0001A,transparent)"></div>
+  </a>
+  <a class="biz-card" href="module-ia-tool.html" style="border:1px solid rgba(201,168,76,.15)">
+    <span class="biz-ic">&#9889;</span>
+    <span class="biz-num">Bonus 04</span>
+    <span class="biz-title">IA Suite Pro</span>
+    <span class="biz-sub">13 outils IA pour vendre et creer</span>
+    <div class="biz-bar" style="background:linear-gradient(90deg,#C9A84C,transparent)"></div>
+  </a>
+</div>
+
+<!-- OFFRE -->
+
+<div class="sec" style="margin-top:6px"><span class="sec-t">L Offre DMA</span><div class="sec-line"></div></div>
+<div class="offre">
+  <div class="offre-titre">Acces complet a vie</div>
+  <div class="offre-name">Digital Mastery <span>Academy</span></div>
+  <div class="offre-prix">397<span>EUR</span></div>
+  <div class="offre-inclus">
+    <strong>28 modules</strong> de formation complete<br>
+    <strong>7 business models</strong> (Drop, POD, UGC, Affil, NL, Flip, IA)<br>
+    <strong>Droits MRR inclus</strong> — revends la formation 397EUR tu gardes tout<br>
+    <strong>Bonus Agence IA</strong> + Arguments de vente + IA Suite Pro<br>
+    <strong>Mises a jour gratuites</strong> a vie
   </div>
-  <div class="welcome-emoji">&#128293;</div>
+  <a class="offre-btn" href="https://mathisdrt.store" target="_blank">ACCEDER A LA DMA — 397EUR</a>
+  <div class="offre-garantie">&#10003; PAIEMENT SECURISE &nbsp;|&nbsp; &#10003; ACCES IMMEDIAT &nbsp;|&nbsp; &#10003; SUPPORT INCLUS</div>
 </div>
 
-<!-- BUSINESS MODELS -->
-
-<div class="section"><span class="section-t">Business Models</span><div class="section-line"></div></div>
-
-<div class="grid">
-
-  <!-- IA SUITE (large) -->
-
-  <a class="card card-large c-ia" href="module-ia-tool.html">
-    <div class="card-top">
-      <span class="card-icon">&#129302;</span>
-      <div class="card-title">IA Suite Pro</div>
-      <div class="card-sub">Scripts DM, contenu viral, hooks, objections, revenus</div>
-      <span class="card-badge">INCLUS</span>
-    </div>
-    <div class="card-large-right">
-      <span style="font-size:8px;font-weight:700;letter-spacing:2px;color:rgba(192,0,26,.5);text-transform:uppercase">6 outils</span>
-      <span style="font-size:22px">&#9658;</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-  <!-- DROP -->
-
-  <a class="card c-drop" href="module-dropshipping.html">
-    <div class="card-top">
-      <span class="card-num">01</span>
-      <span class="card-icon">&#128722;</span>
-      <div class="card-title">Dropshipping</div>
-      <div class="card-sub">Vendre sans stock</div>
-      <span class="card-badge">6 chap.</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-  <!-- POD -->
-
-  <a class="card c-pod" href="module-pod.html">
-    <div class="card-top">
-      <span class="card-num">02</span>
-      <span class="card-icon">&#128247;</span>
-      <div class="card-title">Print on Demand</div>
-      <div class="card-sub">Revenus passifs Etsy</div>
-      <span class="card-badge">5 chap.</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-  <!-- UGC -->
-
-  <a class="card c-ugc" href="module-ugc.html">
-    <div class="card-top">
-      <span class="card-num">03</span>
-      <span class="card-icon">&#127916;</span>
-      <div class="card-title">UGC Creator</div>
-      <div class="card-sub">Paye par les marques</div>
-      <span class="card-badge">5 chap.</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-  <!-- AFFILIATION -->
-
-  <a class="card c-aff" href="module-affiliation.html">
-    <div class="card-top">
-      <span class="card-num">04</span>
-      <span class="card-icon">&#128279;</span>
-      <div class="card-title">Affiliation</div>
-      <div class="card-sub">Commissions passives</div>
-      <span class="card-badge">5 chap.</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-  <!-- NEWSLETTER -->
-
-  <a class="card c-nl" href="module-newsletter.html">
-    <div class="card-top">
-      <span class="card-num">05</span>
-      <span class="card-icon">&#128140;</span>
-      <div class="card-title">Newsletter</div>
-      <div class="card-sub">L actif numero 1</div>
-      <span class="card-badge">5 chap.</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-  <!-- FLIPPING -->
-
-  <a class="card c-flip" href="module-flipping.html">
-    <div class="card-top">
-      <span class="card-num">06</span>
-      <span class="card-icon">&#128200;</span>
-      <div class="card-title">Flipping</div>
-      <div class="card-sub">Acheter et revendre</div>
-      <span class="card-badge">5 chap.</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-  <!-- GENERATEURS -->
-
-  <a class="card c-ia" href="module-generateurs.html" style="grid-column:1/-1;background:rgba(192,0,26,.04)">
-    <div class="card-top" style="display:flex;align-items:center;gap:14px;padding:16px">
-      <span class="card-icon" style="margin-bottom:0;font-size:24px">&#9889;</span>
-      <div>
-        <div class="card-title">Generateurs IA Business</div>
-        <div class="card-sub">Drop Niche, Analyse Produit, Page Produit, Script Pub, Pitch UGC, SEO Etsy</div>
-      </div>
-      <span style="margin-left:auto;font-size:18px;color:rgba(255,255,255,.2)">&#9658;</span>
-    </div>
-    <div class="card-bar"></div>
-  </a>
-
-</div>
-
-<!-- BONUS & OUTILS -->
-
-<div class="section" style="margin-top:16px"><span class="section-t">Bonus et Outils</span><div class="section-line"></div></div>
-
-<div class="grid-list">
-  <a class="list-card" href="module-ia-tool.html">
-    <span class="list-icon">&#129302;</span>
-    <div class="list-info">
-      <div class="list-title">IA Suite Pro — Vente DMA</div>
-      <div class="list-sub">Scripts DM, Prospects, Contenu, Objections, Hooks</div>
-    </div>
-    <span class="list-arr">&#9658;</span>
-  </a>
-  <a class="list-card" href="module-beacons-gen.html">
-    <span class="list-icon">&#128279;</span>
-    <div class="list-info">
-      <div class="list-title">Generateur Beacons</div>
-      <div class="list-sub">Cree ta page de liens pro en quelques clics</div>
-    </div>
-    <span class="list-arr">&#9658;</span>
-  </a>
-  <a class="list-card" href="module-generateurs.html">
-    <span class="list-icon">&#9889;</span>
-    <div class="list-info">
-      <div class="list-title">Generateurs Business IA</div>
-      <div class="list-sub">Niche Drop, Produit, Page, Pub, UGC, Etsy SEO</div>
-    </div>
-    <span class="list-arr">&#9658;</span>
-  </a>
-</div>
-
-<!-- BOTTOM NAV -->
+<!-- NAV -->
 
 <div class="nav">
-  <a class="nav-item active" href="dashboard.html">
-    <span class="nav-icon">&#127968;</span>
-    <span class="nav-label">Accueil</span>
+  <a class="nav-item on" href="dashboard.html">
+    <span class="nav-ic">&#127968;</span>
+    <span class="nav-lb">Accueil</span>
     <span class="nav-dot"></span>
   </a>
   <a class="nav-item" href="module-ia-tool.html">
-    <span class="nav-icon">&#129302;</span>
-    <span class="nav-label">IA Suite</span>
+    <span class="nav-ic">&#129302;</span>
+    <span class="nav-lb">IA Suite</span>
     <span class="nav-dot"></span>
   </a>
   <a class="nav-item" href="module-generateurs.html">
-    <span class="nav-icon">&#9889;</span>
-    <span class="nav-label">Generateurs</span>
+    <span class="nav-ic">&#9889;</span>
+    <span class="nav-lb">Generateurs</span>
     <span class="nav-dot"></span>
   </a>
   <a class="nav-item" href="module-business-models.html">
-    <span class="nav-icon">&#128218;</span>
-    <span class="nav-label">Formation</span>
+    <span class="nav-ic">&#128200;</span>
+    <span class="nav-lb">Business</span>
     <span class="nav-dot"></span>
   </a>
 </div>
 
 <script>
 var user = JSON.parse(sessionStorage.getItem("dma_user") || "null");
-if(!user) window.location.href = "index.html";
-else {
-  var els = document.querySelectorAll(".welcome-title");
-  if(els[0]) els[0].textContent = "Bienvenue, " + user.name + " !";
-}
+if(!user) { window.location.href = "index.html"; }
+else { var el = document.getElementById("uname"); if(el) el.textContent = user.name; }
 </script>
 
 </body>
