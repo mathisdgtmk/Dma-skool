@@ -1,495 +1,352 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>DMA — Print on Demand Mastery</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<title>DMA - Print on Demand</title>
 <style>
-:root{--bg:#050308;--s1:#0c0810;--s2:#130f1a;--purple:#9b59ff;--gold:#C9A84C;--green:#3ecf8e;--red:#C0001A;--text:#f0eeff;--dim:rgba(240,238,255,.4);--border:rgba(155,89,255,.12)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;min-height:100vh;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(155,89,255,.07) 0%,transparent 50%),radial-gradient(ellipse at 85% 100%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
-.hdr{position:sticky;top:0;z-index:100;background:rgba(5,3,8,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
-.hdr-back{text-decoration:none;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-.hdr-title{font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:4px;color:var(--purple)}
-.hdr-badge{font-size:10px;font-weight:700;color:rgba(155,89,255,.6);background:rgba(155,89,255,.08);border:1px solid rgba(155,89,255,.2);border-radius:2px;padding:3px 8px}
-.hero{position:relative;z-index:1;padding:28px 16px 24px;border-bottom:1px solid var(--border);overflow:hidden}
-.hero-num{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(155,89,255,.4);margin-bottom:8px}
-.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(30px,9vw,52px);letter-spacing:3px;line-height:.82;margin-bottom:14px}
-.hl{color:var(--purple);display:block}
-.hero-desc{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:20px}
-.hero-stats{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border)}
+body{background:#0d0d0f;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:40px}
+.hdr{position:sticky;top:0;z-index:99;background:#0d0d0f;border-bottom:1px solid rgba(155,89,255,.15);height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.hdr a{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hdr-t{font-size:12px;font-weight:800;letter-spacing:3px;color:#9b59ff}
+.hero{padding:20px 16px 16px;border-bottom:1px solid rgba(155,89,255,.08)}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(155,89,255,.4);margin-bottom:6px}
+.hero-title{font-size:28px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#fff;margin-bottom:12px;line-height:1}
+.hero-title span{color:#9b59ff;display:block}
+.stats{display:flex;border:1px solid rgba(155,89,255,.12);border-radius:4px;overflow:hidden}
+.stat{flex:1;padding:10px 6px;text-align:center;border-right:1px solid rgba(155,89,255,.08)}
 .stat:last-child{border-right:none}
-.sn{font-family:"Bebas Neue",sans-serif;font-size:22px;display:block}
-.sl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px;display:block}
-.chnav{display:flex;overflow-x:auto;background:var(--s1);border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch}
-.chnav::-webkit-scrollbar{display:none}
-.chbtn{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:"Space Grotesk",sans-serif;white-space:nowrap}
-.chbtn.active{color:var(--purple);border-bottom-color:var(--purple)}
-.panel{display:none;padding:16px 16px 60px;position:relative;z-index:1;animation:fi .3s ease}
-.panel.active{display:block}
-@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.lesson{background:var(--s1);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
-.lhdr{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer}
-.lnum{font-family:"Bebas Neue",sans-serif;font-size:20px;color:rgba(155,89,255,.3);min-width:32px}
-.linfo{flex:1}.ltitle{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
-.lmeta{font-size:10px;color:var(--dim)}
-.larrow{font-size:12px;color:var(--dim);transition:transform .3s}
-.lesson.open .larrow{transform:rotate(90deg)}
-.lbody{display:none;padding:16px}.lesson.open .lbody{display:block}
-.box{border-radius:5px;padding:14px;margin-bottom:12px}
-.box.p{background:rgba(155,89,255,.05);border:1px solid rgba(155,89,255,.15)}
-.box.r{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2)}
-.box.g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15)}
-.box.go{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15)}
-.bt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
-.bt.p{color:var(--purple)}.bt.r{color:#ff6060}.bt.g{color:var(--green)}.bt.go{color:var(--gold)}
-.btext{font-size:12px;color:rgba(240,238,255,.72);line-height:1.8}
-.btext p{margin-bottom:8px}.btext p:last-child{margin-bottom:0}
-.btext strong{color:var(--text);font-weight:600}
-.kp{display:flex;gap:8px;font-size:12px;color:rgba(240,238,255,.7);margin-bottom:6px}
-.ki{flex-shrink:0;font-size:14px}
-.steps{display:flex;flex-direction:column;gap:10px;margin-top:8px}
-.step{display:flex;gap:12px}
-.snum{width:28px;height:28px;border-radius:50%;background:rgba(155,89,255,.12);border:1px solid rgba(155,89,255,.25);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:14px;color:var(--purple);flex-shrink:0}
-.stitle{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
-.sdesc{font-size:12px;color:rgba(240,238,255,.6);line-height:1.6}
-.sdesc strong{color:var(--purple)}
-.tcard{background:var(--s2);border:1px solid rgba(201,168,76,.1);border-radius:5px;padding:12px 14px;display:flex;gap:12px;margin-bottom:8px}
-.tico{font-size:22px;flex-shrink:0}.tname{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:2px}
-.trole{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:4px}
-.tdesc{font-size:11px;color:rgba(240,238,255,.5);line-height:1.5}
-.cs{background:var(--s2);border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:12px}
-.cshdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.1);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
-.csbody{padding:14px}
-.csrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
-.csrow:last-child{border-bottom:none}
-.csl{color:var(--dim)}.csv{font-weight:700;color:var(--text)}
-.csv.g{color:var(--green)}.csv.go{color:var(--gold)}
-.csq{font-size:12px;color:rgba(240,238,255,.65);line-height:1.75;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
-.cli{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
-.clb{width:20px;height:20px;border-radius:3px;border:2px solid rgba(155,89,255,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.cli.done .clb{background:var(--purple);border-color:var(--purple)}
-.clck{display:none;color:#fff;font-size:12px;font-weight:700}.cli.done .clck{display:block}
-.clt{font-size:12px;color:rgba(240,238,255,.7)}.cli.done .clt{color:rgba(240,238,255,.3);text-decoration:line-through}
-.qq{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:10px}
-.qqt{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.5}
-.qo{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(240,238,255,.7);margin-bottom:6px}
-.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:var(--green)}
-.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff6060}
-.qex{margin-top:10px;padding:10px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(240,238,255,.65);line-height:1.6;display:none}
-.iat{background:var(--bg);border:1px solid rgba(155,89,255,.2);border-radius:6px;overflow:hidden;margin-top:10px}
-.iatbar{background:var(--s2);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.iatl{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--purple)}
-.iatb{font-size:8px;color:rgba(155,89,255,.4);font-weight:600}
-.iatbody{padding:12px}
-.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:5px;display:block;margin-top:10px}
-.lbl:first-child{margin-top:0}
-.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none;resize:none}
-.inp:focus{border-color:rgba(155,89,255,.4)}
-.sel{width:100%;background:var(--s2);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none}
+.stat-n{font-size:18px;font-weight:900;display:block;color:#9b59ff}
+.stat-l{font-size:7px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-top:2px}
+.tabs{display:flex;overflow-x:auto;background:#080810;border-bottom:1px solid rgba(155,89,255,.1);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;white-space:nowrap}
+.tab.on{color:#9b59ff;border-bottom-color:#9b59ff}
+.panel{display:none;padding:14px 14px 40px}
+.panel.on{display:block}
+.lesson{background:#080810;border:1px solid rgba(155,89,255,.1);border-radius:6px;margin-bottom:10px;overflow:hidden}
+.lhdr{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.lnum{font-size:16px;font-weight:900;color:rgba(155,89,255,.2);min-width:24px}
+.linfo{flex:1}
+.ltitle{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.lmeta{font-size:10px;color:rgba(255,255,255,.3)}
+.larr{font-size:10px;color:rgba(255,255,255,.2);transition:transform .2s;flex-shrink:0}
+.lesson.open .larr{transform:rotate(90deg)}
+.lbody{display:none;padding:4px 16px 16px}
+.lesson.open .lbody{display:block}
+.box{border-radius:5px;padding:12px 14px;margin-bottom:10px}
+.box-a{background:rgba(155,89,255,.05);border:1px solid rgba(155,89,255,.12)}
+.box-g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.12)}
+.box-r{background:rgba(192,0,26,.05);border:1px solid rgba(192,0,26,.15)}
+.box-gold{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12)}
+.box-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.box-a .box-t{color:#9b59ff}.box-g .box-t{color:#3ecf8e}.box-r .box-t{color:#ff4444}.box-gold .box-t{color:#C9A84C}
+.txt{font-size:12px;color:rgba(255,255,255,.55);line-height:1.8}
+.txt strong{color:#fff}
+.kp{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:6px;line-height:1.5}
+.ki{flex-shrink:0}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.step{display:flex;gap:10px;align-items:flex-start}
+.step-n{width:24px;height:24px;border-radius:50%;background:rgba(155,89,255,.1);border:1px solid rgba(155,89,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#9b59ff;flex-shrink:0}
+.step-t{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.step-d{font-size:11px;color:rgba(255,255,255,.4);line-height:1.6}
+.qq{background:#080810;border:1px solid rgba(155,89,255,.1);border-radius:6px;padding:14px;margin-bottom:10px}
+.qq-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:12px;line-height:1.5}
+.qo{padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;user-select:none}
+.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:#3ecf8e}
+.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff4444}
+.qex{margin-top:10px;padding:10px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;display:none}
+.cl-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;user-select:none}
+.cl-item:last-child{border-bottom:none}
+.cl-box{width:20px;height:20px;border-radius:3px;border:2px solid rgba(155,89,255,.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:#000}
+.cl-item.done .cl-box{background:#9b59ff;border-color:#9b59ff}
+.cl-txt{font-size:12px;color:rgba(255,255,255,.6)}
+.cl-item.done .cl-txt{color:rgba(255,255,255,.25);text-decoration:line-through}
+.cs{background:#0a0a10;border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:10px}
+.cs-hdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.08);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C}
+.cs-body{padding:14px}
+.cs-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.cs-row:last-child{border-bottom:none}
+.cs-l{color:rgba(255,255,255,.35)}.cs-v{font-weight:700;color:#fff}
+.cs-v.g{color:#3ecf8e}.cs-v.gold{color:#C9A84C}
+.cs-q{font-size:11px;color:rgba(255,255,255,.4);line-height:1.7;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
+.prog{background:rgba(155,89,255,.05);border:1px solid rgba(155,89,255,.1);border-radius:5px;padding:12px 14px;margin-bottom:12px}
+.prog-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#9b59ff;margin-bottom:8px}
+.prog-bar{background:rgba(255,255,255,.05);border-radius:2px;height:4px;overflow:hidden;margin-bottom:5px}
+.prog-fill{height:100%;background:#9b59ff;border-radius:2px;width:0;transition:width .4s}
+.prog-info{font-size:11px;color:rgba(255,255,255,.3);display:flex;justify-content:space-between}
+.sim{background:#0a0a10;border:1px solid rgba(155,89,255,.12);border-radius:4px;margin-top:10px}
+.sim-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.sim-row:last-child{border-bottom:none}
+.sim-l{color:rgba(255,255,255,.35)}.sim-v{font-size:16px;font-weight:900}
+.sim-v.g{color:#3ecf8e}.sim-v.gold{color:#C9A84C}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:#f0f0ff;font-family:inherit;outline:none;margin-top:6px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-top:10px;display:block}
 .r2{display:flex;gap:8px}.r2 .c{flex:1}
-.rbtn{width:100%;padding:12px;border:none;border-radius:3px;font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:3px;color:#fff;cursor:pointer;margin-top:10px;-webkit-appearance:none;background:linear-gradient(135deg,var(--purple),#6a3abf)}
-.rbtn:disabled{opacity:.4}
-.rbtn.g{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.25);color:var(--green);font-size:12px;letter-spacing:2px}
-.ld{height:2px;background:rgba(255,255,255,.05);overflow:hidden;display:none;border-radius:1px;margin-top:4px}
-.ldf{height:100%;width:50%;border-radius:1px;background:linear-gradient(90deg,transparent,var(--purple),transparent);animation:lf 1.2s linear infinite}
-@keyframes lf{0%{transform:translateX(-200%)}100%{transform:translateX(300%)}}
-.out{background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px;margin-top:8px;font-size:12px;font-family:"JetBrains Mono",monospace;line-height:1.8;color:rgba(240,238,255,.82);white-space:pre-wrap;display:none}
-.cpbtn{display:none;width:100%;margin-top:6px;padding:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:2px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:"Space Grotesk",sans-serif;letter-spacing:2px;text-transform:uppercase;-webkit-appearance:none}
-.sim{background:var(--s2);border:1px solid rgba(155,89,255,.12);border-radius:3px;margin-top:10px}
-.simrow{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
-.simrow:last-child{border-bottom:none}
-.siml{color:var(--dim)}.simv{font-family:"Bebas Neue",sans-serif;font-size:18px}
-.simv.g{color:var(--green)}.simv.go{color:var(--gold)}.simv.b{font-size:22px;color:var(--text)}
-.prog{background:rgba(155,89,255,.05);border:1px solid rgba(155,89,255,.12);border-radius:6px;padding:14px;margin-bottom:14px}
-.progt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
-.progt2{background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;height:6px;margin-bottom:6px}
-.progf{height:100%;background:linear-gradient(90deg,var(--purple),rgba(155,89,255,.5));border-radius:3px;transition:width .5s}
-.progi{font-size:11px;color:var(--dim);display:flex;justify-content:space-between}
-.preview-card{background:var(--s2);border:1px solid rgba(155,89,255,.15);border-radius:6px;overflow:hidden;margin:10px 0}
-.pc-img{width:100%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:4vw;font-weight:700;letter-spacing:2px;text-transform:uppercase;position:relative;overflow:hidden}
-.pc-footer{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06)}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+.btn{width:100%;padding:13px;border:none;border-radius:3px;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:10px;font-family:inherit}
+.btn-g{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.25);color:#3ecf8e}
+.ia-btn{display:block;margin-top:10px;padding:13px;background:linear-gradient(135deg,#C0001A,#8b0012);border-radius:3px;text-align:center;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#9b59ff;color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
 </style>
 </head>
 <body>
+
 <div class="hdr">
-  <a class="hdr-back" href="module-business-models.html">&#8592; Business Models</a>
-  <div class="hdr-title">PRINT ON DEMAND</div>
-  <div class="hdr-badge">MODULE 02/07</div>
+  <a href="dashboard.html">&#8592; Retour</a>
+  <div class="hdr-t">PRINT ON DEMAND</div>
+  <div style="width:50px"></div>
 </div>
+
 <div class="hero">
-  <div class="hero-num">Business Model 02 / 07</div>
-  <div class="hero-title">PRINT ON<span class="hl">DEMAND</span>MASTERY</div>
-  <div class="hero-desc">Cree des designs avec l IA, vends sur Etsy et Shopify, Printful produit et livre. Zero stock, zero risque, revenus passifs.</div>
-  <div class="hero-stats">
-    <div class="stat"><span class="sn" style="color:var(--purple)">5</span><span class="sl">Chapitres</span></div>
-    <div class="stat"><span class="sn" style="color:var(--gold)">11</span><span class="sl">Lecons</span></div>
-    <div class="stat"><span class="sn" style="color:var(--green)">4</span><span class="sl">Outils IA</span></div>
-    <div class="stat"><span class="sn" style="color:var(--text)">2-3</span><span class="sl">Sem.</span></div>
+  <div class="hero-tag">Business Model 02 / 07</div>
+  <div class="hero-title">PRINT ON<span>DEMAND</span></div>
+  <div class="stats">
+    <div class="stat"><span class="stat-n">5</span><span class="stat-l">Chapitres</span></div>
+    <div class="stat"><span class="stat-n">11</span><span class="stat-l">Lecons</span></div>
+    <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Passif</span></div>
+    <div class="stat"><span class="stat-n">0</span><span class="stat-l">Stock</span></div>
   </div>
 </div>
-<div class="chnav">
-  <button class="chbtn active" onclick="ch(0,this)">01 Fondations</button>
-  <button class="chbtn" onclick="ch(1,this)">02 Niches &amp; Designs</button>
-  <button class="chbtn" onclick="ch(2,this)">03 Outils &amp; Plateformes</button>
-  <button class="chbtn" onclick="ch(3,this)">04 Vente &amp; SEO</button>
-  <button class="chbtn" onclick="ch(4,this)">05 Scale</button>
+
+<div class="tabs">
+  <button class="tab on" onclick="switchTab(0,this)">Fondations</button>
+  <button class="tab" onclick="switchTab(1,this)">Niches et Designs</button>
+  <button class="tab" onclick="switchTab(2,this)">Outils</button>
+  <button class="tab" onclick="switchTab(3,this)">SEO et Vente</button>
+  <button class="tab" onclick="switchTab(4,this)">Scale</button>
 </div>
 
-<!-- CH1 FONDATIONS -->
-
-<div class="panel active" id="ch0">
-<div class="prog"><div class="progt">Progression Ch.1</div><div class="progt2"><div class="progf" id="pf0" style="width:0%"></div></div><div class="progi"><span id="pt0">0/3 lecons</span><span id="pp0">0%</span></div></div>
+<div class="panel on" id="p0">
+<div class="prog"><div class="prog-t">Chapitre 1</div><div class="prog-bar"><div class="prog-fill" id="pf0"></div></div><div class="prog-info"><span id="pt0">0 / 3</span><span id="pp0">0%</span></div></div>
 
 <div class="lesson" id="l0">
-<div class="lhdr" onclick="tl(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">C est quoi le Print on Demand ?</div><div class="lmeta">Fondamentaux - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">C est quoi le Print on Demand ?</div><div class="lmeta">Fondamentaux - 5 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box p"><div class="bt p">Definition</div><div class="btext"><p>Le Print on Demand (POD) c est vendre des produits <strong>personnalises avec tes designs</strong> sans stock. T-shirts, mugs, posters, coques... Quand quelqu un commande, Printful ou Printify imprime et livre directement. <strong>Tu ne touches jamais le produit.</strong></p></div></div>
-<div class="box p"><div class="bt p">Le flux d une vente POD</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Tu crees un design (ou l IA le fait)</div><div class="sdesc">Canva, Midjourney, DALL-E. 1h de travail max pour un bon design.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Tu l uploades sur Printful + Etsy</div><div class="sdesc">Connecte Printful a ta boutique Etsy ou Shopify. Le produit est en ligne en 10 minutes.</div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Client achete sur Etsy</div><div class="sdesc">Il paie le prix que tu as fixe. Etsy te reverse l argent moins leur commission (6.5%).</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">Printful imprime et livre</div><div class="sdesc">Automatiquement. Tu paies leur cout de production. Tu gardes la marge.</div></div></div>
+<div class="box box-a"><div class="box-t">Definition</div><div class="txt">Le POD c est vendre des produits <strong>personnalises avec tes designs</strong> sans stock. T-shirts, mugs, posters... Quand quelqu un commande, Printful imprime et livre directement. <strong>Tu ne touches jamais le produit.</strong></div></div>
+<div class="box box-a"><div class="box-t">Flux d une vente</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Tu crees un design</div><div class="step-d">Canva ou Midjourney. 1h max pour un bon design.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Tu uploades sur Printful et Etsy</div><div class="step-d">Produit en ligne en 10 minutes.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Client achete, Printful livre</div><div class="step-d">Automatiquement. Tu gardes la marge.</div></div></div>
 </div></div>
-<div class="box g"><div class="bt g">L avantage cle</div><div class="btext">Une fois tes designs uploades, ils peuvent se vendre pendant des annees sans aucune intervention de ta part. <strong>Revenu 100% passif.</strong></div></div>
-<button class="rbtn g" onclick="md(0,0,3)">MARQUER COMME VU &#10003;</button>
-</div></div>
+<div class="box box-g"><div class="box-t">L avantage cle</div><div class="txt">Tes designs vendent pendant des <strong>annees sans intervention</strong>. Revenu 100% passif.</div></div>
+<button class="btn btn-g" onclick="markDone(0,0,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 
 <div class="lesson" id="l1">
-<div class="lhdr" onclick="tl(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Avantages, limites et positionnement</div><div class="lmeta">Analyse - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Avantages et limites du POD</div><div class="lmeta">Analyse - 6 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box p"><div class="bt p">Les vrais avantages</div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Zero stock, zero risque financier</strong> - tu paies la production uniquement apres la vente.</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Passif a 95%</strong> - une fois les designs en ligne, les ventes arrivent seules via Etsy SEO.</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Scalable infiniment</strong> - plus tu uploades de designs, plus tu vends. C est mathematique.</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>L IA change tout</strong> - ce qui prenait 1 semaine de design prend maintenant 1h avec Midjourney.</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Marche evergreen</strong> - les gens achetent des vetements et cadeaux en permanence.</span></div>
+<div class="box box-a"><div class="box-t">Avantages</div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Zero stock</strong> - tu paies la production apres la vente</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Passif a 95%</strong> - les ventes arrivent seules via le SEO Etsy</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>IA game changer</strong> - Midjourney cree des designs en 10 min</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Scalable</strong> - plus tu uploades, plus tu vends</span></div>
 </div>
-<div class="box r"><div class="bt r">Les limites a connaitre</div>
-<div class="kp"><span class="ki">&#9888;</span><span><strong>Marges plus faibles que le drop</strong> - marge typique 8-18EUR par produit selon le prix de vente.</span></div>
-<div class="kp"><span class="ki">&#9888;</span><span><strong>Concurrence sur Etsy</strong> - des millions de produits. Le SEO et la qualite des designs font la difference.</span></div>
-<div class="kp"><span class="ki">&#9888;</span><span><strong>Delais de production</strong> - 2-7 jours ouvrables chez Printful avant expedition. A communiquer.</span></div>
-<div class="kp"><span class="ki">&#9888;</span><span><strong>Qualite IA a checker</strong> - verifier toujours le rendu avant de mettre en vente.</span></div>
+<div class="box box-r"><div class="box-t">Limites</div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Marges plus faibles</strong> - 8-18EUR par produit typiquement</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Concurrence Etsy</strong> - le SEO fait la difference</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Delais production</strong> - 2-7 jours ouvrables chez Printful</span></div>
 </div>
-<div class="box g"><div class="bt g">Le modele hybride gagnant</div><div class="btext">Combine Etsy (trafic organique gratuit) + TikTok/Instagram (contenu viral pour tes produits) + Shopify (boutique de marque). Tu captes les deux types de trafic.</div></div>
-<button class="rbtn g" onclick="md(1,0,3)">MARQUER COMME VU &#10003;</button>
-</div></div>
+<button class="btn btn-g" onclick="markDone(1,0,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 
 <div class="lesson" id="l2">
-<div class="lhdr" onclick="tl(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz interactif - 3 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz - 3 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="qq"><div class="qqt">Dans le POD, qui imprime et expedie le produit ?</div>
+<div class="qq"><div class="qq-t">Qui imprime et expedie le produit dans le POD ?</div>
 <div class="qo" onclick="qa(this,false,0)">A. Toi depuis chez toi</div>
-<div class="qo" onclick="qa(this,false,0)">B. Une imprimerie locale</div>
-<div class="qo" onclick="qa(this,true,0)">C. Printful ou Printify automatiquement</div>
-<div class="qo" onclick="qa(this,false,0)">D. Le client imprime lui-meme</div>
-<div class="qex" id="qe0">Correct ! Printful/Printify recoivent la commande automatiquement, impriment le produit et le livrent directement au client. Zero intervention de ta part.</div>
+<div class="qo" onclick="qa(this,true,0)">B. Printful ou Printify automatiquement</div>
+<div class="qo" onclick="qa(this,false,0)">C. Le client imprime lui-meme</div>
+<div class="qex" id="qe0">Correct ! Printful recoivent la commande auto, impriment et livrent. Zero intervention.</div>
 </div>
-<div class="qq"><div class="qqt">Quel est le principal avantage du POD par rapport au dropshipping classique ?</div>
-<div class="qo" onclick="qa(this,false,1)">A. Des marges plus elevees</div>
-<div class="qo" onclick="qa(this,false,1)">B. Une livraison plus rapide</div>
+<div class="qq"><div class="qq-t">Quel est le principal avantage du POD ?</div>
+<div class="qo" onclick="qa(this,false,1)">A. Des marges plus elevees que le drop</div>
+<div class="qo" onclick="qa(this,false,1)">B. Livraison plus rapide</div>
 <div class="qo" onclick="qa(this,true,1)">C. Revenus passifs une fois les designs en ligne</div>
-<div class="qo" onclick="qa(this,false,1)">D. Moins de concurrence</div>
-<div class="qex" id="qe1">Oui ! Le POD est passif a 95% - tes designs peuvent se vendre pendant des annees sans aucune action de ta part. Le SEO Etsy fait le travail.</div>
+<div class="qex" id="qe1">Oui ! Le POD est passif a 95%. Tes designs vendent pendant des annees.</div>
 </div>
-<div class="qq"><div class="qqt">Comment l IA a-t-elle revolutionne le POD en 2024-2025 ?</div>
-<div class="qo" onclick="qa(this,false,2)">A. Elle gere le SAV automatiquement</div>
-<div class="qo" onclick="qa(this,true,2)">B. Elle genere des designs en quelques minutes</div>
-<div class="qo" onclick="qa(this,false,2)">C. Elle optimise automatiquement les prix</div>
-<div class="qo" onclick="qa(this,false,2)">D. Elle gere la production</div>
-<div class="qex" id="qe2">Parfait ! Midjourney, DALL-E et d autres outils IA permettent de creer des designs professionnels en quelques minutes. Ce qui prenait des heures avec un designer prend maintenant 10 minutes.</div>
+<button class="btn btn-g" onclick="markDone(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
 </div>
-<button class="rbtn g" onclick="md(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
-</div></div>
+</div>
 </div>
 
-<!-- CH2 NICHES ET DESIGNS -->
-
-<div class="panel" id="ch1">
-<div class="prog"><div class="progt">Progression Ch.2</div><div class="progt2"><div class="progf" id="pf1" style="width:0%"></div></div><div class="progi"><span id="pt1">0/3 lecons</span><span id="pp1">0%</span></div></div>
+<div class="panel" id="p1">
+<div class="prog"><div class="prog-t">Chapitre 2</div><div class="prog-bar"><div class="prog-fill" id="pf1"></div></div><div class="prog-info"><span id="pt1">0 / 3</span><span id="pp1">0%</span></div></div>
 
 <div class="lesson" id="l3">
-<div class="lhdr" onclick="tl(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Choisir sa niche POD gagnante</div><div class="lmeta">Strategie - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Choisir sa niche POD gagnante</div><div class="lmeta">Strategie - 8 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box p"><div class="bt p">Les criteres d une niche POD rentable</div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Communaute passionnee</strong> - les gens fiers de leur identite achetent des produits qui l affichent.</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Humour ou citation</strong> - le contenu qui fait rire se vend tres bien en POD.</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Cadeaux saisonniers</strong> - fetes des meres, Noel, anniversaires = pics de ventes previsibles.</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span><strong>Sous-niches specifiques</strong> - "Chat noir Halloween" vend mieux que "Chat".</span></div>
+<div class="box box-a"><div class="box-t">Niches qui marchent en 2026</div>
+<div class="kp"><span class="ki">&#128062;</span><span><strong>Animaux par race</strong> - golden retriever, husky, maine coon</span></div>
+<div class="kp"><span class="ki">&#128170;</span><span><strong>Metiers avec humour</strong> - infirmieres, profs, pompiers</span></div>
+<div class="kp"><span class="ki">&#127960;</span><span><strong>Citations motivationnelles</strong> - fitness, mindset</span></div>
+<div class="kp"><span class="ki">&#128149;</span><span><strong>Familles et relations</strong> - maman, papa, meilleur ami</span></div>
+<div class="kp"><span class="ki">&#127988;</span><span><strong>Regions et villes</strong> - fiertes locales</span></div>
 </div>
-<div class="box p"><div class="bt p">Niches qui marchent en 2025</div>
-<div class="kp"><span class="ki">&#128062;</span><span><strong>Animaux par race specifique</strong> - golden retriever, husky, maine coon... Les proprietaires adorent.</span></div>
-<div class="kp"><span class="ki">&#128170;</span><span><strong>Metiers avec humour</strong> - infirmieres, profs, pompiers qui se moquent d eux-memes.</span></div>
-<div class="kp"><span class="ki">&#127960;</span><span><strong>Citations motivationnelles</strong> - fitness, entrepreneuriat, mindset.</span></div>
-<div class="kp"><span class="ki">&#128149;</span><span><strong>Familles et relations</strong> - maman, papa, grand-parent, meilleur ami.</span></div>
-<div class="kp"><span class="ki">&#127942;</span><span><strong>Fandoms et pop culture</strong> - anime, gaming, films (attention aux droits !).</span></div>
-<div class="kp"><span class="ki">&#127988;</span><span><strong>Regions et villes</strong> - fiertes locales, expressions regionales.</span></div>
+<div class="box box-r"><div class="box-t">Niches a eviter</div><div class="txt">Marques deposees (Nike, Disney = violation copyright), politique, contenu trop generique.</div></div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERATEUR NICHE POD ET SEO ETSY</a>
+<button class="btn btn-g" onclick="markDone(3,1,3)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
 </div>
-<div class="box r"><div class="bt r">Niches a eviter</div>
-<div class="btext">Marques deposees (Nike, Disney, Marvel = violation copyright), politiques (trop polarisant), generiques sans angle specifique (ex: juste "chats" sans sous-niche).</div>
 </div>
-<div class="iat">
-<div class="iatbar"><span class="iatl">&#129302; Generateur de niche POD</span><span class="iatb">GROQ</span></div>
-<div class="iatbody">
-<span class="lbl">Tes centres d interet</span>
-<input class="inp" id="ni-i" type="text" placeholder="Ex: animaux, sport, humour, spiritualite...">
-<span class="lbl">Type de produits prefere</span>
-<select class="sel" id="ni-p">
-<option value="t-shirts et sweats">T-shirts &amp; sweats</option>
-<option value="mugs et accessoires cuisine">Mugs &amp; cuisine</option>
-<option value="posters et art mural">Posters &amp; art</option>
-<option value="coques de telephone">Coques telephone</option>
-<option value="tote bags">Tote bags</option>
-</select>
-<span class="lbl">Public cible</span>
-<select class="sel" id="ni-c">
-<option value="passionnes qui aiment afficher leur identite">Passionnes - fiertes</option>
-<option value="personnes qui cherchent des cadeaux originaux">Chercheurs de cadeaux</option>
-<option value="professionnels qui aiment l humour sur leur metier">Pros avec humour</option>
-<option value="parents et familles">Parents et familles</option>
-</select>
-<button class="rbtn" id="ni-btn" onclick="rNiche()">TROUVER MES NICHES POD</button>
-<div class="ld" id="ni-ld"><div class="ldf"></div></div>
-<div class="out" id="ni-out"></div>
-<button class="cpbtn" id="ni-cp" onclick="doCopy('ni-out')">COPIER</button>
-</div></div>
-<button class="rbtn g" onclick="md(3,1,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
 
 <div class="lesson" id="l4">
-<div class="lhdr" onclick="tl(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Creer des designs avec l IA - guide complet</div><div class="lmeta">Creation - 12 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Creer des designs avec l IA</div><div class="lmeta">Creation - 12 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box p"><div class="bt p">3 methodes de creation design</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Canva (Gratuit - Debutant)</div><div class="sdesc">Modeles pre-faits + personnalisation. Ideal pour les designs de typographie et les citations. Resultat pro en 15 minutes sans experience.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Midjourney (Payant - Intermediate)</div><div class="sdesc">Genere des illustrations IA de qualite professionnelle. Tu decris en anglais, il cree. <strong>Le game-changer du POD en 2025.</strong></div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Adobe Express / Illustrator</div><div class="sdesc">Pour les designs vectoriels propres. Necessite un peu d apprentissage mais resultats parfaits pour l impression.</div></div></div>
+<div class="box box-a"><div class="box-t">3 methodes</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Canva (Gratuit)</div><div class="step-d">Modeles pre-faits, ideal pour la typographie et les citations. 15 minutes, resultat pro.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Midjourney (IA)</div><div class="step-d">Tu decris en anglais, il cree. <strong>Le game-changer du POD 2026.</strong></div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Regles d or</div><div class="step-d">PNG fond transparent, 300 DPI minimum, design simple mais percutant.</div></div></div>
 </div></div>
-<div class="box go"><div class="bt go">Regles d or pour un bon design POD</div>
-<div class="kp"><span class="ki">&#127775;</span><span><strong>Fond transparent</strong> - toujours exporter en PNG avec fond transparent pour que l impression soit nette sur n importe quelle couleur de vetement.</span></div>
-<div class="kp"><span class="ki">&#127775;</span><span><strong>Resolution 300 DPI minimum</strong> - sinon impression floue. Printful indique la resolution requise pour chaque produit.</span></div>
-<div class="kp"><span class="ki">&#127775;</span><span><strong>Simple mais percutant</strong> - les designs qui se vendent le mieux sont souvent les plus simples. Un bon texte ou une belle illustration, pas les deux en meme temps.</span></div>
-<div class="kp"><span class="ki">&#127775;</span><span><strong>Checker le mockup</strong> - toujours verifier le rendu sur le produit reel avant de publier.</span></div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERER MES PROMPTS MIDJOURNEY</a>
+<button class="btn btn-g" onclick="markDone(4,1,3)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
 </div>
-<div class="iat">
-<div class="iatbar"><span class="iatl">&#129302; Generateur de prompts Midjourney</span><span class="iatb">GROQ</span></div>
-<div class="iatbody">
-<span class="lbl">Decris ton design en francais</span>
-<textarea class="inp" id="mj-d" rows="3" placeholder="Ex: illustration minimaliste d un golden retriever qui boit du cafe, style vintage, pour t-shirt..."></textarea>
-<span class="lbl">Style visuel</span>
-<select class="sel" id="mj-s">
-<option value="minimaliste et moderne">Minimaliste moderne</option>
-<option value="vintage retro annees 70">Vintage retro</option>
-<option value="illustration vectorielle coloree">Illustration coloree</option>
-<option value="noir et blanc haute contrate">Noir et blanc</option>
-<option value="kawaii mignon">Kawaii / Mignon</option>
-<option value="typographie artistique">Typographie artistique</option>
-</select>
-<span class="lbl">Produit cible</span>
-<select class="sel" id="mj-p">
-<option value="t-shirt">T-shirt</option>
-<option value="mug">Mug</option>
-<option value="poster">Poster</option>
-<option value="coque telephone">Coque</option>
-</select>
-<button class="rbtn" id="mj-btn" onclick="rMidj()">GENERER MES PROMPTS MIDJOURNEY</button>
-<div class="ld" id="mj-ld"><div class="ldf"></div></div>
-<div class="out" id="mj-out"></div>
-<button class="cpbtn" id="mj-cp" onclick="doCopy('mj-out')">COPIER</button>
-</div></div>
-<button class="rbtn g" onclick="md(4,1,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
+</div>
 
 <div class="lesson" id="l5">
-<div class="lhdr" onclick="tl(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Etude de cas - 0 a 3200EUR/mois</div><div class="lmeta">Cas reel - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Etude de cas - 0 a 3200EUR/mois</div><div class="lmeta">Cas reel - 5 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="cs"><div class="cshdr">Boutique Etsy - Humour Metiers - 6 mois</div>
-<div class="csbody">
-<div class="csrow"><span class="csl">Niche</span><span class="csv">Citations humoristiques metiers</span></div>
-<div class="csrow"><span class="csl">Produits vedettes</span><span class="csv">T-shirts infirmiere, prof, cuisinier</span></div>
-<div class="csrow"><span class="csl">Outil design</span><span class="csv">Canva Pro uniquement</span></div>
-<div class="csrow"><span class="csl">Nb de listings</span><span class="csv go">347 designs en ligne</span></div>
-<div class="csrow"><span class="csl">Revenu mois 3</span><span class="csv">680EUR</span></div>
-<div class="csrow"><span class="csl">Revenu mois 6</span><span class="csv g">3 200EUR</span></div>
-<div class="csrow"><span class="csl">Temps/semaine</span><span class="csv">4-5h (creation nouveaux designs)</span></div>
-<div class="csq">"La cle c est le volume. J ai uploade 3-5 nouveaux designs par jour pendant 3 mois. C est du travail mais apres, les ventes arrivent toutes seules. Mes meilleurs designs vendent encore 2 ans apres leur publication. Chaque design est un actif permanent."</div>
+<div class="cs"><div class="cs-hdr">Boutique Etsy - Humour Metiers - 6 mois</div>
+<div class="cs-body">
+<div class="cs-row"><span class="cs-l">Niche</span><span class="cs-v">Citations humoristiques metiers</span></div>
+<div class="cs-row"><span class="cs-l">Designs en ligne</span><span class="cs-v gold">347 designs</span></div>
+<div class="cs-row"><span class="cs-l">Revenu mois 3</span><span class="cs-v">680EUR</span></div>
+<div class="cs-row"><span class="cs-l">Revenu mois 6</span><span class="cs-v g">3 200EUR</span></div>
+<div class="cs-row"><span class="cs-l">Temps par semaine</span><span class="cs-v">4-5h creation</span></div>
+<div class="cs-q">"La cle c est le volume. 3-5 designs par jour pendant 3 mois. Apres, les ventes arrivent seules."</div>
 </div></div>
-<div class="box g"><div class="bt g">La lecon du volume</div><div class="btext">En POD, le nombre de listings est directement correle aux revenus. Chaque design = une chance supplementaire d etre trouve sur Etsy. <strong>L objectif annee 1 = 200 designs en ligne minimum.</strong></div></div>
-<button class="rbtn g" onclick="md(5,1,3)">MARQUER COMME VU &#10003;</button>
-</div></div>
+<button class="btn btn-g" onclick="markDone(5,1,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 </div>
 
-<!-- CH3 OUTILS ET PLATEFORMES -->
-
-<div class="panel" id="ch2">
-<div class="prog"><div class="progt">Progression Ch.3</div><div class="progt2"><div class="progf" id="pf2" style="width:0%"></div></div><div class="progi"><span id="pt2">0/2 lecons</span><span id="pp2">0%</span></div></div>
+<div class="panel" id="p2">
+<div class="prog"><div class="prog-t">Chapitre 3</div><div class="prog-bar"><div class="prog-fill" id="pf2"></div></div><div class="prog-info"><span id="pt2">0 / 2</span><span id="pp2">0%</span></div></div>
 
 <div class="lesson" id="l6">
-<div class="lhdr" onclick="tl(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Printful vs Printify - lequel choisir ?</div><div class="lmeta">Outils - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Printful vs Printify</div><div class="lmeta">Outils - 8 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="tcard"><div class="tico">&#127912;</div><div><div class="tname">PRINTFUL</div><div class="trole">Qualite premium - Notre recommandation</div><div class="tdesc">Qualite d impression superieure, delais fiables (2-5 jours), integration Etsy et Shopify parfaite. Prix un peu plus eleves mais qualite justifiee pour fidéliser les clients. Plan gratuit disponible.</div></div></div>
-<div class="tcard"><div class="tico">&#128450;</div><div><div class="tname">PRINTIFY</div><div class="trole">Catalogue plus large, prix plus bas</div><div class="tdesc">Reseau de fournisseurs mondial. Catalogue enorme (600+ produits). Prix de production plus bas = marges meilleures. Qualite plus variable selon le fournisseur choisi.</div></div></div>
-<div class="tcard"><div class="tico">&#128722;</div><div><div class="tname">ETSY</div><div class="trole">Plateforme de vente principale</div><div class="tdesc">45M d acheteurs actifs. Trafic organique gratuit via SEO. Commission 6.5% + frais de mise en ligne 0.20USD par produit. Le meilleur canal pour demarrer.</div></div></div>
-<div class="box go" style="margin-top:12px"><div class="bt go">Recommandation pour debuter</div><div class="btext"><strong>Printful + Etsy</strong> = le combo gagnant pour le lancement. Qualite fiable, integration simple, trafic organique gratuit sur Etsy. Ajoute Shopify une fois 1000EUR/mois atteint pour reduire les commissions.</div></div>
-<button class="rbtn g" onclick="md(6,2,2)">MARQUER COMME VU &#10003;</button>
-</div></div>
+<div class="box box-a"><div class="box-t">Comparatif</div>
+<div class="kp"><span class="ki">&#127912;</span><span><strong>Printful</strong> - qualite superieure, delais fiables 2-5 jours. Notre recommandation.</span></div>
+<div class="kp"><span class="ki">&#128450;</span><span><strong>Printify</strong> - catalogue plus large, prix plus bas, qualite variable.</span></div>
+<div class="kp"><span class="ki">&#128722;</span><span><strong>Etsy</strong> - 45M acheteurs, trafic gratuit, commission 6.5%.</span></div>
+</div>
+<div class="box box-gold"><div class="box-t">Recommandation</div><div class="txt"><strong>Printful + Etsy</strong> = combo gagnant. Ajoute Shopify apres 1000EUR/mois.</div></div>
+<button class="btn btn-g" onclick="markDone(6,2,2)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 
 <div class="lesson" id="l7">
-<div class="lhdr" onclick="tl(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Simulateur de marge POD</div><div class="lmeta">Calculateur interactif - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Simulateur de marge POD</div><div class="lmeta">Calculateur - 5 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box p"><div class="bt p">Comprendre les couts</div>
-<div class="kp"><span class="ki">&#128178;</span><span><strong>Cout production</strong> - ce que tu paies a Printful par produit vendu</span></div>
-<div class="kp"><span class="ki">&#128178;</span><span><strong>Frais Etsy</strong> - 6.5% du prix de vente + 0.20USD par listing</span></div>
-<div class="kp"><span class="ki">&#128178;</span><span><strong>Ta marge</strong> - ce qu il te reste apres ces deux couts</span></div>
-</div>
-<div class="iatbody" style="background:var(--s2);border:1px solid var(--border);border-radius:5px;padding:12px;margin-top:6px">
+<div style="background:#0a0a10;border:1px solid rgba(155,89,255,.12);border-radius:5px;padding:12px">
 <div class="r2">
 <div class="c"><span class="lbl">Cout Printful (EUR)</span><input class="inp" id="sm-c" type="number" value="14" oninput="calcPOD()"></div>
-<div class="c"><span class="lbl">Prix de vente (EUR)</span><input class="inp" id="sm-v" type="number" value="35" oninput="calcPOD()"></div>
+<div class="c"><span class="lbl">Prix vente (EUR)</span><input class="inp" id="sm-v" type="number" value="35" oninput="calcPOD()"></div>
 </div>
-<div class="r2" style="margin-top:8px">
-<div class="c"><span class="lbl">Ventes par mois</span><input class="inp" id="sm-n" type="number" value="30" oninput="calcPOD()"></div>
-<div class="c"><span class="lbl">Nb de designs</span><input class="inp" id="sm-d" type="number" value="50" oninput="calcPOD()"></div>
-</div>
-<div class="sim" id="sim-pod">
-<div class="simrow"><span class="siml">Frais Etsy par vente</span><span class="simv go" id="sm-etsy">2.3EUR</span></div>
-<div class="simrow"><span class="siml">Marge par vente</span><span class="simv go" id="sm-marge">18.7EUR</span></div>
-<div class="simrow"><span class="siml">Revenu mensuel</span><span class="simv g" id="sm-month">561EUR</span></div>
-<div class="simrow"><span class="siml">Revenu si x2 designs</span><span class="simv g" id="sm-2x">1122EUR</span></div>
-<div class="simrow"><span class="siml">Revenu annuel</span><span class="simv b" id="sm-year">6732EUR</span></div>
+<span class="lbl">Ventes par mois</span>
+<input class="inp" id="sm-n" type="number" value="30" oninput="calcPOD()">
+<div class="sim">
+<div class="sim-row"><span class="sim-l">Marge par vente</span><span class="sim-v gold" id="sm-marge">18.7EUR</span></div>
+<div class="sim-row"><span class="sim-l">Revenu mensuel</span><span class="sim-v g" id="sm-month">561EUR</span></div>
+<div class="sim-row"><span class="sim-l">Revenu annuel</span><span class="sim-v" id="sm-year">6732EUR</span></div>
 </div>
 </div>
-<button class="rbtn g" onclick="md(7,2,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
+<button class="btn btn-g" onclick="markDone(7,2,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 </div>
 
-<!-- CH4 VENTE ET SEO -->
-
-<div class="panel" id="ch3">
-<div class="prog"><div class="progt">Progression Ch.4</div><div class="progt2"><div class="progf" id="pf3" style="width:0%"></div></div><div class="progi"><span id="pt3">0/2 lecons</span><span id="pp3">0%</span></div></div>
+<div class="panel" id="p3">
+<div class="prog"><div class="prog-t">Chapitre 4</div><div class="prog-bar"><div class="prog-fill" id="pf3"></div></div><div class="prog-info"><span id="pt3">0 / 2</span><span id="pp3">0%</span></div></div>
 
 <div class="lesson" id="l8">
-<div class="lhdr" onclick="tl(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">SEO Etsy - Etre trouve par les acheteurs</div><div class="lmeta">Marketing - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">SEO Etsy - Etre trouve</div><div class="lmeta">Marketing - 10 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box p"><div class="bt p">Les 4 elements du SEO Etsy</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Le titre du listing</div><div class="sdesc">Mets les mots-cles les plus importants en premier. Ex: <strong>"Funny Nurse Shirt Gift - Nurse Life TShirt - Nursing Student Gift"</strong>. Maximum 140 caracteres.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Les 13 tags</div><div class="sdesc">Utilise TOUS tes 13 tags. Varie entre mots-cles larges et specifiques. Cherche les auto-completions Etsy pour trouver les termes recherches.</div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Les photos produit</div><div class="sdesc">7 photos = maximum. Photo lifestyle + zoom design + plusieurs couleurs disponibles. Les photos de qualite = meilleur classement ET meilleur taux de clic.</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">La description optimisee</div><div class="sdesc">Repete les mots-cles naturellement dans les 2 premieres lignes. Detaille les options (tailles, couleurs). Inclus les informations de livraison.</div></div></div>
+<div class="box box-a"><div class="box-t">Les 4 elements du SEO Etsy</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Titre (140 chars)</div><div class="step-d">Mots-cles importants en premier.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">13 tags</div><div class="step-d">Utilise TOUS tes 13 tags. Mix large et specifique.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">7 photos</div><div class="step-d">Lifestyle + zoom design + plusieurs couleurs.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">Description optimisee</div><div class="step-d">Mots-cles dans les 2 premieres lignes.</div></div></div>
 </div></div>
-<div class="iat">
-<div class="iatbar"><span class="iatl">&#129302; Generateur SEO Etsy IA</span><span class="iatb">GROQ</span></div>
-<div class="iatbody">
-<span class="lbl">Ton produit</span>
-<input class="inp" id="seo-p" type="text" placeholder="Ex: t-shirt infirmiere humour francais...">
-<span class="lbl">Niche et cible</span>
-<input class="inp" id="seo-n" type="text" placeholder="Ex: infirmieres et etudiantes en soins, cadeau anniversaire...">
-<span class="lbl">Langue boutique</span>
-<select class="sel" id="seo-l">
-<option value="anglais (audience internationale)">Anglais - Audience internationale</option>
-<option value="francais (audience francophone)">Francais - Audience FR/BE/CH</option>
-<option value="anglais ET francais">Les deux langues</option>
-</select>
-<button class="rbtn" id="seo-btn" onclick="rSEO()">GENERER MON SEO ETSY COMPLET</button>
-<div class="ld" id="seo-ld"><div class="ldf"></div></div>
-<div class="out" id="seo-out"></div>
-<button class="cpbtn" id="seo-cp" onclick="doCopy('seo-out')">COPIER</button>
-</div></div>
-<button class="rbtn g" onclick="md(8,3,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERER MON SEO ETSY COMPLET</a>
+<button class="btn btn-g" onclick="markDone(8,3,2)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 
 <div class="lesson" id="l9">
-<div class="lhdr" onclick="tl(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Checklist lancement boutique POD</div><div class="lmeta">Checklist interactive - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Checklist lancement boutique POD</div><div class="lmeta">Checklist - 5 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Compte Etsy cree avec un nom de boutique professionnel</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Compte Printful cree et connecte a Etsy</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Premier design cree (Canva ou Midjourney)</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Design exporte en PNG fond transparent 300 DPI</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Produit cree sur Printful et mockup genere</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Listing Etsy avec titre optimise SEO (mots-cles en premier)</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">13 tags Etsy remplis avec les bons mots-cles</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Au moins 5 photos produit (mockup + lifestyle + detail)</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Prix et options de personnalisation configures</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Politique de remboursement et informations boutique completees</span></div>
-<button class="rbtn g" onclick="md(9,3,2)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
-</div></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Compte Etsy cree avec un nom professionnel</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Compte Printful connecte a Etsy</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Premier design en PNG fond transparent 300 DPI</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Listing Etsy avec titre optimise SEO</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">13 tags Etsy remplis</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Au moins 5 photos produit</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Politique de remboursement completee</span></div>
+<button class="btn btn-g" onclick="markDone(9,3,2)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div>
+</div>
 </div>
 
-<!-- CH5 SCALE -->
-
-<div class="panel" id="ch4">
+<div class="panel" id="p4">
 <div class="lesson" id="l10">
-<div class="lhdr" onclick="tl(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">Scaler avec le volume et l automatisation</div><div class="lmeta">Growth - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">Scale - La strategie des 1000 designs</div><div class="lmeta">Growth - 10 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box p"><div class="bt p">La strategie des 1000 designs</div>
-<div class="btext"><p>En POD, <strong>le volume est la strategie numero 1</strong>. Chaque design est un actif permanent sur Etsy. 1000 designs = 1000 chances d etre trouve par des acheteurs chaque jour.</p><p>Avec l IA, creer 5-10 designs par jour est desormais faisable en 1-2 heures de travail.</p></div>
+<div class="box box-a"><div class="box-t">Objectif 12 mois</div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Mois 1-3 :</strong> 100 designs, apprendre le SEO</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Mois 4-6 :</strong> 300 designs, identifier les niches gagnantes</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Mois 7-9 :</strong> 600 designs, doubler les gagnants</span></div>
+<div class="kp"><span class="ki">&#128176;</span><span><strong>Mois 10-12 :</strong> 1000+ designs, <strong style="color:#3ecf8e">1500-3500EUR/mois passif</strong></span></div>
 </div>
-<div class="box p"><div class="bt p">Comment automatiser la creation</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Batch creation IA</div><div class="sdesc">Genere 20 prompts Midjourney d un coup sur le meme theme. Tu traites tout en une session au lieu de revenir chaque jour.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Templates Canva reutilisables</div><div class="sdesc">Cree un template avec ta police, ta palette de couleurs. Tu changes juste le texte pour chaque nouveau design. <strong>2 minutes par variation.</strong></div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Deleger la creation</div><div class="sdesc">Une fois ton systeme cree, tu peux embaucher un freelance sur Fiverr (5-15EUR par design) pour multiplier le volume par 5.</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">Analyser et doubler les gagnants</div><div class="sdesc">Identifie tes 20% de designs qui font 80% des ventes. Cree 10 variations de ces designs gagnants.</div></div></div>
-</div></div>
-<div class="box g"><div class="bt g">L objectif sur 12 mois</div>
-<div class="btext">
-<strong>Mois 1-3 :</strong> 100 designs en ligne, apprendre les bases SEO<br>
-<strong>Mois 4-6 :</strong> 300 designs, identifier les niches qui marchent<br>
-<strong>Mois 7-9 :</strong> 600 designs, doubler les gagnants<br>
-<strong>Mois 10-12 :</strong> 1000+ designs, revenu passif consolide<br>
-<strong style="color:var(--green)">Projection realiste mois 12 : 1 500 - 3 500EUR/mois</strong>
+<a href="dashboard.html" style="display:block;margin-top:14px;background:linear-gradient(135deg,#9b59ff,#6a3abf);border-radius:3px;padding:13px;text-align:center;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff">RETOUR AU DASHBOARD</a>
 </div>
-</div>
-<button class="rbtn g" onclick="toast('Module POD complete ! &#128293;')">MODULE COMPLETE &#10003;</button>
-</div></div>
-
-<div style="background:linear-gradient(135deg,rgba(155,89,255,.08),rgba(201,168,76,.06));border:1px solid rgba(155,89,255,.2);border-radius:8px;padding:18px;margin-top:6px">
-<div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:3px;color:var(--purple);margin-bottom:12px">PLAN DE LANCEMENT POD</div>
-<div style="font-size:12px;color:rgba(240,238,255,.7);line-height:1.9">
-<strong style="color:var(--text)">Semaine 1 :</strong> Creer compte Etsy + Printful + apprendre Canva<br>
-<strong style="color:var(--text)">Semaine 2 :</strong> Choisir niche + creer 20 premiers designs<br>
-<strong style="color:var(--text)">Semaine 3 :</strong> Uploader avec SEO optimise, tester plusieurs niches<br>
-<strong style="color:var(--text)">Semaine 4 :</strong> Analyser premieres vues, doubler ce qui marche<br>
-<strong style="color:var(--green)">Objectif mois 3 : 200 designs + premieres ventes regulieres</strong>
-</div>
-<a href="module-business-models.html" style="display:block;margin-top:14px;background:linear-gradient(135deg,var(--purple),#6a3abf);border-radius:3px;padding:12px;text-align:center;text-decoration:none"><span style="font-family:Bebas Neue,sans-serif;font-size:13px;letter-spacing:3px;color:#fff">MODULE SUIVANT : UGC &#8594;</span></a>
 </div>
 </div>
 
 <div class="toast" id="tk"></div>
 <script>
-var u=JSON.parse(sessionStorage.getItem("dma_user")||"null");
-if(!u)window.location.href="index.html";
-function ch(i,el){document.querySelectorAll(".chbtn").forEach(function(b){b.classList.remove("active")});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});el.classList.add("active");document.getElementById("ch"+i).classList.add("active");window.scrollTo(0,0);}
-function tl(i){document.getElementById("l"+i).classList.toggle("open")}
-var lch=[[0,1,2],[3,4,5],[6,7],[8,9]];var dL={};
-function md(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById("pf"+ch);if(f)f.style.width=pct+"%";var t=document.getElementById("pt"+ch);if(t)t.textContent=cnt+"/"+tot+" lecons";var p=document.getElementById("pp"+ch);if(p)p.textContent=pct+"%";toast("Lecon validee ! &#128293;");}
-function qa(el,ok,qIdx){el.classList.add(ok?"ok":"ko");if(!ok){setTimeout(function(){el.parentElement.querySelectorAll(".qo").forEach(function(o){if(!o.classList.contains("ko"))o.classList.add("ok")})},700)}var e=document.getElementById("qe"+qIdx);if(e)e.style.display="block";}
-function calcPOD(){var c=parseFloat(document.getElementById("sm-c").value)||0,v=parseFloat(document.getElementById("sm-v").value)||0,n=parseFloat(document.getElementById("sm-n").value)||0,d=parseFloat(document.getElementById("sm-d").value)||0;var etsy=v*0.065,marge=v-c-etsy,month=marge*n;document.getElementById("sm-etsy").textContent=etsy.toFixed(1)+"EUR";document.getElementById("sm-marge").textContent=marge.toFixed(1)+"EUR";document.getElementById("sm-month").textContent=month.toFixed(0)+"EUR";document.getElementById("sm-2x").textContent=(month*2).toFixed(0)+"EUR";document.getElementById("sm-year").textContent=(month*12).toFixed(0)+"EUR";}
-function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
-function sl(id,on){var e=document.getElementById(id);if(e)e.style.display=on?"block":"none"}
-function showO(oid,cpid,txt){var o=document.getElementById(oid);if(o){o.textContent=txt;o.style.display="block"}var c=document.getElementById(cpid);if(c)c.style.display="block"}
-async function groq(p){var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer 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"},body:JSON.stringify({model:"llama-3.3-70b-versatile",max_tokens:1200,messages:[{role:"system",content:"Tu es expert Print on Demand et Etsy francophone avec 4 ans d experience. Conseils ultra concrets, tutoiement."},{role:"user",content:p}]})});var d=await r.json();return d.choices&&d.choices[0]?d.choices[0].message.content:"Erreur - reessaie.";}
-async function rNiche(){var i=gv("ni-i"),p=gv("ni-p"),c=gv("ni-c");if(!i){toast("Entre tes interets");return}sl("ni-ld",true);document.getElementById("ni-btn").disabled=true;try{var r=await groq("Print on Demand sur Etsy. Interets: "+i+". Produits: "+p+". Public: "+c+".
-Donne: TOP 5 sous-niches specifiques et rentables avec justification, 3 idees de designs concrets par niche, potentiel de vente, strategie SEO Etsy pour chaque. Tres specifique et actionnable.");showO("ni-out","ni-cp",r)}catch(e){toast("Erreur")}sl("ni-ld",false);document.getElementById("ni-btn").disabled=false;}
-async function rMidj(){var d=gv("mj-d"),s=gv("mj-s"),p=gv("mj-p");if(!d){toast("Decris ton design");return}sl("mj-ld",true);document.getElementById("mj-btn").disabled=true;try{var r=await groq("Je veux creer un design POD pour "+p+". Description: "+d+". Style: "+s+".
-Genere 3 prompts Midjourney/DALL-E complets en anglais pour ce design. Pour chaque prompt: le prompt complet, les parametres recommandes (--ar, --style etc), la variation (meme concept different angle). Les prompts doivent etre optimises pour du POD avec fond transparent.");showO("mj-out","mj-cp",r)}catch(e){toast("Erreur")}sl("mj-ld",false);document.getElementById("mj-btn").disabled=false;}
-async function rSEO(){var p=gv("seo-p"),n=gv("seo-n"),l=gv("seo-l");if(!p){toast("Entre ton produit");return}sl("seo-ld",true);document.getElementById("seo-btn").disabled=true;try{var r=await groq("SEO Etsy pour: "+p+". Niche: "+n+". Langue: "+l+".
-Genere EXACTEMENT:
-1. TITRE (140 chars max, mots-cles en premier)
-2. 13 TAGS (separes par virgules)
-3. DESCRIPTION (300 mots avec mots-cles naturels, bullet points avantages, info livraison)
-4. 5 MOTS-CLES LONGUE TRAINE supplementaires a utiliser dans les photos
-Optimise pour etre trouve sur Etsy.");showO("seo-out","seo-cp",r)}catch(e){toast("Erreur")}sl("seo-ld",false);document.getElementById("seo-btn").disabled=false;}
-function doCopy(id){var txt=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast("Copie!")});else{var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);toast("Copie!");}}
-function toast(m){var t=document.getElementById("tk");t.textContent=m;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
+function switchTab(i,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  el.classList.add('on');
+  document.getElementById('p'+i).classList.add('on');
+  window.scrollTo(0,0);
+}
+function toggleLesson(i){
+  document.getElementById('l'+i).classList.toggle('open');
+}
+var dL={};
+var lch=[[0,1,2],[3,4,5],[6,7],[8,9]];
+function markDone(li,ch,tot){
+  dL[li]=true;
+  var cnt=0;
+  (lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});
+  var pct=Math.round(cnt/tot*100);
+  var f=document.getElementById('pf'+ch);if(f)f.style.width=pct+'%';
+  var t=document.getElementById('pt'+ch);if(t)t.textContent=cnt+' / '+tot;
+  var p=document.getElementById('pp'+ch);if(p)p.textContent=pct+'%';
+  toast('Lecon validee !');
+}
+function qa(el,ok,idx){
+  el.classList.add(ok?'ok':'ko');
+  if(!ok){setTimeout(function(){el.parentElement.querySelectorAll('.qo').forEach(function(o){if(!o.classList.contains('ko'))o.classList.add('ok')});},700);}
+  var e=document.getElementById('qe'+idx);if(e)e.style.display='block';
+}
+function calcPOD(){
+  var c=parseFloat(document.getElementById('sm-c').value)||0;
+  var v=parseFloat(document.getElementById('sm-v').value)||0;
+  var n=parseFloat(document.getElementById('sm-n').value)||0;
+  var etsy=v*0.065,marge=v-c-etsy,month=marge*n;
+  var sm=document.getElementById('sm-marge');if(sm)sm.textContent=marge.toFixed(1)+'EUR';
+  var smo=document.getElementById('sm-month');if(smo)smo.textContent=month.toFixed(0)+'EUR';
+  var sy=document.getElementById('sm-year');if(sy)sy.textContent=(month*12).toFixed(0)+'EUR';
+}
+function toast(m){
+  var t=document.getElementById('tk');
+  if(t){t.textContent=m;t.style.display='block';setTimeout(function(){t.style.display='none'},2500);}
+}
 calcPOD();
 </script>
 </body>
