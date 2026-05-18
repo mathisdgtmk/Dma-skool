@@ -1,1 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA - Website Flipping</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#0d0d0f;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:40px}
+.hdr{position:sticky;top:0;z-index:99;background:#0d0d0f;border-bottom:1px solid rgba(200,200,200,.15);height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.hdr a{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hdr-t{font-size:12px;font-weight:800;letter-spacing:3px;color:#e0e0e0}
+.hero{padding:20px 16px 16px;border-bottom:1px solid rgba(200,200,200,.08)}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(200,200,200,.4);margin-bottom:6px}
+.hero-title{font-size:28px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#fff;margin-bottom:12px;line-height:1}
+.hero-title span{color:#e0e0e0;display:block}
+.stats{display:flex;border:1px solid rgba(200,200,200,.12);border-radius:4px;overflow:hidden}
+.stat{flex:1;padding:10px 6px;text-align:center;border-right:1px solid rgba(200,200,200,.08)}
+.stat:last-child{border-right:none}
+.stat-n{font-size:18px;font-weight:900;display:block;color:#e0e0e0}
+.stat-l{font-size:7px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-top:2px}
+.tabs{display:flex;overflow-x:auto;background:#080810;border-bottom:1px solid rgba(200,200,200,.1);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;white-space:nowrap}
+.tab.on{color:#e0e0e0;border-bottom-color:#e0e0e0}
+.panel{display:none;padding:14px 14px 40px}
+.panel.on{display:block}
+.lesson{background:#080810;border:1px solid rgba(200,200,200,.1);border-radius:6px;margin-bottom:10px;overflow:hidden}
+.lhdr{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.lnum{font-size:16px;font-weight:900;color:rgba(200,200,200,.2);min-width:24px}
+.linfo{flex:1}
+.ltitle{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.lmeta{font-size:10px;color:rgba(255,255,255,.3)}
+.larr{font-size:10px;color:rgba(255,255,255,.2);transition:transform .2s;flex-shrink:0}
+.lesson.open .larr{transform:rotate(90deg)}
+.lbody{display:none;padding:4px 16px 16px}
+.lesson.open .lbody{display:block}
+.box{border-radius:5px;padding:12px 14px;margin-bottom:10px}
+.box-a{background:rgba(200,200,200,.04);border:1px solid rgba(200,200,200,.1)}
+.box-g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.12)}
+.box-r{background:rgba(192,0,26,.05);border:1px solid rgba(192,0,26,.15)}
+.box-gold{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12)}
+.box-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.box-a .box-t{color:#e0e0e0}.box-g .box-t{color:#3ecf8e}.box-r .box-t{color:#ff4444}.box-gold .box-t{color:#C9A84C}
+.txt{font-size:12px;color:rgba(255,255,255,.55);line-height:1.8}
+.txt strong{color:#fff}
+.kp{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:6px;line-height:1.5}
+.ki{flex-shrink:0}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.step{display:flex;gap:10px;align-items:flex-start}
+.step-n{width:24px;height:24px;border-radius:50%;background:rgba(200,200,200,.1);border:1px solid rgba(200,200,200,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#e0e0e0;flex-shrink:0}
+.step-t{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.step-d{font-size:11px;color:rgba(255,255,255,.4);line-height:1.6}
+.qq{background:#080810;border:1px solid rgba(200,200,200,.1);border-radius:6px;padding:14px;margin-bottom:10px}
+.qq-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:12px;line-height:1.5}
+.qo{padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;user-select:none}
+.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:#3ecf8e}
+.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff4444}
+.qex{margin-top:10px;padding:10px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;display:none}
+.cl-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;user-select:none}
+.cl-item:last-child{border-bottom:none}
+.cl-box{width:20px;height:20px;border-radius:3px;border:2px solid rgba(200,200,200,.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:#000}
+.cl-item.done .cl-box{background:#e0e0e0;border-color:#e0e0e0}
+.cl-txt{font-size:12px;color:rgba(255,255,255,.6)}
+.cl-item.done .cl-txt{color:rgba(255,255,255,.25);text-decoration:line-through}
+.cs{background:#0a0a10;border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:10px}
+.cs-hdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.08);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C}
+.cs-body{padding:14px}
+.cs-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.cs-row:last-child{border-bottom:none}
+.cs-l{color:rgba(255,255,255,.35)}.cs-v{font-weight:700;color:#fff}.cs-v.g{color:#3ecf8e}.cs-v.gold{color:#C9A84C}
+.cs-q{font-size:11px;color:rgba(255,255,255,.4);line-height:1.7;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
+.prog{background:rgba(200,200,200,.04);border:1px solid rgba(200,200,200,.1);border-radius:5px;padding:12px 14px;margin-bottom:12px}
+.prog-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e0e0e0;margin-bottom:8px}
+.prog-bar{background:rgba(255,255,255,.05);border-radius:2px;height:4px;overflow:hidden;margin-bottom:5px}
+.prog-fill{height:100%;background:#e0e0e0;border-radius:2px;width:0;transition:width .4s}
+.prog-info{font-size:11px;color:rgba(255,255,255,.3);display:flex;justify-content:space-between}
+.sim{background:#0a0a10;border:1px solid rgba(200,200,200,.12);border-radius:4px;margin-top:10px}
+.sim-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.sim-row:last-child{border-bottom:none}
+.sim-l{color:rgba(255,255,255,.35)}.sim-v{font-size:16px;font-weight:900}
+.sim-v.g{color:#3ecf8e}.sim-v.gold{color:#C9A84C}.sim-v.r{color:#ff4444}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:#f0f0ff;font-family:inherit;outline:none;margin-top:6px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-top:10px;display:block}
+.r2{display:flex;gap:8px}.r2 .c{flex:1}
+.btn{width:100%;padding:13px;border:none;border-radius:3px;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:10px;font-family:inherit}
+.btn-g{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.25);color:#3ecf8e}
+.ia-btn{display:block;margin-top:10px;padding:13px;background:linear-gradient(135deg,#C0001A,#8b0012);border-radius:3px;text-align:center;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#e0e0e0;color:#000;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="hdr"><a href="dashboard.html">&#8592; Retour</a><div class="hdr-t">WEBSITE FLIPPING</div><div style="width:50px"></div></div>
+<div class="hero">
+  <div class="hero-tag">Business Model 06 / 07</div>
+  <div class="hero-title">WEBSITE<span>FLIPPING</span></div>
+  <div class="stats">
+    <div class="stat"><span class="stat-n">5</span><span class="stat-l">Chapitres</span></div>
+    <div class="stat"><span class="stat-n">11</span><span class="stat-l">Lecons</span></div>
+    <div class="stat"><span class="stat-n">ROI</span><span class="stat-l">Eleve</span></div>
+    <div class="stat"><span class="stat-n">Achat</span><span class="stat-l">Revente</span></div>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab on" onclick="switchTab(0,this)">Fondations</button>
+  <button class="tab" onclick="switchTab(1,this)">Trouver un actif</button>
+  <button class="tab" onclick="switchTab(2,this)">Analyser</button>
+  <button class="tab" onclick="switchTab(3,this)">Optimiser</button>
+  <button class="tab" onclick="switchTab(4,this)">Revendre</button>
+</div>
+
+<div class="panel on" id="p0">
+<div class="prog"><div class="prog-t">Chapitre 1</div><div class="prog-bar"><div class="prog-fill" id="pf0"></div></div><div class="prog-info"><span id="pt0">0 / 3</span><span id="pp0">0%</span></div></div>
+<div class="lesson" id="l0">
+<div class="lhdr" onclick="toggleLesson(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">C est quoi le website flipping ?</div><div class="lmeta">Fondamentaux - 6 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Definition</div><div class="txt">Le flipping c est <strong>acheter des actifs digitaux monetises, les ameliorer, puis les revendre avec une forte plus-value.</strong> Comme l immobilier, mais avec des sites web, des blogs, des comptes Etsy ou des applications.</div></div>
+<div class="box box-a"><div class="box-t">Les types d actifs</div>
+<div class="kp"><span class="ki">&#127760;</span><span><strong>Sites web et blogs</strong> - SEO, affiliation, display ads</span></div>
+<div class="kp"><span class="ki">&#128722;</span><span><strong>Boutiques e-commerce</strong> - Shopify, Etsy</span></div>
+<div class="kp"><span class="ki">&#128241;</span><span><strong>Applications mobiles</strong> - App Store, Google Play</span></div>
+<div class="kp"><span class="ki">&#128247;</span><span><strong>Comptes reseaux sociaux</strong> - Instagram, TikTok</span></div>
+<div class="kp"><span class="ki">&#128179;</span><span><strong>Newsletters</strong> - listes email monetisees</span></div>
+</div>
+<div class="box box-g"><div class="box-t">La logique</div><div class="txt">Un site qui genere 300EUR/mois se vend 30x son revenu mensuel = <strong>9000EUR.</strong> Si tu l ameliores a 500EUR/mois, il vaut 15 000EUR. Tu as cree 6000EUR de valeur.</div></div>
+<button class="btn btn-g" onclick="markDone(0,0,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+<div class="lesson" id="l1">
+<div class="lhdr" onclick="toggleLesson(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Avantages et risques</div><div class="lmeta">Analyse - 6 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Avantages</div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>ROI eleve</strong> - 50-200% sur un bon actif en 6-12 mois</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Actif qui genere des revenus</strong> - tu es paye pendant que tu l ameliores</span></div>
+<div class="kp"><span class="ki">&#10003;</span><span><strong>Pas de creation from scratch</strong> - l actif existe deja, tu optimises</span></div>
+</div>
+<div class="box box-r"><div class="box-t">Risques a connaitre</div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Due diligence obligatoire</strong> - ne pas acheter sans verifier les revenus</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Capital requis</strong> - minimum 500-1000EUR pour debuter</span></div>
+<div class="kp"><span class="ki">&#9888;</span><span><strong>Patience requise</strong> - 3-6 mois pour optimiser et revendre</span></div>
+</div>
+<button class="btn btn-g" onclick="markDone(1,0,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+<div class="lesson" id="l2">
+<div class="lhdr" onclick="toggleLesson(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz - 3 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="qq"><div class="qq-t">Un site genere 200EUR/mois. A quel prix se vend-il en general ?</div>
+<div class="qo" onclick="qa(this,false,0)">A. 1000EUR (5x)</div>
+<div class="qo" onclick="qa(this,false,0)">B. 4000EUR (20x)</div>
+<div class="qo" onclick="qa(this,true,0)">C. 6000EUR (30x)</div>
+<div class="qo" onclick="qa(this,false,0)">D. 20 000EUR (100x)</div>
+<div class="qex" id="qe0">Correct ! La valorisation standard est 25-35x le revenu mensuel. 200EUR x 30 = 6000EUR.</div>
+</div>
+<button class="btn btn-g" onclick="markDone(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
+</div>
+</div>
+</div>
+
+<div class="panel" id="p1">
+<div class="prog"><div class="prog-t">Chapitre 2</div><div class="prog-bar"><div class="prog-fill" id="pf1"></div></div><div class="prog-info"><span id="pt1">0 / 2</span><span id="pp1">0%</span></div></div>
+<div class="lesson" id="l3">
+<div class="lhdr" onclick="toggleLesson(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Ou acheter des actifs digitaux</div><div class="lmeta">Sourcing - 8 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Les meilleures plateformes</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Flippa (flippa.com)</div><div class="step-d">Le plus grand marketplace mondial. Sites, apps, domaines. Toutes les tailles de budget.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Motion Invest</div><div class="step-d">Specialise sites de contenu. Actifs verifies et de qualite. Parfait pour debuter.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Empire Flippers</div><div class="step-d">Premium. Sites verifes, gros budget. Due diligence deja faite.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">Facebook Groups</div><div class="step-d">Ventes directes entre entrepreneurs. Prix souvent moins eleves.</div></div></div>
+</div></div>
+<button class="btn btn-g" onclick="markDone(3,1,2)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+<div class="lesson" id="l4">
+<div class="lhdr" onclick="toggleLesson(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Etude de cas - ROI x3 en 8 mois</div><div class="lmeta">Cas reel - 5 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="cs"><div class="cs-hdr">Blog Niche Animaux - 8 mois</div>
+<div class="cs-body">
+<div class="cs-row"><span class="cs-l">Prix d achat</span><span class="cs-v r">4 200EUR</span></div>
+<div class="cs-row"><span class="cs-l">Revenu au moment achat</span><span class="cs-v">140EUR/mois</span></div>
+<div class="cs-row"><span class="cs-l">Actions realisees</span><span class="cs-v">SEO + nouveaux articles + affiliation</span></div>
+<div class="cs-row"><span class="cs-l">Revenu apres 8 mois</span><span class="cs-v gold">380EUR/mois</span></div>
+<div class="cs-row"><span class="cs-l">Prix de revente</span><span class="cs-v g">11 400EUR</span></div>
+<div class="cs-row"><span class="cs-l">ROI total</span><span class="cs-v g">x3 en 8 mois</span></div>
+<div class="cs-q">"J ai ajoute 15 articles SEO, change les programmes d affiliation pour des high ticket et ajoute des liens newsletter. Le trafic a double en 4 mois."</div>
+</div></div>
+<button class="btn btn-g" onclick="markDone(4,1,2)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+</div>
+
+<div class="panel" id="p2">
+<div class="prog"><div class="prog-t">Chapitre 3</div><div class="prog-bar"><div class="prog-fill" id="pf2"></div></div><div class="prog-info"><span id="pt2">0 / 2</span><span id="pp2">0%</span></div></div>
+<div class="lesson" id="l5">
+<div class="lhdr" onclick="toggleLesson(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Due diligence - Comment analyser un actif</div><div class="lmeta">Analyse - 10 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Les 5 verifications obligatoires</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Verifier les revenus</div><div class="step-d">Demander acces Google Analytics et compte de paiement. Verifier 6-12 mois d historique.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Analyser le trafic</div><div class="step-d">Google Analytics. Trafic organique = durable. Trafic paye = risque a l arret des pubs.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Verifier les backlinks</div><div class="step-d">Ahrefs ou Semrush. Pas de liens toxiques qui pourraient etre penalises par Google.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">Checker les tendances</div><div class="step-d">Google Trends. Le trafic est stable ou en croissance ? Pas en chute.</div></div></div>
+<div class="step"><div class="step-n">5</div><div><div class="step-t">Identifier les risques</div><div class="step-d">Dependance a 1 seule source de revenu ? 1 seul programme affiliation ? 1 seul auteur ?</div></div></div>
+</div></div>
+<div class="box box-r"><div class="box-t">Red flags a eviter</div>
+<div class="kp"><span class="ki">&#10060;</span><span>Pic de trafic recent sans explication</span></div>
+<div class="kp"><span class="ki">&#10060;</span><span>100% du revenu sur une seule source</span></div>
+<div class="kp"><span class="ki">&#10060;</span><span>Aucun contenu publie depuis 6+ mois</span></div>
+<div class="kp"><span class="ki">&#10060;</span><span>Vendeur qui refuse de montrer Analytics</span></div>
+</div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; ANALYSER UN ACTIF AVEC L IA</a>
+<button class="btn btn-g" onclick="markDone(5,2,2)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+<div class="lesson" id="l6">
+<div class="lhdr" onclick="toggleLesson(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Simulateur ROI Flipping</div><div class="lmeta">Calculateur - 5 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div style="background:#0a0a10;border:1px solid rgba(200,200,200,.12);border-radius:5px;padding:12px">
+<div class="r2">
+<div class="c"><span class="lbl">Prix d achat (EUR)</span><input class="inp" id="fl-a" type="number" value="3000" oninput="calcFlip()"></div>
+<div class="c"><span class="lbl">Revenu mensuel actuel</span><input class="inp" id="fl-r" type="number" value="100" oninput="calcFlip()"></div>
+</div>
+<div class="r2" style="margin-top:4px">
+<div class="c"><span class="lbl">Revenu mensuel cible</span><input class="inp" id="fl-rc" type="number" value="250" oninput="calcFlip()"></div>
+<div class="c"><span class="lbl">Multiple revente (x)</span><input class="inp" id="fl-mu" type="number" value="30" oninput="calcFlip()"></div>
+</div>
+<div class="sim">
+<div class="sim-row"><span class="sim-l">Prix de revente estime</span><span class="sim-v gold" id="fl-revente">7500EUR</span></div>
+<div class="sim-row"><span class="sim-l">Profit brut</span><span class="sim-v g" id="fl-profit">4500EUR</span></div>
+<div class="sim-row"><span class="sim-l">ROI</span><span class="sim-v g" id="fl-roi">+150%</span></div>
+</div>
+</div>
+<button class="btn btn-g" onclick="markDone(6,2,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+</div>
+
+<div class="panel" id="p3">
+<div class="prog"><div class="prog-t">Chapitre 4</div><div class="prog-bar"><div class="prog-fill" id="pf3"></div></div><div class="prog-info"><span id="pt3">0 / 2</span><span id="pp3">0%</span></div></div>
+<div class="lesson" id="l7">
+<div class="lhdr" onclick="toggleLesson(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Optimiser un actif pour le revendre plus cher</div><div class="lmeta">Optimisation - 10 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Les 5 leviers d optimisation</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">SEO - Articles optimises</div><div class="step-d">Ajoute 10-20 articles cibles sur des mots-cles a fort volume. Resultats en 3-6 mois.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Ameliorer les programmes d affiliation</div><div class="step-d">Remplacer Amazon (3-5%) par des programmes high ticket (20-50%).</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Ajouter une newsletter</div><div class="step-d">Capture d email + monetisation email = nouvelle source de revenu.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">Ameliorer la vitesse</div><div class="step-d">PageSpeed Insights. Site rapide = meilleur SEO = plus de trafic.</div></div></div>
+<div class="step"><div class="step-n">5</div><div><div class="step-t">Diversifier les revenus</div><div class="step-d">Affiliation + sponsoring + display ads = actif plus valorisable.</div></div></div>
+</div></div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; PLAN D OPTIMISATION AVEC L IA</a>
+<button class="btn btn-g" onclick="markDone(7,3,2)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+<div class="lesson" id="l8">
+<div class="lhdr" onclick="toggleLesson(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">Checklist avant d optimiser</div><div class="lmeta">Checklist - 5 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Google Analytics installe et verifie</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Google Search Console connecte</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tous les revenus documentes sur 3 mois</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Plan d action ecrit avec objectifs chiffres</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Budget ameliorations defini</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Horizon de revente defini (6 mois, 12 mois)</span></div>
+<button class="btn btn-g" onclick="markDone(8,3,2)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div>
+</div>
+</div>
+
+<div class="panel" id="p4">
+<div class="lesson" id="l9">
+<div class="lhdr" onclick="toggleLesson(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Vendre son actif au meilleur prix</div><div class="lmeta">Revente - 10 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Quand vendre ?</div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Apres 3 mois de revenus stables ou croissants</strong> - la valorisation sera maximale</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Avant le pic saisonnier</strong> - lister en novembre pour vendre en janvier</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Quand tu as atteint ton objectif de revenu</strong> - ne pas attendre un plateau</span></div>
+</div>
+<div class="box box-a"><div class="box-t">Comment maximiser le prix</div>
+<div class="kp"><span class="ki">&#127775;</span><span><strong>Preparer 12 mois de data</strong> - plus c est long, plus c est valorisable</span></div>
+<div class="kp"><span class="ki">&#127775;</span><span><strong>Listing detaille et honnete</strong> - les acheteurs verifient tout</span></div>
+<div class="kp"><span class="ki">&#127775;</span><span><strong>Vendre sur 2-3 plateformes</strong> - Flippa + Empire Flippers pour maximiser les offres</span></div>
+</div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERER MON LISTING DE VENTE</a>
+<button class="btn btn-g" onclick="markDone(9,4,2)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+<div class="lesson" id="l10">
+<div class="lhdr" onclick="toggleLesson(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">Strategie portefeuille - 10 000EUR+/mois</div><div class="lmeta">Scale - 10 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">La strategie portefeuille</div><div class="txt">Au lieu de flipper un actif a la fois, <strong>construis un portefeuille de 3-5 actifs simultanement.</strong> Certains generent des revenus passifs pendant que tu en prepares d autres pour la revente.</div></div>
+<div style="background:linear-gradient(135deg,rgba(200,200,200,.06),rgba(201,168,76,.03));border:1px solid rgba(200,200,200,.15);border-radius:6px;padding:18px;margin-top:6px">
+<div style="font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#e0e0e0;margin-bottom:10px">PLAN 12 MOIS</div>
+<div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.9">
+<strong style="color:#fff">Mois 1-3 :</strong> Premier actif 500-1500EUR, optimisation<br>
+<strong style="color:#fff">Mois 4-6 :</strong> Revente x2, reinvestissement dans 2 actifs<br>
+<strong style="color:#fff">Mois 7-9 :</strong> Portefeuille de 3 actifs, revenus passifs 500EUR/mois<br>
+<strong style="color:#C9A84C">Mois 10-12 : Premiere revente a 5 figures, 10 000EUR+</strong>
+</div>
+<a href="dashboard.html" style="display:block;margin-top:14px;background:rgba(200,200,200,.15);border:1px solid rgba(200,200,200,.2);border-radius:3px;padding:13px;text-align:center;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff">RETOUR AU DASHBOARD</a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="toast" id="tk"></div>
+<script>
+function switchTab(i,el){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});el.classList.add('on');document.getElementById('p'+i).classList.add('on');window.scrollTo(0,0);}
+function toggleLesson(i){document.getElementById('l'+i).classList.toggle('open');}
+var dL={};var lch=[[0,1,2],[3,4],[5,6],[7,8],[9,10]];
+function markDone(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById('pf'+ch);if(f)f.style.width=pct+'%';var t=document.getElementById('pt'+ch);if(t)t.textContent=cnt+' / '+tot;var p=document.getElementById('pp'+ch);if(p)p.textContent=pct+'%';toast('Lecon validee !');}
+function qa(el,ok,idx){el.classList.add(ok?'ok':'ko');if(!ok){setTimeout(function(){el.parentElement.querySelectorAll('.qo').forEach(function(o){if(!o.classList.contains('ko'))o.classList.add('ok')});},700);}var e=document.getElementById('qe'+idx);if(e)e.style.display='block';}
+function calcFlip(){var a=parseFloat(document.getElementById('fl-a').value)||0,rc=parseFloat(document.getElementById('fl-rc').value)||0,mu=parseFloat(document.getElementById('fl-mu').value)||30;var revente=rc*mu,profit=revente-a,roi=a?Math.round(profit/a*100):0;var er=document.getElementById('fl-revente');if(er)er.textContent=revente.toLocaleString('fr-FR')+'EUR';var ep=document.getElementById('fl-profit');if(ep)ep.textContent=profit.toLocaleString('fr-FR')+'EUR';var ero=document.getElementById('fl-roi');if(ero)ero.textContent=(roi>0?'+':'')+roi+'%';}
+function toast(m){var t=document.getElementById('tk');if(t){t.textContent=m;t.style.display='block';setTimeout(function(){t.style.display='none'},2500);}}
+calcFlip();
+</script>
+</body>
+</html>
 
