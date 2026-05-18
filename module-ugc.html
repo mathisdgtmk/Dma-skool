@@ -1,540 +1,310 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>DMA — UGC Mastery</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<title>DMA - UGC Creator</title>
 <style>
-:root{--bg:#050300;--s1:#0c0a00;--s2:#141200;--orange:#ff7c3e;--gold:#C9A84C;--green:#3ecf8e;--red:#C0001A;--blue:#4fa3e8;--text:#fff8ee;--dim:rgba(255,248,238,.4);--border:rgba(255,124,62,.12)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--bg);color:var(--text);font-family:"Space Grotesk",sans-serif;min-height:100vh;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(255,124,62,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(201,168,76,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
-.hdr{position:sticky;top:0;z-index:100;background:rgba(5,3,0,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
-.hdr-back{text-decoration:none;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-.hdr-title{font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:4px;color:var(--orange)}
-.hdr-badge{font-size:10px;font-weight:700;color:rgba(255,124,62,.6);background:rgba(255,124,62,.08);border:1px solid rgba(255,124,62,.2);border-radius:2px;padding:3px 8px}
-.hero{position:relative;z-index:1;padding:28px 16px 24px;border-bottom:1px solid var(--border);overflow:hidden}
-.hero-num{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(255,124,62,.4);margin-bottom:8px}
-.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(30px,9vw,52px);letter-spacing:3px;line-height:.82;margin-bottom:14px}
-.hl{color:var(--orange);display:block}
-.hero-desc{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:20px}
-.hero-stats{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border)}
+body{background:#0d0d0f;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:40px}
+.hdr{position:sticky;top:0;z-index:99;background:#0d0d0f;border-bottom:1px solid rgba(255,124,62,.15);height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.hdr a{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hdr-t{font-size:12px;font-weight:800;letter-spacing:3px;color:#ff7c3e}
+.hero{padding:20px 16px 16px;border-bottom:1px solid rgba(255,124,62,.08)}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,124,62,.4);margin-bottom:6px}
+.hero-title{font-size:28px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#fff;margin-bottom:12px;line-height:1}
+.hero-title span{color:#ff7c3e;display:block}
+.stats{display:flex;border:1px solid rgba(255,124,62,.12);border-radius:4px;overflow:hidden}
+.stat{flex:1;padding:10px 6px;text-align:center;border-right:1px solid rgba(255,124,62,.08)}
 .stat:last-child{border-right:none}
-.sn{font-family:"Bebas Neue",sans-serif;font-size:22px;display:block}
-.sl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px;display:block}
-.chnav{display:flex;overflow-x:auto;background:var(--s1);border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch}
-.chnav::-webkit-scrollbar{display:none}
-.chbtn{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:"Space Grotesk",sans-serif;white-space:nowrap}
-.chbtn.active{color:var(--orange);border-bottom-color:var(--orange)}
-.panel{display:none;padding:16px 16px 60px;position:relative;z-index:1;animation:fi .3s ease}
-.panel.active{display:block}
-@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.lesson{background:var(--s1);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
-.lhdr{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer}
-.lnum{font-family:"Bebas Neue",sans-serif;font-size:20px;color:rgba(255,124,62,.3);min-width:32px}
-.linfo{flex:1}.ltitle{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
-.lmeta{font-size:10px;color:var(--dim)}
-.larrow{font-size:12px;color:var(--dim);transition:transform .3s}
-.lesson.open .larrow{transform:rotate(90deg)}
-.lbody{display:none;padding:16px}.lesson.open .lbody{display:block}
-.box{border-radius:5px;padding:14px;margin-bottom:12px}
-.box.o{background:rgba(255,124,62,.05);border:1px solid rgba(255,124,62,.15)}
-.box.r{background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.2)}
-.box.g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15)}
-.box.go{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15)}
-.box.b{background:rgba(79,163,232,.05);border:1px solid rgba(79,163,232,.15)}
-.bt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
-.bt.o{color:var(--orange)}.bt.r{color:#ff6060}.bt.g{color:var(--green)}.bt.go{color:var(--gold)}.bt.b{color:var(--blue)}
-.btext{font-size:12px;color:rgba(255,248,238,.72);line-height:1.8}
-.btext p{margin-bottom:8px}.btext p:last-child{margin-bottom:0}
-.btext strong{color:var(--text);font-weight:600}
-.kp{display:flex;gap:8px;font-size:12px;color:rgba(255,248,238,.7);margin-bottom:6px}
-.ki{flex-shrink:0;font-size:14px}
-.steps{display:flex;flex-direction:column;gap:10px;margin-top:8px}
-.step{display:flex;gap:12px}
-.snum{width:28px;height:28px;border-radius:50%;background:rgba(255,124,62,.12);border:1px solid rgba(255,124,62,.25);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:14px;color:var(--orange);flex-shrink:0}
-.stitle{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
-.sdesc{font-size:12px;color:rgba(255,248,238,.6);line-height:1.6}
-.sdesc strong{color:var(--orange)}
-.cs{background:var(--s2);border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:12px}
-.cshdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.1);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
-.csbody{padding:14px}
-.csrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
-.csrow:last-child{border-bottom:none}
-.csl{color:var(--dim)}.csv{font-weight:700;color:var(--text)}.csv.g{color:var(--green)}.csv.go{color:var(--gold)}
-.csq{font-size:12px;color:rgba(255,248,238,.65);line-height:1.75;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
-.cli{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
-.clb{width:20px;height:20px;border-radius:3px;border:2px solid rgba(255,124,62,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.cli.done .clb{background:var(--orange);border-color:var(--orange)}
-.clck{display:none;color:#fff;font-size:12px;font-weight:700}.cli.done .clck{display:block}
-.clt{font-size:12px;color:rgba(255,248,238,.7)}.cli.done .clt{color:rgba(255,248,238,.3);text-decoration:line-through}
-.qq{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:10px}
-.qqt{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.5}
-.qo{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(255,248,238,.7);margin-bottom:6px}
-.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:var(--green)}
-.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff6060}
-.qex{margin-top:10px;padding:10px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(255,248,238,.65);line-height:1.6;display:none}
-.iat{background:var(--bg);border:1px solid rgba(255,124,62,.2);border-radius:6px;overflow:hidden;margin-top:10px}
-.iatbar{background:var(--s2);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.iatl{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange)}
-.iatb{font-size:8px;color:rgba(255,124,62,.4);font-weight:600}
-.iatbody{padding:12px}
-.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:5px;display:block;margin-top:10px}
-.lbl:first-child{margin-top:0}
-.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none;resize:none}
-.inp:focus{border-color:rgba(255,124,62,.4)}
-.sel{width:100%;background:var(--s2);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:var(--text);font-family:"Space Grotesk",sans-serif;outline:none}
-.r2{display:flex;gap:8px}.r2 .c{flex:1}
-.rbtn{width:100%;padding:12px;border:none;border-radius:3px;font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:3px;color:#fff;cursor:pointer;margin-top:10px;-webkit-appearance:none;background:linear-gradient(135deg,var(--orange),#bf5a2a)}
-.rbtn:disabled{opacity:.4}
-.rbtn.g{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.25);color:var(--green);font-size:12px;letter-spacing:2px}
-.ld{height:2px;background:rgba(255,255,255,.05);overflow:hidden;display:none;border-radius:1px;margin-top:4px}
-.ldf{height:100%;width:50%;border-radius:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent);animation:lf 1.2s linear infinite}
-@keyframes lf{0%{transform:translateX(-200%)}100%{transform:translateX(300%)}}
-.out{background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px;margin-top:8px;font-size:12px;font-family:"JetBrains Mono",monospace;line-height:1.8;color:rgba(255,248,238,.82);white-space:pre-wrap;display:none}
-.cpbtn{display:none;width:100%;margin-top:6px;padding:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:2px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:"Space Grotesk",sans-serif;letter-spacing:2px;text-transform:uppercase;-webkit-appearance:none}
-.prog{background:rgba(255,124,62,.05);border:1px solid rgba(255,124,62,.12);border-radius:6px;padding:14px;margin-bottom:14px}
-.progt{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
-.progt2{background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;height:6px;margin-bottom:6px}
-.progf{height:100%;background:linear-gradient(90deg,var(--orange),rgba(255,124,62,.5));border-radius:3px;transition:width .5s}
-.progi{font-size:11px;color:var(--dim);display:flex;justify-content:space-between}
-/* TARIF CARDS */
-.tarif-grid{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.tarif-card{display:flex;align-items:center;justify-content:space-between;background:var(--s2);border:1px solid var(--border);border-radius:5px;padding:12px 14px}
-.tarif-service{font-size:13px;font-weight:600;color:var(--text)}
-.tarif-desc{font-size:10px;color:var(--dim);margin-top:2px}
-.tarif-price{font-family:"Bebas Neue",sans-serif;font-size:20px;color:var(--orange);text-align:right;white-space:nowrap;margin-left:10px}
-.tarif-price span{font-size:10px;color:rgba(255,124,62,.4);display:block}
-.tarif-card.top{background:rgba(255,124,62,.06);border-color:rgba(255,124,62,.2)}
-/* PORTFOLIO */
-.portfolio-item{background:var(--s2);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:10px}
-.pi-top{background:rgba(255,124,62,.06);padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
-.pi-title{font-size:12px;font-weight:700;color:var(--text)}
-.pi-status{font-size:9px;font-weight:700;padding:2px 8px;border-radius:2px}
-.pi-status.ok{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.2);color:var(--green)}
-.pi-status.progress{background:rgba(255,124,62,.1);border:1px solid rgba(255,124,62,.2);color:var(--orange)}
-.pi-body{padding:12px 14px;font-size:12px;color:rgba(255,248,238,.6);line-height:1.6}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+.stat-n{font-size:18px;font-weight:900;display:block;color:#ff7c3e}
+.stat-l{font-size:7px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-top:2px}
+.tabs{display:flex;overflow-x:auto;background:#080810;border-bottom:1px solid rgba(255,124,62,.1);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;white-space:nowrap}
+.tab.on{color:#ff7c3e;border-bottom-color:#ff7c3e}
+.panel{display:none;padding:14px 14px 40px}
+.panel.on{display:block}
+.lesson{background:#080810;border:1px solid rgba(255,124,62,.1);border-radius:6px;margin-bottom:10px;overflow:hidden}
+.lhdr{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.lnum{font-size:16px;font-weight:900;color:rgba(255,124,62,.2);min-width:24px}
+.linfo{flex:1}
+.ltitle{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.lmeta{font-size:10px;color:rgba(255,255,255,.3)}
+.larr{font-size:10px;color:rgba(255,255,255,.2);transition:transform .2s;flex-shrink:0}
+.lesson.open .larr{transform:rotate(90deg)}
+.lbody{display:none;padding:4px 16px 16px}
+.lesson.open .lbody{display:block}
+.box{border-radius:5px;padding:12px 14px;margin-bottom:10px}
+.box-a{background:rgba(255,124,62,.05);border:1px solid rgba(255,124,62,.12)}
+.box-g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.12)}
+.box-r{background:rgba(192,0,26,.05);border:1px solid rgba(192,0,26,.15)}
+.box-gold{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12)}
+.box-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.box-a .box-t{color:#ff7c3e}.box-g .box-t{color:#3ecf8e}.box-r .box-t{color:#ff4444}.box-gold .box-t{color:#C9A84C}
+.txt{font-size:12px;color:rgba(255,255,255,.55);line-height:1.8}
+.txt strong{color:#fff}
+.kp{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:6px;line-height:1.5}
+.ki{flex-shrink:0}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.step{display:flex;gap:10px;align-items:flex-start}
+.step-n{width:24px;height:24px;border-radius:50%;background:rgba(255,124,62,.1);border:1px solid rgba(255,124,62,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#ff7c3e;flex-shrink:0}
+.step-t{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.step-d{font-size:11px;color:rgba(255,255,255,.4);line-height:1.6}
+.qq{background:#080810;border:1px solid rgba(255,124,62,.1);border-radius:6px;padding:14px;margin-bottom:10px}
+.qq-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:12px;line-height:1.5}
+.qo{padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;user-select:none}
+.qo.ok{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.25);color:#3ecf8e}
+.qo.ko{background:rgba(192,0,26,.08);border-color:rgba(192,0,26,.25);color:#ff4444}
+.qex{margin-top:10px;padding:10px;background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.15);border-radius:4px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;display:none}
+.cl-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;user-select:none}
+.cl-item:last-child{border-bottom:none}
+.cl-box{width:20px;height:20px;border-radius:3px;border:2px solid rgba(255,124,62,.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:#000}
+.cl-item.done .cl-box{background:#ff7c3e;border-color:#ff7c3e}
+.cl-txt{font-size:12px;color:rgba(255,255,255,.6)}
+.cl-item.done .cl-txt{color:rgba(255,255,255,.25);text-decoration:line-through}
+.cs{background:#0a0a10;border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:10px}
+.cs-hdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.08);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C}
+.cs-body{padding:14px}
+.cs-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.cs-row:last-child{border-bottom:none}
+.cs-l{color:rgba(255,255,255,.35)}.cs-v{font-weight:700;color:#fff}.cs-v.g{color:#3ecf8e}.cs-v.gold{color:#C9A84C}
+.cs-q{font-size:11px;color:rgba(255,255,255,.4);line-height:1.7;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
+.prog{background:rgba(255,124,62,.05);border:1px solid rgba(255,124,62,.1);border-radius:5px;padding:12px 14px;margin-bottom:12px}
+.prog-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#ff7c3e;margin-bottom:8px}
+.prog-bar{background:rgba(255,255,255,.05);border-radius:2px;height:4px;overflow:hidden;margin-bottom:5px}
+.prog-fill{height:100%;background:#ff7c3e;border-radius:2px;width:0;transition:width .4s}
+.prog-info{font-size:11px;color:rgba(255,255,255,.3);display:flex;justify-content:space-between}
+.tarif{display:flex;align-items:center;justify-content:space-between;background:#0a0a10;border:1px solid rgba(255,124,62,.12);border-radius:5px;padding:12px 14px;margin-bottom:6px}
+.tarif.top{background:rgba(255,124,62,.05);border-color:rgba(255,124,62,.2)}
+.tarif-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.tarif-desc{font-size:10px;color:rgba(255,255,255,.35)}
+.tarif-price{font-size:18px;font-weight:900;color:#ff7c3e;text-align:right;white-space:nowrap;margin-left:10px}
+.tarif-price span{font-size:9px;color:rgba(255,255,255,.3);display:block}
+.btn{width:100%;padding:13px;border:none;border-radius:3px;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:10px;font-family:inherit}
+.btn-g{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.25);color:#3ecf8e}
+.ia-btn{display:block;margin-top:10px;padding:13px;background:linear-gradient(135deg,#C0001A,#8b0012);border-radius:3px;text-align:center;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#ff7c3e;color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
 </style>
 </head>
 <body>
-<div class="hdr">
-  <a class="hdr-back" href="module-business-models.html">&#8592; Business Models</a>
-  <div class="hdr-title">UGC MASTERY</div>
-  <div class="hdr-badge">MODULE 03/07</div>
-</div>
+<div class="hdr"><a href="dashboard.html">&#8592; Retour</a><div class="hdr-t">UGC CREATOR</div><div style="width:50px"></div></div>
 <div class="hero">
-  <div class="hero-num">Business Model 03 / 07</div>
-  <div class="hero-title">UGC<span class="hl">CREATOR</span>MASTERY</div>
-  <div class="hero-desc">Etre paye 150 a 800EUR par video pour des marques. Zero audience requise, juste un telephone et un angle. Le business le plus accessible de 2025.</div>
-  <div class="hero-stats">
-    <div class="stat"><span class="sn" style="color:var(--orange)">5</span><span class="sl">Chapitres</span></div>
-    <div class="stat"><span class="sn" style="color:var(--gold)">12</span><span class="sl">Lecons</span></div>
-    <div class="stat"><span class="sn" style="color:var(--green)">4</span><span class="sl">Outils IA</span></div>
-    <div class="stat"><span class="sn" style="color:var(--text)">2 sem.</span><span class="sl">1ere vente</span></div>
+  <div class="hero-tag">Business Model 03 / 07</div>
+  <div class="hero-title">UGC<span>CREATOR</span></div>
+  <div class="stats">
+    <div class="stat"><span class="stat-n">5</span><span class="stat-l">Chapitres</span></div>
+    <div class="stat"><span class="stat-n">12</span><span class="stat-l">Lecons</span></div>
+    <div class="stat"><span class="stat-n">0</span><span class="stat-l">Abonnes</span></div>
+    <div class="stat"><span class="stat-n">2sem</span><span class="stat-l">1ere vente</span></div>
   </div>
 </div>
-<div class="chnav">
-  <button class="chbtn active" onclick="ch(0,this)">01 Fondations</button>
-  <button class="chbtn" onclick="ch(1,this)">02 Trouver des marques</button>
-  <button class="chbtn" onclick="ch(2,this)">03 Creer les videos</button>
-  <button class="chbtn" onclick="ch(3,this)">04 Negocier &amp; Tarifs</button>
-  <button class="chbtn" onclick="ch(4,this)">05 Scale</button>
+<div class="tabs">
+  <button class="tab on" onclick="switchTab(0,this)">Fondations</button>
+  <button class="tab" onclick="switchTab(1,this)">Trouver des marques</button>
+  <button class="tab" onclick="switchTab(2,this)">Creer les videos</button>
+  <button class="tab" onclick="switchTab(3,this)">Tarifs et Negocia.</button>
+  <button class="tab" onclick="switchTab(4,this)">Scale</button>
 </div>
 
-<!-- CH1 FONDATIONS -->
-
-<div class="panel active" id="ch0">
-<div class="prog"><div class="progt">Progression Ch.1</div><div class="progt2"><div class="progf" id="pf0" style="width:0%"></div></div><div class="progi"><span id="pt0">0/3 lecons</span><span id="pp0">0%</span></div></div>
-
+<div class="panel on" id="p0">
+<div class="prog"><div class="prog-t">Chapitre 1</div><div class="prog-bar"><div class="prog-fill" id="pf0"></div></div><div class="prog-info"><span id="pt0">0 / 3</span><span id="pp0">0%</span></div></div>
 <div class="lesson" id="l0">
-<div class="lhdr" onclick="tl(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">C est quoi l UGC et pourquoi ca explose ?</div><div class="lmeta">Fondamentaux - 6 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">C est quoi l UGC et pourquoi ca explose ?</div><div class="lmeta">Fondamentaux - 6 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box o"><div class="bt o">Definition UGC</div><div class="btext"><p>L UGC (User Generated Content) c est du contenu cree par de vraies personnes pour le compte de marques. Les marques te paient pour filmer des videos authentiques de leurs produits — <strong>comme si tu etais un vrai client qui partage son experience.</strong></p><p>Ce contenu est utilise pour leurs pubs Meta, TikTok, Instagram — pas pour ta propre page. Tu vends la video, pas ta notoriete.</p></div></div>
-<div class="box o"><div class="bt o">Pourquoi les marques paient-elles autant ?</div>
-<div class="kp"><span class="ki">&#128247;</span><span><strong>Les pubs IA ou produites en studio</strong> ne convertissent plus — elles sont trop polissees, les consommateurs ne s y identifient pas.</span></div>
-<div class="kp"><span class="ki">&#128247;</span><span><strong>Le contenu authentique convertit 4x mieux</strong> — une vraie personne qui parle d un produit = confiance immediate.</span></div>
-<div class="kp"><span class="ki">&#128247;</span><span><strong>Couts de production reduits</strong> — payer 300EUR un creator UGC vs 3000EUR une agence. Les marques preferent 10 videos UGC a 1 video pro.</span></div>
-<div class="kp"><span class="ki">&#128247;</span><span><strong>Demande en explosion</strong> — chaque marque en ligne a besoin de contenu frais en permanence. Le marche UGC depasse 5 milliards EUR en 2025.</span></div>
+<div class="box box-a"><div class="box-t">Definition UGC</div><div class="txt">L UGC c est du contenu cree par de vraies personnes pour le compte de marques. <strong>Tu vends la video, pas ta notoriete.</strong> Les marques utilisent ce contenu pour leurs pubs Meta, TikTok, Instagram.</div></div>
+<div class="box box-a"><div class="box-t">Pourquoi les marques paient autant</div>
+<div class="kp"><span class="ki">&#128247;</span><span><strong>Le contenu authentique convertit 4x mieux</strong> que les pubs studio.</span></div>
+<div class="kp"><span class="ki">&#128247;</span><span><strong>Couts reduits</strong> - 300EUR un creator UGC vs 3000EUR une agence.</span></div>
+<div class="kp"><span class="ki">&#128247;</span><span><strong>Demande en explosion</strong> - chaque marque en ligne a besoin de contenu frais.</span></div>
 </div>
-<div class="box g"><div class="bt g">Le grand avantage : zero audience requise</div><div class="btext">Contrairement a l influenceur, le creator UGC <strong>n a pas besoin d audience</strong>. Les marques t achetent ton skill de creation video, pas ta communaute. Tu peux commencer avec 0 abonnes.</div></div>
-<button class="rbtn g" onclick="md(0,0,3)">MARQUER COMME VU &#10003;</button>
-</div></div>
-
+<div class="box box-g"><div class="box-t">Le grand avantage</div><div class="txt"><strong>Zero audience requise.</strong> Tu peux commencer avec 0 abonnes.</div></div>
+<button class="btn btn-g" onclick="markDone(0,0,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 <div class="lesson" id="l1">
-<div class="lhdr" onclick="tl(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Les types de videos UGC qui se vendent</div><div class="lmeta">Formats - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Les formats de videos les plus demandes</div><div class="lmeta">Formats - 8 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box o"><div class="bt o">Les 6 formats les plus demandes</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Unboxing & First Impression</div><div class="sdesc">Tu ouvres le produit en direct, tu partages ta reaction authentique. Simple, naturel, tres demande.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Review / Testimonial</div><div class="sdesc">Tu parles du produit face camera, tu expliques les avantages comme si tu le recommandais a un ami. Format le plus paye.</div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Tutorial / How to use</div><div class="sdesc">Tu montres comment utiliser le produit etape par etape. Tres utile pour produits tech ou beaute.</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">Problem / Solution</div><div class="sdesc">Tu introduces un probleme que tu avais, puis le produit comme solution. Structure narrative tres efficace pour la pub.</div></div></div>
-<div class="step"><div class="snum">5</div><div><div class="stitle">Lifestyle / B-roll</div><div class="sdesc">Videos d ambiance avec le produit integre naturellement dans ta vie quotidienne. Sans parole, juste des images.</div></div></div>
-<div class="step"><div class="snum">6</div><div><div class="stitle">Voiceover / Faceless</div><div class="sdesc">Voix off + texte a l ecran. Ideal si tu n es pas a l aise face camera. De plus en plus demande.</div></div></div>
+<div class="box box-a"><div class="box-t">Top 6 formats</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Unboxing et First Impression</div><div class="step-d">Tu ouvres le produit et partages ta reaction authentique.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Review face camera</div><div class="step-d">Tu parles du produit comme si tu le recommandais a un ami. Format le mieux paye.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Tutorial etape par etape</div><div class="step-d">Tu montres comment utiliser le produit.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">Problem et Solution</div><div class="step-d">Tu introduces un probleme, le produit est la solution.</div></div></div>
+<div class="step"><div class="step-n">5</div><div><div class="step-t">Lifestyle et B-roll</div><div class="step-d">Videos d ambiance avec le produit integre naturellement.</div></div></div>
+<div class="step"><div class="step-n">6</div><div><div class="step-t">Voiceover faceless</div><div class="step-d">Voix off sans montrer ton visage. Ideal pour commencer.</div></div></div>
 </div></div>
-<div class="box go"><div class="bt go">Les niches les plus payantes</div>
-<div class="kp"><span class="ki">&#128138;</span><span><strong>Beaute &amp; skincare</strong> — 300-800EUR par video, commandes tres frequentes</span></div>
-<div class="kp"><span class="ki">&#128170;</span><span><strong>Fitness &amp; supplements</strong> — 200-600EUR, marques qui investissent massivement</span></div>
-<div class="kp"><span class="ki">&#127968;</span><span><strong>Home &amp; lifestyle</strong> — 150-400EUR, enorme volume de produits disponibles</span></div>
-<div class="kp"><span class="ki">&#128241;</span><span><strong>Tech &amp; apps</strong> — 250-700EUR, demande forte pour les apps mobiles notamment</span></div>
-<div class="kp"><span class="ki">&#128021;</span><span><strong>Pets</strong> — 150-350EUR, niche tres active et agréable</span></div>
+<div class="box box-gold"><div class="box-t">Les niches les plus payantes</div>
+<div class="kp"><span class="ki">&#128138;</span><span><strong>Beaute et skincare</strong> - 300-800EUR par video</span></div>
+<div class="kp"><span class="ki">&#128170;</span><span><strong>Fitness et supplements</strong> - 200-600EUR</span></div>
+<div class="kp"><span class="ki">&#127968;</span><span><strong>Home et lifestyle</strong> - 150-400EUR</span></div>
 </div>
-<button class="rbtn g" onclick="md(1,0,3)">MARQUER COMME VU &#10003;</button>
-</div></div>
-
+<button class="btn btn-g" onclick="markDone(1,0,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 <div class="lesson" id="l2">
-<div class="lhdr" onclick="tl(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz interactif - 3 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Quiz - Verifie tes acquis</div><div class="lmeta">Quiz - 3 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="qq"><div class="qqt">Un creator UGC a-t-il besoin d une grande audience pour travailler avec des marques ?</div>
+<div class="qq"><div class="qq-t">Un creator UGC a-t-il besoin d une grande audience ?</div>
 <div class="qo" onclick="qa(this,false,0)">A. Oui, minimum 10 000 abonnes</div>
 <div class="qo" onclick="qa(this,true,0)">B. Non, les marques achetent le skill pas la notoriete</div>
 <div class="qo" onclick="qa(this,false,0)">C. Oui, minimum 1000 abonnes</div>
-<div class="qo" onclick="qa(this,false,0)">D. Ca depend de la marque</div>
-<div class="qex" id="qe0">Exact ! En UGC, tu vends ta capacite a creer du contenu authentique et efficace, pas ta communaute. Tu peux demarrer avec 0 abonnes.</div>
+<div class="qex" id="qe0">Exact ! Tu vends ta capacite a creer du contenu, pas ta communaute.</div>
 </div>
-<div class="qq"><div class="qqt">Pourquoi les marques preferent-elles le contenu UGC aux pubs produites en studio ?</div>
-<div class="qo" onclick="qa(this,false,1)">A. C est moins cher a produire seulement</div>
-<div class="qo" onclick="qa(this,false,1)">B. Les lois publicitaires l exigent</div>
-<div class="qo" onclick="qa(this,true,1)">C. Le contenu authentique convertit mieux</div>
-<div class="qo" onclick="qa(this,false,1)">D. C est une mode temporaire</div>
-<div class="qex" id="qe1">Parfait ! Le contenu authentique convertit 4x mieux que les pubs trop polissees. Les consommateurs font davantage confiance a une vraie personne qu a une pub studio.</div>
+<div class="qq"><div class="qq-t">Pourquoi les marques preferent le contenu UGC ?</div>
+<div class="qo" onclick="qa(this,false,1)">A. C est moins cher seulement</div>
+<div class="qo" onclick="qa(this,true,1)">B. Le contenu authentique convertit 4x mieux</div>
+<div class="qo" onclick="qa(this,false,1)">C. C est une mode temporaire</div>
+<div class="qex" id="qe1">Parfait ! Le contenu authentique convertit bien mieux que les pubs trop polissees.</div>
 </div>
-<div class="qq"><div class="qqt">Quel est le format UGC le mieux remunere en general ?</div>
-<div class="qo" onclick="qa(this,false,2)">A. L unboxing</div>
-<div class="qo" onclick="qa(this,true,2)">B. Le review / testimonial face camera</div>
-<div class="qo" onclick="qa(this,false,2)">C. Le b-roll lifestyle</div>
-<div class="qo" onclick="qa(this,false,2)">D. Le tutoriel</div>
-<div class="qex" id="qe2">Exact ! Le review face camera est le format le plus demande et le mieux paye car il cree le plus fort sentiment de confiance chez le consommateur. C est le coeur du UGC.</div>
+<button class="btn btn-g" onclick="markDone(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
 </div>
-<button class="rbtn g" onclick="md(2,0,3)">VALIDER LE CHAPITRE &#10003;</button>
-</div></div>
+</div>
 </div>
 
-<!-- CH2 TROUVER DES MARQUES -->
-
-<div class="panel" id="ch1">
-<div class="prog"><div class="progt">Progression Ch.2</div><div class="progt2"><div class="progf" id="pf1" style="width:0%"></div></div><div class="progi"><span id="pt1">0/3 lecons</span><span id="pp1">0%</span></div></div>
-
+<div class="panel" id="p1">
+<div class="prog"><div class="prog-t">Chapitre 2</div><div class="prog-bar"><div class="prog-fill" id="pf1"></div></div><div class="prog-info"><span id="pt1">0 / 3</span><span id="pp1">0%</span></div></div>
 <div class="lesson" id="l3">
-<div class="lhdr" onclick="tl(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Ou trouver tes premiers clients marques</div><div class="lmeta">Prospection - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(3)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Ou trouver tes premiers clients marques</div><div class="lmeta">Prospection - 10 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box o"><div class="bt o">Les 4 canaux de prospection</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Plateformes UGC dediees</div><div class="sdesc"><strong>Billo.app, Insense, JoinBrands, Influee</strong> — les marques viennent chercher les creators. Tu crees un profil, elles te contactent. Ideal pour debuter et construire ton portfolio.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Prospection directe Instagram/TikTok</div><div class="sdesc">Identifie des marques dans ta niche qui font deja des pubs. DM pro avec ton pitch + ta proposition. <strong>Taux de reponse : 10-20% si bien fait.</strong></div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Email professionnel</div><div class="sdesc">Trouve le contact marketing de la marque (LinkedIn ou site web). Email court, proposition de valeur claire, exemples de videos si tu en as.</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">Reseaux freelance</div><div class="sdesc">Fiverr, Upwork, Malt pour les marques qui cherchent des creators. Moins bien paye mais utile pour demarrer et avoir des avis.</div></div></div>
+<div class="box box-a"><div class="box-t">Les 4 canaux</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Plateformes UGC dediees</div><div class="step-d"><strong>Billo, Insense, JoinBrands</strong> - les marques viennent chercher les creators. Cree un profil.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Prospection directe Instagram</div><div class="step-d">DM pro avec ton pitch et ta proposition. Taux de reponse : 10-20% si bien fait.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Email professionnel</div><div class="step-d">Contact marketing trouve sur LinkedIn ou site web de la marque.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">Fiverr et Malt</div><div class="step-d">Moins bien paye mais utile pour demarrer et obtenir des avis.</div></div></div>
 </div></div>
-<div class="box go"><div class="bt go">Identifier les bonnes marques a pitcher</div>
-<div class="kp"><span class="ki">&#10003;</span><span>Elles font deja des pubs Meta ou TikTok (verifiable sur Ads Library)</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span>Budget pub actif = elles investissent et cherchent du contenu</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span>Produit que tu peux utiliser crediblement (colle a ton profil)</span></div>
-<div class="kp"><span class="ki">&#10003;</span><span>Marque mid-size — pas trop petite (pas de budget) ni trop grande (processus trop longs)</span></div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERER MON PITCH EMAIL MARQUE</a>
+<button class="btn btn-g" onclick="markDone(3,1,3)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
 </div>
-<div class="iat">
-<div class="iatbar"><span class="iatl">&#129302; Generateur de pitch email marque</span><span class="iatb">GROQ</span></div>
-<div class="iatbody">
-<span class="lbl">Nom de la marque a pitcher</span>
-<input class="inp" id="pi-b" type="text" placeholder="Ex: Gymshark, Sephora, Dr Brandt, une marque locale...">
-<span class="lbl">Leur niche / produits</span>
-<input class="inp" id="pi-n" type="text" placeholder="Ex: supplements sportifs, skincare naturel, gadgets maison...">
-<span class="lbl">Ton profil creator</span>
-<textarea class="inp" id="pi-p" rows="2" placeholder="Ex: femme 25 ans, passionnee de skincare, camera iPhone, style authentique et naturel..."></textarea>
-<span class="lbl">Ton tarif</span>
-<select class="sel" id="pi-t">
-<option value="150EUR par video UGC">150EUR / video - Debutant</option>
-<option value="300EUR par video UGC">300EUR / video - Intermediaire</option>
-<option value="500EUR par video UGC">500EUR / video - Confirme</option>
-<option value="800EUR par video UGC">800EUR / video - Expert</option>
-</select>
-<button class="rbtn" id="pi-btn" onclick="rPitch()">GENERER MON PITCH EMAIL</button>
-<div class="ld" id="pi-ld"><div class="ldf"></div></div>
-<div class="out" id="pi-out"></div>
-<button class="cpbtn" id="pi-cp" onclick="doCopy('pi-out')">COPIER</button>
-</div></div>
-<button class="rbtn g" onclick="md(3,1,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
-
+</div>
 <div class="lesson" id="l4">
-<div class="lhdr" onclick="tl(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Creer son portfolio UGC sans clients</div><div class="lmeta">Portfolio - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(4)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Creer son portfolio sans clients</div><div class="lmeta">Portfolio - 8 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box o"><div class="bt o">Le paradoxe du debutant</div><div class="btext"><p>Les marques veulent voir des exemples de ton travail avant de te payer. Mais comment avoir des exemples si personne ne t a encore paye ? <strong>Tu crees des videos de produits que tu possedes deja sans etre mandate.</strong></p></div></div>
-<div class="box o"><div class="bt o">Comment construire ton portfolio en 1 semaine</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Identifie 5 produits que tu as deja</div><div class="sdesc">Creme de soin, supplement, accessoire, gadget, vetement de marque... Tout ce qui est photogenique et utilisable naturellement.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Filme 3 types de videos par produit</div><div class="sdesc">1 review face camera, 1 b-roll lifestyle, 1 tutorial. 9-15 videos = portfolio suffisant pour demarrer.</div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Edit professionnel avec CapCut</div><div class="sdesc">Sous-titres, musique tendance, transitions propres. CapCut a des templates auto qui rendent tout professionnel en 2 clics.</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">Monte sur Drive ou Notion</div><div class="sdesc">Cree un dossier Drive avec tes meilleures videos. C est ton portfolio que tu enverras aux marques. Simple et efficace.</div></div></div>
+<div class="box box-a"><div class="box-t">La methode</div><div class="txt">Tu crees des videos de produits que tu possedes deja. <strong>9-15 videos = portfolio suffisant pour demarrer.</strong></div></div>
+<div class="box box-a"><div class="box-t">En 1 semaine</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">5 produits que tu as deja</div><div class="step-d">Creme, supplement, accessoire, gadget... Tout ce qui est photogenique.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">3 types de videos par produit</div><div class="step-d">1 review face camera, 1 b-roll lifestyle, 1 tutorial.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Edit avec CapCut</div><div class="step-d">Sous-titres, musique tendance. Templates auto = resultat pro en 2 minutes.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">Dossier Drive partage</div><div class="step-d">Tes meilleures videos dans un lien Drive. C est ton portfolio.</div></div></div>
 </div></div>
-<div class="box g"><div class="bt g">Le detail qui fait la difference</div><div class="btext">Quand tu crees ton portfolio avec des produits que tu as deja, <strong>retouche le logo</strong> ou parle du produit generiquement. Tu presentes ca comme "examples of UGC content I create" pas comme une collaboration officielle. C est la norme dans le secteur.</div></div>
-<div class="iat">
-<div class="iatbar"><span class="iatl">&#129302; Generateur de script video UGC</span><span class="iatb">GROQ</span></div>
-<div class="iatbody">
-<span class="lbl">Le produit</span>
-<input class="inp" id="sc-p" type="text" placeholder="Ex: serum vitamin C, proteines vanille, gadget massage...">
-<span class="lbl">Type de video</span>
-<select class="sel" id="sc-t">
-<option value="review / testimonial face camera">Review face camera</option>
-<option value="problem / solution">Problem / Solution</option>
-<option value="tutorial etape par etape">Tutorial</option>
-<option value="unboxing reaction authentique">Unboxing</option>
-<option value="before / after transformation">Before / After</option>
-</select>
-<span class="lbl">Duree</span>
-<select class="sel" id="sc-d">
-<option value="15-20 secondes">15-20 sec (TikTok/Reels)</option>
-<option value="30-45 secondes">30-45 sec</option>
-<option value="60 secondes">60 sec</option>
-</select>
-<button class="rbtn" id="sc-btn" onclick="rScript()">GENERER MON SCRIPT VIDEO</button>
-<div class="ld" id="sc-ld"><div class="ldf"></div></div>
-<div class="out" id="sc-out"></div>
-<button class="cpbtn" id="sc-cp" onclick="doCopy('sc-out')">COPIER</button>
-</div></div>
-<button class="rbtn g" onclick="md(4,1,3)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
-
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERER MON SCRIPT VIDEO UGC</a>
+<button class="btn btn-g" onclick="markDone(4,1,3)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 <div class="lesson" id="l5">
-<div class="lhdr" onclick="tl(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Etude de cas - 0 a 4500EUR/mois</div><div class="lmeta">Cas reel - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(5)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Etude de cas - 0 a 4500EUR/mois</div><div class="lmeta">Cas reel - 5 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="cs"><div class="cshdr">Creator UGC Beaute - 5 mois</div>
-<div class="csbody">
-<div class="csrow"><span class="csl">Profil</span><span class="csv">Femme 24 ans, 820 abonnes Instagram</span></div>
-<div class="csrow"><span class="csl">Niche</span><span class="csv">Skincare et wellness</span></div>
-<div class="csrow"><span class="csl">1er contrat</span><span class="csv">180EUR - marque serum locale</span></div>
-<div class="csrow"><span class="csl">Tarif mois 1</span><span class="csv">150-200EUR / video</span></div>
-<div class="csrow"><span class="csl">Tarif mois 5</span><span class="csv go">450-600EUR / video</span></div>
-<div class="csrow"><span class="csl">Nb de videos mois 5</span><span class="csv">8-10 videos / mois</span></div>
-<div class="csrow"><span class="csl">Revenu mois 5</span><span class="csv g">4 200 - 4 800EUR</span></div>
-<div class="csq">"J ai poste mon premier portfolio sur Billo avec 8 videos faites chez moi. Premiere mission 10 jours apres. Le secret c est la coherence et la niche. Je ne travaille qu avec des marques skincare et wellness — je suis devenue la reference dans ce segment pour les marques mid-size."</div>
+<div class="cs"><div class="cs-hdr">Creator UGC Beaute - 5 mois</div>
+<div class="cs-body">
+<div class="cs-row"><span class="cs-l">Profil</span><span class="cs-v">Femme 24 ans, 820 abonnes</span></div>
+<div class="cs-row"><span class="cs-l">Niche</span><span class="cs-v">Skincare et wellness</span></div>
+<div class="cs-row"><span class="cs-l">1er contrat</span><span class="cs-v">180EUR - marque serum locale</span></div>
+<div class="cs-row"><span class="cs-l">Tarif mois 5</span><span class="cs-v gold">450-600EUR / video</span></div>
+<div class="cs-row"><span class="cs-l">Revenu mois 5</span><span class="cs-v g">4 200EUR</span></div>
+<div class="cs-q">"J ai poste mon premier portfolio sur Billo avec 8 videos faites chez moi. Premiere mission 10 jours apres. Le secret c est la niche - je ne travaille qu avec des marques skincare."</div>
 </div></div>
-<div class="box g"><div class="bt g">La lecon</div><div class="btext">La specialisation par niche = des tarifs plus eleves car tu deviens experte. Une creator UGC generaliste gagne moins qu une creator specialisee en skincare ou en tech.</div></div>
-<button class="rbtn g" onclick="md(5,1,3)">MARQUER COMME VU &#10003;</button>
-</div></div>
+<button class="btn btn-g" onclick="markDone(5,1,3)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 </div>
 
-<!-- CH3 CREER LES VIDEOS -->
-
-<div class="panel" id="ch2">
-<div class="prog"><div class="progt">Progression Ch.3</div><div class="progt2"><div class="progf" id="pf2" style="width:0%"></div></div><div class="progi"><span id="pt2">0/2 lecons</span><span id="pp2">0%</span></div></div>
-
+<div class="panel" id="p2">
+<div class="prog"><div class="prog-t">Chapitre 3</div><div class="prog-bar"><div class="prog-fill" id="pf2"></div></div><div class="prog-info"><span id="pt2">0 / 2</span><span id="pp2">0%</span></div></div>
 <div class="lesson" id="l6">
-<div class="lhdr" onclick="tl(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Setup materiel et technique de tournage</div><div class="lmeta">Production - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(6)"><div class="lnum">07</div><div class="linfo"><div class="ltitle">Setup materiel et regles de tournage</div><div class="lmeta">Production - 8 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box o"><div class="bt o">Le materiel minimum pour demarrer</div>
-<div class="kp"><span class="ki">&#128247;</span><span><strong>Ton telephone</strong> - iPhone ou Samsung recents filment en 4K. Amplement suffisant pour demarrer.</span></div>
-<div class="kp"><span class="ki">&#128248;</span><span><strong>Ring light basique</strong> - 20-30EUR sur Amazon. Transforme completement la qualite lumiere de tes videos.</span></div>
-<div class="kp"><span class="ki">&#127915;</span><span><strong>Trepied avec bras flexible</strong> - 15-25EUR. Pour les shots overhead et les plans stables.</span></div>
-<div class="kp"><span class="ki">&#127908;</span><span><strong>Microphone cravate</strong> - 20-40EUR. Le son est 50% de la qualite percue. Priorite sur la camera.</span></div>
+<div class="box box-a"><div class="box-t">Materiel minimum</div>
+<div class="kp"><span class="ki">&#128247;</span><span><strong>Ton telephone</strong> - iPhone ou Samsung recents. Amplement suffisant.</span></div>
+<div class="kp"><span class="ki">&#128248;</span><span><strong>Ring light basique</strong> - 20-30EUR sur Amazon.</span></div>
+<div class="kp"><span class="ki">&#127908;</span><span><strong>Microphone cravate</strong> - 20-40EUR. Le son = 50% de la qualite.</span></div>
+<div class="kp"><span class="ki">&#127915;</span><span><strong>Trepied flexible</strong> - 15-25EUR.</span></div>
 </div>
-<div class="box go"><div class="bt go">Les regles d or du tournage UGC</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Lumiere naturelle en priorite</div><div class="sdesc">Face a une fenetre = meilleur eclairage. La ring light pour completer le soir uniquement.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Background propre et cohesif</div><div class="sdesc">Fond uni, decoration minimaliste. Pas de desordre visible. Le produit doit etre le hero de l image.</div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Plans varies = montage dynamique</div><div class="sdesc">Face camera + gros plan produit + plan lifestyle + plan overhead. Minimum 5-6 plans differents pour 30 secondes.</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">Hook dans les 3 premieres secondes</div><div class="sdesc">La premiere phrase/image doit arreter le scroll. Action, question, declaration choc. Pas d intro longue.</div></div></div>
-</div></div>
-<div class="box b"><div class="bt b">Apps d edition recommandees</div>
-<div class="kp"><span class="ki">&#127937;</span><span><strong>CapCut</strong> (gratuit) — l outil numero 1 des creators UGC. Templates auto, sous-titres AI, transitions, musiques tendance. Maitriser CapCut = 50% du job fait.</span></div>
-<div class="kp"><span class="ki">&#127937;</span><span><strong>InShot</strong> (freemium) — alternative propre pour les montages basiques.</span></div>
-<div class="kp"><span class="ki">&#127937;</span><span><strong>Premiere Rush</strong> (Adobe) — si tu veux passer au niveau superieur.</span></div>
+<div class="box box-gold"><div class="box-t">Regles d or</div>
+<div class="kp"><span class="ki">&#127775;</span><span><strong>Lumiere naturelle</strong> - face a une fenetre = meilleur eclairage.</span></div>
+<div class="kp"><span class="ki">&#127775;</span><span><strong>Hook dans les 3 premieres secondes</strong> - la premiere phrase doit arreter le scroll.</span></div>
+<div class="kp"><span class="ki">&#127775;</span><span><strong>Plans varies</strong> - face camera + gros plan + lifestyle. Min 5 plans pour 30 secondes.</span></div>
 </div>
-<button class="rbtn g" onclick="md(6,2,2)">MARQUER COMME VU &#10003;</button>
-</div></div>
-
+<button class="btn btn-g" onclick="markDone(6,2,2)">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 <div class="lesson" id="l7">
-<div class="lhdr" onclick="tl(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Checklist avant livraison d une video</div><div class="lmeta">Qualite - 5 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(7)"><div class="lnum">08</div><div class="linfo"><div class="ltitle">Checklist avant livraison</div><div class="lmeta">Qualite - 5 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Lumiere suffisante, pas de zones d ombre sur le visage</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Son clair, pas de bruit de fond parasite</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Hook present dans les 3 premieres secondes</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Produit clairement visible et bien mis en valeur</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Minimum 3 plans differents dans le montage</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Sous-titres ajoutes (augmente les vues de 40%)</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">CTA clair a la fin (selon le brief de la marque)</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Video exportee en MP4 haute qualite (min 1080p)</span></div>
-<div class="cli" onclick="this.classList.toggle('done')"><div class="clb"><span class="clck">&#10003;</span></div><span class="clt">Duree conforme au brief (+-10% max)</span></div>
-<button class="rbtn g" onclick="md(7,2,2)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
-</div></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Lumiere suffisante, pas de zones d ombre</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Son clair, pas de bruit de fond</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Hook present dans les 3 premieres secondes</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Produit clairement visible et bien mis en valeur</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Minimum 3 plans differents dans le montage</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Sous-titres ajoutes</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Video exportee en MP4 haute qualite 1080p minimum</span></div>
+<button class="btn btn-g" onclick="markDone(7,2,2)" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div>
+</div>
 </div>
 
-<!-- CH4 TARIFS ET NEGOCIATION -->
-
-<div class="panel" id="ch3">
-<div class="prog"><div class="progt">Progression Ch.4</div><div class="progt2"><div class="progf" id="pf3" style="width:0%"></div></div><div class="progi"><span id="pt3">0/2 lecons</span><span id="pp3">0%</span></div></div>
-
+<div class="panel" id="p3">
+<div class="prog"><div class="prog-t">Chapitre 4</div><div class="prog-bar"><div class="prog-fill" id="pf3"></div></div><div class="prog-info"><span id="pt3">0 / 2</span><span id="pp3">0%</span></div></div>
 <div class="lesson" id="l8">
-<div class="lhdr" onclick="tl(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">Grille de tarifs et comment les augmenter</div><div class="lmeta">Business - 10 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(8)"><div class="lnum">09</div><div class="linfo"><div class="ltitle">Grille de tarifs et comment les augmenter</div><div class="lmeta">Business - 10 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="tarif-grid">
-<div class="tarif-card"><div><div class="tarif-service">Video UGC basique</div><div class="tarif-desc">30-60 sec, 1 format, librairie usage 3 mois</div></div><div class="tarif-price">150-250EUR<span>/video</span></div></div>
-<div class="tarif-card"><div><div class="tarif-service">Video UGC standard</div><div class="tarif-desc">Multiple formats, sous-titres, usage 6 mois</div></div><div class="tarif-price">250-400EUR<span>/video</span></div></div>
-<div class="tarif-card top"><div><div class="tarif-service">Package 3 videos</div><div class="tarif-desc">3 angles differents, livraison 5 jours</div></div><div class="tarif-price">600-900EUR<span>/pack</span></div></div>
-<div class="tarif-card top"><div><div class="tarif-service">Creator confirme</div><div class="tarif-desc">Niche specialisee, track record de conversions</div></div><div class="tarif-price">500-800EUR<span>/video</span></div></div>
-<div class="tarif-card"><div><div class="tarif-service">Droits d usage illimites</div><div class="tarif-desc">Marque peut utiliser sans restriction de duree</div></div><div class="tarif-price">+200EUR<span>supplement</span></div></div>
+<div class="tarif"><div><div class="tarif-name">Video UGC basique</div><div class="tarif-desc">30-60 sec, 1 format</div></div><div class="tarif-price">150-250EUR<span>/video</span></div></div>
+<div class="tarif"><div><div class="tarif-name">Video UGC standard</div><div class="tarif-desc">Multiple formats, sous-titres</div></div><div class="tarif-price">250-400EUR<span>/video</span></div></div>
+<div class="tarif top"><div><div class="tarif-name">Package 3 videos</div><div class="tarif-desc">3 angles differents, livraison 5 jours</div></div><div class="tarif-price">600-900EUR<span>/pack</span></div></div>
+<div class="tarif top"><div><div class="tarif-name">Creator confirme</div><div class="tarif-desc">Niche specialisee, track record</div></div><div class="tarif-price">500-800EUR<span>/video</span></div></div>
+<div class="box box-a" style="margin-top:10px"><div class="box-t">Comment augmenter ses tarifs</div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Se specialiser</strong> - creator UGC beaute charge 2x plus</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Augmenter apres chaque client satisfait</strong> - +50EUR par video</span></div>
 </div>
-<div class="box o" style="margin-top:12px"><div class="bt o">Comment augmenter ses tarifs</div>
-<div class="kp"><span class="ki">&#128200;</span><span><strong>Apporter des preuves de performance</strong> — si une de tes videos a fait de bons resultats (CTR eleve, conversions), montre ces chiffres.</span></div>
-<div class="kp"><span class="ki">&#128200;</span><span><strong>Se specialiser</strong> — une creator UGC specialisee beaute charge 2x plus qu une generaliste.</span></div>
-<div class="kp"><span class="ki">&#128200;</span><span><strong>Ajouter des deliverables</strong> — sous-titres, multiple ratios (9:16, 1:1, 16:9), revisions incluses.</span></div>
-<div class="kp"><span class="ki">&#128200;</span><span><strong>Augmenter apres chaque client satisfait</strong> — +50EUR par video a chaque nouveau contrat. Progressif mais constant.</span></div>
+<button class="btn btn-g" onclick="markDone(8,3,2)">MARQUER COMME VU &#10003;</button>
 </div>
-<button class="rbtn g" onclick="md(8,3,2)">MARQUER COMME VU &#10003;</button>
-</div></div>
-
+</div>
 <div class="lesson" id="l9">
-<div class="lhdr" onclick="tl(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Negocier avec les marques - scripts</div><div class="lmeta">Negociation - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(9)"><div class="lnum">10</div><div class="linfo"><div class="ltitle">Negocier avec les marques</div><div class="lmeta">Negociation - 8 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="iat">
-<div class="iatbar"><span class="iatl">&#129302; Generateur de reponse negociation</span><span class="iatb">GROQ</span></div>
-<div class="iatbody">
-<span class="lbl">Situation de negociation</span>
-<select class="sel" id="neg-s">
-<option value="la marque propose un tarif trop bas">Marque propose tarif trop bas</option>
-<option value="la marque demande plus de videos pour le meme prix">Marque veut plus pour meme prix</option>
-<option value="la marque veut des droits illimites sans supplement">Droits illimites sans supplement</option>
-<option value="la marque demande des revisions excessives">Revisions excessives</option>
-<option value="la marque veut un delai trop court">Delai trop court</option>
-<option value="la marque ne paie pas a temps">Retard de paiement</option>
-</select>
-<span class="lbl">Ton tarif demande vs ce qu ils proposent</span>
-<input class="inp" id="neg-t" type="text" placeholder="Ex: Je demande 350EUR, ils proposent 150EUR...">
-<span class="lbl">Ton experience (pour ton ton)</span>
-<select class="sel" id="neg-e">
-<option value="debutant avec un portfolio de demo">Debutant avec portfolio</option>
-<option value="quelques collaborations realisees">Quelques collaborations</option>
-<option value="creator confirme avec track record">Creator confirme</option>
-</select>
-<button class="rbtn" id="neg-btn" onclick="rNeg()">GENERER MA REPONSE</button>
-<div class="ld" id="neg-ld"><div class="ldf"></div></div>
-<div class="out" id="neg-out"></div>
-<button class="cpbtn" id="neg-cp" onclick="doCopy('neg-out')">COPIER</button>
-</div></div>
-<button class="rbtn g" onclick="md(9,3,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
+<div class="box box-a"><div class="box-t">Les situations courantes</div>
+<div class="kp"><span class="ki">&#128172;</span><span><strong>Tarif trop bas propose</strong> - "Mon tarif de base est X. Je peux proposer un pack degressif si vous avez besoin de plusieurs videos."</span></div>
+<div class="kp"><span class="ki">&#128172;</span><span><strong>Plus de videos pour meme prix</strong> - "Je peux faire X videos supplementaires a Y EUR l unite."</span></div>
+<div class="kp"><span class="ki">&#128172;</span><span><strong>Droits illimites sans supplement</strong> - "Les droits illimites sont +50% du tarif de base."</span></div>
+</div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERER MA REPONSE DE NEGOCIATION</a>
+<button class="btn btn-g" onclick="markDone(9,3,2)" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
 </div>
 
-<!-- CH5 SCALE -->
-
-<div class="panel" id="ch4">
+<div class="panel" id="p4">
 <div class="lesson" id="l10">
-<div class="lhdr" onclick="tl(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">Systeme de retour clients et revenus recurrents</div><div class="lmeta">Business - 8 min</div></div><div class="larrow">&#9658;</div></div>
+<div class="lhdr" onclick="toggleLesson(10)"><div class="lnum">11</div><div class="linfo"><div class="ltitle">Clients recurrents et revenus stables</div><div class="lmeta">Business - 8 min</div></div><div class="larr">&#9658;</div></div>
 <div class="lbody">
-<div class="box o"><div class="bt o">L objectif : clients recurrents</div><div class="btext"><p>Une marque satisfaite devient un client recurrent. C est la que les revenus deviennent previsibles. <strong>3 clients qui commandent 3 videos/mois chacun = revenu stable de 2700EUR+/mois.</strong></p></div></div>
-<div class="box o"><div class="bt o">Comment fideliser une marque</div>
-<div class="steps">
-<div class="step"><div class="snum">1</div><div><div class="stitle">Livrer avant le delai annonce</div><div class="sdesc">Si tu promets 5 jours, livre en 3. C est la chose la plus simple et la plus efficace pour qu on te rappelle.</div></div></div>
-<div class="step"><div class="snum">2</div><div><div class="stitle">Livrer plus que prevu</div><div class="sdesc">Si le brief demande 1 video, livre 2 variations du hook gratuitement. La marque voit la valeur ajoutee.</div></div></div>
-<div class="step"><div class="snum">3</div><div><div class="stitle">Relancer a J+30</div><div class="sdesc">"J ai adore travailler avec vous — avez-vous de nouveaux produits que vous souhaiteriez mettre en avant ?" Simple et efficace.</div></div></div>
-<div class="step"><div class="snum">4</div><div><div class="stitle">Proposer un retainer mensuel</div><div class="sdesc"><strong>4-6 videos par mois a tarif fixe reduit de 10-15%</strong> en echange de la regularite. Securise ton revenu et fidélise la marque.</div></div></div>
+<div class="box box-a"><div class="box-t">Comment fideliser une marque</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">Livrer avant le delai</div><div class="step-d">Si tu promets 5 jours, livre en 3.</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">Livrer plus que prevu</div><div class="step-d">1 video demandee = livre 2 variations du hook gratuitement.</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">Proposer un retainer mensuel</div><div class="step-d"><strong>4-6 videos par mois a tarif fixe.</strong> Securise ton revenu.</div></div></div>
 </div></div>
-<div class="iat">
-<div class="iatbar"><span class="iatl">&#129302; Generateur email relance client</span><span class="iatb">GROQ</span></div>
-<div class="iatbody">
-<span class="lbl">Nom de la marque</span>
-<input class="inp" id="rel-b" type="text" placeholder="Ex: Gymshark, la marque locale...">
-<span class="lbl">Ce qui s est passe</span>
-<textarea class="inp" id="rel-c" rows="2" placeholder="Ex: J ai livre 2 videos il y a 5 semaines, ils etaient tres satisfaits, pas eu de nouvelles depuis..."></textarea>
-<span class="lbl">Objectif de la relance</span>
-<select class="sel" id="rel-o">
-<option value="proposer de nouvelles videos">Proposer nouvelles videos</option>
-<option value="proposer un retainer mensuel">Proposer retainer mensuel</option>
-<option value="demander un temoignage">Demander temoignage</option>
-<option value="upsell un pack plus important">Upsell pack plus grand</option>
-</select>
-<button class="rbtn" id="rel-btn" onclick="rRelance()">GENERER MON EMAIL DE RELANCE</button>
-<div class="ld" id="rel-ld"><div class="ldf"></div></div>
-<div class="out" id="rel-out"></div>
-<button class="cpbtn" id="rel-cp" onclick="doCopy('rel-out')">COPIER</button>
-</div></div>
-<button class="rbtn g" onclick="md(10,4,2)" style="margin-top:10px">MARQUER COMME VU &#10003;</button>
-</div></div>
-
-<div class="lesson" id="l11">
-<div class="lhdr" onclick="tl(11)"><div class="lnum">12</div><div class="linfo"><div class="ltitle">Plan 90 jours - de 0 a 3000EUR/mois</div><div class="lmeta">Roadmap - 8 min</div></div><div class="larrow">&#9658;</div></div>
-<div class="lbody">
-<div class="box o"><div class="bt o">Le plan exact</div>
-<div class="steps">
-<div class="step"><div class="snum" style="background:rgba(255,124,62,.2);font-size:11px">J1-14</div><div><div class="stitle">Construire le portfolio</div><div class="sdesc">Filmer 10-15 videos avec tes produits. 3 formats differents. Editer avec CapCut. Creer un dossier Drive.</div></div></div>
-<div class="step"><div class="snum" style="background:rgba(255,124,62,.2);font-size:11px">J15-30</div><div><div class="stitle">Creer profils et pitcher</div><div class="sdesc">Ouvrir profil sur Billo + Insense + JoinBrands. Envoyer 20 pitches email a des marques de ta niche. Objectif : 2-3 premiers contrats a 150-200EUR.</div></div></div>
-<div class="step"><div class="snum" style="background:rgba(255,124,62,.2);font-size:11px">J31-60</div><div><div class="stitle">Livrer et monter les tarifs</div><div class="sdesc">Executer les premiers contrats en surdelivrant. Demander des temoignages. Augmenter les tarifs a 250-350EUR. Objectif mois 2 : 800-1200EUR.</div></div></div>
-<div class="step"><div class="snum" style="background:rgba(62,207,142,.2);font-size:11px">J61-90</div><div><div class="stitle">Clients recurrents + retainers</div><div class="sdesc">Relancer les clients satisfaits. Proposer des retainers. Viser 3 clients recurrents. <strong>Objectif mois 3 : 2000-3500EUR.</strong></div></div></div>
-</div></div>
-<button class="rbtn g" onclick="toast('Module UGC complete ! &#128293;')">MODULE COMPLETE &#10003;</button>
-</div></div>
-
-<div style="background:linear-gradient(135deg,rgba(255,124,62,.08),rgba(201,168,76,.06));border:1px solid rgba(255,124,62,.2);border-radius:8px;padding:18px;margin-top:6px">
-<div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:3px;color:var(--orange);margin-bottom:12px">RECAP - PLAN D ACTION</div>
-<div style="font-size:12px;color:rgba(255,248,238,.7);line-height:1.9">
-<strong style="color:var(--text)">Semaine 1-2 :</strong> Portfolio 10-15 videos sur tes produits<br>
-<strong style="color:var(--text)">Semaine 3-4 :</strong> 20 pitches envoyes, profils plateformes crees<br>
-<strong style="color:var(--text)">Mois 2 :</strong> Premiers contrats, surlivraison, montee en tarifs<br>
-<strong style="color:var(--text)">Mois 3 :</strong> Clients recurrents, retainers, specialisation<br>
-<strong style="color:var(--green)">Objectif mois 3 : 2 000 - 3 500EUR / mois</strong>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
 </div>
-<a href="module-business-models.html" style="display:block;margin-top:14px;background:linear-gradient(135deg,var(--orange),#bf5a2a);border-radius:3px;padding:12px;text-align:center;text-decoration:none"><span style="font-family:Bebas Neue,sans-serif;font-size:13px;letter-spacing:3px;color:#fff">MODULE SUIVANT : AFFILIATION &#8594;</span></a>
+</div>
+<div class="lesson" id="l11">
+<div class="lhdr" onclick="toggleLesson(11)"><div class="lnum">12</div><div class="linfo"><div class="ltitle">Plan 90 jours - de 0 a 3000EUR/mois</div><div class="lmeta">Roadmap - 8 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Le plan exact</div><div class="steps">
+<div class="step"><div class="step-n" style="font-size:9px">J1-14</div><div><div class="step-t">Construire le portfolio</div><div class="step-d">10-15 videos avec tes produits. Dossier Drive.</div></div></div>
+<div class="step"><div class="step-n" style="font-size:9px">J15-30</div><div><div class="step-t">Creer profils et pitcher</div><div class="step-d">Billo + Insense + 20 pitches email. Objectif : 2-3 premiers contrats.</div></div></div>
+<div class="step"><div class="step-n" style="font-size:9px">J31-60</div><div><div class="step-t">Livrer et monter les tarifs</div><div class="step-d">Augmenter a 250-350EUR. Objectif mois 2 : 800-1200EUR.</div></div></div>
+<div class="step"><div class="step-n" style="font-size:9px;background:rgba(62,207,142,.2);border-color:rgba(62,207,142,.3);color:#3ecf8e">J61-90</div><div><div class="step-t"><strong>Objectif mois 3 : 2000-3500EUR.</strong></div><div class="step-d">Clients recurrents + retainers.</div></div></div>
+</div></div>
+<a href="dashboard.html" style="display:block;margin-top:14px;background:#ff7c3e;border-radius:3px;padding:13px;text-align:center;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff">RETOUR AU DASHBOARD</a>
+</div>
 </div>
 </div>
 
 <div class="toast" id="tk"></div>
 <script>
-var u=JSON.parse(sessionStorage.getItem("dma_user")||"null");
-if(!u)window.location.href="index.html";
-function ch(i,el){document.querySelectorAll(".chbtn").forEach(function(b){b.classList.remove("active")});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});el.classList.add("active");document.getElementById("ch"+i).classList.add("active");window.scrollTo(0,0);}
-function tl(i){document.getElementById("l"+i).classList.toggle("open")}
-var lch=[[0,1,2],[3,4,5],[6,7],[8,9],[10,11]];var dL={};
-function md(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById("pf"+ch);if(f)f.style.width=pct+"%";var t=document.getElementById("pt"+ch);if(t)t.textContent=cnt+"/"+tot+" lecons";var p=document.getElementById("pp"+ch);if(p)p.textContent=pct+"%";toast("Lecon validee ! &#128293;");}
-function qa(el,ok,qIdx){el.classList.add(ok?"ok":"ko");if(!ok){setTimeout(function(){el.parentElement.querySelectorAll(".qo").forEach(function(o){if(!o.classList.contains("ko"))o.classList.add("ok")})},700)}var e=document.getElementById("qe"+qIdx);if(e)e.style.display="block";}
-function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
-function sl(id,on){var e=document.getElementById(id);if(e)e.style.display=on?"block":"none"}
-function showO(oid,cpid,txt){var o=document.getElementById(oid);if(o){o.textContent=txt;o.style.display="block"}var c=document.getElementById(cpid);if(c)c.style.display="block"}
-async function groq(p){var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer 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"},body:JSON.stringify({model:"llama-3.3-70b-versatile",max_tokens:1200,messages:[{role:"system",content:"Tu es expert UGC creator et marketing de contenu francophone avec 3 ans d experience. Conseils ultra concrets, tutoiement, ton pro et direct."},{role:"user",content:p}]})});var d=await r.json();return d.choices&&d.choices[0]?d.choices[0].message.content:"Erreur - reessaie.";}
-async function rPitch(){var b=gv("pi-b"),n=gv("pi-n"),p=gv("pi-p"),t=gv("pi-t");if(!b){toast("Entre le nom de la marque");return}sl("pi-ld",true);document.getElementById("pi-btn").disabled=true;try{var r=await groq("Je suis creator UGC et je veux pitcher la marque: "+b+". Leur niche: "+n+". Mon profil: "+p+". Mon tarif: "+t+".
-
-Redige un email de pitch professionnel et percutant:
-
-- Objet email accrocheur
-- Corps (100-150 mots max): presentation courte, valeur que j apporte, ma proposition concrete
-- CTA clair
-
-Ton confident pas desespere. Court, pro, donne envie de repondre.”);showO(“pi-out”,“pi-cp”,r)}catch(e){toast(“Erreur”)}sl(“pi-ld”,false);document.getElementById(“pi-btn”).disabled=false;}
-async function rScript(){var p=gv(“sc-p”),t=gv(“sc-t”),d=gv(“sc-d”);if(!p){toast(“Entre le produit”);return}sl(“sc-ld”,true);document.getElementById(“sc-btn”).disabled=true;try{var r=await groq(“Script video UGC “+d+” format “+t+” pour le produit: “+p+”.
-
-Structure:
-
-- HOOK (0-3 sec): phrase ou action qui arrete le scroll
-- CORPS: message principal
-- CTA: appel a l action
-
-Inclus les indications de tournage entre crochets [gros plan produit], [face camera], etc.
-Ton naturel et authentique, pas commercial. Comme une vraie personne.”);showO(“sc-out”,“sc-cp”,r)}catch(e){toast(“Erreur”)}sl(“sc-ld”,false);document.getElementById(“sc-btn”).disabled=false;}
-async function rNeg(){var s=gv(“neg-s”),t=gv(“neg-t”),e=gv(“neg-e”);sl(“neg-ld”,true);document.getElementById(“neg-btn”).disabled=true;try{var r=await groq(“Situation de negociation UGC: “+s+”. Details tarifs: “+t+”. Mon niveau: “+e+”.
-
-Redige une reponse professionnelle qui:
-
-1. Reconnait la proposition de la marque
-1. Maintient fermement ma position avec justification
-1. Propose une solution ou alternative acceptable
-1. Reste ouvert sans se devaluer
-
-Ton confiant, pas agressif. 80-120 mots.”);showO(“neg-out”,“neg-cp”,r)}catch(e){toast(“Erreur”)}sl(“neg-ld”,false);document.getElementById(“neg-btn”).disabled=false;}
-async function rRelance(){var b=gv(“rel-b”),c=gv(“rel-c”),o=gv(“rel-o”);if(!b){toast(“Entre le nom de la marque”);return}sl(“rel-ld”,true);document.getElementById(“rel-btn”).disabled=true;try{var r=await groq(“Relance client UGC.
-Marque: “+b+”. Contexte: “+c+”. Objectif: “+o+”.
-
-Redige un email de relance naturel et professionnel qui:
-
-- Rappelle la collaboration precedente positivement
-- Propose la prochaine etape clairement
-- Donne envie de repondre oui
-
-Court (60-100 mots), ton amical pro.”);showO(“rel-out”,“rel-cp”,r)}catch(e){toast(“Erreur”)}sl(“rel-ld”,false);document.getElementById(“rel-btn”).disabled=false;}
-function doCopy(id){var txt=document.getElementById(id).textContent;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast(“Copie!”)});else{var ta=document.createElement(“textarea”);ta.value=txt;ta.style.cssText=“position:fixed;top:0;left:0;opacity:0;font-size:16px”;document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand(“copy”)}catch(e){}document.body.removeChild(ta);toast(“Copie!”);}}
-function toast(m){var t=document.getElementById(“tk”);t.textContent=m;t.style.display=“block”;setTimeout(function(){t.style.display=“none”},2500)}
+function switchTab(i,el){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});el.classList.add('on');document.getElementById('p'+i).classList.add('on');window.scrollTo(0,0);}
+function toggleLesson(i){document.getElementById('l'+i).classList.toggle('open');}
+var dL={};var lch=[[0,1,2],[3,4,5],[6,7],[8,9]];
+function markDone(li,ch,tot){dL[li]=true;var cnt=0;(lch[ch]||[]).forEach(function(l){if(dL[l])cnt++;});var pct=Math.round(cnt/tot*100);var f=document.getElementById('pf'+ch);if(f)f.style.width=pct+'%';var t=document.getElementById('pt'+ch);if(t)t.textContent=cnt+' / '+tot;var p=document.getElementById('pp'+ch);if(p)p.textContent=pct+'%';toast('Lecon validee !');}
+function qa(el,ok,idx){el.classList.add(ok?'ok':'ko');if(!ok){setTimeout(function(){el.parentElement.querySelectorAll('.qo').forEach(function(o){if(!o.classList.contains('ko'))o.classList.add('ok')});},700);}var e=document.getElementById('qe'+idx);if(e)e.style.display='block';}
+function toast(m){var t=document.getElementById('tk');if(t){t.textContent=m;t.style.display='block';setTimeout(function(){t.style.display='none'},2500);}}
 </script>
-
 </body>
 </html>
