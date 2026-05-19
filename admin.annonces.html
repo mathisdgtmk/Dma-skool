@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — Admin Annonces</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#0d0d0f;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:40px}
+.hdr{position:sticky;top:0;z-index:99;background:#0d0d0f;border-bottom:1px solid rgba(192,0,26,.2);height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.hdr a{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hdr-t{font-size:12px;font-weight:800;letter-spacing:3px;color:#C0001A}
+.hero{padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,.05)}
+.hero-t{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px}
+.hero-s{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6}
+.section{padding:16px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.7);margin-bottom:8px;display:block}
+.inp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:12px 14px;font-size:13px;color:#f0f0ff;font-family:inherit;outline:none;resize:none}
+.inp:focus{border-color:rgba(192,0,26,.4)}
+.sel{width:100%;background:#0a0a0f;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:12px 14px;font-size:13px;color:#f0f0ff;font-family:inherit;outline:none;margin-bottom:12px}
+.btn{width:100%;padding:14px;border:none;border-radius:4px;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;margin-top:10px}
+.btn-r{background:#C0001A;color:#fff}
+.btn-g{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.25);color:#3ecf8e}
+.preview{background:#0a0a0f;border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:14px;margin-top:12px}
+.preview-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:10px}
+.ann{border-radius:6px;padding:12px 14px;margin-bottom:8px;position:relative}
+.ann:last-child{margin-bottom:0}
+.ann-type{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.ann-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:3px}
+.ann-body{font-size:11px;line-height:1.6}
+.ann-date{font-size:9px;color:rgba(255,255,255,.25);margin-top:6px}
+.ann-del{position:absolute;top:10px;right:12px;background:rgba(192,0,26,.15);border:1px solid rgba(192,0,26,.3);border-radius:3px;padding:4px 10px;font-size:10px;font-weight:700;color:#C0001A;cursor:pointer}
+.ann-r{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2)}.ann-r .ann-type{color:#C0001A}.ann-r .ann-body{color:rgba(255,200,200,.6)}
+.ann-g{background:rgba(62,207,142,.06);border:1px solid rgba(62,207,142,.15)}.ann-g .ann-type{color:#3ecf8e}.ann-g .ann-body{color:rgba(200,255,230,.5)}
+.ann-b{background:rgba(79,163,232,.06);border:1px solid rgba(79,163,232,.15)}.ann-b .ann-type{color:#4fa3e8}.ann-b .ann-body{color:rgba(200,220,255,.5)}
+.ann-gold{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15)}.ann-gold .ann-type{color:#C9A84C}.ann-gold .ann-body{color:rgba(255,240,200,.5)}
+.code-box{background:#050508;border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:12px;font-size:10px;font-family:monospace;color:rgba(255,255,255,.6);word-break:break-all;line-height:1.6;max-height:220px;overflow-y:auto;white-space:pre-wrap;margin-top:10px}
+.sep{height:1px;background:rgba(255,255,255,.05);margin:4px 0 0}
+.hint{font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;line-height:1.7}
+.hint strong{color:#C9A84C}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#3ecf8e;color:#000;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+.empty{font-size:11px;color:rgba(255,255,255,.2);text-align:center;padding:20px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a href="dashboard.html">&#8592; Dashboard</a>
+  <div class="hdr-t">ADMIN ANNONCES</div>
+  <div style="width:60px"></div>
+</div>
+
+<div class="hero">
+  <div class="hero-t">Gestion des annonces</div>
+  <div class="hero-s">Cree tes annonces, genere le code et colle-le dans dashboard.html sur GitHub.</div>
+</div>
+
+<div class="section">
+
+  <span class="lbl">Type d annonce</span>
+  <select class="sel" id="type">
+    <option value="r">Urgent / Important</option>
+    <option value="g" selected>Bonne nouvelle</option>
+    <option value="b">Info / Mise a jour</option>
+    <option value="gold">Nouveau contenu</option>
+  </select>
+
+  <span class="lbl">Titre</span>
+  <input class="inp" id="titre" type="text" placeholder="Ex : Nouveau module disponible !">
+
+  <span class="lbl" style="margin-top:12px">Message</span>
+  <textarea class="inp" id="body" rows="3" placeholder="Ex : Le module Agence IA vient d etre mis a jour avec 3 nouvelles lecons."></textarea>
+
+  <button class="btn btn-r" onclick="addAnn()">+ AJOUTER L ANNONCE</button>
+
+</div>
+
+<div class="sep"></div>
+
+<div class="section">
+
+  <div class="preview">
+    <div class="preview-t">Annonces (apercu)</div>
+    <div id="ann-list"><div class="empty">Aucune annonce. Ajoutes-en une ci-dessus.</div></div>
+  </div>
+
+  <button class="btn btn-g" onclick="genCode()">GENERER LE CODE</button>
+
+  <div id="code-wrap" style="display:none">
+    <div class="code-box" id="code-out"></div>
+    <button class="btn btn-g" onclick="copyCode()" style="margin-top:8px">COPIER LE CODE</button>
+    <div class="hint">
+      Dans <strong>dashboard.html</strong> sur GitHub, trouve le bloc :<br>
+      <strong>&lt;div class="ann-block" id="annonces-block"&gt;</strong><br>
+      Remplace tout ce qu il y a a l interieur par le code copie.
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="tk"></div>
+
+<script>
+var annonces = JSON.parse(localStorage.getItem('dma_ann') || '[]');
+
+function fmtDate(){
+  var d = new Date();
+  return d.getDate().toString().padStart(2,'0') + '/' + (d.getMonth()+1).toString().padStart(2,'0') + '/' + d.getFullYear();
+}
+
+function typeLabel(t){
+  return {r:'Urgent',g:'Nouveaute',b:'Info',gold:'Contenu'}[t] || 'Info';
+}
+
+function save(){ localStorage.setItem('dma_ann', JSON.stringify(annonces)); }
+
+function render(){
+  var el = document.getElementById('ann-list');
+  if(!annonces.length){ el.innerHTML = '<div class="empty">Aucune annonce. Ajoutes-en une ci-dessus.</div>'; return; }
+  el.innerHTML = annonces.map(function(a, i){
+    return '<div class="ann ann-'+a.type+'">' +
+      '<span class="ann-del" onclick="del('+i+')">Suppr.</span>' +
+      '<div class="ann-type">'+typeLabel(a.type)+'</div>' +
+      '<div class="ann-title">'+a.titre+'</div>' +
+      '<div class="ann-body">'+a.body+'</div>' +
+      '<div class="ann-date">'+a.date+'</div>' +
+    '</div>';
+  }).join('');
+}
+
+function addAnn(){
+  var t = document.getElementById('titre').value.trim();
+  var b = document.getElementById('body').value.trim();
+  var type = document.getElementById('type').value;
+  if(!t || !b){ toast('Remplis le titre et le message'); return; }
+  annonces.unshift({type:type, titre:t, body:b, date:fmtDate()});
+  save(); render();
+  document.getElementById('titre').value = '';
+  document.getElementById('body').value = '';
+  toast('Annonce ajoutee !');
+}
+
+function del(i){
+  annonces.splice(i,1);
+  save(); render();
+  toast('Supprimee');
+}
+
+function genCode(){
+  if(!annonces.length){ toast('Ajoute au moins une annonce'); return; }
+  var bgMap = {r:'rgba(192,0,26,.08)',g:'rgba(62,207,142,.06)',b:'rgba(79,163,232,.06)',gold:'rgba(201,168,76,.06)'};
+  var brMap = {r:'rgba(192,0,26,.2)',g:'rgba(62,207,142,.15)',b:'rgba(79,163,232,.15)',gold:'rgba(201,168,76,.15)'};
+  var tcMap = {r:'#C0001A',g:'#3ecf8e',b:'#4fa3e8',gold:'#C9A84C'};
+  var bcMap = {r:'rgba(255,200,200,.6)',g:'rgba(200,255,230,.5)',b:'rgba(200,220,255,.5)',gold:'rgba(255,240,200,.5)'};
+
+  var html = annonces.map(function(a){
+    return '  <div class="ann ann-'+a.type+'">\n' +
+      '    <div class="ann-type">'+typeLabel(a.type)+'</div>\n' +
+      '    <div class="ann-title">'+a.titre+'</div>\n' +
+      '    <div class="ann-body">'+a.body+'</div>\n' +
+      '    <div class="ann-date">'+a.date+'</div>\n' +
+    '  </div>';
+  }).join('\n');
+
+  document.getElementById('code-out').textContent = html;
+  document.getElementById('code-wrap').style.display = 'block';
+}
+
+function copyCode(){
+  var txt = document.getElementById('code-out').textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){ toast('Copie !'); });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    toast('Copie !');
+  }
+}
+
+function toast(m){
+  var t = document.getElementById('tk');
+  t.textContent = m; t.style.display = 'block';
+  setTimeout(function(){ t.style.display = 'none'; }, 2500);
+}
+
+render();
+</script>
+</body>
+</html>
