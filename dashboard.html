@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -17,6 +16,7 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 .logo-dma span{color:#C0001A}
 .logo-sub{font-size:7px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-top:3px}
 .logo-line{width:36px;height:1px;background:linear-gradient(90deg,transparent,#C9A84C,transparent);margin:4px auto 0}
+.admin-link{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(192,0,26,.4);text-decoration:none}
 
 /* HERO */
 .hero{padding:18px 16px 0;text-align:center}
@@ -36,6 +36,18 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 .sec{padding:18px 16px 8px;display:flex;align-items:center;gap:10px}
 .sec-t{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.6);white-space:nowrap}
 .sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.2),transparent)}
+
+/* ANNONCES */
+.ann-block{padding:0 16px 8px;display:flex;flex-direction:column;gap:8px}
+.ann{border-radius:6px;padding:12px 14px}
+.ann-type{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.ann-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:3px}
+.ann-body{font-size:11px;line-height:1.6}
+.ann-date{font-size:9px;color:rgba(255,255,255,.25);margin-top:6px}
+.ann-r{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2)}.ann-r .ann-type{color:#C0001A}.ann-r .ann-body{color:rgba(255,200,200,.6)}
+.ann-g{background:rgba(62,207,142,.06);border:1px solid rgba(62,207,142,.15)}.ann-g .ann-type{color:#3ecf8e}.ann-g .ann-body{color:rgba(200,255,230,.5)}
+.ann-b{background:rgba(79,163,232,.06);border:1px solid rgba(79,163,232,.15)}.ann-b .ann-type{color:#4fa3e8}.ann-b .ann-body{color:rgba(200,220,255,.5)}
+.ann-gold{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15)}.ann-gold .ann-type{color:#C9A84C}.ann-gold .ann-body{color:rgba(255,240,200,.5)}
 
 /* MODULES LISTE */
 .mod-list{padding:0 16px;display:flex;flex-direction:column;gap:5px}
@@ -93,29 +105,26 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 .nav-dot{width:3px;height:3px;border-radius:50%;background:#C9A84C;display:none}
 .nav-item.on .nav-dot{display:block}
 </style>
-
 </head>
 <body>
 
 <!-- HEADER -->
-
-<div class="hdr">
+<div class="hdr" style="position:relative">
   <div class="logo">
     <div class="logo-dma">D<span>M</span>A</div>
     <div class="logo-sub">Digital Mastery Academy</div>
     <div class="logo-line"></div>
   </div>
+  <a class="admin-link" href="admin-annonces.html">ADMIN</a>
 </div>
 
 <!-- HERO -->
-
 <div class="hero">
   <div class="hero-name">Connecte en tant que <strong id="uname">Membre</strong></div>
   <div class="hero-title">Ton espace <span>formation</span> complet</div>
 </div>
 
 <!-- STATS -->
-
 <div class="stats">
   <div class="stat"><span class="stat-n">28</span><span class="stat-l">Modules</span></div>
   <div class="stat"><span class="stat-n">7</span><span class="stat-l">Business</span></div>
@@ -123,8 +132,18 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
   <div class="stat"><span class="stat-n">MRR</span><span class="stat-l">Droits</span></div>
 </div>
 
-<!-- 28 MODULES -->
+<!-- ANNONCES -->
+<div class="sec"><span class="sec-t">Annonces</span><div class="sec-line"></div></div>
+<div class="ann-block" id="annonces-block">
+  <div class="ann ann-g">
+    <div class="ann-type">Nouveaute</div>
+    <div class="ann-title">Bienvenue sur la DMA 2026</div>
+    <div class="ann-body">Les 7 business models sont disponibles dans la section Bonus. Les generateurs IA sont accessibles depuis chaque module.</div>
+    <div class="ann-date">19/05/2026</div>
+  </div>
+</div>
 
+<!-- 28 MODULES -->
 <div class="sec"><span class="sec-t">Les 28 Modules</span><div class="sec-line"></div></div>
 <div class="mod-list">
   <a class="mod" href="module-01.html"><span class="mod-ic">&#127774;</span><div class="mod-info"><span class="mod-num">Module 01</span><span class="mod-title">Mindset &amp; Vision</span></div><span class="mod-tag tag-g">Mindset</span><span class="mod-arr">&#9658;</span></a>
@@ -158,7 +177,6 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 </div>
 
 <!-- BONUS -->
-
 <div class="sec" style="margin-top:6px"><span class="sec-t">Bonus Inclus</span><div class="sec-line"></div></div>
 <div class="biz-grid">
   <a class="biz-card" href="module-business-models.html" style="border:1px solid rgba(79,163,232,.15)">
@@ -192,7 +210,6 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 </div>
 
 <!-- OFFRE -->
-
 <div class="sec" style="margin-top:6px"><span class="sec-t">Valeur de la Formation</span><div class="sec-line"></div></div>
 <div class="offre">
   <div class="offre-titre">Acces complet a vie</div>
@@ -205,11 +222,9 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
     <strong>Bonus Agence IA</strong> + Arguments de vente + IA Suite Pro<br>
     <strong>Mises a jour gratuites</strong> a vie
   </div>
-
 </div>
 
 <!-- NAV -->
-
 <div class="nav">
   <a class="nav-item on" href="dashboard.html">
     <span class="nav-ic">&#127968;</span>
