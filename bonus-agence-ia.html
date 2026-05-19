@@ -1,233 +1,435 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>DMA — Agence IA No-Code</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — Agence IA No Code</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
-.bg{position:fixed;inset:0;pointer-events:none;z-index:0}
-.bg-g1{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:140%;height:60%;background:radial-gradient(ellipse,rgba(100,150,255,.08) 0%,transparent 65%)}
-.bg-g2{position:absolute;bottom:-10%;right:-10%;width:70%;height:60%;background:radial-gradient(ellipse,rgba(201,168,76,.06) 0%,transparent 65%)}
-.hdr{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.95);border-bottom:1px solid rgba(100,150,255,.15);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
-.hdr-back{text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-.hdr-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#7ab8ff}
-.wrap{position:relative;z-index:1}
-.hero{padding:28px 20px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(100,150,255,.08);border:1px solid rgba(100,150,255,.2);border-radius:3px;padding:6px 18px;margin-bottom:16px}
-.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,8vw,44px);letter-spacing:3px;line-height:.85;color:#f5f0e8;margin-bottom:8px}
-.hero-title .blue{color:#7ab8ff;display:block}
-.hero-title .gold{color:#C9A84C;display:block}
-.hero-sub{font-size:12px;color:rgba(245,240,232,.4);line-height:1.7;margin-bottom:20px}
-.stats{display:flex;border:1px solid rgba(255,255,255,.07);border-radius:6px;overflow:hidden}
-.stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+body{background:#0d0d0f;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:80px}
+.hdr{position:sticky;top:0;z-index:99;background:#0d0d0f;border-bottom:1px solid rgba(155,89,255,.2);height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.hdr a{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hdr-t{font-size:12px;font-weight:800;letter-spacing:3px;color:#9b59ff}
+.hero{padding:20px 16px 16px;border-bottom:1px solid rgba(155,89,255,.08);text-align:center}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(155,89,255,.7);margin-bottom:8px}
+.hero-t{font-size:24px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.2}
+.hero-t span{color:#9b59ff}
+.hero-s{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6}
+.stats{display:flex;margin:14px 16px 0;border:1px solid rgba(155,89,255,.15);border-radius:8px;overflow:hidden}
+.stat{flex:1;padding:10px 6px;text-align:center;border-right:1px solid rgba(155,89,255,.08)}
 .stat:last-child{border-right:none}
-.sn{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;display:block}
-.sl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px;display:block}
-.sec{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
-.sec-title{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#f5f0e8;margin-bottom:4px}
-.sec-title span{color:#7ab8ff}
-.sec-sub{font-size:11px;color:rgba(245,240,232,.3);margin-bottom:16px;font-style:italic}
+.stat-n{font-size:15px;font-weight:900;display:block;color:#9b59ff}
+.stat-l{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3);display:block;margin-top:2px}
+
 /* TABS */
-.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:16px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.tabs{display:flex;overflow-x:auto;background:#080810;border-bottom:1px solid rgba(155,89,255,.1);scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(245,240,232,.4);cursor:pointer;font-family:Montserrat,Arial,sans-serif}
-.tab.active{background:rgba(100,150,255,.1);border-color:rgba(100,150,255,.3);color:#7ab8ff}
-.sc{display:none}
-.sc.active{display:block}
-/* CARDS */
-.card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;margin-bottom:12px}
-.card-hdr{padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.06)}
-.card-icon{font-size:26px;flex-shrink:0}
-.card-name{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:2px;color:#f5f0e8}
-.card-type{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7ab8ff}
-.card-body{padding:14px 16px}
-.problem{font-size:12px;color:rgba(245,240,232,.45);line-height:1.6;margin-bottom:12px;font-style:italic}
-.tools-title{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin-bottom:8px}
-.tools{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.tool{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:3px 10px;font-size:10px;font-weight:700;color:#C9A84C}
-.feats{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-.feat{display:flex;gap:10px}
-.feat-icon{font-size:13px;flex-shrink:0}
-.feat-text{font-size:12px;color:rgba(245,240,232,.7);line-height:1.5}
-.feat-text strong{color:#f5f0e8}
-/* MINI DEMO */
-.demo{background:#0a0d12;border:1px solid rgba(100,150,255,.15);border-radius:6px;overflow:hidden;margin-top:10px}
-.demo-bar{background:#111827;padding:7px 12px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.05)}
-.demo-label{font-size:8px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.3)}
-.live{display:flex;align-items:center;gap:3px;margin-left:auto}
-.live-dot{width:5px;height:5px;border-radius:50%;background:#80d080;animation:blink 1s infinite}
-.live-text{font-size:7px;font-weight:700;letter-spacing:2px;color:#80d080}
-.demo-chat{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
-.mm{max-width:82%;padding:8px 12px;border-radius:6px;font-size:11px;line-height:1.5}
-.mm.u{align-self:flex-end;background:rgba(100,150,255,.12);border:1px solid rgba(100,150,255,.18);color:#c8ddff;border-radius:6px 6px 2px 6px}
-.mm.b{align-self:flex-start;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:rgba(245,240,232,.75);border-radius:6px 6px 6px 2px}
-.revenue{background:rgba(100,200,100,.06);border:1px solid rgba(100,200,100,.15);border-radius:5px;padding:10px 14px;margin-top:10px;display:flex;align-items:center;gap:10px}
-.rev-icon{font-size:18px}
-.rev-text{font-size:12px;font-weight:700;color:#80d080;line-height:1.4}
-.rev-sub{font-size:11px;font-weight:400;color:rgba(128,208,128,.5)}
-/* APPS */
-.app{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 16px;display:flex;gap:12px;margin-bottom:10px}
-.app-icon{font-size:26px;flex-shrink:0}
-.app-name{font-family:Bebas Neue,Impact,sans-serif;font-size:14px;letter-spacing:2px;color:#C9A84C;margin-bottom:2px}
-.app-use{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(100,150,255,.7);margin-bottom:5px}
-.app-desc{font-size:11px;color:rgba(245,240,232,.55);line-height:1.6}
-/* PLAN */
-.step{display:flex;gap:14px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.04)}
-.step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.step-num{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#7ab8ff,#3a7ad4);display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;color:#050505;flex-shrink:0}
-.step-title{font-size:13px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
-.step-desc{font-size:11px;color:rgba(245,240,232,.5);line-height:1.6}
-.step-desc strong{color:#C9A84C}
-.step-badge{display:inline-flex;background:rgba(100,150,255,.08);border:1px solid rgba(100,150,255,.15);border-radius:2px;padding:3px 8px;margin-top:6px}
-.step-badge-text{font-size:9px;font-weight:700;letter-spacing:2px;color:#7ab8ff}
-/* TARIFS */
-.tarif{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:12px 14px;margin-bottom:8px}
-.tarif-name{font-size:13px;font-weight:600;color:#f5f0e8}
-.tarif-desc{font-size:10px;color:rgba(245,240,232,.35);margin-top:2px}
-.tarif-price{font-family:Bebas Neue,Impact,sans-serif;font-size:18px;color:#C9A84C;text-align:right;white-space:nowrap;margin-left:10px}
-.tarif-price span{font-size:10px;color:rgba(201,168,76,.4);display:block}
-/* CTA */
-.cta-sec{padding:24px 20px 60px}
-.cta-box{background:rgba(100,150,255,.05);border:1px solid rgba(100,150,255,.15);border-radius:8px;padding:22px;text-align:center}
-.cta-title{font-family:Bebas Neue,Impact,sans-serif;font-size:22px;letter-spacing:3px;color:#f5f0e8;margin-bottom:6px}
-.cta-sub{font-size:12px;color:rgba(245,240,232,.4);line-height:1.6;margin-bottom:18px}
-.cta-btn{display:block;width:100%;padding:15px;background:linear-gradient(135deg,#7ab8ff,#3a7ad4);border:none;border-radius:5px;font-family:Bebas Neue,Impact,sans-serif;font-size:15px;letter-spacing:3px;color:#050505;cursor:pointer;text-decoration:none;text-align:center;box-shadow:0 6px 24px rgba(100,150,255,.3);-webkit-appearance:none}
+.tab{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;white-space:nowrap}
+.tab.on{color:#9b59ff;border-bottom-color:#9b59ff}
+.panel{display:none;padding:14px 14px 40px}
+.panel.on{display:block}
 
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
+.sec{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(155,89,255,.6);padding:14px 0 8px}
+
+/* LESSON */
+.lesson{background:#080810;border:1px solid rgba(155,89,255,.1);border-radius:6px;margin-bottom:10px;overflow:hidden}
+.lhdr{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.lnum{font-size:16px;font-weight:900;color:rgba(155,89,255,.2);min-width:24px}
+.linfo{flex:1}
+.ltitle{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.lmeta{font-size:10px;color:rgba(255,255,255,.3)}
+.larr{font-size:10px;color:rgba(255,255,255,.2);transition:transform .2s;flex-shrink:0}
+.lesson.open .larr{transform:rotate(90deg)}
+.lbody{display:none;padding:4px 16px 16px}
+.lesson.open .lbody{display:block}
+
+.box{border-radius:5px;padding:12px 14px;margin-bottom:10px}
+.box-a{background:rgba(155,89,255,.05);border:1px solid rgba(155,89,255,.12)}
+.box-g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.12)}
+.box-r{background:rgba(192,0,26,.05);border:1px solid rgba(192,0,26,.15)}
+.box-gold{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12)}
+.box-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.box-a .box-t{color:#9b59ff}.box-g .box-t{color:#3ecf8e}.box-r .box-t{color:#C0001A}.box-gold .box-t{color:#C9A84C}
+.txt{font-size:12px;color:rgba(255,255,255,.55);line-height:1.8}
+.txt strong{color:#fff}
+.kp{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:6px;line-height:1.5;align-items:flex-start}
+.ki{flex-shrink:0;margin-top:1px}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.step{display:flex;gap:10px;align-items:flex-start}
+.step-n{width:24px;height:24px;border-radius:50%;background:rgba(155,89,255,.1);border:1px solid rgba(155,89,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#9b59ff;flex-shrink:0}
+.step-t{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.step-d{font-size:11px;color:rgba(255,255,255,.4);line-height:1.6}
+.cl-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;user-select:none}
+.cl-item:last-child{border-bottom:none}
+.cl-box{width:20px;height:20px;border-radius:3px;border:2px solid rgba(155,89,255,.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px}
+.cl-item.done .cl-box{background:#9b59ff;border-color:#9b59ff}
+.cl-txt{font-size:12px;color:rgba(255,255,255,.6)}
+.cl-item.done .cl-txt{color:rgba(255,255,255,.25);text-decoration:line-through}
+.cs{background:#0a0a10;border:1px solid rgba(201,168,76,.15);border-radius:6px;overflow:hidden;margin-bottom:10px}
+.cs-hdr{background:rgba(201,168,76,.06);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.08);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C}
+.cs-body{padding:14px}
+.cs-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.cs-row:last-child{border-bottom:none;padding-bottom:0}
+.cs-l{color:rgba(255,255,255,.35)}.cs-v{font-weight:700;color:#fff}.cs-v.g{color:#3ecf8e}.cs-v.gold{color:#C9A84C}
+.cs-q{font-size:11px;color:rgba(255,255,255,.4);line-height:1.7;margin-top:10px;font-style:italic;border-left:2px solid rgba(201,168,76,.3);padding-left:12px}
+.service-card{background:#0a0a0f;border:1px solid rgba(155,89,255,.12);border-radius:6px;padding:14px 16px;margin-bottom:8px}
+.sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.sc-name{font-size:13px;font-weight:800;color:#fff}
+.sc-price{font-size:16px;font-weight:900;color:#9b59ff;text-align:right}
+.sc-price span{font-size:9px;color:rgba(255,255,255,.3);display:block}
+.sc-desc{font-size:11px;color:rgba(255,255,255,.35);line-height:1.5;margin-bottom:8px}
+.sc-tools{display:flex;gap:4px;flex-wrap:wrap}
+.sc-tool{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;background:rgba(155,89,255,.08);color:#9b59ff;border:1px solid rgba(155,89,255,.15);border-radius:3px}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:10px 12px;font-size:12px;color:#f0f0ff;font-family:inherit;outline:none;resize:none;margin-top:6px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(155,89,255,.6);margin-top:10px;display:block}
+.btn{width:100%;padding:13px;border:none;border-radius:3px;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:10px;font-family:inherit}
+.btn-a{background:rgba(155,89,255,.12);border:1px solid rgba(155,89,255,.25);color:#9b59ff}
+.btn-g{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.25);color:#3ecf8e}
+.ia-btn{display:block;margin-top:10px;padding:13px;background:linear-gradient(135deg,#C0001A,#8b0012);border-radius:3px;text-align:center;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff}
+.sim{background:#0a0a10;border:1px solid rgba(155,89,255,.12);border-radius:4px;margin-top:10px}
+.sim-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.sim-row:last-child{border-bottom:none}
+.sim-l{color:rgba(255,255,255,.35)}.sim-v{font-size:16px;font-weight:900}
+.sim-v.g{color:#3ecf8e}.sim-v.p{color:#9b59ff}
+.r2{display:flex;gap:8px}.r2 .c{flex:1}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#9b59ff;color:#fff;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(3,3,8,.97);border-top:1px solid rgba(255,255,255,.06);display:flex;height:62px;backdrop-filter:blur(20px);z-index:100}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;text-decoration:none}
+.nav-ic{font-size:18px}
+.nav-lb{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3)}
 </style>
-
 </head>
 <body>
-  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px;width:100%">
-    <div style="font-size:40px">🤖</div>
-    <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:24px;letter-spacing:4px;color:#f5f0e8">BONUS EXCLUSIF</div>
-    <div style="font-family:Bebas Neue,Impact,sans-serif;font-size:18px;letter-spacing:3px;color:#7ab8ff">AGENCE IA NO-CODE</div>
-    <div style="font-size:12px;color:rgba(245,240,232,.35)">Entre ton code d'accès DMA</div>
 
-  </div>
-</div>
-<div class="bg"><div class="bg-g1"></div><div class="bg-g2"></div></div>
 <div class="hdr">
-  <a class="hdr-back" href="dashboard.html">← Retour</a>
-  <div class="hdr-title">AGENCE IA NO-CODE</div>
+  <a href="dashboard.html">&#8592; Retour</a>
+  <div class="hdr-t">AGENCE IA NO CODE</div>
+  <div style="width:60px"></div>
 </div>
-<div class="wrap">
 
 <div class="hero">
-  <div class="hero-badge"><span style="font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#7ab8ff">🤖 Bonus Premium DMA</span></div>
-  <div class="hero-title">LANCE TON<br><span class="blue">AGENCE IA</span><span class="gold">NO-CODE</span></div>
-  <div class="hero-sub">Crée des systèmes IA pour n'importe quel business local —<br>sans écrire une seule ligne de code.</div>
-  <div class="stats">
-    <div class="stat"><span class="sn" style="color:#7ab8ff">8</span><span class="sl">Business types</span></div>
-    <div class="stat"><span class="sn" style="color:#C9A84C">12+</span><span class="sl">Apps no-code</span></div>
-    <div class="stat"><span class="sn" style="color:#80d080">3k€</span><span class="sl">Potentiel/mois</span></div>
-  </div>
+  <div class="hero-tag">Bonus 02 — DMA</div>
+  <div class="hero-t">Lance ton agence IA<span> sans coder</span></div>
+  <div class="hero-s">Propose des services IA premium a des clients pro. Zero competence technique requise.</div>
 </div>
 
-<!-- 8 SCENARIOS -->
-
-<div class="sec">
-  <div class="sec-title">8 TYPES DE <span>CLIENTS</span></div>
-  <div class="sec-sub">Clique sur un secteur pour voir le système IA à construire</div>
-  <div class="tabs">
-    <div class="tab active" onclick="sw(0,this)">🍽️ Restaurant</div>
-    <div class="tab" onclick="sw(1,this)">✂️ Coiffeur</div>
-    <div class="tab" onclick="sw(2,this)">🏠 Immo</div>
-    <div class="tab" onclick="sw(3,this)">💪 Coach</div>
-    <div class="tab" onclick="sw(4,this)">🧴 Esthétique</div>
-    <div class="tab" onclick="sw(5,this)">🦷 Dentiste</div>
-    <div class="tab" onclick="sw(6,this)">🚗 Garage</div>
-    <div class="tab" onclick="sw(7,this)">🏋️ Sport</div>
-  </div>
-
-  <div class="sc active" id="sc0"><div class="card"><div class="card-hdr"><div class="card-icon">🍽️</div><div><div class="card-name">RESTAURANT</div><div class="card-type">Répondeur IA + Réservation auto</div></div></div><div class="card-body"><div class="problem">"On reçoit 50 appels par jour pour les mêmes questions — horaires, menu, réservations. On perd un temps fou..."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Manychat</div><div class="tool">Voiceflow</div><div class="tool">Cal.com</div><div class="tool">Make</div><div class="tool">Notion</div></div><div class="feats"><div class="feat"><span class="feat-icon">🤖</span><div class="feat-text"><strong>Répondeur IA Instagram/WhatsApp</strong> — répond aux questions 24h/24 (menu, horaires, allergènes)</div></div><div class="feat"><span class="feat-icon">📅</span><div class="feat-text"><strong>Réservation automatique Cal.com</strong> — le client réserve sans appeler, notification instantanée</div></div><div class="feat"><span class="feat-icon">📊</span><div class="feat-text"><strong>Dashboard Notion</strong> — toutes les réservations centralisées automatiquement</div></div><div class="feat"><span class="feat-icon">⭐</span><div class="feat-text"><strong>Relance avis Google automatique</strong> — 2h après le repas, demande d'avis 5 étoiles</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">🍕 Bot Instagram — La Bella Napoli</span><div class="live"><div class="live-dot"></div><span class="live-text">LIVE</span></div></div><div class="demo-chat"><div class="mm u">Vous êtes ouverts le dimanche ?</div><div class="mm b">Oui ! Nous sommes ouverts tous les jours de 12h à 14h30 et de 19h à 23h, y compris le dimanche 🍕 Vous souhaitez réserver ?</div><div class="mm u">Oui pour 2 personnes samedi à 20h</div><div class="mm b">Parfait ! Cliquez ici pour confirmer votre réservation 👉 [Lien Cal.com] Vous recevrez une confirmation par email automatiquement ✅</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">300-600€ setup + 80-150€/mois</div><div class="rev-sub">Temps de création : 3-5 heures</div></div></div></div></div></div>
-
-  <div class="sc" id="sc1"><div class="card"><div class="card-hdr"><div class="card-icon">✂️</div><div><div class="card-name">SALON DE COIFFURE</div><div class="card-type">Calendrier IA + Rappels automatiques</div></div></div><div class="card-body"><div class="problem">"Les clientes oublient leurs RDV, j'ai des trous dans mon agenda et je passe mon temps à répondre aux DMs..."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Cal.com</div><div class="tool">Manychat</div><div class="tool">Make</div><div class="tool">Notion</div></div><div class="feats"><div class="feat"><span class="feat-icon">📆</span><div class="feat-text"><strong>Calendrier numérique Cal.com</strong> — réservation en ligne, planning en temps réel</div></div><div class="feat"><span class="feat-icon">⏰</span><div class="feat-text"><strong>Rappels SMS/WhatsApp automatiques</strong> — 24h et 2h avant le RDV, réduit les no-shows de 60%</div></div><div class="feat"><span class="feat-icon">💬</span><div class="feat-text"><strong>Bot Instagram Manychat</strong> — répond aux questions et redirige vers la réservation</div></div><div class="feat"><span class="feat-icon">🎁</span><div class="feat-text"><strong>Programme fidélité auto</strong> — après 5 visites, réduction automatique envoyée</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">✂️ Bot Instagram — Salon Éclat</span><div class="live"><div class="live-dot"></div><span class="live-text">LIVE</span></div></div><div class="demo-chat"><div class="mm u">C'est combien pour une coloration ?</div><div class="mm b">Bonjour ! 💇‍♀️ Nos colorations sont à partir de 65€ selon la longueur. Vous souhaitez prendre RDV ?</div><div class="mm u">Oui vous avez quoi cette semaine ?</div><div class="mm b">Voici notre calendrier en ligne 👉 [Cal.com] Réservez directement, c'est confirmé instantanément ✨</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">250-500€ setup + 60-100€/mois</div><div class="rev-sub">Temps de création : 2-4 heures</div></div></div></div></div></div>
-
-  <div class="sc" id="sc2"><div class="card"><div class="card-hdr"><div class="card-icon">🏠</div><div><div class="card-name">AGENCE IMMOBILIÈRE</div><div class="card-type">Qualification IA + Suivi prospects auto</div></div></div><div class="card-body"><div class="problem">"Je passe des heures à qualifier des prospects qui ne sont pas sérieux. Je n'ai plus le temps pour les vrais acheteurs..."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Voiceflow</div><div class="tool">Make</div><div class="tool">Notion</div><div class="tool">Zapier</div></div><div class="feats"><div class="feat"><span class="feat-icon">🎯</span><div class="feat-text"><strong>Chatbot de qualification auto</strong> — pose les bonnes questions et score le prospect automatiquement</div></div><div class="feat"><span class="feat-icon">📊</span><div class="feat-text"><strong>CRM automatique Notion</strong> — chaque prospect qualifié ajouté avec son score et ses infos</div></div><div class="feat"><span class="feat-icon">📧</span><div class="feat-text"><strong>Séquence email automatique</strong> — envoie des biens correspondants au profil tous les 3 jours</div></div><div class="feat"><span class="feat-icon">📅</span><div class="feat-text"><strong>Prise de RDV automatique</strong> — les prospects chauds réservent une visite directement</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">🏠 Bot qualification — Immo Plus</span><div class="live"><div class="live-dot"></div><span class="live-text">LIVE</span></div></div><div class="demo-chat"><div class="mm u">Bonjour je cherche un appartement</div><div class="mm b">Bonjour ! 🏠 Quel est votre budget approximatif ?</div><div class="mm u">Entre 200 000 et 280 000€</div><div class="mm b">Super ! C'est pour un achat dans quel délai ? Immédiat, 3-6 mois, ou vous explorez encore ?</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">500-1200€ setup + 150-250€/mois</div><div class="rev-sub">Temps de création : 5-8 heures</div></div></div></div></div></div>
-
-  <div class="sc" id="sc3"><div class="card"><div class="card-hdr"><div class="card-icon">💪</div><div><div class="card-name">COACH / FORMATEUR</div><div class="card-type">Funnel IA + Closing automatique</div></div></div><div class="card-body"><div class="problem">"Je réponds aux mêmes questions dans mes DMs toute la journée. Je veux vendre mes programmes sans y passer toute mon énergie..."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Manychat</div><div class="tool">Systeme.io</div><div class="tool">Make</div><div class="tool">Cal.com</div></div><div class="feats"><div class="feat"><span class="feat-icon">🤖</span><div class="feat-text"><strong>Bot DM Instagram complet</strong> — répond aux questions, envoie les tarifs, gère les objections</div></div><div class="feat"><span class="feat-icon">📧</span><div class="feat-text"><strong>Séquence email nurturing</strong> — 7 emails automatiques qui réchauffent le prospect</div></div><div class="feat"><span class="feat-icon">📅</span><div class="feat-text"><strong>Appel découverte automatique</strong> — les prospects qualifiés réservent un call de 30min</div></div><div class="feat"><span class="feat-icon">💳</span><div class="feat-text"><strong>Page de vente + paiement intégré</strong> — Systeme.io avec relance panier abandonné</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">💪 Bot DM — Coach Thomas</span><div class="live"><div class="live-dot"></div><span class="live-text">LIVE</span></div></div><div class="demo-chat"><div class="mm u">C'est quoi ton programme de coaching ?</div><div class="mm b">Bonjour ! 💪 Mon programme Premium c'est 12 semaines de coaching 1-to-1. Quel est ton objectif principal ?</div><div class="mm u">Perdre 15kg et me remettre en forme</div><div class="mm b">C'est exactement pour ça que le programme est fait ! Réserve ton appel découverte gratuit ici 👉 [Cal.com] 🎯</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">400-800€ setup + 100-200€/mois</div><div class="rev-sub">Temps de création : 4-6 heures</div></div></div></div></div></div>
-
-  <div class="sc" id="sc4"><div class="card"><div class="card-hdr"><div class="card-icon">🧴</div><div><div class="card-name">INSTITUT ESTHÉTIQUE</div><div class="card-type">Réservation IA + Upsell automatique</div></div></div><div class="card-body"><div class="problem">"Je dois gérer les RDV, répondre aux questions, relancer les clientes... Je n'ai plus de temps pour mon métier."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Cal.com</div><div class="tool">Tidio</div><div class="tool">Make</div><div class="tool">Notion</div></div><div class="feats"><div class="feat"><span class="feat-icon">✨</span><div class="feat-text"><strong>Bot conseiller beauté IA</strong> — recommande les soins selon le type de peau</div></div><div class="feat"><span class="feat-icon">📆</span><div class="feat-text"><strong>Réservation en ligne 24h/24</strong> — agenda connecté avec confirmation et rappels SMS</div></div><div class="feat"><span class="feat-icon">💄</span><div class="feat-text"><strong>Upsell automatique</strong> — après chaque RDV, propose un soin complémentaire avec -15%</div></div><div class="feat"><span class="feat-icon">🎂</span><div class="feat-text"><strong>Message anniversaire auto</strong> — offre une remise le jour de l'anniversaire de chaque cliente</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">🧴 Bot — Institut Belle & Zen</span><div class="live"><div class="live-dot"></div><span class="live-text">LIVE</span></div></div><div class="demo-chat"><div class="mm u">Vous faites quoi pour peaux sensibles ?</div><div class="mm b">Pour les peaux sensibles, je recommande notre Soin Douceur Apaisante (75 min, 85€) ✨ Vous souhaitez réserver ?</div><div class="mm u">Oui samedi si possible</div><div class="mm b">Samedi il reste 10h00 et 14h30 📅 Je vous mets lequel ?</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">300-600€ setup + 80-120€/mois</div><div class="rev-sub">Temps de création : 3-5 heures</div></div></div></div></div></div>
-
-  <div class="sc" id="sc5"><div class="card"><div class="card-hdr"><div class="card-icon">🦷</div><div><div class="card-name">CABINET DENTAIRE</div><div class="card-type">RDV IA + Réduction no-shows</div></div></div><div class="card-body"><div class="problem">"30% de nos patients ne viennent pas à leurs RDV sans prévenir. On perd des milliers d'euros par mois..."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Cal.com</div><div class="tool">Make</div><div class="tool">Twilio</div><div class="tool">Notion</div></div><div class="feats"><div class="feat"><span class="feat-icon">📅</span><div class="feat-text"><strong>Prise de RDV en ligne 24h/24</strong> — les patients réservent sans appeler</div></div><div class="feat"><span class="feat-icon">📱</span><div class="feat-text"><strong>Rappels SMS automatiques</strong> — 48h, 24h et 2h avant avec demande de confirmation</div></div><div class="feat"><span class="feat-icon">🔄</span><div class="feat-text"><strong>Liste d'attente automatique</strong> — si annulation, les patients en attente sont prévenus</div></div><div class="feat"><span class="feat-icon">📊</span><div class="feat-text"><strong>Suivi patients Notion</strong> — historique, prochaine visite, rappel contrôle annuel</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">🦷 SMS automatique — Dr. Martin</span><div class="live"><div class="live-dot"></div><span class="live-text">AUTO</span></div></div><div class="demo-chat"><div class="mm b">Cabinet Dr. Martin : Rappel RDV demain 14h30. Confirmez avec OUI ou annulez avec NON 🦷</div><div class="mm u">OUI</div><div class="mm b">Parfait, votre RDV est confirmé ! À demain. Pensez à apporter votre carte vitale 📋</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">600-1000€ setup + 150-200€/mois</div><div class="rev-sub">Temps de création : 4-6 heures</div></div></div></div></div></div>
-
-  <div class="sc" id="sc6"><div class="card"><div class="card-hdr"><div class="card-icon">🚗</div><div><div class="card-name">GARAGE AUTOMOBILE</div><div class="card-type">Devis IA + Suivi réparation auto</div></div></div><div class="card-body"><div class="problem">"Les clients appellent pour des devis basiques... On perd un temps fou au téléphone au lieu de travailler sur les voitures."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Voiceflow</div><div class="tool">Make</div><div class="tool">Notion</div><div class="tool">Cal.com</div></div><div class="feats"><div class="feat"><span class="feat-icon">🔧</span><div class="feat-text"><strong>Bot devis automatique</strong> — le client décrit le problème, le bot calcule une estimation</div></div><div class="feat"><span class="feat-icon">📊</span><div class="feat-text"><strong>Suivi réparation temps réel</strong> — updates automatiques sur l'avancement</div></div><div class="feat"><span class="feat-icon">🔔</span><div class="feat-text"><strong>Alerte véhicule prêt</strong> — SMS automatique quand la voiture est prête</div></div><div class="feat"><span class="feat-icon">📅</span><div class="feat-text"><strong>Rappel entretien annuel</strong> — relance automatique 11 mois après le dernier passage</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">🚗 Bot — Garage Central Auto</span><div class="live"><div class="live-dot"></div><span class="live-text">LIVE</span></div></div><div class="demo-chat"><div class="mm u">Ma voiture fait un bruit bizarre au freinage</div><div class="mm b">🔧 Ce bruit peut indiquer une usure des plaquettes. C'est quel type — frottement, sifflement ?</div><div class="mm u">Un frottement métallique</div><div class="mm b">Urgence 🚨 Estimation : 80-150€. Je vous prends un créneau cette semaine ?</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">400-800€ setup + 100-150€/mois</div><div class="rev-sub">Temps de création : 4-7 heures</div></div></div></div></div></div>
-
-  <div class="sc" id="sc7"><div class="card"><div class="card-hdr"><div class="card-icon">🏋️</div><div><div class="card-name">SALLE DE SPORT</div><div class="card-type">Assistant IA + Rétention membres auto</div></div></div><div class="card-body"><div class="problem">"On perd 30% de nos membres chaque mois. Ils s'inscrivent, viennent 3 semaines, puis disparaissent..."</div><div class="tools-title">OUTILS UTILISÉS</div><div class="tools"><div class="tool">Manychat</div><div class="tool">Make</div><div class="tool">Notion</div><div class="tool">Cal.com</div></div><div class="feats"><div class="feat"><span class="feat-icon">💬</span><div class="feat-text"><strong>Bot d'accueil et d'info</strong> — tarifs, cours, horaires — répond 24h/24</div></div><div class="feat"><span class="feat-icon">🎯</span><div class="feat-text"><strong>Suivi motivation automatique</strong> — si absent 7 jours, message de relance motivant</div></div><div class="feat"><span class="feat-icon">📅</span><div class="feat-text"><strong>Réservation cours collectifs</strong> — place réservée en ligne, liste d'attente automatique</div></div><div class="feat"><span class="feat-icon">🏆</span><div class="feat-text"><strong>Programme fidélité auto</strong> — badges et récompenses selon l'assiduité</div></div></div><div class="demo"><div class="demo-bar"><span class="demo-label">🏋️ Message relance — Gym Élite</span><div class="live"><div class="live-dot"></div><span class="live-text">AUTO</span></div></div><div class="demo-chat"><div class="mm b">Hey Thomas ! 💪 Ça fait 8 jours qu'on ne t'a pas vu. Nouveaux cours HIIT mardi et jeudi à 19h — réserve ta place 👉</div><div class="mm u">Merci ! Je reviens demain c'est promis 😅</div><div class="mm b">Super ! Quel créneau te convient pour demain ?</div></div></div><div class="revenue"><div class="rev-icon">💰</div><div><div class="rev-text">400-700€ setup + 100-180€/mois</div><div class="rev-sub">Temps de création : 4-6 heures</div></div></div></div></div></div>
+<div class="stats">
+  <div class="stat"><span class="stat-n">5</span><span class="stat-l">Chapitres</span></div>
+  <div class="stat"><span class="stat-n">0</span><span class="stat-l">Code</span></div>
+  <div class="stat"><span class="stat-n">500+</span><span class="stat-l">EUR/client</span></div>
+  <div class="stat"><span class="stat-n">B2B</span><span class="stat-l">Cible</span></div>
 </div>
 
-<!-- APPS -->
-
-<div class="sec">
-  <div class="sec-title">12 APPS <span>NO-CODE</span></div>
-  <div class="sec-sub">Toutes gratuites ou freemium — zéro code</div>
-  <div class="app"><div class="app-icon">🔗</div><div><div class="app-name">MANYCHAT</div><div class="app-use">Chatbot Instagram & WhatsApp</div><div class="app-desc">Crée des bots DM automatiques en clics. Répond, envoie des liens, qualifie des prospects. Le plus utilisé pour les business locaux.</div></div></div>
-  <div class="app"><div class="app-icon">🎙️</div><div><div class="app-name">VOICEFLOW</div><div class="app-use">Chatbot IA avancé</div><div class="app-desc">Construit des chatbots IA sophistiqués avec des flux complexes. Idéal pour les sites web et le support client automatisé.</div></div></div>
-  <div class="app"><div class="app-icon">⚙️</div><div><div class="app-name">MAKE</div><div class="app-use">Automatisation — le cerveau du système</div><div class="app-desc">Connecte toutes tes apps. Nouveau RDV → SMS envoyé + ligne Notion créée + email de confirmation. Tout automatique.</div></div></div>
-  <div class="app"><div class="app-icon">📅</div><div><div class="app-name">CAL.COM</div><div class="app-use">Calendrier de réservation en ligne</div><div class="app-desc">Prise de RDV professionnelle. Le client choisit, confirme, reçoit tout automatiquement. Synchronisé Google Calendar. 100% gratuit.</div></div></div>
-  <div class="app"><div class="app-icon">📊</div><div><div class="app-name">NOTION</div><div class="app-use">CRM & base de données clients</div><div class="app-desc">CRM, dashboards, bases de données prospects. Connecté à Make, il se remplit automatiquement. Freemium.</div></div></div>
-  <div class="app"><div class="app-icon">⚡</div><div><div class="app-name">ZAPIER</div><div class="app-use">Alternative Make — plus simple</div><div class="app-desc">Plus intuitif pour commencer. Connecte 5000+ apps. Parfait pour les automatisations simples.</div></div></div>
-  <div class="app"><div class="app-icon">💬</div><div><div class="app-name">TIDIO</div><div class="app-use">Chat IA pour sites web</div><div class="app-desc">Chat en direct + IA sur n'importe quel site. Installation en 2 minutes. Répond aux visiteurs automatiquement.</div></div></div>
-  <div class="app"><div class="app-icon">📧</div><div><div class="app-name">SYSTEME.IO</div><div class="app-use">Tunnel de vente + email auto</div><div class="app-desc">Pages de vente, séquences email, tunnels complets. Plateforme tout-en-un française. Plan gratuit très généreux.</div></div></div>
-  <div class="app"><div class="app-icon">📱</div><div><div class="app-name">TWILIO</div><div class="app-use">SMS automatiques pro</div><div class="app-desc">Envoie des SMS automatiques depuis un numéro pro. Rappels, confirmations, alertes. Connecté à Make.</div></div></div>
-  <div class="app"><div class="app-icon">🤖</div><div><div class="app-name">CHATGPT API</div><div class="app-use">Intelligence artificielle personnalisée</div><div class="app-desc">Connecte GPT-4 à tes bots. Le bot répond de façon naturelle et intelligente. Tu configures la personnalité.</div></div></div>
-  <div class="app"><div class="app-icon">🌐</div><div><div class="app-name">WEBFLOW / FRAMER</div><div class="app-use">Sites web pro sans code</div><div class="app-desc">Sites web pros visuellement. Connecte Tidio, Cal.com, Systeme.io. Site complet sans toucher au code.</div></div></div>
-  <div class="app"><div class="app-icon">📋</div><div><div class="app-name">AIRTABLE</div><div class="app-use">Base de données avancée</div><div class="app-desc">Alternative Notion plus puissante. Parfait pour CRM complexes. S'automatise facilement avec Make.</div></div></div>
+<div class="tabs">
+  <button class="tab on" onclick="switchTab(0,this)">C est quoi</button>
+  <button class="tab" onclick="switchTab(1,this)">Services</button>
+  <button class="tab" onclick="switchTab(2,this)">Outils</button>
+  <button class="tab" onclick="switchTab(3,this)">Clients</button>
+  <button class="tab" onclick="switchTab(4,this)">Lancer</button>
 </div>
 
-<!-- PLAN -->
+<!-- PANEL 0 — C EST QUOI -->
+<div class="panel on" id="p0">
 
-<div class="sec">
-  <div class="sec-title">TON PLAN <span>EN 5 ÉTAPES</span></div>
-  <div class="sec-sub">De zéro à ton premier client en moins de 2 semaines</div>
-  <div style="margin-top:16px">
-    <div class="step"><div class="step-num">1</div><div><div class="step-title">Maîtrise 2-3 outils</div><div class="step-desc">Commence par <strong>Manychat + Cal.com + Make</strong>. 3-4h de tutos YouTube suffisent pour démarrer.</div><div class="step-badge"><span class="step-badge-text">⏱ 3-4 jours</span></div></div></div>
-    <div class="step"><div class="step-num">2</div><div><div class="step-title">Crée une démo fictive</div><div class="step-desc">Construis un bot pour un <strong>restaurant imaginaire</strong>. 2-3h de travail. C'est ce que tu montres aux prospects.</div><div class="step-badge"><span class="step-badge-text">⏱ 1-2 jours</span></div></div></div>
-    <div class="step"><div class="step-num">3</div><div><div class="step-title">Prospecte des business locaux</div><div class="step-desc">Identifie <strong>10 commerces près de chez toi</strong>. Message : "J'ai créé un système IA pour votre type de business — je peux vous faire une démo gratuite ?"</div><div class="step-badge"><span class="step-badge-text">⏱ 2-3 jours</span></div></div></div>
-    <div class="step"><div class="step-num">4</div><div><div class="step-title">Démo en 15 min et signe</div><div class="step-desc">Montre le problème qu'ils ont, montre ta solution, propose. <strong>Setup 300-600€ + maintenance mensuelle.</strong></div><div class="step-badge"><span class="step-badge-text">⏱ 1 semaine</span></div></div></div>
-    <div class="step"><div class="step-num">5</div><div><div class="step-title">Livre et encaisse</div><div class="step-desc">Adapte ta démo à leur business en 3-5h. Déploie. Facture. Répète. <strong>2-3 clients = 1000-2000€/mois récurrents.</strong></div><div class="step-badge"><span class="step-badge-text">⏱ 3-5 jours</span></div></div></div>
-  </div>
+<div class="lesson" id="l0">
+<div class="lhdr" onclick="toggleLesson(0)"><div class="lnum">01</div><div class="linfo"><div class="ltitle">C est quoi une agence IA No Code ?</div><div class="lmeta">Fondamentaux - 6 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Definition</div><div class="txt">Une agence IA No Code c est une structure qui vend des <strong>services bases sur l intelligence artificielle</strong> a des entreprises, sans ecrire une seule ligne de code. Tu utilises des outils IA existants et tu les combines pour creer de la valeur pour tes clients.</div></div>
+<div class="box box-a"><div class="box-t">Ce que tu vends concretement</div>
+<div class="kp"><span class="ki">&#129302;</span><span><strong>Chatbots IA</strong> pour sites web et reseaux sociaux</span></div>
+<div class="kp"><span class="ki">&#129302;</span><span><strong>Automatisation de contenu</strong> — posts, newsletters, fiches produit</span></div>
+<div class="kp"><span class="ki">&#129302;</span><span><strong>Assistants IA</strong> pour la prospection et le SAV</span></div>
+<div class="kp"><span class="ki">&#129302;</span><span><strong>Audit IA</strong> — tu analyses ce qu une entreprise pourrait automatiser</span></div>
+</div>
+<div class="box box-g"><div class="box-t">Pourquoi ca marche</div><div class="txt">Les PME et artisans <strong>ne savent pas utiliser l IA</strong> mais ils en entendent parler partout. Ils ont besoin de quelqu un pour le faire a leur place. Toi tu sais, eux non. C est la.</div></div>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
+</div>
 </div>
 
-<!-- TARIFS -->
-
-<div class="sec">
-  <div class="sec-title">TARIFS <span>RECOMMANDÉS</span></div>
-  <div class="sec-sub">Ce que tu peux facturer selon la complexité</div>
-  <div style="margin-top:16px">
-    <div class="tarif"><div><div class="tarif-name">Bot répondeur simple</div><div class="tarif-desc">Questions/réponses + lien RDV</div></div><div class="tarif-price">250-400€<span>/setup</span></div></div>
-    <div class="tarif"><div><div class="tarif-name">Calendrier + rappels auto</div><div class="tarif-desc">Cal.com + SMS automatiques</div></div><div class="tarif-price">300-500€<span>/setup</span></div></div>
-    <div class="tarif"><div><div class="tarif-name">Système complet</div><div class="tarif-desc">Bot + réservation + CRM + emails</div></div><div class="tarif-price">500-1200€<span>/setup</span></div></div>
-    <div class="tarif"><div><div class="tarif-name">Maintenance mensuelle</div><div class="tarif-desc">Mises à jour + support</div></div><div class="tarif-price">80-200€<span>/mois</span></div></div>
-    <div class="tarif" style="background:rgba(100,200,100,.04);border-color:rgba(100,200,100,.15)"><div><div class="tarif-name" style="color:#80d080">3 clients actifs</div><div class="tarif-desc">Maintenances récurrentes</div></div><div class="tarif-price" style="color:#80d080">300-600€<span>/mois passif</span></div></div>
-  </div>
+<div class="lesson" id="l1">
+<div class="lhdr" onclick="toggleLesson(1)"><div class="lnum">02</div><div class="linfo"><div class="ltitle">Pourquoi c est le meilleur moment</div><div class="lmeta">Contexte 2026 - 5 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Le marche en 2026</div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>93% des PME</strong> ne sont pas encore equipees en IA</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span>Les outils IA sont devenus <strong>simples et accessibles</strong> — mais les entreprises ne savent pas les utiliser</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span>La demande explose mais l <strong>offre de proximite</strong> est quasi inexistante</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span>Un restaurant a Aix-en-Provence n ira pas chercher une grande agence parisienne</span></div>
+</div>
+<div class="box box-gold"><div class="box-t">Ton avantage concurrentiel</div><div class="txt">Tu es local, tu parles leur langue, tu proposes des tarifs adaptes. Une grande agence facture 5000EUR/mois. <strong>Toi tu commences a 300-500EUR et tu gardes le client des annees.</strong></div></div>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
+</div>
 </div>
 
-<!-- CTA -->
-
-<div class="cta-sec">
-  <div class="cta-box">
-    <div class="cta-title">PRÊT À LANCER ?</div>
-    <div class="cta-sub">Tu as les outils, les clients cibles, les tarifs et le plan. Il reste qu'à passer à l'action.</div>
-    <a href="https://instagram.com/mathisdgtmk" class="cta-btn">DM MATHIS POUR TE LANCER</a>
-  </div>
+<div class="lesson" id="l2">
+<div class="lhdr" onclick="toggleLesson(2)"><div class="lnum">03</div><div class="linfo"><div class="ltitle">Etude de cas — 0 a 3500EUR/mois</div><div class="lmeta">Cas reel - 5 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="cs"><div class="cs-hdr">Agence IA locale — 6 mois</div>
+<div class="cs-body">
+<div class="cs-row"><span class="cs-l">Localisation</span><span class="cs-v">Marseille</span></div>
+<div class="cs-row"><span class="cs-l">Cible</span><span class="cs-v">Restaurants et commerces locaux</span></div>
+<div class="cs-row"><span class="cs-l">Service principal</span><span class="cs-v">Contenu reseaux sociaux IA</span></div>
+<div class="cs-row"><span class="cs-l">Tarif mensuel</span><span class="cs-v gold">350EUR/mois/client</span></div>
+<div class="cs-row"><span class="cs-l">Clients mois 3</span><span class="cs-v">4 clients</span></div>
+<div class="cs-row"><span class="cs-l">Revenu mois 6</span><span class="cs-v g">3 500EUR/mois</span></div>
+<div class="cs-q">"J ai commence avec 3 restaurants du quartier. Je leur creais 15 posts par mois avec ChatGPT + Canva. En 2 heures de travail par client. Apres 6 mois j avais 10 clients."</div>
+</div></div>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
+</div>
 </div>
 
 </div>
-<div class="toast" id="toast"></div>
+
+<!-- PANEL 1 — SERVICES -->
+<div class="panel" id="p1">
+
+<div class="sec">Les services a proposer</div>
+
+<div class="service-card">
+<div class="sc-top"><div><div class="sc-name">Gestion reseaux sociaux IA</div></div><div class="sc-price">300-600EUR<span>/mois</span></div></div>
+<div class="sc-desc">Tu generes le contenu avec l IA (ChatGPT, Claude), tu crees les visuels (Canva IA) et tu publies. 10-20 posts par mois. 2-3h de travail par client.</div>
+<div class="sc-tools"><span class="sc-tool">ChatGPT</span><span class="sc-tool">Claude</span><span class="sc-tool">Canva IA</span><span class="sc-tool">Buffer</span></div>
+</div>
+
+<div class="service-card">
+<div class="sc-top"><div><div class="sc-name">Chatbot IA pour site web</div></div><div class="sc-price">400-800EUR<span>setup + 150EUR/mois</span></div></div>
+<div class="sc-desc">Tu installes un chatbot IA sur le site du client pour repondre aux questions automatiquement 24h/24. Zero code — tu utilises Tidio, Crisp ou Botpress.</div>
+<div class="sc-tools"><span class="sc-tool">Tidio</span><span class="sc-tool">Crisp</span><span class="sc-tool">Botpress</span><span class="sc-tool">ChatGPT API</span></div>
+</div>
+
+<div class="service-card">
+<div class="sc-top"><div><div class="sc-name">Automatisation emails et SAV</div></div><div class="sc-price">250-500EUR<span>/mois</span></div></div>
+<div class="sc-desc">Tu configures des sequences email IA pour les nouveaux clients, les relances, les newsletters. Tu utilises Systeme.io ou Mailchimp avec des textes generes par IA.</div>
+<div class="sc-tools"><span class="sc-tool">Systeme.io</span><span class="sc-tool">Mailchimp</span><span class="sc-tool">Claude</span></div>
+</div>
+
+<div class="service-card">
+<div class="sc-top"><div><div class="sc-name">Audit IA pour entreprise</div></div><div class="sc-price">300-700EUR<span>one-shot</span></div></div>
+<div class="sc-desc">Tu analyses le business du client et identifies ce qui peut etre automatise avec l IA. Tu livres un rapport avec les recommandations et les outils. Porte d entree parfaite pour signer un contrat mensuel.</div>
+<div class="sc-tools"><span class="sc-tool">Claude</span><span class="sc-tool">ChatGPT</span><span class="sc-tool">Notion IA</span></div>
+</div>
+
+<div class="service-card">
+<div class="sc-top"><div><div class="sc-name">Fiches produit et SEO IA</div></div><div class="sc-price">200-400EUR<span>/mois</span></div></div>
+<div class="sc-desc">Pour les e-commercants : tu generes des fiches produit, descriptions optimisees SEO et contenus blogs avec l IA. Facile, rapide et tres demande.</div>
+<div class="sc-tools"><span class="sc-tool">Claude</span><span class="sc-tool">ChatGPT</span><span class="sc-tool">SEMrush</span></div>
+</div>
+
+<div class="lesson" id="l3">
+<div class="lhdr" onclick="toggleLesson(3)"><div class="lnum">&#128176;</div><div class="linfo"><div class="ltitle">Simulateur de revenus agence</div><div class="lmeta">Calcule ton potentiel</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div style="background:#0a0a10;border:1px solid rgba(155,89,255,.12);border-radius:5px;padding:12px">
+<div class="r2">
+<div class="c"><span class="lbl">Nombre de clients</span><input class="inp" id="ag-c" type="number" value="5" oninput="calcAgence()"></div>
+<div class="c"><span class="lbl">Tarif mensuel moyen (EUR)</span><input class="inp" id="ag-t" type="number" value="400" oninput="calcAgence()"></div>
+</div>
+<span class="lbl">Heures par client par mois</span>
+<input class="inp" id="ag-h" type="number" value="4" oninput="calcAgence()">
+<div class="sim">
+<div class="sim-row"><span class="sim-l">Revenu mensuel</span><span class="sim-v p" id="ag-rev">2000EUR</span></div>
+<div class="sim-row"><span class="sim-l">Heures totales</span><span class="sim-v" id="ag-hrs">20h</span></div>
+<div class="sim-row"><span class="sim-l">Taux horaire effectif</span><span class="sim-v g" id="ag-taux">100EUR/h</span></div>
+<div class="sim-row"><span class="sim-l">Revenu annuel</span><span class="sim-v" id="ag-ann">24000EUR</span></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- PANEL 2 — OUTILS -->
+<div class="panel" id="p2">
+
+<div class="sec">Les outils essentiels — tous gratuits ou peu chers</div>
+
+<div class="lesson" id="l4">
+<div class="lhdr" onclick="toggleLesson(4)"><div class="lnum">&#129302;</div><div class="linfo"><div class="ltitle">Outils IA de creation de contenu</div><div class="lmeta">Les indispensables</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Generation de texte</div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>ChatGPT (GPT-4o)</strong> — le plus polyvalent. 20USD/mois. Idéal pour posts, emails, fiches produit.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Claude (Anthropic)</strong> — meilleur pour les longs formats et la nuance. Parfait pour les rapports et audits.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Mistral / Llama</strong> — alternatives gratuites pour les budgets seres.</span></div>
+</div>
+<div class="box box-a"><div class="box-t">Creation visuelle</div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Canva IA</strong> — generation de visuels, templates pro, magic write. Gratuit + Pro 13EUR/mois.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Midjourney</strong> — visuels premium et originaux. 10USD/mois. Niveau agence.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Adobe Firefly</strong> — integration Creative Cloud. Pour les clients qui exigent du premium.</span></div>
+</div>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+
+<div class="lesson" id="l5">
+<div class="lhdr" onclick="toggleLesson(5)"><div class="lnum">&#128736;</div><div class="linfo"><div class="ltitle">Outils d automatisation No Code</div><div class="lmeta">Faire sans coder</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Automatisation et workflows</div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Make (ex-Integromat)</strong> — connecte tous tes outils entre eux. Automatise les posts, les emails, les relances. Gratuit jusqu a 1000 operations/mois.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Zapier</strong> — plus simple que Make. Ideal pour les debutants. 100 zaps gratuits.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>n8n</strong> — open source, hebergeable. Pour les workflows avances sans payer.</span></div>
+</div>
+<div class="box box-a"><div class="box-t">Chatbots et SAV</div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Tidio</strong> — chatbot pour site web, integration GPT. Gratuit jusqu a 50 conversations/mois.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Botpress</strong> — chatbot avance No Code avec IA integree. Gratuit pour debuter.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Manychat</strong> — chatbot Instagram et Facebook. Automatise les DMs des clients de tes clients.</span></div>
+</div>
+<div class="box box-a"><div class="box-t">Publication et gestion reseaux</div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Buffer</strong> — programme les posts sur tous les reseaux. Gratuit jusqu a 3 canaux.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Later</strong> — specialise Instagram. Preview du feed, hashtags IA.</span></div>
+</div>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+
+<div class="lesson" id="l6">
+<div class="lhdr" onclick="toggleLesson(6)"><div class="lnum">&#128196;</div><div class="linfo"><div class="ltitle">Outils de gestion et livraison client</div><div class="lmeta">Professionnaliser</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Facturation et paiement</div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Stripe</strong> — paiements en ligne, abonnements mensuels automatiques. Indispensable.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Sumeria / Shine</strong> — compte pro pour auto-entrepreneur, facturation integree.</span></div>
+</div>
+<div class="box box-a"><div class="box-t">Livraison et relation client</div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Notion</strong> — espace client partage. Tu livres tes contenus dans un Notion partage. Pro et simple.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Google Drive</strong> — alternative gratuite. Dossier partage par client.</span></div>
+<div class="kp"><span class="ki">&#11088;</span><span><strong>Loom</strong> — envoie des videos explicatives a tes clients. Montre comment ca marche. Gratuit.</span></div>
+</div>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+
+</div>
+
+<!-- PANEL 3 — CLIENTS -->
+<div class="panel" id="p3">
+
+<div class="sec">Trouver et closer ses premiers clients</div>
+
+<div class="lesson" id="l7">
+<div class="lhdr" onclick="toggleLesson(7)"><div class="lnum">04</div><div class="linfo"><div class="ltitle">Les meilleures cibles B2B</div><div class="lmeta">Qui prospecter - 8 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">Top 5 niches B2B locales</div>
+<div class="kp"><span class="ki">&#127869;</span><span><strong>Restaurants et cafes</strong> — besoin de contenu constant, budget present, decision rapide</span></div>
+<div class="kp"><span class="ki">&#128134;</span><span><strong>Artisans et BTP</strong> — plombiers, electriciens, peintres. Quasi zero presence digitale. Facile a convaincre.</span></div>
+<div class="kp"><span class="ki">&#128138;</span><span><strong>Instituts beaute et wellness</strong> — Instagram tres important pour eux. Budget marketing existant.</span></div>
+<div class="kp"><span class="ki">&#127968;</span><span><strong>Agents immobiliers</strong> — gros budget, besoin de contenu regulier, concurrence forte = besoin d IA.</span></div>
+<div class="kp"><span class="ki">&#128200;</span><span><strong>Coachs et consultants</strong> — comprennent la valeur du digital, budget present.</span></div>
+</div>
+<div class="box box-gold"><div class="box-t">Comment les approcher</div>
+<div class="kp"><span class="ki">&#128205;</span><span><strong>Physiquement</strong> — entre dans le restaurant ou l institut et parle au gerant directement. Taux de conversion tres eleve.</span></div>
+<div class="kp"><span class="ki">&#128241;</span><span><strong>Instagram</strong> — DM professionnel avec une proposition concrete et differenciante.</span></div>
+<div class="kp"><span class="ki">&#128140;</span><span><strong>Email</strong> — trouve le contact sur Google My Business et envoie un email personnalise.</span></div>
+</div>
+<a class="ia-btn" href="module-generateurs.html">&#9889; GENERER MON EMAIL DE PROSPECTION B2B</a>
+<button class="btn btn-g" onclick="toast('Lecon validee !')" style="margin-top:8px">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+
+<div class="lesson" id="l8">
+<div class="lhdr" onclick="toggleLesson(8)"><div class="lnum">05</div><div class="linfo"><div class="ltitle">Le pitch parfait en moins de 2 minutes</div><div class="lmeta">Closer - 8 min</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="box box-a"><div class="box-t">La structure du pitch</div><div class="steps">
+<div class="step"><div class="step-n">1</div><div><div class="step-t">L accroche — leur probleme</div><div class="step-d">"Je vois que vous postez peu sur Instagram. Vous n avez pas le temps de faire du contenu regulier ?"</div></div></div>
+<div class="step"><div class="step-n">2</div><div><div class="step-t">La solution — ce que tu fais</div><div class="step-d">"Je gere ca pour vous avec l IA. Je cree 15 posts par mois adaptes a votre business, vous n avez rien a faire."</div></div></div>
+<div class="step"><div class="step-n">3</div><div><div class="step-t">La preuve — montre un exemple</div><div class="step-d">Montre un exemple de post cree pour un client similaire depuis ton tel.</div></div></div>
+<div class="step"><div class="step-n">4</div><div><div class="step-t">L offre — simple et concrete</div><div class="step-d">"C est 350EUR par mois. Et on commence avec un mois d essai — si vous etes pas satisfait vous payez pas le deuxieme."</div></div></div>
+</div></div>
+<div class="box box-gold"><div class="box-t">L offre d essai — ta cle de closing</div><div class="txt">Proposer un <strong>premier mois avec garantie satisfait ou rembourse</strong> eliminse 80% des hesitations. Les clients signent parce qu ils n ont rien a perdre.</div></div>
+<button class="btn btn-g" onclick="toast('Lecon validee !')">MARQUER COMME VU &#10003;</button>
+</div>
+</div>
+
+<div class="lesson" id="l9">
+<div class="lhdr" onclick="toggleLesson(9)"><div class="lnum">06</div><div class="linfo"><div class="ltitle">Checklist avant de prospecter</div><div class="lmeta">Preparation</div></div><div class="larr">&#9658;</div></div>
+<div class="lbody">
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tu as defini ton service principal (ex: reseaux sociaux IA)</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tu as cree 2-3 exemples de posts pour montrer aux prospects</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tu as un tarif clair (ex: 350EUR/mois)</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tu as prepare ton pitch en moins de 2 minutes</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tu as un contrat simple pret (1 page suffit)</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tu as un moyen d encaisser (Stripe ou virement)</span></div>
+<div class="cl-item" onclick="this.classList.toggle('done')"><div class="cl-box">&#10003;</div><span class="cl-txt">Tu as identifie 10 entreprises a prospecter cette semaine</span></div>
+<button class="btn btn-g" onclick="toast('Pret a prospecter !')" style="margin-top:10px">CHECKLIST VALIDEE &#10003;</button>
+</div>
+</div>
+
+</div>
+
+<!-- PANEL 4 — LANCER -->
+<div class="panel" id="p4">
+
+<div class="sec">Plan de lancement 30 jours</div>
+
+<div class="box box-a">
+<div class="box-t">Semaine 1 — Preparer</div>
+<div class="txt">
+<strong>Choisir ton service</strong> — commence avec un seul : reseaux sociaux IA ou chatbot.<br><br>
+<strong>Creer 3 exemples</strong> — prends 3 business fictifs ou de vraies enseignes et cree des posts pour eux avec l IA. Ce sont tes exemples de portfolio.<br><br>
+<strong>Fixer ton tarif</strong> — 300-400EUR/mois pour commencer. Tu augmenteras apres.
+</div>
+</div>
+
+<div class="box box-a">
+<div class="box-t">Semaine 2 — Prospecter</div>
+<div class="txt">
+<strong>10 prospects par jour</strong> — en physique, par DM ou par email. Ne lance pas de pub, commence par du direct.<br><br>
+<strong>Objectif : 2-3 rendez-vous</strong> dans la semaine. Un rendez-vous sur 10 contacts c est un bon ratio.<br><br>
+<strong>Pitche et propose l essai gratuit.</strong> La plupart des hesitations disparaissent avec le premier mois garanti.
+</div>
+</div>
+
+<div class="box box-a">
+<div class="box-t">Semaine 3-4 — Executer et livrer</div>
+<div class="txt">
+<strong>Signe ton premier client.</strong> Facture le et commence immediatement.<br><br>
+<strong>Sur-livre le premier mois</strong> — donne plus que prevu. C est ce qui cree la fidelisation et les recommandations.<br><br>
+<strong>Demande un temoignage</strong> a la fin du mois. Un client satisfait = ta meilleure pub pour signer le suivant.
+</div>
+</div>
+
+<div class="box box-g">
+<div class="box-t">Objectif fin du mois 1</div>
+<div class="txt">
+<strong>2-3 clients a 350EUR/mois = 700-1050EUR de MRR.</strong><br><br>
+En mois 2 tu doubles en t appuyant sur les recommandations. En mois 3-4 tu as 8-10 clients et tu depasses les 3000EUR/mois.
+</div>
+</div>
+
+<a href="dashboard.html" style="display:block;margin-top:6px;background:linear-gradient(135deg,#9b59ff,#6a3abf);border-radius:4px;padding:14px;text-align:center;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff">RETOUR AU DASHBOARD</a>
+
+</div>
+
+<div class="nav">
+  <a class="nav-item" href="dashboard.html"><span class="nav-ic">&#127968;</span><span class="nav-lb">Accueil</span></a>
+  <a class="nav-item" href="module-ia-tool.html"><span class="nav-ic">&#129302;</span><span class="nav-lb">IA Suite</span></a>
+  <a class="nav-item" href="arguments-vente.html"><span class="nav-ic">&#128172;</span><span class="nav-lb">Vente</span></a>
+  <a class="nav-item" href="module-generateurs.html"><span class="nav-ic">&#9889;</span><span class="nav-lb">Generateurs</span></a>
+</div>
+
+<div class="toast" id="tk"></div>
+
 <script>
-
-document.querySelectorAll(”.sc”).forEach(function(s){s.classList.remove(“active”)});
-el.classList.add(“active”);
-document.getElementById(“sc”+i).classList.add(“active”);
+function switchTab(i,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  el.classList.add('on');
+  document.getElementById('p'+i).classList.add('on');
+  window.scrollTo(0,0);
 }
+function toggleLesson(i){document.getElementById('l'+i).classList.toggle('open')}
+function calcAgence(){
+  var c=parseFloat(document.getElementById('ag-c').value)||0;
+  var t=parseFloat(document.getElementById('ag-t').value)||0;
+  var h=parseFloat(document.getElementById('ag-h').value)||1;
+  var rev=c*t,hrs=c*h,taux=hrs?Math.round(rev/hrs):0;
+  var er=document.getElementById('ag-rev');if(er)er.textContent=rev.toLocaleString('fr-FR')+'EUR';
+  var eh=document.getElementById('ag-hrs');if(eh)eh.textContent=hrs+'h';
+  var et=document.getElementById('ag-taux');if(et)et.textContent=taux+'EUR/h';
+  var ea=document.getElementById('ag-ann');if(ea)ea.textContent=(rev*12).toLocaleString('fr-FR')+'EUR';
+}
+function toast(m){
+  var t=document.getElementById('tk');
+  t.textContent=m;t.style.display='block';
+  setTimeout(function(){t.style.display='none'},2500);
+}
+calcAgence();
 </script>
-
 </body>
 </html>
