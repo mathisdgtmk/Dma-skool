@@ -1,353 +1,489 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>DMA — Arguments de Vente</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{background:#050505;color:#f5f0e8;font-family:Montserrat,Arial,sans-serif;min-height:100vh}
-.hdr{position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid rgba(201,168,76,.1);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
-.hdr-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:rgba(245,240,232,.4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-.hdr-title{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:3px;color:#C9A84C}
-.hero{padding:28px 20px 20px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center}
-.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:5px 14px;margin-bottom:14px;background:rgba(201,168,76,.05)}
-.hero-title{font-family:Bebas Neue,Impact,sans-serif;font-size:clamp(28px,8vw,42px);letter-spacing:3px;color:#f5f0e8;line-height:1;margin-bottom:8px}
-.hero-title span{color:#C0001A}
-.hero-sub{font-family:Cormorant Garamond,Georgia,serif;font-size:14px;font-style:italic;color:rgba(245,240,232,.4);line-height:1.6}
+body{background:#0d0d0f;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:80px}
+.hdr{position:sticky;top:0;z-index:99;background:#0d0d0f;border-bottom:1px solid rgba(192,0,26,.2);height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.hdr a{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hdr-t{font-size:12px;font-weight:800;letter-spacing:3px;color:#C0001A}
+.hero{padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,.05);text-align:center}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(192,0,26,.7);margin-bottom:8px}
+.hero-t{font-size:24px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.2}
+.hero-t span{color:#C9A84C}
+.hero-s{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6}
 
-/* SECTIONS */
-.section{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
-.s-title{font-family:Bebas Neue,Impact,sans-serif;font-size:20px;letter-spacing:3px;color:#f5f0e8;margin-bottom:4px}
-.s-title span{color:#C0001A}
-.s-sub{font-size:12px;font-style:italic;color:rgba(245,240,232,.35);margin-bottom:16px}
+/* TABS */
+.tabs{display:flex;overflow-x:auto;background:#080810;border-bottom:1px solid rgba(255,255,255,.06);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:12px 14px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;white-space:nowrap}
+.tab.on{color:#C0001A;border-bottom-color:#C0001A}
 
-/* ARGUMENT CARDS */
-.arg-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-bottom:10px;position:relative;overflow:hidden}
-.arg-card::before{content:””;position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#C0001A,#C9A84C)}
-.arg-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:6px}
-.arg-title{font-family:Bebas Neue,Impact,sans-serif;font-size:16px;letter-spacing:2px;color:#C9A84C;margin-bottom:8px}
-.arg-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.75);line-height:1.75}
-.arg-text strong{color:#f5f0e8;font-weight:600}
-.arg-copy{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:6px 12px;font-size:9px;font-weight:700;letter-spacing:1.5px;color:#C9A84C;margin-top:10px;cursor:pointer;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif;display:inline-block}
+.panel{display:none;padding:14px 14px 40px}
+.panel.on{display:block}
 
-/* SCRIPT CARDS */
-.script-card{background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:6px;overflow:hidden;margin-bottom:12px}
-.script-header{background:#161b22;border-bottom:1px solid rgba(255,255,255,.06);padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
-.script-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A84C}
-.script-copy{background:rgba(201,168,76,.1);border:none;border-radius:3px;padding:4px 10px;font-size:9px;font-weight:600;color:#C9A84C;cursor:pointer;letter-spacing:1px;-webkit-appearance:none;font-family:Montserrat,Arial,sans-serif}
-.script-body{padding:14px}
-.script-line{font-size:12px;font-weight:300;color:rgba(245,240,232,.8);line-height:1.85;margin-bottom:6px;padding-left:12px;position:relative}
-.script-line::before{content:“▸”;position:absolute;left:0;color:rgba(201,168,76,.4);font-size:10px;top:3px}
-.script-line strong{color:#C9A84C;font-weight:600}
-.script-line em{color:rgba(245,240,232,.4);font-style:italic}
+/* SECTION */
+.sec{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.6);padding:16px 0 8px}
 
-/* OBJECTIONS */
-.objection-card{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);border-radius:4px;padding:14px;margin-bottom:10px;cursor:pointer}
-.objection-card.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
-.obj-header{display:flex;align-items:center;justify-content:space-between}
-.obj-q{font-size:12px;font-weight:600;color:#ff7070;padding-right:10px}
-.obj-icon{width:22px;height:22px;flex-shrink:0;border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s;font-size:12px;color:#C9A84C}
-.objection-card.open .obj-icon{transform:rotate(45deg)}
-.obj-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
-.objection-card.open .obj-answer{max-height:500px}
-.obj-text{font-size:12px;font-weight:300;color:rgba(245,240,232,.7);line-height:1.75;padding-top:12px}
-.obj-text strong{color:#C9A84C;font-weight:600}
+/* PROFIL CARD */
+.profil{background:#0a0a0f;border:1px solid rgba(255,255,255,.06);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.profil-hdr{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.profil-ic{font-size:22px;flex-shrink:0}
+.profil-info{flex:1}
+.profil-name{font-size:13px;font-weight:800;color:#fff;display:block;margin-bottom:2px}
+.profil-sub{font-size:10px;color:rgba(255,255,255,.35)}
+.profil-arr{font-size:10px;color:rgba(255,255,255,.2);transition:transform .2s;flex-shrink:0}
+.profil.open .profil-arr{transform:rotate(90deg)}
+.profil-body{display:none;padding:4px 16px 16px}
+.profil.open .profil-body{display:block}
 
-/* TABLEAU COMPARATIF */
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px}
-.comp-table{width:100%;border-collapse:collapse;min-width:300px}
-.comp-table th{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.15);padding:10px 12px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C9A84C;text-align:left}
-.comp-table td{border:1px solid rgba(255,255,255,.06);padding:10px 12px;font-size:12px;color:rgba(245,240,232,.7)}
-.comp-table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
-.comp-table .check{color:#80d080;font-size:14px}
-.comp-table .cross{color:#ff7070;font-size:14px}
+/* OBJECTION */
+.obj{background:#080810;border:1px solid rgba(255,255,255,.05);border-radius:6px;margin-bottom:8px;overflow:hidden}
+.obj-hdr{padding:12px 14px;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between}
+.obj-q{font-size:12px;font-weight:700;color:#fff}
+.obj-arr{font-size:10px;color:rgba(255,255,255,.2);transition:transform .2s;flex-shrink:0;margin-left:8px}
+.obj.open .obj-arr{transform:rotate(90deg)}
+.obj-body{display:none;padding:4px 14px 14px}
+.obj.open .obj-body{display:block}
+.obj-label{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(192,0,26,.7);margin-bottom:6px}
+.obj-rep{font-size:12px;color:rgba(255,255,255,.6);line-height:1.7;font-style:italic;background:rgba(192,0,26,.04);border-left:2px solid rgba(192,0,26,.3);padding:10px 12px;border-radius:0 4px 4px 0}
+.obj-tip{font-size:11px;color:rgba(201,168,76,.6);margin-top:8px;line-height:1.6}
+.obj-tip strong{color:#C9A84C}
 
-/* INFO BLOCK */
-.info-block{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:14px 16px;margin-bottom:12px;display:flex;gap:10px}
-.info-icon{font-size:18px;flex-shrink:0}
-.info-text{font-size:12px;color:rgba(245,240,232,.7);line-height:1.6}
-.info-text strong{color:#C9A84C}
+/* SCRIPT DM */
+.script{background:#080810;border:1px solid rgba(201,168,76,.15);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.script-hdr{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.script-t{font-size:12px;font-weight:800;color:#fff}
+.script-tag{font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;background:rgba(201,168,76,.1);color:#C9A84C;border:1px solid rgba(201,168,76,.2);border-radius:3px}
+.script-arr{font-size:10px;color:rgba(255,255,255,.2);transition:transform .2s}
+.script.open .script-arr{transform:rotate(90deg)}
+.script-body{display:none;padding:4px 16px 16px}
+.script.open .script-body{display:block}
+.msg{background:rgba(255,255,255,.04);border-radius:12px 12px 12px 0;padding:10px 14px;margin-bottom:6px;font-size:12px;color:rgba(255,255,255,.7);line-height:1.7;position:relative}
+.msg strong{color:#fff}
+.msg-label{font-size:8px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:4px;display:block}
+.msg-copy{position:absolute;top:8px;right:10px;font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(201,168,76,.5);cursor:pointer;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:3px 8px}
 
-.footer{padding:32px 20px 60px;text-align:center}
-.footer-logo{font-family:Bebas Neue,Impact,sans-serif;font-size:13px;letter-spacing:5px;color:rgba(245,240,232,.08)}
-.footer-logo span{color:rgba(201,168,76,.15)}
+/* KP */
+.kp{display:flex;gap:10px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:7px;line-height:1.5;align-items:flex-start}
+.ki{flex-shrink:0;margin-top:1px}
 
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:4px;display:none;z-index:200;white-space:nowrap}
+/* BOX */
+.box{border-radius:5px;padding:12px 14px;margin-bottom:10px}
+.box-g{background:rgba(62,207,142,.05);border:1px solid rgba(62,207,142,.12)}
+.box-r{background:rgba(192,0,26,.05);border:1px solid rgba(192,0,26,.15)}
+.box-gold{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12)}
+.box-t{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.box-g .box-t{color:#3ecf8e}.box-r .box-t{color:#C0001A}.box-gold .box-t{color:#C9A84C}
+.txt{font-size:12px;color:rgba(255,255,255,.55);line-height:1.8}
+.txt strong{color:#fff}
+
+/* BADGE */
+.badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:3px}
+.b-r{background:rgba(192,0,26,.1);color:#C0001A;border:1px solid rgba(192,0,26,.2)}
+.b-g{background:rgba(62,207,142,.08);color:#3ecf8e;border:1px solid rgba(62,207,142,.2)}
+.b-gold{background:rgba(201,168,76,.08);color:#C9A84C;border:1px solid rgba(201,168,76,.2)}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#C9A84C;color:#000;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
+
+/* NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(3,3,8,.97);border-top:1px solid rgba(255,255,255,.06);display:flex;height:62px;backdrop-filter:blur(20px);z-index:100}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;text-decoration:none}
+.nav-ic{font-size:18px}
+.nav-lb{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3)}
 </style>
-
 </head>
 <body>
 
 <div class="hdr">
-  <a class="hdr-back" href="dashboard.html">← Retour</a>
-  <div class="hdr-title">ARGUMENTS DE VENTE</div>
+  <a href="dashboard.html">&#8592; Retour</a>
+  <div class="hdr-t">ARGUMENTS DE VENTE</div>
+  <div style="width:60px"></div>
 </div>
 
 <div class="hero">
-  <div class="hero-tag">💰 Bonus DMA</div>
-  <div class="hero-title">ARGUMENTS<br><span>DE VENTE</span></div>
-  <div class="hero-sub">Tout ce qu'il faut savoir pour vendre la DMA<br>et convaincre chaque prospect</div>
+  <div class="hero-tag">Bonus 03 — Closer la DMA</div>
+  <div class="hero-t">Vendre la DMA<span> a tout le monde</span></div>
+  <div class="hero-s">Scripts DM, reponses aux objections et arguments par profil. Tout ce qu il te faut pour closer.</div>
 </div>
 
-<!-- POURQUOI LA DMA -->
-
-<div class="section">
-  <div class="s-title">POURQUOI <span>LA DMA ?</span></div>
-  <div class="s-sub">Les arguments béton à utiliser avec chaque prospect</div>
-
-  <div class="arg-card">
-    <div class="arg-num">Argument 01</div>
-    <div class="arg-title">TON PROPRE SITE — PAS UNE APPLI</div>
-    <div class="arg-text">La DMA n'est pas sur Skool ou une plateforme tierce. <strong>Tu accèdes depuis ton navigateur</strong>, sur n'importe quel appareil. Pas de téléchargement, pas de compte à créer — juste un identifiant et un code. C'est pro, c'est simple, c'est immédiat.</div>
-    <button class="arg-copy" onclick="copyArg(0)">COPIER L'ARGUMENT</button>
-  </div>
-
-  <div class="arg-card">
-    <div class="arg-num">Argument 02</div>
-    <div class="arg-title">MRR 100% — ZERO COMMISSION</div>
-    <div class="arg-text">Tu gardes <strong>100% de ce que tu vends</strong>. Pas de commission, pas d'intermédiaire. Tu revends la formation au prix que tu veux. Tes clients peuvent faire pareil. C'est un système qui se multiplie tout seul.</div>
-    <button class="arg-copy" onclick="copyArg(1)">COPIER L'ARGUMENT</button>
-  </div>
-
-  <div class="arg-card">
-    <div class="arg-num">Argument 03</div>
-    <div class="arg-title">28 MODULES — TOUT EST INCLUS</div>
-    <div class="arg-text">Mindset, Instagram, TikTok, Snapchat, Closing, Live TikTok, VSL, Funnels, MRR, Scaling, Légal, B2B... <strong>Rien à acheter en plus.</strong> Une seule formation, tout ce qu'il faut pour lancer et scaler.</div>
-    <button class="arg-copy" onclick="copyArg(2)">COPIER L'ARGUMENT</button>
-  </div>
-
-  <div class="arg-card">
-    <div class="arg-num">Argument 04</div>
-    <div class="arg-title">ACCÈS À VIE — MISES À JOUR INCLUSES</div>
-    <div class="arg-text">Tu paies une fois, tu accèdes à vie. <strong>Pas d'abonnement mensuel.</strong> Toutes les mises à jour futures sont incluses. La formation évolue avec le marché — tu ne paies jamais plus.</div>
-    <button class="arg-copy" onclick="copyArg(3)">COPIER L'ARGUMENT</button>
-  </div>
-
-  <div class="arg-card">
-    <div class="arg-num">Argument 05</div>
-    <div class="arg-title">PAIEMENT EN PLUSIEURS FOIS</div>
-    <div class="arg-text">Le prix n'est plus une excuse. <strong>4x 62€ via PayPal</strong> pour le Starter, <strong>3x 116€ via Klarna</strong> pour le Premium. Soit moins que ton abonnement Netflix par semaine pour changer ta situation financière.</div>
-    <button class="arg-copy" onclick="copyArg(4)">COPIER L'ARGUMENT</button>
-  </div>
-
-  <div class="arg-card">
-    <div class="arg-num">Argument 06</div>
-    <div class="arg-title">BONUS AGENCE IA NO-CODE</div>
-    <div class="arg-text">En plus de la formation, tu accèdes au <strong>Bonus Agence IA</strong> — lance ton agence digitale alimentée par l'IA sans coder. Outils, workflows, clients. Un bonus qui vaut à lui seul le prix de la formation.</div>
-    <button class="arg-copy" onclick="copyArg(5)">COPIER L'ARGUMENT</button>
-  </div>
+<div class="tabs">
+  <button class="tab on" onclick="switchTab(0,this)">Par profil</button>
+  <button class="tab" onclick="switchTab(1,this)">Objections</button>
+  <button class="tab" onclick="switchTab(2,this)">Scripts DM</button>
+  <button class="tab" onclick="switchTab(3,this)">Arguments cles</button>
 </div>
 
-<!-- COMPARATIF -->
+<!-- PANEL 0 — PAR PROFIL -->
+<div class="panel on" id="p0">
 
-<div class="section">
-  <div class="s-title">COMPARATIF <span>CONCURRENCE</span></div>
-  <div class="s-sub">Montre pourquoi la DMA est le meilleur choix</div>
-  <div class="table-wrap">
-    <table class="comp-table">
-      <tr><th>Caracteristique</th><th>DMA</th><th>Autres formations</th></tr>
-      <tr><td>Prix</td><td>249€ ou 349€</td><td>500€ a 2000€+</td></tr>
-      <tr><td>MRR 100%</td><td><span class="check">✓</span> Inclus</td><td><span class="cross">✗</span> Rarement</td></tr>
-      <tr><td>Acces a vie</td><td><span class="check">✓</span> Oui</td><td><span class="cross">✗</span> Abonnement</td></tr>
-      <tr><td>Paiement fractionne</td><td><span class="check">✓</span> 3x ou 4x</td><td><span class="cross">✗</span> Rarement</td></tr>
-      <tr><td>Bonus IA inclus</td><td><span class="check">✓</span> Oui</td><td><span class="cross">✗</span> Non</td></tr>
-      <tr><td>Support direct</td><td><span class="check">✓</span> DM Mathis</td><td><span class="cross">✗</span> Forum</td></tr>
-      <tr><td>Zero telechargement</td><td><span class="check">✓</span> 100% web</td><td><span class="cross">✗</span> Appli requise</td></tr>
-    </table>
+<div class="sec">Les 6 profils et comment les approcher</div>
+
+<div class="profil" id="pr0">
+<div class="profil-hdr" onclick="toggleProfil(0)">
+  <span class="profil-ic">&#127891;</span>
+  <div class="profil-info"><span class="profil-name">L etudiant</span><span class="profil-sub">Veut un revenu complementaire sans quitter ses etudes</span></div>
+  <span class="profil-arr">&#9658;</span>
+</div>
+<div class="profil-body">
+  <div class="box box-gold"><div class="box-t">Ce qu il veut entendre</div><div class="txt">Il ne veut pas d un job etudiant. Il veut generer de l argent <strong>en dehors des cours</strong>, depuis son tel ou son ordi.</div></div>
+  <div class="box box-g"><div class="box-t">Ton angle d attaque</div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Commence par lui demander s il cherche un revenu complementaire pendant ses etudes</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Montre que <strong>la 1ere vente DMA rembourse tout</strong> — donc risque zero</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Mets en avant les droits MRR : il peut revendre a ses potes etudiants</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Parle du coaching 1-1 : il sera guide, pas seul</span></div>
   </div>
+  <div class="box box-r"><div class="box-t">Sa peur principale</div><div class="txt">Il a peur de depenser 397EUR et que ca ne marche pas. Rappelle lui que <strong>1 seule vente = rembourse</strong>. Et que le paiement en 4x PayPal c est ~100EUR/mois.</div></div>
+  <div class="badge-row"><span class="badge b-gold">MRR</span><span class="badge b-g">1ere vente = remboursé</span><span class="badge b-r">4x PayPal ~100EUR</span></div>
+</div>
 </div>
 
-<!-- SCRIPTS DM -->
-
-<div class="section">
-  <div class="s-title">SCRIPTS <span>DE VENTE DMA</span></div>
-  <div class="s-sub">Utilise ces scripts mot pour mot en DM</div>
-
-  <div class="script-card">
-    <div class="script-header">
-      <span class="script-label">Ouverture froide</span>
-      <button class="script-copy" onclick="copyScript(0)">COPIER</button>
-    </div>
-    <div class="script-body" id="scr0">
-      <div class="script-line"><strong>"Hey [Prenom] ! T'es sur quoi en ce moment pour generer des revenus en ligne ?"</strong></div>
-      <div class="script-line"><em>→ Attends la reponse. Ne pitche pas encore.</em></div>
-    </div>
+<div class="profil" id="pr1">
+<div class="profil-hdr" onclick="toggleProfil(1)">
+  <span class="profil-ic">&#128188;</span>
+  <div class="profil-info"><span class="profil-name">Le salarie qui veut partir</span><span class="profil-sub">Travaille mais cherche une sortie</span></div>
+  <span class="profil-arr">&#9658;</span>
+</div>
+<div class="profil-body">
+  <div class="box box-gold"><div class="box-t">Ce qu il veut entendre</div><div class="txt">Il veut construire un <strong>revenu parallele a son salaire</strong> avant de quitter son emploi. Il a besoin de securite.</div></div>
+  <div class="box box-g"><div class="box-t">Ton angle d attaque</div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Insiste sur le fait qu il peut commencer <strong>en parallele de son job</strong>, le soir et le weekend</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Montre que les 7 business models permettent de choisir celui qui prend le moins de temps au debut</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Le MRR lui permet de revendre pendant son temps libre</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>397EUR = moins d un mois de salaire et potentiellement sa liberte financiere</span></div>
   </div>
-
-  <div class="script-card">
-    <div class="script-header">
-      <span class="script-label">Apres avoir identifie le besoin</span>
-      <button class="script-copy" onclick="copyScript(1)">COPIER</button>
-    </div>
-    <div class="script-body" id="scr1">
-      <div class="script-line"><strong>"J'ai quelque chose qui correspond exactement a ce que tu cherches."</strong></div>
-      <div class="script-line"><strong>"La DMA c'est 28 modules pour apprendre a vendre en ligne — avec les droits de revente a 100%. Tu gardes tout ce que tu vends."</strong></div>
-      <div class="script-line"><strong>"C'est 249€ en une fois ou 4x 62€ via PayPal. T'as des questions ?"</strong></div>
-      <div class="script-line"><em>→ Silence apres le prix. Laisse reagir.</em></div>
-    </div>
-  </div>
-
-  <div class="script-card">
-    <div class="script-header">
-      <span class="script-label">Relance 24h apres</span>
-      <button class="script-copy" onclick="copyScript(2)">COPIER</button>
-    </div>
-    <div class="script-body" id="scr2">
-      <div class="script-line"><strong>"Hey [Prenom] ! T'as eu le temps de reflechir ?"</strong></div>
-      <div class="script-line"><strong>"Je voulais juste te dire que l'offre a 249€ est limitee. Apres ca remonte a 499€."</strong></div>
-      <div class="script-line"><strong>"Si tu veux on peut faire le paiement en 4x via PayPal pour que ce soit plus simple pour toi."</strong></div>
-    </div>
-  </div>
-
-  <div class="script-card">
-    <div class="script-header">
-      <span class="script-label">Pour les indecis</span>
-      <button class="script-copy" onclick="copyScript(3)">COPIER</button>
-    </div>
-    <div class="script-body" id="scr3">
-      <div class="script-line"><strong>"Je comprends l'hesitation. Laisse moi te poser une question."</strong></div>
-      <div class="script-line"><strong>"Dans 6 mois, tu veux etre dans la meme situation ou tu veux avoir avance ?"</strong></div>
-      <div class="script-line"><strong>"La DMA c'est pas une depense — c'est un investissement. Ta premiere vente rembourse la formation."</strong></div>
-    </div>
-  </div>
-
-  <div class="script-card">
-    <div class="script-header">
-      <span class="script-label">Pour pitcher le Premium 349€</span>
-      <button class="script-copy" onclick="copyScript(4)">COPIER</button>
-    </div>
-    <div class="script-body" id="scr4">
-      <div class="script-line"><strong>"Si tu veux aller encore plus vite, j'ai une offre Premium a 349€."</strong></div>
-      <div class="script-line"><strong>"En plus des 28 modules tu as un coaching direct avec moi — je te suis de A a Z jusqu'a ta premiere vente."</strong></div>
-      <div class="script-line"><strong>"Disponible en 3x 116€ via Klarna. Seulement quelques places dispo."</strong></div>
-    </div>
-  </div>
+  <div class="badge-row"><span class="badge b-gold">En parallele du job</span><span class="badge b-g">7 business models</span><span class="badge b-r">Liberte financiere</span></div>
+</div>
 </div>
 
-<!-- OBJECTIONS -->
-
-<div class="section">
-  <div class="s-title">OBJECTIONS <span>& REPONSES</span></div>
-  <div class="s-sub">Clique pour voir la reponse exacte</div>
-
-  <div class="objection-card" onclick="this.classList.toggle('open')">
-    <div class="obj-header"><div class="obj-q">"C'est trop cher"</div><div class="obj-icon">+</div></div>
-    <div class="obj-answer"><div class="obj-text"><strong>Ne baisse jamais le prix en premier.</strong> Creuse d'abord : "Par rapport a quoi ?"<br><br>"Si tu fais une seule vente avec ce que t'apprend la formation, elle est remboursee. Et avec le MRR tu peux revendre la formation le meme prix. <strong>C'est pas un cout, c'est un multiplicateur.</strong>"<br><br>Si besoin : propose le paiement en 4x 62€ via PayPal.</div></div>
+<div class="profil" id="pr2">
+<div class="profil-hdr" onclick="toggleProfil(2)">
+  <span class="profil-ic">&#128640;</span>
+  <div class="profil-info"><span class="profil-name">L entrepreneur debutant</span><span class="profil-sub">Veut lancer mais ne sait pas quoi</span></div>
+  <span class="profil-arr">&#9658;</span>
+</div>
+<div class="profil-body">
+  <div class="box box-gold"><div class="box-t">Ce qu il veut entendre</div><div class="txt">Il a la motivation mais pas la direction. Il a besoin qu on lui montre <strong>exactement quoi faire et dans quel ordre</strong>.</div></div>
+  <div class="box box-g"><div class="box-t">Ton angle d attaque</div>
+    <div class="kp"><span class="ki">&#128161;</span><span>La DMA c est 7 business models : il n a pas a choisir avant d acheter, le coaching 1-1 l aide a choisir</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>28 modules = un plan complet etape par etape</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Les outils IA font le travail technique a sa place</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Il peut commencer par revendre la DMA pour financer son vrai business</span></div>
   </div>
-
-  <div class="objection-card" onclick="this.classList.toggle('open')">
-    <div class="obj-header"><div class="obj-q">"Je vais reflechir"</div><div class="obj-icon">+</div></div>
-    <div class="obj-answer"><div class="obj-text">"Je vais reflechir" = il y a une objection cachee.<br><br><strong>"Bien sur, prends ton temps. Juste pour comprendre — c'est quoi exactement qui te fait hesiter ? Le prix, le timing, ou autre chose ?"</strong><br><br>La vraie objection sort ici. Traite-la — ne laisse jamais partir sans connaitre le vrai blocage.</div></div>
-  </div>
-
-  <div class="objection-card" onclick="this.classList.toggle('open')">
-    <div class="obj-header"><div class="obj-q">"J'ai pas le temps"</div><div class="obj-icon">+</div></div>
-    <div class="obj-answer"><div class="obj-text"><strong>"L'acces est a vie — tu commences quand tu veux, a ton rythme."</strong><br><br>"Mais je te pose la question : si tu commences pas maintenant, quand tu comptes commencer ? Dans 6 mois les conditions seront exactement les memes et tu auras perdu 6 mois."</div></div>
-  </div>
-
-  <div class="objection-card" onclick="this.classList.toggle('open')">
-    <div class="obj-header"><div class="obj-q">"J'ai deja essaye, ca marche pas"</div><div class="obj-icon">+</div></div>
-    <div class="obj-answer"><div class="obj-text">Valide d'abord, ne te defends pas :<br><br><strong>"T'as raison, beaucoup de formations sont creuses. C'est pour ca que la DMA est differente — c'est pas de la theorie, c'est des actions concretes etape par etape."</strong><br><br>Puis montre les preuves : resultats membres, screenshots, temoignages.</div></div>
-  </div>
-
-  <div class="objection-card" onclick="this.classList.toggle('open')">
-    <div class="obj-header"><div class="obj-q">"C'est quoi le MRR exactement ?"</div><div class="obj-icon">+</div></div>
-    <div class="obj-answer"><div class="obj-text"><strong>"MRR = Master Resell Rights = droits de revente."</strong><br><br>"Tu achetes la formation une fois. Tu peux la revendre au meme prix — 249€ ou plus. Tu gardes 100% de ce que tu encaisses. Pas de commission, pas d'intermédiaire.<br><br>Tes clients peuvent faire pareil. C'est un systeme qui se multiplie automatiquement."</div></div>
-  </div>
-
-  <div class="objection-card" onclick="this.classList.toggle('open')">
-    <div class="obj-header"><div class="obj-q">"C'est pas une pyramide de Ponzi ?"</div><div class="obj-icon">+</div></div>
-    <div class="obj-answer"><div class="obj-text">Non et voila pourquoi :<br><br><strong>"Un Ponzi c'est quand les anciens sont payes par les nouveaux. Ici tu vends un VRAI produit — 28 modules de formation avec une vraie valeur. Le contenu existe independamment des ventes."</strong><br><br>"C'est comme acheter une licence de logiciel et avoir le droit de le revendre. Totalement legal et transparent."</div></div>
-  </div>
+  <div class="badge-row"><span class="badge b-gold">Plan etape par etape</span><span class="badge b-g">Coaching 1-1</span><span class="badge b-r">IA Suite Pro</span></div>
+</div>
 </div>
 
-<!-- TIPS -->
-
-<div class="section">
-  <div class="s-title">REGLES D'OR <span>POUR VENDRE</span></div>
-  <div class="s-sub">Les principes qui font la difference</div>
-
-  <div class="info-block">
-    <div class="info-icon">🎯</div>
-    <div class="info-text"><strong>Qualifie avant de pitcher.</strong> Pose 2-3 questions sur leur situation avant de parler de la DMA. Plus tu comprends leur probleme, plus ton pitch sera percutant.</div>
+<div class="profil" id="pr3">
+<div class="profil-hdr" onclick="toggleProfil(3)">
+  <span class="profil-ic">&#128247;</span>
+  <div class="profil-info"><span class="profil-name">Le creator ou influenceur</span><span class="profil-sub">A une audience mais ne la monetise pas</span></div>
+  <span class="profil-arr">&#9658;</span>
+</div>
+<div class="profil-body">
+  <div class="box box-gold"><div class="box-t">Ce qu il veut entendre</div><div class="txt">Il passe des heures a creer du contenu sans gagner un euro. Il a besoin d apprendre <strong>comment monetiser son audience</strong>.</div></div>
+  <div class="box box-g"><div class="box-t">Ton angle d attaque</div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Il a deja l audience — il lui manque juste le produit a vendre. Le MRR lui donne ce produit immediatement</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Les modules Instagram, TikTok et Live Selling sont faits pour son profil</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>UGC = il peut aussi se faire payer par des marques pour son contenu</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Il va vendre la DMA a sa communaute et garder 100%</span></div>
   </div>
-  <div class="info-block">
-    <div class="info-icon">🤫</div>
-    <div class="info-text"><strong>Silence apres le prix.</strong> Dis le prix et dis rien. La premiere personne qui parle apres le prix est en position de faiblesse. Laisse le prospect reagir.</div>
-  </div>
-  <div class="info-block">
-    <div class="info-icon">🔄</div>
-    <div class="info-text"><strong>La relance est obligatoire.</strong> 80% des ventes se font apres le 5eme contact. Si t'as pas de reponse apres 24h, relance. Si toujours rien apres 48h, relance encore.</div>
-  </div>
-  <div class="info-block">
-    <div class="info-icon">📸</div>
-    <div class="info-text"><strong>La preuve sociale bat tout.</strong> Un screenshot d'un membre satisfait vaut 10 arguments. Collecte les temoignages et utilise-les systematiquement dans tes DM.</div>
-  </div>
-  <div class="info-block">
-    <div class="info-icon">⚡</div>
-    <div class="info-text"><strong>L'urgence accelere la decision.</strong> "L'offre a 249€ est limitee", "il reste X places au prix de lancement". L'urgence reelle ou percue pousse a l'action.</div>
-  </div>
+  <div class="badge-row"><span class="badge b-gold">MRR sur son audience</span><span class="badge b-g">UGC</span><span class="badge b-r">Instagram + TikTok</span></div>
+</div>
 </div>
 
-<div class="footer"><div class="footer-logo">DM<span>A</span></div></div>
-<div class="toast" id="toast"></div>
+<div class="profil" id="pr4">
+<div class="profil-hdr" onclick="toggleProfil(4)">
+  <span class="profil-ic">&#128257;</span>
+  <div class="profil-info"><span class="profil-name">Celui qui veut juste revendre</span><span class="profil-sub">Son objectif = MRR, revenus rapides</span></div>
+  <span class="profil-arr">&#9658;</span>
+</div>
+<div class="profil-body">
+  <div class="box box-gold"><div class="box-t">Ce qu il veut entendre</div><div class="txt">Il cherche un business simple avec un produit qui se vend. Il veut <strong>acheter, revendre, encaisser</strong>. Pas complique.</div></div>
+  <div class="box box-g"><div class="box-t">Ton angle d attaque</div>
+    <div class="kp"><span class="ki">&#128161;</span><span>C est le profil le plus simple a closer : montre lui juste que 1 vente = remboursé, 2 ventes = 397EUR de profit</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Donne lui les scripts DM inclus dans la DMA : il peut commencer a vendre le jour meme</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Insiste sur l acces aux outils IA : ils generent ses scripts de vente automatiquement</span></div>
+  </div>
+  <div class="badge-row"><span class="badge b-gold">1 vente = remboursé</span><span class="badge b-g">Scripts inclus</span><span class="badge b-r">Revenus rapides</span></div>
+</div>
+</div>
+
+<div class="profil" id="pr5">
+<div class="profil-hdr" onclick="toggleProfil(5)">
+  <span class="profil-ic">&#127912;</span>
+  <div class="profil-info"><span class="profil-name">Le freelance ou creatif</span><span class="profil-sub">A des competences mais pas assez de clients</span></div>
+  <span class="profil-arr">&#9658;</span>
+</div>
+<div class="profil-body">
+  <div class="box box-gold"><div class="box-t">Ce qu il veut entendre</div><div class="txt">Il sait faire des choses (video, design, redaction) mais ne sait pas comment <strong>trouver des clients et se vendre</strong>.</div></div>
+  <div class="box box-g"><div class="box-t">Ton angle d attaque</div>
+    <div class="kp"><span class="ki">&#128161;</span><span>UGC Creator : ses competences video valent 150-600EUR par video aupres des marques</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>SMMA Agency : il peut proposer ses services en social media management a des business locaux</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Prospection B2B : la DMA lui apprend exactement comment trouver et closer des clients</span></div>
+    <div class="kp"><span class="ki">&#128161;</span><span>Et en parallele il peut revendre la DMA avec le MRR</span></div>
+  </div>
+  <div class="badge-row"><span class="badge b-gold">UGC</span><span class="badge b-g">SMMA</span><span class="badge b-r">B2B + MRR</span></div>
+</div>
+</div>
+
+</div>
+
+<!-- PANEL 1 — OBJECTIONS -->
+<div class="panel" id="p1">
+
+<div class="sec">Les objections les plus courantes</div>
+
+<div class="obj" id="o0">
+<div class="obj-hdr" onclick="toggleObj(0)"><span class="obj-q">"C est trop cher pour moi"</span><span class="obj-arr">&#9658;</span></div>
+<div class="obj-body">
+<div class="obj-label">Ta reponse</div>
+<div class="obj-rep">"Je comprends. Mais regarde : une seule vente de la DMA te rembourse les 397EUR integralement. Ca veut dire que ton risque reel c est zero. Et si tu veux etaler, c est possible en 2x, 3x avec Klarna ou 4x avec PayPal — la ca fait ~100EUR par mois."</div>
+<div class="obj-tip"><strong>Tips :</strong> Propose toujours le 4x PayPal en dernier recours. La plupart des objections prix disparaissent quand ils voient ~100EUR/mois.</div>
+</div>
+</div>
+
+<div class="obj" id="o1">
+<div class="obj-hdr" onclick="toggleObj(1)"><span class="obj-q">"J ai deja achete des formations qui m ont rien appris"</span><span class="obj-arr">&#9658;</span></div>
+<div class="obj-body">
+<div class="obj-label">Ta reponse</div>
+<div class="obj-rep">"C est exactement pour ca que la DMA est differente. D abord tu as un coaching 1-1 avec moi — pas un formulaire, pas un bot, un vrai appel. Et surtout, avec les droits MRR, tu n as pas besoin que la formation marche pour etre rentable : une seule vente et tu es remboursé."</div>
+<div class="obj-tip"><strong>Tips :</strong> Insiste sur le coaching individuel et sur le fait que le MRR casse le risque financier.</div>
+</div>
+</div>
+
+<div class="obj" id="o2">
+<div class="obj-hdr" onclick="toggleObj(2)"><span class="obj-q">"J ai pas le temps"</span><span class="obj-arr">&#9658;</span></div>
+<div class="obj-body">
+<div class="obj-label">Ta reponse</div>
+<div class="obj-rep">"La DMA c est pas un emploi a plein temps. Les modules sont courts, accessibles depuis ton tel. Et le business model MRR par exemple peut se faire en quelques DMs par jour. Je connais des membres qui ont fait leur premiere vente en moins d une semaine en y consacrant 30 minutes par jour."</div>
+<div class="obj-tip"><strong>Tips :</strong> Sois concret sur le temps requis. 30 min par jour ca parle a tout le monde.</div>
+</div>
+</div>
+
+<div class="obj" id="o3">
+<div class="obj-hdr" onclick="toggleObj(3)"><span class="obj-q">"Je suis nul en marketing / technologie"</span><span class="obj-arr">&#9658;</span></div>
+<div class="obj-body">
+<div class="obj-label">Ta reponse</div>
+<div class="obj-rep">"C est justement fait pour ca. T as les 28 modules qui partent de zero, les outils IA qui font le travail a ta place et un coaching 1-1 pour t accompagner. T as pas besoin de savoir quoi que ce soit avant de commencer."</div>
+<div class="obj-tip"><strong>Tips :</strong> Montre lui les generateurs IA si possible — ca demontre visuellement que c est simple.</div>
+</div>
+</div>
+
+<div class="obj" id="o4">
+<div class="obj-hdr" onclick="toggleObj(4)"><span class="obj-q">"Je vais y reflechir"</span><span class="obj-arr">&#9658;</span></div>
+<div class="obj-body">
+<div class="obj-label">Ta reponse</div>
+<div class="obj-rep">"Je comprends, c est normal de pas se precipiter. Dis moi, qu est ce qui te fait hesiter exactement ? Le prix, le contenu, ou tu n es pas sur que ca va marcher pour toi ? Parce que selon ce que c est, j ai peut-etre une reponse concrete."</div>
+<div class="obj-tip"><strong>Tips :</strong> Ne laisse jamais filer un "j y reflechis" sans poser une question. C est presque toujours une objection cachee.</div>
+</div>
+</div>
+
+<div class="obj" id="o5">
+<div class="obj-hdr" onclick="toggleObj(5)"><span class="obj-q">"Ca marche vraiment ?"</span><span class="obj-arr">&#9658;</span></div>
+<div class="obj-body">
+<div class="obj-label">Ta reponse</div>
+<div class="obj-rep">"La meilleure preuve c est les droits MRR. Si la formation ne marchait pas, personne ne la revendrait. Et pourtant les membres la revendent parce qu elle vend — parce qu elle donne de la valeur reelle. Moi je te parle depuis ma propre experience avec la DMA."</div>
+<div class="obj-tip"><strong>Tips :</strong> Utilise ta propre experience. T es la preuve vivante que ca marche puisque tu la revends.</div>
+</div>
+</div>
+
+<div class="obj" id="o6">
+<div class="obj-hdr" onclick="toggleObj(6)"><span class="obj-q">"C est quoi le MRR exactement ?"</span><span class="obj-arr">&#9658;</span></div>
+<div class="obj-body">
+<div class="obj-label">Ta reponse</div>
+<div class="obj-rep">"MRR = Master Resell Rights. Ca veut dire qu en achetant la DMA tu obtiens aussi le droit de la revendre a 397EUR et de garder 100% de l argent. Pas de commission, pas de partage. Tu vends, tu gardes tout. Une vente = tu es rembourse. Deux ventes = 397EUR de profit net."</div>
+<div class="obj-tip"><strong>Tips :</strong> Toujours illustrer avec des chiffres concrets. Deux ventes = 397EUR de profit, ca parle.</div>
+</div>
+</div>
+
+</div>
+
+<!-- PANEL 2 — SCRIPTS DM -->
+<div class="panel" id="p2">
+
+<div class="sec">Scripts DM prets a envoyer</div>
+
+<div class="script" id="sc0">
+<div class="script-hdr" onclick="toggleScript(0)">
+  <span class="script-t">Approche froide — Accroche curiosite</span>
+  <div style="display:flex;align-items:center;gap:8px"><span class="script-tag">Froid</span><span class="script-arr">&#9658;</span></div>
+</div>
+<div class="script-body">
+<div class="msg">
+  <span class="msg-label">Message 1</span>
+  <span class="msg-copy" onclick="copyMsg(0)">Copier</span>
+  Yo [prenom], t es dans quoi en ce moment niveau business / revenus en ligne ?
+</div>
+<div class="msg">
+  <span class="msg-label">Message 2 (apres reponse)</span>
+  <span class="msg-copy" onclick="copyMsg(1)">Copier</span>
+  Ah cool. Moi je travaille sur un truc qui m a permis de generer mes premiers revenus en ligne depuis quelques semaines. Ca m interesse de savoir si ca pourrait t aller aussi — t as 2 minutes ?
+</div>
+<div class="msg">
+  <span class="msg-label">Message 3 (si oui)</span>
+  <span class="msg-copy" onclick="copyMsg(2)">Copier</span>
+  Parfait. En gros c est une formation complete sur le marketing digital avec des droits de revente inclus. Ca s appelle la DMA. Le principe c est simple : tu l achetes 397EUR, tu la revends 397EUR et tu gardes 100%. Une vente et tu es rembourse. Je t envoie les infos ?
+</div>
+</div>
+</div>
+
+<div class="script" id="sc1">
+<div class="script-hdr" onclick="toggleScript(1)">
+  <span class="script-t">Approche tiede — Quelqu un qui vous suit</span>
+  <div style="display:flex;align-items:center;gap:8px"><span class="script-tag">Tiede</span><span class="script-arr">&#9658;</span></div>
+</div>
+<div class="script-body">
+<div class="msg">
+  <span class="msg-label">Message 1</span>
+  <span class="msg-copy" onclick="copyMsg(3)">Copier</span>
+  Yo [prenom] ! Je te vois souvent sur mes posts — t es curieux par rapport au business en ligne ou c est juste par interet general ?
+</div>
+<div class="msg">
+  <span class="msg-label">Message 2</span>
+  <span class="msg-copy" onclick="copyMsg(4)">Copier</span>
+  Ah super. Parce que je viens de debloquer quelque chose qui m a change la game : une formation complete avec les droits de revente. Ca veut dire qu en l achetant tu peux la revendre et garder 100%. T as deja entendu parler du MRR ?
+</div>
+</div>
+</div>
+
+<div class="script" id="sc2">
+<div class="script-hdr" onclick="toggleScript(2)">
+  <span class="script-t">Relance — Prospect qui n a pas repondu</span>
+  <div style="display:flex;align-items:center;gap:8px"><span class="script-tag">Relance</span><span class="script-arr">&#9658;</span></div>
+</div>
+<div class="script-body">
+<div class="msg">
+  <span class="msg-label">Message relance (apres 2-3 jours)</span>
+  <span class="msg-copy" onclick="copyMsg(5)">Copier</span>
+  Yo, je voulais juste verifier que tu as bien recu mon message. Pas de pression du tout — si c est pas le bon moment c est ok. Mais si t es toujours curieux par rapport aux revenus en ligne, je suis dispo.
+</div>
+</div>
+</div>
+
+<div class="script" id="sc3">
+<div class="script-hdr" onclick="toggleScript(3)">
+  <span class="script-t">Closing — Quand le prospect est chaud</span>
+  <div style="display:flex;align-items:center;gap:8px"><span class="script-tag">Closing</span><span class="script-arr">&#9658;</span></div>
+</div>
+<div class="script-body">
+<div class="msg">
+  <span class="msg-label">Message closing</span>
+  <span class="msg-copy" onclick="copyMsg(6)">Copier</span>
+  Pour rejoindre c est simple : tu vas sur mathisdrt.store, tu choisis ton paiement (comptant, 2x, Klarna 3x ou PayPal 4x) et t as acces immediat a tout. Le coaching 1-1 on le planifie apres ton inscription. Dis moi si tu veux qu on le fasse maintenant.
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- PANEL 3 — ARGUMENTS CLES -->
+<div class="panel" id="p3">
+
+<div class="sec">Les arguments qui font la difference</div>
+
+<div class="box box-gold">
+<div class="box-t">L argument numero 1 — Le MRR</div>
+<div class="txt">
+<strong>1 vente = investissement rembourse.</strong><br><br>
+C est l argument le plus puissant et il fonctionne sur tous les profils. Tu n as pas a convaincre que la formation va les rendre riches. Tu dois juste leur montrer que le risque est nul : une seule vente et ils ont recupere leur mise.
+</div>
+</div>
+
+<div class="box box-g">
+<div class="box-t">L argument numero 2 — La completude</div>
+<div class="txt">
+<strong>28 modules + 7 business models = tout dans un seul endroit.</strong><br><br>
+La plupart des formations n enseignent qu une chose. La DMA couvre tout le marketing digital plus 7 facons de gagner de l argent. Peu importe le profil de ton prospect, il y a quelque chose pour lui.
+</div>
+</div>
+
+<div class="box box-r">
+<div class="box-t">L argument numero 3 — L IA</div>
+<div class="txt">
+<strong>13 outils IA qui font le travail a sa place.</strong><br><br>
+Scripts DM, hooks, contenu, generateurs de niche, SEO Etsy... Ca repond directement a l objection "je suis pas doue en marketing". L IA fait le gros du travail.
+</div>
+</div>
+
+<div class="box box-gold">
+<div class="box-t">L argument numero 4 — Le coaching</div>
+<div class="txt">
+<strong>Un appel individuel offert.</strong><br><br>
+Ca rassure les hesitants. Ils savent qu ils ne seront pas seuls. Et ca te donne l occasion de creer un lien, de comprendre leur profil et de les orienter vers le bon business model.
+</div>
+</div>
+
+<div class="box box-g">
+<div class="box-t">Les facilites de paiement — ton arme secrete</div>
+<div class="txt">
+<strong>Toujours mentionner les options de paiement.</strong><br><br>
+&#128176; Comptant : 397EUR via ta page de vente<br>
+&#128176; 2x : 199 + 198EUR via ta page<br>
+&#128176; 3x : ~133EUR/mois via Klarna<br>
+&#128176; 4x : ~100EUR/mois via PayPal<br><br>
+Quand quelqu un dit "c est trop cher", passe directement au 4x PayPal. ~100EUR/mois ca stoppe la plupart des objections prix.
+</div>
+</div>
+
+</div>
+
+<div class="nav">
+  <a class="nav-item" href="dashboard.html">
+    <span class="nav-ic">&#127968;</span>
+    <span class="nav-lb">Accueil</span>
+  </a>
+  <a class="nav-item" href="module-ia-tool.html">
+    <span class="nav-ic">&#129302;</span>
+    <span class="nav-lb">IA Suite</span>
+  </a>
+  <a class="nav-item" href="module-business-models.html">
+    <span class="nav-ic">&#128200;</span>
+    <span class="nav-lb">Business</span>
+  </a>
+  <a class="nav-item" href="module-generateurs.html">
+    <span class="nav-ic">&#9889;</span>
+    <span class="nav-lb">Generateurs</span>
+  </a>
+</div>
+
+<div class="toast" id="tk"></div>
 
 <script>
-var user = JSON.parse(sessionStorage.getItem("dma_user") || "null");
-if (!user) window.location.href = "index.html";
-
-var args = [
-  "La DMA n'est pas sur Skool ou une appli. Tu accedes depuis ton navigateur, sur n'importe quel appareil. Pas de telechargement, pas de compte a creer — juste un identifiant et un code.",
-  "Tu gardes 100% de ce que tu vends. Pas de commission, pas d'intermediaire. Tu revends la formation au prix que tu veux. Tes clients peuvent faire pareil.",
-  "Mindset, Instagram, TikTok, Snapchat, Closing, Live TikTok, VSL, Funnels, MRR, Scaling, Legal, B2B — tout est inclus. Une seule formation, rien a acheter en plus.",
-  "Tu paies une fois, tu accedes a vie. Pas d'abonnement mensuel. Toutes les mises a jour futures sont incluses.",
-  "4x 62 euros via PayPal pour le Starter, 3x 116 euros via Klarna pour le Premium. Moins que ton abonnement Netflix par semaine pour changer ta situation financiere.",
-  "En plus de la formation, tu accedes au Bonus Agence IA — lance ton agence digitale alimentee par l'IA sans coder. Outils, workflows, clients inclus."
+var msgs = [
+  "Yo [prenom], t es dans quoi en ce moment niveau business / revenus en ligne ?",
+  "Ah cool. Moi je travaille sur un truc qui m a permis de generer mes premiers revenus en ligne depuis quelques semaines. Ca m interesse de savoir si ca pourrait t aller aussi — t as 2 minutes ?",
+  "Parfait. En gros c est une formation complete sur le marketing digital avec des droits de revente inclus. Ca s appelle la DMA. Le principe c est simple : tu l achetes 397EUR, tu la revends 397EUR et tu gardes 100%. Une vente et tu es rembourse. Je t envoie les infos ?",
+  "Yo [prenom] ! Je te vois souvent sur mes posts — t es curieux par rapport au business en ligne ou c est juste par interet general ?",
+  "Ah super. Parce que je viens de debloquer quelque chose qui m a change la game : une formation complete avec les droits de revente. Ca veut dire qu en l achetant tu peux la revendre et garder 100%. T as deja entendu parler du MRR ?",
+  "Yo, je voulais juste verifier que tu as bien recu mon message. Pas de pression du tout — si c est pas le bon moment c est ok. Mais si t es toujours curieux par rapport aux revenus en ligne, je suis dispo.",
+  "Pour rejoindre c est simple : tu vas sur mathisdrt.store, tu choisis ton paiement (comptant, 2x, Klarna 3x ou PayPal 4x) et t as acces immediat a tout. Le coaching 1-1 on le planifie apres ton inscription. Dis moi si tu veux qu on le fasse maintenant."
 ];
 
-var scripts = [
-  document.getElementById("scr0") ? document.getElementById("scr0").innerText : "",
-  document.getElementById("scr1") ? document.getElementById("scr1").innerText : "",
-  document.getElementById("scr2") ? document.getElementById("scr2").innerText : "",
-  document.getElementById("scr3") ? document.getElementById("scr3").innerText : "",
-  document.getElementById("scr4") ? document.getElementById("scr4").innerText : ""
-];
-
-function copyArg(i) {
-  copyText(args[i], "Argument copie !");
+function switchTab(i,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  el.classList.add('on');
+  document.getElementById('p'+i).classList.add('on');
+  window.scrollTo(0,0);
 }
-
-function copyScript(i) {
-  var el = document.getElementById("scr" + i);
-  if (el) copyText(el.innerText, "Script copie !");
+function toggleProfil(i){document.getElementById('pr'+i).classList.toggle('open')}
+function toggleObj(i){document.getElementById('o'+i).classList.toggle('open')}
+function toggleScript(i){document.getElementById('sc'+i).classList.toggle('open')}
+function copyMsg(i){
+  var t = msgs[i];
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){toast('Copie !')});}
+  else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Copie !');}
 }
-
-function copyText(txt, msg) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(txt).then(function() { showToast(msg); });
-  } else {
-    var ta = document.createElement("textarea");
-    ta.value = txt;
-    ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
-    document.body.appendChild(ta);
-    ta.focus();
-    ta.select();
-    try { document.execCommand("copy"); } catch(e) {}
-    document.body.removeChild(ta);
-    showToast(msg);
-  }
-}
-
-function showToast(msg) {
-  var t = document.getElementById("toast");
-  t.textContent = msg;
-  t.style.display = "block";
-  setTimeout(function() { t.style.display = "none"; }, 2500);
+function toast(m){
+  var t=document.getElementById('tk');
+  t.textContent=m;t.style.display='block';
+  setTimeout(function(){t.style.display='none'},2000);
 }
 </script>
-
 </body>
 </html>
