@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -7,157 +6,62 @@
 <title>DMA — Accès Membre</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
-
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;width:100%}
-body{
-background:#050505!important;
-color:#f5f0e8;
-font-family:‘Montserrat’,Arial,sans-serif;
-min-height:100vh;
-width:100vw;
-max-width:100%;
-overflow-x:hidden;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-}
-body::before{
-content:’’;position:fixed;inset:0;
-background:radial-gradient(ellipse 100% 50% at 50% 0%,rgba(192,0,26,.18) 0%,transparent 65%),
-radial-gradient(ellipse 60% 40% at 100% 100%,rgba(201,168,76,.06) 0%,transparent 60%);
-pointer-events:none;z-index:0;
-}
+body{background:#050505;color:#f5f0e8;font-family:'Montserrat',Arial,sans-serif;min-height:100vh;width:100vw;max-width:100%;overflow-x:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 100% 50% at 50% 0%,rgba(192,0,26,.18) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 100% 100%,rgba(201,168,76,.06) 0%,transparent 60%);pointer-events:none;z-index:0}
 .corner{position:fixed;width:48px;height:48px;opacity:.28;z-index:1}
 .corner svg{width:100%;height:100%}
-.corner–tl{top:12px;left:12px}
-.corner–tr{top:12px;right:12px;transform:scaleX(-1)}
-.corner–bl{bottom:12px;left:12px;transform:scaleY(-1)}
-.corner–br{bottom:12px;right:12px;transform:scale(-1)}
-
-.card{
-position:relative;z-index:10;
-width:100%;max-width:100%;
-padding:40px 20px 32px;
-animation:fadeUp .7s cubic-bezier(.16,1,.3,1) both;
-}
+.corner--tl{top:12px;left:12px}
+.corner--tr{top:12px;right:12px;transform:scaleX(-1)}
+.corner--bl{bottom:12px;left:12px;transform:scaleY(-1)}
+.corner--br{bottom:12px;right:12px;transform:scale(-1)}
+.card{position:relative;z-index:10;width:100%;max-width:100%;padding:40px 20px 32px;animation:fadeUp .7s cubic-bezier(.16,1,.3,1) both}
 @media(min-width:480px){.card{max-width:420px;padding:48px 36px 36px}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
 .logo-wrap{text-align:center;margin-bottom:30px}
-.logo-icon{
-width:52px;height:52px;
-background:linear-gradient(135deg,#C0001A 0%,#7a0010 100%);
-border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-margin:0 auto 12px;
-box-shadow:0 0 28px rgba(192,0,26,.5),inset 0 1px 0 rgba(255,255,255,.1);
-position:relative;
-}
-.logo-icon::before{
-content:’’;position:absolute;inset:-5px;border-radius:50%;
-border:1px solid rgba(201,168,76,.22);
-animation:pulse 3s ease-in-out infinite;
-}
+.logo-icon{width:52px;height:52px;background:linear-gradient(135deg,#C0001A 0%,#7a0010 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 0 28px rgba(192,0,26,.5),inset 0 1px 0 rgba(255,255,255,.1);position:relative}
+.logo-icon::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(201,168,76,.22);animation:pulse 3s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.4}}
-.logo-icon span{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:17px;color:#C9A84C;letter-spacing:1px}
-.logo-title{
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:clamp(30px,7.5vw,42px);
-letter-spacing:clamp(3px,1.2vw,6px);
-color:#f5f0e8;line-height:1;display:block;
-}
-.logo-sub{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(9px,2.2vw,11px);
-font-weight:300;letter-spacing:clamp(2px,.8vw,3.5px);
-color:#C9A84C;text-transform:uppercase;
-display:block;margin-top:5px;font-style:italic;
-}
-
+.logo-icon span{font-family:'Bebas Neue',Impact,sans-serif;font-size:17px;color:#C9A84C;letter-spacing:1px}
+.logo-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(30px,7.5vw,42px);letter-spacing:clamp(3px,1.2vw,6px);color:#f5f0e8;line-height:1;display:block}
+.logo-sub{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(9px,2.2vw,11px);font-weight:300;letter-spacing:clamp(2px,.8vw,3.5px);color:#C9A84C;text-transform:uppercase;display:block;margin-top:5px;font-style:italic}
 .divider{display:flex;align-items:center;gap:10px;margin-bottom:22px}
 .divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)}
 .divider-dot{width:5px;height:5px;background:#C9A84C;transform:rotate(45deg);opacity:.5;flex-shrink:0}
-
 .form-label{display:block;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin-bottom:7px;opacity:.85}
 .form-group{margin-bottom:14px;position:relative}
-.form-input{
-width:100%;
-background:rgba(255,255,255,.04);
-border:1px solid rgba(201,168,76,.2);
-border-radius:3px;
-padding:13px 42px 13px 14px;
-color:#f5f0e8;
-font-family:‘Montserrat’,Arial,sans-serif;
-font-size:14px;font-weight:300;
-outline:none;-webkit-appearance:none;
-transition:border-color .3s,box-shadow .3s;
-}
+.form-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:13px 42px 13px 14px;color:#f5f0e8;font-family:'Montserrat',Arial,sans-serif;font-size:14px;font-weight:300;outline:none;-webkit-appearance:none;transition:border-color .3s,box-shadow .3s}
 .form-input::placeholder{color:rgba(245,240,232,.2)}
 .form-input:focus{border-color:rgba(201,168,76,.5);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(201,168,76,.07)}
 .form-input.error{border-color:rgba(192,0,26,.5)}
 .toggle-pw{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(245,240,232,.25);cursor:pointer;padding:6px;-webkit-appearance:none;transition:color .2s}
-
-.btn{
-width:100%;
-background:linear-gradient(135deg,#C0001A 0%,#8a0013 100%);
-border:none;border-radius:3px;
-padding:15px;color:#f5f0e8;
-font-family:‘Bebas Neue’,Impact,sans-serif;
-font-size:17px;letter-spacing:4px;
-cursor:pointer;position:relative;overflow:hidden;
-margin-top:8px;
-box-shadow:0 4px 22px rgba(192,0,26,.4);
--webkit-appearance:none;
-transition:transform .15s,box-shadow .2s;
-}
+.btn{width:100%;background:linear-gradient(135deg,#C0001A 0%,#8a0013 100%);border:none;border-radius:3px;padding:15px;color:#f5f0e8;font-family:'Bebas Neue',Impact,sans-serif;font-size:17px;letter-spacing:4px;cursor:pointer;position:relative;overflow:hidden;margin-top:8px;box-shadow:0 4px 22px rgba(192,0,26,.4);-webkit-appearance:none;transition:transform .15s,box-shadow .2s}
 .btn:active{transform:scale(.98)}
 .btn.loading{pointer-events:none;opacity:.7}
 .btn.loading .btn-text{opacity:0}
-.btn-loader{
-position:absolute;top:50%;left:50%;
-transform:translate(-50%,-50%);
-width:18px;height:18px;
-border:2px solid rgba(255,255,255,.2);
-border-top-color:white;border-radius:50%;
-display:none;animation:spin .7s linear infinite;
-}
+.btn-loader{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18px;height:18px;border:2px solid rgba(255,255,255,.2);border-top-color:white;border-radius:50%;display:none;animation:spin .7s linear infinite}
 .btn.loading .btn-loader{display:block}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-
-.error-msg{
-display:none;
-background:rgba(192,0,26,.1);border:1px solid rgba(192,0,26,.3);
-border-radius:3px;padding:11px 14px;margin-bottom:12px;
-font-size:12px;font-weight:500;color:#ff7070;text-align:center;
-}
+.error-msg{display:none;background:rgba(192,0,26,.1);border:1px solid rgba(192,0,26,.3);border-radius:3px;padding:11px 14px;margin-bottom:12px;font-size:12px;font-weight:500;color:#ff7070;text-align:center}
 .error-msg.show{display:block;animation:shake .35s ease}
 @keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
 .attempt-info{font-size:10px;color:rgba(245,240,232,.2);text-align:center;margin-top:9px;letter-spacing:1px;display:none}
 .attempt-info.show{display:block}
-
 .card-footer{margin-top:22px;text-align:center}
 .footer-divider{display:flex;align-items:center;gap:10px;margin-bottom:11px}
 .footer-divider .divider-line{background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent)}
-.footer-text{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:11px;font-style:italic;color:rgba(245,240,232,.2);letter-spacing:.5px;display:block;margin-bottom:9px}
+.footer-text{font-family:'Cormorant Garamond',Georgia,serif;font-size:11px;font-style:italic;color:rgba(245,240,232,.2);letter-spacing:.5px;display:block;margin-bottom:9px}
 .contact-link{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,.3);text-decoration:none}
-
 .success-overlay{position:fixed;inset:0;background:#050505;z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .5s}
 .success-overlay.show{opacity:1;pointer-events:all}
 .success-content{text-align:center;padding:24px}
 .success-icon{width:60px;height:60px;border:2px solid #C9A84C;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;animation:scaleIn .4s cubic-bezier(.34,1.56,.64,1) both}
 @keyframes scaleIn{from{transform:scale(0)}to{transform:scale(1)}}
 .success-icon svg{width:26px;height:26px;stroke:#C9A84C;fill:none;stroke-width:2.5}
-.success-title{font-family:‘Bebas Neue’,Impact,sans-serif;font-size:30px;letter-spacing:5px;color:#f5f0e8;margin-bottom:8px}
-.success-sub{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:14px;color:#C9A84C;font-style:italic;letter-spacing:2px}
+.success-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;letter-spacing:5px;color:#f5f0e8;margin-bottom:8px}
+.success-sub{font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;color:#C9A84C;font-style:italic;letter-spacing:2px}
 </style>
-
-<style>
-html,body,div,main,section,header,footer{background-color:#050505!important}
-body::after{content:"";position:fixed;inset:0;background:#050505;z-index:-999;pointer-events:none}
-</style>
-
 </head>
 <body>
 
@@ -181,7 +85,7 @@ body::after{content:"";position:fixed;inset:0;background:#050505;z-index:-999;po
   <div class="form-group">
     <label class="form-label" for="password">Mot de passe</label>
     <input class="form-input" type="password" id="password" placeholder="••••••••" autocomplete="current-password">
-    <button class="toggle-pw" onclick="togglePw()" type="button" id="toggleBtn">
+    <button class="toggle-pw" onclick="togglePw()" type="button">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
   </div>
@@ -206,62 +110,60 @@ body::after{content:"";position:fixed;inset:0;background:#050505;z-index:-999;po
 </div>
 
 <script>
-const MEMBRES = {
+var MEMBRES = {
   "lauriane374": { password: "Lauriane829k", name: "Lauriane", tier: "starter" },
-"perrine284": { password: "Perrine637k", name: "Perrine", tier: "starter" },
-"lou519":     { password: "Lou842k", name: "Lou", tier: "starter" },
-"solene731":  { password: "Solene294k", name: "Solene", tier: "starter" },
-"lina473": { password: "Lina826k", name: "Lina", tier: "starter" },
-"":
-"raed417": { password: "Raed263k", name: "Raed", tier: "starter" },
-"katie293": { password: "Katie847k", name: "Katie", tier: "starter" },
-"charly829": { password: "Charly156k", name: "Charly", tier: "starter" },
-"fayyad293": { password: "Fayyad817k", name: "Fayyad", tier: "starter" },
-"fayyad293": { password: "Fayyad817k", name: "Fayyad", tier: "starter" },
-"anass462": { password: "Anass738k", name: "Anass", tier: "starter" },
-"andy754": { password: "Andy819k", name: "Andy", tier: "starter" },
-"lohan551": { password: "Lohan248k", name: "Lohan", tier: "starter" },
-"ahmad774": { password: "Ahmad327k", name: "Ahmad", tier: "starter" },
-"romain839": { password: "Romain720k", name: "Romain", tier: "starter" },
-"mnu855": { password: "Mnu541k", name: "Mnu", tier: "starter" },
-
-  "mathis":    { password: "AdminDMA!", name: "Mathis", tier: "duking" },
-  "matheo247": { password: "Matheo583k", name: "Matheo", tier: "starter" },
-  "romeo391":  { password: "Romeo741k", name: "Romeo", tier: "starter" },
-  "zahia156":  { password: "Zahia362k", name: "Zahia", tier: "starter" },
-  "yedrox824": { password: "Yedrox195k", name: "Yedrox", tier: "starter" },
-  "momo374":   { password: "Momo829k", name: "Momo", tier: "starter" },
-  "clint512":  { password: "Clint347k", name: "Clint", tier: "starter" },
-  "lola691":   { password: "Lola256k", name: "Lola", tier: "starter" },
-  "lucas183":  { password: "Lucas748k", name: "Lucas", tier: "starter" },
-  "eric924":   { password: "Eric531k", name: "Eric", tier: "starter" },
-  "theo267":   { password: "Theo412k", name: "Theo", tier: "starter" },
-  "jenny845":  { password: "Jenny193k", name: "Jenny", tier: "starter" },
-  "enola638":  { password: "Enola574k", name: "Enola", tier: "starter" },
-  "liam493":   { password: "Liam827k", name: "Liam", tier: "starter" },
+  "perrine284":  { password: "Perrine637k",  name: "Perrine",  tier: "starter" },
+  "lou519":      { password: "Lou842k",       name: "Lou",      tier: "starter" },
+  "solene731":   { password: "Solene294k",    name: "Solene",   tier: "starter" },
+  "lina473":     { password: "Lina826k",      name: "Lina",     tier: "starter" },
+  "raed417":     { password: "Raed263k",      name: "Raed",     tier: "starter" },
+  "katie293":    { password: "Katie847k",     name: "Katie",    tier: "starter" },
+  "charly829":   { password: "Charly156k",    name: "Charly",   tier: "starter" },
+  "fayyad293":   { password: "Fayyad817k",    name: "Fayyad",   tier: "starter" },
+  "anass462":    { password: "Anass738k",     name: "Anass",    tier: "starter" },
+  "andy754":     { password: "Andy819k",      name: "Andy",     tier: "starter" },
+  "lohan551":    { password: "Lohan248k",     name: "Lohan",    tier: "starter" },
+  "ahmad774":    { password: "Ahmad327k",     name: "Ahmad",    tier: "starter" },
+  "romain839":   { password: "Romain720k",    name: "Romain",   tier: "starter" },
+  "cedric484":   { password: "Cedric258k",    name: "Cedric",   tier: "starter" },
+  "mnu855":      { password: "Mnu541k",       name: "Mnu",      tier: "starter" },
+  "mathis":      { password: "AdminDMA!",     name: "Mathis",   tier: "duking"  },
+  "matheo247":   { password: "Matheo583k",    name: "Matheo",   tier: "starter" },
+  "romeo391":    { password: "Romeo741k",     name: "Romeo",    tier: "starter" },
+  "zahia156":    { password: "Zahia362k",     name: "Zahia",    tier: "starter" },
+  "yedrox824":   { password: "Yedrox195k",    name: "Yedrox",   tier: "starter" },
+  "momo374":     { password: "Momo829k",      name: "Momo",     tier: "starter" },
+  "clint512":    { password: "Clint347k",     name: "Clint",    tier: "starter" },
+  "lola691":     { password: "Lola256k",      name: "Lola",     tier: "starter" },
+  "lucas183":    { password: "Lucas748k",     name: "Lucas",    tier: "starter" },
+  "eric924":     { password: "Eric531k",      name: "Eric",     tier: "starter" },
+  "theo267":     { password: "Theo412k",      name: "Theo",     tier: "starter" },
+  "jenny845":    { password: "Jenny193k",     name: "Jenny",    tier: "starter" },
+  "enola638":    { password: "Enola574k",     name: "Enola",    tier: "starter" },
+  "liam493":     { password: "Liam827k",      name: "Liam",     tier: "starter" }
 };
 
-let attempts = 0, locked = false;
+var attempts = 0, locked = false;
 
 function handleLogin() {
   if (locked) return;
-  const u = document.getElementById('username').value.trim().toLowerCase();
-  const p = document.getElementById('password').value;
-  const err = document.getElementById('errorMsg');
-  const btn = document.getElementById('loginBtn');
+  var u = document.getElementById('username').value.trim().toLowerCase();
+  var p = document.getElementById('password').value;
+  var err = document.getElementById('errorMsg');
+  var btn = document.getElementById('loginBtn');
   err.classList.remove('show');
   document.getElementById('username').classList.remove('error');
   document.getElementById('password').classList.remove('error');
   if (!u || !p) { err.textContent = "Remplis tous les champs."; err.classList.add('show'); return; }
   btn.classList.add('loading');
-  setTimeout(() => {
+  setTimeout(function() {
     btn.classList.remove('loading');
-    const m = MEMBRES[u];
+    var m = MEMBRES[u];
     if (m && m.password === p) {
       sessionStorage.setItem('dma_user', JSON.stringify({ id: u, name: m.name, tier: m.tier }));
       document.getElementById('successOverlay').classList.add('show');
       trackLogin(u, m.name);
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1800);
+      setTimeout(function() { window.location.href = 'dashboard.html'; }, 1800);
     } else {
       attempts++;
       document.getElementById('username').classList.add('error');
@@ -270,13 +172,13 @@ function handleLogin() {
       if (attempts >= 5) {
         locked = true;
         err.textContent = "Trop de tentatives. Réessaie dans 10 min.";
-        setTimeout(() => { locked = false; attempts = 0; }, 600000);
+        setTimeout(function() { locked = false; attempts = 0; }, 600000);
       } else {
         err.textContent = "Identifiants incorrects.";
         if (attempts >= 2) {
-          const i = document.getElementById('attemptInfo');
-          const r = 5 - attempts;
-          i.textContent = r + " tentative" + (r>1?"s":"") + " restante" + (r>1?"s":"");
+          var i = document.getElementById('attemptInfo');
+          var r = 5 - attempts;
+          i.textContent = r + " tentative" + (r > 1 ? "s" : "") + " restante" + (r > 1 ? "s" : "");
           i.classList.add('show');
         }
       }
@@ -286,11 +188,11 @@ function handleLogin() {
 }
 
 function togglePw() {
-  const pw = document.getElementById('password');
+  var pw = document.getElementById('password');
   pw.type = pw.type === 'password' ? 'text' : 'password';
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleLogin(); });
 
 function trackLogin(identifiant, nom) {
   var token = "patqxKulxpZ2ERSII.a9a8d52b13701bde569c6693e43ad3c1eb14ab50ce4e4ffb187df13c77afb7c5";
@@ -304,23 +206,10 @@ function trackLogin(identifiant, nom) {
                  navigator.userAgent.indexOf("Android") !== -1 ? "Android" : "Ordinateur";
   fetch("https://api.airtable.com/v0/" + baseId + "/" + encodeURIComponent(table), {
     method: "POST",
-    headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      records: [{
-        fields: {
-          "Identifiant": identifiant,
-          "Nom": nom,
-          "Date": date,
-          "Heure": heure
-        }
-      }]
-    })
+    headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" },
+    body: JSON.stringify({ records: [{ fields: { "Identifiant": identifiant, "Nom": nom, "Date": date, "Heure": heure } }] })
   }).catch(function() {});
 }
 </script>
-
 </body>
 </html>
