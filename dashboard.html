@@ -4,169 +4,221 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>DMA — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#08080d;
+  --bg2:#0d0d14;
+  --gold:#b8962e;
+  --gold-l:#d4af4a;
+  --red:#a8001a;
+  --white:#ede8f0;
+  --muted:rgba(237,232,240,.35);
+  --border:rgba(184,150,46,.1);
+}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;padding-bottom:80px}
+html,body{background:var(--bg);color:var(--white);font-family:"DM Sans",sans-serif;min-height:100vh;padding-bottom:80px;overflow-x:hidden}
 
-/* HEADER */
-.hdr{background:rgba(3,3,8,.97);border-bottom:1px solid rgba(192,0,26,.2);padding:14px 16px;display:flex;align-items:center;justify-content:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}
-.logo{text-align:center}
-.logo-dma{font-size:28px;font-weight:900;letter-spacing:8px;color:#fff;line-height:1}
-.logo-dma span{color:#C0001A}
-.logo-sub{font-size:7px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-top:3px}
-.logo-line{width:36px;height:1px;background:linear-gradient(90deg,transparent,#C9A84C,transparent);margin:4px auto 0}
-.admin-link{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(192,0,26,.4);text-decoration:none}
+/* NOISE */
+body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:0;background-size:200px}
 
-/* HERO */
-.hero{padding:20px 16px 0;text-align:center}
-.hero-name{font-size:12px;color:rgba(240,240,255,.4);margin-bottom:6px}
-.hero-name strong{color:#C9A84C}
-.hero-title{font-size:18px;font-weight:800;color:#fff;line-height:1.3}
-.hero-title span{color:#C0001A}
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
 
-/* STATS */
-.stats{display:flex;margin:14px 16px 0;border:1px solid rgba(201,168,76,.15);border-radius:8px;overflow:hidden}
-.stat{flex:1;padding:10px 6px;text-align:center;border-right:1px solid rgba(201,168,76,.08)}
-.stat:last-child{border-right:none}
-.stat-n{font-size:15px;font-weight:900;display:block;color:#C9A84C}
-.stat-l{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3);display:block;margin-top:2px}
+/* ===== HEADER ===== */
+.hdr{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,8,13,.92);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hdr-logo{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:600;letter-spacing:.05em;color:var(--white)}
+.hdr-logo em{color:var(--gold);font-style:normal}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.hdr-name{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.05em}
+.hdr-admin{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(168,0,26,.5);text-decoration:none}
 
-/* SECTION */
-.sec{padding:20px 16px 10px;display:flex;align-items:center;gap:10px}
-.sec-t{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.6);white-space:nowrap}
-.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.2),transparent)}
+/* ===== HERO ===== */
+.hero{
+  padding:40px 20px 28px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;
+  top:-80px;left:50%;transform:translateX(-50%);
+  width:400px;height:300px;
+  background:radial-gradient(ellipse,rgba(184,150,46,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow{font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:10px}
+.hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(32px,8vw,48px);font-weight:300;color:var(--white);line-height:1.1;margin-bottom:4px}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-line{width:40px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:16px 0}
+.hero-sub{font-size:12px;font-weight:300;color:var(--muted);line-height:1.8}
 
-/* ANNONCES */
-.ann-block{padding:0 16px 8px;display:flex;flex-direction:column;gap:8px}
-.ann{border-radius:6px;padding:12px 14px}
-.ann-type{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
-.ann-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:3px}
-.ann-body{font-size:11px;line-height:1.6}
-.ann-date{font-size:9px;color:rgba(255,255,255,.25);margin-top:6px}
-.ann-g{background:rgba(62,207,142,.06);border:1px solid rgba(62,207,142,.15)}.ann-g .ann-type{color:#3ecf8e}.ann-g .ann-body{color:rgba(200,255,230,.5)}
-.ann-b{background:rgba(79,163,232,.06);border:1px solid rgba(79,163,232,.15)}.ann-b .ann-type{color:#4fa3e8}.ann-b .ann-body{color:rgba(200,220,255,.5)}
-.ann-r{background:rgba(192,0,26,.08);border:1px solid rgba(192,0,26,.2)}.ann-r .ann-type{color:#C0001A}.ann-r .ann-body{color:rgba(255,200,200,.6)}
-.ann-gold{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15)}.ann-gold .ann-type{color:#C9A84C}.ann-gold .ann-body{color:rgba(255,240,200,.5)}
+/* ===== STATS ===== */
+.stats{display:flex;gap:1px;background:var(--border);margin:0 20px 28px;border:1px solid var(--border)}
+.stat{flex:1;background:var(--bg2);padding:16px 10px;text-align:center;transition:background .2s}
+.stat:active{background:rgba(184,150,46,.06)}
+.stat-n{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:600;color:var(--gold);display:block;line-height:1}
+.stat-l{font-size:8px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-top:4px}
+
+/* ===== ANNONCES ===== */
+.ann-wrap{padding:0 20px 8px}
+.ann{border-radius:2px;padding:14px 16px;margin-bottom:8px;border-left:2px solid}
+.ann-g{background:rgba(62,207,142,.04);border-color:rgba(62,207,142,.3)}
+.ann-b{background:rgba(79,163,232,.04);border-color:rgba(79,163,232,.3)}
+.ann-r{background:rgba(168,0,26,.04);border-color:rgba(168,0,26,.3)}
+.ann-gold{background:rgba(184,150,46,.04);border-color:var(--gold)}
+.ann-type{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px}
+.ann-g .ann-type{color:rgba(62,207,142,.8)}
+.ann-b .ann-type{color:rgba(79,163,232,.8)}
+.ann-r .ann-type{color:rgba(168,0,26,.8)}
+.ann-gold .ann-type{color:var(--gold)}
+.ann-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px}
+.ann-body{font-size:11px;font-weight:300;color:var(--muted);line-height:1.7}
+.ann-date{font-size:9px;color:rgba(237,232,240,.2);margin-top:6px}
+
+/* ===== SECTION LABEL ===== */
+.sec{padding:24px 20px 12px;display:flex;align-items:center;gap:14px}
+.sec-t{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.sec-line{flex:1;height:1px;background:var(--border)}
 
 /* ===== MODULES GRILLE ===== */
-.mod-grid{padding:0 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mod-grid{padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
 
 .mod{
   position:relative;
-  background:#0a0a0f;
-  border:1px solid rgba(255,255,255,.05);
-  border-radius:10px;
-  padding:16px 14px 14px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:18px 14px 14px;
   text-decoration:none;
   overflow:hidden;
   display:flex;
   flex-direction:column;
-  gap:6px;
-  transition:transform .2s cubic-bezier(.34,1.56,.64,1), border-color .2s, box-shadow .2s;
-  animation:modIn .4s both;
+  gap:8px;
+  transition:border-color .25s, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+  opacity:0;
+  transform:translateY(16px);
 }
-.mod:active{transform:scale(.96);border-color:rgba(192,0,26,.3)}
-@keyframes modIn{
-  from{opacity:0;transform:translateY(16px)}
-  to{opacity:1;transform:translateY(0)}
+.mod.loaded{opacity:1;transform:translateY(0)}
+.mod:active{
+  transform:scale(.97);
+  border-color:rgba(184,150,46,.3);
+  box-shadow:0 4px 24px rgba(184,150,46,.06);
 }
 
-/* Délais d'animation décalés */
-.mod:nth-child(1){animation-delay:.04s}
-.mod:nth-child(2){animation-delay:.08s}
-.mod:nth-child(3){animation-delay:.12s}
-.mod:nth-child(4){animation-delay:.16s}
-.mod:nth-child(5){animation-delay:.20s}
-.mod:nth-child(6){animation-delay:.24s}
-.mod:nth-child(7){animation-delay:.28s}
-.mod:nth-child(8){animation-delay:.32s}
-.mod:nth-child(9){animation-delay:.36s}
-.mod:nth-child(10){animation-delay:.40s}
-.mod:nth-child(11){animation-delay:.44s}
-.mod:nth-child(12){animation-delay:.48s}
-.mod:nth-child(13){animation-delay:.52s}
-.mod:nth-child(14){animation-delay:.56s}
-.mod:nth-child(15){animation-delay:.60s}
-.mod:nth-child(16){animation-delay:.64s}
-.mod:nth-child(17){animation-delay:.68s}
-.mod:nth-child(18){animation-delay:.72s}
-.mod:nth-child(19){animation-delay:.76s}
-.mod:nth-child(20){animation-delay:.80s}
-.mod:nth-child(21){animation-delay:.84s}
-.mod:nth-child(22){animation-delay:.88s}
-.mod:nth-child(23){animation-delay:.92s}
-.mod:nth-child(24){animation-delay:.96s}
-.mod:nth-child(25){animation-delay:1.0s}
-.mod:nth-child(26){animation-delay:1.04s}
-.mod:nth-child(27){animation-delay:1.08s}
-.mod:nth-child(28){animation-delay:1.12s}
+/* Accent line top */
+.mod::before{
+  content:"";position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:var(--ac,rgba(184,150,46,.3));
+  transition:background .25s;
+}
+.mod:active::before{background:var(--ac,var(--gold));opacity:1}
 
-/* Barre couleur en haut de chaque carte */
-.mod::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent, rgba(192,0,26,.4));opacity:.7;transition:opacity .2s}
-.mod:active::before{opacity:1}
+/* Shimmer */
+.mod::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.02) 0%,transparent 50%);
+  pointer-events:none;
+}
 
-/* Reflet lumineux au hover */
-.mod::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,transparent 60%);pointer-events:none}
+.mod-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.mod-num{font-size:9px;font-weight:500;letter-spacing:.15em;color:rgba(237,232,240,.2)}
+.mod-tag{font-size:7px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:1px}
+.tag-r{background:rgba(168,0,26,.08);color:rgba(168,0,26,.8);border:1px solid rgba(168,0,26,.15)}
+.tag-g{background:rgba(184,150,46,.08);color:rgba(184,150,46,.8);border:1px solid rgba(184,150,46,.15)}
+.tag-b{background:rgba(79,163,232,.08);color:rgba(79,163,232,.8);border:1px solid rgba(79,163,232,.15)}
+.tag-p{background:rgba(155,89,255,.08);color:rgba(155,89,255,.8);border:1px solid rgba(155,89,255,.15)}
+.tag-gr{background:rgba(62,207,142,.08);color:rgba(62,207,142,.8);border:1px solid rgba(62,207,142,.15)}
 
-.mod-top{display:flex;align-items:center;justify-content:space-between}
-.mod-num{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(240,240,255,.2)}
-.mod-tag{font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:2px}
-.tag-r{background:rgba(192,0,26,.1);color:rgba(192,0,26,.8);border:1px solid rgba(192,0,26,.15)}
-.tag-g{background:rgba(201,168,76,.1);color:rgba(201,168,76,.8);border:1px solid rgba(201,168,76,.15)}
-.tag-b{background:rgba(79,163,232,.1);color:rgba(79,163,232,.8);border:1px solid rgba(79,163,232,.15)}
-.tag-p{background:rgba(155,89,255,.1);color:rgba(155,89,255,.8);border:1px solid rgba(155,89,255,.15)}
-.tag-gr{background:rgba(62,207,142,.1);color:rgba(62,207,142,.8);border:1px solid rgba(62,207,142,.15)}
+.mod-ic{font-size:24px;line-height:1}
+.mod-title{font-size:12px;font-weight:500;color:var(--white);line-height:1.3;letter-spacing:.01em}
+.mod-arr{font-size:8px;color:rgba(237,232,240,.15);align-self:flex-end}
 
-.mod-ic{font-size:26px;line-height:1;margin:4px 0}
-.mod-title{font-size:12px;font-weight:800;color:#f0f0ff;line-height:1.3}
-.mod-arr{font-size:9px;color:rgba(255,255,255,.15);align-self:flex-end;margin-top:2px}
+/* ===== BONUS ===== */
+.bonus-grid{padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.bonus-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:18px 14px;
+  text-decoration:none;
+  display:flex;flex-direction:column;gap:6px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.bonus-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--bc,var(--border))}
+.bonus-card:active{transform:scale(.97);border-color:rgba(184,150,46,.3)}
+.bonus-ic{font-size:24px}
+.bonus-title{font-size:12px;font-weight:500;color:var(--white);line-height:1.3}
+.bonus-sub{font-size:10px;font-weight:300;color:var(--muted);line-height:1.5}
 
-/* BONUS GRILLE */
-.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px}
-.bonus-card{background:#0a0a0f;border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:16px 14px;text-decoration:none;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden;transition:transform .2s}
-.bonus-card:active{transform:scale(.96)}
-.bonus-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
-.bonus-ic{font-size:26px;line-height:1}
-.bonus-title{font-size:12px;font-weight:800;color:#fff;line-height:1.3}
-.bonus-sub{font-size:10px;color:rgba(240,240,255,.3);line-height:1.4}
+/* ===== OFFRE ===== */
+.offre{
+  margin:0 20px;
+  background:linear-gradient(135deg,rgba(184,150,46,.06),rgba(168,0,26,.03));
+  border:1px solid rgba(184,150,46,.15);
+  border-radius:2px;
+  padding:24px 20px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.offre::before{content:"DMA";position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:"Cormorant Garamond",serif;font-size:120px;color:rgba(184,150,46,.04);pointer-events:none;letter-spacing:.1em}
+.offre-eyebrow{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(168,0,26,.7);margin-bottom:10px}
+.offre-name{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:600;color:var(--white);margin-bottom:4px}
+.offre-name span{color:var(--gold);font-style:italic}
+.offre-prix{font-family:"Cormorant Garamond",serif;font-size:52px;font-weight:600;color:var(--gold);margin:10px 0 4px;line-height:1}
+.offre-prix span{font-size:16px;font-weight:300;color:var(--muted)}
+.offre-inclus{font-size:11px;font-weight:300;color:var(--muted);margin-bottom:0;line-height:2}
+.offre-inclus strong{color:var(--white);font-weight:500}
 
-/* OFFRE */
-.offre{margin:0 12px;background:linear-gradient(135deg,rgba(192,0,26,.08),rgba(201,168,76,.04));border:1px solid rgba(192,0,26,.25);border-radius:10px;padding:18px;text-align:center}
-.offre-titre{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(192,0,26,.7);margin-bottom:8px}
-.offre-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px}
-.offre-name span{color:#C9A84C}
-.offre-prix{font-size:36px;font-weight:900;color:#C9A84C;margin:10px 0 4px}
-.offre-prix span{font-size:14px;font-weight:400;color:rgba(240,240,255,.4)}
-.offre-inclus{font-size:11px;color:rgba(240,240,255,.5);margin-bottom:14px;line-height:1.7}
-.offre-inclus strong{color:#f0f0ff}
-
-/* NAV */
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(3,3,8,.97);border-top:1px solid rgba(255,255,255,.06);display:flex;height:62px;backdrop-filter:blur(20px);z-index:100}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;text-decoration:none}
-.nav-ic{font-size:18px}
-.nav-lb{font-size:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(240,240,255,.3)}
-.nav-item.on .nav-lb{color:#C9A84C}
-.nav-dot{width:3px;height:3px;border-radius:50%;background:#C9A84C;display:none}
+/* ===== NAV ===== */
+.nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(8,8,13,.95);
+  border-top:1px solid var(--border);
+  display:flex;height:60px;
+  backdrop-filter:blur(24px);
+  z-index:100;
+}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.nav-item:active{opacity:.6}
+.nav-ic{font-size:17px;line-height:1}
+.nav-lb{font-size:7px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nav-item.on .nav-lb{color:var(--gold)}
+.nav-dot{width:2px;height:2px;border-radius:50%;background:var(--gold);display:none}
 .nav-item.on .nav-dot{display:block}
 </style>
 </head>
 <body>
 
-<div class="hdr" style="position:relative">
-  <div class="logo">
-    <div class="logo-dma">D<span>M</span>A</div>
-    <div class="logo-sub">Digital Mastery Academy</div>
-    <div class="logo-line"></div>
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-logo">D<em>M</em>A</div>
+  <div class="hdr-right">
+    <span class="hdr-name" id="uname">Membre</span>
+    <a class="hdr-admin" href="admin-annonces.html">Admin</a>
   </div>
-  <a class="admin-link" href="admin-annonces.html">ADMIN</a>
 </div>
 
-<div class="hero">
-  <div class="hero-name">Connecte en tant que <strong id="uname">Membre</strong></div>
-  <div class="hero-title">Ton espace <span>formation</span> complet</div>
+<!-- HERO -->
+<div class="hero reveal">
+  <div class="hero-eyebrow">Digital Mastery Academy</div>
+  <div class="hero-title">Ton espace<br><em>formation.</em></div>
+  <div class="hero-line"></div>
+  <div class="hero-sub">28 modules · 7 business models · 13 outils IA · Droits MRR</div>
 </div>
 
-<div class="stats">
+<!-- STATS -->
+<div class="stats reveal">
   <div class="stat"><span class="stat-n">28</span><span class="stat-l">Modules</span></div>
   <div class="stat"><span class="stat-n">7</span><span class="stat-l">Business</span></div>
   <div class="stat"><span class="stat-n">13+</span><span class="stat-l">Outils IA</span></div>
@@ -174,78 +226,74 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 </div>
 
 <!-- ANNONCES -->
-<div class="sec"><span class="sec-t">Annonces</span><div class="sec-line"></div></div>
-<div class="ann-block" id="annonces-block">
+<div class="sec reveal"><span class="sec-t">Annonces</span><div class="sec-line"></div></div>
+<div class="ann-wrap reveal" id="annonces-block">
   <div class="ann ann-g">
     <div class="ann-type">Nouveaute</div>
     <div class="ann-title">Mise a jour majeure — DMA 2026</div>
     <div class="ann-body">Les 7 modules business models sont completement reconstruits. Bonus Agence IA et Arguments de Vente disponibles.</div>
-    <div class="ann-date">19/05/2026</div>
+    <div class="ann-date">29/05/2026</div>
   </div>
   <div class="ann ann-b">
     <div class="ann-type">Info</div>
     <div class="ann-title">IA Suite Pro — 13 generateurs disponibles</div>
     <div class="ann-body">Accessible depuis chaque module business via le bouton rouge.</div>
-    <div class="ann-date">19/05/2026</div>
+    <div class="ann-date">29/05/2026</div>
   </div>
 </div>
 
 <!-- 28 MODULES -->
-<div class="sec"><span class="sec-t">Les 28 Modules</span><div class="sec-line"></div></div>
+<div class="sec reveal"><span class="sec-t">Les 28 Modules</span><div class="sec-line"></div></div>
 <div class="mod-grid">
-  <a class="mod" href="module-01.html" style="--accent:#C9A84C"><div class="mod-top"><span class="mod-num">01</span><span class="mod-tag tag-g">Mindset</span></div><div class="mod-ic">&#127774;</div><div class="mod-title">Mindset &amp; Vision</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-02.html" style="--accent:#C9A84C"><div class="mod-top"><span class="mod-num">02</span><span class="mod-tag tag-g">Strategie</span></div><div class="mod-ic">&#127775;</div><div class="mod-title">Positionnement Premium</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-03.html" style="--accent:#C0001A"><div class="mod-top"><span class="mod-num">03</span><span class="mod-tag tag-r">Business</span></div><div class="mod-ic">&#128179;</div><div class="mod-title">Paiement &amp; Page de Vente</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-04.html" style="--accent:#C0001A"><div class="mod-top"><span class="mod-num">04</span><span class="mod-tag tag-r">Produits</span></div><div class="mod-ic">&#128190;</div><div class="mod-title">Produits Digitaux</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-05.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">05</span><span class="mod-tag tag-b">Marketing</span></div><div class="mod-ic">&#128247;</div><div class="mod-title">Marketing &amp; Contenu</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-06.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">06</span><span class="mod-tag tag-b">Content</span></div><div class="mod-ic">&#127916;</div><div class="mod-title">Video Faceless</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-07.html" style="--accent:#9b59ff"><div class="mod-top"><span class="mod-num">07</span><span class="mod-tag tag-p">Instagram</span></div><div class="mod-ic">&#128247;</div><div class="mod-title">Instagram Mastery</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-08.html" style="--accent:#9b59ff"><div class="mod-top"><span class="mod-num">08</span><span class="mod-tag tag-p">TikTok</span></div><div class="mod-ic">&#127926;</div><div class="mod-title">TikTok Hooks</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-09.html" style="--accent:#9b59ff"><div class="mod-top"><span class="mod-num">09</span><span class="mod-tag tag-p">Snap</span></div><div class="mod-ic">&#128155;</div><div class="mod-title">Snapchat Strategy</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-10.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">10</span><span class="mod-tag tag-b">Email</span></div><div class="mod-ic">&#128140;</div><div class="mod-title">Email Marketing</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-11.html" style="--accent:#C0001A"><div class="mod-top"><span class="mod-num">11</span><span class="mod-tag tag-r">Closing</span></div><div class="mod-ic">&#128172;</div><div class="mod-title">Closing &amp; Scripts</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-12.html" style="--accent:#C0001A"><div class="mod-top"><span class="mod-num">12</span><span class="mod-tag tag-r">Live</span></div><div class="mod-ic">&#128250;</div><div class="mod-title">Live Selling TikTok</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-13.html" style="--accent:#C0001A"><div class="mod-top"><span class="mod-num">13</span><span class="mod-tag tag-r">VSL</span></div><div class="mod-ic">&#127909;</div><div class="mod-title">VSL &amp; Video Sales</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-14.html" style="--accent:#3ecf8e"><div class="mod-top"><span class="mod-num">14</span><span class="mod-tag tag-gr">IA</span></div><div class="mod-ic">&#129302;</div><div class="mod-title">AI Selling</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-15.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">15</span><span class="mod-tag tag-b">Funnels</span></div><div class="mod-ic">&#127915;</div><div class="mod-title">Funnels &amp; Tunnels</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-16.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">16</span><span class="mod-tag tag-b">Auto</span></div><div class="mod-ic">&#9889;</div><div class="mod-title">Automation DM</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-17.html" style="--accent:#3ecf8e"><div class="mod-top"><span class="mod-num">17</span><span class="mod-tag tag-gr">MRR</span></div><div class="mod-ic">&#128176;</div><div class="mod-title">MRR &amp; Recurrence</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-18.html" style="--accent:#3ecf8e"><div class="mod-top"><span class="mod-num">18</span><span class="mod-tag tag-gr">Agency</span></div><div class="mod-ic">&#127970;</div><div class="mod-title">SMMA Agency</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-19.html" style="--accent:#C0001A"><div class="mod-top"><span class="mod-num">19</span><span class="mod-tag tag-r">E-com</span></div><div class="mod-ic">&#128722;</div><div class="mod-title">Shopify &amp; E-commerce</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-20.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">20</span><span class="mod-tag tag-b">Tech</span></div><div class="mod-ic">&#128736;</div><div class="mod-title">Systeme.io &amp; Stan</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-21.html" style="--accent:#3ecf8e"><div class="mod-top"><span class="mod-num">21</span><span class="mod-tag tag-gr">Legal</span></div><div class="mod-ic">&#128196;</div><div class="mod-title">Declaration Legale</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-22.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">22</span><span class="mod-tag tag-b">B2B</span></div><div class="mod-ic">&#128188;</div><div class="mod-title">Prospection B2B</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-23.html" style="--accent:#3ecf8e"><div class="mod-top"><span class="mod-num">23</span><span class="mod-tag tag-gr">MRR</span></div><div class="mod-ic">&#128281;</div><div class="mod-title">Droits de Revente MRR</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-24.html" style="--accent:#9b59ff"><div class="mod-top"><span class="mod-num">24</span><span class="mod-tag tag-p">Branding</span></div><div class="mod-ic">&#127775;</div><div class="mod-title">Personal Branding</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-25.html" style="--accent:#4fa3e8"><div class="mod-top"><span class="mod-num">25</span><span class="mod-tag tag-b">CRM</span></div><div class="mod-ic">&#129309;</div><div class="mod-title">Gestion Client</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-26.html" style="--accent:#C0001A"><div class="mod-top"><span class="mod-num">26</span><span class="mod-tag tag-r">Scale</span></div><div class="mod-ic">&#128640;</div><div class="mod-title">Scaling &amp; Delegation</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-27.html" style="--accent:#3ecf8e"><div class="mod-top"><span class="mod-num">27</span><span class="mod-tag tag-gr">Affil.</span></div><div class="mod-ic">&#128279;</div><div class="mod-title">Affiliation &amp; Partenariats</div><div class="mod-arr">&#9658;</div></a>
-  <a class="mod" href="module-28.html" style="--accent:#C9A84C"><div class="mod-top"><span class="mod-num">28</span><span class="mod-tag tag-g">Vision</span></div><div class="mod-ic">&#128205;</div><div class="mod-title">Strategie 2026</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-01.html" style="--ac:rgba(184,150,46,.4)"><div class="mod-top"><span class="mod-num">01</span><span class="mod-tag tag-g">Mindset</span></div><div class="mod-ic">&#127774;</div><div class="mod-title">Mindset &amp; Vision</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-02.html" style="--ac:rgba(184,150,46,.4)"><div class="mod-top"><span class="mod-num">02</span><span class="mod-tag tag-g">Strategie</span></div><div class="mod-ic">&#127775;</div><div class="mod-title">Positionnement Premium</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-03.html" style="--ac:rgba(168,0,26,.4)"><div class="mod-top"><span class="mod-num">03</span><span class="mod-tag tag-r">Business</span></div><div class="mod-ic">&#128179;</div><div class="mod-title">Paiement &amp; Page de Vente</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-04.html" style="--ac:rgba(168,0,26,.4)"><div class="mod-top"><span class="mod-num">04</span><span class="mod-tag tag-r">Produits</span></div><div class="mod-ic">&#128190;</div><div class="mod-title">Produits Digitaux</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-05.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">05</span><span class="mod-tag tag-b">Marketing</span></div><div class="mod-ic">&#128247;</div><div class="mod-title">Marketing &amp; Contenu</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-06.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">06</span><span class="mod-tag tag-b">Content</span></div><div class="mod-ic">&#127916;</div><div class="mod-title">Video Faceless</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-07.html" style="--ac:rgba(155,89,255,.4)"><div class="mod-top"><span class="mod-num">07</span><span class="mod-tag tag-p">Instagram</span></div><div class="mod-ic">&#128247;</div><div class="mod-title">Instagram Mastery</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-08.html" style="--ac:rgba(155,89,255,.4)"><div class="mod-top"><span class="mod-num">08</span><span class="mod-tag tag-p">TikTok</span></div><div class="mod-ic">&#127926;</div><div class="mod-title">TikTok Hooks</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-09.html" style="--ac:rgba(155,89,255,.4)"><div class="mod-top"><span class="mod-num">09</span><span class="mod-tag tag-p">Snap</span></div><div class="mod-ic">&#128155;</div><div class="mod-title">Snapchat Strategy</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-10.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">10</span><span class="mod-tag tag-b">Email</span></div><div class="mod-ic">&#128140;</div><div class="mod-title">Email Marketing</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-11.html" style="--ac:rgba(168,0,26,.4)"><div class="mod-top"><span class="mod-num">11</span><span class="mod-tag tag-r">Closing</span></div><div class="mod-ic">&#128172;</div><div class="mod-title">Closing &amp; Scripts</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-12.html" style="--ac:rgba(168,0,26,.4)"><div class="mod-top"><span class="mod-num">12</span><span class="mod-tag tag-r">Live</span></div><div class="mod-ic">&#128250;</div><div class="mod-title">Live Selling TikTok</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-13.html" style="--ac:rgba(168,0,26,.4)"><div class="mod-top"><span class="mod-num">13</span><span class="mod-tag tag-r">VSL</span></div><div class="mod-ic">&#127909;</div><div class="mod-title">VSL &amp; Video Sales</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-14.html" style="--ac:rgba(62,207,142,.4)"><div class="mod-top"><span class="mod-num">14</span><span class="mod-tag tag-gr">IA</span></div><div class="mod-ic">&#129302;</div><div class="mod-title">AI Selling</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-15.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">15</span><span class="mod-tag tag-b">Funnels</span></div><div class="mod-ic">&#127915;</div><div class="mod-title">Funnels &amp; Tunnels</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-16.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">16</span><span class="mod-tag tag-b">Auto</span></div><div class="mod-ic">&#9889;</div><div class="mod-title">Automation DM</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-17.html" style="--ac:rgba(62,207,142,.4)"><div class="mod-top"><span class="mod-num">17</span><span class="mod-tag tag-gr">MRR</span></div><div class="mod-ic">&#128176;</div><div class="mod-title">MRR &amp; Recurrence</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-18.html" style="--ac:rgba(62,207,142,.4)"><div class="mod-top"><span class="mod-num">18</span><span class="mod-tag tag-gr">Agency</span></div><div class="mod-ic">&#127970;</div><div class="mod-title">SMMA Agency</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-19.html" style="--ac:rgba(168,0,26,.4)"><div class="mod-top"><span class="mod-num">19</span><span class="mod-tag tag-r">E-com</span></div><div class="mod-ic">&#128722;</div><div class="mod-title">Shopify &amp; E-commerce</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-20.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">20</span><span class="mod-tag tag-b">Tech</span></div><div class="mod-ic">&#128736;</div><div class="mod-title">Systeme.io &amp; Stan</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-21.html" style="--ac:rgba(62,207,142,.4)"><div class="mod-top"><span class="mod-num">21</span><span class="mod-tag tag-gr">Legal</span></div><div class="mod-ic">&#128196;</div><div class="mod-title">Declaration Legale</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-22.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">22</span><span class="mod-tag tag-b">B2B</span></div><div class="mod-ic">&#128188;</div><div class="mod-title">Prospection B2B</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-23.html" style="--ac:rgba(62,207,142,.4)"><div class="mod-top"><span class="mod-num">23</span><span class="mod-tag tag-gr">MRR</span></div><div class="mod-ic">&#128281;</div><div class="mod-title">Droits de Revente MRR</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-24.html" style="--ac:rgba(155,89,255,.4)"><div class="mod-top"><span class="mod-num">24</span><span class="mod-tag tag-p">Branding</span></div><div class="mod-ic">&#127775;</div><div class="mod-title">Personal Branding</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-25.html" style="--ac:rgba(79,163,232,.4)"><div class="mod-top"><span class="mod-num">25</span><span class="mod-tag tag-b">CRM</span></div><div class="mod-ic">&#129309;</div><div class="mod-title">Gestion Client</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-26.html" style="--ac:rgba(168,0,26,.4)"><div class="mod-top"><span class="mod-num">26</span><span class="mod-tag tag-r">Scale</span></div><div class="mod-ic">&#128640;</div><div class="mod-title">Scaling &amp; Delegation</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-27.html" style="--ac:rgba(62,207,142,.4)"><div class="mod-top"><span class="mod-num">27</span><span class="mod-tag tag-gr">Affil.</span></div><div class="mod-ic">&#128279;</div><div class="mod-title">Affiliation &amp; Partenariats</div><div class="mod-arr">&#9658;</div></a>
+  <a class="mod" href="module-28.html" style="--ac:rgba(184,150,46,.5)"><div class="mod-top"><span class="mod-num">28</span><span class="mod-tag tag-g">Vision</span></div><div class="mod-ic">&#128205;</div><div class="mod-title">Strategie 2026</div><div class="mod-arr">&#9658;</div></a>
 </div>
 
 <!-- BONUS -->
-<div class="sec" style="margin-top:8px"><span class="sec-t">Bonus Inclus</span><div class="sec-line"></div></div>
-<div class="bonus-grid">
-  <a class="bonus-card" href="module-business-models.html" style="--accent:#4fa3e8">
-    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#4fa3e8;opacity:.5"></div>
+<div class="sec reveal" style="margin-top:8px"><span class="sec-t">Bonus</span><div class="sec-line"></div></div>
+<div class="bonus-grid reveal">
+  <a class="bonus-card" href="module-business-models.html" style="--bc:rgba(79,163,232,.25)">
     <div class="bonus-ic">&#128200;</div>
     <div class="bonus-title">7 Business Models</div>
-    <div class="bonus-sub">Drop, POD, UGC, Affil., Newsletter, Flipping + IA</div>
+    <div class="bonus-sub">Drop, POD, UGC, Affil., Newsletter, Flip, IA</div>
   </a>
-  <a class="bonus-card" href="bonus-agence-ia.html">
-    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#9b59ff;opacity:.5"></div>
+  <a class="bonus-card" href="bonus-agence-ia.html" style="--bc:rgba(155,89,255,.25)">
     <div class="bonus-ic">&#129302;</div>
     <div class="bonus-title">Agence IA No Code</div>
     <div class="bonus-sub">Lance ton agence sans coder</div>
   </a>
-  <a class="bonus-card" href="arguments-vente.html">
-    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C0001A;opacity:.5"></div>
+  <a class="bonus-card" href="arguments-vente.html" style="--bc:rgba(168,0,26,.25)">
     <div class="bonus-ic">&#128172;</div>
     <div class="bonus-title">Arguments de Vente</div>
     <div class="bonus-sub">Closer la DMA a tous les profils</div>
   </a>
-  <a class="bonus-card" href="module-ia-tool.html">
-    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#C9A84C;opacity:.5"></div>
+  <a class="bonus-card" href="module-ia-tool.html" style="--bc:rgba(184,150,46,.35)">
     <div class="bonus-ic">&#9889;</div>
     <div class="bonus-title">IA Suite Pro</div>
     <div class="bonus-sub">13 outils IA pour vendre et creer</div>
@@ -253,15 +301,14 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 </div>
 
 <!-- OFFRE -->
-<div class="sec" style="margin-top:8px"><span class="sec-t">Valeur de la Formation</span><div class="sec-line"></div></div>
-<div class="offre">
-  <div class="offre-titre">Acces complet a vie</div>
+<div class="sec reveal" style="margin-top:8px"><span class="sec-t">Formation</span><div class="sec-line"></div></div>
+<div class="offre reveal">
+  <div class="offre-eyebrow">Acces complet a vie</div>
   <div class="offre-name">Digital Mastery <span>Academy</span></div>
-  <div class="offre-prix">397<span>EUR</span></div>
+  <div class="offre-prix">397<span> EUR</span></div>
   <div class="offre-inclus">
-    <strong>28 modules</strong> · <strong>7 business models</strong> · <strong>Droits MRR</strong><br>
-    <strong>Agence IA</strong> · <strong>Arguments de vente</strong> · <strong>IA Suite Pro</strong><br>
-    <strong>Mises a jour gratuites</strong> a vie
+    <strong>28 modules</strong> · <strong>7 business models</strong> · <strong>MRR inclus</strong><br>
+    <strong>Agence IA</strong> · <strong>Arguments</strong> · <strong>IA Suite Pro</strong>
   </div>
 </div>
 
@@ -269,14 +316,32 @@ html,body{background:#030308;color:#f0f0ff;font-family:-apple-system,BlinkMacSys
 <div class="nav">
   <a class="nav-item on" href="dashboard.html"><span class="nav-ic">&#127968;</span><span class="nav-lb">Accueil</span><span class="nav-dot"></span></a>
   <a class="nav-item" href="module-ia-tool.html"><span class="nav-ic">&#129302;</span><span class="nav-lb">IA Suite</span><span class="nav-dot"></span></a>
-  <a class="nav-item" href="module-01.html"><span class="nav-ic">&#128218;</span><span class="nav-lb">Modules</span><span class="nav-dot"></span></a>
+  <a class="nav-item" href="module-business-models.html"><span class="nav-ic">&#128200;</span><span class="nav-lb">Business</span><span class="nav-dot"></span></a>
   <a class="nav-item" href="crm-tracker.html"><span class="nav-ic">&#128203;</span><span class="nav-lb">CRM</span><span class="nav-dot"></span></a>
 </div>
 
 <script>
+// USER
 var user=JSON.parse(sessionStorage.getItem("dma_user")||"null");
 if(!user){window.location.href="index.html";}
 else{var el=document.getElementById("uname");if(el)el.textContent=user.name;}
+
+// MODULES — animation en cascade au chargement
+var mods=document.querySelectorAll('.mod');
+mods.forEach(function(m,i){
+  setTimeout(function(){m.classList.add('loaded')},40+i*30);
+});
+
+// SCROLL REVEAL
+var reveals=document.querySelectorAll('.reveal');
+function checkReveal(){
+  var wh=window.innerHeight;
+  reveals.forEach(function(el){
+    if(el.getBoundingClientRect().top<wh*.92)el.classList.add('in');
+  });
+}
+window.addEventListener('scroll',checkReveal,{passive:true});
+checkReveal();
 </script>
 </body>
 </html>
