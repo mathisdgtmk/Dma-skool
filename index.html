@@ -111,8 +111,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <script>
 var MEMBRES = {
-  "florence":    { password: "Florence492k",  name: "Florence", tier: "starter" },
-
   "lauriane374": { password: "Lauriane829k", name: "Lauriane", tier: "starter" },
   "perrine284":  { password: "Perrine637k",  name: "Perrine",  tier: "starter" },
   "lou519":      { password: "Lou842k",       name: "Lou",      tier: "starter" },
@@ -142,7 +140,8 @@ var MEMBRES = {
   "theo267":     { password: "Theo412k",      name: "Theo",     tier: "starter" },
   "jenny845":    { password: "Jenny193k",     name: "Jenny",    tier: "starter" },
   "enola638":    { password: "Enola574k",     name: "Enola",    tier: "starter" },
-  "liam493":     { password: "Liam827k",      name: "Liam",     tier: "starter" }
+  "liam493":     { password: "Liam827k",      name: "Liam",     tier: "starter" },
+  "florence":    { password: "Florence492k",  name: "Florence", tier: "starter" }
 };
 
 var attempts = 0, locked = false;
@@ -199,18 +198,36 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Enter') handle
 function trackLogin(identifiant, nom) {
   var token = "patqxKulxpZ2ERSII.a9a8d52b13701bde569c6693e43ad3c1eb14ab50ce4e4ffb187df13c77afb7c5";
   var baseId = "app1N7fUuN5pcWE5S";
-  var table = "Table 1";
+  var table = "Connexions";
   var now = new Date();
   var date = now.toLocaleDateString("fr-FR");
   var heure = now.toLocaleTimeString("fr-FR", {hour: "2-digit", minute: "2-digit"});
   var appareil = navigator.userAgent.indexOf("iPhone") !== -1 ? "iPhone" :
                  navigator.userAgent.indexOf("iPad") !== -1 ? "iPad" :
                  navigator.userAgent.indexOf("Android") !== -1 ? "Android" : "Ordinateur";
-  fetch("https://api.airtable.com/v0/" + baseId + "/" + encodeURIComponent(table), {
+  var url = "https://api.airtable.com/v0/" + baseId + "/" + encodeURIComponent(table);
+  var payload = JSON.stringify({
+    records: [{ fields: {
+      "Identifiant": identifiant,
+      "Nom": nom,
+      "Date": date,
+      "Heure": heure,
+      "Appareil": appareil
+    }}]
+  });
+  fetch(url, {
     method: "POST",
     headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" },
-    body: JSON.stringify({ records: [{ fields: { "Identifiant": identifiant, "Nom": nom, "Date": date, "Heure": heure } }] })
-  }).catch(function() {});
+    body: payload
+  }).then(function(r){
+    if(!r.ok) throw new Error("status " + r.status);
+  }).catch(function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(payload);
+  });
 }
 </script>
 </body>
