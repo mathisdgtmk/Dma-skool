@@ -172,6 +172,46 @@ body::after{content:"";position:fixed;inset:0;background-image:url("data:image/s
 .ob-next{font-size:10px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:#c8a84b;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.2);padding:10px 20px;cursor:pointer;font-family:inherit;transition:background .2s}
 .ob-next:active{background:rgba(200,168,75,.18)}
 .ob-finish{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#06060a;background:linear-gradient(135deg,#c8a84b,#e8c86a);border:none;padding:10px 20px;cursor:pointer;font-family:inherit}
+
+/* COMMUNAUTE */
+#pg-community{padding-top:52px}
+.comm-hero{padding:28px 20px 20px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(200,168,75,.04) 0%,transparent 100%)}
+.comm-title{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:300;color:var(--white);line-height:1;margin-bottom:4px}
+.comm-title em{color:var(--gold);font-style:italic}
+.comm-sub{font-size:11px;font-weight:300;color:var(--muted)}
+
+/* COMPOSER */
+.comm-compose{margin:16px 20px;background:var(--bg2);border:1px solid var(--border);border-radius:2px;padding:16px}
+.comm-compose-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.comm-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,rgba(200,168,75,.2),rgba(160,0,26,.1));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.comm-who{font-size:12px;font-weight:400;color:var(--white)}
+.comm-textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:2px;padding:12px;color:var(--white);font-family:"DM Sans",sans-serif;font-size:13px;font-weight:300;resize:none;outline:none;min-height:80px;transition:border-color .2s}
+.comm-textarea::placeholder{color:var(--muted)}
+.comm-textarea:focus{border-color:var(--border2)}
+.comm-compose-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.comm-char{font-size:9px;color:var(--muted);letter-spacing:.1em}
+.comm-send{font-size:10px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--bg);background:var(--gold);border:none;padding:10px 20px;cursor:pointer;font-family:"DM Sans",sans-serif;transition:opacity .2s}
+.comm-send:active{opacity:.7}
+.comm-send:disabled{opacity:.4;cursor:not-allowed}
+
+/* MESSAGES */
+.comm-feed{padding:0 20px 20px;display:flex;flex-direction:column;gap:10px}
+.comm-msg{background:var(--bg2);border:1px solid var(--border);border-radius:2px;padding:16px;position:relative;overflow:hidden;animation:msgIn .4s cubic-bezier(.16,1,.3,1) both}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.comm-msg::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);opacity:.3}
+.comm-msg-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.comm-msg-av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,rgba(200,168,75,.15),rgba(160,0,26,.1));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.comm-msg-name{font-size:12px;font-weight:500;color:var(--white)}
+.comm-msg-date{font-size:9px;color:var(--muted);margin-left:auto;letter-spacing:.05em}
+.comm-msg-txt{font-size:13px;font-weight:300;color:rgba(236,232,240,.75);line-height:1.7}
+
+/* LOADING / EMPTY */
+.comm-loading{text-align:center;padding:40px 20px;font-size:12px;font-weight:300;color:var(--muted)}
+.comm-empty{text-align:center;padding:40px 20px}
+.comm-empty-ic{font-size:36px;margin-bottom:12px;display:block;opacity:.4}
+.comm-empty-t{font-size:13px;font-weight:300;color:var(--muted)}
+.comm-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--gold);color:#06060a;font-size:11px;font-weight:600;letter-spacing:.1em;padding:10px 20px;border-radius:2px;display:none;z-index:300;white-space:nowrap}
+
 </style>
 </head>
 <body>
@@ -311,6 +351,7 @@ body::after{content:"";position:fixed;inset:0;background-image:url("data:image/s
     <a class="bonus-item" href="arguments-vente.html" style="--bc:rgba(160,0,26,.3)"><div class="bonus-item-ic">&#128172;</div><div class="bonus-item-info"><span class="bonus-item-label">Bonus 03</span><div class="bonus-item-title">Arguments de Vente</div><div class="bonus-item-sub">Scripts DM, objections, profils clients. Tout pour closer la DMA.</div></div><div class="bonus-item-arr">&#9658;</div></a>
     <a class="bonus-item" href="module-ia-tool.html" style="--bc:rgba(200,168,75,.3)"><div class="bonus-item-ic">&#9889;</div><div class="bonus-item-info"><span class="bonus-item-label">Bonus 04</span><div class="bonus-item-title">IA Suite Pro</div><div class="bonus-item-sub">13 generateurs IA operationnels pour hooks, scripts, contenu et business.</div></div><div class="bonus-item-arr">&#9658;</div></a>
     <a class="bonus-item" href="module-generateurs.html" style="--bc:rgba(62,207,142,.3)"><div class="bonus-item-ic">&#128300;</div><div class="bonus-item-info"><span class="bonus-item-label">Bonus 05</span><div class="bonus-item-title">Generateurs IA Business</div><div class="bonus-item-sub">Analyse produit, pitch UGC, SEO Etsy, script pub video et plus.</div></div><div class="bonus-item-arr">&#9658;</div></a>
+    <a class="bonus-item" href="module-vinted.html" style="--bc:rgba(200,168,75,.4)"><div class="bonus-item-ic">&#128084;</div><div class="bonus-item-info"><span class="bonus-item-label">Bonus 06 — Accompagnement</span><div class="bonus-item-title">Vinted Resell Mastery</div><div class="bonus-item-sub">Sourcing, fournisseurs Europe, photos, pricing, scaling et declaration legale.</div></div><div class="bonus-item-arr">&#9658;</div></a>
   </div>
 </div>
 
@@ -336,11 +377,39 @@ body::after{content:"";position:fixed;inset:0;background-image:url("data:image/s
   <button class="logout-btn" onclick="logout()">Se deconnecter</button>
 </div>
 
+
+<!-- COMMUNAUTE -->
+<div class="page" id="pg-community">
+  <div class="comm-hero">
+    <div class="comm-title">La <em>communaute</em></div>
+    <div class="comm-sub">Partage, questions, victoires — echange avec les autres membres DMA</div>
+  </div>
+
+  <div class="comm-compose">
+    <div class="comm-compose-top">
+      <div class="comm-avatar">&#128100;</div>
+      <div class="comm-who" id="comm-who">Membre</div>
+    </div>
+    <textarea class="comm-textarea" id="comm-input" placeholder="Partage quelque chose avec la communaute..." maxlength="400" oninput="commCount()"></textarea>
+    <div class="comm-compose-footer">
+      <span class="comm-char"><span id="comm-c">0</span>/400</span>
+      <button class="comm-send" id="comm-btn" onclick="commSend()">Publier</button>
+    </div>
+  </div>
+
+  <div class="comm-feed" id="comm-feed">
+    <div class="comm-loading">Chargement des messages...</div>
+  </div>
+</div>
+
+<div class="comm-toast" id="comm-toast"></div>
+
 <!-- NAV -->
 <div class="nav">
   <button class="nav-btn on" id="nb-home" onclick="goPage('home')"><span class="nav-ic">&#127968;</span><span class="nav-lb">Accueil</span><div class="nav-line"></div></button>
   <button class="nav-btn" id="nb-modules" onclick="goPage('modules')"><span class="nav-ic">&#128218;</span><span class="nav-lb">Modules</span><div class="nav-line"></div></button>
   <button class="nav-btn" id="nb-bonus" onclick="goPage('bonus')"><span class="nav-ic">&#11088;</span><span class="nav-lb">Bonus</span><div class="nav-line"></div></button>
+  <button class="nav-btn" id="nb-community" onclick="goPage('community')"><span class="nav-ic">&#128483;</span><span class="nav-lb">Communaute</span><div class="nav-line"></div></button>
   <button class="nav-btn" id="nb-profile" onclick="goPage('profile')"><span class="nav-ic">&#128100;</span><span class="nav-lb">Profil</span><div class="nav-line"></div></button>
 </div>
 
@@ -382,6 +451,7 @@ function goPage(p){
   document.getElementById('nb-'+p).classList.add('on');
   window.scrollTo(0,0);
   if(p === 'modules') animMods();
+  if(p === 'community'){ document.getElementById('comm-who').textContent = user ? user.name : 'Membre'; commLoad(); }
 }
 
 // ===== MODULES ANIMATION =====
@@ -459,6 +529,77 @@ if(!localStorage.getItem('dma_ob')){
 
 // Init modules
 animMods();
+
+// ===== COMMUNAUTE =====
+var AIRTABLE_TOKEN = "patqxKulxpZ2ERSII.a9a8d52b13701bde569c6693e43ad3c1eb14ab50ce4e4ffb187df13c77afb7c5";
+var AIRTABLE_BASE = "app1N7fUuN5pcWE5S";
+var AIRTABLE_TABLE = "Communaute";
+
+function commCount(){
+  var v = document.getElementById('comm-input').value.length;
+  document.getElementById('comm-c').textContent = v;
+}
+
+function commToast(msg){
+  var t = document.getElementById('comm-toast');
+  t.textContent = msg; t.style.display = 'block';
+  setTimeout(function(){ t.style.display = 'none'; }, 2200);
+}
+
+function commLoad(){
+  var feed = document.getElementById('comm-feed');
+  feed.innerHTML = '<div class="comm-loading">Chargement...</div>';
+  fetch('https://api.airtable.com/v0/' + AIRTABLE_BASE + '/' + encodeURIComponent(AIRTABLE_TABLE) + '?sort[0][field]=Date&sort[0][direction]=desc&maxRecords=50', {
+    headers: { 'Authorization': 'Bearer ' + AIRTABLE_TOKEN }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    feed.innerHTML = '';
+    if(!data.records || data.records.length === 0){
+      feed.innerHTML = '<div class="comm-empty"><span class="comm-empty-ic">&#128483;</span><div class="comm-empty-t">Sois le premier a publier quelque chose !</div></div>';
+      return;
+    }
+    data.records.forEach(function(rec){
+      var f = rec.fields;
+      var d = document.createElement('div');
+      d.className = 'comm-msg';
+      var initials = (f.Nom || 'M').charAt(0).toUpperCase();
+      d.innerHTML = '<div class="comm-msg-top"><div class="comm-msg-av">' + initials + '</div><span class="comm-msg-name">' + (f.Nom||'Membre') + '</span><span class="comm-msg-date">' + (f.Date||'') + '</span></div><div class="comm-msg-txt">' + (f.Message||'') + '</div>';
+      feed.appendChild(d);
+    });
+  })
+  .catch(function(){
+    feed.innerHTML = '<div class="comm-empty"><span class="comm-empty-ic">&#9888;</span><div class="comm-empty-t">Impossible de charger les messages. Verifie ta connexion.</div></div>';
+  });
+}
+
+function commSend(){
+  var txt = document.getElementById('comm-input').value.trim();
+  if(!txt){ commToast('Ecris quelque chose !'); return; }
+  var btn = document.getElementById('comm-btn');
+  btn.disabled = true; btn.textContent = '...';
+  var u = JSON.parse(sessionStorage.getItem('dma_user') || '{}');
+  var now = new Date();
+  var date = now.toLocaleDateString('fr-FR') + ' ' + now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  fetch('https://api.airtable.com/v0/' + AIRTABLE_BASE + '/' + encodeURIComponent(AIRTABLE_TABLE), {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + AIRTABLE_TOKEN, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ records: [{ fields: { Nom: u.name||'Membre', Message: txt, Date: date, Identifiant: u.id||'' } }] })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(){
+    document.getElementById('comm-input').value = '';
+    document.getElementById('comm-c').textContent = '0';
+    btn.disabled = false; btn.textContent = 'Publier';
+    commToast('Message publie !');
+    commLoad();
+  })
+  .catch(function(){
+    btn.disabled = false; btn.textContent = 'Publier';
+    commToast('Erreur, reessaie.');
+  });
+}
+
 </script>
 </body>
 </html>
