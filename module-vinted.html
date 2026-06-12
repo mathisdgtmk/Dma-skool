@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — Module Vinted Resell</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06060a;--bg2:#0b0b10;--gold:#c8a84b;--gold2:#e8c86a;--red:#a0001a;--white:#ece8f0;--muted:rgba(236,232,240,.3);--border:rgba(200,168,75,.08);--border2:rgba(200,168,75,.15)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--white);font-family:"DM Sans",sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:40px}
+
+.hdr{position:sticky;top:0;z-index:100;background:rgba(6,6,10,.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 20px;gap:14px}
+.hdr-back{font-size:18px;color:var(--muted);text-decoration:none;cursor:pointer}
+.hdr-title{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:600;color:var(--white)}
+.hdr-title em{color:var(--gold);font-style:italic}
+
+/* HERO */
+.hero{padding:28px 20px 24px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(200,168,75,.05) 0%,transparent 100%);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(ellipse,rgba(200,168,75,.06) 0%,transparent 70%)}
+.hero-badge{font-size:8px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,168,75,.6);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.hero-badge::before{content:"";width:16px;height:1px;background:var(--gold);opacity:.5}
+.hero-title{font-family:"Cormorant Garamond",serif;font-size:34px;font-weight:300;color:var(--white);line-height:1;margin-bottom:8px}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:12px;font-weight:300;color:var(--muted);line-height:1.8}
+
+/* TABS */
+.tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none;position:sticky;top:52px;z-index:99;background:var(--bg)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:12px 16px;font-size:9px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:1px solid transparent;font-family:"DM Sans",sans-serif;transition:color .2s,border-color .2s;white-space:nowrap}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold)}
+
+.panel{display:none;padding:16px 20px}
+.panel.on{display:block}
+
+/* SECTION */
+.sec-label{font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* CARDS */
+.card-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:2px;padding:16px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ac,var(--border2));opacity:.6}
+.card-title{font-size:13px;font-weight:500;color:var(--white);margin-bottom:6px}
+.card-body{font-size:12px;font-weight:300;color:var(--muted);line-height:1.8}
+.card-body strong{color:rgba(236,232,240,.7);font-weight:400}
+.card-tag{display:inline-block;font-size:7px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;margin-top:10px;border-radius:1px}
+.tag-gold{background:rgba(200,168,75,.1);color:var(--gold);border:1px solid rgba(200,168,75,.2)}
+.tag-green{background:rgba(62,207,142,.08);color:rgba(62,207,142,.8);border:1px solid rgba(62,207,142,.15)}
+.tag-red{background:rgba(160,0,26,.08);color:rgba(160,0,26,.8);border:1px solid rgba(160,0,26,.15)}
+.tag-blue{background:rgba(79,163,232,.08);color:rgba(79,163,232,.8);border:1px solid rgba(79,163,232,.15)}
+
+/* MARGE BOX */
+.marge-box{background:linear-gradient(135deg,rgba(200,168,75,.06),rgba(160,0,26,.03));border:1px solid rgba(200,168,75,.15);padding:16px;margin-bottom:8px}
+.marge-title{font-size:11px;font-weight:500;color:var(--white);margin-bottom:10px}
+.marge-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.marge-row:last-child{border-bottom:none}
+.marge-label{font-size:11px;font-weight:300;color:var(--muted)}
+.marge-val{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:600}
+.marge-val.green{color:rgba(62,207,142,.9)}
+.marge-val.red{color:rgba(160,0,26,.8)}
+.marge-val.gold{color:var(--gold)}
+
+/* FOURNISSEUR */
+.fournisseur{background:var(--bg2);border:1px solid var(--border);border-radius:2px;padding:14px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
+.fournisseur-ic{font-size:22px;flex-shrink:0;margin-top:2px}
+.fournisseur-info{}
+.fournisseur-name{font-size:13px;font-weight:500;color:var(--white);display:block;margin-bottom:2px}
+.fournisseur-pays{font-size:9px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;display:block}
+.fournisseur-desc{font-size:11px;font-weight:300;color:var(--muted);line-height:1.6}
+.fournisseur-tag{display:inline-block;font-size:7px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;margin-top:6px;border-radius:1px}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.check-item{display:flex;gap:10px;align-items:flex-start;font-size:12px;font-weight:300;color:var(--muted);line-height:1.6;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:2px}
+.check-ic{flex-shrink:0;font-size:14px;margin-top:1px}
+.check-txt strong{color:rgba(236,232,240,.7);font-weight:400;display:block;font-size:13px;margin-bottom:2px}
+
+/* SCRIPT BOX */
+.script-box{background:rgba(200,168,75,.04);border:1px solid rgba(200,168,75,.12);border-radius:2px;padding:14px;margin-bottom:8px;position:relative}
+.script-label{font-size:8px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,168,75,.6);margin-bottom:8px}
+.script-txt{font-size:12px;font-weight:300;color:rgba(236,232,240,.6);line-height:1.8;white-space:pre-wrap}
+.copy-btn{position:absolute;top:10px;right:10px;font-size:8px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;background:rgba(200,168,75,.1);color:var(--gold);border:1px solid rgba(200,168,75,.2);border-radius:1px;cursor:pointer}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#06060a;font-size:11px;font-weight:600;letter-spacing:.1em;padding:10px 20px;border-radius:2px;display:none;z-index:999;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a class="hdr-back" href="dashboard.html">&#8592;</a>
+  <div class="hdr-title">Vinted <em>Resell</em></div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">Bonus Exclusif — Accompagnement 697EUR</div>
+  <div class="hero-title">Vinted<em>Resell Mastery</em></div>
+  <div class="hero-sub">Tout ce qu il faut pour construire un business d achat-revente rentable sur Vinted — des sources aux fournisseurs etrangers.</div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw(0,this)">Fondations</button>
+  <button class="tab" onclick="sw(1,this)">Sourcing</button>
+  <button class="tab" onclick="sw(2,this)">Vendre</button>
+  <button class="tab" onclick="sw(3,this)">Fournisseurs</button>
+  <button class="tab" onclick="sw(4,this)">Scaling</button>
+</div>
+
+<!-- FONDATIONS -->
+<div class="panel on" id="p0">
+  <div class="sec-label">Les bases du resell</div>
+  <div class="card-list">
+    <div class="card" style="--ac:rgba(200,168,75,.6)">
+      <div class="card-title">C est quoi le modele Vinted Resell ?</div>
+      <div class="card-body">Tu achetes des vetements, chaussures ou accessoires en dessous du prix du marche — sur Vinted, vide-greniers, friperies, lots en gros — et tu les revends plus cher sur Vinted avec un profit net.<br><br>Avantages : <strong>zero stock a avancer</strong> si tu fais du flip rapide, <strong>zero frais de plateforme</strong> pour le vendeur sur Vinted, audience massive de 75M utilisateurs en Europe.</div>
+      <span class="card-tag tag-gold">Modele business</span>
+    </div>
+    <div class="card" style="--ac:rgba(62,207,142,.5)">
+      <div class="card-title">Les 3 types de resell</div>
+      <div class="card-body"><strong>Flip rapide</strong> — tu achetes et revends la meme semaine. Petites marges, gros volume.<br><br><strong>Niche premium</strong> — tu te specialises (Nike, vintage 90s, marques de luxe) et tu vends moins mais avec de grosses marges.<br><br><strong>Lot en gros</strong> — tu achetes des lots de 10-50 pieces a prix reduit et tu revends a l unite.</div>
+      <span class="card-tag tag-green">Strategie</span>
+    </div>
+  </div>
+
+  <div class="sec-label">Calcul des marges</div>
+  <div class="marge-box">
+    <div class="marge-title">Exemple — Nike Air Force 1</div>
+    <div class="marge-row"><span class="marge-label">Prix d achat (Vinted/friperie)</span><span class="marge-val red">- 15EUR</span></div>
+    <div class="marge-row"><span class="marge-label">Prix de vente Vinted</span><span class="marge-val">45EUR</span></div>
+    <div class="marge-row"><span class="marge-label">Frais envoi (Mondial Relay)</span><span class="marge-val red">- 4EUR</span></div>
+    <div class="marge-row"><span class="marge-label">Profit net</span><span class="marge-val green">+ 26EUR</span></div>
+    <div class="marge-row"><span class="marge-label">ROI</span><span class="marge-val gold">173%</span></div>
+  </div>
+  <div class="marge-box">
+    <div class="marge-title">Exemple — Lot 20 pieces friperie</div>
+    <div class="marge-row"><span class="marge-label">Prix lot (2EUR/piece)</span><span class="marge-val red">- 40EUR</span></div>
+    <div class="marge-row"><span class="marge-label">Revente moyenne (12EUR/piece)</span><span class="marge-val">240EUR</span></div>
+    <div class="marge-row"><span class="marge-label">Frais envoi total</span><span class="marge-val red">- 40EUR</span></div>
+    <div class="marge-row"><span class="marge-label">Profit net</span><span class="marge-val green">+ 160EUR</span></div>
+  </div>
+</div>
+
+<!-- SOURCING -->
+<div class="panel" id="p1">
+  <div class="sec-label">Ou trouver les articles</div>
+  <div class="card-list">
+    <div class="card" style="--ac:rgba(200,168,75,.6)">
+      <div class="card-title">Vinted lui-meme — la mine d or</div>
+      <div class="card-body">Cherche des articles <strong>sous-evalues</strong> — vendeurs qui ne connaissent pas la valeur de leurs pieces. Filtre par : prix bas, marques cibles, taille specifique.<br><br>Astuce : active les <strong>alertes</strong> sur tes recherches pour etre le premier a voir les nouvelles annonces.</div>
+      <span class="card-tag tag-gold">Source #1</span>
+    </div>
+    <div class="card" style="--ac:rgba(79,163,232,.5)">
+      <div class="card-title">Vide-greniers et brocantes</div>
+      <div class="card-body">Les <strong>vide-greniers physiques</strong> le dimanche matin sont encore les meilleures sources. Les gens vendent sans connaitre les prix du marche.<br><br>Cibles : Nike, Adidas vintage, marques 90s, cuir, denim vintage. Budget moyen : 5-20EUR l article, revente 30-80EUR.</div>
+      <span class="card-tag tag-blue">Source #2</span>
+    </div>
+    <div class="card" style="--ac:rgba(62,207,142,.5)">
+      <div class="card-title">Leboncoin et eBay FR</div>
+      <div class="card-body">Lots de vetements <strong>vendus en gros</strong> — cherche "lot vetements femme taille M", "lot Nike", "destockage vetements". Tu paies 20-50EUR pour des lots revendables 200-400EUR sur Vinted a l unite.</div>
+      <span class="card-tag tag-green">Source #3</span>
+    </div>
+    <div class="card" style="--ac:rgba(160,0,26,.5)">
+      <div class="card-title">Depop et eBay UK</div>
+      <div class="card-body">Le marche anglais est moins mature que la France sur certaines marques. Tu trouves des pieces <strong>moins cheres qu en France</strong> et tu les revends sur Vinted FR avec une belle marge. Frais de port UK → FR : 6-10EUR via Mondial Relay.</div>
+      <span class="card-tag tag-red">Source #4</span>
+    </div>
+  </div>
+
+  <div class="sec-label">Niches les plus rentables</div>
+  <div class="checklist">
+    <div class="check-item"><span class="check-ic">&#128293;</span><div class="check-txt"><strong>Sneakers Nike / Adidas vintage</strong>Marges x3 a x8. Air Force 1, Cortez, Stan Smith ancienne generation.</div></div>
+    <div class="check-item"><span class="check-ic">&#128293;</span><div class="check-txt"><strong>Denim vintage 90s / 2000s</strong>Levi's 501, Lee, Wrangler — achete 5EUR en friperie, vendu 35-60EUR.</div></div>
+    <div class="check-item"><span class="check-ic">&#128293;</span><div class="check-txt"><strong>Marques de luxe accessibles</strong>Lacoste, Ralph Lauren, Tommy Hilfiger, Burberry — achetees 10-20EUR, vendues 40-120EUR.</div></div>
+    <div class="check-item"><span class="check-ic">&#128293;</span><div class="check-txt"><strong>Streetwear / hype</strong>Supreme, Stone Island, Palace — necessite connaissance mais marges enormes.</div></div>
+    <div class="check-item"><span class="check-ic">&#128293;</span><div class="check-txt"><strong>Vetements de sport vintage</strong>Maillots de foot retro, tracksuits Fila/Kappa — tres tendance, marges x4 a x6.</div></div>
+  </div>
+</div>
+
+<!-- VENDRE -->
+<div class="panel" id="p2">
+  <div class="sec-label">Photos qui vendent</div>
+  <div class="card-list">
+    <div class="card" style="--ac:rgba(200,168,75,.6)">
+      <div class="card-title">Setup photo parfait</div>
+      <div class="card-body"><strong>Fond blanc ou bois clair</strong> — jamais de sol sale ou encombre. Lumiere naturelle pres d une fenetre, pas de flash.<br><br>Prends <strong>5 photos minimum</strong> : face, dos, etiquette, details (coutures, logo), defaut si present. Les acheteurs veulent tout voir avant d acheter.</div>
+      <span class="card-tag tag-gold">Essentiel</span>
+    </div>
+    <div class="card" style="--ac:rgba(62,207,142,.5)">
+      <div class="card-title">Titre optimise pour le SEO Vinted</div>
+      <div class="card-body">Format : <strong>[Marque] [Modele] [Couleur] [Taille] [Style]</strong><br><br>Exemple : "Nike Air Force 1 blanc taille 42 vintage sneakers"<br><br>Inclus les mots cles que les acheteurs tapent. Evite les majuscules excessives et les emojis dans le titre.</div>
+      <span class="card-tag tag-green">SEO</span>
+    </div>
+  </div>
+
+  <div class="sec-label">Scripts de description</div>
+  <div class="script-box">
+    <div class="script-label">Description type — piece vintage</div>
+    <div class="script-txt">✨ [Marque] [Modele] — [Couleur/Style]
+
+Taille : [taille]
+Etat : [Tres bon / Bon / Correct]
+
+[2-3 phrases sur la piece : caracteristiques, histoire si pertinent, pourquoi c est une bonne affaire]
+
+Vendu sans defaut visible / Petit defaut signale en photo [supprimer selon le cas]
+
+Envoi soigne sous 24-48h via Mondial Relay 📦
+Questions bienvenues !</div>
+    <div class="copy-btn" onclick="cp(this)">Copier</div>
+  </div>
+  <div class="script-box">
+    <div class="script-label">Reponse aux offres trop basses</div>
+    <div class="script-txt">Bonjour ! Merci pour votre interet 😊
+Le prix est deja au plus bas pour cette piece, je ne peux pas descendre davantage.
+Je peux faire [prix - 2EUR] si vous achetez aujourd hui !
+Bonne journee</div>
+    <div class="copy-btn" onclick="cp(this)">Copier</div>
+  </div>
+
+  <div class="sec-label">Pricing strategy</div>
+  <div class="card-list">
+    <div class="card" style="--ac:rgba(200,168,75,.6)">
+      <div class="card-title">Comment fixer le bon prix</div>
+      <div class="card-body">1. Cherche <strong>10 articles similaires vendus</strong> sur Vinted (filtre "Vendus")<br>2. Prends la <strong>mediane</strong> — pas le plus cher, pas le moins cher<br>3. Ajoute <strong>10-15%</strong> pour laisser de la marge de negociation<br>4. Si pas vendu en 7 jours — baisse de 10% et remets en avant</div>
+      <span class="card-tag tag-gold">Methode</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOURNISSEURS -->
+<div class="panel" id="p3">
+  <div class="sec-label">Plateformes europeennes</div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🇵🇱</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">Humana / Tekstil</span>
+      <span class="fournisseur-pays">Pologne — Europe de l Est</span>
+      <span class="fournisseur-desc">Friperies en gros — lots de 10 a 100kg de vetements tries par categorie. Prix : 1-3EUR/kg. Livraison Europe disponible. Ideal pour volume et flip rapide.</span>
+      <span class="fournisseur-tag tag-green">Gros volume</span>
+    </div>
+  </div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🇬🇧</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">eBay UK</span>
+      <span class="fournisseur-pays">Royaume-Uni</span>
+      <span class="fournisseur-desc">Marche anglais avec des prix souvent inferieurs au marche francais sur certaines marques. Lots "job lot clothing" tres interessants. Frais de port UK → FR via Mondial Relay : 6-10EUR.</span>
+      <span class="fournisseur-tag tag-blue">Niche premium</span>
+    </div>
+  </div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🇪🇸</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">Vinted ES / DE / BE</span>
+      <span class="fournisseur-pays">Espagne — Allemagne — Belgique</span>
+      <span class="fournisseur-desc">Les marches Vinted etrangers ont parfois des prix inferieurs au marche FR. Achete sur Vinted ES ou DE et revends sur Vinted FR. Fonctionne bien pour les marques sport et les pieces vintage.</span>
+      <span class="fournisseur-tag tag-gold">Arbitrage</span>
+    </div>
+  </div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🇳🇱</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">Vinted NL + Marktplaats</span>
+      <span class="fournisseur-pays">Pays-Bas</span>
+      <span class="fournisseur-desc">Les neerlandais vendent beaucoup de vetements de marque a prix tres bas. Marktplaats (l equivalant Leboncoin) est une mine d or pour les lots.</span>
+      <span class="fournisseur-tag tag-blue">Lots interessants</span>
+    </div>
+  </div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🇮🇹</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">Vestiaire Collective (vendeurs IT)</span>
+      <span class="fournisseur-pays">Italie</span>
+      <span class="fournisseur-desc">Certains vendeurs italiens bradent du luxe accessible. Achete sur Vestiaire pas cher, revends sur Vinted FR avec marge. Necessite de bien connaitre les authentiques.</span>
+      <span class="fournisseur-tag tag-red">Luxe accessible</span>
+    </div>
+  </div>
+
+  <div class="sec-label" style="margin-top:12px">Friperies en gros France</div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🇫🇷</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">Remix Vintage</span>
+      <span class="fournisseur-pays">France — disponible en ligne</span>
+      <span class="fournisseur-desc">Grossiste vetements vintage — lots tries par decennie (70s/80s/90s). Commande minimum 10kg. Prix 4-8EUR/kg. Livraison France rapide. Ideal pour niche vintage.</span>
+      <span class="fournisseur-tag tag-gold">Vintage specialise</span>
+    </div>
+  </div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🇫🇷</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">Leboncoin — Lots vetements</span>
+      <span class="fournisseur-pays">France</span>
+      <span class="fournisseur-desc">Cherche "lot vetements", "destockage vetements", "lot friperie". Des particuliers vendent des centaines de pieces pour 20-100EUR total. ROI enorme si tu tries bien.</span>
+      <span class="fournisseur-tag tag-green">Source facile</span>
+    </div>
+  </div>
+
+  <div class="fournisseur">
+    <div class="fournisseur-ic">🌍</div>
+    <div class="fournisseur-info">
+      <span class="fournisseur-name">ThredUp Wholesale (US)</span>
+      <span class="fournisseur-pays">Etats-Unis — livraison internationale</span>
+      <span class="fournisseur-desc">Plateforme de gros pour la revente — lots de vetements tries par marque, taille et categorie. Frais de port eleves depuis les US mais marges enormes sur les marques americaines rares en France.</span>
+      <span class="fournisseur-tag tag-blue">Marques US rares</span>
+    </div>
+  </div>
+</div>
+
+<!-- SCALING -->
+<div class="panel" id="p4">
+  <div class="sec-label">Automatiser et scaler</div>
+  <div class="card-list">
+    <div class="card" style="--ac:rgba(200,168,75,.6)">
+      <div class="card-title">Gestion multi-compte</div>
+      <div class="card-body">Vinted autorise <strong>un compte par personne</strong>. Pour scaler legalement utilise les comptes de personnes de confiance (famille, amis) ou cree une <strong>structure juridique</strong> (auto-entrepreneur) pour avoir un compte pro Vinted.<br><br>Vinted Pro donne acces a des stats avancees et une meilleure visibilite.</div>
+      <span class="card-tag tag-gold">Structuration</span>
+    </div>
+    <div class="card" style="--ac:rgba(62,207,142,.5)">
+      <div class="card-title">Automatiser les annonces</div>
+      <div class="card-body">Utilise <strong>Pricero</strong> ou des outils tiers pour suivre tes prix vs la concurrence. Pour les photos en serie utilise un <strong>fond photo fixe</strong> et un process en chaine : trier → photographier → decrire → publier.<br><br>Objectif : traiter <strong>10 articles par heure</strong> une fois rodé.</div>
+      <span class="card-tag tag-green">Process</span>
+    </div>
+    <div class="card" style="--ac:rgba(79,163,232,.5)">
+      <div class="card-title">Remise en avant automatique</div>
+      <div class="card-body">Vinted booste la visibilite des articles recemment mis en avant. Chaque jour mets en avant <strong>5-10 articles</strong> en baissant legerement le prix (meme 1EUR suffit). Ca remet l article en tete des recherches.</div>
+      <span class="card-tag tag-blue">Visibilite</span>
+    </div>
+    <div class="card" style="--ac:rgba(160,0,26,.5)">
+      <div class="card-title">Objectifs chiffres</div>
+      <div class="card-body"><strong>Debutant</strong> : 10 articles/semaine → 100-300EUR de profit<br><strong>Intermediaire</strong> : 30 articles/semaine → 500-1000EUR<br><strong>Avance</strong> : 100+ articles/semaine → 2000-5000EUR<br><br>La cle : la regularite et la specialisation dans une niche.</div>
+      <span class="card-tag tag-red">Objectifs</span>
+    </div>
+  </div>
+
+  <div class="sec-label">Declaration et statut legal</div>
+  <div class="card-list">
+    <div class="card" style="--ac:rgba(200,168,75,.6)">
+      <div class="card-title">Quand declarer ?</div>
+      <div class="card-body">En France tu peux vendre des objets personnels sans declarer. Mais si tu achetes pour revendre c est une <strong>activite commerciale</strong>.<br><br>Au dela de <strong>3000EUR de ventes/an</strong> ou plus de 20 transactions, Vinted transmet tes infos aux impots. Cree une <strong>micro-entreprise</strong> pour etre en regle et deduire tes achats.</div>
+      <span class="card-tag tag-gold">Important</span>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="tk"></div>
+
+<script>
+function sw(i,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  el.classList.add('on');
+  document.getElementById('p'+i).classList.add('on');
+  window.scrollTo(0,104);
+}
+function cp(btn){
+  var txt=btn.previousElementSibling.textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast('Copie !')});}
+  else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);toast('Copie !');}
+}
+function toast(m){var t=document.getElementById('tk');t.textContent=m;t.style.display='block';setTimeout(function(){t.style.display='none'},2000);}
+</script>
+</body>
+</html>
