@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DMA — Mes Ventes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06060a;--bg2:#0b0b10;--gold:#c8a84b;--gold2:#e8c86a;--red:#a0001a;--white:#ece8f0;--muted:rgba(236,232,240,.3);--border:rgba(200,168,75,.08);--border2:rgba(200,168,75,.15);--green:#3ecf8e}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--white);font-family:"DM Sans",sans-serif;min-height:100vh;padding-bottom:40px}
+
+.hdr{position:sticky;top:0;z-index:100;background:rgba(6,6,10,.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 20px;gap:14px}
+.hdr-back{font-size:18px;color:var(--muted);text-decoration:none}
+.hdr-title{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:600;color:var(--white)}
+.hdr-title em{color:var(--gold);font-style:italic}
+
+/* HERO STATS */
+.stats-hero{padding:24px 20px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(200,168,75,.05) 0%,transparent 100%)}
+.stats-name{font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.stats-name::after{content:"";flex:1;height:1px;background:var(--border)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.stat-box{background:var(--bg);padding:16px 14px}
+.stat-box.full{grid-column:1/-1;background:linear-gradient(135deg,rgba(200,168,75,.06),rgba(160,0,26,.03));border:none}
+.stat-label{font-size:8px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.stat-val{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:600;color:var(--gold);display:block;line-height:1}
+.stat-val.white{color:var(--white)}
+.stat-val.green{color:var(--green)}
+.stat-sub{font-size:10px;font-weight:300;color:var(--muted);display:block;margin-top:3px}
+
+/* GRAPHIQUE BARRES */
+.chart-wrap{padding:16px 20px;border-bottom:1px solid var(--border)}
+.chart-label{font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.chart-label::after{content:"";flex:1;height:1px;background:var(--border)}
+.chart{display:flex;align-items:flex-end;gap:4px;height:80px;padding:0 4px}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{width:100%;border-radius:1px 1px 0 0;background:rgba(200,168,75,.15);transition:height .5s cubic-bezier(.16,1,.3,1);min-height:2px;position:relative;cursor:pointer}
+.bar.active{background:var(--gold)}
+.bar-day{font-size:8px;color:var(--muted);text-align:center;letter-spacing:.05em}
+
+/* FORMULAIRE */
+.form-section{padding:16px 20px;border-bottom:1px solid var(--border)}
+.form-title{font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.form-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.form-row{display:flex;gap:8px;margin-bottom:8px}
+.form-input{flex:1;background:rgba(255,255,255,.03);border:1px solid var(--border);padding:12px 14px;color:var(--white);font-family:"DM Sans",sans-serif;font-size:14px;font-weight:300;outline:none;transition:border-color .2s;border-radius:2px}
+.form-input::placeholder{color:var(--muted)}
+.form-input:focus{border-color:var(--border2)}
+.form-select{flex:1;background:rgba(255,255,255,.03);border:1px solid var(--border);padding:12px 14px;color:var(--white);font-family:"DM Sans",sans-serif;font-size:13px;font-weight:300;outline:none;border-radius:2px;-webkit-appearance:none}
+.form-select option{background:#0b0b10;color:var(--white)}
+.add-btn{width:100%;padding:14px;background:var(--gold);border:none;color:#06060a;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:opacity .2s}
+.add-btn:active{opacity:.7}
+
+/* LISTE VENTES */
+.ventes-section{padding:16px 20px}
+.ventes-title{font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.ventes-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.vente-item{background:var(--bg2);border:1px solid var(--border);border-radius:2px;padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:14px;animation:fadeIn .3s both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.vente-item::before{content:"";width:2px;height:100%;background:var(--gold);align-self:stretch;flex-shrink:0;border-radius:1px;margin:-14px 0;padding:14px 0}
+.vente-info{flex:1}
+.vente-source{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
+.vente-note{font-size:12px;font-weight:300;color:rgba(236,232,240,.5);display:block}
+.vente-date{font-size:9px;color:rgba(236,232,240,.2)}
+.vente-montant{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:600;color:var(--green)}
+.vente-del{font-size:12px;color:rgba(236,232,240,.15);background:none;border:none;cursor:pointer;padding:4px 8px}
+.vente-del:active{color:rgba(160,0,26,.7)}
+
+.empty{text-align:center;padding:40px 20px}
+.empty-ic{font-size:36px;display:block;margin-bottom:12px;opacity:.4}
+.empty-t{font-size:12px;font-weight:300;color:var(--muted)}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#06060a;font-size:11px;font-weight:600;letter-spacing:.1em;padding:10px 20px;border-radius:2px;display:none;z-index:999;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <a class="hdr-back" href="dashboard.html">&#8592;</a>
+  <div class="hdr-title">Mes <em>ventes</em></div>
+</div>
+
+<div class="stats-hero">
+  <div class="stats-name" id="stats-name">Mon tableau de bord</div>
+  <div class="stats-grid">
+    <div class="stat-box full">
+      <span class="stat-label">Total ce mois</span>
+      <span class="stat-val" id="total-mois">0 EUR</span>
+      <span class="stat-sub" id="nb-mois">0 vente ce mois</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Total global</span>
+      <span class="stat-val white" id="total-global">0 EUR</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Meilleure vente</span>
+      <span class="stat-val green" id="best-vente">—</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Nb total ventes</span>
+      <span class="stat-val white" id="nb-total">0</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Moyenne par vente</span>
+      <span class="stat-val" id="moyenne">—</span>
+    </div>
+  </div>
+</div>
+
+<!-- GRAPHIQUE 7 DERNIERS JOURS -->
+<div class="chart-wrap">
+  <div class="chart-label">7 derniers jours</div>
+  <div class="chart" id="chart"></div>
+</div>
+
+<!-- FORMULAIRE -->
+<div class="form-section">
+  <div class="form-title">Ajouter une vente</div>
+  <div class="form-row">
+    <input class="form-input" type="number" id="montant" placeholder="Montant en EUR" min="0" step="0.01">
+    <select class="form-select" id="source">
+      <option value="DMA">DMA</option>
+      <option value="Vinted">Vinted</option>
+      <option value="Dropshipping">Dropshipping</option>
+      <option value="Affiliation">Affiliation</option>
+      <option value="UGC">UGC</option>
+      <option value="Newsletter">Newsletter</option>
+      <option value="Autre">Autre</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <input class="form-input" type="text" id="note" placeholder="Note (optionnel)">
+  </div>
+  <button class="add-btn" onclick="addVente()">+ Ajouter la vente</button>
+</div>
+
+<!-- LISTE -->
+<div class="ventes-section">
+  <div class="ventes-title">Historique</div>
+  <div id="ventes-list"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var KEY = 'dma_ventes_' + (JSON.parse(sessionStorage.getItem('dma_user')||'{}').id || 'user');
+var user = JSON.parse(sessionStorage.getItem('dma_user') || '{}');
+
+if(user.name) document.getElementById('stats-name').childNodes[0].textContent = user.name + ' — ';
+
+function getVentes(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+function saveVentes(v){ localStorage.setItem(KEY, JSON.stringify(v)); }
+
+function addVente(){
+  var m = parseFloat(document.getElementById('montant').value);
+  var s = document.getElementById('source').value;
+  var n = document.getElementById('note').value.trim();
+  if(!m || m <= 0){ showToast('Entre un montant valide'); return; }
+  var ventes = getVentes();
+  var now = new Date();
+  ventes.unshift({
+    id: Date.now(),
+    montant: m,
+    source: s,
+    note: n,
+    date: now.toLocaleDateString('fr-FR'),
+    ts: now.getTime()
+  });
+  saveVentes(ventes);
+  document.getElementById('montant').value = '';
+  document.getElementById('note').value = '';
+  render();
+  showToast('Vente ajoutee ! +' + m + 'EUR');
+}
+
+function delVente(id){
+  var ventes = getVentes().filter(function(v){ return v.id !== id; });
+  saveVentes(ventes);
+  render();
+}
+
+function render(){
+  var ventes = getVentes();
+  var now = new Date();
+  var moisCourant = now.getMonth();
+  var annee = now.getFullYear();
+
+  // Stats
+  var totalGlobal = ventes.reduce(function(a,v){ return a+v.montant; }, 0);
+  var ventesMois = ventes.filter(function(v){
+    var d = new Date(v.ts);
+    return d.getMonth()===moisCourant && d.getFullYear()===annee;
+  });
+  var totalMois = ventesMois.reduce(function(a,v){ return a+v.montant; }, 0);
+  var best = ventes.length ? Math.max.apply(null, ventes.map(function(v){ return v.montant; })) : 0;
+  var moy = ventes.length ? totalGlobal/ventes.length : 0;
+
+  document.getElementById('total-mois').textContent = totalMois.toFixed(0) + ' EUR';
+  document.getElementById('nb-mois').textContent = ventesMois.length + ' vente' + (ventesMois.length>1?'s':'') + ' ce mois';
+  document.getElementById('total-global').textContent = totalGlobal.toFixed(0) + ' EUR';
+  document.getElementById('best-vente').textContent = best ? best.toFixed(0)+' EUR' : '—';
+  document.getElementById('nb-total').textContent = ventes.length;
+  document.getElementById('moyenne').textContent = moy ? moy.toFixed(0)+' EUR' : '—';
+
+  // Graphique 7 jours
+  var chart = document.getElementById('chart');
+  chart.innerHTML = '';
+  var days = [];
+  for(var i=6;i>=0;i--){
+    var d = new Date(); d.setDate(d.getDate()-i);
+    var dd = d.toLocaleDateString('fr-FR');
+    var total = ventes.filter(function(v){ return v.date===dd; }).reduce(function(a,v){ return a+v.montant; },0);
+    days.push({label:d.toLocaleDateString('fr-FR',{weekday:'short'}), total:total});
+  }
+  var maxVal = Math.max.apply(null, days.map(function(d){ return d.total; })) || 1;
+  days.forEach(function(d, i){
+    var bw = document.createElement('div');
+    bw.className = 'bar-wrap';
+    var bar = document.createElement('div');
+    bar.className = 'bar' + (i===6?' active':'');
+    bar.style.height = Math.max(2, (d.total/maxVal)*72) + 'px';
+    if(d.total>0) bar.title = d.total+'EUR';
+    var lbl = document.createElement('div');
+    lbl.className = 'bar-day';
+    lbl.textContent = d.label;
+    bw.appendChild(bar);
+    bw.appendChild(lbl);
+    chart.appendChild(bw);
+  });
+
+  // Liste
+  var list = document.getElementById('ventes-list');
+  if(ventes.length === 0){
+    list.innerHTML = '<div class="empty"><span class="empty-ic">📊</span><div class="empty-t">Aucune vente encore. Ajoute ta premiere !</div></div>';
+    return;
+  }
+  list.innerHTML = '';
+  ventes.slice(0,30).forEach(function(v){
+    var el = document.createElement('div');
+    el.className = 'vente-item';
+    el.innerHTML =
+      '<div class="vente-info">' +
+        '<span class="vente-source">' + v.source + '</span>' +
+        (v.note ? '<span class="vente-note">' + v.note + '</span>' : '') +
+        '<span class="vente-date">' + v.date + '</span>' +
+      '</div>' +
+      '<span class="vente-montant">+' + v.montant.toFixed(0) + 'EUR</span>' +
+      '<button class="vente-del" onclick="delVente('+v.id+')">✕</button>';
+    list.appendChild(el);
+  });
+}
+
+function showToast(m){
+  var t = document.getElementById('toast');
+  t.textContent = m; t.style.display = 'block';
+  setTimeout(function(){ t.style.display = 'none'; }, 2200);
+}
+
+render();
+</script>
+</body>
+</html>
