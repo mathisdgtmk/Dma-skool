@@ -368,9 +368,7 @@ async function callAI(prompt, systemPrompt) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer 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",
-      "HTTP-Referer": "https://mathisdgtmk.github.io",
-      "X-Title": "DMA IA Suite"
+      "Authorization": "Bearer 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"
     },
     body: JSON.stringify({
       model: "meta-llama/llama-3.3-70b-instruct:free",
@@ -384,6 +382,9 @@ async function callAI(prompt, systemPrompt) {
   var data = await res.json();
   if (data.choices && data.choices[0]) {
     return data.choices[0].message.content;
+  }
+  if (data.error) {
+    return "Erreur API : " + (data.error.message || JSON.stringify(data.error));
   }
   return "Erreur — reessaie.";
 }
