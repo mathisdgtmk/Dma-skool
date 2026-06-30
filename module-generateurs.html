@@ -533,7 +533,7 @@ async function callAI(prompt, systemPrompt) {
       "Authorization": "Bearer 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"
     },
     body: JSON.stringify({
-      model: "google/gemini-2.0-flash-exp:free",
+      model: "mistralai/mistral-7b-instruct:free",
       max_tokens: 1024,
       messages: [
         {role: "system", content: sys},
