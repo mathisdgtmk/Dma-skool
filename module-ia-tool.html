@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -138,32 +137,30 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
 </div>
 
 <!-- ═══ OUTIL 1 — SCRIPT DM ═══ -->
-
 <div class="tool-panel active" id="t0">
   <div class="t-title">GENERATEUR <span>DE SCRIPTS DM</span></div>
   <div class="t-sub">Décris ton prospect et l'IA écrit le script DM parfait pour le closer.</div>
 
-<span class="lbl">Ton offre</span>
-<select class="sel" id="dm-offre" style="margin-bottom:10px">
-<option value="DMA 397€ avec coaching offert et MRR 100%">Formule DMA 397€</option>
-<option value="Bonus Agence IA No-Code 197€">Bonus Agence IA 197€</option>
-<option value="Accompagnement Premium 1-to-1 697€">Accompagnement Premium 697€</option>
-</select>
+  <span class="lbl">Ton offre</span>
+  <select class="sel" id="dm-offre" style="margin-bottom:10px">
+    <option value="DMA 397€ avec coaching offert et MRR 100%">Formule DMA 397€</option>
+    <option value="Bonus Agence IA No-Code 197€">Bonus Agence IA 197€</option>
+    <option value="Accompagnement Premium 1-to-1 697€">Accompagnement Premium 697€</option>
+  </select>
 
-<span class="lbl">Profil du prospect</span>
-
+  <span class="lbl">Profil du prospect</span>
   <textarea class="inp" id="dm-prospect" rows="3" placeholder="Ex: Étudiant 20 ans, veut gagner de l'argent en ligne, a regardé mes stories sur le MRR, a commenté 'intéressant'..."></textarea>
 
-<span class="lbl" style="margin-top:10px">Ton objectif</span>
-<select class="sel" id="dm-objectif" style="margin-bottom:0">
-<option value="pitcher l'offre directement">Pitcher l’offre direct</option>
-<option value="qualifier le prospect avant de pitcher">Qualifier d’abord</option>
-<option value="relancer après 3 jours sans réponse">Relance 3 jours</option>
-<option value="répondre à l'objection 'c'est cher'">Gérer objection prix</option>
-<option value="closer après une démo">Closer après démo</option>
-</select>
+  <span class="lbl" style="margin-top:10px">Ton objectif</span>
+  <select class="sel" id="dm-objectif" style="margin-bottom:0">
+    <option value="pitcher l'offre directement">Pitcher l'offre direct</option>
+    <option value="qualifier le prospect avant de pitcher">Qualifier d'abord</option>
+    <option value="relancer après 3 jours sans réponse">Relance 3 jours</option>
+    <option value="répondre à l'objection 'c'est cher'">Gérer objection prix</option>
+    <option value="closer après une démo">Closer après démo</option>
+  </select>
 
-<button class="btn-run" id="dm-btn" onclick="runDM()">⚡ GÉNÉRER LE SCRIPT</button>
+  <button class="btn-run" id="dm-btn" onclick="runDM()">⚡ GÉNÉRER LE SCRIPT</button>
 
   <div class="loading-bar" id="dm-loading"><div class="loading-fill"></div></div>
 
@@ -180,43 +177,37 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
 </div>
 
 <!-- ═══ OUTIL 2 — PROSPECTS ═══ -->
-
 <div class="tool-panel" id="t1">
   <div class="t-title">CIBLAGE & <span>APPROCHE</span></div>
   <div class="t-sub">Décris ta cible et ce qu'elle veut accomplir — l'IA génère les critères pour la trouver ET le message d'approche parfait.</div>
 
-<span class="lbl">Plateforme de prospection</span>
-<select class="sel" id="p-platform" style="margin-bottom:10px">
-<option value="Instagram">Instagram</option>
-<option value="TikTok">TikTok</option>
-<option value="Snapchat">Snapchat</option>
-</select>
+  <span class="lbl">Plateforme de prospection</span>
+  <select class="sel" id="p-platform" style="margin-bottom:10px">
+    <option value="Instagram">Instagram</option>
+    <option value="TikTok">TikTok</option>
+    <option value="Snapchat">Snapchat</option>
+  </select>
 
-<span class="lbl">Qui tu veux cibler ?</span>
-
+  <span class="lbl">Qui tu veux cibler ?</span>
   <textarea class="inp" id="p-cible" rows="2" placeholder="Ex: Des gens qui suivent des créateurs comme @mthsdgtmk, @lena_situations, qui parlent de business, MRR, liberté financière..."></textarea>
 
-<span class="lbl">Ce qu’ils veulent accomplir</span>
-
+  <span class="lbl">Ce qu'ils veulent accomplir</span>
   <textarea class="inp" id="p-objectif" rows="2" placeholder="Ex: Ils veulent gagner de l'argent en ligne, quitter leur job, avoir un revenu complémentaire, être libre financièrement..."></textarea>
 
-<span class="lbl">Signaux à repérer sur leur profil</span>
-<input class="inp" id="p-signaux" type="text" placeholder="Ex: Ils commentent 'comment tu fais ?' sur des posts business, ils postent sur leur galère financière...">
+  <span class="lbl">Signaux à repérer sur leur profil</span>
+  <input class="inp" id="p-signaux" type="text" placeholder="Ex: Ils commentent 'comment tu fais ?' sur des posts business, ils postent sur leur galère financière...">
 
-<button class="btn-run" id="p-btn" onclick="runProspects()">🎯 GÉNÉRER MON PLAN DE CIBLAGE</button>
-
+  <button class="btn-run" id="p-btn" onclick="runProspects()">🎯 GÉNÉRER MON PLAN DE CIBLAGE</button>
   <div class="loading-bar" id="p-loading"><div class="loading-fill"></div></div>
   <div id="p-result" style="margin-top:12px"></div>
 </div>
 
 <!-- ═══ OUTIL 3 — CONTENU VIRAL ═══ -->
-
 <div class="tool-panel" id="t2">
   <div class="t-title">GENERATEUR <span>DE CONTENU VIRAL</span></div>
   <div class="t-sub">L'IA crée des hooks, légendes et scripts prêts à poster sur chaque plateforme.</div>
 
-<span class="lbl">Sujet / Angle</span>
-
+  <span class="lbl">Sujet / Angle</span>
   <textarea class="inp" id="c-sujet" rows="2" placeholder="Ex: Comment j'ai fait ma première vente DMA en 5 jours..."></textarea>
 
   <div class="row2" style="margin-top:10px">
@@ -240,14 +231,12 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
     </div>
   </div>
 
-<button class="btn-run" id="c-btn" onclick="runContent()">📲 GÉNÉRER LE CONTENU</button>
-
+  <button class="btn-run" id="c-btn" onclick="runContent()">📲 GÉNÉRER LE CONTENU</button>
   <div class="loading-bar" id="c-loading"><div class="loading-fill"></div></div>
   <div class="ideas-grid" id="c-result"></div>
 </div>
 
 <!-- ═══ OUTIL 4 — SIMULATEUR REVENUS ═══ -->
-
 <div class="tool-panel" id="t3">
   <div class="t-title">SIMULATEUR <span>DE REVENUS MRR</span></div>
   <div class="t-sub">Calcule tes revenus potentiels selon tes objectifs de ventes.</div>
@@ -268,16 +257,16 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
     </div>
   </div>
 
-<span class="lbl" style="margin-top:10px">Ton taux de closing actuel</span>
-<select class="sel" id="r-taux">
-<option value="10">10% — Débutant</option>
-<option value="20">20% — En progression</option>
-<option value="30" selected>30% — Intermédiaire</option>
-<option value="50">50% — Confirmé</option>
-<option value="70">70% — Expert</option>
-</select>
+  <span class="lbl" style="margin-top:10px">Ton taux de closing actuel</span>
+  <select class="sel" id="r-taux">
+    <option value="10">10% — Débutant</option>
+    <option value="20">20% — En progression</option>
+    <option value="30" selected>30% — Intermédiaire</option>
+    <option value="50">50% — Confirmé</option>
+    <option value="70">70% — Expert</option>
+  </select>
 
-<button class="btn-run" style="background:linear-gradient(135deg,#C9A84C,#8B6914);margin-top:12px" onclick="calcRevenue()">💰 CALCULER MES REVENUS</button>
+  <button class="btn-run" style="background:linear-gradient(135deg,#C9A84C,#8B6914);margin-top:12px" onclick="calcRevenue()">💰 CALCULER MES REVENUS</button>
 
   <div class="calc-result" id="r-result" style="display:none">
     <div class="calc-row"><span class="calc-label">Prospects nécessaires/semaine</span><span class="calc-value gold" id="r-prospects">0</span></div>
@@ -290,25 +279,22 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
 </div>
 
 <!-- ═══ OUTIL 5 — OBJECTIONS ═══ -->
-
 <div class="tool-panel" id="t4">
   <div class="t-title">CRUSHER <span>D'OBJECTIONS</span></div>
   <div class="t-sub">Colle l'objection de ton prospect — l'IA génère la réponse parfaite pour closer.</div>
 
-<span class="lbl">Objection du prospect</span>
-
+  <span class="lbl">Objection du prospect</span>
   <textarea class="inp" id="o-text" rows="3" placeholder="Ex: 'C'est trop cher pour moi là j'ai pas les moyens' ou 'Je vais réfléchir' ou colle son message exact..."></textarea>
 
-<span class="lbl" style="margin-top:10px">Contexte</span>
-<select class="sel" id="o-context">
-<option value="DM Instagram">DM Instagram</option>
-<option value="appel téléphonique">Appel téléphone</option>
-<option value="Snapchat">Snapchat</option>
-<option value="après une présentation">Après présentation</option>
-</select>
+  <span class="lbl" style="margin-top:10px">Contexte</span>
+  <select class="sel" id="o-context">
+    <option value="DM Instagram">DM Instagram</option>
+    <option value="appel téléphonique">Appel téléphone</option>
+    <option value="Snapchat">Snapchat</option>
+    <option value="après une présentation">Après présentation</option>
+  </select>
 
-<button class="btn-run" id="o-btn" onclick="runObjection()">🥊 GÉNÉRER LA RÉPONSE</button>
-
+  <button class="btn-run" id="o-btn" onclick="runObjection()">🥊 GÉNÉRER LA RÉPONSE</button>
   <div class="loading-bar" id="o-loading"><div class="loading-fill"></div></div>
 
   <div class="result-box" id="o-result">
@@ -324,13 +310,11 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
 </div>
 
 <!-- ═══ OUTIL 6 — HOOKS ═══ -->
-
 <div class="tool-panel" id="t5">
   <div class="t-title">GÉNÉRATEUR <span>DE HOOKS</span></div>
   <div class="t-sub">Entre un thème et l'IA génère 10 hooks ultra percutants pour arrêter le scroll.</div>
 
-<span class="lbl">Thème / Sujet</span>
-
+  <span class="lbl">Thème / Sujet</span>
   <textarea class="inp" id="h-theme" rows="2" placeholder="Ex: Gagner de l'argent en ligne, MRR, liberté financière, ma première vente..."></textarea>
 
   <div class="row2" style="margin-top:10px">
@@ -355,8 +339,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
     </div>
   </div>
 
-<button class="btn-run" id="h-btn" onclick="runHooks()" style="background:linear-gradient(135deg,#7ab8ff,#3a7ad4);color:#050505">🎣 GÉNÉRER 10 HOOKS</button>
-
+  <button class="btn-run" id="h-btn" onclick="runHooks()" style="background:linear-gradient(135deg,#7ab8ff,#3a7ad4);color:#050505">🎣 GÉNÉRER 10 HOOKS</button>
   <div class="loading-bar" id="h-loading"><div class="loading-fill"></div></div>
 
   <div id="h-result" style="margin-top:12px;display:none">
@@ -381,14 +364,16 @@ function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
 
 async function callAI(prompt, systemPrompt) {
   var sys = systemPrompt || "Tu es un expert en vente et marketing digital francophone. Tes reponses sont directes, percutantes et immediatement utilisables. Tu parles comme un pro du terrain, pas comme un livre. Utilise le tutoiement, sois concis et impactant.";
-  var res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  var res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer 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"
+      "Authorization": "Bearer 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",
+      "HTTP-Referer": "https://mathisdgtmk.github.io",
+      "X-Title": "DMA IA Suite"
     },
     body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",
+      model: "meta-llama/llama-3.3-70b-instruct:free",
       max_tokens: 1024,
       messages: [
         {role: "system", content: sys},
@@ -614,6 +599,5 @@ function toast(msg) {
   setTimeout(function(){t.style.display="none"},2500);
 }
 </script>
-
 </body>
 </html>
