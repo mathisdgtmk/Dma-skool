@@ -8,115 +8,202 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#05050a;color:#f0f0ff;font-family:Montserrat,sans-serif;overflow-x:hidden;font-size:16px}
+body{
+  background:#05050a;
+  color:#f0f0ff;
+  font-family:Montserrat,sans-serif;
+  overflow-x:hidden;
+  font-size:16px;
+  text-align:center;
+}
 
-/* UTILS */
-.wrap{width:100%;max-width:900px;margin:0 auto;padding:0 20px}
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,75,.15),transparent);margin:0}
-.gold{color:#C9A84C}
-.green{color:#3ecf8e}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+/* BASE */
+.wrap{
+  width:100%;
+  max-width:860px;
+  margin:0 auto;
+  padding:0 20px;
+  text-align:left;
+}
+.center{text-align:center}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,75,.15),transparent)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.on{opacity:1;transform:translateY(0)}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;transition:background .3s}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .3s;
+}
 nav.s{background:rgba(5,5,10,.97);border-bottom:1px solid rgba(200,168,75,.1);backdrop-filter:blur(16px)}
-.n-logo{font-family:"Bebas Neue",sans-serif;font-size:22px;letter-spacing:6px;color:#f0f0ff}
+.n-logo{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:6px;color:#f0f0ff}
 .n-logo span{color:#C0001A}
-.n-btn{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:#C9A84C;color:#05050a;padding:10px 20px;text-decoration:none;white-space:nowrap}
+.n-btn{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  background:#C9A84C;color:#05050a;
+  padding:10px 18px;text-decoration:none;white-space:nowrap;
+}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;position:relative;overflow:hidden}
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 20px 70px;
+  position:relative;overflow:hidden;
+}
 .hero::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#C9A84C,#C0001A,#C9A84C,transparent)}
 .h-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:500px;background:radial-gradient(ellipse,rgba(200,168,75,.08) 0%,transparent 65%);pointer-events:none}
-.h-inner{position:relative;z-index:1;width:100%}
-.h-eye{font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(200,168,75,.7);margin-bottom:16px}
-.h-logo{font-family:"Bebas Neue",sans-serif;font-size:clamp(60px,15vw,130px);letter-spacing:10px;color:#f0f0ff;line-height:1;margin-bottom:8px}
+.h-inner{position:relative;z-index:1;width:100%;max-width:700px;margin:0 auto}
+
+.h-eye{font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(200,168,75,.7);margin-bottom:16px;display:block}
+.h-logo{font-family:"Bebas Neue",sans-serif;font-size:clamp(64px,18vw,140px);letter-spacing:10px;color:#f0f0ff;line-height:1;display:block;margin-bottom:10px}
 .h-logo span{color:#C0001A}
-.h-tag{font-family:"Cormorant Garamond",serif;font-size:clamp(18px,3.5vw,32px);font-weight:300;font-style:italic;color:rgba(255,255,255,.5);margin-bottom:20px}
+.h-tag{font-family:"Cormorant Garamond",serif;font-size:clamp(18px,4vw,30px);font-weight:300;font-style:italic;color:rgba(255,255,255,.5);display:block;margin-bottom:20px;line-height:1.4}
 .h-tag em{color:#C9A84C;font-style:normal;font-weight:600}
-.h-desc{font-size:clamp(13px,2vw,15px);font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;max-width:540px;margin:0 auto 32px}
+.h-desc{font-size:clamp(13px,1.8vw,15px);font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;max-width:520px;margin:0 auto 32px;display:block}
 .h-desc strong{color:#f0f0ff;font-weight:600}
 
 /* PRIX HERO */
-.h-prix{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-.hp{padding:16px 20px;border:1px solid rgba(200,168,75,.15);background:rgba(255,255,255,.02);text-align:center;min-width:140px}
+.h-prix{
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;flex-wrap:wrap;margin-bottom:20px;
+}
+.hp{
+  padding:16px 24px;
+  border:1px solid rgba(200,168,75,.15);
+  background:rgba(255,255,255,.02);
+  text-align:center;min-width:150px;
+}
 .hp-n{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:6px}
-.hp-v{font-family:"Bebas Neue",sans-serif;font-size:clamp(32px,6vw,48px);color:#f0f0ff;line-height:1}
+.hp-v{font-family:"Bebas Neue",sans-serif;font-size:clamp(36px,7vw,52px);color:#f0f0ff;line-height:1}
 .hp-v em{color:#C9A84C;font-style:normal;font-size:55%;vertical-align:super}
 .hp-s{font-size:10px;font-weight:300;color:rgba(255,255,255,.25);letter-spacing:2px;margin-top:4px;display:block}
 .hp-ou{font-family:"Cormorant Garamond",serif;font-size:22px;color:rgba(255,255,255,.1);font-style:italic}
 
-.klarna{display:inline-flex;align-items:center;gap:8px;background:rgba(255,183,3,.06);border:1px solid rgba(255,183,3,.18);padding:8px 16px;margin-bottom:24px;font-size:11px;font-weight:600;color:rgba(255,183,3,.75);letter-spacing:1px}
+.klarna{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:rgba(255,183,3,.06);border:1px solid rgba(255,183,3,.18);
+  padding:8px 16px;margin-bottom:24px;
+  font-size:11px;font-weight:600;color:rgba(255,183,3,.75);letter-spacing:1px;
+}
 
-.btn-main{display:inline-block;font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#05050a;background:linear-gradient(135deg,#C9A84C,#e8c86a);padding:16px 40px;text-decoration:none;transition:transform .2s,box-shadow .2s}
-.btn-main:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(200,168,75,.2)}
-.h-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.2);margin-top:14px;line-height:2.2}
+.btn-gold{
+  display:inline-block;
+  font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;
+  color:#05050a;background:linear-gradient(135deg,#C9A84C,#e8c86a);
+  padding:16px 36px;text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  margin:4px;
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(200,168,75,.2)}
+.btn-green{
+  display:inline-block;
+  font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;
+  color:#05050a;background:linear-gradient(135deg,#3ecf8e,#5effc0);
+  padding:16px 36px;text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  margin:4px;
+}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(62,207,142,.2)}
+
+.h-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.2);margin-top:14px;line-height:2.2;display:block}
 .h-note strong{color:rgba(200,168,75,.45)}
 
 /* SECTIONS */
 .sec{padding:70px 0}
-.s-eye{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(200,168,75,.7);margin-bottom:10px}
-.s-title{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,5vw,48px);font-weight:600;color:#f0f0ff;line-height:1.1;margin-bottom:10px}
+.s-eye{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(200,168,75,.7);margin-bottom:10px;display:block}
+.s-title{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,5vw,46px);font-weight:600;color:#f0f0ff;line-height:1.1;margin-bottom:10px}
 .s-title em{color:#C9A84C;font-style:italic}
-.s-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;max-width:500px;margin-bottom:32px}
+.s-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;margin-bottom:32px;max-width:500px}
+
+/* GRILLES */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 
 /* CE QU ILS OBTIENNENT */
-.obtient{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.05)}
-.o-item{background:#0a0a12;padding:24px;display:flex;gap:16px;border-left:3px solid transparent;transition:border-color .3s,background .3s}
-.o-item:hover{background:rgba(200,168,75,.03);border-left-color:#C9A84C}
-.o-ic{font-size:26px;flex-shrink:0;line-height:1;margin-top:2px}
-.o-title{font-size:14px;font-weight:700;color:#f0f0ff;display:block;margin-bottom:6px}
+.o-item{
+  background:#0a0a12;padding:22px;
+  display:flex;gap:14px;align-items:flex-start;
+  border:1px solid rgba(255,255,255,.05);
+  border-left:3px solid rgba(200,168,75,.3);
+  text-align:left;
+}
+.o-ic{font-size:24px;flex-shrink:0;line-height:1;margin-top:2px}
+.o-title{font-size:14px;font-weight:700;color:#f0f0ff;display:block;margin-bottom:5px}
 .o-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.8}
 
 /* BONUS */
-.bonus{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
-.b-card{background:linear-gradient(135deg,rgba(200,168,75,.07),rgba(192,0,26,.03));border:1px solid rgba(200,168,75,.2);padding:24px;position:relative}
-.b-card::after{content:"EXCLUSIF";position:absolute;top:10px;right:10px;font-size:7px;font-weight:700;letter-spacing:2px;color:rgba(200,168,75,.45);border:1px solid rgba(200,168,75,.2);padding:2px 6px}
+.b-card{
+  background:linear-gradient(135deg,rgba(200,168,75,.07),rgba(192,0,26,.03));
+  border:1px solid rgba(200,168,75,.2);
+  padding:24px;text-align:left;position:relative;
+}
+.b-badge{
+  position:absolute;top:10px;right:10px;
+  font-size:7px;font-weight:700;letter-spacing:2px;
+  color:rgba(200,168,75,.45);border:1px solid rgba(200,168,75,.2);padding:2px 6px;
+}
 .b-ic{font-size:24px;display:block;margin-bottom:10px}
 .b-title{font-size:13px;font-weight:700;color:#f0f0ff;display:block;margin-bottom:6px}
 .b-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.8}
 
 /* OFFRES */
-.offres{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.05);margin-top:28px}
-.off{background:#0a0a12;padding:28px;display:flex;flex-direction:column;gap:16px}
-.off.prem{background:linear-gradient(180deg,rgba(62,207,142,.04),#0a0a12)}
-.off-name{font-family:"Bebas Neue",sans-serif;font-size:26px;letter-spacing:3px;display:block;margin-bottom:6px}
+.off{
+  background:#0a0a12;padding:28px;
+  display:flex;flex-direction:column;gap:16px;
+  border:1px solid rgba(255,255,255,.05);
+  text-align:left;
+}
+.off.prem{background:linear-gradient(180deg,rgba(62,207,142,.04),#0a0a12);border-color:rgba(62,207,142,.1)}
+.off-name{font-family:"Bebas Neue",sans-serif;font-size:24px;letter-spacing:3px;display:block;margin-bottom:6px}
 .off:first-child .off-name{color:#C9A84C}
 .off.prem .off-name{color:#3ecf8e}
 .off-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.7;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.05)}
-.off-px{font-family:"Bebas Neue",sans-serif;font-size:clamp(36px,6vw,52px);color:#f0f0ff;line-height:1}
+.off-px{font-family:"Bebas Neue",sans-serif;font-size:clamp(34px,6vw,48px);color:#f0f0ff;line-height:1}
 .off-px em{font-style:normal;font-size:50%;vertical-align:super;color:#C9A84C}
 .off.prem .off-px em{color:#3ecf8e}
-.off-abo{font-family:"Bebas Neue",sans-serif;font-size:26px;color:#C9A84C;margin-top:4px}
+.off-abo{font-family:"Bebas Neue",sans-serif;font-size:24px;color:#C9A84C;margin-top:4px}
 .off.prem .off-abo{color:#3ecf8e}
 .off-abo-s{font-size:10px;font-weight:300;color:rgba(255,255,255,.25);letter-spacing:2px;display:block;margin-top:2px}
-.off-kl{font-size:11px;font-weight:600;color:rgba(255,183,3,.6);background:rgba(255,183,3,.06);border:1px solid rgba(255,183,3,.15);padding:6px 12px;display:inline-block}
-.off-items{display:flex;flex-direction:column;gap:8px}
+.off-kl{font-size:11px;font-weight:600;color:rgba(255,183,3,.6);background:rgba(255,183,3,.06);border:1px solid rgba(255,183,3,.15);padding:5px 10px;display:inline-block}
+.off-items{display:flex;flex-direction:column;gap:7px}
 .off-item{display:flex;align-items:flex-start;gap:10px;font-size:12px;font-weight:300;color:rgba(255,255,255,.5)}
 .off-ck{flex-shrink:0;font-size:13px;margin-top:1px}
 .off:first-child .off-ck{color:#C9A84C}
 .off.prem .off-ck{color:#3ecf8e}
-.off-btn{display:block;width:100%;padding:14px;text-align:center;font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;text-decoration:none;margin-top:8px;transition:opacity .2s}
+.off-btn{
+  display:block;width:100%;padding:14px;text-align:center;
+  font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;
+  text-decoration:none;margin-top:4px;transition:opacity .2s;
+}
 .off:first-child .off-btn{background:#C9A84C;color:#05050a}
 .off.prem .off-btn{background:#3ecf8e;color:#05050a}
 .off-btn:hover{opacity:.85}
 
 /* AVIS */
-.avis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}
-.av{background:#0a0a12;border:1px solid rgba(255,255,255,.05);border-top:2px solid rgba(200,168,75,.25);padding:22px}
+.av{
+  background:#0a0a12;
+  border:1px solid rgba(255,255,255,.05);
+  border-top:2px solid rgba(200,168,75,.25);
+  padding:20px;text-align:left;
+}
 .av-stars{color:#C9A84C;font-size:12px;display:block;margin-bottom:10px;letter-spacing:2px}
-.av-txt{font-family:"Cormorant Garamond",serif;font-size:14px;font-weight:300;font-style:italic;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:12px}
+.av-txt{font-family:"Cormorant Garamond",serif;font-size:14px;font-weight:300;font-style:italic;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:10px}
 .av-auth{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.6)}
 
 /* GARANTIE */
-.garan{background:linear-gradient(135deg,rgba(200,168,75,.06),rgba(192,0,26,.03));border:1px solid rgba(200,168,75,.18);padding:44px 32px;text-align:center}
+.garan{
+  background:linear-gradient(135deg,rgba(200,168,75,.06),rgba(192,0,26,.03));
+  border:1px solid rgba(200,168,75,.18);
+  padding:44px 32px;text-align:center;
+}
 .garan-ic{font-size:48px;display:block;margin-bottom:14px}
-.garan-title{font-family:"Cormorant Garamond",serif;font-size:clamp(24px,4vw,40px);font-weight:600;color:#f0f0ff;margin-bottom:12px}
+.garan-title{font-family:"Cormorant Garamond",serif;font-size:clamp(24px,4vw,38px);font-weight:600;color:#f0f0ff;margin-bottom:12px}
 .garan-title em{color:#C9A84C;font-style:italic}
-.garan-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;max-width:480px;margin:0 auto}
+.garan-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;max-width:460px;margin:0 auto}
 .garan-desc strong{color:#f0f0ff;font-weight:500}
 
 /* CTA FINAL */
@@ -124,71 +211,74 @@ nav.s{background:rgba(5,5,10,.97);border-bottom:1px solid rgba(200,168,75,.1);ba
 .cta-fin::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,75,.2),transparent)}
 .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(200,168,75,.07) 0%,transparent 70%);pointer-events:none}
 .cta-in{position:relative;z-index:1;max-width:600px;margin:0 auto}
-.cta-title{font-family:"Cormorant Garamond",serif;font-size:clamp(34px,6vw,60px);font-weight:600;color:#f0f0ff;line-height:1;margin-bottom:12px}
+.cta-title{font-family:"Cormorant Garamond",serif;font-size:clamp(32px,6vw,58px);font-weight:600;color:#f0f0ff;line-height:1;margin-bottom:12px}
 .cta-title em{color:#C9A84C;font-style:italic;display:block}
 .cta-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.9;margin-bottom:32px}
 .cta-prix{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:8px;flex-wrap:wrap}
 .cp{text-align:center}
 .cp-l{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);display:block;margin-bottom:4px}
-.cp-v{font-family:"Bebas Neue",sans-serif;font-size:clamp(32px,6vw,56px);color:#f0f0ff;line-height:1}
+.cp-v{font-family:"Bebas Neue",sans-serif;font-size:clamp(32px,6vw,54px);color:#f0f0ff;line-height:1}
 .cp-v em{color:#C9A84C;font-style:normal;font-size:50%;vertical-align:super}
 .cp-ou{font-family:"Cormorant Garamond",serif;font-size:20px;color:rgba(255,255,255,.1);font-style:italic}
 .cta-kl{font-size:10px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:rgba(255,183,3,.45);margin-bottom:28px;display:block}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
 .cta-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.18);margin-top:18px;line-height:2.4}
 .cta-note strong{color:rgba(200,168,75,.4)}
 
 /* FOOTER */
-footer{padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer{
+  padding:24px 20px;
+  border-top:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;
+}
 .f-logo{font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:6px;color:rgba(255,255,255,.2)}
 .f-logo span{color:rgba(192,0,26,.35)}
 .f-handle{font-size:10px;color:rgba(255,255,255,.18);letter-spacing:2px}
 
-/* RESPONSIVE */
+/* RESPONSIVE MOBILE */
 @media(max-width:640px){
-  nav{padding:12px 16px}
-  .n-btn{font-size:9px;padding:8px 14px;letter-spacing:1px}
-  .obtient,.bonus,.offres,.avis{grid-template-columns:1fr}
-  .o-item{padding:18px}
-  .off{padding:22px}
-  .garan{padding:30px 20px}
-  footer{justify-content:center;text-align:center}
-  .h-prix{flex-direction:column;align-items:center}
-  .cta-prix{flex-direction:column}
+  nav{padding:12px 16px}
+  .n-btn{font-size:9px;padding:8px 12px;letter-spacing:1px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .off,.o-item{padding:18px}
+  .garan{padding:28px 18px}
+  .h-prix{flex-direction:column;align-items:center}
+  .cta-prix{flex-direction:column}
+  .cta-btns{flex-direction:column;width:100%}
+  .btn-gold,.btn-green{width:100%;text-align:center;margin:4px 0}
+  footer{justify-content:center;text-align:center}
+  .s-sub{max-width:100%}
 }
 </style>
 </head>
 <body>
 
 <nav id="nav">
-  <div class="n-logo">D<span>M</span>A</div>
-  <a class="n-btn" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Rejoindre — dès 89.90€</a>
+  <div class="n-logo">D<span>M</span>A</div>
+  <a class="n-btn" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Rejoindre dès 89.90€</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="h-glow"></div>
-  <div class="h-inner">
-    <div class="h-eye">Digital Mastery Academy</div>
-    <div class="h-logo">D<span>M</span>A</div>
-    <div class="h-tag">Lance ton business en ligne.<em>Gagne chaque mois.</em></div>
-    <div class="h-desc">Tu veux générer des revenus en ligne sans te prendre la tête ? La DMA te donne tout — la formation, les outils et les droits de revente — pour lancer ton business <strong>dès aujourd'hui.</strong></div>
-    <div class="h-prix">
-      <div class="hp">
-        <span class="hp-n">Starter</span>
-        <div class="hp-v"><em>€</em>89.90</div>
-        <span class="hp-s">+ 29.90€/mois</span>
-      </div>
-      <div class="hp-ou">ou</div>
-      <div class="hp">
-        <span class="hp-n">Premium</span>
-        <div class="hp-v"><em>€</em>189.90</div>
-        <span class="hp-s">+ 39.90€/mois</span>
-      </div>
-    </div>
-    <div class="klarna">🛍️ Paiement en 3x avec Klarna — commence pour moins de 30€</div>
-    <a class="btn-main" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Je rejoins la DMA maintenant</a>
-    <div class="h-note"><strong>MRR 100% inclus</strong> — tu revends et tu gardes tout<br>Garantie 30 jours · Accès immédiat · Places limitées</div>
-  </div>
+  <div class="h-glow"></div>
+  <div class="h-inner">
+    <span class="h-eye">Digital Mastery Academy</span>
+    <span class="h-logo">D<span>M</span>A</span>
+    <span class="h-tag">Lance ton business en ligne.<em>Gagne chaque mois.</em></span>
+    <span class="h-desc">Tu veux générer des revenus en ligne sans te prendre la tête ? La DMA te donne tout — la formation, les outils et les droits de revente — pour lancer ton business <strong>dès aujourd'hui.</strong></span>
+    <div class="h-prix">
+      <div class="hp"><span class="hp-n">Starter</span><div class="hp-v"><em>€</em>89.90</div><span class="hp-s">+ 29.90€/mois</span></div>
+      <div class="hp-ou">ou</div>
+      <div class="hp"><span class="hp-n">Premium</span><div class="hp-v"><em>€</em>189.90</div><span class="hp-s">+ 39.90€/mois</span></div>
+    </div>
+    <div class="klarna">🛍️ Paiement en 3x avec Klarna — commence pour moins de 30€</div>
+    <div>
+      <a class="btn-gold" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Starter — 89.90€</a>
+      <a class="btn-green" href="https://buy.stripe.com/dRm14ncww7uAeWqeaT7ok0g">Premium — 189.90€</a>
+    </div>
+    <span class="h-note"><strong>MRR 100% inclus</strong> — tu revends et tu gardes tout<br>Garantie 30 jours · Accès immédiat · Places limitées</span>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -196,15 +286,15 @@ footer{padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- CE QU ILS OBTIENNENT -->
 <section class="sec">
 <div class="wrap">
-  <div class="s-eye reveal">Ce que tu obtiens</div>
-  <div class="s-title reveal">Tout ce qu il faut <em>pour réussir.</em></div>
-  <div class="s-sub reveal">Une formation complète, des outils puissants et les droits pour revendre et générer un revenu mensuel automatique.</div>
-  <div class="obtient reveal">
-    <div class="o-item"><div class="o-ic">📚</div><div><span class="o-title">Une formation complète</span><span class="o-desc">28 modules sur le marketing digital, le business en ligne et les outils IA. Accessible depuis n'importe quel appareil, à ton rythme.</span></div></div>
-    <div class="o-item"><div class="o-ic">💸</div><div><span class="o-title">Les droits MRR 100%</span><span class="o-desc">Tu revends comme si c'était ta formation. 100% du prix dans ta poche. Pas de commission. Une vente à 89.90€ = 89.90€ pour toi.</span></div></div>
-    <div class="o-item"><div class="o-ic">🔁</div><div><span class="o-title">Un revenu mensuel automatique</span><span class="o-desc">Chaque membre que tu amènes paie un abonnement mensuel. 20 membres actifs = entre 598€ et 798€ automatiquement, sans rien faire de plus.</span></div></div>
-    <div class="o-item"><div class="o-ic">🤖</div><div><span class="o-title">Des outils IA inclus</span><span class="o-desc">Scripts DM, hooks viraux, générateur de contenu, crusher d'objections — tout généré en quelques secondes. Fini le syndrome de la page blanche.</span></div></div>
-  </div>
+  <span class="s-eye reveal">Ce que tu obtiens</span>
+  <div class="s-title reveal">Tout ce qu il faut <em>pour réussir.</em></div>
+  <div class="s-sub reveal">Une formation complète, des outils puissants et les droits pour revendre et générer un revenu mensuel automatique.</div>
+  <div class="grid2 reveal">
+    <div class="o-item"><div class="o-ic">📚</div><div><span class="o-title">Une formation complète</span><span class="o-desc">28 modules sur le marketing digital, le business en ligne et les outils IA. Accessible depuis n'importe quel appareil, à ton rythme.</span></div></div>
+    <div class="o-item"><div class="o-ic">💸</div><div><span class="o-title">Les droits MRR 100%</span><span class="o-desc">Tu revends comme si c'était ta formation. 100% du prix dans ta poche. Pas de commission. Une vente à 89.90€ = 89.90€ pour toi.</span></div></div>
+    <div class="o-item"><div class="o-ic">🔁</div><div><span class="o-title">Un revenu mensuel automatique</span><span class="o-desc">Chaque membre que tu amènes paie un abonnement mensuel. 20 membres actifs = entre 598€ et 798€ automatiquement, sans rien faire de plus.</span></div></div>
+    <div class="o-item"><div class="o-ic">🤖</div><div><span class="o-title">Des outils IA inclus</span><span class="o-desc">Scripts DM, hooks viraux, générateur de contenu, crusher d'objections — tout généré en quelques secondes.</span></div></div>
+  </div>
 </div>
 </section>
 
@@ -213,12 +303,12 @@ footer{padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- BONUS -->
 <section class="sec">
 <div class="wrap">
-  <div class="s-eye reveal">Bonus exclusifs</div>
-  <div class="s-title reveal">Ce que personne <em>d'autre ne propose.</em></div>
-  <div class="bonus reveal">
-    <div class="b-card"><span class="b-ic">⚡</span><span class="b-title">Un dashboard membre personnalisé</span><span class="b-desc">Espace privé avec tracker de ventes, progression modules, objectif mensuel et outils IA — tout au même endroit. Aucune autre formation ne propose ça.</span></div>
-    <div class="b-card"><span class="b-ic">🎯</span><span class="b-title">Un accompagnement jusqu'à l'autonomie</span><span class="b-desc">Mathis t'accompagne pas à pas jusqu'à ce que tu saches vendre, closer et gérer ton business seul. L'objectif c'est que tu n'aies plus besoin de lui.</span></div>
-  </div>
+  <span class="s-eye reveal">Bonus exclusifs</span>
+  <div class="s-title reveal">Ce que personne <em>d'autre ne propose.</em></div>
+  <div class="grid2 reveal">
+    <div class="b-card"><span class="b-badge">EXCLUSIF</span><span class="b-ic">⚡</span><span class="b-title">Un dashboard membre personnalisé</span><span class="b-desc">Espace privé avec tracker de ventes, progression modules, objectif mensuel et outils IA — tout au même endroit. Aucune autre formation ne propose ça.</span></div>
+    <div class="b-card"><span class="b-badge">EXCLUSIF</span><span class="b-ic">🎯</span><span class="b-title">Un accompagnement jusqu'à l'autonomie</span><span class="b-desc">Mathis t'accompagne pas à pas jusqu'à ce que tu saches vendre, closer et gérer ton business seul. L'objectif c'est que tu n'aies plus besoin de lui.</span></div>
+  </div>
 </div>
 </section>
 
@@ -227,39 +317,39 @@ footer{padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- OFFRES -->
 <section class="sec">
 <div class="wrap">
-  <div class="s-eye reveal">Les offres</div>
-  <div class="s-title reveal">Choisis ton <em>niveau.</em></div>
-  <div class="s-sub reveal">Les deux formules donnent accès aux droits MRR 100%. La différence c'est le niveau d'accompagnement et le montant de l'abonnement revendu.</div>
-  <div class="offres reveal">
-    <div class="off">
-      <div><span class="off-name">Starter</span><span class="off-desc">L'offre d'entrée. Accès complet à la formation et tu commences à vendre dès le premier jour. Idéal pour se lancer sans investir beaucoup.</span></div>
-      <div><div class="off-px"><em>€</em>89.90</div><div class="off-abo">+ 29.90€</div><span class="off-abo-s">par mois · abonnement mensuel</span></div>
-      <div class="off-kl">Paiement en 3x disponible</div>
-      <div class="off-items">
-        <div class="off-item"><span class="off-ck">✓</span>28 modules complets</div>
-        <div class="off-item"><span class="off-ck">✓</span>7 business models</div>
-        <div class="off-item"><span class="off-ck">✓</span>Outils IA inclus</div>
-        <div class="off-item"><span class="off-ck">✓</span>MRR 100% — revente libre</div>
-        <div class="off-item"><span class="off-ck">✓</span>Dashboard membre</div>
-        <div class="off-item"><span class="off-ck">✓</span>Garantie 30 jours</div>
-      </div>
-      <a class="off-btn" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Je prends le Starter</a>
-    </div>
-    <div class="off prem">
-      <div><span class="off-name">Premium</span><span class="off-desc">Pour aller plus vite et plus loin. Accompagnement renforcé et abonnement revendu 10€ de plus par membre — soit 300€ de plus sur 30 membres.</span></div>
-      <div><div class="off-px"><em>€</em>189.90</div><div class="off-abo">+ 39.90€</div><span class="off-abo-s">par mois · abonnement mensuel</span></div>
-      <div class="off-kl">Paiement en 3x disponible</div>
-      <div class="off-items">
-        <div class="off-item"><span class="off-ck">✓</span>Tout le Starter inclus</div>
-        <div class="off-item"><span class="off-ck">✓</span>Accompagnement renforcé</div>
-        <div class="off-item"><span class="off-ck">✓</span>Accès prioritaire à Mathis</div>
-        <div class="off-item"><span class="off-ck">✓</span>Modules en avant-première</div>
-        <div class="off-item"><span class="off-ck">✓</span>+10€/membre/mois vs Starter</div>
-        <div class="off-item"><span class="off-ck">✓</span>Garantie 30 jours</div>
-      </div>
-      <a class="off-btn" href="https://buy.stripe.com/dRm14ncww7uAeWqeaT7ok0g">Je prends le Premium</a>
-    </div>
-  </div>
+  <span class="s-eye reveal">Les offres</span>
+  <div class="s-title reveal">Choisis ton <em>niveau.</em></div>
+  <div class="s-sub reveal">Les deux formules donnent accès aux droits MRR 100%. La différence c'est le niveau d'accompagnement et le montant de l'abonnement revendu.</div>
+  <div class="grid2 reveal">
+    <div class="off">
+      <div><span class="off-name">Starter</span><span class="off-desc">L'offre d'entrée. Accès complet à la formation, tu commences à vendre dès le premier jour.</span></div>
+      <div><div class="off-px"><em>€</em>89.90</div><div class="off-abo">+ 29.90€</div><span class="off-abo-s">par mois · abonnement mensuel</span></div>
+      <div class="off-kl">Paiement en 3x disponible</div>
+      <div class="off-items">
+        <div class="off-item"><span class="off-ck">✓</span>28 modules complets</div>
+        <div class="off-item"><span class="off-ck">✓</span>7 business models</div>
+        <div class="off-item"><span class="off-ck">✓</span>Outils IA inclus</div>
+        <div class="off-item"><span class="off-ck">✓</span>MRR 100% revente libre</div>
+        <div class="off-item"><span class="off-ck">✓</span>Dashboard membre</div>
+        <div class="off-item"><span class="off-ck">✓</span>Garantie 30 jours</div>
+      </div>
+      <a class="off-btn" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Je prends le Starter</a>
+    </div>
+    <div class="off prem">
+      <div><span class="off-name">Premium</span><span class="off-desc">Pour aller plus vite. Accompagnement renforcé et 10€ de plus par membre par mois.</span></div>
+      <div><div class="off-px"><em>€</em>189.90</div><div class="off-abo">+ 39.90€</div><span class="off-abo-s">par mois · abonnement mensuel</span></div>
+      <div class="off-kl">Paiement en 3x disponible</div>
+      <div class="off-items">
+        <div class="off-item"><span class="off-ck">✓</span>Tout le Starter inclus</div>
+        <div class="off-item"><span class="off-ck">✓</span>Accompagnement renforcé</div>
+        <div class="off-item"><span class="off-ck">✓</span>Accès prioritaire à Mathis</div>
+        <div class="off-item"><span class="off-ck">✓</span>Modules en avant-première</div>
+        <div class="off-item"><span class="off-ck">✓</span>+10€ par membre par mois</div>
+        <div class="off-item"><span class="off-ck">✓</span>Garantie 30 jours</div>
+      </div>
+      <a class="off-btn" href="https://buy.stripe.com/dRm14ncww7uAeWqeaT7ok0g">Je prends le Premium</a>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -268,16 +358,16 @@ footer{padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- AVIS -->
 <section class="sec">
 <div class="wrap">
-  <div class="s-eye reveal">Témoignages</div>
-  <div class="s-title reveal">Ils ont sauté <em>le pas.</em></div>
-  <div class="avis reveal">
-    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"J'avais 17 ans et zéro expérience. En 3 semaines j'ai fait ma première vente. Maintenant j'ai 8 membres actifs — un revenu chaque mois sans bouger."</div><span class="av-auth">— Enzo, 17 ans, lycéen</span></div>
-    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"J'étais sceptique, j'avais déjà acheté des formations inutiles. En 6 semaines j'ai récupéré mon investissement. Le dashboard et les outils IA font vraiment la différence."</div><span class="av-auth">— Camille, 24 ans, alternante</span></div>
-    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"Je cherchais un complément sérieux. J'ai 15 membres actifs en 2 mois — 448€ automatiquement chaque mois. Mathis est toujours disponible."</div><span class="av-auth">— Karim, 34 ans, salarié</span></div>
-    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"30 minutes par jour entre le boulot et les enfants. Mathis m'a montré comment faire simple. 10 membres actifs — 299€ par mois automatiquement. Ça change le quotidien."</div><span class="av-auth">— Sarah, 31 ans, maman de 2 enfants</span></div>
-    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"À 55 ans je pensais que c'était pas pour moi. Mathis m'a accompagné pas à pas. Aujourd'hui je génère mes premiers revenus en ligne. Il n'est jamais trop tard."</div><span class="av-auth">— Christine, 55 ans, en reconversion</span></div>
-    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"En 3 semaines j'avais récupéré mon investissement. Le dashboard est incroyable — tout au même endroit, mes ventes, mes modules, mes objectifs."</div><span class="av-auth">— Lauriane, 22 ans, étudiante</span></div>
-  </div>
+  <span class="s-eye reveal">Témoignages</span>
+  <div class="s-title reveal">Ils ont sauté <em>le pas.</em></div>
+  <div class="grid2 reveal">
+    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"J'avais 17 ans et zéro expérience. En 3 semaines j'ai fait ma première vente. Maintenant j'ai 8 membres actifs — un revenu chaque mois sans bouger."</div><span class="av-auth">— Enzo, 17 ans, lycéen</span></div>
+    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"J'étais sceptique, j'avais déjà acheté des formations inutiles. En 6 semaines j'ai récupéré mon investissement. Le dashboard et les outils IA font vraiment la différence."</div><span class="av-auth">— Camille, 24 ans, alternante</span></div>
+    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"Je cherchais un complément sérieux. J'ai 15 membres actifs en 2 mois — 448€ automatiquement chaque mois. Mathis est toujours disponible."</div><span class="av-auth">— Karim, 34 ans, salarié</span></div>
+    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"30 minutes par jour entre le boulot et les enfants. 10 membres actifs — 299€ par mois automatiquement. Ça change le quotidien."</div><span class="av-auth">— Sarah, 31 ans, maman de 2 enfants</span></div>
+    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"À 55 ans je pensais que c'était pas pour moi. Mathis m'a accompagné pas à pas. Aujourd'hui je génère mes premiers revenus en ligne."</div><span class="av-auth">— Christine, 55 ans, en reconversion</span></div>
+    <div class="av"><span class="av-stars">★★★★★</span><div class="av-txt">"En 3 semaines j'avais récupéré mon investissement. Le dashboard est incroyable — tout au même endroit, mes ventes, mes modules, mes objectifs."</div><span class="av-auth">— Lauriane, 22 ans, étudiante</span></div>
+  </div>
 </div>
 </section>
 
@@ -286,11 +376,11 @@ footer{padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <!-- GARANTIE -->
 <section class="sec">
 <div class="wrap">
-  <div class="garan reveal">
-    <span class="garan-ic">🛡️</span>
-    <div class="garan-title">Garantie 30 jours <em>ou remboursé.</em></div>
-    <div class="garan-desc">Tu suis le contenu, tu appliques et tu fais <strong>0 euro de résultat</strong> en 30 jours — remboursement intégral. Aucune question posée. Zéro risque.</div>
-  </div>
+  <div class="garan reveal">
+    <span class="garan-ic">🛡️</span>
+    <div class="garan-title">Garantie 30 jours <em>ou remboursé.</em></div>
+    <div class="garan-desc">Tu suis le contenu, tu appliques et tu fais <strong>0 euro de résultat</strong> en 30 jours — remboursement intégral. Aucune question posée.</div>
+  </div>
 </div>
 </section>
 
@@ -298,24 +388,27 @@ footer{padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);display:flex
 
 <!-- CTA FINAL -->
 <section class="cta-fin">
-  <div class="cta-glow"></div>
-  <div class="cta-in">
-    <div class="cta-title reveal">Prêt à <em>te lancer ?</em></div>
-    <div class="cta-sub reveal">Rejoins la DMA aujourd'hui. Forme-toi, revends, et construis un revenu mensuel automatique.</div>
-    <div class="cta-prix reveal">
-      <div class="cp"><span class="cp-l">Starter</span><div class="cp-v"><em>€</em>89.90</div></div>
-      <div class="cp-ou">ou</div>
-      <div class="cp"><span class="cp-l">Premium</span><div class="cp-v"><em>€</em>189.90</div></div>
-    </div>
-    <span class="cta-kl reveal">Paiement en 3x disponible avec Klarna</span>
-    <a class="btn-main reveal" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Je rejoins la DMA maintenant</a>
-    <div class="cta-note reveal"><strong>MRR 100% inclus</strong> · Accès immédiat · Garantie 30 jours<br>Des questions ? <strong>@mthsdgtmk</strong> sur Instagram</div>
-  </div>
+  <div class="cta-glow"></div>
+  <div class="cta-in">
+    <div class="cta-title reveal">Prêt à <em>te lancer ?</em></div>
+    <div class="cta-sub reveal">Rejoins la DMA aujourd'hui. Forme-toi, revends, et construis un revenu mensuel automatique.</div>
+    <div class="cta-prix reveal">
+      <div class="cp"><span class="cp-l">Starter</span><div class="cp-v"><em>€</em>89.90</div></div>
+      <div class="cp-ou">ou</div>
+      <div class="cp"><span class="cp-l">Premium</span><div class="cp-v"><em>€</em>189.90</div></div>
+    </div>
+    <span class="cta-kl reveal">Paiement en 3x disponible avec Klarna</span>
+    <div class="cta-btns reveal">
+      <a class="btn-gold" href="https://buy.stripe.com/3cI8wP1RS16c6pUfeX7ok0e">Starter — 89.90€</a>
+      <a class="btn-green" href="https://buy.stripe.com/dRm14ncww7uAeWqeaT7ok0g">Premium — 189.90€</a>
+    </div>
+    <div class="cta-note reveal"><strong>MRR 100% inclus</strong> · Accès immédiat · Garantie 30 jours<br>Des questions ? <strong>@mthsdgtmk</strong> sur Instagram</div>
+  </div>
 </section>
 
 <footer>
-  <div class="f-logo">D<span>M</span>A</div>
-  <div class="f-handle">@mthsdgtmk · mathisdrouet04700.systeme.io</div>
+  <div class="f-logo">D<span>M</span>A</div>
+  <div class="f-handle">@mthsdgtmk</div>
 </footer>
 
 <script>
