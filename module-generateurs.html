@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -133,14 +134,14 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
   <button class="tnav" onclick="switchTool(2,this)">📲 Contenu<div class="tnav-dot"></div></button>
   <button class="tnav" onclick="switchTool(3,this)">💰 Revenus<div class="tnav-dot"></div></button>
   <button class="tnav" onclick="switchTool(4,this)">🥊 Objections<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(5,this)">🎣 Hooks<div class="tnav-dot"></div>
-    <div class="tnav" onclick="switchTool(6,this)">&#128722; Drop Niche</div>
-    <div class="tnav" onclick="switchTool(7,this)">&#128230; Analyse Produit</div>
-    <div class="tnav" onclick="switchTool(8,this)">&#128204; Page Produit</div>
-    <div class="tnav" onclick="switchTool(9,this)">&#127916; Script Pub</div>
-    <div class="tnav" onclick="switchTool(10,this)">&#127916; Pitch UGC</div>
-    <div class="tnav" onclick="switchTool(11,this)">&#127916; Script UGC</div>
-    <div class="tnav" onclick="switchTool(12,this)">&#127760; SEO Etsy</div></button>
+  <button class="tnav" onclick="switchTool(5,this)">🎣 Hooks<div class="tnav-dot"></div></button>
+  <button class="tnav" onclick="switchTool(6,this)">🛒 Drop Niche<div class="tnav-dot"></div></button>
+  <button class="tnav" onclick="switchTool(7,this)">📦 Analyse Produit<div class="tnav-dot"></div></button>
+  <button class="tnav" onclick="switchTool(8,this)">📌 Page Produit<div class="tnav-dot"></div></button>
+  <button class="tnav" onclick="switchTool(9,this)">🎬 Script Pub<div class="tnav-dot"></div></button>
+  <button class="tnav" onclick="switchTool(10,this)">🎬 Pitch UGC<div class="tnav-dot"></div></button>
+  <button class="tnav" onclick="switchTool(11,this)">🎬 Script UGC<div class="tnav-dot"></div></button>
+  <button class="tnav" onclick="switchTool(12,this)">🌐 SEO Etsy<div class="tnav-dot"></div></button>
 </div>
 
 <!-- ═══ OUTIL 1 — SCRIPT DM ═══ -->
@@ -354,15 +355,15 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
   </div>
 </div>
 
-<div class="toast" id="toast">
+<div class="toast" id="toast"></div>
 
 <div class="tool-panel" id="t6">
   <div class="t-title">NICHE <span>DROPSHIPPING</span></div>
   <div class="t-sub">Trouve ta niche dropshipping parfaite selon tes interets et ton budget pub.</div>
   <span class="lbl">Tes interets</span>
-  <input class="inp" id="drop-int" type="text" placeholder="Ex: sport, animaux, gaming...">
+  <input class="inp" id="drop-int" type="text" placeholder="Ex: sport, animaux, gaming..." style="margin-bottom:10px">
   <span class="lbl">Ta cible</span>
-  <select class="sel" id="drop-cible">
+  <select class="sel" id="drop-cible" style="margin-bottom:10px">
     <option value="hommes 18-35 ans">Hommes 18-35</option>
     <option value="femmes 25-45 ans">Femmes 25-45</option>
     <option value="parents avec enfants">Parents</option>
@@ -374,26 +375,38 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
     <option value="150-500EUR/mois">150-500EUR/mois</option>
     <option value="500EUR+/mois">500EUR+/mois</option>
   </select>
-  <button class="run-btn" id="drop-btn" onclick="runDrop()">TROUVER MA NICHE</button>
-  <div class="loading" id="drop-loading" style="display:none"><div class="loading-bar"></div></div>
-  <div class="result-box" id="drop-result" style="display:none">
+  <button class="btn-run" id="drop-btn" onclick="runDrop()">TROUVER MA NICHE</button>
+  <div class="loading-bar" id="drop-loading"><div class="loading-fill"></div></div>
+  <div class="result-box" id="drop-result">
+    <div class="result-header">
+      <span class="result-label">🛒 Résultat</span>
+      <div class="result-actions">
+        <button class="btn-copy" onclick="copyResult('drop-content')">COPIER</button>
+        <button class="btn-regen" onclick="runDrop()">↻ REGEN</button>
+      </div>
+    </div>
     <div class="result-content" id="drop-content"></div>
-    <button class="copy-btn" onclick="copyResult('drop-content')">COPIER</button>
   </div>
 </div>
 
 <div class="tool-panel" id="t7">
   <div class="t-title">ANALYSE <span>PRODUIT DROP</span></div>
-  <div class="t-sub">L IA analyse ton produit dropshipping et te dit si tu dois le lancer.</div>
+  <div class="t-sub">L'IA analyse ton produit dropshipping et te dit si tu dois le lancer.</div>
   <span class="lbl">Decris ton produit</span>
   <textarea class="inp" id="prod-desc" rows="4" placeholder="Ex: Masque LED anti-acne, prix AliExpress 12EUR, note 4.7, 2300 commandes..."></textarea>
-  <span class="lbl">Prix de vente envisage</span>
+  <span class="lbl" style="margin-top:10px">Prix de vente envisage</span>
   <input class="inp" id="prod-prix" type="text" placeholder="Ex: 39EUR">
-  <button class="run-btn" id="prod-btn" onclick="runProduit()">ANALYSER CE PRODUIT</button>
-  <div class="loading" id="prod-loading" style="display:none"><div class="loading-bar"></div></div>
-  <div class="result-box" id="prod-result" style="display:none">
+  <button class="btn-run" id="prod-btn" onclick="runProduit()">ANALYSER CE PRODUIT</button>
+  <div class="loading-bar" id="prod-loading"><div class="loading-fill"></div></div>
+  <div class="result-box" id="prod-result">
+    <div class="result-header">
+      <span class="result-label">📦 Résultat</span>
+      <div class="result-actions">
+        <button class="btn-copy" onclick="copyResult('prod-content')">COPIER</button>
+        <button class="btn-regen" onclick="runProduit()">↻ REGEN</button>
+      </div>
+    </div>
     <div class="result-content" id="prod-content"></div>
-    <button class="copy-btn" onclick="copyResult('prod-content')">COPIER</button>
   </div>
 </div>
 
@@ -401,16 +414,22 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
   <div class="t-title">PAGE PRODUIT <span>SHOPIFY</span></div>
   <div class="t-sub">Genere une page produit complete qui vend — titre, bullets, description, CTA.</div>
   <span class="lbl">Ton produit</span>
-  <input class="inp" id="pp-prod" type="text" placeholder="Ex: Ceinture chauffante lombaire...">
+  <input class="inp" id="pp-prod" type="text" placeholder="Ex: Ceinture chauffante lombaire..." style="margin-bottom:10px">
   <span class="lbl">Ta cible</span>
-  <input class="inp" id="pp-cible" type="text" placeholder="Ex: femmes 30-50 ans avec maux de dos...">
+  <input class="inp" id="pp-cible" type="text" placeholder="Ex: femmes 30-50 ans avec maux de dos..." style="margin-bottom:10px">
   <span class="lbl">Prix de vente</span>
   <input class="inp" id="pp-prix" type="text" placeholder="Ex: 39EUR">
-  <button class="run-btn" id="pp-btn" onclick="runPageProd()">GENERER MA PAGE PRODUIT</button>
-  <div class="loading" id="pp-loading" style="display:none"><div class="loading-bar"></div></div>
-  <div class="result-box" id="pp-result" style="display:none">
+  <button class="btn-run" id="pp-btn" onclick="runPageProd()">GENERER MA PAGE PRODUIT</button>
+  <div class="loading-bar" id="pp-loading"><div class="loading-fill"></div></div>
+  <div class="result-box" id="pp-result">
+    <div class="result-header">
+      <span class="result-label">📌 Résultat</span>
+      <div class="result-actions">
+        <button class="btn-copy" onclick="copyResult('pp-content')">COPIER</button>
+        <button class="btn-regen" onclick="runPageProd()">↻ REGEN</button>
+      </div>
+    </div>
     <div class="result-content" id="pp-content"></div>
-    <button class="copy-btn" onclick="copyResult('pp-content')">COPIER</button>
   </div>
 </div>
 
@@ -418,11 +437,11 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
   <div class="t-title">SCRIPT PUB <span>VIDEO</span></div>
   <div class="t-sub">Script video pub TikTok ou Meta — hook, probleme, solution, CTA. Naturel et efficace.</div>
   <span class="lbl">Ton produit</span>
-  <input class="inp" id="pub-prod" type="text" placeholder="Ex: Ceinture chauffante anti-douleur...">
+  <input class="inp" id="pub-prod" type="text" placeholder="Ex: Ceinture chauffante anti-douleur..." style="margin-bottom:10px">
   <span class="lbl">Cible</span>
-  <input class="inp" id="pub-cible" type="text" placeholder="Ex: femmes 30-50 ans avec douleurs de dos...">
+  <input class="inp" id="pub-cible" type="text" placeholder="Ex: femmes 30-50 ans avec douleurs de dos..." style="margin-bottom:10px">
   <span class="lbl">Plateforme</span>
-  <select class="sel" id="pub-pl">
+  <select class="sel" id="pub-pl" style="margin-bottom:10px">
     <option value="TikTok Ads">TikTok Ads</option>
     <option value="Meta Ads (Facebook/Instagram)">Meta Ads</option>
   </select>
@@ -432,11 +451,17 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
     <option value="30 secondes">30 secondes</option>
     <option value="60 secondes">60 secondes</option>
   </select>
-  <button class="run-btn" id="pub-btn" onclick="runPub()">GENERER MON SCRIPT PUB</button>
-  <div class="loading" id="pub-loading" style="display:none"><div class="loading-bar"></div></div>
-  <div class="result-box" id="pub-result" style="display:none">
+  <button class="btn-run" id="pub-btn" onclick="runPub()">GENERER MON SCRIPT PUB</button>
+  <div class="loading-bar" id="pub-loading"><div class="loading-fill"></div></div>
+  <div class="result-box" id="pub-result">
+    <div class="result-header">
+      <span class="result-label">🎬 Résultat</span>
+      <div class="result-actions">
+        <button class="btn-copy" onclick="copyResult('pub-content')">COPIER</button>
+        <button class="btn-regen" onclick="runPub()">↻ REGEN</button>
+      </div>
+    </div>
     <div class="result-content" id="pub-content"></div>
-    <button class="copy-btn" onclick="copyResult('pub-content')">COPIER</button>
   </div>
 </div>
 
@@ -444,22 +469,28 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
   <div class="t-title">PITCH EMAIL <span>UGC</span></div>
   <div class="t-sub">Pitch email percutant pour contacter une marque et decrocher ta premiere mission UGC.</div>
   <span class="lbl">Nom de la marque</span>
-  <input class="inp" id="ugc-marque" type="text" placeholder="Ex: Gymshark, une marque locale...">
+  <input class="inp" id="ugc-marque" type="text" placeholder="Ex: Gymshark, une marque locale..." style="margin-bottom:10px">
   <span class="lbl">Leur niche / produits</span>
-  <input class="inp" id="ugc-niche" type="text" placeholder="Ex: supplements sportifs, skincare naturel...">
+  <input class="inp" id="ugc-niche" type="text" placeholder="Ex: supplements sportifs, skincare naturel..." style="margin-bottom:10px">
   <span class="lbl">Ton profil creator</span>
   <textarea class="inp" id="ugc-profil" rows="2" placeholder="Ex: femme 25 ans, passionnee de skincare, camera iPhone, style naturel..."></textarea>
-  <span class="lbl">Ton tarif</span>
+  <span class="lbl" style="margin-top:10px">Ton tarif</span>
   <select class="sel" id="ugc-tarif">
     <option value="150EUR par video UGC">150EUR / video</option>
     <option value="300EUR par video UGC">300EUR / video</option>
     <option value="500EUR par video UGC">500EUR / video</option>
   </select>
-  <button class="run-btn" id="ugc-btn" onclick="runUGC()">GENERER MON PITCH EMAIL</button>
-  <div class="loading" id="ugc-loading" style="display:none"><div class="loading-bar"></div></div>
-  <div class="result-box" id="ugc-result" style="display:none">
+  <button class="btn-run" id="ugc-btn" onclick="runUGC()">GENERER MON PITCH EMAIL</button>
+  <div class="loading-bar" id="ugc-loading"><div class="loading-fill"></div></div>
+  <div class="result-box" id="ugc-result">
+    <div class="result-header">
+      <span class="result-label">🎬 Résultat</span>
+      <div class="result-actions">
+        <button class="btn-copy" onclick="copyResult('ugc-content')">COPIER</button>
+        <button class="btn-regen" onclick="runUGC()">↻ REGEN</button>
+      </div>
+    </div>
     <div class="result-content" id="ugc-content"></div>
-    <button class="copy-btn" onclick="copyResult('ugc-content')">COPIER</button>
   </div>
 </div>
 
@@ -467,9 +498,9 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
   <div class="t-title">SCRIPT VIDEO <span>UGC</span></div>
   <div class="t-sub">Script complet pour ta video UGC — hook, corps, CTA, indications camera incluses.</div>
   <span class="lbl">Le produit</span>
-  <input class="inp" id="scr-prod" type="text" placeholder="Ex: serum vitamin C, proteines vanille...">
+  <input class="inp" id="scr-prod" type="text" placeholder="Ex: serum vitamin C, proteines vanille..." style="margin-bottom:10px">
   <span class="lbl">Type de video</span>
-  <select class="sel" id="scr-type">
+  <select class="sel" id="scr-type" style="margin-bottom:10px">
     <option value="review / testimonial face camera">Review face camera</option>
     <option value="problem / solution">Problem / Solution</option>
     <option value="tutorial etape par etape">Tutorial</option>
@@ -481,11 +512,17 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
     <option value="30-45 secondes">30-45 sec</option>
     <option value="60 secondes">60 sec</option>
   </select>
-  <button class="run-btn" id="scr-btn" onclick="runScriptUGC()">GENERER MON SCRIPT VIDEO</button>
-  <div class="loading" id="scr-loading" style="display:none"><div class="loading-bar"></div></div>
-  <div class="result-box" id="scr-result" style="display:none">
+  <button class="btn-run" id="scr-btn" onclick="runScriptUGC()">GENERER MON SCRIPT VIDEO</button>
+  <div class="loading-bar" id="scr-loading"><div class="loading-fill"></div></div>
+  <div class="result-box" id="scr-result">
+    <div class="result-header">
+      <span class="result-label">🎬 Résultat</span>
+      <div class="result-actions">
+        <button class="btn-copy" onclick="copyResult('scr-content')">COPIER</button>
+        <button class="btn-regen" onclick="runScriptUGC()">↻ REGEN</button>
+      </div>
+    </div>
     <div class="result-content" id="scr-content"></div>
-    <button class="copy-btn" onclick="copyResult('scr-content')">COPIER</button>
   </div>
 </div>
 
@@ -493,22 +530,26 @@ html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;m
   <div class="t-title">SEO <span>ETSY POD</span></div>
   <div class="t-sub">Titre optimise, 13 tags et description complete pour ton listing Etsy Print on Demand.</div>
   <span class="lbl">Ton produit POD</span>
-  <input class="inp" id="etsy-prod" type="text" placeholder="Ex: t-shirt infirmiere humour, mug golden retriever...">
+  <input class="inp" id="etsy-prod" type="text" placeholder="Ex: t-shirt infirmiere humour, mug golden retriever..." style="margin-bottom:10px">
   <span class="lbl">Niche et cible</span>
-  <input class="inp" id="etsy-niche" type="text" placeholder="Ex: infirmieres, cadeau anniversaire, humour metier...">
+  <input class="inp" id="etsy-niche" type="text" placeholder="Ex: infirmieres, cadeau anniversaire, humour metier..." style="margin-bottom:10px">
   <span class="lbl">Langue boutique</span>
   <select class="sel" id="etsy-lang">
     <option value="anglais (audience internationale)">Anglais — Audience internationale</option>
     <option value="francais (audience FR/BE/CH)">Francais — FR/BE/CH</option>
   </select>
-  <button class="run-btn" id="etsy-btn" onclick="runEtsySEO()">GENERER MON SEO ETSY</button>
-  <div class="loading" id="etsy-loading" style="display:none"><div class="loading-bar"></div></div>
-  <div class="result-box" id="etsy-result" style="display:none">
+  <button class="btn-run" id="etsy-btn" onclick="runEtsySEO()">GENERER MON SEO ETSY</button>
+  <div class="loading-bar" id="etsy-loading"><div class="loading-fill"></div></div>
+  <div class="result-box" id="etsy-result">
+    <div class="result-header">
+      <span class="result-label">🌐 Résultat</span>
+      <div class="result-actions">
+        <button class="btn-copy" onclick="copyResult('etsy-content')">COPIER</button>
+        <button class="btn-regen" onclick="runEtsySEO()">↻ REGEN</button>
+      </div>
+    </div>
     <div class="result-content" id="etsy-content"></div>
-    <button class="copy-btn" onclick="copyResult('etsy-content')">COPIER</button>
   </div>
-</div>
-
 </div>
 
 <script>
@@ -542,10 +583,14 @@ async function callAI(prompt, systemPrompt) {
     })
   });
   var data = await res.json();
+  if (data.error) {
+    console.error("OpenRouter error:", data.error);
+    throw new Error(data.error.message || "Erreur API");
+  }
   if (data.choices && data.choices[0]) {
     return data.choices[0].message.content;
   }
-  return "Erreur — reessaie.";
+  throw new Error("Reponse IA vide");
 }
 
 function showLoading(id, btnId) {
@@ -574,7 +619,7 @@ async function runDM() {
     document.getElementById("dm-content").textContent = result;
     document.getElementById("dm-result").style.display = "block";
   } catch(e) {
-    toast("Erreur réseau — réessaie");
+    toast("Erreur — " + e.message);
   }
 
   hideLoading("dm-loading","dm-btn");
@@ -582,13 +627,16 @@ async function runDM() {
 
 // ═══ PROSPECTS ═══
 async function runProspects() {
-  var niche = gv("p-niche");
   var platform = gv("p-platform");
+  var cible = gv("p-cible");
+  var objectif = gv("p-objectif");
+  var signaux = gv("p-signaux");
+  if(!cible){toast("Décris ta cible d'abord");return}
 
   showLoading("p-loading","p-btn");
   document.getElementById("p-result").innerHTML = "";
 
-  var prompt = "Génère 5 profils de prospects typiques sur " + platform + " pour la niche : " + niche + ".\n\nPour chaque profil donne :\n- Pseudo fictif réaliste\n- Description en 1 phrase\n- Signaux d'intérêt repérables\n- Score de chaleur : HOT/WARM/COLD\n- Premier message DM à envoyer\n\nFormat JSON array : [{\"name\":\"...\",\"desc\":\"...\",\"signaux\":\"...\",\"score\":\"HOT/WARM/COLD\",\"dm\":\"...\"}]";
+  var prompt = "Génère 5 profils de prospects typiques sur " + platform + ".\nCible : " + cible + "\nCe qu'ils veulent accomplir : " + objectif + "\nSignaux à repérer sur leur profil : " + signaux + "\n\nPour chaque profil donne :\n- Pseudo fictif réaliste\n- Description en 1 phrase\n- Signaux d'intérêt repérables\n- Score de chaleur : HOT/WARM/COLD\n- Premier message DM à envoyer\n\nFormat JSON array : [{\"name\":\"...\",\"desc\":\"...\",\"signaux\":\"...\",\"score\":\"HOT/WARM/COLD\",\"dm\":\"...\"}]";
 
   try {
     var result = await callAI(prompt, "Tu es un expert en prospection digitale. Réponds UNIQUEMENT en JSON valide, sans texte avant ou après.");
@@ -608,7 +656,7 @@ async function runProspects() {
     });
     document.getElementById("p-result").innerHTML = html;
   } catch(e) {
-    document.getElementById("p-result").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — réessaie</div>';
+    document.getElementById("p-result").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — ' + e.message + '</div>';
   }
 
   hideLoading("p-loading","p-btn");
@@ -643,7 +691,7 @@ async function runContent() {
     });
     document.getElementById("c-result").innerHTML = html;
   } catch(e) {
-    document.getElementById("c-result").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — réessaie</div>';
+    document.getElementById("c-result").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — ' + e.message + '</div>';
   }
 
   hideLoading("c-loading","c-btn");
@@ -693,7 +741,7 @@ async function runObjection() {
     document.getElementById("o-content").textContent = result;
     document.getElementById("o-result").style.display = "block";
   } catch(e) {
-    toast("Erreur réseau — réessaie");
+    toast("Erreur — " + e.message);
   }
 
   hideLoading("o-loading","o-btn");
@@ -746,7 +794,7 @@ async function runHooks() {
     document.getElementById("h-list").innerHTML = html;
     document.getElementById("h-result").style.display = "block";
   } catch(e) {
-    document.getElementById("h-list").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — réessaie</div>';
+    document.getElementById("h-list").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — ' + e.message + '</div>';
     document.getElementById("h-result").style.display = "block";
   }
 
@@ -769,7 +817,7 @@ async function runDrop() {
     var result = await callAI(prompt, "Tu es expert dropshipping francophone. Conseils concrets, tutoiement.");
     document.getElementById("drop-content").textContent = result;
     document.getElementById("drop-result").style.display = "block";
-  } catch(e) { toast("Erreur reseau — reessaie"); }
+  } catch(e) { toast("Erreur — " + e.message); }
   hideLoading("drop-loading","drop-btn");
 }
 
@@ -783,7 +831,7 @@ async function runProduit() {
     var result = await callAI(prompt, "Tu es expert dropshipping francophone. Analyse concrete, tutoiement.");
     document.getElementById("prod-content").textContent = result;
     document.getElementById("prod-result").style.display = "block";
-  } catch(e) { toast("Erreur reseau — reessaie"); }
+  } catch(e) { toast("Erreur — " + e.message); }
   hideLoading("prod-loading","prod-btn");
 }
 
@@ -797,7 +845,7 @@ async function runPageProd() {
     var result = await callAI(prompt, "Tu es expert dropshipping et copywriting francophone.");
     document.getElementById("pp-content").textContent = result;
     document.getElementById("pp-result").style.display = "block";
-  } catch(e) { toast("Erreur reseau — reessaie"); }
+  } catch(e) { toast("Erreur — " + e.message); }
   hideLoading("pp-loading","pp-btn");
 }
 
@@ -811,7 +859,7 @@ async function runPub() {
     var result = await callAI(prompt, "Tu es expert dropshipping et publicite digitale francophone.");
     document.getElementById("pub-content").textContent = result;
     document.getElementById("pub-result").style.display = "block";
-  } catch(e) { toast("Erreur reseau — reessaie"); }
+  } catch(e) { toast("Erreur — " + e.message); }
   hideLoading("pub-loading","pub-btn");
 }
 
@@ -825,7 +873,7 @@ async function runUGC() {
     var result = await callAI(prompt, "Tu es expert UGC creator francophone. Emails de prospection percutants.");
     document.getElementById("ugc-content").textContent = result;
     document.getElementById("ugc-result").style.display = "block";
-  } catch(e) { toast("Erreur reseau — reessaie"); }
+  } catch(e) { toast("Erreur — " + e.message); }
   hideLoading("ugc-loading","ugc-btn");
 }
 
@@ -839,7 +887,7 @@ async function runScriptUGC() {
     var result = await callAI(prompt, "Tu es expert UGC creator francophone. Scripts videos authentiques.");
     document.getElementById("scr-content").textContent = result;
     document.getElementById("scr-result").style.display = "block";
-  } catch(e) { toast("Erreur reseau — reessaie"); }
+  } catch(e) { toast("Erreur — " + e.message); }
   hideLoading("scr-loading","scr-btn");
 }
 
@@ -853,7 +901,7 @@ async function runEtsySEO() {
     var result = await callAI(prompt, "Tu es expert SEO Etsy et Print on Demand francophone.");
     document.getElementById("etsy-content").textContent = result;
     document.getElementById("etsy-result").style.display = "block";
-  } catch(e) { toast("Erreur reseau — reessaie"); }
+  } catch(e) { toast("Erreur — " + e.message); }
   hideLoading("etsy-loading","etsy-btn");
 }
 
