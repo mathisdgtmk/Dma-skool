@@ -1,556 +1,387 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>DMA — IA Suite Pro + Business</title>
+<title>DMA — Scripts & Ressources</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--red:#C0001A;--gold:#C9A84C;--blue:#7ab8ff;--bg:#050505;--s1:#0a0a0a;--s2:#111;--border:rgba(255,255,255,.07);--text:#f5f0e8;--dim:rgba(245,240,232,.4)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
-/* HDR */
 .hdr{position:sticky;top:0;z-index:100;background:rgba(5,5,5,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(192,0,26,.2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
 .hdr-back{text-decoration:none;color:var(--dim);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-.hdr-logo{font-family:'Bebas Neue',Impact,sans-serif;font-size:14px;letter-spacing:4px}
+.hdr-logo{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:4px}
 .hdr-logo span{color:var(--red)}
-.hdr-badge{display:flex;align-items:center;gap:5px;background:rgba(192,0,26,.1);border:1px solid rgba(192,0,26,.3);border-radius:2px;padding:4px 10px}
-.hdr-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse-dot 1.5s infinite}
-@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-.hdr-badge-text{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ff6060}
-/* HERO */
-.hero{padding:28px 16px 20px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:150%;height:80%;background:radial-gradient(ellipse,rgba(192,0,26,.12) 0%,transparent 65%);pointer-events:none}
-.hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(192,0,26,.6);margin-bottom:12px}
-.hero-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(32px,9vw,52px);letter-spacing:3px;line-height:.85;margin-bottom:10px}
+.hdr-badge{background:rgba(192,0,26,.1);border:1px solid rgba(192,0,26,.3);border-radius:2px;padding:4px 10px;font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ff6060}
+
+.hero{padding:24px 16px 16px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:150%;height:80%;background:radial-gradient(ellipse,rgba(192,0,26,.1) 0%,transparent 65%);pointer-events:none}
+.hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(192,0,26,.6);margin-bottom:10px}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,8vw,44px);letter-spacing:3px;line-height:.9;margin-bottom:8px}
 .hero-title .r{color:var(--red)}
 .hero-title .g{color:var(--gold)}
-.hero-sub{font-size:12px;font-weight:400;color:var(--dim);line-height:1.7;margin-bottom:20px}
-.hero-pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.pill{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;padding:4px 10px;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
-/* TABS NAV */
+.hero-sub{font-size:11px;color:var(--dim);line-height:1.7;margin-bottom:16px}
+
 .tools-nav{display:flex;overflow-x:auto;gap:0;border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch;background:var(--s1)}
 .tools-nav::-webkit-scrollbar{display:none}
-.tnav{flex-shrink:0;padding:12px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;font-family:'Syne',sans-serif;position:relative}
+.tnav{flex-shrink:0;padding:12px 14px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;font-family:'Syne',sans-serif}
 .tnav.active{color:var(--text);border-bottom-color:var(--red)}
-.tnav-dot{width:5px;height:5px;border-radius:50%;background:var(--red);position:absolute;top:8px;right:8px;display:none}
-.tnav.active .tnav-dot{display:block}
-/* TOOL PANELS */
+
 .tool-panel{display:none;padding:20px 16px;animation:fadeIn .3s ease}
 .tool-panel.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-/* COMMON */
-.t-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:20px;letter-spacing:3px;color:var(--text);margin-bottom:4px}
+
+.t-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--text);margin-bottom:4px}
 .t-title span{color:var(--red)}
 .t-sub{font-size:11px;color:var(--dim);margin-bottom:18px;line-height:1.6}
-.lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:6px;display:block}
-.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:12px 14px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none;transition:border-color .2s;resize:none}
-.inp:focus{border-color:rgba(192,0,26,.4)}
-.sel{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:3px;padding:12px 14px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none}
-.row2{display:flex;gap:10px}
-.row2 .c{flex:1}
-.btn-run{width:100%;padding:14px;background:linear-gradient(135deg,var(--red),#8a0013);border:none;border-radius:3px;font-family:'Bebas Neue',Impact,sans-serif;font-size:16px;letter-spacing:4px;color:#fff;cursor:pointer;margin-top:12px;-webkit-appearance:none;position:relative;overflow:hidden}
-.btn-run::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .2s}
-.btn-run:active::after{opacity:1}
-.btn-run:disabled{opacity:.5;cursor:not-allowed}
-/* RESULT BOX */
-.result-box{background:var(--s1);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:14px;display:none}
-.result-header{background:var(--s2);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.result-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
-.result-actions{display:flex;gap:6px}
-.btn-copy{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:4px 10px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:'Syne',sans-serif;-webkit-appearance:none}
-.btn-regen{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:2px;padding:4px 10px;font-size:9px;font-weight:700;color:var(--dim);cursor:pointer;font-family:'Syne',sans-serif;-webkit-appearance:none}
-.result-content{padding:14px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.8;color:rgba(245,240,232,.85);white-space:pre-wrap;min-height:80px}
-/* LOADING */
-.loading-bar{height:2px;background:var(--border);position:relative;overflow:hidden;display:none}
-.loading-fill{position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--red),var(--gold),transparent);animation:loading 1.2s linear infinite}
-@keyframes loading{to{left:100%}}
-/* PROSPECTS LIST */
-.prospect-grid{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-.prospect-card{background:var(--s1);border:1px solid var(--border);border-radius:4px;overflow:hidden}
-.pc-top{padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
-.pc-name{font-size:13px;font-weight:700}
-.pc-score{font-size:9px;font-weight:700;letter-spacing:2px;padding:3px 8px;border-radius:2px}
-.pc-score.hot{background:rgba(192,0,26,.15);color:#ff7070}
-.pc-score.warm{background:rgba(201,168,76,.12);color:var(--gold)}
-.pc-score.cold{background:rgba(255,255,255,.05);color:var(--dim)}
-.pc-body{padding:0 14px 12px;font-size:11px;color:var(--dim);line-height:1.6}
-.pc-actions{display:flex;border-top:1px solid var(--border)}
-.pc-btn{flex:1;padding:9px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;background:none;color:var(--dim);cursor:pointer;font-family:'Syne',sans-serif;border-right:1px solid var(--border)}
-.pc-btn:last-child{border-right:none}
-.pc-btn.gold{color:var(--gold)}
-/* REVENUE CALC */
-.calc-result{background:var(--s1);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:16px;margin-top:12px}
-.calc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)}
-.calc-row:last-child{border-bottom:none;padding-top:10px;margin-top:4px}
-.calc-label{font-size:12px;color:var(--dim)}
-.calc-value{font-family:'Bebas Neue',Impact,sans-serif;font-size:18px}
-.calc-value.green{color:#80d080}
-.calc-value.gold{color:var(--gold)}
-.calc-value.big{font-size:28px;color:var(--text)}
-/* CONTENT IDEAS */
-.ideas-grid{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-.idea-card{background:var(--s1);border:1px solid var(--border);border-radius:4px;padding:14px;position:relative}
-.idea-platform{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
-.idea-hook{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.4}
-.idea-body{font-size:11px;color:var(--dim);line-height:1.6}
-.idea-copy{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:2px;padding:3px 8px;font-size:8px;color:var(--dim);cursor:pointer;font-family:'Syne',sans-serif;-webkit-appearance:none}
+
+/* SCRIPTS */
+.script-card{background:var(--s1);border:1px solid var(--border);border-left:3px solid rgba(192,0,26,.5);border-radius:4px;padding:14px;margin-bottom:12px}
+.script-label{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.script-tag{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(192,0,26,.1);color:var(--red);border:1px solid rgba(192,0,26,.2);padding:2px 8px;display:inline-block;margin-bottom:8px}
+.script-text{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:rgba(245,240,232,.8);white-space:pre-wrap}
+.btn-copy{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:2px;padding:6px 14px;font-size:9px;font-weight:700;color:var(--gold);cursor:pointer;font-family:'Syne',sans-serif;margin-top:10px;width:100%;letter-spacing:1px}
+.btn-copy:active{opacity:.7}
+
+/* HOOKS */
+.hook-item{background:var(--s1);border:1px solid var(--border);border-radius:4px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hook-num{font-family:'Bebas Neue',sans-serif;font-size:18px;color:rgba(122,184,255,.25);flex-shrink:0;min-width:24px}
+.hook-txt{font-size:12px;font-weight:600;color:var(--text);line-height:1.5;flex:1}
+.hook-platform{font-size:8px;font-weight:700;letter-spacing:1px;color:var(--dim);display:block;margin-top:2px}
+.btn-copy-sm{background:rgba(122,184,255,.08);border:1px solid rgba(122,184,255,.15);border-radius:2px;padding:4px 10px;font-size:8px;font-weight:700;color:var(--blue);cursor:pointer;font-family:'Syne',sans-serif;flex-shrink:0}
+
 /* OBJECTIONS */
 .obj-card{background:var(--s1);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:10px}
 .obj-q{background:rgba(192,0,26,.08);border-bottom:1px solid rgba(192,0,26,.15);padding:10px 14px;font-size:12px;font-weight:700;color:#ff7070}
 .obj-a{padding:12px 14px;font-size:12px;color:rgba(245,240,232,.75);line-height:1.7}
 .obj-a strong{color:var(--gold)}
-/* TOAST */
+.obj-copy{float:right;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);padding:3px 8px;font-size:8px;font-weight:700;color:var(--gold);cursor:pointer;font-family:'Syne',sans-serif;border-radius:2px;margin-top:6px}
+
+/* PLAN */
+.jour-card{background:var(--s1);border:1px solid var(--border);border-radius:4px;padding:14px;margin-bottom:10px}
+.jour-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:var(--red);margin-bottom:4px}
+.jour-type{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:block}
+.jour-titre{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.jour-desc{font-size:11px;color:var(--dim);line-height:1.6}
+
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#050505;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px 20px;border-radius:3px;display:none;z-index:999;white-space:nowrap}
-/* SCROLL INDICATOR */
-.scroll-hint{text-align:center;padding:6px;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.1);text-transform:uppercase}
 </style>
 </head>
 <body>
 
 <div class="hdr">
   <a class="hdr-back" href="dashboard.html">← Dashboard</a>
-  <div class="hdr-logo">DMA <span>IA</span> SUITE</div>
-  <div class="hdr-badge"><div class="hdr-badge-dot"></div><span class="hdr-badge-text">PRO</span></div>
+  <div class="hdr-logo">DMA <span>SCRIPTS</span></div>
+  <div class="hdr-badge">PRET A COPIER</div>
 </div>
 
 <div class="hero">
   <div class="hero-eyebrow">Module Exclusif DMA</div>
-  <div class="hero-title">TON IA<br><span class="r">TRAVAILLE</span><br><span class="g">POUR TOI</span></div>
-  <div class="hero-sub">Scripts DM, prospects qualifiés, contenu viral, simulateur de revenus — tout généré par IA en quelques secondes.</div>
-  <div class="hero-pills">
-    <div class="pill">🤖 Propulsé par Claude IA</div>
-    <div class="pill">⚡ Résultats en 10s</div>
-    <div class="pill">🔒 Exclusif DMA</div>
-  </div>
+  <div class="hero-title">TES SCRIPTS<br><span class="r">PRETS</span><br><span class="g">A COPIER</span></div>
+  <div class="hero-sub">Scripts DM, hooks, objections, plan de contenu — tout est prêt. Copie, adapte, envoie.</div>
 </div>
-
-<div class="scroll-hint">← Swipe pour changer d'outil →</div>
 
 <div class="tools-nav">
-  <button class="tnav active" onclick="switchTool(0,this)">📨 Script DM<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(1,this)">🎯 Prospects<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(2,this)">📲 Contenu<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(3,this)">💰 Revenus<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(4,this)">🥊 Objections<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(5,this)">🎣 Hooks<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(6,this)">🛒 Drop Niche<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(7,this)">📦 Analyse Produit<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(8,this)">📌 Page Produit<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(9,this)">🎬 Script Pub<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(10,this)">🎬 Pitch UGC<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(11,this)">🎬 Script UGC<div class="tnav-dot"></div></button>
-  <button class="tnav" onclick="switchTool(12,this)">🌐 SEO Etsy<div class="tnav-dot"></div></button>
+  <button class="tnav active" onclick="switchTool(0,this)">📨 Scripts DM</button>
+  <button class="tnav" onclick="switchTool(1,this)">🎣 Hooks</button>
+  <button class="tnav" onclick="switchTool(2,this)">🥊 Objections</button>
+  <button class="tnav" onclick="switchTool(3,this)">📲 Plan contenu</button>
+  <button class="tnav" onclick="switchTool(4,this)">💰 Argumentaire</button>
+  <button class="tnav" onclick="switchTool(5,this)">🔁 Relances</button>
 </div>
 
-<!-- ═══ OUTIL 1 — SCRIPT DM ═══ -->
+<!-- SCRIPTS DM -->
 <div class="tool-panel active" id="t0">
-  <div class="t-title">GENERATEUR <span>DE SCRIPTS DM</span></div>
-  <div class="t-sub">Décris ton prospect et l'IA écrit le script DM parfait pour le closer.</div>
+  <div class="t-title">SCRIPTS <span>DM PRETS A ENVOYER</span></div>
+  <div class="t-sub">Copie et adapte à ta façon de parler. Ne les envoie pas mot pour mot — personnalise.</div>
 
-  <span class="lbl">Ton offre</span>
-  <select class="sel" id="dm-offre" style="margin-bottom:10px">
-    <option value="DMA 397€ avec coaching offert et MRR 100%">Formule DMA 397€</option>
-    <option value="Bonus Agence IA No-Code 197€">Bonus Agence IA 197€</option>
-    <option value="Accompagnement Premium 1-to-1 697€">Accompagnement Premium 697€</option>
-  </select>
+  <div class="script-card">
+    <span class="script-label">Script 1 — Premier contact</span>
+    <span class="script-tag">ACCROCHE</span>
+    <div class="script-text">Salut [prénom] 👋
 
-  <span class="lbl">Profil du prospect</span>
-  <textarea class="inp" id="dm-prospect" rows="3" placeholder="Ex: Étudiant 20 ans, veut gagner de l'argent en ligne, a regardé mes stories sur le MRR, a commenté 'intéressant'..."></textarea>
+J'ai vu ton profil et je me suis dit que ça pourrait vraiment t'intéresser.
 
-  <span class="lbl" style="margin-top:10px">Ton objectif</span>
-  <select class="sel" id="dm-objectif" style="margin-bottom:0">
-    <option value="pitcher l'offre directement">Pitcher l'offre direct</option>
-    <option value="qualifier le prospect avant de pitcher">Qualifier d'abord</option>
-    <option value="relancer après 3 jours sans réponse">Relance 3 jours</option>
-    <option value="répondre à l'objection 'c'est cher'">Gérer objection prix</option>
-    <option value="closer après une démo">Closer après démo</option>
-  </select>
+Tu cherches à générer des revenus en ligne ?</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER CE SCRIPT</button>
+  </div>
 
-  <button class="btn-run" id="dm-btn" onclick="runDM()">⚡ GÉNÉRER LE SCRIPT</button>
+  <div class="script-card">
+    <span class="script-label">Script 2 — Pitch complet</span>
+    <span class="script-tag">APRES QUALIFICATION</span>
+    <div class="script-text">Ok donc je vais être direct avec toi.
 
-  <div class="loading-bar" id="dm-loading"><div class="loading-fill"></div></div>
+J'ai accès à une formation complète sur le business en ligne — 28 modules, 7 façons de gagner de l'argent, des outils IA pour créer du contenu et prospecter.
 
-  <div class="result-box" id="dm-result">
-    <div class="result-header">
-      <span class="result-label">📨 Script généré</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('dm-content')">COPIER</button>
-        <button class="btn-regen" onclick="runDM()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="dm-content"></div>
+Le truc vraiment puissant c'est les droits de revente. Tu peux vendre cette formation et garder 100% de l'argent. Zéro commission.
+
+10 personnes = 499€/mois automatiquement.
+30 personnes = près de 1500€/mois.
+
+Tout ça pour 49.90€ par mois. Sans engagement.
+
+T'as des questions ?</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER CE SCRIPT</button>
+  </div>
+
+  <div class="script-card">
+    <span class="script-label">Script 3 — Approche douce</span>
+    <span class="script-tag">PROSPECT FROID</span>
+    <div class="script-text">Salut [prénom], j'espère que tu vas bien 😊
+
+Je te contacte car j'ai vu que tu t'intéressais au business en ligne.
+
+J'ai découvert quelque chose qui a vraiment changé ma façon de générer des revenus — et je pense que ça pourrait t'intéresser aussi.
+
+C'est pas une promesse de devenir riche du jour au lendemain, mais un vrai système qui fonctionne. Je t'explique en 2 minutes si t'as le temps 🙂</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER CE SCRIPT</button>
+  </div>
+
+  <div class="script-card">
+    <span class="script-label">Script 4 — Closing final</span>
+    <span class="script-tag">CLOSING</span>
+    <div class="script-text">Est-ce que t'as des questions avant de te lancer ?
+
+Le lien pour rejoindre c'est [ton lien Stripe]. Tu peux commencer aujourd'hui — accès immédiat.
+
+Et si dans 30 jours tu as suivi la formation et appliqué les méthodes sans résultat — remboursement intégral. Zéro risque. 🛡️</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER CE SCRIPT</button>
   </div>
 </div>
 
-<!-- ═══ OUTIL 2 — PROSPECTS ═══ -->
+<!-- HOOKS -->
 <div class="tool-panel" id="t1">
-  <div class="t-title">CIBLAGE & <span>APPROCHE</span></div>
-  <div class="t-sub">Décris ta cible et ce qu'elle veut accomplir — l'IA génère les critères pour la trouver ET le message d'approche parfait.</div>
+  <div class="t-title">HOOKS <span>VIRAUX</span></div>
+  <div class="t-sub">Utilise ces hooks pour tes reels, stories et posts. Arrêtent le scroll en 2 secondes.</div>
 
-  <span class="lbl">Plateforme de prospection</span>
-  <select class="sel" id="p-platform" style="margin-bottom:10px">
-    <option value="Instagram">Instagram</option>
-    <option value="TikTok">TikTok</option>
-    <option value="Snapchat">Snapchat</option>
-  </select>
+  <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">💰 BUSINESS EN LIGNE / MRR</div>
+  <div class="hook-item"><span class="hook-num">1</span><div><span class="hook-txt">J'ai généré 1500€ ce mois sans quitter mon canapé</span><span class="hook-platform">TikTok · Reels · Story</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">2</span><div><span class="hook-txt">Ce que personne te dit sur le business en ligne</span><span class="hook-platform">TikTok · Reels</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">3</span><div><span class="hook-txt">Comment j'ai fait ma première vente en 5 jours</span><span class="hook-platform">TikTok · Reels · Story</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">4</span><div><span class="hook-txt">10 personnes = 499€/mois automatiquement</span><span class="hook-platform">TikTok · Reels</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">5</span><div><span class="hook-txt">J'aurais voulu savoir ça avant de commencer</span><span class="hook-platform">Story · Post</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">6</span><div><span class="hook-txt">La vraie raison pour laquelle tu gagnes pas encore</span><span class="hook-platform">TikTok · Reels</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">7</span><div><span class="hook-txt">49€/mois pour construire un revenu automatique 👀</span><span class="hook-platform">Story · Post</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">8</span><div><span class="hook-txt">Tu vends une fois. Tu touches chaque mois.</span><span class="hook-platform">TikTok · Reels</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
 
-  <span class="lbl">Qui tu veux cibler ?</span>
-  <textarea class="inp" id="p-cible" rows="2" placeholder="Ex: Des gens qui suivent des créateurs comme @mthsdgtmk, @lena_situations, qui parlent de business, MRR, liberté financière..."></textarea>
-
-  <span class="lbl">Ce qu'ils veulent accomplir</span>
-  <textarea class="inp" id="p-objectif" rows="2" placeholder="Ex: Ils veulent gagner de l'argent en ligne, quitter leur job, avoir un revenu complémentaire, être libre financièrement..."></textarea>
-
-  <span class="lbl">Signaux à repérer sur leur profil</span>
-  <input class="inp" id="p-signaux" type="text" placeholder="Ex: Ils commentent 'comment tu fais ?' sur des posts business, ils postent sur leur galère financière...">
-
-  <button class="btn-run" id="p-btn" onclick="runProspects()">🎯 GÉNÉRER MON PLAN DE CIBLAGE</button>
-  <div class="loading-bar" id="p-loading"><div class="loading-fill"></div></div>
-  <div id="p-result" style="margin-top:12px"></div>
+  <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin:18px 0 12px">📲 LIFESTYLE / LIBERTE</div>
+  <div class="hook-item"><span class="hook-num">9</span><div><span class="hook-txt">Je gagne de l'argent pendant que je dors</span><span class="hook-platform">TikTok · Reels · Story</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">10</span><div><span class="hook-txt">Mon téléphone travaille à ma place 24h/24</span><span class="hook-platform">TikTok · Story</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">11</span><div><span class="hook-txt">Voilà pourquoi je peux travailler de n'importe où</span><span class="hook-platform">Reels · Post</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
+  <div class="hook-item"><span class="hook-num">12</span><div><span class="hook-txt">J'ai quitté mon job pour ça — voilà ce que j'ai fait</span><span class="hook-platform">TikTok · Reels</span></div><button class="btn-copy-sm" onclick="copyText(this.previousElementSibling.previousElementSibling.textContent)">COPIER</button></div>
 </div>
 
-<!-- ═══ OUTIL 3 — CONTENU VIRAL ═══ -->
+<!-- OBJECTIONS -->
 <div class="tool-panel" id="t2">
-  <div class="t-title">GENERATEUR <span>DE CONTENU VIRAL</span></div>
-  <div class="t-sub">L'IA crée des hooks, légendes et scripts prêts à poster sur chaque plateforme.</div>
-
-  <span class="lbl">Sujet / Angle</span>
-  <textarea class="inp" id="c-sujet" rows="2" placeholder="Ex: Comment j'ai fait ma première vente DMA en 5 jours..."></textarea>
-
-  <div class="row2" style="margin-top:10px">
-    <div class="c">
-      <span class="lbl">Plateforme</span>
-      <select class="sel" id="c-platform">
-        <option value="TikTok et Instagram Reels">TikTok / Reels</option>
-        <option value="Instagram Story">Story Insta</option>
-        <option value="Instagram Post">Post Insta</option>
-        <option value="Snapchat">Snapchat</option>
-      </select>
-    </div>
-    <div class="c">
-      <span class="lbl">Type</span>
-      <select class="sel" id="c-type">
-        <option value="vidéo avec hook viral">Vidéo hook viral</option>
-        <option value="témoignage résultat">Témoignage résultat</option>
-        <option value="éducatif qui vend subtilement">Éducatif subtil</option>
-        <option value="storytelling personnel">Storytelling</option>
-      </select>
-    </div>
-  </div>
-
-  <button class="btn-run" id="c-btn" onclick="runContent()">📲 GÉNÉRER LE CONTENU</button>
-  <div class="loading-bar" id="c-loading"><div class="loading-fill"></div></div>
-  <div class="ideas-grid" id="c-result"></div>
-</div>
-
-<!-- ═══ OUTIL 4 — SIMULATEUR REVENUS ═══ -->
-<div class="tool-panel" id="t3">
-  <div class="t-title">SIMULATEUR <span>DE REVENUS MRR</span></div>
-  <div class="t-sub">Calcule tes revenus potentiels selon tes objectifs de ventes.</div>
-
-  <div class="row2">
-    <div class="c">
-      <span class="lbl">Ventes DMA/semaine</span>
-      <input class="inp" id="r-ventes" type="number" value="3" min="1" max="50">
-    </div>
-    <div class="c">
-      <span class="lbl">Prix moyen vendu</span>
-      <select class="sel" id="r-prix">
-        <option value="397">397€ — Formule</option>
-        <option value="197">197€ — Bonus IA</option>
-        <option value="697">697€ — Premium</option>
-        <option value="497">Mix moyen 497€</option>
-      </select>
-    </div>
-  </div>
-
-  <span class="lbl" style="margin-top:10px">Ton taux de closing actuel</span>
-  <select class="sel" id="r-taux">
-    <option value="10">10% — Débutant</option>
-    <option value="20">20% — En progression</option>
-    <option value="30" selected>30% — Intermédiaire</option>
-    <option value="50">50% — Confirmé</option>
-    <option value="70">70% — Expert</option>
-  </select>
-
-  <button class="btn-run" style="background:linear-gradient(135deg,#C9A84C,#8B6914);margin-top:12px" onclick="calcRevenue()">💰 CALCULER MES REVENUS</button>
-
-  <div class="calc-result" id="r-result" style="display:none">
-    <div class="calc-row"><span class="calc-label">Prospects nécessaires/semaine</span><span class="calc-value gold" id="r-prospects">0</span></div>
-    <div class="calc-row"><span class="calc-label">Revenus semaine</span><span class="calc-value green" id="r-week">0€</span></div>
-    <div class="calc-row"><span class="calc-label">Revenus mois (x4)</span><span class="calc-value green" id="r-month">0€</span></div>
-    <div class="calc-row"><span class="calc-label">Revenus annuels</span><span class="calc-value green" id="r-year">0€</span></div>
-    <div class="calc-row" style="border-top:1px solid rgba(201,168,76,.2);margin-top:8px"><span class="calc-label" style="font-weight:700;color:var(--text)">Objectif 1000€/mois</span><span class="calc-value big" id="r-goal">0 ventes</span></div>
-    <div id="r-ai-comment" style="margin-top:14px;padding:12px;background:rgba(192,0,26,.06);border:1px solid rgba(192,0,26,.15);border-radius:3px;font-size:12px;color:rgba(245,240,232,.7);line-height:1.7"></div>
-  </div>
-</div>
-
-<!-- ═══ OUTIL 5 — OBJECTIONS ═══ -->
-<div class="tool-panel" id="t4">
   <div class="t-title">CRUSHER <span>D'OBJECTIONS</span></div>
-  <div class="t-sub">Colle l'objection de ton prospect — l'IA génère la réponse parfaite pour closer.</div>
+  <div class="t-sub">Les réponses aux objections les plus courantes. Copie et adapte.</div>
 
-  <span class="lbl">Objection du prospect</span>
-  <textarea class="inp" id="o-text" rows="3" placeholder="Ex: 'C'est trop cher pour moi là j'ai pas les moyens' ou 'Je vais réfléchir' ou colle son message exact..."></textarea>
+  <div class="obj-card">
+    <div class="obj-q">❌ "C'est trop cher pour moi"</div>
+    <div class="obj-a">
+      Je comprends que 49.90€ ça peut sembler beaucoup au premier abord. Mais regarde ça autrement — <strong>une seule vente te rapporte 49.90€</strong>. Ton premier mois est déjà remboursé avec une seule personne que tu fais rentrer.
 
-  <span class="lbl" style="margin-top:10px">Contexte</span>
-  <select class="sel" id="o-context">
-    <option value="DM Instagram">DM Instagram</option>
-    <option value="appel téléphonique">Appel téléphone</option>
-    <option value="Snapchat">Snapchat</option>
-    <option value="après une présentation">Après présentation</option>
-  </select>
-
-  <button class="btn-run" id="o-btn" onclick="runObjection()">🥊 GÉNÉRER LA RÉPONSE</button>
-  <div class="loading-bar" id="o-loading"><div class="loading-fill"></div></div>
-
-  <div class="result-box" id="o-result">
-    <div class="result-header">
-      <span class="result-label">🥊 Réponse générée</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('o-content')">COPIER</button>
-        <button class="btn-regen" onclick="runObjection()">↻ REGEN</button>
-      </div>
+Et si t'as 10 membres actifs c'est 499€ qui tombent <strong>chaque mois automatiquement</strong>. C'est plus un coût, c'est un investissement.
+      <button class="obj-copy" onclick="copyParent(this)">COPIER</button>
     </div>
-    <div class="result-content" id="o-content"></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❌ "Je sais pas vendre"</div>
+    <div class="obj-a">
+      Bonne nouvelle — t'as pas besoin de savoir vendre. T'as accès à des <strong>scripts DM prêts à copier</strong>, des hooks viraux pour tes réseaux, et des outils IA pour créer du contenu.
+
+Le système est fait pour que même un débutant complet puisse faire sa première vente. T'as juste à suivre les étapes dans l'ordre.
+      <button class="obj-copy" onclick="copyParent(this)">COPIER</button>
+    </div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❌ "J'ai pas le temps"</div>
+    <div class="obj-a">
+      30 minutes par jour suffisent pour commencer. T'as pas besoin d'y passer des heures.
+
+Et le vrai truc avec ce modèle c'est que <strong>une fois que t'as des membres actifs, c'est passif</strong>. Ils paient leur abonnement tous les mois — toi tu touches sans rien faire de plus.
+      <button class="obj-copy" onclick="copyParent(this)">COPIER</button>
+    </div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❌ "Je vais réfléchir"</div>
+    <div class="obj-a">
+      Bien sûr, prends le temps qu'il te faut. Mais je veux juste te dire un truc honnêtement — <strong>chaque mois que tu attends c'est un mois de revenus en moins</strong>.
+
+Les gens qui ont commencé il y a 3 mois ont déjà des résultats. La garantie 30 jours est là si ça marche pas — tu prends zéro risque.
+      <button class="obj-copy" onclick="copyParent(this)">COPIER</button>
+    </div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❌ "C'est quoi la garantie ?"</div>
+    <div class="obj-a">
+      Garantie 30 jours complète. Tu suis la formation, tu appliques les méthodes — si t'as <strong>zéro résultat au bout de 30 jours</strong>, je te rembourse intégralement. Sans condition. Sans question. 🛡️
+      <button class="obj-copy" onclick="copyParent(this)">COPIER</button>
+    </div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-q">❌ "C'est pas une arnaque ?"</div>
+    <div class="obj-a">
+      Je comprends la méfiance — il y a beaucoup d'arnaques en ligne. Ce qui te protège ici c'est simple : <strong>tu peux te résilier à tout moment</strong>, il y a une garantie remboursement 30 jours, et on est une entreprise déclarée en France (SIRET 930 115 555 00037). 
+
+Le business model est transparent — tu paies 49.90€/mois, tu accèdes à la formation, tu revends et tu gardes tout.
+      <button class="obj-copy" onclick="copyParent(this)">COPIER</button>
+    </div>
   </div>
 </div>
 
-<!-- ═══ OUTIL 6 — HOOKS ═══ -->
-<div class="tool-panel" id="t5">
-  <div class="t-title">GÉNÉRATEUR <span>DE HOOKS</span></div>
-  <div class="t-sub">Entre un thème et l'IA génère 10 hooks ultra percutants pour arrêter le scroll.</div>
+<!-- PLAN CONTENU -->
+<div class="tool-panel" id="t3">
+  <div class="t-title">PLAN CONTENU <span>7 JOURS</span></div>
+  <div class="t-sub">Un post par jour pendant 7 jours. Mix entre valeur, témoignage et vente directe.</div>
 
-  <span class="lbl">Thème / Sujet</span>
-  <textarea class="inp" id="h-theme" rows="2" placeholder="Ex: Gagner de l'argent en ligne, MRR, liberté financière, ma première vente..."></textarea>
-
-  <div class="row2" style="margin-top:10px">
-    <div class="c">
-      <span class="lbl">Plateforme</span>
-      <select class="sel" id="h-platform">
-        <option value="TikTok">TikTok</option>
-        <option value="Instagram Reels">Reels</option>
-        <option value="Instagram Story">Story</option>
-        <option value="Snapchat">Snapchat</option>
-      </select>
-    </div>
-    <div class="c">
-      <span class="lbl">Style</span>
-      <select class="sel" id="h-style">
-        <option value="choc et provocateur">Choc / Provoc</option>
-        <option value="curiosité mystère">Curiosité</option>
-        <option value="résultat concret avec chiffres">Résultat chiffré</option>
-        <option value="storytelling personnel">Storytelling</option>
-        <option value="contre-intuitif">Contre-intuitif</option>
-      </select>
-    </div>
+  <div class="jour-card">
+    <div class="jour-num">JOUR 1 — LUNDI</div>
+    <span class="jour-type">🎬 REEL / TIKTOK</span>
+    <div class="jour-titre">Présente-toi et ton projet</div>
+    <div class="jour-desc">Hook : "Voilà pourquoi j'ai décidé de me lancer dans le business en ligne"<br>Parle de toi, de où tu en étais avant, et ce que tu fais maintenant. Pas besoin de résultats — l'authenticité suffit.</div>
   </div>
 
-  <button class="btn-run" id="h-btn" onclick="runHooks()" style="background:linear-gradient(135deg,#7ab8ff,#3a7ad4);color:#050505">🎣 GÉNÉRER 10 HOOKS</button>
-  <div class="loading-bar" id="h-loading"><div class="loading-fill"></div></div>
+  <div class="jour-card">
+    <div class="jour-num">JOUR 2 — MARDI</div>
+    <span class="jour-type">📲 STORY</span>
+    <div class="jour-titre">Éducation : c'est quoi le MRR ?</div>
+    <div class="jour-desc">Explique simplement ce que c'est. "Tu achètes une formation une fois → tu la revends → tu gardes 100% du prix." Slide simple avec un exemple chiffré.</div>
+  </div>
 
-  <div id="h-result" style="margin-top:12px;display:none">
-    <div style="display:flex;flex-direction:column;gap:8px" id="h-list"></div>
+  <div class="jour-card">
+    <div class="jour-num">JOUR 3 — MERCREDI</div>
+    <span class="jour-type">🎬 REEL / TIKTOK</span>
+    <div class="jour-titre">Les erreurs que font les débutants</div>
+    <div class="jour-desc">Hook : "Les 3 erreurs qui m'ont coûté 6 mois en business en ligne"<br>Contenu éducatif qui montre ton expertise sans pitcher. Appel à l'action : "DM moi si tu veux éviter ça"</div>
+  </div>
+
+  <div class="jour-card">
+    <div class="jour-num">JOUR 4 — JEUDI</div>
+    <span class="jour-type">📊 POST CARROUSEL</span>
+    <div class="jour-titre">Les revenus potentiels</div>
+    <div class="jour-desc">Slide 1 : "Ce que tu peux gagner chaque mois"<br>Slide 2-4 : Les paliers 10 / 30 / 50 membres avec les chiffres<br>Slide 5 : CTA vers ton lien</div>
+  </div>
+
+  <div class="jour-card">
+    <div class="jour-num">JOUR 5 — VENDREDI</div>
+    <span class="jour-type">📲 STORY</span>
+    <div class="jour-titre">Vente directe</div>
+    <div class="jour-desc">Story simple et directe : "L'accès DMA c'est 49.90€/mois. Tu accèdes à 28 modules, les droits de revente, les outils IA. Lien en bio ou DM moi."</div>
+  </div>
+
+  <div class="jour-card">
+    <div class="jour-num">JOUR 6 — SAMEDI</div>
+    <span class="jour-type">🎬 REEL / TIKTOK</span>
+    <div class="jour-titre">Témoignage ou résultat</div>
+    <div class="jour-desc">Montre un résultat — même petit. Une notification de paiement, un DM d'intérêt, une capture de vente. Si t'as pas encore de résultat, montre ta progression dans la formation.</div>
+  </div>
+
+  <div class="jour-card">
+    <div class="jour-num">JOUR 7 — DIMANCHE</div>
+    <span class="jour-type">📲 STORY Q&A</span>
+    <div class="jour-titre">Réponses aux questions</div>
+    <div class="jour-desc">Ouvre un sondage : "Des questions sur le business en ligne ?" Réponds en stories. Ça crée de l'engagement et des prospects organiques.</div>
+  </div>
+</div>
+
+<!-- ARGUMENTAIRE -->
+<div class="tool-panel" id="t4">
+  <div class="t-title">ARGUMENTAIRE <span>DE VENTE</span></div>
+  <div class="t-sub">Ton pitch complet — ce que tu dis quand quelqu'un te demande "c'est quoi la DMA ?"</div>
+
+  <div class="script-card">
+    <span class="script-label">Pitch version courte (30 secondes)</span>
+    <div class="script-text">La DMA c'est une formation complète sur le business en ligne — 28 modules, 7 façons de générer des revenus.
+
+Mais le vrai avantage c'est les droits de revente. Tu peux revendre la formation et garder 100% des revenus.
+
+49.90€/mois. Sans engagement. Garantie 30 jours.</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER</button>
+  </div>
+
+  <div class="script-card">
+    <span class="script-label">Pitch version complète (2 minutes)</span>
+    <div class="script-text">Donc voilà comment ça marche.
+
+La Digital Mastery Academy c'est une plateforme de formation sur tout ce qui touche au business en ligne. T'as 28 modules — marketing digital, création de contenu, e-commerce, affiliation, IA, et plein d'autres choses.
+
+Mais la vraie force du truc c'est le MRR — les droits de revente à 100%. Ça veut dire que toi aussi tu peux vendre l'accès DMA et garder l'intégralité du prix. Pas de commission, pas d'intermédiaire. Tu vends à 49.90€/mois, tu gardes 49.90€.
+
+Maintenant imagine que t'as 20 personnes qui paient chaque mois. C'est 998€ automatiquement, sans que t'aies besoin de rien faire de plus. Et plus t'en as, plus ça monte.
+
+Pour accéder à tout ça c'est 49.90€ par mois. T'as un accès immédiat, tu peux résilier quand tu veux, et si dans 30 jours t'as pas de résultat malgré l'application des méthodes — remboursement intégral.
+
+Tu veux te lancer ?</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER</button>
+  </div>
+
+  <div class="script-card">
+    <span class="script-label">Pitch pour un Live</span>
+    <div class="script-text">Pour ceux qui viennent de rejoindre — je vous explique rapidement ce que je propose.
+
+J'ai accès à une formation complète sur le business en ligne. 28 modules, des outils IA, et surtout les droits de revente à 100%.
+
+Ce que ça veut dire concrètement — vous payez 49.90€ par mois, vous apprenez, et vous pouvez revendre la même formation en gardant tout l'argent.
+
+10 membres actifs = 499€/mois automatique. 30 membres = 1500€/mois.
+
+Le lien est en bio. DM moi "NEW" si vous voulez plus d'infos. 🔥</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER</button>
+  </div>
+</div>
+
+<!-- RELANCES -->
+<div class="tool-panel" id="t5">
+  <div class="t-title">SCRIPTS <span>DE RELANCE</span></div>
+  <div class="t-sub">80% des ventes se font après la 2ème ou 3ème relance. Ne lâche jamais.</div>
+
+  <div class="script-card">
+    <span class="script-label">Relance J+2 — Doux</span>
+    <div class="script-text">Salut [prénom] 👋
+
+Je voulais juste m'assurer que t'avais bien vu mon message. T'as eu le temps d'y réfléchir ?</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER</button>
+  </div>
+
+  <div class="script-card">
+    <span class="script-label">Relance J+5 — Valeur</span>
+    <div class="script-text">Salut [prénom], je reviens vers toi.
+
+J'ai pensé à toi quand j'ai vu qu'un de mes membres venait de faire sa première vente cette semaine — en moins de 10 jours.
+
+Si t'as encore des questions je suis dispo pour t'expliquer comment il a fait 🙂</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER</button>
+  </div>
+
+  <div class="script-card">
+    <span class="script-label">Relance J+10 — Urgence</span>
+    <div class="script-text">Salut [prénom], dernière fois que je te contacte là-dessus.
+
+Je voulais juste te dire que les places sont limitées cette semaine — après ça je ferme les accès pour un moment.
+
+Si t'as envie de te lancer c'est maintenant. Le lien : [ton lien]</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER</button>
+  </div>
+
+  <div class="script-card">
+    <span class="script-label">Relance après un Non</span>
+    <div class="script-text">Pas de souci du tout, je comprends 🙂
+
+Je te recontacte dans quelques semaines si ça te va — des fois le timing c'est juste pas le bon moment.
+
+Bon courage pour la suite !</div>
+    <button class="btn-copy" onclick="copyScript(this)">COPIER</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
-
-<div class="tool-panel" id="t6">
-  <div class="t-title">NICHE <span>DROPSHIPPING</span></div>
-  <div class="t-sub">Trouve ta niche dropshipping parfaite selon tes interets et ton budget pub.</div>
-  <span class="lbl">Tes interets</span>
-  <input class="inp" id="drop-int" type="text" placeholder="Ex: sport, animaux, gaming..." style="margin-bottom:10px">
-  <span class="lbl">Ta cible</span>
-  <select class="sel" id="drop-cible" style="margin-bottom:10px">
-    <option value="hommes 18-35 ans">Hommes 18-35</option>
-    <option value="femmes 25-45 ans">Femmes 25-45</option>
-    <option value="parents avec enfants">Parents</option>
-    <option value="seniors 50+">Seniors 50+</option>
-  </select>
-  <span class="lbl">Budget pub mensuel</span>
-  <select class="sel" id="drop-budget">
-    <option value="50-150EUR/mois">50-150EUR/mois</option>
-    <option value="150-500EUR/mois">150-500EUR/mois</option>
-    <option value="500EUR+/mois">500EUR+/mois</option>
-  </select>
-  <button class="btn-run" id="drop-btn" onclick="runDrop()">TROUVER MA NICHE</button>
-  <div class="loading-bar" id="drop-loading"><div class="loading-fill"></div></div>
-  <div class="result-box" id="drop-result">
-    <div class="result-header">
-      <span class="result-label">🛒 Résultat</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('drop-content')">COPIER</button>
-        <button class="btn-regen" onclick="runDrop()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="drop-content"></div>
-  </div>
-</div>
-
-<div class="tool-panel" id="t7">
-  <div class="t-title">ANALYSE <span>PRODUIT DROP</span></div>
-  <div class="t-sub">L'IA analyse ton produit dropshipping et te dit si tu dois le lancer.</div>
-  <span class="lbl">Decris ton produit</span>
-  <textarea class="inp" id="prod-desc" rows="4" placeholder="Ex: Masque LED anti-acne, prix AliExpress 12EUR, note 4.7, 2300 commandes..."></textarea>
-  <span class="lbl" style="margin-top:10px">Prix de vente envisage</span>
-  <input class="inp" id="prod-prix" type="text" placeholder="Ex: 39EUR">
-  <button class="btn-run" id="prod-btn" onclick="runProduit()">ANALYSER CE PRODUIT</button>
-  <div class="loading-bar" id="prod-loading"><div class="loading-fill"></div></div>
-  <div class="result-box" id="prod-result">
-    <div class="result-header">
-      <span class="result-label">📦 Résultat</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('prod-content')">COPIER</button>
-        <button class="btn-regen" onclick="runProduit()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="prod-content"></div>
-  </div>
-</div>
-
-<div class="tool-panel" id="t8">
-  <div class="t-title">PAGE PRODUIT <span>SHOPIFY</span></div>
-  <div class="t-sub">Genere une page produit complete qui vend — titre, bullets, description, CTA.</div>
-  <span class="lbl">Ton produit</span>
-  <input class="inp" id="pp-prod" type="text" placeholder="Ex: Ceinture chauffante lombaire..." style="margin-bottom:10px">
-  <span class="lbl">Ta cible</span>
-  <input class="inp" id="pp-cible" type="text" placeholder="Ex: femmes 30-50 ans avec maux de dos..." style="margin-bottom:10px">
-  <span class="lbl">Prix de vente</span>
-  <input class="inp" id="pp-prix" type="text" placeholder="Ex: 39EUR">
-  <button class="btn-run" id="pp-btn" onclick="runPageProd()">GENERER MA PAGE PRODUIT</button>
-  <div class="loading-bar" id="pp-loading"><div class="loading-fill"></div></div>
-  <div class="result-box" id="pp-result">
-    <div class="result-header">
-      <span class="result-label">📌 Résultat</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('pp-content')">COPIER</button>
-        <button class="btn-regen" onclick="runPageProd()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="pp-content"></div>
-  </div>
-</div>
-
-<div class="tool-panel" id="t9">
-  <div class="t-title">SCRIPT PUB <span>VIDEO</span></div>
-  <div class="t-sub">Script video pub TikTok ou Meta — hook, probleme, solution, CTA. Naturel et efficace.</div>
-  <span class="lbl">Ton produit</span>
-  <input class="inp" id="pub-prod" type="text" placeholder="Ex: Ceinture chauffante anti-douleur..." style="margin-bottom:10px">
-  <span class="lbl">Cible</span>
-  <input class="inp" id="pub-cible" type="text" placeholder="Ex: femmes 30-50 ans avec douleurs de dos..." style="margin-bottom:10px">
-  <span class="lbl">Plateforme</span>
-  <select class="sel" id="pub-pl" style="margin-bottom:10px">
-    <option value="TikTok Ads">TikTok Ads</option>
-    <option value="Meta Ads (Facebook/Instagram)">Meta Ads</option>
-  </select>
-  <span class="lbl">Duree</span>
-  <select class="sel" id="pub-dur">
-    <option value="15 secondes">15 secondes</option>
-    <option value="30 secondes">30 secondes</option>
-    <option value="60 secondes">60 secondes</option>
-  </select>
-  <button class="btn-run" id="pub-btn" onclick="runPub()">GENERER MON SCRIPT PUB</button>
-  <div class="loading-bar" id="pub-loading"><div class="loading-fill"></div></div>
-  <div class="result-box" id="pub-result">
-    <div class="result-header">
-      <span class="result-label">🎬 Résultat</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('pub-content')">COPIER</button>
-        <button class="btn-regen" onclick="runPub()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="pub-content"></div>
-  </div>
-</div>
-
-<div class="tool-panel" id="t10">
-  <div class="t-title">PITCH EMAIL <span>UGC</span></div>
-  <div class="t-sub">Pitch email percutant pour contacter une marque et decrocher ta premiere mission UGC.</div>
-  <span class="lbl">Nom de la marque</span>
-  <input class="inp" id="ugc-marque" type="text" placeholder="Ex: Gymshark, une marque locale..." style="margin-bottom:10px">
-  <span class="lbl">Leur niche / produits</span>
-  <input class="inp" id="ugc-niche" type="text" placeholder="Ex: supplements sportifs, skincare naturel..." style="margin-bottom:10px">
-  <span class="lbl">Ton profil creator</span>
-  <textarea class="inp" id="ugc-profil" rows="2" placeholder="Ex: femme 25 ans, passionnee de skincare, camera iPhone, style naturel..."></textarea>
-  <span class="lbl" style="margin-top:10px">Ton tarif</span>
-  <select class="sel" id="ugc-tarif">
-    <option value="150EUR par video UGC">150EUR / video</option>
-    <option value="300EUR par video UGC">300EUR / video</option>
-    <option value="500EUR par video UGC">500EUR / video</option>
-  </select>
-  <button class="btn-run" id="ugc-btn" onclick="runUGC()">GENERER MON PITCH EMAIL</button>
-  <div class="loading-bar" id="ugc-loading"><div class="loading-fill"></div></div>
-  <div class="result-box" id="ugc-result">
-    <div class="result-header">
-      <span class="result-label">🎬 Résultat</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('ugc-content')">COPIER</button>
-        <button class="btn-regen" onclick="runUGC()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="ugc-content"></div>
-  </div>
-</div>
-
-<div class="tool-panel" id="t11">
-  <div class="t-title">SCRIPT VIDEO <span>UGC</span></div>
-  <div class="t-sub">Script complet pour ta video UGC — hook, corps, CTA, indications camera incluses.</div>
-  <span class="lbl">Le produit</span>
-  <input class="inp" id="scr-prod" type="text" placeholder="Ex: serum vitamin C, proteines vanille..." style="margin-bottom:10px">
-  <span class="lbl">Type de video</span>
-  <select class="sel" id="scr-type" style="margin-bottom:10px">
-    <option value="review / testimonial face camera">Review face camera</option>
-    <option value="problem / solution">Problem / Solution</option>
-    <option value="tutorial etape par etape">Tutorial</option>
-    <option value="unboxing reaction authentique">Unboxing</option>
-  </select>
-  <span class="lbl">Duree</span>
-  <select class="sel" id="scr-dur">
-    <option value="15-20 secondes">15-20 sec</option>
-    <option value="30-45 secondes">30-45 sec</option>
-    <option value="60 secondes">60 sec</option>
-  </select>
-  <button class="btn-run" id="scr-btn" onclick="runScriptUGC()">GENERER MON SCRIPT VIDEO</button>
-  <div class="loading-bar" id="scr-loading"><div class="loading-fill"></div></div>
-  <div class="result-box" id="scr-result">
-    <div class="result-header">
-      <span class="result-label">🎬 Résultat</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('scr-content')">COPIER</button>
-        <button class="btn-regen" onclick="runScriptUGC()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="scr-content"></div>
-  </div>
-</div>
-
-<div class="tool-panel" id="t12">
-  <div class="t-title">SEO <span>ETSY POD</span></div>
-  <div class="t-sub">Titre optimise, 13 tags et description complete pour ton listing Etsy Print on Demand.</div>
-  <span class="lbl">Ton produit POD</span>
-  <input class="inp" id="etsy-prod" type="text" placeholder="Ex: t-shirt infirmiere humour, mug golden retriever..." style="margin-bottom:10px">
-  <span class="lbl">Niche et cible</span>
-  <input class="inp" id="etsy-niche" type="text" placeholder="Ex: infirmieres, cadeau anniversaire, humour metier..." style="margin-bottom:10px">
-  <span class="lbl">Langue boutique</span>
-  <select class="sel" id="etsy-lang">
-    <option value="anglais (audience internationale)">Anglais — Audience internationale</option>
-    <option value="francais (audience FR/BE/CH)">Francais — FR/BE/CH</option>
-  </select>
-  <button class="btn-run" id="etsy-btn" onclick="runEtsySEO()">GENERER MON SEO ETSY</button>
-  <div class="loading-bar" id="etsy-loading"><div class="loading-fill"></div></div>
-  <div class="result-box" id="etsy-result">
-    <div class="result-header">
-      <span class="result-label">🌐 Résultat</span>
-      <div class="result-actions">
-        <button class="btn-copy" onclick="copyResult('etsy-content')">COPIER</button>
-        <button class="btn-regen" onclick="runEtsySEO()">↻ REGEN</button>
-      </div>
-    </div>
-    <div class="result-content" id="etsy-content"></div>
-  </div>
-</div>
 
 <script>
 var user = JSON.parse(sessionStorage.getItem("dma_user") || "null");
@@ -563,348 +394,41 @@ function switchTool(i, el) {
   document.getElementById("t"+i).classList.add("active");
 }
 
-function gv(id){var e=document.getElementById(id);return e?e.value.trim():""}
-
-async function callAI(prompt, systemPrompt) {
-  var sys = systemPrompt || "Tu es un expert en vente et marketing digital francophone. Tes reponses sont directes, percutantes et immediatement utilisables. Tu parles comme un pro du terrain, pas comme un livre. Utilise le tutoiement, sois concis et impactant.";
-  var res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer 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"
-    },
-    body: JSON.stringify({
-      model: "mistralai/mistral-7b-instruct:free",
-      max_tokens: 1024,
-      messages: [
-        {role: "system", content: sys},
-        {role: "user", content: prompt}
-      ]
-    })
-  });
-  var data = await res.json();
-  if (data.error) {
-    console.error("OpenRouter error:", data.error);
-    throw new Error(data.error.message || "Erreur API");
-  }
-  if (data.choices && data.choices[0]) {
-    return data.choices[0].message.content;
-  }
-  throw new Error("Reponse IA vide");
+function copyScript(btn) {
+  var txt = btn.previousElementSibling.textContent;
+  copyToClipboard(txt, btn);
 }
 
-function showLoading(id, btnId) {
-  document.getElementById(id).style.display = "block";
-  if(btnId) document.getElementById(btnId).disabled = true;
-}
-function hideLoading(id, btnId) {
-  document.getElementById(id).style.display = "none";
-  if(btnId) document.getElementById(btnId).disabled = false;
-}
-
-// ═══ DM SCRIPT ═══
-async function runDM() {
-  var offre = gv("dm-offre");
-  var prospect = gv("dm-prospect");
-  var objectif = gv("dm-objectif");
-  if(!prospect){toast("Décris ton prospect d'abord");return}
-
-  showLoading("dm-loading","dm-btn");
-  document.getElementById("dm-result").style.display = "none";
-
-  var prompt = "Écris un script DM Instagram en français pour " + objectif + ".\n\nL'offre : " + offre + "\nLe prospect : " + prospect + "\n\nLe script doit être naturel, pas commercial, avec des emojis appropriés. Maximum 5-6 messages courts. Chaque message sur une nouvelle ligne avec un emoji de flèche ▸ devant.";
-
-  try {
-    var result = await callAI(prompt);
-    document.getElementById("dm-content").textContent = result;
-    document.getElementById("dm-result").style.display = "block";
-  } catch(e) {
-    toast("Erreur — " + e.message);
-  }
-
-  hideLoading("dm-loading","dm-btn");
-}
-
-// ═══ PROSPECTS ═══
-async function runProspects() {
-  var platform = gv("p-platform");
-  var cible = gv("p-cible");
-  var objectif = gv("p-objectif");
-  var signaux = gv("p-signaux");
-  if(!cible){toast("Décris ta cible d'abord");return}
-
-  showLoading("p-loading","p-btn");
-  document.getElementById("p-result").innerHTML = "";
-
-  var prompt = "Génère 5 profils de prospects typiques sur " + platform + ".\nCible : " + cible + "\nCe qu'ils veulent accomplir : " + objectif + "\nSignaux à repérer sur leur profil : " + signaux + "\n\nPour chaque profil donne :\n- Pseudo fictif réaliste\n- Description en 1 phrase\n- Signaux d'intérêt repérables\n- Score de chaleur : HOT/WARM/COLD\n- Premier message DM à envoyer\n\nFormat JSON array : [{\"name\":\"...\",\"desc\":\"...\",\"signaux\":\"...\",\"score\":\"HOT/WARM/COLD\",\"dm\":\"...\"}]";
-
-  try {
-    var result = await callAI(prompt, "Tu es un expert en prospection digitale. Réponds UNIQUEMENT en JSON valide, sans texte avant ou après.");
-    var clean = result.replace(/```json|```/g,"").trim();
-    var profiles = JSON.parse(clean);
-    var html = "";
-    profiles.forEach(function(p) {
-      var scoreClass = p.score === "HOT" ? "hot" : p.score === "WARM" ? "warm" : "cold";
-      html += '<div class="prospect-card">' +
-        '<div class="pc-top"><span class="pc-name">' + (p.name||"Prospect") + '</span><span class="pc-score ' + scoreClass + '">' + (p.score||"WARM") + '</span></div>' +
-        '<div class="pc-body"><div style="margin-bottom:4px;color:var(--dim)">' + (p.desc||"") + '</div>' +
-        '<div style="font-size:10px;color:rgba(122,184,255,.6);margin-bottom:4px">👁 ' + (p.signaux||"") + '</div>' +
-        '<div style="font-size:11px;color:rgba(245,240,232,.7);background:rgba(255,255,255,.03);padding:8px;border-radius:3px;border:1px solid rgba(255,255,255,.05)">▸ ' + (p.dm||"") + '</div></div>' +
-        '<div class="pc-actions">' +
-        '<button class="pc-btn gold" onclick="copyText(\'' + (p.dm||"").replace(/'/g,"\\'") + '\')">COPIER DM</button>' +
-        '</div></div>';
-    });
-    document.getElementById("p-result").innerHTML = html;
-  } catch(e) {
-    document.getElementById("p-result").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — ' + e.message + '</div>';
-  }
-
-  hideLoading("p-loading","p-btn");
-}
-
-// ═══ CONTENU ═══
-async function runContent() {
-  var sujet = gv("c-sujet");
-  var platform = gv("c-platform");
-  var type = gv("c-type");
-  if(!sujet){toast("Entre un sujet d'abord");return}
-
-  showLoading("c-loading","c-btn");
-  document.getElementById("c-result").innerHTML = "";
-
-  var prompt = "Crée 3 idées de contenu " + type + " pour " + platform + " sur le sujet : " + sujet + ".\n\nContexte : vente de formations digitales et MRR, audience jeune française.\n\nPour chaque idée :\n- Hook d'accroche puissant (3-5 mots)\n- Corps du contenu (5-8 lignes)\n- Call to action\n\nFormat JSON : [{\"hook\":\"...\",\"body\":\"...\",\"cta\":\"...\"}]";
-
-  try {
-    var result = await callAI(prompt, "Tu es un expert en création de contenu viral pour les réseaux sociaux français. Réponds UNIQUEMENT en JSON valide.");
-    var clean = result.replace(/```json|```/g,"").trim();
-    var ideas = JSON.parse(clean);
-    var platforms = ["TikTok","Instagram","Snap"];
-    var html = "";
-    ideas.forEach(function(idea, i) {
-      html += '<div class="idea-card">' +
-        '<div class="idea-platform">' + (platforms[i] || platform) + '</div>' +
-        '<div class="idea-hook">' + (idea.hook||"") + '</div>' +
-        '<div class="idea-body">' + (idea.body||"").replace(/\n/g,"<br>") + '</div>' +
-        '<div style="margin-top:8px;font-size:10px;font-weight:700;color:var(--red)">👉 ' + (idea.cta||"") + '</div>' +
-        '<button class="idea-copy" onclick="copyText(\'' + ((idea.hook||"") + "\n\n" + (idea.body||"") + "\n\n👉 " + (idea.cta||"")).replace(/'/g,"\\'").replace(/\n/g,"\\n") + '\')">COPIER</button>' +
-        '</div>';
-    });
-    document.getElementById("c-result").innerHTML = html;
-  } catch(e) {
-    document.getElementById("c-result").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — ' + e.message + '</div>';
-  }
-
-  hideLoading("c-loading","c-btn");
-}
-
-// ═══ REVENUS ═══
-function calcRevenue() {
-  var ventes = parseInt(gv("r-ventes")) || 3;
-  var prix = parseInt(gv("r-prix")) || 397;
-  var taux = parseInt(gv("r-taux")) || 30;
-
-  var prospects = Math.ceil(ventes / (taux/100));
-  var week = ventes * prix;
-  var month = week * 4;
-  var year = month * 12;
-  var goalVentes = Math.ceil(1000 / prix);
-
-  document.getElementById("r-prospects").textContent = prospects + " prospects";
-  document.getElementById("r-week").textContent = week.toLocaleString("fr-FR") + "€";
-  document.getElementById("r-month").textContent = month.toLocaleString("fr-FR") + "€";
-  document.getElementById("r-year").textContent = year.toLocaleString("fr-FR") + "€";
-  document.getElementById("r-goal").textContent = goalVentes + " ventes/mois";
-
-  var comment = "";
-  if(month >= 5000) comment = "🔥 Tu es dans le top 1% des vendeurs digitaux. À ce rythme, tu atteins l'indépendance financière en moins de 6 mois. Continue — scale avec de la pub.";
-  else if(month >= 2000) comment = "💪 Excellent ! " + month.toLocaleString("fr-FR") + "€/mois c'est un vrai salaire. Maintenant scale — augmente tes prospects ou monte le prix.";
-  else if(month >= 1000) comment = "✅ " + month.toLocaleString("fr-FR") + "€/mois — t'as validé le modèle. Maintenant double le volume de prospects et tu doubles les revenus.";
-  else comment = "📈 Bon départ ! Pour atteindre 1000€/mois il te faut " + goalVentes + " ventes. Avec un taux de " + taux + "%, contacte " + Math.ceil(goalVentes/(taux/100)) + " prospects par mois.";
-
-  document.getElementById("r-ai-comment").textContent = comment;
-  document.getElementById("r-result").style.display = "block";
-}
-
-// ═══ OBJECTIONS ═══
-async function runObjection() {
-  var obj = gv("o-text");
-  var ctx = gv("o-context");
-  if(!obj){toast("Entre l'objection d'abord");return}
-
-  showLoading("o-loading","o-btn");
-  document.getElementById("o-result").style.display = "none";
-
-  var prompt = "Mon prospect m'a dit en " + ctx + " : \"" + obj + "\"\n\nJe vends la Formule DMA à 397€ (28 modules MRR 100% + coaching offert). Génère une réponse de closing en 3-5 messages courts qui :\n1. Valide son ressenti sans capituler\n2. Retourne l'objection en argument\n3. Close avec une action concrète\n\nTon de vendeur confiant, pas désespéré. Avec emojis adaptés. Chaque message séparé par une ligne vide.";
-
-  try {
-    var result = await callAI(prompt);
-    document.getElementById("o-content").textContent = result;
-    document.getElementById("o-result").style.display = "block";
-  } catch(e) {
-    toast("Erreur — " + e.message);
-  }
-
-  hideLoading("o-loading","o-btn");
-}
-
-function copyResult(id) {
-  var txt = document.getElementById(id).textContent;
-  copyText(txt);
+function copyParent(btn) {
+  var card = btn.closest('.obj-a');
+  var txt = card.textContent.replace('COPIER','').trim();
+  copyToClipboard(txt, btn);
 }
 
 function copyText(txt) {
-  txt = txt.replace(/\\n/g,"\n");
+  copyToClipboard(txt, null);
+}
+
+function copyToClipboard(txt, btn) {
   if(navigator.clipboard){
-    navigator.clipboard.writeText(txt).then(function(){toast("Copié !")});
+    navigator.clipboard.writeText(txt.trim()).then(function(){
+      toast("Copié !");
+      if(btn){var orig=btn.textContent;btn.textContent="✓ COPIÉ";setTimeout(function(){btn.textContent=orig},2000)}
+    });
   } else {
-    var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";
+    var ta=document.createElement("textarea");ta.value=txt.trim();
+    ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";
     document.body.appendChild(ta);ta.focus();ta.select();
     try{document.execCommand("copy")}catch(e){}
     document.body.removeChild(ta);toast("Copié !");
   }
 }
 
-// ═══ HOOKS ═══
-async function runHooks() {
-  var theme = gv("h-theme");
-  var platform = gv("h-platform");
-  var style = gv("h-style");
-  if(!theme){toast("Entre un thème d'abord");return}
-
-  showLoading("h-loading","h-btn");
-  document.getElementById("h-result").style.display = "none";
-  document.getElementById("h-list").innerHTML = "";
-
-  var prompt = "Génère 10 hooks " + style + " pour " + platform + " sur le thème : " + theme + ".\n\nContexte : créateur de contenu francophone qui vend des formations digitales et parle de MRR, liberté financière, business en ligne.\n\nChaque hook doit :\n- Arrêter le scroll en 2 secondes\n- Être en français naturel, pas corporate\n- Maximum 15 mots\n- Commencer par un mot fort ou un chiffre\n\nFormat JSON : [{\"hook\":\"...\",\"emoji\":\"...\"}]";
-
-  try {
-    var result = await callAI(prompt, "Tu es un expert en création de contenu viral francophone. Réponds UNIQUEMENT en JSON valide, sans texte avant ou après.");
-    var clean = result.replace(/```json|```/g,"").trim();
-    var hooks = JSON.parse(clean);
-    var html = "";
-    hooks.forEach(function(h, i) {
-      html += '<div style="background:var(--s1);border:1px solid var(--border);border-radius:4px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
-        '<div style="display:flex;align-items:center;gap:10px;flex:1">' +
-        '<span style="font-family:Bebas Neue,Impact,sans-serif;font-size:16px;color:rgba(122,184,255,.3);min-width:22px">' + (i+1) + '</span>' +
-        '<span style="font-size:12px;font-weight:600;color:var(--text);line-height:1.5">' + (h.emoji||"") + ' ' + (h.hook||"") + '</span>' +
-        '</div>' +
-        '<button onclick="copyText(\'' + ((h.emoji||"")+" "+(h.hook||"")).replace(/'/g,"\\'") + '\')" style="flex-shrink:0;background:rgba(122,184,255,.08);border:1px solid rgba(122,184,255,.15);border-radius:2px;padding:4px 10px;font-size:9px;font-weight:700;color:var(--blue);cursor:pointer;font-family:Syne,sans-serif;-webkit-appearance:none">COPIER</button>' +
-        '</div>';
-    });
-    document.getElementById("h-list").innerHTML = html;
-    document.getElementById("h-result").style.display = "block";
-  } catch(e) {
-    document.getElementById("h-list").innerHTML = '<div style="padding:16px;color:var(--dim);font-size:12px">Erreur — ' + e.message + '</div>';
-    document.getElementById("h-result").style.display = "block";
-  }
-
-  hideLoading("h-loading","h-btn");
-}
-
 function toast(msg) {
   var t=document.getElementById("toast");
   t.textContent=msg;t.style.display="block";
-  setTimeout(function(){t.style.display="none"},2500);
+  setTimeout(function(){t.style.display="none"},2000);
 }
-
-async function runDrop() {
-  var int=gv("drop-int"), cible=gv("drop-cible"), budget=gv("drop-budget");
-  if(!int){toast("Decris tes interets");return}
-  showLoading("drop-loading","drop-btn");
-  document.getElementById("drop-result").style.display = "none";
-  var prompt = "Interets: "+int+". Cible: "+cible+". Budget pub: "+budget+".\nTop 3 niches dropshipping avec justification, 2-3 produits gagnants (prix fournisseur/vente), recommandation finale.";
-  try {
-    var result = await callAI(prompt, "Tu es expert dropshipping francophone. Conseils concrets, tutoiement.");
-    document.getElementById("drop-content").textContent = result;
-    document.getElementById("drop-result").style.display = "block";
-  } catch(e) { toast("Erreur — " + e.message); }
-  hideLoading("drop-loading","drop-btn");
-}
-
-async function runProduit() {
-  var desc=gv("prod-desc"), prix=gv("prod-prix");
-  if(!desc){toast("Decris ton produit");return}
-  showLoading("prod-loading","prod-btn");
-  document.getElementById("prod-result").style.display = "none";
-  var prompt = "Produit: "+desc+"\nPrix vente: "+prix+"\nScore/10, analyse marge, points forts, risques, LANCER/PRUDENCE/EVITER, angle marketing.";
-  try {
-    var result = await callAI(prompt, "Tu es expert dropshipping francophone. Analyse concrete, tutoiement.");
-    document.getElementById("prod-content").textContent = result;
-    document.getElementById("prod-result").style.display = "block";
-  } catch(e) { toast("Erreur — " + e.message); }
-  hideLoading("prod-loading","prod-btn");
-}
-
-async function runPageProd() {
-  var prod=gv("pp-prod"), cible=gv("pp-cible"), prix=gv("pp-prix");
-  if(!prod){toast("Entre ton produit");return}
-  showLoading("pp-loading","pp-btn");
-  document.getElementById("pp-result").style.display = "none";
-  var prompt = "Page produit Shopify:\nProduit: "+prod+"\nCible: "+cible+"\nPrix: "+prix+"\nTitre benefice, 5 bullets ok [benefice]-[pourquoi], description, garantie, CTA.";
-  try {
-    var result = await callAI(prompt, "Tu es expert dropshipping et copywriting francophone.");
-    document.getElementById("pp-content").textContent = result;
-    document.getElementById("pp-result").style.display = "block";
-  } catch(e) { toast("Erreur — " + e.message); }
-  hideLoading("pp-loading","pp-btn");
-}
-
-async function runPub() {
-  var prod=gv("pub-prod"), cible=gv("pub-cible"), pl=gv("pub-pl"), dur=gv("pub-dur");
-  if(!prod){toast("Entre ton produit");return}
-  showLoading("pub-loading","pub-btn");
-  document.getElementById("pub-result").style.display = "none";
-  var prompt = "Script pub video "+dur+" pour "+pl+".\nProduit: "+prod+"\nCible: "+cible+"\n[0-3s] HOOK / [3-10s] PROBLEME / [10-20s] SOLUTION / CTA. Naturel.";
-  try {
-    var result = await callAI(prompt, "Tu es expert dropshipping et publicite digitale francophone.");
-    document.getElementById("pub-content").textContent = result;
-    document.getElementById("pub-result").style.display = "block";
-  } catch(e) { toast("Erreur — " + e.message); }
-  hideLoading("pub-loading","pub-btn");
-}
-
-async function runUGC() {
-  var marque=gv("ugc-marque"), niche=gv("ugc-niche"), profil=gv("ugc-profil"), tarif=gv("ugc-tarif");
-  if(!marque){toast("Entre le nom de la marque");return}
-  showLoading("ugc-loading","ugc-btn");
-  document.getElementById("ugc-result").style.display = "none";
-  var prompt = "Pitch email pour: "+marque+". Niche: "+niche+". Profil: "+profil+". Tarif: "+tarif+".\nObjet accrocheur, corps 100-150 mots, CTA. Ton confident.";
-  try {
-    var result = await callAI(prompt, "Tu es expert UGC creator francophone. Emails de prospection percutants.");
-    document.getElementById("ugc-content").textContent = result;
-    document.getElementById("ugc-result").style.display = "block";
-  } catch(e) { toast("Erreur — " + e.message); }
-  hideLoading("ugc-loading","ugc-btn");
-}
-
-async function runScriptUGC() {
-  var prod=gv("scr-prod"), type=gv("scr-type"), dur=gv("scr-dur");
-  if(!prod){toast("Entre le produit");return}
-  showLoading("scr-loading","scr-btn");
-  document.getElementById("scr-result").style.display = "none";
-  var prompt = "Script video "+dur+" format "+type+" pour: "+prod+".\n[0-3s] HOOK / corps / CTA. Indications camera. Naturel et authentique.";
-  try {
-    var result = await callAI(prompt, "Tu es expert UGC creator francophone. Scripts videos authentiques.");
-    document.getElementById("scr-content").textContent = result;
-    document.getElementById("scr-result").style.display = "block";
-  } catch(e) { toast("Erreur — " + e.message); }
-  hideLoading("scr-loading","scr-btn");
-}
-
-async function runEtsySEO() {
-  var prod=gv("etsy-prod"), niche=gv("etsy-niche"), lang=gv("etsy-lang");
-  if(!prod){toast("Entre ton produit");return}
-  showLoading("etsy-loading","etsy-btn");
-  document.getElementById("etsy-result").style.display = "none";
-  var prompt = "SEO Etsy pour: "+prod+". Niche: "+niche+". Langue: "+lang+".\nTITRE 140 chars, 13 TAGS (virgules), DESCRIPTION 300 mots, 5 mots-cles longue traine.";
-  try {
-    var result = await callAI(prompt, "Tu es expert SEO Etsy et Print on Demand francophone.");
-    document.getElementById("etsy-content").textContent = result;
-    document.getElementById("etsy-result").style.display = "block";
-  } catch(e) { toast("Erreur — " + e.message); }
-  hideLoading("etsy-loading","etsy-btn");
-}
-
 </script>
 </body>
 </html>
